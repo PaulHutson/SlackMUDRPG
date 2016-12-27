@@ -1,0 +1,69 @@
+﻿TODO List:
+----------
+
+1) Finalise the CommandClasses>SlackMud>GetCharacter method
+	- Load the user from the GetCharacter Method, bringing in the JSON code.
+
+2) Create location Method
+	- Create stubs for locations & exits (done)
+	- On first load, use the JSON>Scripts>EnterWorldProcess file to select the first room to show.
+	- On subsequent loads use the location information within the Player file.
+	- Implement move method
+		- using the available exits from the location (north, east, front door, etc...)
+		- ... update the player location within the player file.
+
+3) Implement object system
+	- Add player inventory
+		- Add items to inventory
+			- Use start script to add a few items to the player inventory to stat with.
+			- Get items from room location, add to inventory. ("TAKE ItemName")
+				- Check that there is room in the inventory
+				- Create a get method where you can add something to bag ("TAKE ItemName in BAG" where BAG is an inventory location)
+		- Remove items from inventory
+			- Add items to the room
+		- Use items
+			- Add player locations to character file
+			- Add item use locations to items stub
+			- Implement use item method for using on the character
+				- Check whether something is alredy in the slot
+				- If nothing is in the slot use the item
+					- use item effects based on the item parameters. (i.e. a torch will light things up)
+						- may need a new item effect element.
+
+4) Implement Chat System
+	- Implement Say command which will talk to all people in a location ("SAY Hello")
+	- Implement Shout command which will talk to all people across all locations around the current location ("SHOUT Hello")
+		- Note, when this command is used and someone hears it from another location it will say where the sound is coming from (i.e. "You hear someone shouting to the north" where north is an exit)
+	- Implement Whisper command to whisper to a specific person ("WHISPER PlayerName Hello")
+
+5) Implement Commands
+	- Attack ("ATTACK PlayerName") - will use default item in their hand
+		- Hit points must reduce
+	- Make ("MAKE Torch") - will use the items from their inventory to make the torch.
+		- Make advanced ("MAKE Sword USING Anvil")
+	- Build ("BUILD Shed") - will use items in a location to build something.
+		- This should take time (as per the object stub).
+		- Not sure if the build system should be split up a bit - i.e. you can build 5% of the house, depending on how
+			long you take doing it or until resources run out.
+
+6) Implement Story element
+	- Jobs system (get jobs from a notice board)
+		- Means we need a new notice board system, with a "LOOK AT" and/or "EXAMINE" command.
+	- Implement story arcs (locations you need to go to, get clues, clues generate if someone is on a quest on entry to the location / they can only see them themselves)
+
+7) More Stuff
+	- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)
+	- Characters (basic, stay in locations, can talk back / say set phrases)
+	- Character Jobs (basic, can get jobs / tasks from a character)
+	- Characters (advanced, can move around routes, change their persona based on location (i.e. bob goes to the pub at night and gets drunk so speaks differently)
+	- Character Jobs (advanced, can get jobs from characters but they react to what has already been done (i.e. the jobs are generated on a frequency - Mrs Miggens doesn't always need flour if she has already had loads delivered already).
+	- Creatures (advanced, they can react / follow scripts as to what they do.)
+
+MISC Thoughts:
+	- I wonder how to do a "pulse" type system to ensure that all the automated things happen.
+		i.e.	Building continuing
+				Seasons changing (would need extra information in the location stubs for each season, quite cool though)
+					Effects of the seasons (i.e. players needing more clothes in the winter months, storms breaking houses)
+				AI creatures - how to make things move around / react?  This would need to be on the pulse system.
+
+

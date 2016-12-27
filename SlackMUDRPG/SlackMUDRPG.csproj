@@ -20,6 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <ApplicationInsightsResourceId>/subscriptions/f61f9592-505b-4383-86d1-d47c9b6b3f26/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/SlackMUDRPG</ApplicationInsightsResourceId>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -107,6 +108,7 @@
     <Content Include="TestButton.aspx" />
     <Content Include="TestOutput.aspx" />
     <Content Include="TestPost.aspx" />
+    <Content Include="ToDo.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
