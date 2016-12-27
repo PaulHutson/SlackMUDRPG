@@ -5,7 +5,7 @@
 	DONE- Load the user from the GetCharacter Method, bringing in the JSON code.
 		DONE- Remember that we need to add it to the characters within the world
 
-2) Create location Method
+2) Create location Method PAUL WORKING ON THIS
 	- Create stubs for locations & exits (done)
 	- On first load, use the JSON>Scripts>EnterWorldProcess file to select the first room to show.
 	- On subsequent loads use the location information within the Player file.
