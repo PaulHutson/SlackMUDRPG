@@ -59,6 +59,18 @@
       <Name>SlackMUDRPG</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="JSON\Locations\" />
+    <Folder Include="JSON\Objects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="JSON\Characters\Char123.json" />
+    <None Include="JSON\Commands\Help.json" />
+    <None Include="JSON\Commands\NewCharacter.json" />
+    <None Include="JSON\GeneralText\NoCharacter.json" />
+    <None Include="JSON\GeneralText\WelcomeMessage.json" />
+    <None Include="JSON\Scripts\EnterWorldProcess.json" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SlackMUDRPG.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,8 +21,8 @@ namespace SlackMUDRPG.CommandsClasses
             string returnString = "";
 
             // Get the right path, and work out if the file exists.
-            string path = HttpContext.Current.Server.MapPath("~/JSON/Characters/Char" + userID + ".json");
-            
+            string path = FilePathSystem.GetFilePath("Characters", "Char" + userID); 
+
             // Check if the character exists..
             if (!File.Exists(path))
             {
@@ -48,8 +49,8 @@ namespace SlackMUDRPG.CommandsClasses
         public static string GetCharacter(string userID, bool newCharacter = false)
         {
             // Set the path to look for the character information.
-            string path = HttpContext.Current.Server.MapPath("~/JSON/Characters/Char" + userID + ".json");
-            
+            string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
+
             // Check if the file exists.
             if (File.Exists(path))
             {
@@ -126,7 +127,7 @@ namespace SlackMUDRPG.CommandsClasses
             var SMCharJSON = JsonConvert.SerializeObject(SMChar);
 
             // Get the path for the character
-            string path = HttpContext.Current.Server.MapPath("~/JSON/Characters/Char" + userID + ".json");
+            string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
 
             // If the file doesn't exist i.e. the character doesn't exist
             if (!File.Exists(path))

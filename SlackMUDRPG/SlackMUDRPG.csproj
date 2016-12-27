@@ -148,6 +148,8 @@
     <Compile Include="TestPost.aspx.designer.cs">
       <DependentUpon>TestPost.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Path.cs" />
+    <Compile Include="Utility\UnitTestDetector.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="JSON\Locations\" />

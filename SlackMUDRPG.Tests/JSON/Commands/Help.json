@@ -1,0 +1,10 @@
+﻿{
+    "Command": 
+    {
+        "CommandText": "help",
+        "CommandShortcut": "h",
+        "Description": "This will show a list of all the commands available to you.\nYou can get a list of all commands or a specific one as needed.",
+        "Example": "'help' or 'help look' (to see what the look command does)",
+        "CommandFormat": "command {option}"
+    }
+}
