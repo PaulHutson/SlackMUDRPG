@@ -40,6 +40,15 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.Button btn_Test;
         
         /// <summary>
+        /// btn_GetLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_GetLocation;
+        
+        /// <summary>
         /// btn_CreateCharacter control.
         /// </summary>
         /// <remarks>

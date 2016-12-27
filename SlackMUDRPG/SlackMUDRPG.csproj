@@ -90,6 +90,9 @@
     <Content Include="JSON\GeneralText\NoCharacter.json" />
     <Content Include="JSON\GeneralText\WelcomeMessage.json" />
     <Content Include="JSON\Scripts\EnterWorldProcess.json" />
+    <Content Include="JSON\Locations\Loc1.json" />
+    <Content Include="JSON\Locations\Loc2.json" />
+    <Content Include="JSON\Locations\Loc3.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -152,7 +155,6 @@
     <Compile Include="Utility\UnitTestDetector.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="JSON\Locations\" />
     <Folder Include="JSON\Objects\" />
   </ItemGroup>
   <PropertyGroup>

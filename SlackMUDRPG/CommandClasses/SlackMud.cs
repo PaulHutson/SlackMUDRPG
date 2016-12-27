@@ -10,6 +10,9 @@ namespace SlackMUDRPG.CommandsClasses
 {
     public static class SlackMud
     {
+
+        #region "Login and Character Methods"
+
         /// <summary>
         /// Logs someone in with the Slack UserID
         /// </summary>
@@ -147,5 +150,99 @@ namespace SlackMUDRPG.CommandsClasses
                 return "You already have a character, you can not create another.\nTry to login instead i.e. /sm Login";
             }
         }
+
+        #endregion
+
+        #region "Location Methods"
+        
+        public static string GetLocationDetails(string locationID)
+        {
+            // Variable for the return string
+            string returnString = "";
+
+            // Get the right path, and work out if the file exists.
+            string path = FilePathSystem.GetFilePath("Locations", "Loc" + locationID);
+
+            // Check if the character exists..
+            if (!File.Exists(path))
+            {
+                // If they don't exist inform the person as to how to create a new user
+                returnString = "Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com";
+            }
+            else
+            {
+                // Load the room details
+                SMRoom smr = new SMRoom();
+
+                // Use a stream reader to read the file in (based on the path)
+                using (StreamReader r = new StreamReader(path))
+                {
+                    // Create a new JSON string to be used...
+                    string json = r.ReadToEnd();
+
+                    // ... get the informaiton from the the room information.
+                    smr = JsonConvert.DeserializeObject<SMRoom>(json);
+
+                    // Return the room description, exits, people and objects 
+                    returnString = ConstructLocationInformation(smr, locationID);
+                }
+            }
+
+            // Return the text output
+            return returnString;
+        }
+
+        /// <summary>
+        /// Internal Method to create a room decription, created as it's going to be used over and over...
+        /// </summary>
+        /// <param name="smr">An SMRoom</param>
+        /// <returns>String including a full location string</returns>
+        private static string ConstructLocationInformation(SMRoom smr, String locationID)
+        {
+            // Construct the room string.
+            // Create the string and add the basic room description.
+            string returnString = smr.RoomDescription;
+
+            // Add the people within the location
+            // Search through logged in users to see which are in this location
+            List<SMCharacter> smcs = new List<SMCharacter>();
+            smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+
+            // Check if the character already exists or not.
+            if (smcs != null)
+            {
+                string smcsNames = "";
+                if (smcs.Count(smc => smc.RoomLocation == locationID) > 0)
+                {
+                    returnString += "\n\nPeople: ";
+                    List<SMCharacter> charsInLocation = new List<SMCharacter>();
+                    charsInLocation = smcs.FindAll(s => s.RoomLocation == locationID);
+                    var counted = 0;
+                    foreach(SMCharacter sma in charsInLocation)
+                    {
+                        if (counted==0)
+                        {
+                            returnString += sma.FirstName + " " + sma.LastName;
+                        } else
+                        {
+                            returnString += ", " + sma.FirstName + " " + sma.LastName;
+                        }
+                    }
+                }
+            }
+            
+            // Add the exits to the room so that someone can leave.
+            returnString += "\n\nExits: " + smr.RoomExits;
+
+            // Show all the items within the room that can be returned.
+            returnString += "\n\nItems: TODO";
+
+            // Return the string to the calling method.
+            return returnString;
+        }
+
+        #endregion
+
+
     }
 }

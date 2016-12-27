@@ -11,6 +11,7 @@
         <div>
             <asp:Literal runat="server" ID="lit_OutputExample"></asp:Literal><br /><br />
             <asp:Button runat="server" ID="btn_Test" Text="Test Login" OnClick="btn_Test_Click" />
+             <asp:Button runat="server" ID="btn_GetLocation" Text="Test Location 1" OnClick="btn_TestLoc_Click" />
             <asp:Button runat="server" ID="btn_CreateCharacter" Text="Test Create Character" OnClick="btn_CreateCharacter_Click" />
         </div>
     </form>

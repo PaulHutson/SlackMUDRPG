@@ -20,13 +20,13 @@ namespace SlackMUDRPG.Utility
         public static string GetFilePath(string folder, string fileName)
         {
             // Set the base file path.
-            string pathToUse = @"~\JSON\" + folder + "\\" + fileName + ".json";
+            string pathToUse = @"~\JSON\" + folder + @"\" + fileName + ".json";
 
             // Check if we're running inside a unit test or not.
             if(!UnitTestDetector.IsInUnitTest)
             {
                 // Get the server folder structure.
-                pathToUse = HttpContext.Current.Server.MapPath("~/JSON/" + folder + "/ " + fileName + ".json");
+                pathToUse = HttpContext.Current.Server.MapPath("~/JSON/" + folder + "/" + fileName + ".json");
             }
 
             // Return the file path string.

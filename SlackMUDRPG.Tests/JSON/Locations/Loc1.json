@@ -1,0 +1,19 @@
+﻿{
+  "RoomLocationX": "1",
+  "RoomLocationY": "1",
+  "RoomLocationZ": "1",
+  "RoomDescription": "Welcome to the world... this is the starter room",
+  "RoomExits": [
+    {
+      "Shortcut": "D1",
+      "Description": "Door One",
+      "LocationID": "2"
+    },
+    {
+      "Shortcut": "D2",
+      "Description": "Door Two",
+      "LocationID": "3"
+    }
+  ],
+  "RoomItems": null
+}

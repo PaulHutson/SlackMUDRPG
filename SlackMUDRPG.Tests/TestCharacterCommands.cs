@@ -57,7 +57,13 @@ namespace SlackMUDRPG.Tests
             Assert.AreEqual(a, expected, false);
         }
 
-
+        [TestMethod]
+        public void Test_GetLocation()
+        {
+            string a = CommandsClasses.SlackMud.GetLocationDetails("1");
+            string expected = "Welcome back Paul";
+            Assert.AreEqual(a, expected, false);
+        }
         
     }
 }

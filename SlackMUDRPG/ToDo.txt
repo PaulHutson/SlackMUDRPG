@@ -67,5 +67,6 @@ MISC Thoughts:
 					Effects of the seasons (i.e. players needing more clothes in the winter months, storms breaking houses)
 				AI creatures - how to make things move around / react?  This would need to be on the pulse system.
 	- Timeout Characters
+	- Possibility to look through an exit to the lands beyond, i.e. "LOOK E" returns "You can see fields to the east, with mountains in the background"
 
 

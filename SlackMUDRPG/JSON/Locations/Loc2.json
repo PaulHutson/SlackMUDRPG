@@ -1,0 +1,14 @@
+﻿{
+  "RoomLocationX": "2",
+  "RoomLocationY": "1",
+  "RoomLocationZ": "1",
+  "RoomDescription": "This is room 2...",
+  "RoomExits": [
+    {
+      "Shortcut": "D1",
+      "Description": "Door 1 takes you back to room 1",
+      "LocationID": "1"
+    }
+  ],
+  "RoomItems": null
+}

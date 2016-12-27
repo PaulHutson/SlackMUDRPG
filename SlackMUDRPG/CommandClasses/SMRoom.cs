@@ -34,5 +34,8 @@ namespace SlackMUDRPG.CommandsClasses
 
         [JsonProperty("Description")]
         public string Description { get; set; }
+        
+        [JsonProperty("LocationID")]
+        public string LocationID { get; set; }
     }
 }
