@@ -1,0 +1,7 @@
+﻿{
+    "Information": {
+        "TextMessage": {
+            "Text": "You need a character to enter the world of {worldname}.  You must create a character, to do so, use the command /sm CreateCharacter FIRSTNAME,LASTNAME,SEX,AGE\n i.e. /sm CreateCharacter Paul,Hutson,m,34"
+        }
+    } 
+}

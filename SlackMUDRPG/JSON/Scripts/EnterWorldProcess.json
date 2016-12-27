@@ -1,0 +1,8 @@
+﻿{
+    "Process": {
+        "Steps": [
+            {"Text": "WelcomeMessage", "Type": "GeneralText"},
+            {"Text": "NoCharacter", "Type": "GeneralText"}
+        ]
+    } 
+}

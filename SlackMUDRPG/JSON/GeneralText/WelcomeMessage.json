@@ -1,0 +1,7 @@
+﻿{
+    "Information": {
+        "TextMessage": {
+            "Text": "Wecome to SlackMud - a multiplayer online game built to integrate into Slack.\nThere are going to be some rules and stuff, but I've not written them yet... and some help commands (i.e. use the 'Help' command to list all other commands)."
+        }
+    } 
+}
