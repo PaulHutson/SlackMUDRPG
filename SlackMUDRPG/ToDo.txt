@@ -1,8 +1,10 @@
 ﻿TODO List:
 ----------
 
-1) Finalise the CommandClasses>SlackMud>GetCharacter method
+1) Finalise the CommandClasses>SlackMud>GetCharacter method (PAUL WORKING ON THIS)
 	- Load the user from the GetCharacter Method, bringing in the JSON code.
+	- Remember that we need to add it to the characters within the world
+		- Timeout characters needs to be adde.
 
 2) Create location Method
 	- Create stubs for locations & exits (done)

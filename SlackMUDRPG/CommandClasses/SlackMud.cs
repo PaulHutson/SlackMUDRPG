@@ -29,7 +29,17 @@ namespace SlackMUDRPG.CommandsClasses
 
         public static string GetCharacter(string userID)
         {
-            return "Not implemented yet";
+            string path = HttpContext.Current.Server.MapPath("~/JSON/Characters/Char" + userID + ".json");
+            if (File.Exists(path))
+            {
+                // In progress
+                SMCharacter SMChar = new SMCharacter();
+                return "Loaded the character";
+            }
+            else
+            {
+                return "You do not have a character yet, you need to create one...";
+            }
         }
 
         public static string CreateCharacter(string userID, string firstName, string lastName, int age, char sexIn)
