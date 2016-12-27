@@ -13,7 +13,7 @@ namespace SlackMUDRPG.CommandsClasses
         {
             string returnString = "";
 
-            string path = @"~\JSON\Characters\Char" + userID + ".json";
+            string path = HttpContext.Current.Server.MapPath("~/JSON/Characters/Char" + userID + ".json");
             if (!File.Exists(path))
             {
                 returnString = "You must create a character, to do so, use the command /sm CreateCharacter FIRSTNAME,LASTNAME,SEX,AGE\n";
@@ -27,14 +27,49 @@ namespace SlackMUDRPG.CommandsClasses
             return returnString;
         }
 
+        /// <summary>
+        /// Gets a character object, and loads it into memory.
+        /// </summary>
+        /// <param name="userID">userID is based on the id from the slack channel</param>
+        /// <returns>String message for usage</returns>
         public static string GetCharacter(string userID)
         {
+            // Set the path to look for the character information.
             string path = HttpContext.Current.Server.MapPath("~/JSON/Characters/Char" + userID + ".json");
+            
+            // Check if the file exists.
             if (File.Exists(path))
             {
-                // In progress
+                // Get the Character
                 SMCharacter SMChar = new SMCharacter();
-                return "Loaded the character";
+
+                // Use a stream reader to read the file in (based on the path)
+                using (StreamReader r = new StreamReader(path))
+                {
+                    // Create a new JSON string to be used...
+                    string json = r.ReadToEnd();
+
+                    // ... use the json string we've just gotten to create a new character
+                    SMChar = JsonConvert.DeserializeObject<SMCharacter>(json);
+                }
+
+                // Add the character to the application memory (so it's accessible to everyone sending commands, etc).
+                // Get the list of existing characters
+                List<SMCharacter> smcs = new List<SMCharacter>();
+                smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+                
+                // Check if the character already exists or not.
+                if (smcs != null) { 
+                    if (smcs.FirstOrDefault(smc => smc.FirstName == SMChar.FirstName) == null)
+                    {
+                        // If it doesn't, add it to the character list.
+                        smcs.Add(SMChar);
+                        HttpContext.Current.Application["SMCharacters"] = smcs;
+                    }
+                }
+                
+                // return a welcome!
+                return "Welcome back " + SMChar.FirstName;
             }
             else
             {
@@ -58,10 +93,6 @@ namespace SlackMUDRPG.CommandsClasses
             string path = HttpContext.Current.Server.MapPath("~/JSON/Characters/Char" + userID + ".json");
             if (!File.Exists(path))
             {
-                //File.Create(path);
-                //TextWriter tw = new StreamWriter(path);
-                //tw.WriteLine(SMCharJSON);
-                //tw.Close();
 
                 using (StreamWriter w = new StreamWriter(path, true))
                 {

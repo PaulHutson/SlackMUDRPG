@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SlackMUDRPG.CommandsClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,8 @@ namespace SlackMUDRPG
         protected void Application_Start(object sender, EventArgs e)
         {
             Application["TestOutput"] = 0;
+            List<SMCharacter> smc = new List<SMCharacter>();
+            Application["SMCharacters"] = smc;
         }
 
         protected void Session_Start(object sender, EventArgs e)

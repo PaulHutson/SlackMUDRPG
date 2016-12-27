@@ -1,10 +1,9 @@
 ﻿TODO List:
 ----------
 
-1) Finalise the CommandClasses>SlackMud>GetCharacter method (PAUL WORKING ON THIS)
-	- Load the user from the GetCharacter Method, bringing in the JSON code.
-	- Remember that we need to add it to the characters within the world
-		- Timeout characters needs to be adde.
+1) DONE Finalise the CommandClasses>SlackMud>GetCharacter method 
+	DONE- Load the user from the GetCharacter Method, bringing in the JSON code.
+		DONE- Remember that we need to add it to the characters within the world
 
 2) Create location Method
 	- Create stubs for locations & exits (done)
@@ -67,5 +66,6 @@ MISC Thoughts:
 				Seasons changing (would need extra information in the location stubs for each season, quite cool though)
 					Effects of the seasons (i.e. players needing more clothes in the winter months, storms breaking houses)
 				AI creatures - how to make things move around / react?  This would need to be on the pulse system.
+	- Timeout Characters
 
 
