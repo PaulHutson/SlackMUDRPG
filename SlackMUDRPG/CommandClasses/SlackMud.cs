@@ -147,7 +147,7 @@ namespace SlackMUDRPG.CommandsClasses
             else
             {
                 // If they already have a character tell them they do and that they need to login.
-                return "You already have a character, you can not create another.\nTry to login instead i.e. /sm Login";
+                return "You already have a character, you cannot create another.\nTry to login instead i.e. /sm Login";
             }
         }
 

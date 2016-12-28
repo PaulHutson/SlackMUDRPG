@@ -7,8 +7,8 @@
 
 2) Create location Method PAUL WORKING ON THIS
 	- Create stubs for locations & exits (done)
-	- On first load, use the JSON>Scripts>EnterWorldProcess file to select the first room to show.
-	- On subsequent loads use the location information within the Player file.
+	- On first load, use the JSON>Scripts>EnterWorldProcess-FirstLocation file to select the first room to show.
+	- On subsequent loads use the location information within the Player file. (done)
 	- Implement move method
 		- using the available exits from the location (north, east, front door, etc...)
 		- ... update the player location within the player file.
