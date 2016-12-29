@@ -41,10 +41,10 @@ namespace SlackMUDRPG.CommandsClasses
         public string RoomDescription { get; set; }
 
         [JsonProperty("RoomExits")]
-        public SMExit[] RoomExits { get; set; }
+        public List<SMExit> RoomExits { get; set; }
 
         [JsonProperty("RoomItems")]
-        public SMItem[] RoomItems { get; set; }
+        public List<SMItem> RoomItems { get; set; }
     }
 
     public class SMExit
