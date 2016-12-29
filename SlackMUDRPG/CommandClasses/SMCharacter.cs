@@ -40,5 +40,19 @@ namespace SlackMUDRPG.CommandsClasses
 
         [JsonProperty("Skills")]
         public List<SMSkill> Skills { get; set; }
+
+		/// <summary>
+		/// Adds the item to the characters CharacterItems list.
+		/// </summary>
+		/// <param name="item">Item.</param>
+		public void AddItem(SMItem item)
+		{
+			if (this.CharacterItems == null)
+			{
+				this.CharacterItems = new List<SMItem>();
+			}
+
+			this.CharacterItems.Add(item);
+		}
     }
 }
