@@ -48,7 +48,7 @@ namespace SlackMUDRPG
             // Test Functionality 
             if ((additionalText == "PMTest"))
             {
-                SendPrivateMessage(serviceType, serviceName, "@paulhutson");
+                SendPrivateMessage(serviceType, serviceName, "@hutsonphutty");
                 SetOutputText("Output On");
             }
 
