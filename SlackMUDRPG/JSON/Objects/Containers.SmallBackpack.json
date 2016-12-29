@@ -1,8 +1,8 @@
 ﻿{
-	"ItemName": "Small Bag",
-    "ItemType": "carry",
-    "ItemDescription": "Basic small bag that all players start with.",
-    "ItemWeight": 0,
-    "ItemSize": 1,
-    "CanHoldOtherItems": true
+	"ItemName": "Small Backpack",
+	"ItemType": "containers",
+	"ItemDescription": "Basic small backpack that all players start with.",
+	"ItemWeight": 0,
+	"ItemSize": 1,
+	"CanHoldOtherItems": true
 }

@@ -1,8 +1,8 @@
 ﻿{
-	"ItemName": "Small Bag",
-    "ItemType": "carry",
-    "ItemDescription": "Basic small bag that all players start with.",
-    "ItemWeight": 0,
-    "ItemSize": 1,
-    "CanHoldOtherItems": true
+	"ItemName": "Wooden Sword",
+	"ItemType": "weapons",
+	"ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"CanHoldOtherItems": true
 }
