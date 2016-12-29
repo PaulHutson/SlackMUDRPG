@@ -45,6 +45,20 @@ namespace SlackMUDRPG.CommandsClasses
 
         [JsonProperty("RoomItems")]
         public List<SMItem> RoomItems { get; set; }
+
+		/// <summary>
+		/// Adds an item to the room, so any user can collect it.
+		/// </summary>
+		/// <param name="item">Item.</param>
+		public void AddItem(SMItem item)
+		{
+			if (this.RoomItems == null)
+			{
+				this.RoomItems = new List<SMItem>();
+			}
+
+			this.RoomItems.Add(item);
+		}
     }
 
     public class SMExit
