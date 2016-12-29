@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
 using System;
@@ -25,7 +25,7 @@ namespace SlackMUDRPG.CommandsClasses
             string returnString = "";
 
             // Get the right path, and work out if the file exists.
-            string path = FilePathSystem.GetFilePath("Characters", "Char" + userID); 
+            string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
 
             // Check if the character exists..
             if (!File.Exists(path))
@@ -70,15 +70,16 @@ namespace SlackMUDRPG.CommandsClasses
                     // ... use the json string we've just gotten to create a new character
                     SMChar = JsonConvert.DeserializeObject<SMCharacter>(json);
                 }
-                
+
 
                 // Add the character to the application memory (so it's accessible to everyone sending commands, etc).
                 // Get the list of existing characters
                 List<SMCharacter> smcs = new List<SMCharacter>();
                 smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
-                
+
                 // Check if the character already exists or not.
-                if (smcs != null) { 
+                if (smcs != null)
+                {
                     if (smcs.FirstOrDefault(smc => smc.FirstName == SMChar.FirstName) == null)
                     {
                         // If it doesn't, add it to the character list.
@@ -92,11 +93,12 @@ namespace SlackMUDRPG.CommandsClasses
                 if (!newCharacter)
                 {
                     returnString = "Welcome back " + SMChar.FirstName;
-                } else
+                }
+                else
                 {
                     returnString = "Welcome to SlackMud!\n";
                     returnString += "We've created your character in the magical world of Arrelvia!"; // TO DO, use a welcome script!
-                    // TO DO, get room details
+                                                                                                      // TO DO, get room details
                 }
                 return returnString;
             }
@@ -127,6 +129,10 @@ namespace SlackMUDRPG.CommandsClasses
             SMChar.PKFlag = false;
             SMChar.Sex = sexIn;
 
+            // Add default items to the character
+            SMChar.AddItem(CreateItemFromJson("Containers.SmallBackpack"));
+            SMChar.AddItem(CreateItemFromJson("Weapons.WoodenSword"));
+
             // Set the start location
             SMChar.RoomLocation = "1";
             string defaultRoomPath = FilePathSystem.GetFilePath("Scripts", "EnterWorldProcess-FirstLocation");
@@ -145,7 +151,7 @@ namespace SlackMUDRPG.CommandsClasses
                     SMChar.RoomLocation = sl.StartLocation;
                 }
             }
-            
+
             // Create the JSON object from the new SMCharacter object
             var SMCharJSON = JsonConvert.SerializeObject(SMChar);
 
@@ -174,7 +180,7 @@ namespace SlackMUDRPG.CommandsClasses
         #endregion
 
         #region "Location Methods"
-        
+
         public static string GetLocationDetails(string locationID)
         {
             // Variable for the return string
@@ -238,19 +244,20 @@ namespace SlackMUDRPG.CommandsClasses
                     List<SMCharacter> charsInLocation = new List<SMCharacter>();
                     charsInLocation = smcs.FindAll(s => s.RoomLocation == locationID);
                     var counted = 0;
-                    foreach(SMCharacter sma in charsInLocation)
+                    foreach (SMCharacter sma in charsInLocation)
                     {
-                        if (counted==0)
+                        if (counted == 0)
                         {
                             returnString += sma.FirstName + " " + sma.LastName;
-                        } else
+                        }
+                        else
                         {
                             returnString += ", " + sma.FirstName + " " + sma.LastName;
                         }
                     }
                 }
             }
-            
+
             // Add the exits to the room so that someone can leave.
             returnString += "\n\nExits: " + smr.RoomExits;
 
@@ -263,6 +270,33 @@ namespace SlackMUDRPG.CommandsClasses
 
         #endregion
 
+        #region "Item Methods"
+
+        /// <summary>
+        /// Internal Method to create a new item with data from an Objects json file
+        /// </summary>
+        /// <returns>The item.</returns>
+        /// <param name="fileName">File name of the objects json file.</param>
+        private static SMItem CreateItemFromJson(string fileName)
+        {
+            string path = FilePathSystem.GetFilePath("Objects", fileName);
+
+            SMItem item = new SMItem();
+
+            if (File.Exists(path))
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    item = JsonConvert.DeserializeObject<SMItem>(json);
+                    item.ItemId = Guid.NewGuid().ToString();
+                }
+            }
+
+            return item;
+        }
+
+        #endregion
 
     }
 }

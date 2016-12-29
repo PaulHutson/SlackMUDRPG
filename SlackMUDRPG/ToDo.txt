@@ -13,7 +13,7 @@
 		- using the available exits from the location (north, east, front door, etc...)
 		- ... update the player location within the player file.
 
-3) Implement object system
+3) Implement object system ROB WORKING ON THIS
 	- Add player inventory
 		- Add items to inventory
 			- Use start script to add a few items to the player inventory to stat with.

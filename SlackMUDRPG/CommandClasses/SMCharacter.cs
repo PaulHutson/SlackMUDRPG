@@ -36,9 +36,23 @@ namespace SlackMUDRPG.CommandsClasses
         public string RoomLocation { get; set; }
 
         [JsonProperty("CharacterItems")]
-        public SMItem[] CharacterItems { get; set; }
+        public List<SMItem> CharacterItems { get; set; }
 
         [JsonProperty("Skills")]
-        public SMSkill[] Skills { get; set; }
+        public List<SMSkill> Skills { get; set; }
+
+		/// <summary>
+		/// Adds the item to the characters CharacterItems list.
+		/// </summary>
+		/// <param name="item">Item.</param>
+		public void AddItem(SMItem item)
+		{
+			if (this.CharacterItems == null)
+			{
+				this.CharacterItems = new List<SMItem>();
+			}
+
+			this.CharacterItems.Add(item);
+		}
     }
 }
