@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
 using System;
 using System.Collections.Generic;
@@ -125,13 +126,31 @@ namespace SlackMUDRPG.CommandsClasses
             SMChar.LastName = lastName;
             SMChar.LastLogindate = DateTime.Now;
             SMChar.LastInteractionDate = DateTime.Now;
-            SMChar.RoomLocation = "0";  // NEED TO ADD THE LOCATION FROM THE SCRIPTS
             SMChar.PKFlag = false;
             SMChar.Sex = sexIn;
 
             // Add default items to the character
             SMChar.AddItem(CreateItemFromJson("Containers.SmallBackpack"));
             SMChar.AddItem(CreateItemFromJson("Weapons.WoodenSword"));
+
+            // Set the start location
+            SMChar.RoomLocation = "1";
+            string defaultRoomPath = FilePathSystem.GetFilePath("Scripts", "EnterWorldProcess-FirstLocation");
+            if (File.Exists(defaultRoomPath))
+            {
+                // Use a stream reader to read the file in (based on the path)
+                using (StreamReader r = new StreamReader(defaultRoomPath))
+                {
+                    // Create a new JSON string to be used...
+                    string json = r.ReadToEnd();
+
+                    // ... get the information from the the start location token..
+                    SMStartLocation sl = JsonConvert.DeserializeObject<SMStartLocation>(json);
+
+                    // Set the start location.
+                    SMChar.RoomLocation = sl.StartLocation;
+                }
+            }
 
             // Create the JSON object from the new SMCharacter object
             var SMCharJSON = JsonConvert.SerializeObject(SMChar);
