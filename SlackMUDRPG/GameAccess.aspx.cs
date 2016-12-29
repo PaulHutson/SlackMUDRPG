@@ -89,7 +89,7 @@ namespace SlackMUDRPG
             if ((serviceType == "Slack") || (serviceType == ""))
             {
                 // Note the services tokens below needs to be updated based on the registered slack service...
-                accessToken = "https://hooks.slack.com/services/T06LN6GQY/B06LNLD8U/" + Utility.SlackWebHooks.GetWebHookToken(nameOfHook);
+                accessToken = "https://hooks.slack.com/services/" + Utility.SlackWebHooks.GetWebHookToken(nameOfHook);
             } // implement more for other things like Discord (anything with a webhook really, or for a custom page).
             return accessToken;
         }

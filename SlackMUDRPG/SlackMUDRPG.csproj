@@ -95,6 +95,7 @@
     <Content Include="JSON\Locations\Loc2.json" />
     <Content Include="JSON\Locations\Loc3.json" />
     <Content Include="JSON\SlackWebHooks\SlackWebHook_SD.json" />
+    <Content Include="JSON\SlackWebHooks\SlackWebHook_SlackMud.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
