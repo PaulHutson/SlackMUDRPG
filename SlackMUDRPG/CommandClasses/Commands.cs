@@ -14,19 +14,24 @@ namespace SlackMUDRPG.CommandsClasses
         {
             int r = rnd.Next(helloList.Count());
 
+            
             // Create actual name links
             // String format: <a class="internal_member_link" data-member-name="kerryb" target="/team/kerryb" href="/team/kerryb">@kerryb</a>
-            String[] splitString = extraItemsIn.Split(' ');
+            
             string extraItemsList = "";
-            foreach (string item in splitString)
-            {
-                if ((item.Substring(0, 1) == "@") || (item.Substring(0, 1) == "#"))
+
+            if (extraItemsIn != "") { 
+                String[] splitString = extraItemsIn.Split(' ');
+                foreach (string item in splitString)
                 {
-                    extraItemsList += "<" + item + "> ";
-                }
-                else
-                {
-                    extraItemsList += item + " ";
+                    if ((item.Substring(0, 1) == "@") || (item.Substring(0, 1) == "#"))
+                    {
+                        extraItemsList += "<" + item + "> ";
+                    }
+                    else
+                    {
+                        extraItemsList += item + " ";
+                    }
                 }
             }
 

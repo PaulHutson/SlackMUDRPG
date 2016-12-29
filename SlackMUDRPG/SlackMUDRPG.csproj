@@ -83,6 +83,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GameAccess.aspx" />
     <Content Include="packages.config" />
     <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Commands\Help.json" />
@@ -93,6 +94,7 @@
     <Content Include="JSON\Locations\Loc1.json" />
     <Content Include="JSON\Locations\Loc2.json" />
     <Content Include="JSON\Locations\Loc3.json" />
+    <Content Include="JSON\SlackWebHooks\SlackWebHook_SD.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -119,6 +121,13 @@
     <Compile Include="CommandClasses\SMItem.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
+    <Compile Include="GameAccess.aspx.cs">
+      <DependentUpon>GameAccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GameAccess.aspx.designer.cs">
+      <DependentUpon>GameAccess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -152,9 +161,11 @@
       <DependentUpon>TestPost.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utility\Path.cs" />
+    <Compile Include="Utility\SlackWebHooks.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="JSON\Misc\" />
     <Folder Include="JSON\Objects\" />
   </ItemGroup>
   <PropertyGroup>
