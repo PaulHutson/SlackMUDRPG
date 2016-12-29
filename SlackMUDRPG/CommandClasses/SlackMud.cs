@@ -122,6 +122,7 @@ namespace SlackMUDRPG.CommandsClasses
         {
             // Create the character options
             SMCharacter SMChar = new SMCharacter();
+			SMChar.UserID = userID;
             SMChar.FirstName = firstName;
             SMChar.LastName = lastName;
             SMChar.LastLogindate = DateTime.Now;
@@ -153,7 +154,7 @@ namespace SlackMUDRPG.CommandsClasses
             }
 
             // Create the JSON object from the new SMCharacter object
-            var SMCharJSON = JsonConvert.SerializeObject(SMChar);
+			var SMCharJSON = JsonConvert.SerializeObject(SMChar, Formatting.Indented);
 
             // Get the path for the character
             string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
