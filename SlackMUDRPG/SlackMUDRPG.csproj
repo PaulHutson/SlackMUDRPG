@@ -96,6 +96,7 @@
     <Content Include="JSON\Locations\Loc3.json" />
     <Content Include="JSON\SlackWebHooks\SlackWebHook_SD.json" />
     <Content Include="JSON\SlackWebHooks\SlackWebHook_SlackMud.json" />
+    <Content Include="JSON\Scripts\EnterWorldProcess-FirstLocation.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -120,6 +121,7 @@
     <Compile Include="CommandClasses\SlackMud.cs" />
     <Compile Include="CommandClasses\SMCharacter.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
+    <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
     <Compile Include="GameAccess.aspx.cs">
