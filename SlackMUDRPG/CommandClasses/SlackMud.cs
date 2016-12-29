@@ -69,6 +69,7 @@ namespace SlackMUDRPG.CommandsClasses
                     // ... use the json string we've just gotten to create a new character
                     SMChar = JsonConvert.DeserializeObject<SMCharacter>(json);
                 }
+                
 
                 // Add the character to the application memory (so it's accessible to everyone sending commands, etc).
                 // Get the list of existing characters

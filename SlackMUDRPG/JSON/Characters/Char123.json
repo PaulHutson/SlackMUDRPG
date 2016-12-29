@@ -1,1 +1,13 @@
-{"firstname":"Paul","lastname":"Hutson","lastinteractiondate":"2015-07-20T22:22:01.4840636+01:00","lastlogindate":"2015-07-20T22:22:01.3032953+01:00","age":0,"sex":"m","PKFlag":false,"userid":null,"RoomLocation":"1","CharacterItems":null,"Skills":null}
+{
+  "firstname": "Paul",
+  "lastname": "Hutson",
+  "lastinteractiondate": "2015-07-20T22:22:01.4840636+01:00",
+  "lastlogindate": "2015-07-20T22:22:01.3032953+01:00",
+  "age": 0,
+  "sex": "m",
+  "PKFlag": false,
+  "userid": null,
+  "RoomLocation": "1",
+  "CharacterItems": null,
+  "Skills": null
+}
