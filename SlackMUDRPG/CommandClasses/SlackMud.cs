@@ -55,9 +55,9 @@ namespace SlackMUDRPG.CommandsClasses
 			List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
 
-			if (character != null)
+			if ((character != null) && (!newCharacter))
 			{
-				return "Your are already logged in!";
+				return "You're already logged in!";
 			}
 			else
 			{
@@ -115,7 +115,7 @@ namespace SlackMUDRPG.CommandsClasses
         {
             // Create the character options
             SMCharacter SMChar = new SMCharacter();
-      			SMChar.UserID = userID;
+      		SMChar.UserID = userID;
             SMChar.FirstName = firstName;
             SMChar.LastName = lastName;
             SMChar.LastLogindate = DateTime.Now;
