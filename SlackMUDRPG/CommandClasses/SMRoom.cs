@@ -32,13 +32,13 @@ namespace SlackMUDRPG.CommandsClasses
 		public string RoomID { get; set; }
 
 		[JsonProperty("RoomLocationX")]
-        public int RoomIDX { get; set; }
+        public int RoomLocationX { get; set; }
 
         [JsonProperty("RoomLocationY")]
-        public int RoomIDY { get; set; }
+        public int RoomLocationY { get; set; }
 
         [JsonProperty("RoomLocationZ")]
-        public int RoomIDZ { get; set; }
+        public int RoomLocationZ { get; set; }
 
         [JsonProperty("RoomDescription")]
         public string RoomDescription { get; set; }
