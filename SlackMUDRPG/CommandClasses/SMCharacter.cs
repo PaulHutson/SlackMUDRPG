@@ -108,13 +108,11 @@ namespace SlackMUDRPG.CommandsClasses
 		{
 			List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
-			if (smcs.FirstOrDefault(smc => smc.UserID == this.UserID) != null)
+			SMCharacter characterInMem = smcs.FirstOrDefault(smc => smc.UserID == this.UserID);
+
+			if (characterInMem != null)
 			{
-				SMCharacter charToRemove = smcs.SingleOrDefault(smc => smc.UserID == this.UserID);
-				if (charToRemove != null)
-				{
-					smcs.Remove(charToRemove);
-				}
+				smcs.Remove(characterInMem);
 			}
 
 			smcs.Add(this);

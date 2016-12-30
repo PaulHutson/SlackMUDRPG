@@ -1,8 +1,10 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using SlackMUDRPG.Utility;
 
 namespace SlackMUDRPG.CommandsClasses
 {
@@ -41,6 +43,39 @@ namespace SlackMUDRPG.CommandsClasses
 			}
 
 			this.RoomItems.Add(item);
+			this.SaveToApplication();
+		}
+
+		/// <summary>
+		/// Saves the room to file.
+		/// </summary>
+		public void SaveToFile()
+		{
+			string path = FilePathSystem.GetFilePath("Location", "Loc" + this.RoomID);
+			string roomJSON = JsonConvert.SerializeObject(this, Formatting.Indented);
+
+			using (StreamWriter w = new StreamWriter(path))
+			{
+				w.WriteLine(roomJSON);
+			}
+		}
+
+		/// <summary>
+		/// Saves the room to application memory.
+		/// </summary>
+		public void SaveToApplication()
+		{
+			List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+
+			SMRoom roomInMem = smrs.FirstOrDefault(smr => smr.RoomID == this.RoomID);
+
+			if (roomInMem != null)
+			{
+				smrs.Remove(roomInMem);
+			}
+
+			smrs.Add(this);
+			HttpContext.Current.Application["SMRooms"] = smrs;
 		}
     }
 
