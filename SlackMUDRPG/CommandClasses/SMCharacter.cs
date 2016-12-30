@@ -31,11 +31,11 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("PKFlag")]
         public bool PKFlag { get; set; }
 
-        [JsonProperty("userid")]
+        [JsonProperty("UserID")]
         public string UserID { get; set; }
 
-        [JsonProperty("RoomLocation")]
-        public string RoomLocation { get; set; }
+        [JsonProperty("RoomID")]
+        public string RoomID { get; set; }
 
         [JsonProperty("CharacterItems")]
         public List<SMItem> CharacterItems { get; set; }
@@ -57,8 +57,7 @@ namespace SlackMUDRPG.CommandsClasses
 			//TODO check that tha play has weight and capacity to add the item
 
 			this.CharacterItems.Add(item);
-
-			this.SaveCharacter();
+			this.SaveToApplication();
 		}
 
 		/// <summary>
@@ -80,14 +79,14 @@ namespace SlackMUDRPG.CommandsClasses
 
 				room.AddItem(item);
 				this.CharacterItems.Remove(item);
-				this.SaveCharacter();
+				this.SaveToApplication();
 			}
 		}
 
 		/// <summary>
 		/// Saves the character to the file system.
 		/// </summary>
-		public void SaveCharacter()
+		public void SaveToFile()
 		{
 			string path = FilePathSystem.GetFilePath("Characters", "Char" + this.UserID);
 			string charJSON = JsonConvert.SerializeObject(this, Formatting.Indented);
@@ -99,22 +98,55 @@ namespace SlackMUDRPG.CommandsClasses
 		}
 
 		/// <summary>
-		/// Gets an SMRoom object representing the characters current location.
+		/// Saves the character to application memory.
 		/// </summary>
-		/// <returns>The room.</returns>
-		private SMRoom GetRoom()
+		public void SaveToApplication()
 		{
-			SMRoom room = new SMRoom();
+			List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
-			string path = FilePathSystem.GetFilePath("Locations", "Loc" + this.RoomLocation);
-
-			using (StreamReader r = new StreamReader(path))
+			if (smcs.FirstOrDefault(smc => smc.UserID == this.UserID) != null)
 			{
-				string json = r.ReadToEnd();
-				room = JsonConvert.DeserializeObject<SMRoom>(json);
+				SMCharacter charToRemove = smcs.SingleOrDefault(smc => smc.UserID == this.UserID);
+				if (charToRemove != null)
+				{
+					smcs.Remove(charToRemove);
+				}
 			}
 
-			return room;
+			smcs.Add(this);
+			HttpContext.Current.Application["SMCharacters"] = smcs;
+		}
+
+		/// <summary>
+		/// Gets the characters current room, loads from mem or file as required
+		/// </summary>
+		public SMRoom GetRoom()
+		{
+			List<SMRoom> smrs = (List<SlackMUDRPG.CommandsClasses.SMRoom>)HttpContext.Current.Application["SMRooms"];
+			SMRoom smr = smrs.FirstOrDefault(obj => obj.RoomID == this.RoomID);
+
+			if (smr != null)
+			{
+				return smr;
+			}
+			else
+			{
+				string path = FilePathSystem.GetFilePath("Locations", "Loc" + this.RoomID);
+
+				if (File.Exists(path))
+				{
+					using (StreamReader r = new StreamReader(path))
+					{
+						string json = r.ReadToEnd();
+						smr = JsonConvert.DeserializeObject<SMRoom>(json);
+						smrs.Add(smr);
+						HttpContext.Current.Application["SMRooms"] = smrs;
+						return smr;
+					}
+				}
+
+				return null;
+			}
 		}
 	}
 }
