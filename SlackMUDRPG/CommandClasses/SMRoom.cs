@@ -6,26 +6,6 @@ using System.Web;
 
 namespace SlackMUDRPG.CommandsClasses
 {
-    public static class Movement
-    {
-        public static string MoveLocation(string charID, string exitShortcut)
-        {
-            // Create returnString
-            string returnString = "";
-
-            // Get the current character location
-            
-
-            // Get the exits from that location
-
-            // Get the specific exit from the location referred to by the shortcut
-
-            // Move the player to the other location
-
-            return returnString;
-        }
-    }
-
     public class SMRoom
     {
 		[JsonProperty("RoomID")]

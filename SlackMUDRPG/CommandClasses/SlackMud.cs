@@ -109,18 +109,22 @@ namespace SlackMUDRPG.CommandsClasses
         /// <param name="lastName">The last name of the character</param>
         /// <param name="age">The age of the character</param>
         /// <param name="sexIn">M or F for the male / Female character</param>
+        /// <param name="characterType">M or F for the male / Female character</param>
         /// <returns>A string with the character information</returns>
-        public static string CreateCharacter(string userID, string firstName, string lastName, int age, char sexIn)
+        public static string CreateCharacter(string userID, string firstName, string lastName, int age, char sexIn, string characterType = "BaseCharacter")
         {
             // Create the character options
             SMCharacter SMChar = new SMCharacter();
-			SMChar.UserID = userID;
+      			SMChar.UserID = userID;
             SMChar.FirstName = firstName;
             SMChar.LastName = lastName;
             SMChar.LastLogindate = DateTime.Now;
             SMChar.LastInteractionDate = DateTime.Now;
             SMChar.PKFlag = false;
             SMChar.Sex = sexIn;
+
+            // Add default attributes to the character
+            SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);
 
             // Add default items to the character
             SMChar.AddItem(CreateItemFromJson("Containers.SmallBackpack"));
@@ -141,6 +145,8 @@ namespace SlackMUDRPG.CommandsClasses
                     SMStartLocation sl = JsonConvert.DeserializeObject<SMStartLocation>(json);
 
                     // Set the start location.
+
+                    // TODO Add room to memory if not already there.
                     SMChar.RoomID = sl.StartLocation;
                 }
             }
@@ -281,6 +287,33 @@ namespace SlackMUDRPG.CommandsClasses
             }
 
             return item;
+        }
+
+        #endregion
+
+        #region "Attribute Methods"
+
+        /// <summary>
+        /// Internal Method to get base attributes from a file
+        /// </summary>
+        /// <returns>An Attribues list</returns>
+        /// <param name="fileName">File name of the objects json file.</param>
+        private static SMAttributes CreateBaseAttributesFromJson(string fileName)
+        {
+            string path = FilePathSystem.GetFilePath("Misc", fileName);
+
+            SMAttributes attrs = new SMAttributes();
+
+            if (File.Exists(path))
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    attrs = JsonConvert.DeserializeObject<SMAttributes>(json);
+                }
+            }
+
+            return attrs;
         }
 
         #endregion

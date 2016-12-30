@@ -41,7 +41,37 @@
 		- Note, when this command is used and someone hears it from another location it will say where the sound is coming from (i.e. "You hear someone shouting to the north" where north is an exit)
 	- Implement Whisper command to whisper to a specific person ("WHISPER PlayerName Hello")
 
-5) Implement Commands
+5) Skill System
+	- Add Skill System functionality
+		- Skill Class
+			- Skill Name
+			- Skill Type
+			- Base Stat for the skill
+			- Skill Description
+			- Skill Shortcut (if not passive)
+			- Improvement Speed
+			- Prerequisite Skills
+		- Skill:
+			- GrandType Fighting Skills
+				- TYPE Melee
+					- Dagger
+					- Sword
+				- TYPE Ranged
+					- Bow
+				- TYPE Unarmed
+					- boxing
+				- Defence
+					- parrying
+					- blocking
+					- dodging
+			- Functional Skills
+				- CHOP item i.e. CHOP TREE to chop a tree, if the character has an axe equipped.
+				- MAKE item i.e. MAKE SWORD (would need to have an available, unused anvil)
+					- Using an item marks it as "in use" until the thing is done or the player is logged out.
+					- sword would use an additional sub skill of "Weaponsmithing"
+						- Which would be a subskill of "BlackSmithing"
+
+6) Implement Commands/Skills
 	- Attack ("ATTACK PlayerName") - will use default item in their hand
 		- Hit points must reduce
 	- Make ("MAKE Torch") - will use the items from their inventory to make the torch.
@@ -51,12 +81,12 @@
 		- Not sure if the build system should be split up a bit - i.e. you can build 5% of the house, depending on how
 			long you take doing it or until resources run out.
 
-6) Implement Story element
+5) Implement Story element
 	- Jobs system (get jobs from a notice board)
 		- Means we need a new notice board system, with a "LOOK AT" and/or "EXAMINE" command.
 	- Implement story arcs (locations you need to go to, get clues, clues generate if someone is on a quest on entry to the location / they can only see them themselves)
 
-7) More Stuff
+8) More Stuff
 	- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)
 	- Characters (basic, stay in locations, can talk back / say set phrases)
 	- Character Jobs (basic, can get jobs / tasks from a character)

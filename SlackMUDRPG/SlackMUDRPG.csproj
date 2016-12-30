@@ -97,6 +97,9 @@
     <Content Include="JSON\SlackWebHooks\SlackWebHook_SD.json" />
     <Content Include="JSON\SlackWebHooks\SlackWebHook_SlackMud.json" />
     <Content Include="JSON\Scripts\EnterWorldProcess-FirstLocation.json" />
+    <Content Include="JSON\Misc\Attribute.BaseCharacter.json" />
+    <Content Include="JSON\Misc\Attribute.Blacksmith.json" />
+    <Content Include="JSON\Misc\Attribute.Warrior.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -121,6 +124,7 @@
     <Compile Include="CommandClasses\Commands.cs" />
     <Compile Include="CommandClasses\SlackClient.cs" />
     <Compile Include="CommandClasses\SlackMud.cs" />
+    <Compile Include="CommandClasses\SMAttributes.cs" />
     <Compile Include="CommandClasses\SMCharacter.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
@@ -169,10 +173,7 @@
     <Compile Include="Utility\SlackWebHooks.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="JSON\Misc\" />
-    <Folder Include="JSON\Objects\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

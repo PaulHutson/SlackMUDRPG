@@ -31,7 +31,7 @@ namespace SlackMUDRPG
                 serviceType = Request.QueryString["st"];
             }
 
-            // Get Slack / Other webhook locations
+            // Get Slack Group Name
             string serviceName = Request.Form["sn"];   // This will only be Slack for now, but could use something else like Discord
             if (serviceName == null)
             {
