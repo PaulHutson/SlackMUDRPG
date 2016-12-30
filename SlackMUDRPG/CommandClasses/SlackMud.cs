@@ -53,9 +53,9 @@ namespace SlackMUDRPG.CommandsClasses
         public static string GetCharacter(string userID, bool newCharacter = false)
 		{
 			List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
-			SMCharacter smc = smcs.Find(obj => obj.UserID == userID);
+			SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
 
-			if (smc != null)
+			if (character != null)
 			{
 				return "Your are already logged in!";
 			}
@@ -71,6 +71,12 @@ namespace SlackMUDRPG.CommandsClasses
 					{
 						string json = r.ReadToEnd();
 						smc = JsonConvert.DeserializeObject<SMCharacter>(json);
+					}
+
+					SMRoom room = smc.GetRoom();
+					if (room != null)
+					{
+						//TODO room.Announce() someone has entered the room or new player ect...
 					}
 
 					smcs.Add(smc);
@@ -121,7 +127,7 @@ namespace SlackMUDRPG.CommandsClasses
             SMChar.AddItem(CreateItemFromJson("Weapons.WoodenSword"));
 
             // Set the start location
-            SMChar.RoomLocation = "1";
+            SMChar.RoomID = "1";
             string defaultRoomPath = FilePathSystem.GetFilePath("Scripts", "EnterWorldProcess-FirstLocation");
             if (File.Exists(defaultRoomPath))
             {
@@ -135,12 +141,9 @@ namespace SlackMUDRPG.CommandsClasses
                     SMStartLocation sl = JsonConvert.DeserializeObject<SMStartLocation>(json);
 
                     // Set the start location.
-                    SMChar.RoomLocation = sl.StartLocation;
+                    SMChar.RoomID = sl.StartLocation;
                 }
             }
-
-            // Create the JSON object from the new SMCharacter object
-			var SMCharJSON = JsonConvert.SerializeObject(SMChar, Formatting.Indented);
 
             // Get the path for the character
             string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
@@ -149,10 +152,7 @@ namespace SlackMUDRPG.CommandsClasses
             if (!File.Exists(path))
             {
                 // Write the character to the stream
-                using (StreamWriter w = new StreamWriter(path, true))
-                {
-                    w.WriteLine(SMCharJSON); // Write the text
-                }
+                SMChar.SaveToFile();
 
                 // log the newly created character into the game
                 return GetCharacter(userID, true);
@@ -225,11 +225,11 @@ namespace SlackMUDRPG.CommandsClasses
             if (smcs != null)
             {
                 string smcsNames = "";
-                if (smcs.Count(smc => smc.RoomLocation == locationID) > 0)
+                if (smcs.Count(smc => smc.RoomID == locationID) > 0)
                 {
                     returnString += "\n\nPeople: ";
                     List<SMCharacter> charsInLocation = new List<SMCharacter>();
-                    charsInLocation = smcs.FindAll(s => s.RoomLocation == locationID);
+                    charsInLocation = smcs.FindAll(s => s.RoomID == locationID);
                     var counted = 0;
                     foreach (SMCharacter sma in charsInLocation)
                     {
