@@ -13,15 +13,15 @@ namespace SlackMUDRPG
         {
 
         }
-
+        
         protected void btn_Test_Click(object sender, EventArgs e)
         {
-            OutputUpdate(SlackMUDRPG.CommandsClasses.SlackMud.Login("123"));
+            OutputUpdate(SlackMUDRPG.CommandsClasses.SlackMud.Login(tb_CharID.Text));
         }
 
         protected void btn_CreateCharacter_Click(object sender, EventArgs e)
         {
-            OutputUpdate(SlackMUDRPG.CommandsClasses.SlackMud.CreateCharacter("123", "Paul", "Hutson", 34, 'm'));
+            OutputUpdate(SlackMUDRPG.CommandsClasses.SlackMud.CreateCharacter(tb_CharID.Text, "Paul", "Hutson", 34, 'm'));
         }
 
         protected void btn_TestLoc_Click(object sender, EventArgs e)
