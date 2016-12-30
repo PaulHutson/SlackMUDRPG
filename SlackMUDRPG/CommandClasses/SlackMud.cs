@@ -51,62 +51,48 @@ namespace SlackMUDRPG.CommandsClasses
         /// <param name="newCharacter">newCharacter to change the output of the text based on whether the character is new or not</param>
         /// <returns>String message for usage</returns>
         public static string GetCharacter(string userID, bool newCharacter = false)
-        {
-            // Set the path to look for the character information.
-            string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
+		{
+			List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			SMCharacter smc = smcs.Find(obj => obj.UserID == userID);
 
-            // Check if the file exists.
-            if (File.Exists(path))
-            {
-                // Get the Character
-                SMCharacter SMChar = new SMCharacter();
+			if (smc != null)
+			{
+				return "Your are already logged in!";
+			}
+			else
+			{
+				string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
 
-                // Use a stream reader to read the file in (based on the path)
-                using (StreamReader r = new StreamReader(path))
-                {
-                    // Create a new JSON string to be used...
-                    string json = r.ReadToEnd();
+				if (File.Exists(path))
+				{
+					SMCharacter smc = new SMCharacter();
 
-                    // ... use the json string we've just gotten to create a new character
-                    SMChar = JsonConvert.DeserializeObject<SMCharacter>(json);
-                }
+					using (StreamReader r = new StreamReader(path))
+					{
+						string json = r.ReadToEnd();
+						smc = JsonConvert.DeserializeObject<SMCharacter>(json);
+					}
 
+					smcs.Add(smc);
+					HttpContext.Current.Application["SMCharacters"] = smcs;
 
-                // Add the character to the application memory (so it's accessible to everyone sending commands, etc).
-                // Get the list of existing characters
-                List<SMCharacter> smcs = new List<SMCharacter>();
-                smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+					if (!newCharacter)
+					{
+						return "Welcome back " + smc.FirstName;
+					}
 
-                // Check if the character already exists or not.
-                if (smcs != null)
-                {
-                    if (smcs.FirstOrDefault(smc => smc.FirstName == SMChar.FirstName) == null)
-                    {
-                        // If it doesn't, add it to the character list.
-                        smcs.Add(SMChar);
-                        HttpContext.Current.Application["SMCharacters"] = smcs;
-                    }
-                }
+					string returnString = "Welcome to SlackMud!\n";
+					returnString += "We've created your character in the magical world of Arrelvia!"; // TODO, use a welcome script!
+																									  // TODO, get room details
 
-                // return a welcome!
-                string returnString = "";
-                if (!newCharacter)
-                {
-                    returnString = "Welcome back " + SMChar.FirstName;
-                }
-                else
-                {
-                    returnString = "Welcome to SlackMud!\n";
-                    returnString += "We've created your character in the magical world of Arrelvia!"; // TO DO, use a welcome script!
-                                                                                                      // TO DO, get room details
-                }
-                return returnString;
-            }
-            else
-            {
-                // If the UserID doesn't have a character already, inform them that they need to create one.
-                return "You do not have a character yet, you need to create one...";
-            }
+					return returnString;
+				}
+				else
+				{
+					// If the UserID doesn't have a character already, inform them that they need to create one.
+					return "You do not have a character yet, you need to create one...";
+				}
+			}
         }
 
         /// <summary>
