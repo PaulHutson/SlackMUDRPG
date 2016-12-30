@@ -14,8 +14,12 @@ namespace SlackMUDRPG
         protected void Application_Start(object sender, EventArgs e)
         {
             Application["TestOutput"] = 0;
+
             List<SMCharacter> smc = new List<SMCharacter>();
             Application["SMCharacters"] = smc;
+
+			List<SMRoom> smr = new List<SMRoom>();
+			Application["SMRooms"] = smr;
         }
 
         protected void Session_Start(object sender, EventArgs e)

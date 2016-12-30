@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,10 @@ namespace SlackMUDRPG.CommandsClasses
 {
     public class SMRoom
     {
-        [JsonProperty("RoomLocationX")]
+		[JsonProperty("RoomID")]
+		public string RoomID { get; set; }
+
+		[JsonProperty("RoomLocationX")]
         public int RoomLocationX { get; set; }
 
         [JsonProperty("RoomLocationY")]
@@ -21,10 +24,24 @@ namespace SlackMUDRPG.CommandsClasses
         public string RoomDescription { get; set; }
 
         [JsonProperty("RoomExits")]
-        public SMExit[] RoomExits { get; set; }
+        public List<SMExit> RoomExits { get; set; }
 
         [JsonProperty("RoomItems")]
-        public SMItem[] RoomItems { get; set; }
+        public List<SMItem> RoomItems { get; set; }
+
+		/// <summary>
+		/// Adds an item to the room, so any user can collect it.
+		/// </summary>
+		/// <param name="item">Item.</param>
+		public void AddItem(SMItem item)
+		{
+			if (this.RoomItems == null)
+			{
+				this.RoomItems = new List<SMItem>();
+			}
+
+			this.RoomItems.Add(item);
+		}
     }
 
     public class SMExit
@@ -35,7 +52,7 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("Description")]
         public string Description { get; set; }
         
-        [JsonProperty("LocationID")]
-        public string LocationID { get; set; }
+        [JsonProperty("RoomID")]
+        public string RoomID { get; set; }
     }
 }
