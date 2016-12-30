@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,13 +32,13 @@ namespace SlackMUDRPG.CommandsClasses
 		public string RoomID { get; set; }
 
 		[JsonProperty("RoomLocationX")]
-        public int RoomLocationX { get; set; }
+        public int RoomIDX { get; set; }
 
         [JsonProperty("RoomLocationY")]
-        public int RoomLocationY { get; set; }
+        public int RoomIDY { get; set; }
 
         [JsonProperty("RoomLocationZ")]
-        public int RoomLocationZ { get; set; }
+        public int RoomIDZ { get; set; }
 
         [JsonProperty("RoomDescription")]
         public string RoomDescription { get; set; }
@@ -72,7 +72,7 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("Description")]
         public string Description { get; set; }
         
-        [JsonProperty("LocationID")]
-        public string LocationID { get; set; }
+        [JsonProperty("RoomID")]
+        public string RoomID { get; set; }
     }
 }

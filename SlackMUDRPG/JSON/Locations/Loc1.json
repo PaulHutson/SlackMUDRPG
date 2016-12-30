@@ -1,4 +1,4 @@
-﻿{
+{
 	"RoomID": "1",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
@@ -8,12 +8,12 @@
 		{
 			"Shortcut": "D1",
 			"Description": "Door One",
-			"LocationID": "2"
+			"RoomID": "2"
 		},
 		{
 			"Shortcut": "D2",
 			"Description": "Door Two",
-			"LocationID": "3"
+			"RoomID": "3"
 		}
 	],
 	"RoomItems": null
