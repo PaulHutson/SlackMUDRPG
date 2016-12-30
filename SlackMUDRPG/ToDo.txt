@@ -14,14 +14,14 @@
 		- ... update the player location within the player file.
 
 3) Implement object system ROB WORKING ON THIS
-	- Add player inventory
-		- Add items to inventory
-			- Use start script to add a few items to the player inventory to stat with.
+	DONE- Add player inventory
+		DONE- Add items to inventory
+			DONE- Use start script to add a few items to the player inventory to stat with.
 			- Get items from room location, add to inventory. ("TAKE ItemName")
 				- Check that there is room in the inventory
 				- Create a get method where you can add something to bag ("TAKE ItemName in BAG" where BAG is an inventory location)
-		- Remove items from inventory
-			- Add items to the room
+		DONE- Remove items from inventory
+			DONE- Add items to the room
 		- Use items
 			- Add player locations to character file
 			- Add item use locations to items stub
