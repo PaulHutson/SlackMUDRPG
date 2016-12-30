@@ -6,7 +6,7 @@
   "age": 0,
   "sex": "m",
   "PKFlag": false,
-  "userid": null,
+  "userid": "123",
   "RoomLocation": "1",
   "CharacterItems": null,
   "Skills": null
