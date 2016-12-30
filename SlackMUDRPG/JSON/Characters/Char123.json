@@ -6,8 +6,8 @@
   "age": 0,
   "sex": "m",
   "PKFlag": false,
-  "userid": "123",
-  "RoomLocation": null,
+  "UserID": "123",
+  "RoomID": "1",
   "CharacterItems": [
     {
       "ItemId": "6f523dad-c9d2-459e-b3fc-c229d374b7d3",
