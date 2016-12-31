@@ -77,6 +77,117 @@ namespace SlackMUDRPG.CommandsClasses
 			smrs.Add(this);
 			HttpContext.Current.Application["SMRooms"] = smrs;
 		}
+
+        /// <summary>
+        /// Gets the room exit details
+        /// </summary>
+        public string GetExitDetails()
+        {
+            string returnString = "";
+
+            if (this.RoomExits.Count == 0)
+            {
+                returnString = "No Exits are found from this room...";
+            } else
+            {
+                returnString += "\n\nRoom Exits:\n";
+                bool isFirst = true;
+
+                foreach (SMExit sme in this.RoomExits)
+                {
+                    if (!isFirst)
+                    {
+                        returnString += ", ";
+                    }
+                    else
+                    {
+                        isFirst = false;
+                    }
+                    returnString += sme.Description + "(" + sme.Shortcut + ")";
+                }
+            }
+            
+            return returnString;
+        }
+        
+        /// <summary>
+        /// Gets a list of all the people in the room.
+        /// </summary>
+        public string GetPeopleDetails(string userID = "0")
+        {
+            string returnString = "\n\nPeople:\n";
+
+            // Add the people within the location
+            // Search through logged in users to see which are in this location
+            List<SMCharacter> smcs = new List<SMCharacter>();
+            smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+
+            // Check if the character already exists or not.
+            if (smcs != null)
+            {
+                if (smcs.Count(smc => smc.RoomID == this.RoomID) > 0)
+                {
+                    List<SMCharacter> charsInLocation = new List<SMCharacter>();
+                    charsInLocation = smcs.FindAll(s => s.RoomID == this.RoomID);
+                    bool isFirst = true;
+                    foreach (SMCharacter sma in charsInLocation)
+                    {
+                        if (!isFirst)
+                        {
+                            returnString += ", ";
+                        }
+                        else
+                        {
+                            isFirst = false;
+                        }
+
+                        if (sma.UserID == userID)
+                        {
+                            returnString += "You";
+                        }
+                        else
+                        {
+                            returnString += sma.FirstName + " " + sma.LastName;
+                        }
+
+                    }
+                }
+                else
+                {
+                    returnString += "There's noone here.";
+                }
+            }
+            else
+            {
+                returnString += "There's noone here.";
+            }
+
+            return returnString;
+        }
+
+        /// <summary>
+        /// Internal Method to create a room decription, created as it's going to be used over and over...
+        /// </summary>
+        /// <param name="smr">An SMRoom</param>
+        /// <returns>String including a full location string</returns>
+        public string GetLocationInformation(string userID = "0")
+        {
+            // Construct the room string.
+            // Create the string and add the basic room description.
+            string returnString = this.RoomDescription;
+
+            // Add the people within the location
+            returnString += this.GetPeopleDetails(userID);
+
+            // Add the exits to the room so that someone can leave.
+            returnString += this.GetExitDetails();
+
+            // Show all the items within the room that can be returned.
+            returnString += "\n\nItems: TODO";
+
+            // Return the string to the calling method.
+            return returnString;
+        }
     }
 
     public class SMExit

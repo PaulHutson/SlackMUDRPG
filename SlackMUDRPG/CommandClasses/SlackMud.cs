@@ -19,7 +19,7 @@ namespace SlackMUDRPG.CommandsClasses
         /// </summary>
         /// <param name="userID">Slack UserID</param>
         /// <returns>A string response</returns>
-        public static string Login(string userID)
+        public static string Login(string userID, bool newCharacter = false)
         {
             // Variable for the return string
             string returnString = "";
@@ -36,12 +36,74 @@ namespace SlackMUDRPG.CommandsClasses
             }
             else
             {
-                // If the userid already has a user then get the character details.
-                returnString = GetCharacter(userID);
+                List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+                SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
+
+                if ((character != null) && (!newCharacter))
+                {
+                    return "You're already logged in!";
+                }
+                else
+                {
+                    // Get the character
+                    character = GetCharacter(userID);
+
+                    SMRoom room = character.GetRoom();
+                    if (room != null)
+                    {
+                        //TODO room.Announce() someone has entered the room or new player etc...
+                    }
+
+                    if (!newCharacter)
+                    {
+                        returnString = "Welcome back " + character.FirstName + " " + character.LastName + "\n";
+                    }
+                    else
+                    {
+                        returnString = "Welcome to SlackMud!\n";
+                        returnString += "We've created your character in the magical world of Arrelvia!\n"; // TODO, use a welcome script!
+                    }
+                    returnString += GetLocationDetails(character.RoomID, character.UserID);
+                }
             }
 
             // Return the text output
             return returnString;
+        }
+
+        /// <summary>
+        /// Gets a character and also loads the character to memory if it isn't already there.
+        /// </summary>
+        /// <param name="userID">The id of the character you want to load</param>
+        /// <returns>A character</returns>
+        public static SMCharacter GetCharacter(string userID)
+        {
+            // Get the room file if it exists
+            List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+            SMCharacter charInMem = smcs.FirstOrDefault(smc => smc.UserID == userID);
+
+            if (charInMem == null)
+            {
+                // Get the right path, and work out if the file exists.
+                string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
+
+                // Check if the character exists..
+                if (File.Exists(path))
+                {
+                    using (StreamReader r = new StreamReader(path))
+                    {
+                        // Get the character from the json string
+                        string json = r.ReadToEnd();
+                        charInMem = JsonConvert.DeserializeObject<SMCharacter>(json);
+
+                        // Add the character to the application memory 
+                        smcs.Add(charInMem);
+                        HttpContext.Current.Application["SMCharacters"] = smcs;
+                    }
+                }
+            }
+
+            return charInMem;
         }
 
         /// <summary>
@@ -50,7 +112,7 @@ namespace SlackMUDRPG.CommandsClasses
         /// <param name="userID">userID is based on the id from the slack channel</param>
         /// <param name="newCharacter">newCharacter to change the output of the text based on whether the character is new or not</param>
         /// <returns>String message for usage</returns>
-        public static string GetCharacter(string userID, bool newCharacter = false)
+        public static string GetCharacterOLD(string userID, bool newCharacter = false)
 		{
 			List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
@@ -113,55 +175,56 @@ namespace SlackMUDRPG.CommandsClasses
         /// <returns>A string with the character information</returns>
         public static string CreateCharacter(string userID, string firstName, string lastName, int age, char sexIn, string characterType = "BaseCharacter")
         {
-            // Create the character options
-            SMCharacter SMChar = new SMCharacter();
-      		SMChar.UserID = userID;
-            SMChar.FirstName = firstName;
-            SMChar.LastName = lastName;
-            SMChar.LastLogindate = DateTime.Now;
-            SMChar.LastInteractionDate = DateTime.Now;
-            SMChar.PKFlag = false;
-            SMChar.Sex = sexIn;
-
-            // Add default attributes to the character
-            SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);
-
-            // Add default items to the character
-            SMChar.AddItem(CreateItemFromJson("Containers.SmallBackpack"));
-            SMChar.AddItem(CreateItemFromJson("Weapons.WoodenSword"));
-
-            // Set the start location
-            SMChar.RoomID = "1";
-            string defaultRoomPath = FilePathSystem.GetFilePath("Scripts", "EnterWorldProcess-FirstLocation");
-            if (File.Exists(defaultRoomPath))
-            {
-                // Use a stream reader to read the file in (based on the path)
-                using (StreamReader r = new StreamReader(defaultRoomPath))
-                {
-                    // Create a new JSON string to be used...
-                    string json = r.ReadToEnd();
-
-                    // ... get the information from the the start location token..
-                    SMStartLocation sl = JsonConvert.DeserializeObject<SMStartLocation>(json);
-
-                    // Set the start location.
-
-                    // TODO Add room to memory if not already there.
-                    SMChar.RoomID = sl.StartLocation;
-                }
-            }
-
             // Get the path for the character
             string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
 
             // If the file doesn't exist i.e. the character doesn't exist
             if (!File.Exists(path))
             {
+                // Create the character options
+                SMCharacter SMChar = new SMCharacter();
+                SMChar.UserID = userID;
+                SMChar.FirstName = firstName;
+                SMChar.LastName = lastName;
+                SMChar.LastLogindate = DateTime.Now;
+                SMChar.LastInteractionDate = DateTime.Now;
+                SMChar.PKFlag = false;
+                SMChar.Sex = sexIn;
+
+                // Add default attributes to the character
+                SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);
+
+                // Add default items to the character
+                SMChar.AddItem(CreateItemFromJson("Containers.SmallBackpack"));
+                SMChar.AddItem(CreateItemFromJson("Weapons.WoodenSword"));
+
+                // Set the start location
+                SMChar.RoomID = "1";
+                string defaultRoomPath = FilePathSystem.GetFilePath("Scripts", "EnterWorldProcess-FirstLocation");
+                if (File.Exists(defaultRoomPath))
+                {
+                    // Use a stream reader to read the file in (based on the path)
+                    using (StreamReader r = new StreamReader(defaultRoomPath))
+                    {
+                        // Create a new JSON string to be used...
+                        string json = r.ReadToEnd();
+
+                        // ... get the information from the the start location token..
+                        SMStartLocation sl = JsonConvert.DeserializeObject<SMStartLocation>(json);
+
+                        // Set the start location.
+                        SMChar.RoomID = sl.StartLocation;
+
+                        // TODO Add room to memory if not already there.
+
+                    }
+                }
+                
                 // Write the character to the stream
                 SMChar.SaveToFile();
 
                 // log the newly created character into the game
-                return GetCharacter(userID, true);
+                return Login(userID, true);
             }
             else
             {
@@ -174,90 +237,65 @@ namespace SlackMUDRPG.CommandsClasses
 
         #region "Location Methods"
 
-        public static string GetLocationDetails(string locationID)
+        /// <summary>
+        /// Gets a room and also loads the room to memory if it isn't already there.
+        /// </summary>
+        /// <param name="roomID">The id of the location you want to load</param>
+        /// <returns>A room</returns>
+        public static SMRoom GetRoom(string roomID)
+        {
+            // Get the room file if it exists
+            List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+            SMRoom roomInMem = smrs.FirstOrDefault(smr => smr.RoomID == roomID);
+
+            if (roomInMem == null)
+            {
+                // Get the right path, and work out if the file exists.
+                string path = FilePathSystem.GetFilePath("Locations", "Loc" + roomID);
+
+                // Check if the character exists..
+                if (File.Exists(path))
+                {
+                    // Use a stream reader to read the file in (based on the path)
+                    using (StreamReader r = new StreamReader(path))
+                    {
+                        // Create a new JSON string to be used...
+                        string json = r.ReadToEnd();
+
+                        // ... get the information from the the room information.
+                        roomInMem = JsonConvert.DeserializeObject<SMRoom>(json);
+
+                        // Add the room to the application memory 
+                        smrs.Add(roomInMem);
+                        HttpContext.Current.Application["SMRooms"] = smrs;
+                    }
+                }
+            }
+
+            return roomInMem;
+        }
+
+        public static string GetLocationDetails(string roomID, string userID = "0")
         {
             // Variable for the return string
             string returnString = "";
 
-            // Get the right path, and work out if the file exists.
-            string path = FilePathSystem.GetFilePath("Locations", "Loc" + locationID);
+            // Get the room from memory
+            SMRoom smr = GetRoom(roomID);
 
             // Check if the character exists..
-            if (!File.Exists(path))
+            if (smr == null)
             {
                 // If they don't exist inform the person as to how to create a new user
                 returnString = "Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com";
             }
             else
             {
-                // Load the room details
-                SMRoom smr = new SMRoom();
-
-                // Use a stream reader to read the file in (based on the path)
-                using (StreamReader r = new StreamReader(path))
-                {
-                    // Create a new JSON string to be used...
-                    string json = r.ReadToEnd();
-
-                    // ... get the informaiton from the the room information.
-                    smr = JsonConvert.DeserializeObject<SMRoom>(json);
-
-                    // Return the room description, exits, people and objects 
-                    returnString = ConstructLocationInformation(smr, locationID);
-                }
+                // Return the room description, exits, people and objects 
+                returnString = smr.GetLocationInformation(userID);
             }
 
             // Return the text output
-            return returnString;
-        }
-
-        /// <summary>
-        /// Internal Method to create a room decription, created as it's going to be used over and over...
-        /// </summary>
-        /// <param name="smr">An SMRoom</param>
-        /// <returns>String including a full location string</returns>
-        private static string ConstructLocationInformation(SMRoom smr, String locationID)
-        {
-            // Construct the room string.
-            // Create the string and add the basic room description.
-            string returnString = smr.RoomDescription;
-
-            // Add the people within the location
-            // Search through logged in users to see which are in this location
-            List<SMCharacter> smcs = new List<SMCharacter>();
-            smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
-
-            // Check if the character already exists or not.
-            if (smcs != null)
-            {
-                string smcsNames = "";
-                if (smcs.Count(smc => smc.RoomID == locationID) > 0)
-                {
-                    returnString += "\n\nPeople: ";
-                    List<SMCharacter> charsInLocation = new List<SMCharacter>();
-                    charsInLocation = smcs.FindAll(s => s.RoomID == locationID);
-                    var counted = 0;
-                    foreach (SMCharacter sma in charsInLocation)
-                    {
-                        if (counted == 0)
-                        {
-                            returnString += sma.FirstName + " " + sma.LastName;
-                        }
-                        else
-                        {
-                            returnString += ", " + sma.FirstName + " " + sma.LastName;
-                        }
-                    }
-                }
-            }
-
-            // Add the exits to the room so that someone can leave.
-            returnString += "\n\nExits: " + smr.RoomExits;
-
-            // Show all the items within the room that can be returned.
-            returnString += "\n\nItems: TODO";
-
-            // Return the string to the calling method.
             return returnString;
         }
 

@@ -3,7 +3,7 @@
 	"RoomLocationX": "2",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
-	"RoomDescription": "This is room 2...",
+	"RoomDescription": "Another room in the world, this time painted purple with lovely flowers all over the walls..",
 	"RoomExits": [
 		{
 			"Shortcut": "D1",

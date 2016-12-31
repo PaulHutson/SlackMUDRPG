@@ -85,7 +85,6 @@
   <ItemGroup>
     <Content Include="GameAccess.aspx" />
     <Content Include="packages.config" />
-    <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Commands\Help.json" />
     <Content Include="JSON\Commands\NewCharacter.json" />
     <Content Include="JSON\GeneralText\NoCharacter.json" />
@@ -100,6 +99,7 @@
     <Content Include="JSON\Misc\Attribute.BaseCharacter.json" />
     <Content Include="JSON\Misc\Attribute.Blacksmith.json" />
     <Content Include="JSON\Misc\Attribute.Warrior.json" />
+    <Content Include="JSON\Characters\Char123.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
