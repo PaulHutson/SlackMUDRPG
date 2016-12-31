@@ -3,7 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
-	"RoomDescription": "Welcome to the world... this is the starter room",
+	"RoomDescription": "This is the starter room, around you is infinite nothingness, barring a couple of doors that lead to places elsewhere.",
 	"RoomExits": [
 		{
 			"Shortcut": "D1",
