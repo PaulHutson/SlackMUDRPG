@@ -109,6 +109,62 @@ namespace SlackMUDRPG.CommandsClasses
             
             return returnString;
         }
+        
+        /// <summary>
+        /// Gets a list of all the people in the room.
+        /// </summary>
+        public string GetPeopleDetails(string userID = "0")
+        {
+            string returnString = "\n\nPeople:\n";
+
+            // Add the people within the location
+            // Search through logged in users to see which are in this location
+            List<SMCharacter> smcs = new List<SMCharacter>();
+            smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+
+            // Check if the character already exists or not.
+            if (smcs != null)
+            {
+                if (smcs.Count(smc => smc.RoomID == this.RoomID) > 0)
+                {
+                    List<SMCharacter> charsInLocation = new List<SMCharacter>();
+                    charsInLocation = smcs.FindAll(s => s.RoomID == this.RoomID);
+                    bool isFirst = true;
+                    foreach (SMCharacter sma in charsInLocation)
+                    {
+                        if (!isFirst)
+                        {
+                            returnString += ", ";
+                        }
+                        else
+                        {
+                            isFirst = false;
+                        }
+
+                        if (sma.UserID == userID)
+                        {
+                            returnString += "You";
+                        }
+                        else
+                        {
+                            returnString += sma.FirstName + " " + sma.LastName;
+                        }
+
+                    }
+                }
+                else
+                {
+                    returnString += "There's noone here.";
+                }
+            }
+            else
+            {
+                returnString += "There's noone here.";
+            }
+
+            return returnString;
+        }
+
 
     }
 

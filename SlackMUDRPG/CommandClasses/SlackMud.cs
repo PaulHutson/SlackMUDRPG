@@ -311,41 +311,7 @@ namespace SlackMUDRPG.CommandsClasses
             string returnString = smr.RoomDescription;
 
             // Add the people within the location
-            // Search through logged in users to see which are in this location
-            List<SMCharacter> smcs = new List<SMCharacter>();
-            smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
-
-            // Check if the character already exists or not.
-            if (smcs != null)
-            {
-                if (smcs.Count(smc => smc.RoomID == locationID) > 0)
-                {
-                    returnString += "\n\nPeople: ";
-                    List<SMCharacter> charsInLocation = new List<SMCharacter>();
-                    charsInLocation = smcs.FindAll(s => s.RoomID == locationID);
-                    bool isFirst = true;
-                    foreach (SMCharacter sma in charsInLocation)
-                    {
-                        if (!isFirst)
-                        {
-                            returnString += ", ";
-                        }
-                        else
-                        {
-                            isFirst = false;
-                        }
-
-                        if (sma.UserID == userID)
-                        {
-                            returnString += "You";
-                        } else
-                        {
-                            returnString += sma.FirstName + " " + sma.LastName;
-                        }
-                        
-                    }
-                }
-            }
+            returnString += smr.GetPeopleDetails(userID);
 
             // Add the exits to the room so that someone can leave.
             returnString += smr.GetExitDetails();
