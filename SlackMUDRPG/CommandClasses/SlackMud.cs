@@ -292,34 +292,10 @@ namespace SlackMUDRPG.CommandsClasses
             else
             {
                 // Return the room description, exits, people and objects 
-                returnString = ConstructLocationInformation(smr, roomID, userID);
+                returnString = smr.GetLocationInformation(userID);
             }
 
             // Return the text output
-            return returnString;
-        }
-
-        /// <summary>
-        /// Internal Method to create a room decription, created as it's going to be used over and over...
-        /// </summary>
-        /// <param name="smr">An SMRoom</param>
-        /// <returns>String including a full location string</returns>
-        private static string ConstructLocationInformation(SMRoom smr, string locationID, string userID = "0")
-        {
-            // Construct the room string.
-            // Create the string and add the basic room description.
-            string returnString = smr.RoomDescription;
-
-            // Add the people within the location
-            returnString += smr.GetPeopleDetails(userID);
-
-            // Add the exits to the room so that someone can leave.
-            returnString += smr.GetExitDetails();
-
-            // Show all the items within the room that can be returned.
-            returnString += "\n\nItems: TODO";
-
-            // Return the string to the calling method.
             return returnString;
         }
 
