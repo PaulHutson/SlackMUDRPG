@@ -50,8 +50,7 @@ namespace SlackMUDRPG
         protected void Application_End(object sender, EventArgs e)
         {
             // If the application closes flush everything to disk.
-            List<SMCharacter> smcl = new List<SMCharacter>();
-            smcl = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+            List<SMCharacter> smcl = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
             foreach (SMCharacter smc in smcl)
             {
@@ -59,6 +58,12 @@ namespace SlackMUDRPG
             }
 
             // TODO Save Rooms
+            List<SMRoom> smrl = (List<SlackMUDRPG.CommandsClasses.SMRoom>)HttpContext.Current.Application["SMRooms"];
+
+            foreach (SMRoom smr in smrl)
+            {
+                smr.SaveToFile();
+            }
         }
     }
 }
