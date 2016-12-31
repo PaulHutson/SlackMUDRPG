@@ -145,9 +145,10 @@ namespace SlackMUDRPG.CommandsClasses
                     SMStartLocation sl = JsonConvert.DeserializeObject<SMStartLocation>(json);
 
                     // Set the start location.
+                    SMChar.RoomID = sl.StartLocation;
 
                     // TODO Add room to memory if not already there.
-                    SMChar.RoomID = sl.StartLocation;
+
                 }
             }
 
@@ -174,37 +175,65 @@ namespace SlackMUDRPG.CommandsClasses
 
         #region "Location Methods"
 
-        public static string GetLocationDetails(string locationID)
+        /// <summary>
+        /// Gets a room and also loads the room to memory if it isn't already there.
+        /// </summary>
+        /// <param name="roomID">The id of the location you want to load</param>
+        /// <returns>A room</returns>
+        public static SMRoom GetRoom(string roomID)
+        {
+            // Get the room file if it exists
+            List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+            SMRoom roomInMem = smrs.FirstOrDefault(smr => smr.RoomID == roomID);
+
+            if (roomInMem == null)
+            {
+                // Get the right path, and work out if the file exists.
+                string path = FilePathSystem.GetFilePath("Locations", "Loc" + roomID);
+
+                // Check if the character exists..
+                if (File.Exists(path))
+                {
+                    // Load the room details
+                    SMRoom smr = new SMRoom();
+
+                    // Use a stream reader to read the file in (based on the path)
+                    using (StreamReader r = new StreamReader(path))
+                    {
+                        // Create a new JSON string to be used...
+                        string json = r.ReadToEnd();
+
+                        // ... get the informaiton from the the room information.
+                        smr = JsonConvert.DeserializeObject<SMRoom>(json);
+
+                        // Return the room description, exits, people and objects 
+                        smrs.Add(smr);
+                        HttpContext.Current.Application["SMRooms"] = smrs;
+                    }
+                }
+            }
+
+            return roomInMem;
+        }
+
+        public static string GetLocationDetails(string roomID)
         {
             // Variable for the return string
             string returnString = "";
 
-            // Get the right path, and work out if the file exists.
-            string path = FilePathSystem.GetFilePath("Locations", "Loc" + locationID);
+            // Get the room from memory
+            SMRoom smr = GetRoom(roomID);
 
             // Check if the character exists..
-            if (!File.Exists(path))
+            if (smr == null)
             {
                 // If they don't exist inform the person as to how to create a new user
                 returnString = "Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com";
             }
             else
             {
-                // Load the room details
-                SMRoom smr = new SMRoom();
-
-                // Use a stream reader to read the file in (based on the path)
-                using (StreamReader r = new StreamReader(path))
-                {
-                    // Create a new JSON string to be used...
-                    string json = r.ReadToEnd();
-
-                    // ... get the informaiton from the the room information.
-                    smr = JsonConvert.DeserializeObject<SMRoom>(json);
-
-                    // Return the room description, exits, people and objects 
-                    returnString = ConstructLocationInformation(smr, locationID);
-                }
+                // Return the room description, exits, people and objects 
+                returnString = ConstructLocationInformation(smr, roomID);
             }
 
             // Return the text output
@@ -230,7 +259,6 @@ namespace SlackMUDRPG.CommandsClasses
             // Check if the character already exists or not.
             if (smcs != null)
             {
-                string smcsNames = "";
                 if (smcs.Count(smc => smc.RoomID == locationID) > 0)
                 {
                     returnString += "\n\nPeople: ";
