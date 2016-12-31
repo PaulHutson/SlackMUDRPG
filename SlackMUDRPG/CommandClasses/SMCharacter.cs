@@ -184,6 +184,8 @@ namespace SlackMUDRPG.CommandsClasses
 
                     // Announce arrival to other players in the same place
                     // TODO room.Announce()
+
+                    this.SaveToFile();
                 }
             }
 
