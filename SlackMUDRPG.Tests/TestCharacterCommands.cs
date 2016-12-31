@@ -27,7 +27,7 @@ namespace SlackMUDRPG.Tests
         [TestMethod]
         public void Test_GetChar()
         {
-            string a = CommandsClasses.SlackMud.GetCharacter("123");
+            string a = CommandsClasses.SlackMud.Login("123");
             string expected = "Welcome back Paul";
             Assert.AreEqual(a, expected, false);
         }
@@ -35,7 +35,7 @@ namespace SlackMUDRPG.Tests
         [TestMethod]
         public void Test_GetCharNewCharacter()
         {
-            string a = CommandsClasses.SlackMud.GetCharacter("123", true);
+            string a = CommandsClasses.SlackMud.Login("123", true);
             string expected = "Welcome to SlackMud!\n";
             expected += "We've created your character in the magical world of Arrelvia!";
             Assert.AreEqual(a, expected, false);
@@ -44,7 +44,7 @@ namespace SlackMUDRPG.Tests
         [TestMethod]
         public void Test_GetChar_NoChar()
         {
-            string a = CommandsClasses.SlackMud.GetCharacter("WONTWORK");
+            string a = CommandsClasses.SlackMud.Login("WONTWORK");
             string expected = "You do not have a character yet, you need to create one...";
             Assert.AreEqual(a, expected, false);
         }

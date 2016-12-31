@@ -18,9 +18,7 @@ namespace SlackMUDRPG
 
             // Other variables needed
             bool error = true;                              // Set the error bool to true because.. actually why do that?
-            string botName = "T43 3RR0R |307";              // Error bot name
-            string channelName = "#";                       // Channel the request came from
-            string channelID = "x";                         // Default channel id to reply to
+            string botName = "SlackMud";                // Error bot name
             string replyToChannel = "@error";               // Default ReplyToChannel
             string replyToError = outputText;               // Default reply text
 
@@ -54,7 +52,7 @@ namespace SlackMUDRPG
 
             if ((!error) && (replyToChannel != "@error"))
             {
-                SendToChannelMessage(serviceType, serviceName, outputText, botName, replyToChannel); // Note we need to change SD for a configurable one.
+                Commands.SendToChannelMessage(serviceType, serviceName, outputText, botName, replyToChannel); // Note we need to change SD for a configurable one.
             }
 
         }
@@ -66,32 +64,7 @@ namespace SlackMUDRPG
 
         private void SendPrivateMessage(string serviceType, string nameOfHook, string toName)
         {
-            SendToChannelMessage(serviceType, nameOfHook, "This is a bit of text", "Test Bot!", toName);
-        }
-
-        private void SendToChannelMessage(string serviceType, string nameOfHook, string messageContent, string botName, string channelTo)
-        {
-            using (WebClient client = new WebClient())
-            {
-                string urlWithAccessToken = GetAccessToken(serviceType, nameOfHook);
-
-                SlackClient sclient = new SlackClient(urlWithAccessToken);
-
-                sclient.PostMessage(username: botName,
-                           text: messageContent,
-                           channel: channelTo);
-            }
-        }
-
-        private string GetAccessToken(string serviceType, string nameOfHook)
-        {
-            string accessToken = "";
-            if ((serviceType == "Slack") || (serviceType == ""))
-            {
-                // Note the services tokens below needs to be updated based on the registered slack service...
-                accessToken = "https://hooks.slack.com/services/" + Utility.SlackWebHooks.GetWebHookToken(nameOfHook);
-            } // implement more for other things like Discord (anything with a webhook really, or for a custom page).
-            return accessToken;
+            Commands.SendToChannelMessage(serviceType, nameOfHook, "This is a bit of text", "SlackMud", toName);
         }
     }
 }

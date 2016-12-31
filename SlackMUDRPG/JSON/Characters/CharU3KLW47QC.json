@@ -1,0 +1,42 @@
+{
+  "firstname": "Paul",
+  "lastname": "Hutson",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 0,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "U3KLW47QC",
+  "RoomID": "3",
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "SocialStanding": 8
+  },
+  "CharacterItems": [
+    {
+      "ItemId": "1def209c-8dc5-4208-877a-5de64c13e12c",
+      "ItemName": "Small Backpack",
+      "ItemType": "containers",
+      "ItemDescription": "Basic small backpack that all players start with.",
+      "ItemWeight": 0,
+      "ItemSize": 1,
+      "CanHoldOtherItems": true,
+      "HeldItems": null
+    },
+    {
+      "ItemId": "a44a31e6-a28c-47ad-984d-ff24372b2453",
+      "ItemName": "Wooden Sword",
+      "ItemType": "weapons",
+      "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+      "ItemWeight": 1,
+      "ItemSize": 1,
+      "CanHoldOtherItems": true,
+      "HeldItems": null
+    }
+  ],
+  "Skills": null
+}

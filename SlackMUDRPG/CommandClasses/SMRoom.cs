@@ -265,18 +265,20 @@ namespace SlackMUDRPG.CommandsClasses
             foreach (SMExit sme in this.RoomExits)
             {
                 // Get the room details from the exit id
-                SMRoom smr = SlackMud.GetRoom(sme.RoomID);
+                SMRoom otherRooms = new SMRoom();
+
+                otherRooms = SlackMud.GetRoom(sme.RoomID);
 
                 // Get the "from" location
-                SMExit smre = smr.RoomExits.FirstOrDefault(smef => smef.RoomID == this.RoomID);
+                SMExit smre = otherRooms.RoomExits.FirstOrDefault(smef => smef.RoomID == this.RoomID);
 
                 // Construct the message
                 message = "_Someone shouts from " + smre.Description + " (" + smre.Shortcut + "):_ \"" + speech + "\"";
 
                 // Send the message to all people connected to the room
-                foreach (SMCharacter smc in smr.GetPeople())
+                foreach (SMCharacter smcInOtherRoom in otherRooms.GetPeople())
                 {
-                    smr.ChatSendMessage(smc, message);
+                    otherRooms.ChatSendMessage(smcInOtherRoom, message);
                 }
             }
         }

@@ -25,7 +25,7 @@ namespace SlackMUDRPG
             string replyToChannel = "@error";
             string replyToError = outputText;
             string userName = "Slackbot";
-            string additionalText = Request.Form["text"];
+            string additionalText = Request.Form["text"] ?? Request.QueryString["text"];
             if (additionalText == null)
             {
                 additionalText = Request.QueryString["text"];
@@ -38,9 +38,9 @@ namespace SlackMUDRPG
                     additionalText = "";
                 }
                 outputText = SlackMUDRPG.CommandsClasses.Commands.HelloSlack(additionalText);
-                botName = Request.Form["user_name"];
-                channelName = Request.Form["channel_name"];
-                channelID = Request.Form["channel_id"];
+                botName = Request.Form["user_name"] ?? "TestBot";
+                channelName = Request.Form["channel_name"] ?? "General";
+                channelID = Request.Form["channel_id"] ?? "C3L9HN59V";
                 replyToChannel = SetChannelReply(channelName, channelID);
                 if (replyToChannel == "@error")
                 {
@@ -51,7 +51,7 @@ namespace SlackMUDRPG
             }
             else if ((additionalText == "PMTest"))
             {
-                SendPrivateMessage("@paulhutson");
+                SendPrivateMessage("U3KLW47QC"); // this is Pauls userid (note, not name!)
                 SetOutputText("Output On");
             }
             else if ((Request.QueryString["op"] == "help") || (additionalText == "help"))
@@ -99,8 +99,7 @@ namespace SlackMUDRPG
         {
             using (WebClient client = new WebClient())
             {
-                string urlWithAccessToken = "https://hooks.slack.com/services/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"; // YB
-                //string urlWithAccessToken = "https://hooks.slack.com/services/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"; // SD 
+                string urlWithAccessToken = Commands.GetAccessToken("", "SlackMud");
 
                 SlackClient sclient = new SlackClient(urlWithAccessToken);
 

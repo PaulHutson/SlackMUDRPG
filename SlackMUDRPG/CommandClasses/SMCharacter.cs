@@ -189,13 +189,13 @@ namespace SlackMUDRPG.CommandsClasses
                 if (smr != null)
                 {
                     // Move the player to the new location
-                    this.RoomID = sme.RoomID;
+                    this.RoomID = smr.RoomID;
+                    this.SaveToFile();
                     returnString = SlackMud.GetLocationDetails(this.RoomID);
 
                     // Announce arrival to other players in the same place
-                    // TODO room.Announce()
+                    smr.Announce("_" + this.GetFullName() + " walks in._");
 
-                    this.SaveToFile();
                 }
             }
 
@@ -237,10 +237,10 @@ namespace SlackMUDRPG.CommandsClasses
         /// <summary>
         /// Announce something to the player
         /// </summary>
-        /// <param name="speech">What is being announced to the player</param>
-        public void Announce(string speech)
+        /// <param name="announcement">What is being announced to the player</param>
+        public void Announce(string announcement)
         {
-            // TODO implement send function.
+            sendMessageToPlayer(announcement);
         }
 
         /// <summary>

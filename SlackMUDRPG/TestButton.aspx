@@ -23,7 +23,8 @@
         </div>
         <div>
             CharID : <asp:TextBox runat="server" ID="tb_CharID">123</asp:TextBox><br />
-            ShortcutRoomMove : <asp:TextBox runat="server" ID="tb_RoomShortcutText"></asp:TextBox><br /><br />
+            ShortcutRoomMove : <asp:TextBox runat="server" ID="tb_RoomShortcutText"></asp:TextBox><br />
+            Talk : <asp:TextBox runat="server" ID="tb_ChatText"></asp:TextBox> <asp:Button runat="server" ID="btn_Say" Text="Say" OnClick="btn_Say_Click" OnClientClick="scrollBoxToBottom();" />  <asp:Button runat="server" ID="btn_Shout" Text="Shout" OnClick="btn_Shout_Click" OnClientClick="scrollBoxToBottom();" />  <%--<asp:Button runat="server" ID="btn_Whisper" Text="Whisper" OnClick="btn_Whisper_Click" OnClientClick="scrollBoxToBottom();" />--%><br /><br />
         </div>
         <div>
             <asp:Button runat="server" ID="btn_Test" Text="Test Login" OnClick="btn_Test_Click" OnClientClick="scrollBoxToBottom();" />
