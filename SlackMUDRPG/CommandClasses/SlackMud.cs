@@ -63,7 +63,7 @@ namespace SlackMUDRPG.CommandsClasses
                         returnString = "Welcome to SlackMud!\n";
                         returnString += "We've created your character in the magical world of Arrelvia!\n"; // TODO, use a welcome script!
                     }
-                    returnString += GetLocationDetails(character.RoomID);
+                    returnString += GetLocationDetails(character.RoomID, character.UserID);
                 }
             }
 
@@ -275,7 +275,7 @@ namespace SlackMUDRPG.CommandsClasses
             return roomInMem;
         }
 
-        public static string GetLocationDetails(string roomID)
+        public static string GetLocationDetails(string roomID, string userID = "0")
         {
             // Variable for the return string
             string returnString = "";
@@ -292,7 +292,7 @@ namespace SlackMUDRPG.CommandsClasses
             else
             {
                 // Return the room description, exits, people and objects 
-                returnString = ConstructLocationInformation(smr, roomID);
+                returnString = ConstructLocationInformation(smr, roomID, userID);
             }
 
             // Return the text output
@@ -304,7 +304,7 @@ namespace SlackMUDRPG.CommandsClasses
         /// </summary>
         /// <param name="smr">An SMRoom</param>
         /// <returns>String including a full location string</returns>
-        private static string ConstructLocationInformation(SMRoom smr, String locationID)
+        private static string ConstructLocationInformation(SMRoom smr, string locationID, string userID = "0")
         {
             // Construct the room string.
             // Create the string and add the basic room description.
@@ -323,17 +323,26 @@ namespace SlackMUDRPG.CommandsClasses
                     returnString += "\n\nPeople: ";
                     List<SMCharacter> charsInLocation = new List<SMCharacter>();
                     charsInLocation = smcs.FindAll(s => s.RoomID == locationID);
-                    var counted = 0;
+                    bool isFirst = true;
                     foreach (SMCharacter sma in charsInLocation)
                     {
-                        if (counted == 0)
+                        if (!isFirst)
                         {
-                            returnString += sma.FirstName + " " + sma.LastName;
+                            returnString += ", ";
                         }
                         else
                         {
-                            returnString += ", " + sma.FirstName + " " + sma.LastName;
+                            isFirst = false;
                         }
+
+                        if (sma.UserID == userID)
+                        {
+                            returnString += "You";
+                        } else
+                        {
+                            returnString += sma.FirstName + " " + sma.LastName;
+                        }
+                        
                     }
                 }
             }
