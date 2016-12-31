@@ -77,6 +77,39 @@ namespace SlackMUDRPG.CommandsClasses
 			smrs.Add(this);
 			HttpContext.Current.Application["SMRooms"] = smrs;
 		}
+
+        /// <summary>
+        /// Gets the room exit details
+        /// </summary>
+        public string GetExitDetails()
+        {
+            string returnString = "";
+
+            if (this.RoomExits.Count == 0)
+            {
+                returnString = "No Exits are found from this room...";
+            } else
+            {
+                returnString += "\n\nRoom Exits:\n";
+                bool isFirst = true;
+
+                foreach (SMExit sme in this.RoomExits)
+                {
+                    if (!isFirst)
+                    {
+                        returnString += ", ";
+                    }
+                    else
+                    {
+                        isFirst = false;
+                    }
+                    returnString += sme.Description + "(" + sme.Shortcut + ")";
+                }
+            }
+            
+            return returnString;
+        }
+
     }
 
     public class SMExit

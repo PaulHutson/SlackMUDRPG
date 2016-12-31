@@ -124,31 +124,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// </summary>
 		public SMRoom GetRoom()
 		{
-			List<SMRoom> smrs = (List<SlackMUDRPG.CommandsClasses.SMRoom>)HttpContext.Current.Application["SMRooms"];
-			SMRoom smr = smrs.FirstOrDefault(obj => obj.RoomID == this.RoomID);
-
-			if (smr != null)
-			{
-				return smr;
-			}
-			else
-			{
-				string path = FilePathSystem.GetFilePath("Locations", "Loc" + this.RoomID);
-
-				if (File.Exists(path))
-				{
-					using (StreamReader r = new StreamReader(path))
-					{
-						string json = r.ReadToEnd();
-						smr = JsonConvert.DeserializeObject<SMRoom>(json);
-						smrs.Add(smr);
-						HttpContext.Current.Application["SMRooms"] = smrs;
-						return smr;
-					}
-				}
-
-				return null;
-			}
+            return SlackMud.GetRoom(this.RoomID);
 		}
 
         /// <summary>
@@ -165,7 +141,7 @@ namespace SlackMUDRPG.CommandsClasses
             // Get the current character location
             List<SMCharacter> smcs = new List<SMCharacter>();
             smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
-            SMCharacter charToMove;
+            SMCharacter charToMove = new SMCharacter();
             bool foundCharacter = false;
 
             // Check if there are characters actually on the server to move...
@@ -189,23 +165,26 @@ namespace SlackMUDRPG.CommandsClasses
 
             if (foundCharacter)
             {
-                // Get the exits from that location
-                // TODO get room exits from memory
+                // Get the room for the characters location
+                List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+                SMRoom roomInMem = smrs.FirstOrDefault(smrn => smrn.RoomID == charToMove.RoomID);
 
                 // Get the specific exit from the location referred to by the shortcut
-                // TODO check the exits include one for the location
+                SMExit sme = new SMExit();
+                sme = roomInMem.RoomExits.FirstOrDefault(smes => smes.Shortcut == exitShortcut);
 
-                // Check new room is loaded
-                // TODO Implement
+                // Get the new room (and check that it's loaded in memory).
+                SMRoom smr = SlackMud.GetRoom(sme.RoomID);
 
-                // Move the player to the new location
-                // TODO change the player location
+                if (smr != null)
+                {
+                    // Move the player to the new location
+                    this.RoomID = sme.RoomID;
+                    returnString = SlackMud.GetLocationDetails(this.RoomID);
 
-                // Announce arrival to other players in the same place
-                // Get all players in the location
-
-                // Send a message to those players
-                // TODO 
+                    // Announce arrival to other players in the same place
+                    // TODO room.Announce()
+                }
             }
 
             return returnString;

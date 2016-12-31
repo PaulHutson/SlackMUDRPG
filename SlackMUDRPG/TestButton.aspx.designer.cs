@@ -40,6 +40,15 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.TextBox tb_CharID;
         
         /// <summary>
+        /// tb_RoomShortcutText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_RoomShortcutText;
+        
+        /// <summary>
         /// btn_Test control.
         /// </summary>
         /// <remarks>
@@ -65,5 +74,14 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_CreateCharacter;
+        
+        /// <summary>
+        /// btn_MoveToRoom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_MoveToRoom;
     }
 }

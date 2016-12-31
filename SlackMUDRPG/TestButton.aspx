@@ -12,12 +12,14 @@
             <asp:Literal runat="server" ID="lit_OutputExample"></asp:Literal><br /><br />
         </div>
         <div>
-            CharID : <asp:TextBox runat="server" ID="tb_CharID">123</asp:TextBox><br /><br />
+            CharID : <asp:TextBox runat="server" ID="tb_CharID">123</asp:TextBox><br />
+            ShortcutRoomMove : <asp:TextBox runat="server" ID="tb_RoomShortcutText"></asp:TextBox><br /><br />
         </div>
         <div>
             <asp:Button runat="server" ID="btn_Test" Text="Test Login" OnClick="btn_Test_Click" />
             <asp:Button runat="server" ID="btn_GetLocation" Text="Test Location 1" OnClick="btn_TestLoc_Click" />
-            <asp:Button runat="server" ID="btn_CreateCharacter" Text="Test Create Character" OnClick="btn_CreateCharacter_Click" />
+            <asp:Button runat="server" ID="btn_CreateCharacter" Text="Test Create Character" OnClick="btn_CreateCharacter_Click" /><br />
+            <asp:Button runat="server" ID="btn_MoveToRoom" Text="Move To Room Shortcut" OnClick="btn_MoveRoom_Click" />
         </div>
     </form>
 </body>

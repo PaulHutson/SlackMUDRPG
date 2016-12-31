@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SlackMUDRPG.CommandsClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,6 +28,15 @@ namespace SlackMUDRPG
         protected void btn_TestLoc_Click(object sender, EventArgs e)
         {
             OutputUpdate(SlackMUDRPG.CommandsClasses.SlackMud.GetLocationDetails("1"));
+        }
+
+        protected void btn_MoveRoom_Click(object sender, EventArgs e)
+        {
+            // Get char from memory for the move
+            SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+
+            // Move the char to a new location
+            OutputUpdate(smc.Move(tb_RoomShortcutText.Text));
         }
 
         private void OutputUpdate(string s)
