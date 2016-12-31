@@ -27,7 +27,8 @@ namespace SlackMUDRPG
 
         protected void btn_TestLoc_Click(object sender, EventArgs e)
         {
-            OutputUpdate(SlackMUDRPG.CommandsClasses.SlackMud.GetLocationDetails("1"));
+            SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+            OutputUpdate(SlackMUDRPG.CommandsClasses.SlackMud.GetLocationDetails(smc.RoomID, smc.UserID));
         }
 
         protected void btn_MoveRoom_Click(object sender, EventArgs e)
@@ -41,7 +42,7 @@ namespace SlackMUDRPG
 
         private void OutputUpdate(string s)
         {
-            lit_OutputExample.Text = s;
+            tb_TextAreaOutput.Text += s + "\n\n";
         }
         
     }

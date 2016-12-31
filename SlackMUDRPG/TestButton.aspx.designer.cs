@@ -22,13 +22,13 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// lit_OutputExample control.
+        /// tb_TextAreaOutput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal lit_OutputExample;
+        protected global::System.Web.UI.WebControls.TextBox tb_TextAreaOutput;
         
         /// <summary>
         /// tb_CharID control.
