@@ -31,11 +31,13 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("RoomItems")]
         public List<SMItem> RoomItems { get; set; }
 
-		/// <summary>
-		/// Adds an item to the room, so any user can collect it.
-		/// </summary>
-		/// <param name="item">Item.</param>
-		public void AddItem(SMItem item)
+        #region "General Room Function"
+
+        /// <summary>
+        /// Adds an item to the room, so any user can collect it.
+        /// </summary>
+        /// <param name="item">Item.</param>
+        public void AddItem(SMItem item)
 		{
 			if (this.RoomItems == null)
 			{
@@ -109,15 +111,9 @@ namespace SlackMUDRPG.CommandsClasses
             
             return returnString;
         }
-        
-        /// <summary>
-        /// Gets a list of all the people in the room.
-        /// </summary>
-        public string GetPeopleDetails(string userID = "0")
-        {
-            string returnString = "\n\nPeople:\n";
 
-            // Add the people within the location
+        public List<SMCharacter> GetPeople()
+        {
             // Search through logged in users to see which are in this location
             List<SMCharacter> smcs = new List<SMCharacter>();
             smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
@@ -129,32 +125,46 @@ namespace SlackMUDRPG.CommandsClasses
                 {
                     List<SMCharacter> charsInLocation = new List<SMCharacter>();
                     charsInLocation = smcs.FindAll(s => s.RoomID == this.RoomID);
-                    bool isFirst = true;
-                    foreach (SMCharacter sma in charsInLocation)
-                    {
-                        if (!isFirst)
-                        {
-                            returnString += ", ";
-                        }
-                        else
-                        {
-                            isFirst = false;
-                        }
-
-                        if (sma.UserID == userID)
-                        {
-                            returnString += "You";
-                        }
-                        else
-                        {
-                            returnString += sma.FirstName + " " + sma.LastName;
-                        }
-
-                    }
                 }
-                else
+            }
+
+            return smcs;
+        }
+
+        /// <summary>
+        /// Gets a list of all the people in the room.
+        /// </summary>
+        public string GetPeopleDetails(string userID = "0")
+        {
+            string returnString = "\n\nPeople:\n";
+
+            // Get the people within the location
+            List<SMCharacter> smcs = this.GetPeople();
+
+            // Check if the character already exists or not.
+            if (smcs != null)
+            {
+                bool isFirst = true;
+                foreach (SMCharacter smc in smcs)
                 {
-                    returnString += "There's noone here.";
+                    if (!isFirst)
+                    {
+                        returnString += ", ";
+                    }
+                    else
+                    {
+                        isFirst = false;
+                    }
+
+                    if (smc.UserID == userID)
+                    {
+                        returnString += "You";
+                    }
+                    else
+                    {
+                        returnString += smc.FirstName + " " + smc.LastName;
+                    }
+
                 }
             }
             else
@@ -188,6 +198,104 @@ namespace SlackMUDRPG.CommandsClasses
             // Return the string to the calling method.
             return returnString;
         }
+
+        #endregion
+
+        #region "Room Chat Functions"
+
+        /// <summary>
+        /// Character "SAY" method
+        /// </summary>
+        /// <param name="speech">What the character is "Saying"</param>
+        /// <param name="charSpeaking">The character who is speaking</param>
+        public void ChatSay(string speech, SMCharacter charSpeaking)
+        {
+            // Construct the message
+            string message = "_" + charSpeaking.GetFullName() + " says:_ \"" + speech + "\"";
+
+            // Send the message to all people connected to the room
+            foreach (SMCharacter smc in this.GetPeople())
+            {
+                this.ChatSendMessage(smc, message);
+            }
+        }
+
+        /// <summary>
+        /// Character "Whisper" method
+        /// </summary>
+        /// <param name="speech">What the character is "Whispering"</param>
+        /// <param name="charSpeaking">The character who is speaking</param>
+        /// /// <param name="whisperToName">The character who is being whispered to</param>
+        public void ChatWhisper(string speech, SMCharacter charSpeaking, string whisperToName)
+        {
+            // Construct the message
+            string message = "_" + charSpeaking.GetFullName() + " whispers:_ \"" + speech + "\"";
+
+            // See if the person being whispered to is in the room
+            SMCharacter smc = this.GetPeople().FirstOrDefault(charWhisperedto => charWhisperedto.GetFullName() == whisperToName);
+            if (smc != null)
+            { 
+                this.ChatSendMessage(smc, message);
+            } else
+            {
+                message = "That person doesn't appear to be here?";
+                // TODO Send message to player to say they can't whisper to that person.
+            }
+        }
+
+        /// <summary>
+        /// Character "Shout" method
+        /// </summary>
+        /// <param name="speech">What the character is "Shouting"</param>
+        /// <param name="charSpeaking">The character who is speaking</param>
+        public void ChatShout(string speech, SMCharacter charSpeaking)
+        {
+            // variable for the message sending used later.
+            string message;
+
+            // Send the message to all people connected to the room
+            foreach (SMCharacter smc in this.GetPeople())
+            {
+                // construct the local message to be sent.
+                message = "*" + charSpeaking.GetFullName() + " shouts:* \"" + speech + "\"";
+                this.ChatSendMessage(smc, message);
+            }
+
+            // Send a message to people connected to rooms around this room
+            foreach (SMExit sme in this.RoomExits)
+            {
+                // Get the room details from the exit id
+                SMRoom smr = SlackMud.GetRoom(sme.RoomID);
+
+                // Get the "from" location
+                SMExit smre = smr.RoomExits.FirstOrDefault(smef => smef.RoomID == this.RoomID);
+
+                // Construct the message
+                message = "_Someone shouts from " + smre.Description + " (" + smre.Shortcut + "):_ \"" + speech + "\"";
+
+                // Send the message to all people connected to the room
+                foreach (SMCharacter smc in smr.GetPeople())
+                {
+                    smr.ChatSendMessage(smc, message);
+                }
+            }
+        }
+
+        public void Announce(string msg)
+        {
+            // Send the message to all people connected to the room
+            foreach (SMCharacter smc in this.GetPeople())
+            {
+                this.ChatSendMessage(smc, msg);
+            }
+        }
+
+        public void ChatSendMessage(SMCharacter smc, string msg)
+        {
+            smc.sendMessageToPlayer(msg);
+        }
+
+        #endregion
     }
 
     public class SMExit
