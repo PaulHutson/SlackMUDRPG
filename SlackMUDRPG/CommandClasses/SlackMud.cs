@@ -67,7 +67,7 @@ namespace SlackMUDRPG.CommandsClasses
                     returnString += GetLocationDetails(character.RoomID, character.UserID);
                 }
             }
-
+            
             // Return the text output
             return returnString;
         }

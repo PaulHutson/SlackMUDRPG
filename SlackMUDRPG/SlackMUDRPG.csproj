@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GameAccess.aspx" />
+    <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
     <Content Include="JSON\Commands\Help.json" />
     <Content Include="JSON\Commands\NewCharacter.json" />
@@ -100,6 +101,15 @@
     <Content Include="JSON\Misc\Attribute.Blacksmith.json" />
     <Content Include="JSON\Misc\Attribute.Warrior.json" />
     <Content Include="JSON\Characters\Char123.json" />
+    <Content Include="JSON\Skills\Skill.Sword.json" />
+    <Content Include="JSON\Skills\Skill.Axe.json" />
+    <Content Include="JSON\Skills\Skill.Dagger.json" />
+    <Content Include="JSON\Skills\Skill.Bow.json" />
+    <Content Include="JSON\Skills\Skill.Brawl.json" />
+    <Content Include="JSON\Skills\Skill.Dodge.json" />
+    <Content Include="JSON\Skills\Skill.Parry.json" />
+    <Content Include="JSON\Skills\Skill.Chop.json" />
+    <Content Include="JSON\Objects\Weapons.ShoddyAxe.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

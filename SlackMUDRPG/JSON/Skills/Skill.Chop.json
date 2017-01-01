@@ -28,7 +28,7 @@
   "SkillSteps": [
     {
       "StepType": "Object",
-      "StepRequiredObject": "Family.Weapons.Axe",
+      "StepRequiredObject": "Family.Axe",
       "RequiredObjectAmount": 1,
       "FailureOutput": "You don't have an axe equipped",
       "SuccessOutput": null
@@ -42,10 +42,10 @@
     },
     {
       "StepType": "Hit",
-      "StepRequiredObject": "Family.Weapons.Axe",
+      "StepRequiredObject": "Family.Axe",
       "RequiredObjectAmount": 1,
-      "FailureOutput": "Failed to hit TARGETNAME",
-      "SuccessOutput": "CHARNAME chops TARGETNAME"
+      "FailureOutput": "Failed to hit {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} chops {TARGETNAME}"
     },
     {
       "StepType": "SkillLevelIncrease",
