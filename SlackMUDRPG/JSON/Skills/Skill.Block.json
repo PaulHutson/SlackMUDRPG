@@ -1,0 +1,23 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Defence",
+    "SkillTypeDescription": "Defensive skills"
+  },
+    "SkillName": "Block",
+    "SkillDescription": "The ability to block unarmed attacks",
+    "BaseStat": "DEX",
+    "LevelMultiplier": 10,
+    "ImprovementSpeed": 10,
+    "Prerequisites": [
+      {
+        "IsSkill": false,
+        "SkillStatName": "STR",
+        "PreReqLevel": 6
+      },
+      {
+        "IsSkill": false,
+        "SkillStatName": "DEX",
+        "PreReqLevel": 6
+      }
+    ]
+  }

@@ -1,0 +1,23 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Ranged",
+    "SkillTypeDescription": "Combat Related Skill for Ranged fighting"
+  },
+    "SkillName": "Bow Use",
+    "SkillDescription": "The ability to competently use a bow",
+    "BaseStat": "DEX",
+    "LevelMultiplier": 10,
+    "ImprovementSpeed": 10,
+    "Prerequisites": [
+      {
+        "IsSkill": false,
+        "SkillStatName": "STR",
+        "PreReqLevel": 5
+      },
+      {
+        "IsSkill": false,
+        "SkillStatName": "DEX",
+        "PreReqLevel": 8
+      }
+    ]
+  }
