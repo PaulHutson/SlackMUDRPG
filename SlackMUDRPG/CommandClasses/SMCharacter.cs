@@ -38,6 +38,9 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("RoomID")]
         public string RoomID { get; set; }
 
+        [JsonProperty("CurrentActivity")]
+        public string CurrentActivity { get; set; }
+
         [JsonProperty("Attributes")]
         public SMAttributes Attributes { get; set; }
 
