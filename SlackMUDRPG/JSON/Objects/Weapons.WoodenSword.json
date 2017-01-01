@@ -3,6 +3,8 @@
 	"ItemType": "weapons",
 	"ItemDescription": "This wooden sword won't do much damage, but it's a start.",
 	"ItemWeight": 1,
-	"ItemSize": 1,
+  "ItemSize": 1,
+  "HitPoints": 25,
+  "BaseDamage": 0.001,
 	"CanHoldOtherItems": true
 }

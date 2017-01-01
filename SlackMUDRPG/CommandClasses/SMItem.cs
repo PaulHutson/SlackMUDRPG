@@ -17,6 +17,9 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("ItemType")]
         public string ItemType { get; set; }
 
+        [JsonProperty("ItemFamily")]
+        public string ItemFamily { get; set; }
+
         [JsonProperty("ItemDescription")]
         public string ItemDescription { get; set; }
 
@@ -28,6 +31,12 @@ namespace SlackMUDRPG.CommandsClasses
 
         [JsonProperty("CanHoldOtherItems")]
         public bool CanHoldOtherItems { get; set; }
+
+        [JsonProperty("HitPoints")]
+        public int HitPoints { get; set; }
+
+        [JsonProperty("BaseDamage")]
+        public float BaseDamage { get; set; }
 
         [JsonProperty("HeldItems")]
         public SMItem[] HeldItems { get; set; }

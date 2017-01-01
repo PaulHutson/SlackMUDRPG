@@ -3,6 +3,8 @@
 	"ItemType": "containers",
 	"ItemDescription": "Basic small backpack that all players start with.",
 	"ItemWeight": 0,
-	"ItemSize": 1,
+  "ItemSize": 1,
+  "HitPoints": 5,
+  "BaseDamage": 0.0000000001,
 	"CanHoldOtherItems": true
 }
