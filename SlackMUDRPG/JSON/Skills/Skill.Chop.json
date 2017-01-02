@@ -3,11 +3,14 @@
     "SkillTypeName": "Environment",
     "SkillTypeDescription": "Skills related to manipulating the environment"
   },
-    "SkillName": "Chop",
-    "SkillDescription": "The ability to use an axe to chop things",
-    "BaseStat": "STR",
-    "LevelMultiplier": 10,
-    "ImprovementSpeed": 10,
+  "SkillName": "Chop",
+  "SkillDescription": "The ability to use an axe to chop things",
+  "SkillLearnText": "You've learnt how to chop things with an axe",
+  "LevelIncreaseText":  "You feel you've gotten better at chopping things",
+  "ActivityType":  "Chopping",
+  "BaseStat": "STR",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
   "Prerequisites": [
     {
       "IsSkill": false,
@@ -44,23 +47,29 @@
       "StepType": "Hit",
       "StepRequiredObject": "Family.Axe",
       "RequiredObjectAmount": 1,
-      "FailureOutput": "Failed to hit {TARGETNAME}",
-      "SuccessOutput": "{CHARNAME} chops {TARGETNAME}"
+      "FailureOutput": "Failed to chop {TARGETNAME}",
+      "SuccessOutput": "Object.DestroyedOutput,{CHARNAME} chops {TARGETNAME} to produce an {Object.DestroyedOutput}"
     },
     {
-      "StepType": "SkillLevelIncrease",
+      "StepType": "Information",
       "StepRequiredObject": null,
       "RequiredObjectAmount": null,
       "FailureOutput": null,
-      "SuccessOutput": "You feel you have become better at chopping things"
+      "SuccessOutput": "{CHARNAME} chops {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
     },
     {
       "StepType": "Repeat.Chop",
-      "StepRequiredObject": null,
+      "StepRequiredObject": "Activity.Chopping",
       "RequiredObjectAmount": null,
       "FailureOutput": null,
       "SuccessOutput": null
     }
   ]
-
 }

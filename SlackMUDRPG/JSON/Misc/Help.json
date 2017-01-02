@@ -1,12 +1,12 @@
 ﻿{
-  "SMCommandList": [
+  "SMCommandList":[
     {
       "CommandFamily": "Environment",
       "CommandBaseName": "Chop",
       "CommandName": "Chop",
       "CommandDescription": "Enables the player to chop something.",
       "CommandSyntax": "chop {TargetName}",
-      "ExampleUsage":  "chop tree1",
+      "ExampleUsage": "chop tree1",
       "RequiredSkill": "Skill.Chop"
     },
     {
@@ -15,7 +15,7 @@
       "CommandName": "Say",
       "CommandDescription": "Enables the player to say something to the people within the same location.",
       "CommandSyntax": "say {whatever-you-want}",
-      "ExampleUsage":  "say Hello!",
+      "ExampleUsage": "say Hello!",
       "RequiredSkill": null
     },
     {
@@ -24,7 +24,7 @@
       "CommandName": "Shout",
       "CommandDescription": "Enables the player to shout something which will be heard in the current location and locations all around.",
       "CommandSyntax": "shout {whatever-you-want}",
-      "ExampleUsage":  "shout HELLO!",
+      "ExampleUsage": "shout HELLO!",
       "RequiredSkill": null
     },
     {
@@ -33,7 +33,7 @@
       "CommandName": "Whisper",
       "CommandDescription": "Enables the player to whisper something to another player.",
       "CommandSyntax": "whisper \"{playername}\" {whatever-you-want}",
-      "ExampleUsage":  "whisper \"Paul Almighty\" Hellloooo",
+      "ExampleUsage": "whisper \"Paul Almighty\" Hellloooo",
       "RequiredSkill": null
     }
   ]

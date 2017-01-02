@@ -1,0 +1,12 @@
+﻿{
+	"ItemName": "Tree Trunk",
+  "ItemType": "resource",
+  "ItemFamily": "TreeTrunks",
+	"ItemDescription": "A fallen tree trunk",
+	"ItemWeight": 50,
+  "ItemSize": 50,
+  "HitPoints": 50,
+  "BaseDamage": 0.001,
+  "DestroyedOutput":  "Logs,20",
+	"CanHoldOtherItems": false
+}

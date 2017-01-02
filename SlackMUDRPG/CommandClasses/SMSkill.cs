@@ -17,6 +17,15 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("SkillDescription")]
         public string SkillDescription { get; set; }
 
+        [JsonProperty("SkillLearnText")]
+        public string SkillLearnText { get; set; }
+
+        [JsonProperty("LevelIncreaseText")]
+        public string LevelIncreaseText { get; set; }
+
+        [JsonProperty("ActivityType")]
+        public string ActivityType { get; set; }
+
         [JsonProperty("BaseStat")]
         public string BaseStat { get; set; }
 
@@ -32,33 +41,54 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("SkillSteps")]
         public List<SMSkillStep> SkillSteps { get; set; }
 
-        public string UseSkill(SMCharacter smc, string targetType = null, string targetName = null)
+        public void UseSkill(SMCharacter smc, bool beginSkillUse = true, string targetType = null, string targetName = null, string targetID = null)
         {
+            // Set the character activity
+            if (beginSkillUse)
+            {
+                smc.CurrentActivity = this.ActivityType;
+            }
+
             // Loop around the steps
             foreach(SMSkillStep smss in this.SkillSteps)
             {
-                switch (smss.StepType)
+                if (smc.CurrentActivity == this.ActivityType)
                 {
-                    case "Object":
-                        if (!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount))
-                            return smss.FailureOutput;
-                        break;
-                    case "Target":
-                        if (!StepRequiredTarget(smc, targetType, targetName, smss.StepRequiredObject, smss.RequiredObjectAmount))
-                            return smss.FailureOutput;
-                        break;
-                    case "Hit":
-                        if (!StepHit(smc, this.BaseStat, targetType, targetName, smss.StepRequiredObject, smss.RequiredObjectAmount))
-                            return smss.FailureOutput;
-                        break;
-                    case "SkillLevelIncrease":
-                        break;
-                    case "Repeat":
-                        break;
+                    switch (smss.StepType)
+                    {
+                        case "Object":
+                            if (!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount))
+                                smc.sendMessageToPlayer(smss.FailureOutput);
+                            break;
+                        case "Target":
+                            if (!StepRequiredTarget(smc, targetType, targetName, smss.StepRequiredObject, smss.RequiredObjectAmount))
+                                smc.sendMessageToPlayer(smss.FailureOutput);
+                            break;
+                        case "Hit":
+                            if (!StepHit(smc, this.BaseStat, targetType, targetName, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+                            {
+                                smc.sendMessageToPlayer(smss.FailureOutput);
+                                SkillIncrease(smc, this.BaseStat, false);
+                            }
+                            else
+                            {
+                                smc.CurrentActivity = null;
+                                smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetName, targetID));
+                                SkillIncrease(smc, this.BaseStat, true);
+                            }
+                            break;
+                        case "Information":
+                            smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetName, targetID));
+                            break;
+                        case "Pause":
+                            System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
+                            break;
+                        case "Repeat":
+                            this.UseSkill(smc, false, targetType, targetName, targetID);
+                            break;
+                    }
                 }
             }
-
-            return "";
         }
 
         #region "Skill Step Methods"
@@ -84,7 +114,7 @@ namespace SlackMUDRPG.CommandsClasses
             return true;
         }
 
-        private bool StepHit(SMCharacter smc, string BaseStat, string targetType, string targetName, string requiredTargetObjectType, int requiredTargetObjectAmount)
+        private bool StepHit(SMCharacter smc, string BaseStat, string targetType, string targetName, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
         {
             // Get the object to hit the target with.
 
@@ -101,10 +131,30 @@ namespace SlackMUDRPG.CommandsClasses
             // reduce the objects HP
             //      if the objects HP reaches 0 then the item is "broken" and the player needs to be told via a message.
             //      Stop any repeat actions against the character happening.
-
-
-
+            
             return true;
+        }
+
+        private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetType, string targetName, string targetID)
+        {
+            // Get the target type details
+
+            // Parse the string to change the text elements around as needed
+
+            return "";
+        }
+
+        private void SkillIncrease(SMCharacter smc, string BaseStat, bool skillSuccess)
+        {
+            // Skill Increase
+            // Work out the change of skill increase based on level (also include a small bonus for skill success)
+
+            // Random chance to see if someone achieves the skill increase change
+            //      Increase the skill by one.
+            //      Send message to the player.
+
+            // Attribute Increase
+            // TODO add an attribute increase method check to SMAttributes
         }
 
         #endregion
@@ -144,9 +194,11 @@ namespace SlackMUDRPG.CommandsClasses
     /// Step types include:
     /// Object: Required Object, i.e. you must have an object of a type, like an axe to chop something.
     /// Target: Required Target, i.e. you must target something to use the skill, like a tree if you want to chop it.
+    /// CheckComplete: Check whether the task is completed, i.e. if you're forging a sword you need to check whether it's completed yet.
     /// Hit: Hits something with the object that they've used.
+    /// Pause: Pause timing so the system doesn't just loop like a crazy! - required amount denotes the pause time in seconds.
     /// Repeat: Repeats everything until stopped (i.e. will continue to do something over and over).
-    /// SkillLevelIncrease: Checks to see if the skill level should increase, as things get harder then the skills become harder to get better at.
+    /// Information: Information output.
     /// </summary>
     public class SMSkillStep
     {

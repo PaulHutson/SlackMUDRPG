@@ -1,0 +1,12 @@
+﻿{
+	"ItemName": "Young Tree",
+  "ItemType": "environment",
+  "ItemFamily": "Tree",
+	"ItemDescription": "This tree looks young judging by it's age",
+	"ItemWeight": 50,
+  "ItemSize": 50,
+  "HitPoints": 100,
+  "BaseDamage": 0.001,
+  "DestroyedOutput":  "TreeTrunk,1",
+	"CanHoldOtherItems": false
+}

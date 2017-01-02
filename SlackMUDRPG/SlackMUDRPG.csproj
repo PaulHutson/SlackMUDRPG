@@ -110,6 +110,10 @@
     <Content Include="JSON\Skills\Skill.Parry.json" />
     <Content Include="JSON\Skills\Skill.Chop.json" />
     <Content Include="JSON\Objects\Weapons.ShoddyAxe.json" />
+    <Content Include="JSON\Objects\Environment.YoungTree.json" />
+    <Content Include="JSON\Objects\Resource.TreeTrunk.json" />
+    <Content Include="JSON\Objects\Resource.Log.json" />
+    <Content Include="JSON\Misc\Help.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -136,6 +140,7 @@
     <Compile Include="CommandClasses\SlackMud.cs" />
     <Compile Include="CommandClasses\SMAttributes.cs" />
     <Compile Include="CommandClasses\SMCharacter.cs" />
+    <Compile Include="CommandClasses\SMCommand.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
