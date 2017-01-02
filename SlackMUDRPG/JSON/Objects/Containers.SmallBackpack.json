@@ -1,6 +1,6 @@
 ﻿{
 	"ItemName": "Small Backpack",
-	"ItemType": "containers",
+	"ItemType": "container",
 	"ItemDescription": "Basic small backpack that all players start with.",
 	"ItemWeight": 0,
 	"ItemSize": 1,
