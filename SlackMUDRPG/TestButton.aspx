@@ -19,8 +19,10 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:TextBox runat="server" ID="tb_TextAreaOutput" ClientIDMode="Static" Height="200px" ReadOnly="True" Rows="5" TextMode="MultiLine" Width="600px"></asp:TextBox><br /><br />
-        </div>
+            <asp:TextBox runat="server" ID="tb_TextAreaOutput" ClientIDMode="Static" Height="200px" ReadOnly="True" Rows="5" TextMode="MultiLine" Width="600px"></asp:TextBox>
+			<asp:Button runat="server" ID="btn_clear" Text="Clear" OnClick="btn_Clear_Click" OnClientClick="scrollBoxToTop();" />	
+			<br /><br />
+		</div>
         <div>
             CharID : <asp:TextBox runat="server" ID="tb_CharID">123</asp:TextBox><br />
             ShortcutRoomMove : <asp:TextBox runat="server" ID="tb_RoomShortcutText"></asp:TextBox><br />

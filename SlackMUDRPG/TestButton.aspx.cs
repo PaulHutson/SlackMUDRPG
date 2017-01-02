@@ -52,6 +52,11 @@ namespace SlackMUDRPG
             smc.Shout(tb_ChatText.Text);
         }
 
+		protected void btn_Clear_Click(object sender, EventArgs e)
+		{
+			tb_TextAreaOutput.Text = "";
+		}
+
         private void OutputUpdate(string s)
         {
             tb_TextAreaOutput.Text += s + "\n\n";
