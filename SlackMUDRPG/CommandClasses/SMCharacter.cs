@@ -224,6 +224,124 @@ namespace SlackMUDRPG.CommandsClasses
 			return null;
 		}
 
+		/// <summary>
+		/// Picks up an item from the characters current room.
+		/// </summary>
+		/// <param name="item">The item to pick up.</param>
+		public void PickUpItem(SMItem item)
+		{
+			// check for an empty hand to pick up the item
+			SMCharacterSlot hand = this.GetEmptyHand();
+
+			if (hand == null)
+			{
+				this.sendMessageToPlayer($"You need an empty hand to pick up \"{item.ItemName}\"");
+				return;
+			}
+
+			// check weight constraints
+			int weightLimit = this.GetWeightLimit();
+			int currentWeight = this.GetCurrentWeight();
+
+			if ((currentWeight + item.ItemWeight) > weightLimit)
+			{
+				this.sendMessageToPlayer($"Unable to pick up \"{item.ItemName}\" this would exceed your weight limit of \"{weightLimit}\"");
+				return;
+			}
+
+
+			// check item is in the current room and remove it
+			SMRoom room = this.GetRoom();
+			if (room.RoomItems.FirstOrDefault(i => i.ItemID == item.ItemID) == null)
+			{
+				this.sendMessageToPlayer($"Cannot find \"{item.ItemName}\" in this room");
+				return;
+			}
+
+			room.RemoveItem(item);
+			room.Announce($"\"{GetFullName()}\" picked up \"{item.ItemName}\"");
+
+			// add item to slot
+			hand.EquippedItem = item;
+			this.sendMessageToPlayer($"You equipped \"{item.ItemName}\"");
+
+			this.SaveToApplication();
+		}
+
+		//TODO drop item
+
+		//TODO equip item
+
+		//TODO equip item to slot
+
+		//TODO list slot
+
+		//TODO list slots
+
+		/// <summary>
+		/// Gets an emptySMCharacterSlot that is a hand.
+		/// </summary>
+		/// <returns>The empty hand SMCharacterSlot or null.</returns>
+		private SMCharacterSlot GetEmptyHand()
+		{
+			SMCharacterSlot rightHand = this.GetSlotByName("RightHand");
+			SMCharacterSlot leftHand = this.GetSlotByName("LeftHand");
+
+			if (rightHand.isEmpty())
+			{
+				return rightHand;
+			}
+			else if (leftHand.isEmpty())
+			{
+				return leftHand;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Gets the weight limit for the character based on STR attribute.
+		/// </summary>
+		/// <returns>The weight limit.</returns>
+		private int GetWeightLimit()
+		{
+			return this.Attributes.Strength * 5;
+		}
+
+		/// <summary>
+		/// Gets the current weight being carried by the character.
+		/// </summary>
+		/// <returns>The weight.</returns>
+		private int GetCurrentWeight()
+		{
+			int weight = 0;
+
+			foreach (SMCharacterSlot slot in this.CharacterSlots)
+			{
+				if (!slot.isEmpty())
+				{
+					weight += slot.EquippedItem.ItemWeight;
+
+					if (slot.EquippedItem.ItemType == "container")
+					{
+						weight += this.GetContainerWeight(slot.EquippedItem);
+					}
+				}
+			}
+
+			return weight;
+		}
+
+		/// <summary>
+		/// Gets the weight of items in a container.
+		/// </summary>
+		/// <returns>The weight.</returns>
+		private int GetContainerWeight(SMItem container)
+		{
+			//TODO implement this properly
+			return 0;
+		}
+
 		#endregion
 
         #region "Chat Functions"
