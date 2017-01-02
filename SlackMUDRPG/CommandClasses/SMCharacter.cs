@@ -269,6 +269,28 @@ namespace SlackMUDRPG.CommandsClasses
 		}
 
 		//TODO drop item
+		public void DropItem(SMItem item)
+		{
+			// check item is in a hand
+			SMCharacterSlot hand = GetHandWithItemEquipped(item.ItemID);
+
+			if (hand == null)
+			{
+				sendMessageToPlayer("You must be holding the item to drop it");
+				return;
+			}
+
+			// remove item from slot
+			hand.EquippedItem = null;
+			SaveToApplication();
+
+			// add item to room
+			SMRoom room = GetRoom();
+			room.AddItem(item);
+
+			// announce to the room
+			room.Announce($"\"{this.GetFullName()}\" dropped \"{item.ItemName}\"");
+		}
 
 		//TODO equip item
 
@@ -340,6 +362,28 @@ namespace SlackMUDRPG.CommandsClasses
 		{
 			//TODO implement this properly
 			return 0;
+		}
+
+		/// <summary>
+		/// Gets the hand (SMCharacterSlot) which has the item equipped.
+		/// </summary>
+		/// <returns>The hand (SMCharacterSlot) with item equipped, or null.</returns>
+		/// <param name="id">The id of the item.</param>
+		private SMCharacterSlot GetHandWithItemEquipped(string id)
+		{
+			SMCharacterSlot rightHand = this.GetSlotByName("RightHand");
+			SMCharacterSlot leftHand = this.GetSlotByName("LeftHand");
+
+			if (!rightHand.isEmpty() && rightHand.EquippedItem.ItemID == id)
+			{
+				return rightHand;
+			}
+			else if (!leftHand.isEmpty() && leftHand.EquippedItem.ItemID == id)
+			{
+				return leftHand;
+			}
+
+			return null;
 		}
 
 		#endregion
