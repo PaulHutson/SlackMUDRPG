@@ -34,6 +34,10 @@
 			- Add weight restrictions
 		- Containers
 			- Add containers - like backpacks.
+		- Wear and Tear
+			- Implement a wear and tear function, with a reduction in the HP of an object
+			- If the object gets to 0 it becomes broken
+				Note: We need a way of mending them (this will be a skill later on!)
 
 4) Implement Chat System PAUL WORKING ON THIS
 	DONE- Implement Say command which will talk to all people in a location ("SAY Hello")
