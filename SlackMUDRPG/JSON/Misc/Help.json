@@ -1,0 +1,20 @@
+﻿{
+  "SMCommandList": [
+    {
+      "CommandFamily": "Environment",
+      "CommandBaseName": "Chop",
+      "CommandName": "Chop",
+      "CommandDescription": "Enables the player to chop something.",
+      "CommandSyntax": "chop {TargetName}",
+      "RequiredSkill": "Skill.Chop"
+    },
+    {
+      "CommandFamily": "Chat",
+      "CommandBaseName": "Say",
+      "CommandName": "Say",
+      "CommandDescription": "Enables the player to say something to the people within the same location.",
+      "CommandSyntax": "say {whatever-you-want}",
+      "RequiredSkill": null
+    }
+  ]
+}
