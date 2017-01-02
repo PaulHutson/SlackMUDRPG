@@ -41,8 +41,12 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("SkillSteps")]
         public List<SMSkillStep> SkillSteps { get; set; }
         
-        public void UseSkill(SMCharacter smc, bool beginSkillUse = true, string targetType = null, string targetID = null)
+        public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, bool beginSkillUse = true, string targetType = null, string targetID = null)
         {
+            // Output variables for passive skills that need output (like "dodge")
+            messageOut = "";
+            floatOut = 0;
+
             // Set the character activity
             if (beginSkillUse)
             {
@@ -83,11 +87,12 @@ namespace SlackMUDRPG.CommandsClasses
                             System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
                             break;
                         case "Repeat":
-                            this.UseSkill(smc, false, targetType, targetID);
+                            this.UseSkill(smc, out messageOut, out floatOut, false, targetType, targetID);
                             break;
                     }
                 }
             }
+
         }
 
         #region "Skill Step Methods"
