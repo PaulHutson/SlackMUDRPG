@@ -114,6 +114,8 @@
     <Content Include="JSON\Objects\Resource.TreeTrunk.json" />
     <Content Include="JSON\Objects\Resource.Log.json" />
     <Content Include="JSON\Misc\Help.json" />
+    <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
+    <Content Include="JSON\Characters\CharU3KLW47QC.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -35,8 +35,14 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("HitPoints")]
         public int HitPoints { get; set; }
 
+        [JsonProperty("MaxHitPoints")]
+        public int MaxHitPoints { get; set; }
+
         [JsonProperty("BaseDamage")]
         public float BaseDamage { get; set; }
+
+        [JsonProperty("Toughness")]
+        public int Toughness { get; set; }
 
         [JsonProperty("DestroyedOutput")]
         public string DestroyedOutput { get; set; }

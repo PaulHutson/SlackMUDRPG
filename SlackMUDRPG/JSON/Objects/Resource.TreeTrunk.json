@@ -6,7 +6,9 @@
 	"ItemWeight": 50,
   "ItemSize": 50,
   "HitPoints": 50,
+  "MaxHitPoints": 50,
   "BaseDamage": 0.001,
+  "Toughness": 3,
   "DestroyedOutput":  "Logs,20",
 	"CanHoldOtherItems": false
 }

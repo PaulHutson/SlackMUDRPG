@@ -23,6 +23,15 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("wp")]
         public int WillPower { get; set; }
 
+        [JsonProperty("ft")]
+        public int Fortitude { get; set; }
+
+        [JsonProperty("hp")]
+        public int HitPoints { get; set; }
+
+        [JsonProperty("maxhp")]
+        public int MaxHitPoints { get; set; }
+
         [JsonProperty("SocialStanding")]
         public int SocialStanding { get; set; }
 
@@ -80,6 +89,14 @@ namespace SlackMUDRPG.CommandClasses
                     };
                     updatedAttributeValue = this.WillPower;
                     break;
+                case "ft":
+                    this.Fortitude += 1;
+                    if (this.Fortitude > maxAttributeValue)
+                    {
+                        this.Fortitude = maxAttributeValue;
+                    };
+                    updatedAttributeValue = this.Fortitude;
+                    break;
                 case "SocialStanding":
                     this.SocialStanding += 1;
                     if (this.SocialStanding > maxAttributeValue)
@@ -92,5 +109,50 @@ namespace SlackMUDRPG.CommandClasses
 
             return updatedAttributeValue;
         }
+
+        /// <summary>
+        /// Returns the base stat value for a specific attribute
+        /// </summary>
+        /// <param name="statShortName">Short attribute name i.e. STR, INT, DEX, WP, SS
+        /// <returns></returns>
+        public int GetBaseStatValue(string statShortName)
+        {
+            int statValue = 0;
+            switch (statShortName)
+            {
+                case ("STR"):
+                    statValue = this.Strength;
+                    break;
+                case ("INT"):
+                    statValue = this.Intelligence;
+                    break;
+                case ("CHR"):
+                    statValue = this.Charisma;
+                    break;
+                case ("DEX"):
+                    statValue = this.Dexterity;
+                    break;
+                case ("WP"):
+                    statValue = this.WillPower;
+                    break;
+                case ("FT"):
+                    statValue = this.WillPower;
+                    break;
+                case ("SS"):
+                    statValue = this.SocialStanding;
+                    break;
+            }
+            return statValue;
+        }
+
+        #region "Derived Atributes"
+
+        public int GetToughness()
+        {
+            // Base Toughness based on the fortitude of someone.
+            return this.Fortitude / 10;
+        }
+
+        #endregion
     }
 }

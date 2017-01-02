@@ -40,8 +40,8 @@ namespace SlackMUDRPG.CommandsClasses
 
         [JsonProperty("SkillSteps")]
         public List<SMSkillStep> SkillSteps { get; set; }
-
-        public void UseSkill(SMCharacter smc, bool beginSkillUse = true, string targetType = null, string targetName = null, string targetID = null)
+        
+        public void UseSkill(SMCharacter smc, bool beginSkillUse = true, string targetType = null, string targetID = null)
         {
             // Set the character activity
             if (beginSkillUse)
@@ -61,11 +61,11 @@ namespace SlackMUDRPG.CommandsClasses
                                 smc.sendMessageToPlayer(smss.FailureOutput);
                             break;
                         case "Target":
-                            if (!StepRequiredTarget(smc, targetType, targetName, smss.StepRequiredObject, smss.RequiredObjectAmount))
+                            if (!StepRequiredTarget(smc, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
                                 smc.sendMessageToPlayer(smss.FailureOutput);
                             break;
                         case "Hit":
-                            if (!StepHit(smc, this.BaseStat, targetType, targetName, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+                            if (!StepHit(smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
                             {
                                 smc.sendMessageToPlayer(smss.FailureOutput);
                                 SkillIncrease(smc, this.BaseStat, false);
@@ -73,18 +73,18 @@ namespace SlackMUDRPG.CommandsClasses
                             else
                             {
                                 smc.CurrentActivity = null;
-                                smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetName, targetID));
+                                smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetID));
                                 SkillIncrease(smc, this.BaseStat, true);
                             }
                             break;
                         case "Information":
-                            smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetName, targetID));
+                            smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetID));
                             break;
                         case "Pause":
                             System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
                             break;
                         case "Repeat":
-                            this.UseSkill(smc, false, targetType, targetName, targetID);
+                            this.UseSkill(smc, false, targetType, targetID);
                             break;
                     }
                 }
@@ -105,37 +105,97 @@ namespace SlackMUDRPG.CommandsClasses
             return true;
         }
 
-        private bool StepRequiredTarget(SMCharacter smc, string targetType, string targetName, string requiredTargetObjectType, int requiredTargetObjectAmount)
+        private bool StepRequiredTarget(SMCharacter smc, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
         {
             // Check the type of target they've specified is correct...
-            // ... if the step required object type is null then as long as there is a target all is good.
-            // return false if something isn't there.
+            // Get the target item
+            SMItem targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemId == targetID);
+
+            // Look through the items in the room to see if there are any items with the target id
+            if (targetItem != null)
+            {
+                if (requiredTargetObjectType != null)
+                {
+                    if (targetItem.ItemFamily != requiredTargetObjectType)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
 
             return true;
         }
 
-        private bool StepHit(SMCharacter smc, string BaseStat, string targetType, string targetName, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
+        private bool StepHit(SMCharacter smc, string baseStat, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
         {
             // Get the object to hit the target with.
+            // TODO Get the objects from the equipped items.
+            SMItem charItemToUse = new SMItem(); // TODO REPLACE THIS WITH CORRECT ITEM.
+            float charItembaseDamage = charItemToUse.BaseDamage; // TODO GET THE REAL VALUE OF THE DAMAGE DEALT!
 
-            // Get the base attribute from the character to see how much they get.
+            // Get the base attribute from the character
+            int baseStatValue = smc.Attributes.GetBaseStatValue(baseStat);
 
             // Work out the damage multiplier based on attribute level (+/-)
+            int baseStatRequiredAmount = this.Prerequisites.First(pr => pr.SkillStatName == baseStat).PreReqLevel;
+            float positiveNegativeBaseStat = baseStatValue - baseStatRequiredAmount;
+            int charLevelOfSkill = smc.Skills.First(skill => skill.SkillName == this.SkillName).SkillLevel;
+            float damageMultiplier = (positiveNegativeBaseStat + charLevelOfSkill) / 100;
 
-            // Hit the target 
+            // Get the target toughness and HP
+            int targetToughness, targetHP;
+            SMItem targetItem; // for use when it's a target item
+            SMCharacter targetChar; // for use when it's a target character
+            if (targetType == "Character")
+            {
+                // Get the character
+                targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+
+                // Get the toughness and the hitpoints
+                targetToughness = targetChar.Attributes.GetToughness();
+                targetHP = targetChar.Attributes.HitPoints;
+            }
+            else // Assume it's an item
+            {
+                // Get the target item
+                targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemId == targetID);
+
+                // Get the toughness and the hitpoints
+                targetToughness = targetItem.Toughness;
+                targetHP = targetItem.HitPoints;
+            }
+
+            // Hit the target
+            // calculate the actual damage amount
+            float actualDamageAmount = (charItembaseDamage * (1 + damageMultiplier)) - targetToughness;
+
             // Reduce the targets HP
-            //      if the targets HP reaches 0 it has "died" or been "destroyed"
-            //          Replace the object with the alterobject type
-
+            int newTargetHP = targetHP - (int)actualDamageAmount;
+            // if the targets HP reaches 0 it has "died" or been "destroyed"
+            if (newTargetHP<0)
+            {
+                // Replace the object with the alterobject type
+                // TODO - Add methods to objects and characters for "die" times.
+            }
+            
             // Check to see if we should reduce the objects HP (wear and tear)
+            // TODO - Add Method to the object method for wear and tear
             // reduce the objects HP
             //      if the objects HP reaches 0 then the item is "broken" and the player needs to be told via a message.
             //      Stop any repeat actions against the character happening.
-            
+
             return true;
         }
 
-        private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetType, string targetName, string targetID)
+        private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetType, string targetID)
         {
             // Get the target type details
 
@@ -176,7 +236,7 @@ namespace SlackMUDRPG.CommandsClasses
         public string SkillStatName { get; set; }
 
         [JsonProperty("PreReqLevel")]
-        public string PreReqLevel { get; set; }
+        public int PreReqLevel { get; set; }
     }
 
     public class SMSkillType

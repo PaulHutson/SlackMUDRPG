@@ -48,7 +48,7 @@ namespace SlackMUDRPG.CommandsClasses
         public List<SMItem> CharacterItems { get; set; }
         
         [JsonProperty("Skills")]
-        public List<SMSkill> Skills { get; set; }
+        public List<SMCharacterSkill> Skills { get; set; }
 
         #region "General Player Functions"
 
@@ -206,7 +206,7 @@ namespace SlackMUDRPG.CommandsClasses
         }
 
         #endregion
-
+        
         #region "Chat Functions"
 
         /// <summary>

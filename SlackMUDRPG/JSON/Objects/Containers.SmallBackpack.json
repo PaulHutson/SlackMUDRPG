@@ -5,6 +5,8 @@
 	"ItemWeight": 0,
   "ItemSize": 1,
   "HitPoints": 5,
+  "MaxHitPoints": 5,
   "BaseDamage": 0.0000000001,
+  "Toughness": 1,
 	"CanHoldOtherItems": true
 }
