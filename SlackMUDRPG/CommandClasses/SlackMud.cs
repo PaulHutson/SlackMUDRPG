@@ -51,7 +51,8 @@ namespace SlackMUDRPG.CommandsClasses
                     SMRoom room = character.GetRoom();
                     if (room != null)
                     {
-                        //TODO room.Announce() someone has entered the room or new player etc...
+                        // Announce someone has walked into the room.
+                        room.Announce("_" + character.GetFullName() + " walks in._");
                     }
 
                     if (!newCharacter)
@@ -356,5 +357,20 @@ namespace SlackMUDRPG.CommandsClasses
 
         #endregion
 
+        #region "ChatMethods"
+        
+        public static void GlobalAnnounce(string msg)
+        {
+            // Get all the characters currently logged in
+            List<SMCharacter> smcl = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+
+            // Send a message to each of them.
+            foreach(SMCharacter smc in smcl)
+            {
+                smc.Announce("*GLOBAL MESSAGE: " + msg + "*");
+            }
+        }
+
+        #endregion
     }
 }

@@ -47,11 +47,21 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("Skills")]
         public List<SMSkill> Skills { get; set; }
 
-		/// <summary>
-		/// Adds the item to the characters CharacterItems list.
-		/// </summary>
-		/// <param name="item">Item.</param>
-		public void AddItem(SMItem item)
+        #region "General Player Functions"
+
+        /// <summary>
+        /// Get the full name of the character.
+        /// </summary>
+        public string GetFullName()
+        {
+            return this.FirstName + " " + this.LastName;
+        }
+
+        /// <summary>
+        /// Adds the item to the characters CharacterItems list.
+        /// </summary>
+        /// <param name="item">Item.</param>
+        public void AddItem(SMItem item)
 		{
 			if (this.CharacterItems == null)
 			{
@@ -179,17 +189,70 @@ namespace SlackMUDRPG.CommandsClasses
                 if (smr != null)
                 {
                     // Move the player to the new location
-                    this.RoomID = sme.RoomID;
+                    this.RoomID = smr.RoomID;
+                    this.SaveToFile();
                     returnString = SlackMud.GetLocationDetails(this.RoomID);
 
                     // Announce arrival to other players in the same place
-                    // TODO room.Announce()
+                    smr.Announce("_" + this.GetFullName() + " walks in._");
 
-                    this.SaveToFile();
                 }
             }
 
             return returnString;
         }
+
+        #endregion
+
+        #region "Chat Functions"
+
+        /// <summary>
+        /// Make the character say something
+        /// </summary>
+        /// <param name="speech">What the character is saying</param>
+        public void Say(string speech)
+        {
+            SlackMud.GetRoom(this.RoomID).ChatSay(speech, this);
+        }
+
+        /// <summary>
+        /// Make the character Whisper something
+        /// </summary>
+        /// <param name="speech">What the character is whispering</param>
+        /// /// <param name="whisperToName">Who the character is whispering to (name)</param>
+        public void Whisper(string speech, string whisperToName)
+        {
+            SlackMud.GetRoom(this.RoomID).ChatWhisper(speech, this, whisperToName);
+        }
+
+        /// <summary>
+        /// Make the character Shout something
+        /// </summary>
+        /// <param name="speech">What the character is shouting</param>
+        public void Shout(string speech)
+        {
+            SlackMud.GetRoom(this.RoomID).ChatShout(speech, this);
+        }
+
+        /// <summary>
+        /// Announce something to the player
+        /// </summary>
+        /// <param name="announcement">What is being announced to the player</param>
+        public void Announce(string announcement)
+        {
+            sendMessageToPlayer(announcement);
+        }
+
+        /// <summary>
+        /// Send the message to the player
+        /// </summary>
+        /// <param name="message">the message being sent to the player</param>
+        public void sendMessageToPlayer(string message)
+        {
+            // TODO Change the name of the service based on the one used to send the information!
+            Commands.SendToChannelMessage("", "SlackMud", message, "SlackMud", this.UserID);
+        }
+
+        #endregion
     }
 }

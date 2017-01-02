@@ -44,10 +44,18 @@ namespace SlackMUDRPG.CommandsClasses
                 NameValueCollection data = new NameValueCollection();
                 data["payload"] = payloadJson;
 
-                var response = client.UploadValues(_uri, "POST", data);
+                try
+                {
+                    var response = client.UploadValues(_uri, "POST", data);
 
-                //The response text is usually "ok"
-                string responseText = _encoding.GetString(response);
+                    //The response text is usually "ok"
+                    string responseText = _encoding.GetString(response);
+                }
+                catch
+                {
+                    string responseText = "Error";
+                }
+                
             }
         }
     }

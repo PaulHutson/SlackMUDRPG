@@ -5,13 +5,13 @@
 	DONE- Load the user from the GetCharacter Method, bringing in the JSON code.
 		DONE- Remember that we need to add it to the characters within the world
 
-2) Create location Method PAUL WORKING ON THIS
+2) DONE Create location Method
 	DONE- Create stubs for locations & exits (done)
 	DONE- On first load, use the JSON>Scripts>EnterWorldProcess-FirstLocation file to select the first room to show.
 	DONE- On subsequent loads use the location information within the Player file.
-	- Implement move method
-		- using the available exits from the location (north, east, front door, etc...)
-		- ... update the player location within the player file.
+	DONE- Implement move method
+		DONE- using the available exits from the location (north, east, front door, etc...)
+		DONE- ... update the player location within the player file.
 
 3) Implement object system ROB WORKING ON THIS
 	DONE- Add player inventory
@@ -35,11 +35,14 @@
 		- Containers
 			- Add containers - like backpacks.
 
-4) Implement Chat System
-	- Implement Say command which will talk to all people in a location ("SAY Hello")
+4) Implement Chat System PAUL WORKING ON THIS
+	DONE- Implement Say command which will talk to all people in a location ("SAY Hello")
+	DONE- Implement Whisper command to whisper to a specific person ("WHISPER PlayerName Hello")
 	- Implement Shout command which will talk to all people across all locations around the current location ("SHOUT Hello")
 		- Note, when this command is used and someone hears it from another location it will say where the sound is coming from (i.e. "You hear someone shouting to the north" where north is an exit)
-	- Implement Whisper command to whisper to a specific person ("WHISPER PlayerName Hello")
+	DONE- Implement announce function for when someone arrives in a room.
+	DONE- Implement general message to player function
+	DONE- Implement global announce function.
 
 5) Skill System
 	- Add Skill System functionality
@@ -81,10 +84,28 @@
 		- Not sure if the build system should be split up a bit - i.e. you can build 5% of the house, depending on how
 			long you take doing it or until resources run out.
 
-5) Implement Story element
+7) Implement Story element
 	- Jobs system (get jobs from a notice board)
 		- Means we need a new notice board system, with a "LOOK AT" and/or "EXAMINE" command.
 	- Implement story arcs (locations you need to go to, get clues, clues generate if someone is on a quest on entry to the location / they can only see them themselves)
+
+8) Generate World
+	- Create a world image (i.e. pixels of green, yellow, etc)
+	- Create stubs for different types of terrain
+		- desert
+		- forest
+		- plains
+			- grass
+			- tundra
+		- Artic
+	- Generate world objects to interact with
+		- Trees
+		- Plants
+			- Flowers
+			- Berry bushes
+				- berries
+	- Set the object types to have a "respawn" type function within the room so they regrow
+	- Generate the JSON for the image (each pixel is a location)
 
 8) More Stuff
 	- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)

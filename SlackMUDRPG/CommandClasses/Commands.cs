@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace SlackMUDRPG.CommandsClasses
@@ -20,7 +21,7 @@ namespace SlackMUDRPG.CommandsClasses
             
             string extraItemsList = "";
 
-            if (extraItemsIn != "") { 
+            if ((extraItemsIn != null) && (extraItemsIn != "")) { 
                 String[] splitString = extraItemsIn.Split(' ');
                 foreach (string item in splitString)
                 {
@@ -36,6 +37,31 @@ namespace SlackMUDRPG.CommandsClasses
             }
 
             return helloList[r] + " " + extraItemsList;
+        }
+
+        public static void SendToChannelMessage(string serviceType, string nameOfHook, string messageContent, string botName, string channelOrPersonTo)
+        {
+            using (WebClient client = new WebClient())
+            {
+                string urlWithAccessToken = GetAccessToken(serviceType, nameOfHook);
+
+                SlackClient sclient = new SlackClient(urlWithAccessToken);
+
+                sclient.PostMessage(username: botName,
+                           text: messageContent,
+                           channel: channelOrPersonTo);
+            }
+        }
+
+        public static string GetAccessToken(string serviceType, string nameOfHook)
+        {
+            string accessToken = "";
+            if ((serviceType == "Slack") || (serviceType == ""))
+            {
+                // Note the services tokens below needs to be updated based on the registered slack service...
+                accessToken = "https://hooks.slack.com/services/" + Utility.SlackWebHooks.GetWebHookToken(nameOfHook);
+            } // implement more for other things like Discord (anything with a webhook really, or for a custom page).
+            return accessToken;
         }
     }
 }

@@ -40,6 +40,18 @@ namespace SlackMUDRPG
             OutputUpdate(smc.Move(tb_RoomShortcutText.Text));
         }
 
+        protected void btn_Say_Click(object sender, EventArgs e)
+        {
+            SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+            smc.Say(tb_ChatText.Text);
+        }
+        
+        protected void btn_Shout_Click(object sender, EventArgs e)
+        {
+            SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+            smc.Shout(tb_ChatText.Text);
+        }
+
         private void OutputUpdate(string s)
         {
             tb_TextAreaOutput.Text += s + "\n\n";

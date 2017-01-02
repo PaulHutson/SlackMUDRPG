@@ -49,6 +49,33 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.TextBox tb_RoomShortcutText;
         
         /// <summary>
+        /// tb_ChatText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_ChatText;
+        
+        /// <summary>
+        /// btn_Say control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Say;
+        
+        /// <summary>
+        /// btn_Shout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Shout;
+        
+        /// <summary>
         /// btn_Test control.
         /// </summary>
         /// <remarks>
