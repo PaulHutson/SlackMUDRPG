@@ -65,7 +65,7 @@ namespace SlackMUDRPG.CommandsClasses
                                 smc.sendMessageToPlayer(smss.FailureOutput);
                             break;
                         case "Hit":
-                            if (!StepHit(smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+                            if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
                             {
                                 smc.sendMessageToPlayer(smss.FailureOutput);
                                 SkillIncrease(smc, this.BaseStat, false);
@@ -73,7 +73,6 @@ namespace SlackMUDRPG.CommandsClasses
                             else
                             {
                                 smc.CurrentActivity = null;
-                                smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetID));
                                 SkillIncrease(smc, this.BaseStat, true);
                             }
                             break;
@@ -134,7 +133,7 @@ namespace SlackMUDRPG.CommandsClasses
             return true;
         }
 
-        private bool StepHit(SMCharacter smc, string baseStat, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
+        private bool StepHit(SMSkillStep smss, SMCharacter smc, string baseStat, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
         {
             // Get the object to hit the target with.
             // TODO Get the objects from the equipped items.
@@ -154,6 +153,7 @@ namespace SlackMUDRPG.CommandsClasses
             int targetToughness, targetHP;
             SMItem targetItem; // for use when it's a target item
             SMCharacter targetChar; // for use when it's a target character
+            string targetName, destroyedObjectType;
             if (targetType == "Character")
             {
                 // Get the character
@@ -162,6 +162,8 @@ namespace SlackMUDRPG.CommandsClasses
                 // Get the toughness and the hitpoints
                 targetToughness = targetChar.Attributes.GetToughness();
                 targetHP = targetChar.Attributes.HitPoints;
+                targetName = targetChar.GetFullName();
+                destroyedObjectType = "Corpse of " + targetName;
             }
             else // Assume it's an item
             {
@@ -171,6 +173,8 @@ namespace SlackMUDRPG.CommandsClasses
                 // Get the toughness and the hitpoints
                 targetToughness = targetItem.Toughness;
                 targetHP = targetItem.HitPoints;
+                targetName = targetItem.ItemName;
+                destroyedObjectType = targetItem.DestroyedOutput;
             }
 
             // Hit the target
@@ -183,9 +187,32 @@ namespace SlackMUDRPG.CommandsClasses
             if (newTargetHP<0)
             {
                 // Replace the object with the alterobject type
-                // TODO - Add methods to objects and characters for "die" times.
+                if (targetType == "Character")
+                {
+                    // TODO Add "Die" method to the characer
+                }
+                else // Assume it's an item
+                {
+                    // Todo add the new item to the room.
+                    // Get the target item
+                    targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemId == targetID);
+                    string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
+                    int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[0]);
+                    while (numberOfObjectsToCreate > 0)
+                    {
+                        // Reduce the number of items waiting to be created
+                        numberOfObjectsToCreate--;
+
+                        // Add the item to the room
+                        smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
+                        
+                        // Remove the destroyed item from the room.
+                        // TODO Need to remove the item from the room.
+                    }
+                }
+                smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetID));
             }
-            
+
             // Check to see if we should reduce the objects HP (wear and tear)
             // TODO - Add Method to the object method for wear and tear
             // reduce the objects HP
@@ -195,9 +222,11 @@ namespace SlackMUDRPG.CommandsClasses
             return true;
         }
 
-        private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetType, string targetID)
+        private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetName, string objectDestroyedName)
         {
-            // Get the target type details
+            successOutput.Replace("{TARGETNAME}", targetName);
+            successOutput.Replace("{CHARNAME}", smc.GetFullName());
+            successOutput.Replace("{Object.DestroyedOutput}", objectDestroyedName);
 
             // Parse the string to change the text elements around as needed
 

@@ -49,5 +49,10 @@ namespace SlackMUDRPG.CommandsClasses
 
         [JsonProperty("HeldItems")]
         public SMItem[] HeldItems { get; set; }
+
+        public SMItem GetDestroyedItem()
+        {
+            return SlackMud.CreateItemFromJson(this.DestroyedOutput);
+        }
     }
 }

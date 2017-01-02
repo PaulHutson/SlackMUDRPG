@@ -309,7 +309,7 @@ namespace SlackMUDRPG.CommandsClasses
         /// </summary>
         /// <returns>The item.</returns>
         /// <param name="fileName">File name of the objects json file.</param>
-        private static SMItem CreateItemFromJson(string fileName)
+        public static SMItem CreateItemFromJson(string fileName)
         {
             string path = FilePathSystem.GetFilePath("Objects", fileName);
 

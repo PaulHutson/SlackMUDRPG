@@ -48,7 +48,7 @@
       "StepRequiredObject": "Family.Axe",
       "RequiredObjectAmount": 1,
       "FailureOutput": "Failed to chop {TARGETNAME}",
-      "SuccessOutput": "Object.DestroyedOutput,{CHARNAME} chops {TARGETNAME} to produce an {Object.DestroyedOutput}"
+      "SuccessOutput": "{CHARNAME} chops {TARGETNAME} to produce an {Object.DestroyedOutput}"
     },
     {
       "StepType": "Information",
