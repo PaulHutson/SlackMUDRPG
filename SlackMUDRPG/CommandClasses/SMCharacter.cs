@@ -75,9 +75,9 @@ namespace SlackMUDRPG.CommandsClasses
 		}
 
 		/// <summary>
-		/// Removes and item by ItemId from the characters CharacterItems list dropping the item to the characters current room.
+		/// Removes and item by ItemID from the characters CharacterItems list dropping the item to the characters current room.
 		/// </summary>
-		/// <param name="Id">ItemId</param>
+		/// <param name="id">ItemID</param>
 		public void DropItem(string id)
 		{
 			if (this.CharacterItems == null)
@@ -85,7 +85,7 @@ namespace SlackMUDRPG.CommandsClasses
 				return;
 			}
 
-			SMItem item = this.CharacterItems.Find(obj => obj.ItemId == id);
+			SMItem item = this.CharacterItems.Find(obj => obj.ItemID == id);
 
 			if (item != null)
 			{

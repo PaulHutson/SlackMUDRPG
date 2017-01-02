@@ -321,7 +321,7 @@ namespace SlackMUDRPG.CommandsClasses
                 {
                     string json = r.ReadToEnd();
                     item = JsonConvert.DeserializeObject<SMItem>(json);
-                    item.ItemId = Guid.NewGuid().ToString();
+                    item.ItemID = Guid.NewGuid().ToString();
                 }
             }
 
