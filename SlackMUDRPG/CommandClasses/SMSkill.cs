@@ -226,13 +226,12 @@ namespace SlackMUDRPG.CommandsClasses
 
         private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetName, string objectDestroyedName)
         {
+            // replace the elements as needed
             successOutput.Replace("{TARGETNAME}", targetName);
             successOutput.Replace("{CHARNAME}", smc.GetFullName());
             successOutput.Replace("{Object.DestroyedOutput}", objectDestroyedName);
 
-            // Parse the string to change the text elements around as needed
-
-            return "";
+            return successOutput;
         }
         
         private void SkillIncrease(SMCharacter smc, bool skillSuccess = true)
