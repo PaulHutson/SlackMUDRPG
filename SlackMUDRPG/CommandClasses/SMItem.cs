@@ -38,6 +38,9 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("BaseDamage")]
         public float BaseDamage { get; set; }
 
+        [JsonProperty("DestroyedOutput")]
+        public string DestroyedOutput { get; set; }
+
         [JsonProperty("HeldItems")]
         public SMItem[] HeldItems { get; set; }
     }
