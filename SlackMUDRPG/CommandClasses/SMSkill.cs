@@ -68,12 +68,12 @@ namespace SlackMUDRPG.CommandsClasses
                             if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
                             {
                                 smc.sendMessageToPlayer(smss.FailureOutput);
-                                SkillIncrease(smc, this.BaseStat, false);
+                                SkillIncrease(smc, false);
                             }
                             else
                             {
                                 smc.CurrentActivity = null;
-                                SkillIncrease(smc, this.BaseStat, true);
+                                SkillIncrease(smc, true);
                             }
                             break;
                         case "Information":
@@ -153,6 +153,7 @@ namespace SlackMUDRPG.CommandsClasses
             int targetToughness, targetHP;
             SMItem targetItem; // for use when it's a target item
             SMCharacter targetChar; // for use when it's a target character
+            bool objectAvoidedHit = false; // Need to check whether the character has any defensive type skills that are going to help here.
             string targetName, destroyedObjectType;
             if (targetType == "Character")
             {
@@ -211,6 +212,7 @@ namespace SlackMUDRPG.CommandsClasses
                     }
                 }
                 smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetID));
+                SkillIncrease(smc);
             }
 
             // Check to see if we should reduce the objects HP (wear and tear)
@@ -232,18 +234,38 @@ namespace SlackMUDRPG.CommandsClasses
 
             return "";
         }
-
-        private void SkillIncrease(SMCharacter smc, string BaseStat, bool skillSuccess)
+        
+        private void SkillIncrease(SMCharacter smc, bool skillSuccess = true)
         {
             // Skill Increase
-            // Work out the change of skill increase based on level (also include a small bonus for skill success)
+            // Max skill level
+            int maxSkillLevel = 100;
+            int failureMultipler = 2;
+            if (skillSuccess)
+            {
+                failureMultipler = 1;
+            }
+
+            // Get characters current skill level
+            int currentSkillLevel = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName).SkillLevel;
+
+            // Chance of the skill increasing in level
+            double chanceOfSkillIncrease = ((maxSkillLevel - (currentSkillLevel * failureMultipler)) / 100)/4;
 
             // Random chance to see if someone achieves the skill increase change
-            //      Increase the skill by one.
-            //      Send message to the player.
+            Random r = new Random();
+            double rDouble = r.NextDouble();
+            if (rDouble < chanceOfSkillIncrease)
+            {
+                // Increase the skill lebel by one.
+                smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName).SkillLevel++;
 
+                // Send message to the player.
+                smc.sendMessageToPlayer(this.SkillName + " increased in level to " + (currentSkillLevel + 1));
+            }
+            
             // Attribute Increase
-            // TODO add an attribute increase method check to SMAttributes
+            // TODO add an attribute increase method check to SMAttributes, very very low chance!
         }
 
         #endregion
