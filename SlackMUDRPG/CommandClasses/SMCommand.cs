@@ -32,6 +32,7 @@ namespace SlackMUDRPG.CommandClasses
 
     public class SMCommands
     {
+        [JsonProperty("SMCommandList")]
         List<SMCommand> SMCommandList { get; set; }
     }
 }
