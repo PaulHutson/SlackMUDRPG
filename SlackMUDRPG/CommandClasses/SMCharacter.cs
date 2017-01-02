@@ -47,6 +47,9 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("Skills")]
         public List<SMSkill> Skills { get; set; }
 
+		[JsonProperty("CharacterSlots")]
+		public List<SMCharacterSlot> CharacterSlots { get; set; }
+
         #region "General Player Functions"
 
         /// <summary>
@@ -203,6 +206,25 @@ namespace SlackMUDRPG.CommandsClasses
         }
 
         #endregion
+
+		#region "Inventory Functions"
+
+		/// <summary>
+		/// Gets an SMCharacterSlot by name.
+		/// </summary>
+		/// <returns>The slot.</returns>
+		/// <param name="name">Name of the slot.</param>
+		public SMCharacterSlot GetSlotByName(string name)
+		{
+			if (this.CharacterSlots != null)
+			{
+				return this.CharacterSlots.FirstOrDefault(slot => slot.Name == name);
+			}
+
+			return null;
+		}
+
+		#endregion
 
         #region "Chat Functions"
 

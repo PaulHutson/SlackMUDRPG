@@ -1,10 +1,23 @@
-﻿using System;
-namespace SlackMUDRPG
-{
-	public class Slots
+﻿[
 	{
-		public Slots()
-		{
-		}
+		"Name":"RightHand",
+		"AllowedTypes": [
+			"any"
+		],
+		"EquippedItem": null
+	},
+	{
+		"Name":"LeftHand",
+		"AllowedTypes": [
+			"any"
+		],
+		"EquippedItem": null
+	},
+	{
+		"Name":"Back",
+		"AllowedTypes": [
+			"containers"
+		],
+		"EquippedItem": null
 	}
-}
+]

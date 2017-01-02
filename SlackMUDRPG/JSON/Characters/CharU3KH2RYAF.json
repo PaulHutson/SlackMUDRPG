@@ -1,0 +1,62 @@
+{
+  "firstname": "Robert",
+  "lastname": "Curran",
+  "lastinteractiondate": "2017-01-02T21:18:51.556181+00:00",
+  "lastlogindate": "2017-01-02T21:18:51.556071+00:00",
+  "age": 0,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "U3KH2RYAF",
+  "RoomID": "2",
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "SocialStanding": 8
+  },
+  "CharacterItems": null,
+  "Skills": null,
+  "CharacterSlots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "2de61885-2a88-42c5-b5ee-961a7528f4ce",
+        "ItemName": "Wooden Sword",
+        "ItemType": "weapon",
+        "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+        "ItemWeight": 1,
+        "ItemSize": 1,
+        "CanHoldOtherItems": true,
+        "HeldItems": null
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": {
+        "ItemID": "c1eeeac1-4428-4840-84fc-e9aa9c1ae19b",
+        "ItemName": "Small Backpack",
+        "ItemType": "container",
+        "ItemDescription": "Basic small backpack that all players start with.",
+        "ItemWeight": 0,
+        "ItemSize": 1,
+        "CanHoldOtherItems": true,
+        "HeldItems": null
+      }
+    }
+  ]
+}
