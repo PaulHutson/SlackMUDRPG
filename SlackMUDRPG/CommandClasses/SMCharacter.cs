@@ -185,11 +185,21 @@ namespace SlackMUDRPG.CommandsClasses
 		}
 
 		/// <summary>
-		/// Picks up an item from the characters current room.
+		/// Picks up an item from the characters current room, by the items ItemID.
 		/// </summary>
-		/// <param name="item">The item to pick up.</param>
-		public void PickUpItem(SMItem item)
+		/// <param name="id">The ItemID if the item to pick up.</param>
+		public void PickUpItem(string id)
 		{
+			SMRoom room = this.GetRoom();
+
+			SMItem item = room.RoomItems.FirstOrDefault(smi => smi.ItemID == id);
+
+			if (item == null)
+			{
+				this.sendMessageToPlayer($"Cannot find that item in this room");
+				return;
+			}
+
 			// check for an empty hand to pick up the item
 			SMCharacterSlot hand = this.GetEmptyHand();
 
@@ -209,15 +219,7 @@ namespace SlackMUDRPG.CommandsClasses
 				return;
 			}
 
-
-			// check item is in the current room and remove it
-			SMRoom room = this.GetRoom();
-			if (room.RoomItems.FirstOrDefault(i => i.ItemID == item.ItemID) == null)
-			{
-				this.sendMessageToPlayer($"Cannot find \"{item.ItemName}\" in this room");
-				return;
-			}
-
+			// remove item from the room
 			room.RemoveItem(item);
 			room.Announce($"\"{GetFullName()}\" picked up \"{item.ItemName}\"");
 
@@ -228,17 +230,22 @@ namespace SlackMUDRPG.CommandsClasses
 			this.SaveToApplication();
 		}
 
-		//TODO drop item
-		public void DropItem(SMItem item)
+		/// <summary>
+		/// Drops an item the character is holding.
+		/// </summary>
+		/// <param name="id">ItemID.</param>
+		public void DropItem(string id)
 		{
 			// check item is in a hand
-			SMCharacterSlot hand = GetHandWithItemEquipped(item.ItemID);
+			SMCharacterSlot hand = GetHandWithItemEquipped(id);
 
 			if (hand == null)
 			{
 				sendMessageToPlayer("You must be holding the item to drop it");
 				return;
 			}
+
+			SMItem item = this.GetEquippedItemByID(id);
 
 			// remove item from slot
 			hand.EquippedItem = null;
@@ -322,6 +329,27 @@ namespace SlackMUDRPG.CommandsClasses
 		{
 			//TODO implement this properly
 			return 0;
+		}
+
+		/// <summary>
+		/// Gets an equipped item by its ItemID.
+		/// </summary>
+		/// <returns>The equipped item.</returns>
+		/// <param name="id">ItemID.</param>
+		private SMItem GetEquippedItemByID(string id)
+		{
+			foreach (SMCharacterSlot slot in this.CharacterSlots)
+			{
+				if (slot.EquippedItem != null)
+				{
+					if (slot.EquippedItem.ItemID == id)
+					{
+						return slot.EquippedItem;
+					}
+				}
+			}
+
+			return null;
 		}
 
 		/// <summary>
