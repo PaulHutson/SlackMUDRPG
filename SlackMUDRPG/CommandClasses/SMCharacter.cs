@@ -267,6 +267,39 @@ namespace SlackMUDRPG.CommandsClasses
 
 		//TODO list slots
 
+		public string GetOwnedItemIDByName(string name)
+		{
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (slot.EquippedItem.ItemName == name)
+					{
+						return slot.EquippedItem.ItemID;
+					}
+
+					if (slot.EquippedItem.ItemType == "container")
+					{
+						SMItem item = this.FindItemInContainerByName(name, slot.EquippedItem);
+						if (item != null)
+						{
+							return item.ItemID;
+						}
+					}
+				}
+			}
+
+			return null;
+		}
+
+		//TODO HasItemEquipped(id)
+
+		//TODO HasItemTypeEquipped(type)
+
+		//TODO CountItemsByName(name)
+
+		//TODO AreHandsEmpty()
+
 		/// <summary>
 		/// Gets an emptySMCharacterSlot that is a hand.
 		/// </summary>
@@ -388,6 +421,38 @@ namespace SlackMUDRPG.CommandsClasses
 			else if (!leftHand.isEmpty() && leftHand.EquippedItem.ItemID == id)
 			{
 				return leftHand;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Finds an item by name in a container by recursivly searching through the container
+		/// and any containers it contains.
+		/// </summary>
+		/// <returns>The item in a container.</returns>
+		/// <param name="name">ItemName.</param>
+		/// <param name="container">Container to look in.</param>
+		private SMItem FindItemInContainerByName(string name, SMItem container)
+		{
+			if (container.HeldItems != null)
+			{
+				foreach (SMItem item in container.HeldItems)
+				{
+					if (item.ItemName == name)
+					{
+						return item;
+					}
+
+					if (item.ItemType == "container")
+					{
+						SMItem smi = this.FindItemInContainerByName(name, item);
+						if (smi != null)
+						{
+							return smi;
+						}
+					}
+				}
 			}
 
 			return null;
