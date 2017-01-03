@@ -309,11 +309,13 @@ namespace SlackMUDRPG.CommandsClasses
 			{
 				if (!slot.isEmpty())
 				{
-					weight += slot.EquippedItem.ItemWeight;
-
 					if (slot.EquippedItem.ItemType == "container")
 					{
 						weight += this.GetContainerWeight(slot.EquippedItem);
+					}
+					else
+					{
+						weight += slot.EquippedItem.ItemWeight;
 					}
 				}
 			}
@@ -322,13 +324,30 @@ namespace SlackMUDRPG.CommandsClasses
 		}
 
 		/// <summary>
-		/// Gets the weight of items in a container.
+		/// Gets the weight of items in a container, this will recursivley call itself to resolve the weights of
+		/// containers inside other containers that hold items.
 		/// </summary>
 		/// <returns>The weight.</returns>
 		private int GetContainerWeight(SMItem container)
 		{
-			//TODO implement this properly
-			return 0;
+			int weight = container.ItemWeight;
+
+			if (container.HeldItems != null)
+			{
+				foreach (SMItem item in container.HeldItems)
+				{
+					if (item.ItemType == "container")
+					{
+						weight += this.GetContainerWeight(item);
+					}
+					else
+					{
+						weight += item.ItemWeight;
+					}
+				}
+			}
+
+			return weight;
 		}
 
 		/// <summary>
