@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using SlackMUDRPG.CommandClasses;
 using System;
 using System.Collections.Generic;
@@ -292,13 +292,85 @@ namespace SlackMUDRPG.CommandsClasses
 			return null;
 		}
 
-		//TODO HasItemEquipped(id)
+		/// <summary>
+		/// Hases the item equipped.
+		/// </summary>
+		/// <returns><c>true</c>, if item equipped was hased, <c>false</c> otherwise.</returns>
+		/// <param name="id">ItemID.</param>
+		public bool HasItemEquipped(string id)
+		{
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty() && slot.EquippedItem.ItemID == id)
+				{
+					return true;
+				}
+			}
 
-		//TODO HasItemTypeEquipped(type)
+			return false;
+		}
 
-		//TODO CountItemsByName(name)
+		/// <summary>
+		/// Has an item of a given type equipped.
+		/// </summary>
+		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
+		/// <param name="type">ItemType.</param>
+		public bool HasItemTypeEquipped(string type)
+		{
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty() && slot.EquippedItem.ItemType == type)
+				{
+					return true;
+				}
+			}
 
-		//TODO AreHandsEmpty()
+			return false;
+		}
+
+		/// <summary>
+		/// Counts the number of a named item the character owns.
+		/// </summary>
+		/// <returns>The count.</returns>
+		/// <param name="name">ItemName.</param>
+		public int CountOwnedItemsByName(string name)
+		{
+			int count = 0;
+
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (slot.EquippedItem.ItemName == name)
+					{
+						count++;
+					}
+
+					if (slot.EquippedItem.ItemType == "container")
+					{
+						SMItem item = this.FindItemInContainerByName(name, slot.EquippedItem);
+						if (item != null && item.ItemName == name)
+						{
+							count++;
+						}
+					}
+				}
+			}
+
+			return count;
+		}
+
+		/// <summary>
+		/// Are the characters hands empty.
+		/// </summary>
+		/// <returns><c>true</c>, if hands are empty, <c>false</c> otherwise.</returns>
+		public bool AreHandsEmpty()
+		{
+			SMCharacterSlot rightHand = this.GetSlotByName("RightHand");
+			SMCharacterSlot leftHand = this.GetSlotByName("LeftHand");
+
+			return rightHand.isEmpty() && leftHand.isEmpty();
+		}
 
 		/// <summary>
 		/// Gets an emptySMCharacterSlot that is a hand.
