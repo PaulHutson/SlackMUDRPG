@@ -34,6 +34,10 @@
 			- Add weight restrictions
 		- Containers
 			- Add containers - like backpacks.
+		- Wear and Tear
+			- Implement a wear and tear function, with a reduction in the HP of an object
+			- If the object gets to 0 it becomes broken
+				Note: We need a way of mending them (this will be a skill later on!)
 
 4) Implement Chat System PAUL WORKING ON THIS
 	DONE- Implement Say command which will talk to all people in a location ("SAY Hello")
@@ -44,45 +48,44 @@
 	DONE- Implement general message to player function
 	DONE- Implement global announce function.
 
-5) Skill System
+5) Skill System PAUL WORKING ON THIS
 	- Add Skill System functionality
-		- Skill Class
-			- Skill Name
-			- Skill Type
-			- Base Stat for the skill
-			- Skill Description
-			- Skill Shortcut (if not passive)
-			- Improvement Speed
-			- Prerequisite Skills
-		- Skill:
+		DONE- Skill Class
+			DONE- Skill Name
+			DONE- Skill Type
+			DONE- Base Stat for the skill
+			DONE- Skill Description
+			DONE- Skill Shortcut (if not passive)
+			DONE- Improvement Speed
+			DONE- Prerequisite Skills
+		DONE- Skill:
 			- GrandType Fighting Skills
-				- TYPE Melee
-					- Dagger
-					- Sword
-				- TYPE Ranged
-					- Bow
-				- TYPE Unarmed
-					- boxing
-				- Defence
-					- parrying
-					- blocking
-					- dodging
+				DONE- TYPE Melee
+					DONE- Dagger
+					DONE- Sword
+				DONE- TYPE Ranged
+					DONE- Bow
+				DONE- TYPE Unarmed
+					DONE- boxing
+				DONE- Defence
+					DONE- parrying
+					DONE- blocking
+					DONE- dodging
 			- Functional Skills
-				- CHOP item i.e. CHOP TREE to chop a tree, if the character has an axe equipped.
+				DONE- CHOP item i.e. CHOP TREE to chop a tree, if the character has an axe equipped.
 				- MAKE item i.e. MAKE SWORD (would need to have an available, unused anvil)
 					- Using an item marks it as "in use" until the thing is done or the player is logged out.
 					- sword would use an additional sub skill of "Weaponsmithing"
 						- Which would be a subskill of "BlackSmithing"
-
-6) Implement Commands/Skills
-	- Attack ("ATTACK PlayerName") - will use default item in their hand
-		- Hit points must reduce
-	- Make ("MAKE Torch") - will use the items from their inventory to make the torch.
-		- Make advanced ("MAKE Sword USING Anvil")
-	- Build ("BUILD Shed") - will use items in a location to build something.
-		- This should take time (as per the object stub).
-		- Not sure if the build system should be split up a bit - i.e. you can build 5% of the house, depending on how
-			long you take doing it or until resources run out.
+	- Implement Commands/Skills
+		- Attack ("ATTACK PlayerName") - will use default item in their hand
+			- Hit points must reduce
+		- Make ("MAKE Torch") - will use the items from their inventory to make the torch.
+			- Make advanced ("MAKE Sword USING Anvil")
+		- Build ("BUILD Shed") - will use items in a location to build something.
+			- This should take time (as per the object stub).
+			- Not sure if the build system should be split up a bit - i.e. you can build 5% of the house, depending on how
+				long you take doing it or until resources run out.
 
 7) Implement Story element
 	- Jobs system (get jobs from a notice board)
@@ -90,6 +93,16 @@
 	- Implement story arcs (locations you need to go to, get clues, clues generate if someone is on a quest on entry to the location / they can only see them themselves)
 
 8) Generate World
+	- FIRST extend the locations to include weather effects
+		- Season/Weather types:
+			- Winter (Snow)
+			- Spring
+			- Rain
+			- Summer (hot)
+			- Autumn
+		- Add Night / Day descriptions
+			- For each weather type
+		- Note, not all locations will have any change of effect, so will need to use the base description.
 	- Create a world image (i.e. pixels of green, yellow, etc)
 	- Create stubs for different types of terrain
 		- desert
@@ -107,7 +120,7 @@
 	- Set the object types to have a "respawn" type function within the room so they regrow
 	- Generate the JSON for the image (each pixel is a location)
 
-8) More Stuff
+9) More Stuff
 	- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)
 	- Characters (basic, stay in locations, can talk back / say set phrases)
 	- Character Jobs (basic, can get jobs / tasks from a character)

@@ -1,0 +1,75 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Environment",
+    "SkillTypeDescription": "Skills related to manipulating the environment"
+  },
+  "SkillName": "Chop",
+  "SkillDescription": "The ability to use an axe to chop things",
+  "SkillLearnText": "You've learnt how to chop things with an axe",
+  "LevelIncreaseText":  "You feel you've gotten better at chopping things",
+  "ActivityType":  "Chopping",
+  "BaseStat": "STR",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 6
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "INT",
+      "PreReqLevel": 5
+    },
+    {
+      "IsSkill": true,
+      "SkillStatName": "Axe",
+      "PreReqLevel": 1
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "Object",
+      "StepRequiredObject": "Family.Axe",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have an axe equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Target",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You must choose something to chop",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Hit",
+      "StepRequiredObject": "Family.Axe",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to chop {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} chops {TARGETNAME} to produce an {Object.DestroyedOutput}"
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": null,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} chops {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Repeat.Chop",
+      "StepRequiredObject": "Activity.Chopping",
+      "RequiredObjectAmount": null,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    }
+  ]
+}

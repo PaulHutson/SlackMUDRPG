@@ -1,0 +1,18 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Defence",
+    "SkillTypeDescription": "Defensive skills"
+  },
+    "SkillName": "Dodge",
+    "SkillDescription": "The ability to dodge attacks",
+    "BaseStat": "DEX",
+    "LevelMultiplier": 10,
+    "ImprovementSpeed": 10,
+    "Prerequisites": [
+      {
+        "IsSkill": false,
+        "SkillStatName": "DEX",
+        "PreReqLevel": 8
+      }
+    ]
+  }

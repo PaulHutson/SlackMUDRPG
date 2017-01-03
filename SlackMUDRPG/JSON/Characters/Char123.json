@@ -1,10 +1,10 @@
 {
-  "firstname": "Paul",
-  "lastname": "Hutson",
+  "firstname": "Amy",
+  "lastname": "Jennis",
   "lastinteractiondate": "2016-12-31T15:49:35.3550031+00:00",
   "lastlogindate": "2016-12-31T15:49:35.3550031+00:00",
-  "age": 0,
-  "sex": "m",
+  "age": 10,
+  "sex": "f",
   "PKFlag": false,
   "UserID": "123",
   "RoomID": "1",
@@ -14,6 +14,9 @@
     "chr": 10,
     "dex": 10,
     "wp": 10,
+    "ft": 10,
+    "hp": 10,
+    "maxhp": 10,
     "SocialStanding": 8
   },
   "CharacterItems": [

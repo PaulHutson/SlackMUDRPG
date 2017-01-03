@@ -128,6 +128,9 @@ namespace SlackMUDRPG.CommandsClasses
 
         public List<SMCharacter> GetPeople()
         {
+            // Return element.
+            List<SMCharacter> charsInLocation = new List<SMCharacter>();
+
             // Search through logged in users to see which are in this location
             List<SMCharacter> smcs = new List<SMCharacter>();
             smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
@@ -137,12 +140,11 @@ namespace SlackMUDRPG.CommandsClasses
             {
                 if (smcs.Count(smc => smc.RoomID == this.RoomID) > 0)
                 {
-                    List<SMCharacter> charsInLocation = new List<SMCharacter>();
                     charsInLocation = smcs.FindAll(s => s.RoomID == this.RoomID);
                 }
             }
 
-            return smcs;
+            return charsInLocation;
         }
 
         /// <summary>

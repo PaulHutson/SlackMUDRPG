@@ -1,0 +1,13 @@
+﻿{
+	"ItemName": "Shoddy Axe",
+  "ItemType": "weapons",
+  "ItemFamily": "Axe",
+	"ItemDescription": "This shoddy axe doesn't do much damage but it's a start.",
+	"ItemWeight": 1,
+  "ItemSize": 1,
+  "HitPoints": 50,
+  "MaxHitPoints": 50,
+  "BaseDamage": 0.2,
+  "Toughness": 3,
+	"CanHoldOtherItems": true
+}
