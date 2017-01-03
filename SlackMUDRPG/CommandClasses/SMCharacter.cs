@@ -44,9 +44,6 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("Attributes")]
         public SMAttributes Attributes { get; set; }
 
-        [JsonProperty("CharacterItems")]
-        public List<SMItem> CharacterItems { get; set; }
-        
         [JsonProperty("Skills")]
         public List<SMCharacterSkill> Skills { get; set; }
 
@@ -62,46 +59,6 @@ namespace SlackMUDRPG.CommandsClasses
         {
             return this.FirstName + " " + this.LastName;
         }
-
-        /// <summary>
-        /// Adds the item to the characters CharacterItems list.
-        /// </summary>
-        /// <param name="item">Item.</param>
-        public void AddItem(SMItem item)
-		{
-			if (this.CharacterItems == null)
-			{
-				this.CharacterItems = new List<SMItem>();
-			}
-
-			//TODO check that tha play has weight and capacity to add the item
-
-			this.CharacterItems.Add(item);
-			this.SaveToApplication();
-		}
-
-		/// <summary>
-		/// Removes and item by ItemID from the characters CharacterItems list dropping the item to the characters current room.
-		/// </summary>
-		/// <param name="id">ItemID</param>
-		public void DropItem(string id)
-		{
-			if (this.CharacterItems == null)
-			{
-				return;
-			}
-
-			SMItem item = this.CharacterItems.Find(obj => obj.ItemID == id);
-
-			if (item != null)
-			{
-				SMRoom room = this.GetRoom();
-
-				room.AddItem(item);
-				this.CharacterItems.Remove(item);
-				this.SaveToApplication();
-			}
-		}
 
 		/// <summary>
 		/// Saves the character to the file system.

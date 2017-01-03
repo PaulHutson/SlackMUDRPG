@@ -113,7 +113,7 @@ namespace SlackMUDRPG.CommandsClasses
         {
             // Check the type of target they've specified is correct...
             // Get the target item
-            SMItem targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemId == targetID);
+            SMItem targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
 
             // Look through the items in the room to see if there are any items with the target id
             if (targetItem != null)
@@ -174,7 +174,7 @@ namespace SlackMUDRPG.CommandsClasses
             else // Assume it's an item
             {
                 // Get the target item
-                targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemId == targetID);
+                targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
 
                 // Get the toughness and the hitpoints
                 targetToughness = targetItem.Toughness;
@@ -201,7 +201,7 @@ namespace SlackMUDRPG.CommandsClasses
                 {
                     // Todo add the new item to the room.
                     // Get the target item
-                    targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemId == targetID);
+                    targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
                     string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
                     int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[0]);
                     while (numberOfObjectsToCreate > 0)

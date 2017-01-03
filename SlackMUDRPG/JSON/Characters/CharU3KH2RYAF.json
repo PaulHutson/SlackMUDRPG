@@ -61,35 +61,6 @@
         "HeldItems": null
       }
     }
-  ]
-  },
-  "CharacterItems": [
-    {
-      "ItemId": "1def209c-8dc5-4208-877a-5de64c13e12c",
-      "ItemName": "Small Backpack",
-      "ItemType": "containers",
-      "ItemFamily": null,
-      "ItemDescription": "Basic small backpack that all players start with.",
-      "ItemWeight": 0,
-      "ItemSize": 1,
-      "CanHoldOtherItems": true,
-      "HitPoints": 0,
-      "BaseDamage": 0.0,
-      "HeldItems": null
-    },
-    {
-      "ItemId": "a44a31e6-a28c-47ad-984d-ff24372b2453",
-      "ItemName": "Wooden Sword",
-      "ItemType": "weapons",
-      "ItemFamily": null,
-      "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
-      "ItemWeight": 1,
-      "ItemSize": 1,
-      "CanHoldOtherItems": true,
-      "HitPoints": 0,
-      "BaseDamage": 0.0,
-      "HeldItems": null
-    }
   ],
   "Skills": null
 }
