@@ -11,5 +11,15 @@
 			"RoomID": "1"
 		}
 	],
-	"RoomItems": null
+		"RoomItems": [
+		{
+			"ItemID": "7b76eb9b-bd86-4ba5-8535-7249d2a40b1a",
+			"ItemName": "Wooden Stick",
+			"ItemType": "weapon",
+			"ItemDescription": "This wooden stick is just for testing.",
+			"ItemWeight": 1,
+			"ItemSize": 1,
+			"CanHoldOtherItems": false
+		}
+	]
 }

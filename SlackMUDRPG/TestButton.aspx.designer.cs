@@ -19,6 +19,8 @@ namespace SlackMUDRPG {
 		
 		protected System.Web.UI.WebControls.Button btn_clear;
 		
+		protected System.Web.UI.WebControls.Button btn_guid;
+		
 		protected System.Web.UI.WebControls.TextBox tb_CharID;
 		
 		protected System.Web.UI.WebControls.TextBox tb_RoomShortcutText;
@@ -36,5 +38,9 @@ namespace SlackMUDRPG {
 		protected System.Web.UI.WebControls.Button btn_CreateCharacter;
 		
 		protected System.Web.UI.WebControls.Button btn_MoveToRoom;
+		
+		protected System.Web.UI.WebControls.Button btn_PickUpStick;
+		
+		protected System.Web.UI.WebControls.Button btn_DropUpStick;
 	}
 }

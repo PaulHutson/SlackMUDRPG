@@ -57,6 +57,42 @@ namespace SlackMUDRPG
 			tb_TextAreaOutput.Text = "";
 		}
 
+		protected void btn_Get_Guid(object sender, EventArgs e)
+		{
+			OutputUpdate(Guid.NewGuid().ToString());
+		}
+
+		protected void btn_PickUpStick_Click(object sender, EventArgs e)
+		{
+			SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+			SMRoom smr = smc.GetRoom();
+			SMItem stick = smr.GetItemByName("Wooden Stick");
+
+			if (stick != null)
+			{
+				smc.PickUpItem(stick.ItemID);
+			}
+			else
+			{
+				OutputUpdate($"Can't find a wooden stick in room {smr.RoomID}");
+			}
+		}
+
+		protected void btn_DropStick_Click(object sender, EventArgs e)
+		{
+			SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+			string stickID = smc.GetOwnedItemIDByName("Wooden Stick");
+
+			if (stickID != null)
+			{
+				smc.DropItem(stickID);
+			}
+			else
+			{
+				OutputUpdate($"Can't find a wooden stick your inventory.");
+			}
+		}
+
         private void OutputUpdate(string s)
         {
             tb_TextAreaOutput.Text += s + "\n\n";
