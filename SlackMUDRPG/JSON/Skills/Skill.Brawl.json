@@ -1,0 +1,12 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Unarmed",
+    "SkillTypeDescription": "Combat Related Skill for Unarmed Fighting"
+  },
+    "SkillName": "Brawl",
+    "SkillDescription": "The ability to competently fight with nothing but your hands",
+    "BaseStat": "STR",
+    "LevelMultiplier": 10,
+    "ImprovementSpeed": 10,
+    "Prerequisites": null
+  }

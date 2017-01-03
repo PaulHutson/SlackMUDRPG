@@ -1,0 +1,18 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Melee",
+    "SkillTypeDescription": "Combat Related Skill for Melee fighting"
+  },
+    "SkillName": "Sword Use",
+    "SkillDescription": "The ability to competently use a sword",
+    "BaseStat": "STR",
+    "LevelMultiplier": 10,
+    "ImprovementSpeed": 10,
+    "Prerequisites": [
+      {
+        "IsSkill": false,
+        "SkillStatName": "STR",
+        "PreReqLevel": 10
+      }
+    ]
+  }

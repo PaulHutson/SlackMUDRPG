@@ -1,0 +1,23 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Defence",
+    "SkillTypeDescription": "Defensive skills"
+  },
+    "SkillName": "Parry",
+    "SkillDescription": "The ability to parry attacks using a melee weapon",
+    "BaseStat": "DEX",
+    "LevelMultiplier": 10,
+    "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+        "IsSkill": false,
+        "SkillStatName": "DEX",
+        "PreReqLevel": 8
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 6
+    }
+  ]
+  }
