@@ -33,8 +33,7 @@ namespace SlackMUDRPG
 
             // Additional text (this works for both form submissions and also query strings depending on how we're accessing the code)
             string responseURL = Request.Form["response_url"] ?? Request.QueryString["response_url"] ?? "Mmm";   // Additional text that might be needed from the form..
-
-
+            
             // Test Functionality 
             //if ((additionalText == "PMTest"))
             //{

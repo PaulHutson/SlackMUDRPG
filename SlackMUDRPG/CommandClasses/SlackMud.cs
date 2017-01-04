@@ -180,7 +180,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// <param name="sexIn">M or F for the male / Female character</param>
 		/// <param name="characterType">M or F for the male / Female character</param>
 		/// <returns>A string with the character information</returns>
-		public static string CreateCharacter(string userID, string firstName, string lastName, int age, char sexIn, string characterType = "BaseCharacter")
+		public static string CreateCharacter(string userID, string firstName, string lastName, int age, char sexIn, string characterType = "BaseCharacter", string responseURL = null)
 		{
 			// Get the path for the character
 			string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
@@ -237,7 +237,7 @@ namespace SlackMUDRPG.CommandsClasses
 				SMChar.SaveToFile();
 
 				// log the newly created character into the game
-				return Login(userID, true);
+				return Login(userID, true, responseURL);
 			}
 			else
 			{
