@@ -1,18 +1,26 @@
 {
   "SkillType": {
-    "SkillTypeName": "Melee",
-    "SkillTypeDescription": "Combat Related Skill for Melee fighting"
+    "SkillTypeName": "Weapon.Tool",
+    "SkillTypeDescription": "Related to use of weapons"
   },
-    "SkillName": "Dagger Use",
-    "SkillDescription": "The ability to competently use a dagger",
-    "BaseStat": "STR",
-    "LevelMultiplier": 10,
-    "ImprovementSpeed": 20,
-    "Prerequisites": [
-      {
-        "IsSkill": false,
-        "SkillStatName": "STR",
-        "PreReqLevel": 5
-      }
-    ]
-  }
+  "SkillName": "Dagger Use",
+  "SkillDescription": "The ability to competently use a dagger",
+  "SkillLearnText": "You've learnt how to use a dagger",
+  "LevelIncreaseText":  "You feel you've gotten better at using daggers",
+  "ActivityType":  "Passive",
+  "BaseStat": "STR",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 20,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 5
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 5
+    }
+  ]
+}

@@ -3,10 +3,57 @@
     "SkillTypeName": "Unarmed",
     "SkillTypeDescription": "Combat Related Skill for Unarmed Fighting"
   },
-    "SkillName": "Brawl",
-    "SkillDescription": "The ability to competently fight with nothing but your hands",
-    "BaseStat": "STR",
-    "LevelMultiplier": 10,
-    "ImprovementSpeed": 10,
-    "Prerequisites": null
-  }
+  "SkillName": "Brawl",
+  "SkillDescription": "The ability to competently fight with nothing but your hands",
+  "SkillLearnText": "You've learnt how to fight with nothing but your bare hands",
+  "LevelIncreaseText": "You feel you've gotten better at brawling",
+  "ActivityType":  "Brawling",
+  "BaseStat": "STR",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": null,
+  "SkillSteps": [
+    {
+      "StepType": "NothingEquipped.Hands",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": null,
+      "FailureOutput": "You can not have anything equipped in your hands",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Target",
+      "StepRequiredObject": "Character",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You must choose something to attack",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Hit",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": null,
+      "FailureOutput": "Failed to hit {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} kills {TARGETNAME}"
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": null,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Repeat.Brawl",
+      "StepRequiredObject": "Activity.Brawling",
+      "RequiredObjectAmount": null,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    }
+  ]
+}

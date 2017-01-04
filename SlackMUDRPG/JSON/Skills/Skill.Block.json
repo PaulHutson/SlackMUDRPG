@@ -3,21 +3,24 @@
     "SkillTypeName": "Defence",
     "SkillTypeDescription": "Defensive skills"
   },
-    "SkillName": "Block",
-    "SkillDescription": "The ability to block unarmed attacks",
-    "BaseStat": "DEX",
-    "LevelMultiplier": 10,
-    "ImprovementSpeed": 10,
-    "Prerequisites": [
-      {
-        "IsSkill": false,
-        "SkillStatName": "STR",
-        "PreReqLevel": 6
-      },
-      {
-        "IsSkill": false,
-        "SkillStatName": "DEX",
-        "PreReqLevel": 6
-      }
-    ]
-  }
+  "SkillName": "Block",
+  "SkillDescription": "The ability to block unarmed attacks",
+  "SkillLearnText": "You've learnt how to block unarmed attacks",
+  "LevelIncreaseText":  "You feel you've gotten better blocking unarmed attacks",
+  "ActivityType":  "Passive",
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 6
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 6
+    }
+  ]
+}

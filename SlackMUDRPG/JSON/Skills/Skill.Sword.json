@@ -1,18 +1,26 @@
 {
   "SkillType": {
-    "SkillTypeName": "Melee",
-    "SkillTypeDescription": "Combat Related Skill for Melee fighting"
+    "SkillTypeName": "Weapon",
+    "SkillTypeDescription": "Related to use of weapons"
   },
-    "SkillName": "Sword Use",
-    "SkillDescription": "The ability to competently use a sword",
-    "BaseStat": "STR",
-    "LevelMultiplier": 10,
-    "ImprovementSpeed": 10,
-    "Prerequisites": [
-      {
-        "IsSkill": false,
-        "SkillStatName": "STR",
-        "PreReqLevel": 10
-      }
-    ]
-  }
+  "SkillName": "Sword Use",
+  "SkillDescription": "The ability to competently use a sword",
+  "SkillLearnText": "You've learnt how to use a sword",
+  "LevelIncreaseText":  "You feel you've gotten better using swords",
+  "ActivityType":  "Passive",
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 10
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 5
+    }
+  ]
+}
