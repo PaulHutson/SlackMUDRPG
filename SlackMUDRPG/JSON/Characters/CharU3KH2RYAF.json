@@ -1,8 +1,8 @@
 {
-  "firstname": "Rob",
+  "firstname": "Robert",
   "lastname": "Curran",
-  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
-  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastinteractiondate": "2017-01-02T21:18:51.556181+00:00",
+  "lastlogindate": "2017-01-02T21:18:51.556071+00:00",
   "age": 0,
   "sex": "m",
   "PKFlag": false,
@@ -15,37 +15,51 @@
     "chr": 10,
     "dex": 10,
     "wp": 10,
-    "ft": 10,
     "hp": 10,
     "maxhp": 10,
     "SocialStanding": 8
   },
-  "CharacterItems": [
+  "CharacterItems": null,
+  "Skills": null,
+  "CharacterSlots": [
     {
-      "ItemId": "1def209c-8dc5-4208-877a-5de64c13e12c",
-      "ItemName": "Small Backpack",
-      "ItemType": "containers",
-      "ItemFamily": null,
-      "ItemDescription": "Basic small backpack that all players start with.",
-      "ItemWeight": 0,
-      "ItemSize": 1,
-      "CanHoldOtherItems": true,
-      "HitPoints": 0,
-      "BaseDamage": 0.0,
-      "HeldItems": null
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "2de61885-2a88-42c5-b5ee-961a7528f4ce",
+        "ItemName": "Wooden Sword",
+        "ItemType": "weapon",
+        "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+        "ItemWeight": 1,
+        "ItemSize": 1,
+        "CanHoldOtherItems": true,
+        "HeldItems": null
+      }
     },
     {
-      "ItemId": "a44a31e6-a28c-47ad-984d-ff24372b2453",
-      "ItemName": "Wooden Sword",
-      "ItemType": "weapons",
-      "ItemFamily": null,
-      "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
-      "ItemWeight": 1,
-      "ItemSize": 1,
-      "CanHoldOtherItems": true,
-      "HitPoints": 0,
-      "BaseDamage": 0.0,
-      "HeldItems": null
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": {
+        "ItemID": "c1eeeac1-4428-4840-84fc-e9aa9c1ae19b",
+        "ItemName": "Small Backpack",
+        "ItemType": "container",
+        "ItemDescription": "Basic small backpack that all players start with.",
+        "ItemWeight": 0,
+        "ItemSize": 1,
+        "CanHoldOtherItems": true,
+        "HeldItems": null
+      }
     }
   ],
   "Skills": null

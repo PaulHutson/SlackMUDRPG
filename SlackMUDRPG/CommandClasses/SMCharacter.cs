@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using SlackMUDRPG.CommandClasses;
 using System;
 using System.Collections.Generic;
@@ -44,11 +44,11 @@ namespace SlackMUDRPG.CommandsClasses
         [JsonProperty("Attributes")]
         public SMAttributes Attributes { get; set; }
 
-        [JsonProperty("CharacterItems")]
-        public List<SMItem> CharacterItems { get; set; }
-        
         [JsonProperty("Skills")]
         public List<SMCharacterSkill> Skills { get; set; }
+
+		[JsonProperty("CharacterSlots")]
+		public List<SMCharacterSlot> CharacterSlots { get; set; }
 
         #region "General Player Functions"
 
@@ -59,46 +59,6 @@ namespace SlackMUDRPG.CommandsClasses
         {
             return this.FirstName + " " + this.LastName;
         }
-
-        /// <summary>
-        /// Adds the item to the characters CharacterItems list.
-        /// </summary>
-        /// <param name="item">Item.</param>
-        public void AddItem(SMItem item)
-		{
-			if (this.CharacterItems == null)
-			{
-				this.CharacterItems = new List<SMItem>();
-			}
-
-			//TODO check that tha play has weight and capacity to add the item
-
-			this.CharacterItems.Add(item);
-			this.SaveToApplication();
-		}
-
-		/// <summary>
-		/// Removes and item by ItemId from the characters CharacterItems list dropping the item to the characters current room.
-		/// </summary>
-		/// <param name="Id">ItemId</param>
-		public void DropItem(string id)
-		{
-			if (this.CharacterItems == null)
-			{
-				return;
-			}
-
-			SMItem item = this.CharacterItems.Find(obj => obj.ItemId == id);
-
-			if (item != null)
-			{
-				SMRoom room = this.GetRoom();
-
-				room.AddItem(item);
-				this.CharacterItems.Remove(item);
-				this.SaveToApplication();
-			}
-		}
 
 		/// <summary>
 		/// Saves the character to the file system.
@@ -206,7 +166,372 @@ namespace SlackMUDRPG.CommandsClasses
         }
 
         #endregion
-        
+
+		#region "Inventory Functions"
+
+		/// <summary>
+		/// Gets an SMCharacterSlot by name.
+		/// </summary>
+		/// <returns>The slot.</returns>
+		/// <param name="name">Name of the slot.</param>
+		public SMCharacterSlot GetSlotByName(string name)
+		{
+			if (this.CharacterSlots != null)
+			{
+				return this.CharacterSlots.FirstOrDefault(slot => slot.Name == name);
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Picks up an item from the characters current room, by the items ItemID.
+		/// </summary>
+		/// <param name="id">The ItemID if the item to pick up.</param>
+		public void PickUpItem(string id)
+		{
+			SMRoom room = this.GetRoom();
+
+			SMItem item = room.RoomItems.FirstOrDefault(smi => smi.ItemID == id);
+
+			if (item == null)
+			{
+				this.sendMessageToPlayer($"Cannot find that item in this room");
+				return;
+			}
+
+			// check for an empty hand to pick up the item
+			SMCharacterSlot hand = this.GetEmptyHand();
+
+			if (hand == null)
+			{
+				this.sendMessageToPlayer($"You need an empty hand to pick up \"{item.ItemName}\"");
+				return;
+			}
+
+			// check weight constraints
+			int weightLimit = this.GetWeightLimit();
+			int currentWeight = this.GetCurrentWeight();
+
+			if ((currentWeight + item.ItemWeight) > weightLimit)
+			{
+				this.sendMessageToPlayer($"Unable to pick up \"{item.ItemName}\" this would exceed your weight limit of \"{weightLimit}\"");
+				return;
+			}
+
+			// remove item from the room
+			room.RemoveItem(item);
+			room.Announce($"\"{GetFullName()}\" picked up \"{item.ItemName}\"");
+
+			// add item to slot
+			hand.EquippedItem = item;
+			this.sendMessageToPlayer($"You equipped \"{item.ItemName}\"");
+
+			this.SaveToApplication();
+		}
+
+		/// <summary>
+		/// Drops an item the character is holding.
+		/// </summary>
+		/// <param name="id">ItemID.</param>
+		public void DropItem(string id)
+		{
+			// check item is in a hand
+			SMCharacterSlot hand = GetHandWithItemEquipped(id);
+
+			if (hand == null)
+			{
+				sendMessageToPlayer("You must be holding the item to drop it");
+				return;
+			}
+
+			SMItem item = this.GetEquippedItemByID(id);
+
+			// remove item from slot
+			hand.EquippedItem = null;
+			SaveToApplication();
+
+			// add item to room
+			SMRoom room = GetRoom();
+			room.AddItem(item);
+
+			// announce to the room
+			room.Announce($"\"{this.GetFullName()}\" dropped \"{item.ItemName}\"");
+		}
+
+		//TODO equip item
+
+		//TODO equip item to slot
+
+		//TODO list slot
+
+		//TODO list slots
+
+		public string GetOwnedItemIDByName(string name)
+		{
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (slot.EquippedItem.ItemName == name)
+					{
+						return slot.EquippedItem.ItemID;
+					}
+
+					if (slot.EquippedItem.ItemType == "container")
+					{
+						SMItem item = this.FindItemInContainerByName(name, slot.EquippedItem);
+						if (item != null)
+						{
+							return item.ItemID;
+						}
+					}
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Hases the item equipped.
+		/// </summary>
+		/// <returns><c>true</c>, if item equipped was hased, <c>false</c> otherwise.</returns>
+		/// <param name="id">ItemID.</param>
+		public bool HasItemEquipped(string id)
+		{
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty() && slot.EquippedItem.ItemID == id)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Has an item of a given type equipped.
+		/// </summary>
+		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
+		/// <param name="type">ItemType.</param>
+		public bool HasItemTypeEquipped(string type)
+		{
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty() && slot.EquippedItem.ItemType == type)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Counts the number of a named item the character owns.
+		/// </summary>
+		/// <returns>The count.</returns>
+		/// <param name="name">ItemName.</param>
+		public int CountOwnedItemsByName(string name)
+		{
+			int count = 0;
+
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (slot.EquippedItem.ItemName == name)
+					{
+						count++;
+					}
+
+					if (slot.EquippedItem.ItemType == "container")
+					{
+						SMItem item = this.FindItemInContainerByName(name, slot.EquippedItem);
+						if (item != null && item.ItemName == name)
+						{
+							count++;
+						}
+					}
+				}
+			}
+
+			return count;
+		}
+
+		/// <summary>
+		/// Are the characters hands empty.
+		/// </summary>
+		/// <returns><c>true</c>, if hands are empty, <c>false</c> otherwise.</returns>
+		public bool AreHandsEmpty()
+		{
+			SMCharacterSlot rightHand = this.GetSlotByName("RightHand");
+			SMCharacterSlot leftHand = this.GetSlotByName("LeftHand");
+
+			return rightHand.isEmpty() && leftHand.isEmpty();
+		}
+
+		/// <summary>
+		/// Gets an emptySMCharacterSlot that is a hand.
+		/// </summary>
+		/// <returns>The empty hand SMCharacterSlot or null.</returns>
+		private SMCharacterSlot GetEmptyHand()
+		{
+			SMCharacterSlot rightHand = this.GetSlotByName("RightHand");
+			SMCharacterSlot leftHand = this.GetSlotByName("LeftHand");
+
+			if (rightHand.isEmpty())
+			{
+				return rightHand;
+			}
+			else if (leftHand.isEmpty())
+			{
+				return leftHand;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Gets the weight limit for the character based on STR attribute.
+		/// </summary>
+		/// <returns>The weight limit.</returns>
+		private int GetWeightLimit()
+		{
+			return this.Attributes.Strength * 5;
+		}
+
+		/// <summary>
+		/// Gets the current weight being carried by the character.
+		/// </summary>
+		/// <returns>The weight.</returns>
+		private int GetCurrentWeight()
+		{
+			int weight = 0;
+
+			foreach (SMCharacterSlot slot in this.CharacterSlots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (slot.EquippedItem.ItemType == "container")
+					{
+						weight += this.GetContainerWeight(slot.EquippedItem);
+					}
+					else
+					{
+						weight += slot.EquippedItem.ItemWeight;
+					}
+				}
+			}
+
+			return weight;
+		}
+
+		/// <summary>
+		/// Gets the weight of items in a container, this will recursivley call itself to resolve the weights of
+		/// containers inside other containers that hold items.
+		/// </summary>
+		/// <returns>The weight.</returns>
+		private int GetContainerWeight(SMItem container)
+		{
+			int weight = container.ItemWeight;
+
+			if (container.HeldItems != null)
+			{
+				foreach (SMItem item in container.HeldItems)
+				{
+					if (item.ItemType == "container")
+					{
+						weight += this.GetContainerWeight(item);
+					}
+					else
+					{
+						weight += item.ItemWeight;
+					}
+				}
+			}
+
+			return weight;
+		}
+
+		/// <summary>
+		/// Gets an equipped item by its ItemID.
+		/// </summary>
+		/// <returns>The equipped item.</returns>
+		/// <param name="id">ItemID.</param>
+		private SMItem GetEquippedItemByID(string id)
+		{
+			foreach (SMCharacterSlot slot in this.CharacterSlots)
+			{
+				if (slot.EquippedItem != null)
+				{
+					if (slot.EquippedItem.ItemID == id)
+					{
+						return slot.EquippedItem;
+					}
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Gets the hand (SMCharacterSlot) which has the item equipped.
+		/// </summary>
+		/// <returns>The hand (SMCharacterSlot) with item equipped, or null.</returns>
+		/// <param name="id">The id of the item.</param>
+		private SMCharacterSlot GetHandWithItemEquipped(string id)
+		{
+			SMCharacterSlot rightHand = this.GetSlotByName("RightHand");
+			SMCharacterSlot leftHand = this.GetSlotByName("LeftHand");
+
+			if (!rightHand.isEmpty() && rightHand.EquippedItem.ItemID == id)
+			{
+				return rightHand;
+			}
+			else if (!leftHand.isEmpty() && leftHand.EquippedItem.ItemID == id)
+			{
+				return leftHand;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Finds an item by name in a container by recursivly searching through the container
+		/// and any containers it contains.
+		/// </summary>
+		/// <returns>The item in a container.</returns>
+		/// <param name="name">ItemName.</param>
+		/// <param name="container">Container to look in.</param>
+		private SMItem FindItemInContainerByName(string name, SMItem container)
+		{
+			if (container.HeldItems != null)
+			{
+				foreach (SMItem item in container.HeldItems)
+				{
+					if (item.ItemName == name)
+					{
+						return item;
+					}
+
+					if (item.ItemType == "container")
+					{
+						SMItem smi = this.FindItemInContainerByName(name, item);
+						if (smi != null)
+						{
+							return smi;
+						}
+					}
+				}
+			}
+
+			return null;
+		}
+
+		#endregion
+
         #region "Chat Functions"
 
         /// <summary>

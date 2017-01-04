@@ -1,0 +1,23 @@
+﻿[
+	{
+		"Name":"RightHand",
+		"AllowedTypes": [
+			"any"
+		],
+		"EquippedItem": null
+	},
+	{
+		"Name":"LeftHand",
+		"AllowedTypes": [
+			"any"
+		],
+		"EquippedItem": null
+	},
+	{
+		"Name":"Back",
+		"AllowedTypes": [
+			"containers"
+		],
+		"EquippedItem": null
+	}
+]

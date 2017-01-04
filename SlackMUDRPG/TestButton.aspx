@@ -19,8 +19,13 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:TextBox runat="server" ID="tb_TextAreaOutput" ClientIDMode="Static" Height="200px" ReadOnly="True" Rows="5" TextMode="MultiLine" Width="600px"></asp:TextBox><br /><br />
-        </div>
+            <asp:TextBox runat="server" ID="tb_TextAreaOutput" ClientIDMode="Static" Height="200px" ReadOnly="True" Rows="5" TextMode="MultiLine" Width="600px"></asp:TextBox>
+		</div>
+		<div>
+			<asp:Button runat="server" ID="btn_clear" Text="Clear" OnClick="btn_Clear_Click" OnClientClick="scrollBoxToTop();" />
+			<asp:Button runat="server" ID="btn_guid" Text="Get GUID" OnClick="btn_Get_Guid" OnClientClick="scrollBoxToTop();" />
+			<br /><br />
+		</div>
         <div>
             CharID : <asp:TextBox runat="server" ID="tb_CharID">123</asp:TextBox><br />
             ShortcutRoomMove : <asp:TextBox runat="server" ID="tb_RoomShortcutText"></asp:TextBox><br />
@@ -32,6 +37,12 @@
             <asp:Button runat="server" ID="btn_CreateCharacter" Text="Test Create Character" OnClick="btn_CreateCharacter_Click" OnClientClick="scrollBoxToBottom();" /><br />
             <asp:Button runat="server" ID="btn_MoveToRoom" Text="Move To Room Shortcut" OnClick="btn_MoveRoom_Click" OnClientClick="scrollBoxToBottom();" />
         </div>
+
+		<div>
+			Inventory:
+				<asp:Button runat="server" ID="btn_PickUpStick" Text="Pick Up Wooden Stick" OnClick="btn_PickUpStick_Click" OnClientClick="scrollBoxToBottom();" />
+				<asp:Button runat="server" ID="btn_DropUpStick" Text="Drop Wooden Stick" OnClick="btn_DropStick_Click" OnClientClick="scrollBoxToBottom();" />
+		</div>
     </form>
 </body>
 </html>

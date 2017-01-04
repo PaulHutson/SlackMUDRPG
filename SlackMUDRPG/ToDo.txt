@@ -17,9 +17,12 @@
 	DONE- Add player inventory
 		DONE- Add items to inventory
 			DONE- Use start script to add a few items to the player inventory to stat with.
-			- Get items from room location, add to inventory. ("TAKE ItemName")
-				- Check that there is room in the inventory
-				- Create a get method where you can add something to bag ("TAKE ItemName in BAG" where BAG is an inventory location)
+			DONE- Get items from room location, add to inventory. ("TAKE ItemName")
+				- Check that there is room in the inventory (weight and space)
+				- Look at items being held (equipped to slots)
+				- Add item to container
+				- Look at items in a container (containers can contain containers)
+				- Eqiup item from bag to any slot or a specific slot (so it can be used)
 		DONE- Remove items from inventory
 			DONE- Add items to the room
 		- Use items
@@ -30,14 +33,19 @@
 				- If nothing is in the slot use the item
 					- use item effects based on the item parameters. (i.e. a torch will light things up)
 						- may need a new item effect element.
-		- Weights
-			- Add weight restrictions
+		- Weights/Capacity
+			DONE- Add weight restrictions
 		- Containers
-			- Add containers - like backpacks.
+			DONE- Add containers - like backpacks.
+			- Add Capacity restrictions for containers
 		- Wear and Tear
 			- Implement a wear and tear function, with a reduction in the HP of an object
 			- If the object gets to 0 it becomes broken
 				Note: We need a way of mending them (this will be a skill later on!)
+		- Body Parts
+			- Implement body parts on character
+			- Wear item (type clothing)
+			- Remove items (type clothing)
 
 4) Implement Chat System PAUL WORKING ON THIS
 	DONE- Implement Say command which will talk to all people in a location ("SAY Hello")

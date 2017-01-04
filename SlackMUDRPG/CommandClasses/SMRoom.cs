@@ -49,6 +49,20 @@ namespace SlackMUDRPG.CommandsClasses
 		}
 
 		/// <summary>
+		/// Removes an item from the room.
+		/// </summary>
+		/// <param name="item">Item.</param>
+		public void RemoveItem(SMItem item)
+		{
+			if (this.RoomItems != null)
+			{
+				this.RoomItems.Remove(item);
+			}
+
+			this.SaveToApplication();
+		}
+
+		/// <summary>
 		/// Saves the room to file.
 		/// </summary>
 		public void SaveToFile()
@@ -105,7 +119,7 @@ namespace SlackMUDRPG.CommandsClasses
                     {
                         isFirst = false;
                     }
-                    returnString += sme.Description + "(" + sme.Shortcut + ")";
+                    returnString += sme.Description + " (" + sme.Shortcut + ")";
                 }
             }
             
@@ -201,7 +215,26 @@ namespace SlackMUDRPG.CommandsClasses
             return returnString;
         }
 
-        #endregion
+		#endregion
+
+		#region "Inventory Function"
+
+		/// <summary>
+		/// Gets an item in the room by its ItemName.
+		/// </summary>
+		/// <returns>The item.</returns>
+		/// <param name="name">ItemName.</param>
+		public SMItem GetItemByName(string name)
+		{
+			if (this.RoomItems == null)
+			{
+				return null;
+			}
+
+			return this.RoomItems.FirstOrDefault(smi => smi.ItemName == name);
+		}
+
+		#endregion
 
         #region "Room Chat Functions"
 

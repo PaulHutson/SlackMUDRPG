@@ -1,0 +1,8 @@
+﻿{
+	"ItemName": "Wooden Stick",
+	"ItemType": "weapon",
+	"ItemDescription": "This wooden stick is just for testing.",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"CanHoldOtherItems": false
+}
