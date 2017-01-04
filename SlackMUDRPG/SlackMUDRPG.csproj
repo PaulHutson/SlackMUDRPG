@@ -124,7 +124,6 @@
     </None>
     <Content Include="JSON\Objects\Containers.SmallBackpack.json" />
     <Content Include="JSON\Objects\Weapons.WoodenSword.json" />
-    <Content Include="ApplicationInsights.config" />
     <None Include="JSON\Misc\Slots.BaseCharacter.json" />
     <Content Include="JSON\Objects\Weapons.WoodenStick.json" />
   </ItemGroup>

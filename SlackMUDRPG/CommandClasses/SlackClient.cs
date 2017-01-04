@@ -9,68 +9,68 @@ using System.Web;
 
 namespace SlackMUDRPG.CommandsClasses
 {
-    //A simple C# class to post messages to a Slack channel
-    //Note: This class uses the Newtonsoft Json.NET serializer available via NuGet
-    public class SlackClient
-    {
-        private readonly Uri _uri;
-        private readonly Encoding _encoding = new UTF8Encoding();
+	//A simple C# class to post messages to a Slack channel
+	//Note: This class uses the Newtonsoft Json.NET serializer available via NuGet
+	public class SlackClient
+	{
+		private readonly Uri _uri;
+		private readonly Encoding _encoding = new UTF8Encoding();
 
-        public SlackClient(string urlWithAccessToken)
-        {
-            _uri = new Uri(urlWithAccessToken);
-        }
+		public SlackClient(string urlWithAccessToken)
+		{
+			_uri = new Uri(urlWithAccessToken);
+		}
 
-        //Post a message using simple strings
-        public void PostMessage(string text, string username = null, string channel = null)
-        {
-            Payload payload = new Payload()
-            {
-                Channel = channel,
-                Username = username,
-                Text = text
-            };
+		//Post a message using simple strings
+		public void PostMessage(string text, string username = null, string channel = null)
+		{
+			Payload payload = new Payload()
+			{
+				Channel = channel,
+				Username = username,
+				Text = text
+			};
 
-            PostMessage(payload);
-        }
+			PostMessage(payload);
+		}
 
-        //Post a message using a Payload object
-        public void PostMessage(Payload payload)
-        {
-            string payloadJson = JsonConvert.SerializeObject(payload);
+		//Post a message using a Payload object
+		public void PostMessage(Payload payload)
+		{
+			string payloadJson = JsonConvert.SerializeObject(payload);
 
-            using (WebClient client = new WebClient())
-            {
-                NameValueCollection data = new NameValueCollection();
-                data["payload"] = payloadJson;
+			using (WebClient client = new WebClient())
+			{
+				NameValueCollection data = new NameValueCollection();
+				data["payload"] = payloadJson;
 
-                try
-                {
-                    var response = client.UploadValues(_uri, "POST", data);
+				try
+				{
+					var response = client.UploadValues(_uri, "POST", data);
 
-                    //The response text is usually "ok"
-                    string responseText = _encoding.GetString(response);
-                }
-                catch
-                {
-                    string responseText = "Error";
-                }
-                
-            }
-        }
-    }
+					//The response text is usually "ok"
+					string responseText = _encoding.GetString(response);
+				}
+				catch
+				{
+					string responseText = "Error";
+				}
 
-    //This class serializes into the Json payload required by Slack Incoming WebHooks
-    public class Payload
-    {
-        [JsonProperty("channel")]
-        public string Channel { get; set; }
+			}
+		}
+	}
 
-        [JsonProperty("username")]
-        public string Username { get; set; }
+	//This class serializes into the Json payload required by Slack Incoming WebHooks
+	public class Payload
+	{
+		[JsonProperty("channel")]
+		public string Channel { get; set; }
 
-        [JsonProperty("text")]
-        public string Text { get; set; }
-    }
+		[JsonProperty("username")]
+		public string Username { get; set; }
+
+		[JsonProperty("text")]
+		public string Text { get; set; }
+	}
 
 }

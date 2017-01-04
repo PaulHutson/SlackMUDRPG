@@ -6,13 +6,13 @@ using System.Web;
 
 namespace SlackMUDRPG.CommandClasses
 {
-    public class SMMiscObjectTypes
-    {
-    }
+	public class SMMiscObjectTypes
+	{
+	}
 
-    public class SMStartLocation
-    {
-        [JsonProperty("StartLocation")]
-        public string StartLocation { get; set; }
-    }
+	public class SMStartLocation
+	{
+		[JsonProperty("StartLocation")]
+		public string StartLocation { get; set; }
+	}
 }
