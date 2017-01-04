@@ -19,7 +19,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// </summary>
 		/// <param name="userID">Slack UserID</param>
 		/// <returns>A string response</returns>
-		public static string Login(string userID, bool newCharacter = false)
+		public static string Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack")
 		{
 			// Variable for the return string
 			string returnString = "";
@@ -47,6 +47,12 @@ namespace SlackMUDRPG.CommandsClasses
 				{
 					// Get the character
 					character = GetCharacter(userID);
+
+                    // Set the response URL of the character
+                    if (responseURL != null)
+                    {
+                        character.ResponseURL = responseURL;
+                    }
 
 					SMRoom room = character.GetRoom();
 					if (room != null)
