@@ -23,31 +23,18 @@ namespace SlackMUDRPG
 			string replyToError = outputText;               // Default reply text
 
 			// Get Slack / Other webhook locations
-			string serviceType = Request.Form["st"];   // This will only be Slack for now, but could use something else like Discord
-			if (serviceType == null)
-			{
-				serviceType = Request.QueryString["st"];
-			}
+			string serviceType = Request.Form["st"] ?? Request.QueryString["st"];   // This will only be Slack for now, but could use something else like Discord
 
 			// Get Slack Group Name
-			string serviceName = Request.Form["sn"];   // This will only be Slack for now, but could use something else like Discord
-			if (serviceName == null)
-			{
-				serviceName = Request.QueryString["sn"];
-			}
+			string serviceName = Request.Form["sn"] ?? Request.QueryString["sn"];   // This will only be Slack for now, but could use something else like Discord
 
 			// Additional text (this works for both form submissions and also query strings depending on how we're accessing the code)
-			string additionalText = Request.Form["text"];   // Additional text that might be needed from the form..
-			if (additionalText == null)
-			{
-				additionalText = Request.QueryString["text"];
-			}
+			string additionalText = Request.Form["text"] ?? Request.QueryString["text"];   // Additional text that might be needed from the form..
 
 			// Test Functionality 
 			if ((additionalText == "PMTest"))
 			{
 				SendPrivateMessage(serviceType, serviceName, "@hutsonphutty");
-				SetOutputText("Output On");
 			}
 
 			if ((!error) && (replyToChannel != "@error"))
