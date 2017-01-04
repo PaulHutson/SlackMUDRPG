@@ -30,7 +30,7 @@
   ],
   "SkillSteps": [
     {
-      "StepType": "Object",
+      "StepType": "EquippedObject",
       "StepRequiredObject": "Family.Axe",
       "RequiredObjectAmount": 1,
       "FailureOutput": "You don't have an axe equipped",

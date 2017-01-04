@@ -192,12 +192,46 @@ namespace SlackMUDRPG.CommandsClasses
 			return returnString;
 		}
 
-		/// <summary>
-		/// Internal Method to create a room decription, created as it's going to be used over and over...
+        /// <summary>
+		/// Gets a list of all the items in the room.
 		/// </summary>
-		/// <param name="smr">An SMRoom</param>
-		/// <returns>String including a full location string</returns>
-		public string GetLocationInformation(string userID = "0")
+		public string GetItemDetails()
+        {
+            string returnString = "\n\nObjects:\n";
+
+            // Check if the character already exists or not.
+            if (this.RoomItems.Count > 0)
+            {
+                bool isFirst = true;
+                foreach (SMItem smi in RoomItems)
+                {
+                    if (!isFirst)
+                    {
+                        returnString += ", ";
+                    }
+                    else
+                    {
+                        isFirst = false;
+                    }
+
+                    returnString += smi.ItemName;
+
+                }
+            }
+            else
+            {
+                returnString += "Nothing";
+            }
+
+            return returnString;
+        }
+
+        /// <summary>
+        /// Internal Method to create a room decription, created as it's going to be used over and over...
+        /// </summary>
+        /// <param name="smr">An SMRoom</param>
+        /// <returns>String including a full location string</returns>
+        public string GetLocationInformation(string userID = "0")
 		{
 			// Construct the room string.
 			// Create the string and add the basic room description.
@@ -210,7 +244,7 @@ namespace SlackMUDRPG.CommandsClasses
 			returnString += this.GetExitDetails();
 
 			// Show all the items within the room that can be returned.
-			returnString += "\n\nItems: TODO";
+			returnString += this.GetItemDetails();
 
 			// Return the string to the calling method.
 			return returnString;
