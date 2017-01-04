@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using SlackMUDRPG.CommandClasses;
-using SlackMUDRPG.CommandsClasses;
-using SlackMUDRPG.Utility;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using SlackMUDRPG.CommandClasses;
+using SlackMUDRPG.Utility;
 
 namespace SlackMUDRPG
 {
@@ -75,7 +74,7 @@ namespace SlackMUDRPG
 		protected void Application_End(object sender, EventArgs e)
 		{
 			// If the application closes flush everything to disk.
-			List<SMCharacter> smcl = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			List<SMCharacter> smcl = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
 			foreach (SMCharacter smc in smcl)
 			{
@@ -83,7 +82,7 @@ namespace SlackMUDRPG
 			}
 
 			// TODO Save Rooms
-			List<SMRoom> smrl = (List<SlackMUDRPG.CommandsClasses.SMRoom>)HttpContext.Current.Application["SMRooms"];
+			List<SMRoom> smrl = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
 
 			foreach (SMRoom smr in smrl)
 			{

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using SlackMUDRPG.Utility;
 
-namespace SlackMUDRPG.CommandsClasses
+namespace SlackMUDRPG.CommandClasses
 {
 	public class SMRoom
 	{
@@ -134,7 +134,7 @@ namespace SlackMUDRPG.CommandsClasses
 
 			// Search through logged in users to see which are in this location
 			List<SMCharacter> smcs = new List<SMCharacter>();
-			smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
 			// Check if the character already exists or not.
 			if (smcs != null)

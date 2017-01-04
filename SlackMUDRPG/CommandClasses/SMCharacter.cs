@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using SlackMUDRPG.CommandClasses;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Web;
 using SlackMUDRPG.Utility;
 
-namespace SlackMUDRPG.CommandsClasses
+namespace SlackMUDRPG.CommandClasses
 {
 	public class SMCharacter
 	{
@@ -81,7 +80,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// </summary>
 		public void SaveToApplication()
 		{
-			List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
 			SMCharacter characterInMem = smcs.FirstOrDefault(smc => smc.UserID == this.UserID);
 
@@ -115,7 +114,7 @@ namespace SlackMUDRPG.CommandsClasses
 
 			// Get the current character location
 			List<SMCharacter> smcs = new List<SMCharacter>();
-			smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			SMCharacter charToMove = new SMCharacter();
 			bool foundCharacter = false;
 

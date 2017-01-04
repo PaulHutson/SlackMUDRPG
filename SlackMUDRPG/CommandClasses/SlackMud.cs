@@ -1,13 +1,12 @@
 using Newtonsoft.Json;
-using SlackMUDRPG.CommandClasses;
-using SlackMUDRPG.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using SlackMUDRPG.Utility;
 
-namespace SlackMUDRPG.CommandsClasses
+namespace SlackMUDRPG.CommandClasses
 {
 	public static class SlackMud
 	{
@@ -36,7 +35,7 @@ namespace SlackMUDRPG.CommandsClasses
 			}
 			else
 			{
-				List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+				List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 				SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
 
 				if ((character != null) && (!newCharacter))
@@ -86,7 +85,7 @@ namespace SlackMUDRPG.CommandsClasses
 		public static SMCharacter GetCharacter(string userID)
 		{
 			// Get the room file if it exists
-			List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			SMCharacter charInMem = smcs.FirstOrDefault(smc => smc.UserID == userID);
 
 			if (charInMem == null)
@@ -121,7 +120,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// <returns>String message for usage</returns>
 		public static string GetCharacterOLD(string userID, bool newCharacter = false)
 		{
-			List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
 
 			if ((character != null) && (!newCharacter))
@@ -396,7 +395,7 @@ namespace SlackMUDRPG.CommandsClasses
 		public static void GlobalAnnounce(string msg)
 		{
 			// Get all the characters currently logged in
-			List<SMCharacter> smcl = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			List<SMCharacter> smcl = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
 			// Send a message to each of them.
 			foreach (SMCharacter smc in smcl)

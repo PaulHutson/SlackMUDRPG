@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,7 +16,7 @@ namespace SlackMUDRPG
 			{
 				string urlWithAccessToken = "https://hooks.slack.com/services/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";
 
-				SlackMUDRPG.CommandsClasses.SlackClient sclient = new SlackMUDRPG.CommandsClasses.SlackClient(urlWithAccessToken);
+				SlackMUDRPG.CommandClasses.SlackClient sclient = new SlackMUDRPG.CommandClasses.SlackClient(urlWithAccessToken);
 
 				sclient.PostMessage(username: "Mr. Torgue",
 						   text: "THIS IS A TEST MESSAGE! SQUEEDLYBAMBLYFEEDLYMEEDLYMOWWWWWWWW!",

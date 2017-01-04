@@ -1,4 +1,3 @@
-﻿using SlackMUDRPG.CommandsClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SlackMUDRPG.CommandClasses;
 
 namespace SlackMUDRPG
 {
@@ -37,7 +37,7 @@ namespace SlackMUDRPG
 				{
 					additionalText = "";
 				}
-				outputText = SlackMUDRPG.CommandsClasses.Commands.HelloSlack(additionalText);
+				outputText = Commands.HelloSlack(additionalText);
 				botName = Request.Form["user_name"] ?? "TestBot";
 				channelName = Request.Form["channel_name"] ?? "General";
 				channelID = Request.Form["channel_id"] ?? "C3L9HN59V";
