@@ -578,7 +578,7 @@ namespace SlackMUDRPG.CommandsClasses
 		public void sendMessageToPlayer(string message)
 		{
 			// TODO Change the name of the service based on the one used to send the information!
-			Commands.SendToChannelMessage("", "SlackMud", message, "SlackMud", this.UserID);
+			Commands.SendMessage("", "SlackMud", message, "SlackMud", this.UserID);
 		}
 
 		#endregion

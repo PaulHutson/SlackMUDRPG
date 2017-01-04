@@ -31,15 +31,21 @@ namespace SlackMUDRPG
 			// Additional text (this works for both form submissions and also query strings depending on how we're accessing the code)
 			string additionalText = Request.Form["text"] ?? Request.QueryString["text"];   // Additional text that might be needed from the form..
 
-			// Test Functionality 
-			if ((additionalText == "PMTest"))
-			{
-				SendPrivateMessage(serviceType, serviceName, "@hutsonphutty");
-			}
+            // Additional text (this works for both form submissions and also query strings depending on how we're accessing the code)
+            string responseURL = Request.Form["response_url"] ?? Request.QueryString["response_url"] ?? "Mmm";   // Additional text that might be needed from the form..
 
-			if ((!error) && (replyToChannel != "@error"))
+
+            // Test Functionality 
+            //if ((additionalText == "PMTest"))
+            //{
+            //	SendPrivateMessage(serviceType, serviceName, "@hutsonphutty");
+            //}
+
+            Commands.SendMessage(serviceType, serviceName, additionalText, botName, replyToChannel, responseURL);
+            
+            if ((!error) && (replyToChannel != "@error"))
 			{
-				Commands.SendToChannelMessage(serviceType, serviceName, outputText, botName, replyToChannel); // Note we need to change SD for a configurable one.
+				Commands.SendMessage(serviceType, serviceName, outputText, botName, replyToChannel, responseURL); // Note we need to change SD for a configurable one.
 			}
 
 		}
@@ -51,7 +57,7 @@ namespace SlackMUDRPG
 
 		private void SendPrivateMessage(string serviceType, string nameOfHook, string toName)
 		{
-			Commands.SendToChannelMessage(serviceType, nameOfHook, "This is a bit of text", "SlackMud", toName);
+			//Commands.SendMessage(serviceType, nameOfHook, "This is a bit of text", "SlackMud", toName);
 		}
 	}
 }
