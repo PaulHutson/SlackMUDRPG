@@ -64,7 +64,11 @@ namespace SlackMUDRPG.CommandsClasses
 							if (!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount))
 								smc.sendMessageToPlayer(smss.FailureOutput);
 							break;
-						case "Target":
+                        case "EquippedObject":
+                            if (!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true))
+                                smc.sendMessageToPlayer(smss.FailureOutput);
+                            break;
+                        case "Target":
 							if (!StepRequiredTarget(smc, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
 								smc.sendMessageToPlayer(smss.FailureOutput);
 							break;
@@ -97,16 +101,31 @@ namespace SlackMUDRPG.CommandsClasses
 
 		#region "Skill Step Methods"
 
-		private bool StepRequiredObject(SMCharacter smc, string requiredObjectType, int requiredObjectAmount)
+		private bool StepRequiredObject(SMCharacter smc, string requiredObjectType, int requiredObjectAmount, bool equippedItem = false)
 		{
-			// First look at what is in the players hand.
-			// TODO use inventory system to do this!
+            bool hasItem = false;
+            string[] splitRequiredObjectType = requiredObjectType.Split('.');
 
-			// Check if, in the list, they have the required item / amount
-			// TODO linq to see if they have enough of the item (i.e. do a count on the list).
-			//      if they don't have enough return a false.
+            if (equippedItem)
+            {
+                // Check if the player has the type of object equipped.
+                if (splitRequiredObjectType[0] == "Family")
+                {
+                    hasItem = smc.HasItemFamilyTypeEquipped(splitRequiredObjectType[1]);
+                } else
+                {
+                    hasItem = smc.HasItemTypeEquipped(splitRequiredObjectType[1]);
+                }
+            }
 
-			return true;
+            bool hasEnoughOfItem = true;
+            if (hasItem)
+            {
+                // Check if, in the list, they have the required item / amount
+                hasEnoughOfItem = (smc.CountOwnedItemsByName(splitRequiredObjectType[1]) >= requiredObjectAmount);
+            }
+            
+            return hasItem && hasEnoughOfItem;
 		}
 
 		private bool StepRequiredTarget(SMCharacter smc, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
@@ -303,19 +322,20 @@ namespace SlackMUDRPG.CommandsClasses
 		public string SkillTypeDescription { get; set; }
 	}
 
-	/// <summary>
-	/// Skill steps represent the steps that something uses to use the skill.
-	/// 
-	/// Step types include:
-	/// Object: Required Object, i.e. you must have an object of a type, like an axe to chop something.
-	/// Target: Required Target, i.e. you must target something to use the skill, like a tree if you want to chop it.
-	/// CheckComplete: Check whether the task is completed, i.e. if you're forging a sword you need to check whether it's completed yet.
-	/// Hit: Hits something with the object that they've used.
-	/// Pause: Pause timing so the system doesn't just loop like a crazy! - required amount denotes the pause time in seconds.
-	/// Repeat: Repeats everything until stopped (i.e. will continue to do something over and over).
-	/// Information: Information output.
-	/// </summary>
-	public class SMSkillStep
+    /// <summary>
+    /// Skill steps represent the steps that something uses to use the skill.
+    /// 
+    /// Step types include:
+    /// Object: Required Object, i.e. you must have an object of a type, like an axe to chop something.
+    /// EquippedObject: Required Object is equipped, i.e. you must have an object of a type, like an axe to chop something.
+    /// Target: Required Target, i.e. you must target something to use the skill, like a tree if you want to chop it.
+    /// CheckComplete: Check whether the task is completed, i.e. if you're forging a sword you need to check whether it's completed yet.
+    /// Hit: Hits something with the object that they've used.
+    /// Pause: Pause timing so the system doesn't just loop like a crazy! - required amount denotes the pause time in seconds.
+    /// Repeat: Repeats everything until stopped (i.e. will continue to do something over and over).
+    /// Information: Information output.
+    /// </summary>
+    public class SMSkillStep
 	{
 		// Different types of steps have different code that runs them.
 		[JsonProperty("StepType")]

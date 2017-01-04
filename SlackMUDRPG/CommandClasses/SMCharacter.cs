@@ -328,12 +328,30 @@ namespace SlackMUDRPG.CommandsClasses
 			return false;
 		}
 
-		/// <summary>
-		/// Counts the number of a named item the character owns.
+        /// <summary>
+		/// Has an item of a given family type equipped.
 		/// </summary>
-		/// <returns>The count.</returns>
-		/// <param name="name">ItemName.</param>
-		public int CountOwnedItemsByName(string name)
+		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
+		/// <param name="familyType">Item Type Family.</param>
+		public bool HasItemFamilyTypeEquipped(string familyType)
+        {
+            foreach (SMCharacterSlot slot in CharacterSlots)
+            {
+                if (!slot.isEmpty() && slot.EquippedItem.ItemFamily == familyType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Counts the number of a named item the character owns.
+        /// </summary>
+        /// <returns>The count.</returns>
+        /// <param name="name">ItemName.</param>
+        public int CountOwnedItemsByName(string name)
 		{
 			int count = 0;
 
