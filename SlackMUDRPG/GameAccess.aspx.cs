@@ -56,7 +56,7 @@ namespace SlackMUDRPG
 		{
 			SMParsedCommand parsedCmd = this.ParseCommandString(cmd);
 
-			this.CallUserFuncArray("SlackMUDRPG.GameAccess", parsedCmd.CommandName, parsedCmd.Parameters);
+			this.CallUserFuncArray("SlackMUDRPG.GameAccess", parsedCmd.CommandName, parsedCmd.Parameters.ToArray());
 		}
 
 		private SMParsedCommand ParseCommandString(string cmdString)
