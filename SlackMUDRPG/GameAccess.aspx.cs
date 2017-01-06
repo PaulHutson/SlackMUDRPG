@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
+using System.Reflection;
 
 namespace SlackMUDRPG
 {
@@ -33,21 +34,20 @@ namespace SlackMUDRPG
 			// Additional text (this works for both form submissions and also query strings depending on how we're accessing the code)
 			string additionalText = Request.Form["text"] ?? Request.QueryString["text"];   // Additional text that might be needed from the form..
 
-			string responseURL = Request.Form["response_url"] ?? Request.QueryString["response_url"] ?? "Mmm";
+			string responseURL = Request.Form["response_url"] ?? Request.QueryString["response_url"];
 
-			this.PerformCommand(additionalText);
-
-			// Test Functionality
-			//if ((additionalText == "PMTest"))
-			//{
-			//	SendPrivateMessage(serviceType, serviceName, "@hutsonphutty");
-			//}
-
-			//Commands.SendMessage(serviceType, serviceName, additionalText, botName, replyToChannel, responseURL);
-
+            try
+            {
+                PerformCommand(additionalText);
+            }
+            catch
+            {
+                error = true;
+            }
+			
 			if (error && (replyToChannel != "@error"))
 			{
-				Commands.SendMessage(serviceType, serviceName, outputText, botName, replyToChannel, responseURL); // Note we need to change SD for a configurable one.
+				Commands.SendMessage(serviceType, serviceName, outputText, botName, replyToChannel, responseURL);
 			}
 
 		}
@@ -55,9 +55,10 @@ namespace SlackMUDRPG
 		private void PerformCommand(string cmd)
 		{
 			SMParsedCommand parsedCmd = this.ParseCommandString(cmd);
+            
+            this.CallUserFuncArray(parsedCmd.Command.CommandClass, parsedCmd.Command.CommandMethod, parsedCmd.Parameters.ToArray());
 
-			this.CallUserFuncArray("SlackMUDRPG.GameAccess", parsedCmd.CommandName, parsedCmd.Parameters.ToArray());
-		}
+        }
 
 		private SMParsedCommand ParseCommandString(string cmdString)
 		{
@@ -69,11 +70,11 @@ namespace SlackMUDRPG
 
 			SMCommand command = this.GetCommandByName(commandName);
 
-			List<string> paremeters = this.GetParamsFromCommandString(command, cmdString);
+			List<object> parameters = this.GetParamsFromCommandString(command, cmdString);
 
 			cmd.CommandName = commandName;
 			cmd.Command = command;
-			cmd.Parameters = paremeters;
+			cmd.Parameters = parameters;
 
 			return cmd;
 		}
@@ -111,10 +112,19 @@ namespace SlackMUDRPG
 			return command;
 		}
 
-		private List<string> GetParamsFromCommandString(SMCommand command, string cmdString)
+		private List<object> GetParamsFromCommandString(SMCommand command, string cmdString)
 		{
-			List<string> parameters = new List<string>();
+			List<object> parameters = new List<object>();
+            string userId = HttpContext.Current.Request.Form["user_id"] ?? HttpContext.Current.Request.QueryString["user_id"];
 
+            if (!command.CommandNoChar)
+            {
+                parameters.Add(new SlackMud().GetCharacter(userId));
+            } else
+            {
+                parameters.Add(userId);
+            }
+            
 			string commandExpression = command.CommandExpression;
 
 			string pattern = command.ParseExpression();
@@ -125,8 +135,8 @@ namespace SlackMUDRPG
 			{
 				foreach (Group group in match.Groups)
 				{
-					if (group.Value != cmdString)
-					{
+					if ((group.Value != cmdString) && (group.Value != ""))
+                    {
 						parameters.Add(group.Value);
 					}
 				}
@@ -135,17 +145,36 @@ namespace SlackMUDRPG
 			return parameters;
 		}
 
-		private void CallUserFuncArray(string className, string methodName, params object[] args)
+		private void CallUserFuncArray(string className, string methodName, params object[] providedArgs)
 		{
 			object obj = Type.GetType(className).GetConstructor(Type.EmptyTypes).Invoke(new object[]{});
+			MethodInfo method = Type.GetType(className).GetMethod(methodName);
+            var parameters = method.GetParameters();
+            object[] calulatedArgs = new object[parameters.Length];
+            for (int i = 0; i < calulatedArgs.Length; i++)
+            {
+                if (i < providedArgs.Length)
+                {
+                    calulatedArgs[i] = providedArgs[i];
+                }
+                else if (parameters[i].HasDefaultValue)
+                {
+                    calulatedArgs[i] = parameters[i].DefaultValue;
+                }
+                else
+                {
+                    throw new ArgumentException("Not enough arguments provided");
+                }
+            }
+            method.Invoke(method.IsStatic ? null : obj, calulatedArgs);
 
-			Type.GetType(className).GetMethod(methodName).Invoke(obj, args);
+            //.Invoke(obj, args)
 
-			// for static methods
-			//Type.GetType(className).GetMethod(methodName).Invoke(null, args);
-		}
+            // for static methods
+            //Type.GetType(className).GetMethod(methodName).Invoke(null, args);
+        }
 
-		private void SetOutputText(string outputLit)
+        private void SetOutputText(string outputLit)
 		{
 			lit_output.Text = outputLit;
 		}
@@ -153,13 +182,6 @@ namespace SlackMUDRPG
 		private void SendPrivateMessage(string serviceType, string nameOfHook, string toName)
 		{
 			//Commands.SendMessage(serviceType, nameOfHook, "This is a bit of text", "SlackMud", toName);
-		}
-
-		public void login()
-		{
-			string userId = Request.Form["user_id"];
-
-			SlackMUDRPG.CommandClasses.SlackMud.Login(userId);
 		}
 	}
 }

@@ -338,7 +338,7 @@ namespace SlackMUDRPG.CommandClasses
 				// Get the room details from the exit id
 				SMRoom otherRooms = new SMRoom();
 
-				otherRooms = SlackMud.GetRoom(sme.RoomID);
+				otherRooms = new SlackMud().GetRoom(sme.RoomID);
 
 				// Get the "from" location
 				SMExit smre = otherRooms.RoomExits.FirstOrDefault(smef => smef.RoomID == this.RoomID);

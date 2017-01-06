@@ -52,7 +52,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		public SMItem GetDestroyedItem()
 		{
-			return SlackMud.CreateItemFromJson(this.DestroyedOutput);
+			return new SlackMud().CreateItemFromJson(this.DestroyedOutput);
 		}
 	}
 }

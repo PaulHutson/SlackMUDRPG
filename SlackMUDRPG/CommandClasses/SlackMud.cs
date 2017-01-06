@@ -8,7 +8,7 @@ using SlackMUDRPG.Utility;
 
 namespace SlackMUDRPG.CommandClasses
 {
-	public static class SlackMud
+	public class SlackMud
 	{
 
 		#region "Login and Character Methods"
@@ -18,13 +18,17 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="userID">Slack UserID</param>
 		/// <returns>A string response</returns>
-		public static string Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack")
+		public void Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack")
 		{
-			// Variable for the return string
+			// Variables for the return string
 			string returnString = "";
 
-			// Get the right path, and work out if the file exists.
-			string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
+            // Get all current characters
+            List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+            SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
+
+            // Get the right path, and work out if the file exists.
+            string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
 
 			// Check if the character exists..
 			if (!File.Exists(path))
@@ -35,12 +39,9 @@ namespace SlackMUDRPG.CommandClasses
 			}
 			else
 			{
-				List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
-				SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
-
 				if ((character != null) && (!newCharacter))
 				{
-					return "You're already logged in!";
+                    returnString = "You're already logged in!";
 				}
 				else
 				{
@@ -73,8 +74,8 @@ namespace SlackMUDRPG.CommandClasses
 				}
 			}
 
-			// Return the text output
-			return returnString;
+            // Return the text output
+            character.sendMessageToPlayer(returnString);
 		}
 
 		/// <summary>
@@ -82,7 +83,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="userID">The id of the character you want to load</param>
 		/// <returns>A character</returns>
-		public static SMCharacter GetCharacter(string userID)
+		public SMCharacter GetCharacter(string userID)
 		{
 			// Get the room file if it exists
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
@@ -118,7 +119,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="userID">userID is based on the id from the slack channel</param>
 		/// <param name="newCharacter">newCharacter to change the output of the text based on whether the character is new or not</param>
 		/// <returns>String message for usage</returns>
-		public static string GetCharacterOLD(string userID, bool newCharacter = false)
+		public string GetCharacterOLD(string userID, bool newCharacter = false)
 		{
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
@@ -179,7 +180,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="sexIn">M or F for the male / Female character</param>
 		/// <param name="characterType">M or F for the male / Female character</param>
 		/// <returns>A string with the character information</returns>
-		public static string CreateCharacter(string userID, string firstName, string lastName, int age, char sexIn, string characterType = "BaseCharacter", string responseURL = null)
+		public void CreateCharacter(string userID, string firstName, string lastName, int age, char sexIn, string characterType = "BaseCharacter", string responseURL = null)
 		{
 			// Get the path for the character
 			string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
@@ -235,15 +236,25 @@ namespace SlackMUDRPG.CommandClasses
 				// Write the character to the stream
 				SMChar.SaveToFile();
 
-				// log the newly created character into the game
-				return Login(userID, true, responseURL);
-			}
+                // log the newly created character into the game
+                Login(userID, true, responseURL);
+
+            }
 			else
 			{
-				// If they already have a character tell them they do and that they need to login.
-				return "You already have a character, you cannot create another.\nTry to login instead i.e. /sm Login";
+                // If they already have a character tell them they do and that they need to login.
+                // log the newly created character into the game
+                Login(userID, true, responseURL);
+
+                // Get all current characters
+                List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+                SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
+
+                character.sendMessageToPlayer("You already have a character, you cannot create another.");
 			}
-		}
+
+            
+        }
 
 		#endregion
 
@@ -254,7 +265,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="roomID">The id of the location you want to load</param>
 		/// <returns>A room</returns>
-		public static SMRoom GetRoom(string roomID)
+		public SMRoom GetRoom(string roomID)
 		{
 			// Get the room file if it exists
 			List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
@@ -287,7 +298,7 @@ namespace SlackMUDRPG.CommandClasses
 			return roomInMem;
 		}
 
-		public static string GetLocationDetails(string roomID, string userID = "0")
+		public string GetLocationDetails(string roomID, string userID = "0")
 		{
 			// Variable for the return string
 			string returnString = "";
@@ -315,7 +326,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		#region "Slots Methods"
 
-		private static List<SMCharacterSlot> CreateCharacterSlotsFromJSON(string filename)
+		private List<SMCharacterSlot> CreateCharacterSlotsFromJSON(string filename)
 		{
 			string path = FilePathSystem.GetFilePath("Misc", filename);
 
@@ -342,7 +353,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <returns>The item.</returns>
 		/// <param name="fileName">File name of the objects json file.</param>
-		public static SMItem CreateItemFromJson(string fileName)
+		public SMItem CreateItemFromJson(string fileName)
 		{
 			string path = FilePathSystem.GetFilePath("Objects", fileName);
 
@@ -370,7 +381,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <returns>An Attribues list</returns>
 		/// <param name="fileName">File name of the objects json file.</param>
-		private static SMAttributes CreateBaseAttributesFromJson(string fileName)
+		private SMAttributes CreateBaseAttributesFromJson(string fileName)
 		{
 			string path = FilePathSystem.GetFilePath("Misc", fileName);
 
@@ -392,7 +403,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		#region "ChatMethods"
 
-		public static void GlobalAnnounce(string msg)
+		public void GlobalAnnounce(string msg)
 		{
 			// Get all the characters currently logged in
 			List<SMCharacter> smcl = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];

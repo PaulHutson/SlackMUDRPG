@@ -17,6 +17,9 @@
       "CommandDescription": "Logs you into the game.",
       "CommandSyntax": "login",
       "CommandExpression": "login",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SlackMud",
+      "CommandMethod": "Login",
+      "CommandNoChar":  true,
       "ExampleUsage": "login",
       "RequiredSkill": null
     },

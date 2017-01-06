@@ -24,10 +24,19 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("CommandSyntax")]
 		public string CommandSyntax { get; set; }
 
-		[JsonProperty("CommandExpression")]
-		public string CommandExpression { get; set; }
+        [JsonProperty("CommandExpression")]
+        public string CommandExpression { get; set; }
 
-		[JsonProperty("ExampleUsage")]
+        [JsonProperty("CommandClass")]
+        public string CommandClass { get; set; }
+
+        [JsonProperty("CommandMethod")]
+        public string CommandMethod { get; set; }
+        
+        [JsonProperty("CommandNoChar")]
+        public bool CommandNoChar { get; set; }
+
+        [JsonProperty("ExampleUsage")]
 		public string ExampleUsage { get; set; }
 
 		[JsonProperty("RequiredSkill")]
@@ -119,6 +128,6 @@ namespace SlackMUDRPG.CommandClasses
 
 		public SMCommand Command;
 
-		public List<string> Parameters;
+		public List<object> Parameters;
 	}
 }

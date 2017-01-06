@@ -98,7 +98,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		public SMRoom GetRoom()
 		{
-			return SlackMud.GetRoom(this.RoomID);
+			return new SlackMud().GetRoom(this.RoomID);
 		}
 
 		/// <summary>
@@ -148,14 +148,14 @@ namespace SlackMUDRPG.CommandClasses
 				sme = roomInMem.RoomExits.FirstOrDefault(smes => smes.Shortcut == exitShortcut);
 
 				// Get the new room (and check that it's loaded in memory).
-				SMRoom smr = SlackMud.GetRoom(sme.RoomID);
+				SMRoom smr = new SlackMud().GetRoom(sme.RoomID);
 
 				if (smr != null)
 				{
 					// Move the player to the new location
 					this.RoomID = smr.RoomID;
 					this.SaveToFile();
-					returnString = SlackMud.GetLocationDetails(this.RoomID);
+					returnString = new SlackMud().GetLocationDetails(this.RoomID);
 
 					// Announce arrival to other players in the same place
 					smr.Announce("_" + this.GetFullName() + " walks in._");
@@ -559,7 +559,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="speech">What the character is saying</param>
 		public void Say(string speech)
 		{
-			SlackMud.GetRoom(this.RoomID).ChatSay(speech, this);
+            new SlackMud().GetRoom(this.RoomID).ChatSay(speech, this);
 		}
 
 		/// <summary>
@@ -569,7 +569,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// /// <param name="whisperToName">Who the character is whispering to (name)</param>
 		public void Whisper(string speech, string whisperToName)
 		{
-			SlackMud.GetRoom(this.RoomID).ChatWhisper(speech, this, whisperToName);
+            new SlackMud().GetRoom(this.RoomID).ChatWhisper(speech, this, whisperToName);
 		}
 
 		/// <summary>
@@ -578,7 +578,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="speech">What the character is shouting</param>
 		public void Shout(string speech)
 		{
-			SlackMud.GetRoom(this.RoomID).ChatShout(speech, this);
+            new SlackMud().GetRoom(this.RoomID).ChatShout(speech, this);
 		}
 
 		/// <summary>

@@ -17,24 +17,24 @@ namespace SlackMUDRPG
 
 		protected void btn_Test_Click(object sender, EventArgs e)
 		{
-			OutputUpdate(SlackMUDRPG.CommandClasses.SlackMud.Login(tb_CharID.Text));
+			//OutputUpdate(SlackMUDRPG.CommandClasses.SlackMud.Login(tb_CharID.Text));
 		}
 
 		protected void btn_CreateCharacter_Click(object sender, EventArgs e)
 		{
-			OutputUpdate(SlackMUDRPG.CommandClasses.SlackMud.CreateCharacter(tb_CharID.Text, "Paul", "Hutson", 34, 'm'));
+			//OutputUpdate(SlackMUDRPG.CommandClasses.SlackMud.CreateCharacter(tb_CharID.Text, "Paul", "Hutson", 34, 'm'));
 		}
 
 		protected void btn_TestLoc_Click(object sender, EventArgs e)
 		{
-			SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
-			OutputUpdate(SlackMUDRPG.CommandClasses.SlackMud.GetLocationDetails(smc.RoomID, smc.UserID));
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+			//OutputUpdate(SlackMUDRPG.CommandClasses.SlackMud.GetLocationDetails(smc.RoomID, smc.UserID));
 		}
 
 		protected void btn_MoveRoom_Click(object sender, EventArgs e)
 		{
 			// Get char from memory for the move
-			SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 
 			// Move the char to a new location
 			OutputUpdate(smc.Move(tb_RoomShortcutText.Text));
@@ -42,13 +42,13 @@ namespace SlackMUDRPG
 
 		protected void btn_Say_Click(object sender, EventArgs e)
 		{
-			SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			smc.Say(tb_ChatText.Text);
 		}
 
 		protected void btn_Shout_Click(object sender, EventArgs e)
 		{
-			SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			smc.Shout(tb_ChatText.Text);
 		}
 
@@ -64,7 +64,7 @@ namespace SlackMUDRPG
 
 		protected void btn_PickUpStick_Click(object sender, EventArgs e)
 		{
-			SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			SMRoom smr = smc.GetRoom();
 			SMItem stick = smr.GetItemByName("Wooden Stick");
 
@@ -80,7 +80,7 @@ namespace SlackMUDRPG
 
 		protected void btn_DropStick_Click(object sender, EventArgs e)
 		{
-			SMCharacter smc = SlackMud.GetCharacter(tb_CharID.Text);
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			string stickID = smc.GetOwnedItemIDByName("Wooden Stick");
 
 			if (stickID != null)
