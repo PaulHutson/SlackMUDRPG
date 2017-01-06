@@ -19,7 +19,7 @@
       "CommandExpression": "login",
       "CommandClass": "SlackMUDRPG.CommandClasses.SlackMud",
       "CommandMethod": "Login",
-      "CommandNoChar":  true,
+      "PassQueryParam":  "user_id",
       "ExampleUsage": "login",
       "RequiredSkill": null
     },
@@ -40,6 +40,9 @@
       "CommandDescription": "Enables the player to say something to the people within the same location.",
       "CommandSyntax": "say <whatever-you-want>",
       "CommandExpression": "say {.+}",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+      "CommandMethod": "Say",
+      "PassQueryParam":  null,
       "ExampleUsage": "say Hello!",
       "RequiredSkill": null
     },

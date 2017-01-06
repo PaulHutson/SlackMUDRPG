@@ -115,14 +115,10 @@ namespace SlackMUDRPG
 		private List<object> GetParamsFromCommandString(SMCommand command, string cmdString)
 		{
 			List<object> parameters = new List<object>();
-            string userId = HttpContext.Current.Request.Form["user_id"] ?? HttpContext.Current.Request.QueryString["user_id"];
 
-            if (!command.CommandNoChar)
+            if (command.PassQueryParam != null)
             {
-                parameters.Add(new SlackMud().GetCharacter(userId));
-            } else
-            {
-                parameters.Add(userId);
+                parameters.Add(this.GetQueryParam(command.PassQueryParam));
             }
             
 			string commandExpression = command.CommandExpression;
@@ -145,10 +141,21 @@ namespace SlackMUDRPG
 			return parameters;
 		}
 
+        private string GetQueryParam(string paramName)
+        {
+            return HttpContext.Current.Request.Form[paramName] ?? HttpContext.Current.Request.QueryString[paramName];
+        }
+
 		private void CallUserFuncArray(string className, string methodName, params object[] providedArgs)
 		{
-			object obj = Type.GetType(className).GetConstructor(Type.EmptyTypes).Invoke(new object[]{});
-			MethodInfo method = Type.GetType(className).GetMethod(methodName);
+            SMCharacter smi = new SMCharacter();
+            object obj = null;
+
+            smi = new SlackMud().GetCharacter(HttpContext.Current.Request.Form["user_id"] ?? HttpContext.Current.Request.QueryString["user_id"]);
+            if (smi == null) { 
+			    obj = Type.GetType(className).GetConstructor(Type.EmptyTypes).Invoke(new object[]{});
+            }
+            MethodInfo method = Type.GetType(className).GetMethod(methodName);
             var parameters = method.GetParameters();
             object[] calulatedArgs = new object[parameters.Length];
             for (int i = 0; i < calulatedArgs.Length; i++)
@@ -166,7 +173,7 @@ namespace SlackMUDRPG
                     throw new ArgumentException("Not enough arguments provided");
                 }
             }
-            method.Invoke(method.IsStatic ? null : obj, calulatedArgs);
+            method.Invoke(method.IsStatic ? null : obj ?? smi, calulatedArgs);
 
             //.Invoke(obj, args)
 

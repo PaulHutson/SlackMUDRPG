@@ -33,8 +33,8 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("CommandMethod")]
         public string CommandMethod { get; set; }
         
-        [JsonProperty("CommandNoChar")]
-        public bool CommandNoChar { get; set; }
+        [JsonProperty("PassQueryParam")]
+        public string PassQueryParam { get; set; }
 
         [JsonProperty("ExampleUsage")]
 		public string ExampleUsage { get; set; }
