@@ -86,7 +86,6 @@
     <Content Include="GameAccess.aspx" />
     <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
-    <Content Include="JSON\Commands\Help.json" />
     <Content Include="JSON\Commands\NewCharacter.json" />
     <Content Include="JSON\GeneralText\NoCharacter.json" />
     <Content Include="JSON\GeneralText\WelcomeMessage.json" />
@@ -113,7 +112,6 @@
     <Content Include="JSON\Objects\Environment.YoungTree.json" />
     <Content Include="JSON\Objects\Resource.TreeTrunk.json" />
     <Content Include="JSON\Objects\Resource.Log.json" />
-    <Content Include="JSON\Misc\Help.json" />
     <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Characters\CharU3KLW47QC.json" />
     <None Include="Web.Debug.config">
@@ -126,6 +124,7 @@
     <Content Include="JSON\Objects\Weapons.WoodenSword.json" />
     <None Include="JSON\Misc\Slots.BaseCharacter.json" />
     <Content Include="JSON\Objects\Weapons.WoodenStick.json" />
+    <Content Include="JSON\Commands\Help.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

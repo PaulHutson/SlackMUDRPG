@@ -29,7 +29,7 @@ namespace SlackMUDRPG
 			// Load the Commands into memory for usage later
 			// Used for both parsing commands sent in and also for help output
 			SMCommands lsmc = new SMCommands();
-			string path = FilePathSystem.GetFilePath("Misc", "Help");
+			string path = FilePathSystem.GetFilePath("Commands", "Help");
 			// Check if the character exists..
 			if (File.Exists(path))
 			{
