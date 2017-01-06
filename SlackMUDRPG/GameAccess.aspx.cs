@@ -94,6 +94,11 @@ namespace SlackMUDRPG
 		{
 			int spacePos = cmdString.IndexOf(" ");
 
+			if (spacePos < 0)
+			{
+				spacePos = cmdString.Length;
+			}
+
 			return cmdString.Substring(0, spacePos);
 		}
 
