@@ -110,7 +110,7 @@ namespace SlackMUDRPG.CommandClasses
 	public class SMCommands
 	{
 		[JsonProperty("SMCommandList")]
-		List<SMCommand> SMCommandList { get; set; }
+		public List<SMCommand> SMCommandList { get; set; }
 	}
 
 	public struct SMParsedCommand

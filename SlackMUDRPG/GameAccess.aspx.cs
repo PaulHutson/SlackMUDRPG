@@ -104,9 +104,9 @@ namespace SlackMUDRPG
 
 		private SMCommand GetCommandByName(string name)
 		{
-			List<SMCommand> commands = (List<SMCommand>)HttpContext.Current.Application["SMCommands"];
+			SMCommands commands = (SMCommands)HttpContext.Current.Application["SMCommands"];
 
-			SMCommand command = commands.FirstOrDefault(cmd => cmd.CommandName == name);
+			SMCommand command = commands.SMCommandList.FirstOrDefault(cmd => cmd.CommandName == name);
 
 			return command;
 		}
