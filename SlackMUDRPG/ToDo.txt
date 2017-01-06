@@ -100,7 +100,12 @@
 		- Means we need a new notice board system, with a "LOOK AT" and/or "EXAMINE" command.
 	- Implement story arcs (locations you need to go to, get clues, clues generate if someone is on a quest on entry to the location / they can only see them themselves)
 
-8) Generate World
+8) More Stuff
+	- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)
+
+V0.2 Items
+
+1) Generate World
 	- FIRST extend the locations to include weather effects
 		- Season/Weather types:
 			- Winter (Snow)
@@ -128,13 +133,13 @@
 	- Set the object types to have a "respawn" type function within the room so they regrow
 	- Generate the JSON for the image (each pixel is a location)
 
-9) More Stuff
-	- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)
+2) More Stuff
 	- Characters (basic, stay in locations, can talk back / say set phrases)
 	- Character Jobs (basic, can get jobs / tasks from a character)
 	- Characters (advanced, can move around routes, change their persona based on location (i.e. bob goes to the pub at night and gets drunk so speaks differently)
 	- Character Jobs (advanced, can get jobs from characters but they react to what has already been done (i.e. the jobs are generated on a frequency - Mrs Miggens doesn't always need flour if she has already had loads delivered already).
 	- Creatures (advanced, they can react / follow scripts as to what they do.)
+
 
 MISC Thoughts:
 	- I wonder how to do a "pulse" type system to ensure that all the automated things happen.
