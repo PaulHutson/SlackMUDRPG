@@ -295,10 +295,15 @@ namespace SlackMUDRPG.CommandClasses
 
 	}
 
-	public class SMCharacterSkill : SMSkill
+	public class SMCharacterSkill
 	{
+		[JsonProperty("SkillName")]
+		public string SkillName { get; set; }
+
 		[JsonProperty("SkillLevel")]
 		public int SkillLevel { get; set; }
+
+		
 	}
 
 	public class SMSkillPrerequisite

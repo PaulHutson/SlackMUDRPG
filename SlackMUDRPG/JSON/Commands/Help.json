@@ -25,11 +25,14 @@
     },
     {
       "CommandFamily": "Environment",
-      "CommandBaseName": "Chop",
-      "CommandName": "Chop",
+      "CommandBaseName": "chop",
+      "CommandName": "chop",
       "CommandDescription": "Enables the player to chop something.",
       "CommandSyntax": "chop <TargetName>",
       "CommandExpression": "chop {.+}",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+      "CommandMethod": "UseSkill",
+      "PassCommandAsFirstArg": true,
       "ExampleUsage": "chop tree1",
       "RequiredSkill": "Skill.Chop"
     },
@@ -74,6 +77,16 @@
       "CommandSyntax": "help [command]",
       "CommandExpression": "help {.+}?",
       "ExampleUsage": "help or help equip",
+      "RequiredSkill": null
+    },
+    {
+      "CommandFamily": "General",
+      "CommandBaseName": "move",
+      "CommandName": "move",
+      "CommandDescription": "This will move you to a room defined by the exit.",
+      "CommandSyntax": "move <locationshortcut>",
+      "CommandExpression": "move {.+}",
+      "ExampleUsage": "move n (would move you north if n was a location exit shortcut)",
       "RequiredSkill": null
     }
   ]

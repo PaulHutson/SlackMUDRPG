@@ -107,11 +107,8 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="charID"></param>
 		/// <param name="exitShortcut"></param>
 		/// <returns></returns>
-		public string Move(string exitShortcut)
+		public void Move(string exitShortcut)
 		{
-			// Create returnString
-			string returnString = "";
-
 			// Get the current character location
 			List<SMCharacter> smcs = new List<SMCharacter>();
 			smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
@@ -129,12 +126,12 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else
 				{
-					returnString = "Character not logged in, please login before trying to move.";
+					this.sendMessageToPlayer("Character not logged in, please login before trying to move.");
 				}
 			}
 			else
 			{
-				returnString = "Character not logged in, please login before trying to move.";
+				this.sendMessageToPlayer("Character not logged in, please login before trying to move.");
 			}
 
 			if (foundCharacter)
@@ -155,15 +152,88 @@ namespace SlackMUDRPG.CommandClasses
 					// Move the player to the new location
 					this.RoomID = smr.RoomID;
 					this.SaveToFile();
-					returnString = new SlackMud().GetLocationDetails(this.RoomID);
+					this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
 
 					// Announce arrival to other players in the same place
 					smr.Announce("_" + this.GetFullName() + " walks in._");
 
 				}
 			}
+		}
 
-			return returnString;
+		/// <summary>
+		/// Use a skill
+		/// </summary>
+		/// <param name="skillName">The name of the skill to use</param>
+		/// <param name="targetName">The name of a (the) target to use the skill on (optional)</param>
+		public void UseSkill(string skillName, string targetName = null)
+		{
+			// Find out if the character has the skill.
+			SMCharacterSkill smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName == skillName);
+
+			// If the character has the skill
+			if (smcs != null)
+			{
+				// Variables for use later
+				string targetType = null, targetID = null;
+				bool useSkill = true;
+
+				// If there's a target we need to look at...
+				if (targetName != null) {
+					// .. get the room
+					SMRoom currentRoom = this.GetRoom();
+
+					// find any players with that target name first
+					SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName() == targetName);
+
+					// If it's not null set the target details
+					if (targetCharacter != null)
+					{
+						// Set the target as a character and set the target id
+						targetType = "Character";
+						targetID = targetCharacter.UserID;
+					}
+					else // We need to see if there's an object with the name
+					{
+						// get a target item with the target name
+						SMItem targetItem = currentRoom.GetItemByName(targetName);
+
+						// if we find one...
+						if (targetItem != null)
+						{
+							// .. set the target type to be an item and set the target id
+							targetType = "Item";
+							targetID = targetItem.ItemID;
+						}
+						else
+						{
+							// Not found the target with the name.. so send a message...
+							this.sendMessageToPlayer("The target you've specified is not valid");
+
+							// And we can't use the skill because we can't find the target.
+							useSkill = false;
+						}
+					}
+				}
+
+				// Check if we're able to use the skill...
+				if (useSkill) { 
+					// Output variables we don't need
+					string messageOut;
+					float floatOut;
+
+					// Create a new instance of the skill.
+					SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName == skillName);
+
+					// Execute the skill
+					smc.UseSkill(this, out messageOut, out floatOut, true, targetType, targetID);
+				}
+			}
+			else
+			{
+				// Can't use the skill so let the player know!
+				this.sendMessageToPlayer("You need to learn the \"" + skillName + "\" skill before you can use it.");
+			}
 		}
 
 		#endregion

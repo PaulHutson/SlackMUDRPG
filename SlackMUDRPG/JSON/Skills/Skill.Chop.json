@@ -53,7 +53,7 @@
     {
       "StepType": "Information",
       "StepRequiredObject": null,
-      "RequiredObjectAmount": null,
+      "RequiredObjectAmount": 0,
       "FailureOutput": null,
       "SuccessOutput": "{CHARNAME} chops {TARGETNAME}"
     },
@@ -67,7 +67,7 @@
     {
       "StepType": "Repeat.Chop",
       "StepRequiredObject": "Activity.Chopping",
-      "RequiredObjectAmount": null,
+      "RequiredObjectAmount": 0,
       "FailureOutput": null,
       "SuccessOutput": null
     }

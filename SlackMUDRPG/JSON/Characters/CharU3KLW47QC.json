@@ -20,7 +20,12 @@
     "maxhp": 10,
     "SocialStanding": 8
   },
-  "Skills": null,
+	"Skills": [
+		{
+			"SkillName": "Chop",
+			"SkillLevel":  1
+		}
+	],
   "CharacterSlots": [
     {
       "Name": "RightHand",

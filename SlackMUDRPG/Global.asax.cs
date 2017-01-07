@@ -29,12 +29,12 @@ namespace SlackMUDRPG
 			// Load the Commands into memory for usage later
 			// Used for both parsing commands sent in and also for help output
 			SMCommands lsmc = new SMCommands();
-			string path = FilePathSystem.GetFilePath("Commands", "Help");
+			string commandsPath = FilePathSystem.GetFilePath("Commands", "Help");
 			// Check if the character exists..
-			if (File.Exists(path))
+			if (File.Exists(commandsPath))
 			{
 				// Use a stream reader to read the file in (based on the path)
-				using (StreamReader r = new StreamReader(path))
+				using (StreamReader r = new StreamReader(commandsPath))
 				{
 					// Create a new JSON string to be used...
 					string json = r.ReadToEnd();
@@ -44,6 +44,30 @@ namespace SlackMUDRPG
 				}
 			}
 			Application["SMCommands"] = lsmc;
+
+			// Load the Skills into memory for usage later
+			// Used for both parsing commands sent in and also for help output
+			List<SMSkill> lsk = new List<SMSkill>();
+
+			// Get all filenames from path
+			string skillFolderFilePath = FilePathSystem.GetFilePathFromFolder("Skills");
+			DirectoryInfo d = new DirectoryInfo(skillFolderFilePath);//Assuming Test is your Folder
+			FileInfo[] Files = d.GetFiles();
+			foreach (FileInfo file in Files)
+			{
+				string skillFilePath = FilePathSystem.GetFilePath("Skills", file.Name, "");
+				// Use a stream reader to read the file in (based on the path)
+				using (StreamReader r = new StreamReader(skillFilePath))
+				{
+					// Create a new JSON string to be used...
+					string json = r.ReadToEnd();
+
+					// ... get the information from the help file
+					lsk.Add(JsonConvert.DeserializeObject<SMSkill>(json));
+				}
+			}
+
+			Application["SMSkills"] = lsk;
 		}
 
 		protected void Session_Start(object sender, EventArgs e)

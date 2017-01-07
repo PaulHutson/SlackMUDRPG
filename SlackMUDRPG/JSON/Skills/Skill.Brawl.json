@@ -16,7 +16,7 @@
     {
       "StepType": "NothingEquipped.Hands",
       "StepRequiredObject": null,
-      "RequiredObjectAmount": null,
+      "RequiredObjectAmount": 0,
       "FailureOutput": "You can not have anything equipped in your hands",
       "SuccessOutput": null
     },
@@ -30,14 +30,14 @@
     {
       "StepType": "Hit",
       "StepRequiredObject": null,
-      "RequiredObjectAmount": null,
+      "RequiredObjectAmount": 0,
       "FailureOutput": "Failed to hit {TARGETNAME}",
       "SuccessOutput": "{CHARNAME} kills {TARGETNAME}"
     },
     {
       "StepType": "Information",
       "StepRequiredObject": null,
-      "RequiredObjectAmount": null,
+      "RequiredObjectAmount": 0,
       "FailureOutput": null,
       "SuccessOutput": "{CHARNAME} hits {TARGETNAME}"
     },
@@ -51,7 +51,7 @@
     {
       "StepType": "Repeat.Brawl",
       "StepRequiredObject": "Activity.Brawling",
-      "RequiredObjectAmount": null,
+      "RequiredObjectAmount": 0,
       "FailureOutput": null,
       "SuccessOutput": null
     }
