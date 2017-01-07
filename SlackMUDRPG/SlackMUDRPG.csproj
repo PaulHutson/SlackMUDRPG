@@ -134,10 +134,7 @@
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.1.0.4-build00190.js" />
     <Content Include="scripts\ai.1.0.4-build00190.min.js" />
-    <Content Include="SlackCommands.aspx" />
     <Content Include="TestButton.aspx" />
-    <Content Include="TestOutput.aspx" />
-    <Content Include="TestPost.aspx" />
     <Content Include="ToDo.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -163,33 +160,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SlackCommands.aspx.cs">
-      <DependentUpon>SlackCommands.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SlackCommands.aspx.designer.cs">
-      <DependentUpon>SlackCommands.aspx</DependentUpon>
-    </Compile>
     <Compile Include="TestButton.aspx.cs">
       <DependentUpon>TestButton.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TestButton.aspx.designer.cs">
       <DependentUpon>TestButton.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TestOutput.aspx.cs">
-      <DependentUpon>TestOutput.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestOutput.aspx.designer.cs">
-      <DependentUpon>TestOutput.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TestPost.aspx.cs">
-      <DependentUpon>TestPost.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestPost.aspx.designer.cs">
-      <DependentUpon>TestPost.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utility\Path.cs" />
     <Compile Include="Utility\SlackWebHooks.cs" />
