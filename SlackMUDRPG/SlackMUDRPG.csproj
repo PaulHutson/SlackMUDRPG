@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GameAccess.aspx" />
+    <Content Include="Index.aspx" />
     <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
     <Content Include="JSON\Commands\NewCharacter.json" />
@@ -118,6 +119,7 @@
     <Content Include="JSON\Locations\LocOutside1.json" />
     <Content Include="JSON\Locations\LocTrainingYard.json" />
     <Content Include="JSON\Objects\Environment.OldTree.json" />
+    <Content Include="WebPlay.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -159,6 +161,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestButton.aspx.cs">
       <DependentUpon>TestButton.aspx</DependentUpon>
@@ -171,6 +180,13 @@
     <Compile Include="Utility\SlackWebHooks.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />
     <Compile Include="CommandClasses\SMCharacterSlot.cs" />
+    <Compile Include="WebPlay.aspx.cs">
+      <DependentUpon>WebPlay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebPlay.aspx.designer.cs">
+      <DependentUpon>WebPlay.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
