@@ -2,16 +2,6 @@
   "SMCommandList":[
     {
       "CommandFamily": "General",
-      "CommandBaseName": "test",
-      "CommandName": "test",
-      "CommandDescription": "A simple command test.",
-      "CommandSyntax": "test <param> [optional param]",
-      "CommandExpression": "test {.+} {.+}?",
-      "ExampleUsage": "test hi there",
-      "RequiredSkill": null
-    },
-    {
-      "CommandFamily": "General",
       "CommandBaseName": "login",
       "CommandName": "login",
       "CommandDescription": "Logs you into the game.",
@@ -19,7 +9,8 @@
       "CommandExpression": "login",
       "CommandClass": "SlackMUDRPG.CommandClasses.SlackMud",
       "CommandMethod": "Login",
-      "PassQueryParam":  "user_id",
+      "PassCommandAsFirstArg": false,
+      "PassQueryParamAsFirstArg": "user_id",
       "ExampleUsage": "login",
       "RequiredSkill": null
     },
@@ -33,6 +24,7 @@
       "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
       "CommandMethod": "UseSkill",
       "PassCommandAsFirstArg": true,
+      "PassQueryParamAsFirstArg": null,
       "ExampleUsage": "chop tree1",
       "RequiredSkill": "Skill.Chop"
     },
@@ -45,7 +37,8 @@
       "CommandExpression": "say {.+}",
       "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
       "CommandMethod": "Say",
-      "PassQueryParam":  null,
+      "PassCommandAsFirstArg": false,
+      "PassQueryParamAsFirstArg":  null,
       "ExampleUsage": "say Hello!",
       "RequiredSkill": null
     },

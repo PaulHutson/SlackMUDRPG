@@ -8,7 +8,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
-using System.Reflection;
 
 namespace SlackMUDRPG
 {
@@ -16,84 +15,74 @@ namespace SlackMUDRPG
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			// Default text to output if everything goes Pete-Tong
-			string outputText = "Command not found... try '/sdcommand help' to return a list of possible commands";
+			// Command text (this works for both form submissions and also query strings)
+			string commandText = Utils.GetQueryParam("text");
 
-			// Other variables needed
-			bool error = false;
-			string botName = "SlackMud";                	// Error bot name
-			string replyToChannel = "@error";               // Default ReplyToChannel
-			string replyToError = outputText;               // Default reply text
-
-			// Get Slack / Other webhook locations
-			string serviceType = Request.Form["st"] ?? Request.QueryString["st"];   // This will only be Slack for now, but could use something else like Discord
-
-			// Get Slack Group Name
-			string serviceName = Request.Form["sn"] ?? Request.QueryString["sn"];   // This will only be Slack for now, but could use something else like Discord
-
-			// Additional text (this works for both form submissions and also query strings depending on how we're accessing the code)
-			string additionalText = Request.Form["text"] ?? Request.QueryString["text"];   // Additional text that might be needed from the form..
-
-			string responseURL = Request.Form["response_url"] ?? Request.QueryString["response_url"];
-
-            try
-            {
-                PerformCommand(additionalText);
-            }
-            catch
-            {
-                error = true;
-            }
-			
-			if (error && (replyToChannel != "@error"))
+			try
 			{
-				Commands.SendMessage(serviceType, serviceName, outputText, botName, replyToChannel, responseURL);
+				this.ProcessUserCommand(commandText);
 			}
-
+			catch (Exception expection)
+			{
+				// TODO report error to person
+			}
 		}
 
-		private void PerformCommand(string cmd)
+		/// <summary>
+		/// Processes the user command, running the action if the command is vaid.
+		/// </summary>
+		/// <param name="cmd">User entered command string.</param>
+		private void ProcessUserCommand(string cmd)
 		{
 			SMParsedCommand parsedCmd = this.ParseCommandString(cmd);
-            
-            this.CallUserFuncArray(parsedCmd.Command.CommandClass, parsedCmd.Command.CommandMethod, parsedCmd.Parameters.ToArray());
 
+			this.RunAction(parsedCmd);
         }
 
+		/// <summary>
+		/// Parses the user enterd command string to produced a SMParsedCommand object to run.
+		/// </summary>
+		/// <returns>SMParsedCommand object to run.</returns>
+		/// <param name="cmdString">User entered command string.</param>
+		/// <thorws>NullReferenceException if command not found.
 		private SMParsedCommand ParseCommandString(string cmdString)
 		{
 			SMParsedCommand cmd = new SMParsedCommand();
 
-			cmdString = this.CleanCommandString(cmdString);
+			// Trim white space and remove leading /
+			char[] trimFromStart = { '/' };
+			cmdString = Utils.CleanString(cmdString, trimFromStart);
 
+			// Get the and of the command e.g. "shout"
 			string commandName = this.GetCommandNameFromString(cmdString);
 
+			// Get the SMCommmand object for the given command name
 			SMCommand command = this.GetCommandByName(commandName);
 
-			List<object> parameters = this.GetParamsFromCommandString(command, cmdString);
+			// If the command if found extra the params and return the parsed command object.
+			if (command != null)
+			{
+				List<object> parameters = this.GetParamsFromCommandString(command, cmdString);
 
-			cmd.CommandName = commandName;
-			cmd.Command = command;
-			cmd.Parameters = parameters;
+				cmd.CommandName = commandName;
+				cmd.Command = command;
+				cmd.Parameters = parameters;
 
-			return cmd;
+				return cmd;
+			}
+
+			// Throw and exception if unable to find the command
+			throw new System.NullReferenceException("Command specified command not found.");
 		}
 
-		private string CleanCommandString(string cmdString)
-		{
-			// trim extra white space
-			cmdString = cmdString.Trim();
-
-			//trim leading "/" id present
-			char[] toTrim = { '/' };
-			cmdString = cmdString.TrimStart(toTrim);
-
-			return cmdString;
-		}
-
+		/// <summary>
+		/// Gets the command name from the user command string.
+		/// </summary>
+		/// <returns>The command name..</returns>
+		/// <param name="cmdString">User entered command string..</param>
 		private string GetCommandNameFromString(string cmdString)
 		{
-			int spacePos = cmdString.IndexOf(" ");
+			int spacePos = cmdString.IndexOf(" ", StringComparison.CurrentCulture);
 
 			if (spacePos < 0)
 			{
@@ -103,6 +92,11 @@ namespace SlackMUDRPG
 			return cmdString.Substring(0, spacePos);
 		}
 
+		/// <summary>
+		/// Gets an SMCommand object for the command by name.
+		/// </summary>
+		/// <returns>SMCommand object or null</returns>
+		/// <param name="name">Name of the command.</param>
 		private SMCommand GetCommandByName(string name)
 		{
 			SMCommands commands = (SMCommands)HttpContext.Current.Application["SMCommands"];
@@ -112,27 +106,44 @@ namespace SlackMUDRPG
 			return command;
 		}
 
+		/// <summary>
+		/// Gets the parameters from command string based on the expression in the corresponding SMCommand object
+		/// </summary>
+		/// <returns>List of extrated parameters to use when running the user command</returns>
+		/// <param name="command">SMCommand object.</param>
+		/// <param name="cmdString">User entered command string.</param>
 		private List<object> GetParamsFromCommandString(SMCommand command, string cmdString)
 		{
+			// Create a new generic object list to hold the commands parameters
 			List<object> parameters = new List<object>();
 
-            if (command.PassQueryParam != null)
-            {
-                parameters.Add(this.GetQueryParam(command.PassQueryParam));
-            }
-            
-			string commandExpression = command.CommandExpression;
+			// Handle passing the CommandName as the first arg if set in the SMCommand object
+			if (command.PassCommandAsFirstArg)
+			{
+				parameters.Add(command.CommandName);
+			}
 
-			string pattern = command.ParseExpression();
+			// Handle passing a defined Form/QueryString param as the first arg if set in the SMCommand object
+			if (command.PassQueryParamAsFirstArg != null)
+			{
+				parameters.Add(Utils.GetQueryParam(command.PassQueryParamAsFirstArg));
+			}
 
-			Match match = Regex.Match(cmdString, pattern);
+			// Get the Regex form the Command object to extract params from the user command string
+			string extractPattern = command.ParseExpression();
 
+			// Get the Match from runnong the extraction Regex
+			Match match = Regex.Match(cmdString, extractPattern);
+
+			// Check we have a match and process the matches capturing groups
 			if (match.Success)
 			{
 				foreach (Group group in match.Groups)
 				{
-					if ((group.Value != cmdString) && (group.Value != ""))
-                    {
+					// Onlt process groups that aren't empty or the full command string
+					// the first matching group is always the full command string
+					if (group.Value != cmdString && group.Value != "")
+					{
 						parameters.Add(group.Value);
 					}
 				}
@@ -141,54 +152,22 @@ namespace SlackMUDRPG
 			return parameters;
 		}
 
-        private string GetQueryParam(string paramName)
-        {
-            return HttpContext.Current.Request.Form[paramName] ?? HttpContext.Current.Request.QueryString[paramName];
-        }
-
-		private void CallUserFuncArray(string className, string methodName, params object[] providedArgs)
+		/// <summary>
+		/// Runs the parsed command.
+		/// </summary>
+		/// <param name="command">Parsed Command.</param>
+		private void RunAction(SMParsedCommand command)
 		{
-            SMCharacter smi = new SMCharacter();
-            object obj = null;
-
-            smi = new SlackMud().GetCharacter(HttpContext.Current.Request.Form["user_id"] ?? HttpContext.Current.Request.QueryString["user_id"]);
-            if (smi == null) { 
-			    obj = Type.GetType(className).GetConstructor(Type.EmptyTypes).Invoke(new object[]{});
-            }
-            MethodInfo method = Type.GetType(className).GetMethod(methodName);
-            var parameters = method.GetParameters();
-            object[] calulatedArgs = new object[parameters.Length];
-            for (int i = 0; i < calulatedArgs.Length; i++)
-            {
-                if (i < providedArgs.Length)
-                {
-                    calulatedArgs[i] = providedArgs[i];
-                }
-                else if (parameters[i].HasDefaultValue)
-                {
-                    calulatedArgs[i] = parameters[i].DefaultValue;
-                }
-                else
-                {
-                    throw new ArgumentException("Not enough arguments provided");
-                }
-            }
-            method.Invoke(method.IsStatic ? null : obj ?? smi, calulatedArgs);
-
-            //.Invoke(obj, args)
-
-            // for static methods
-            //Type.GetType(className).GetMethod(methodName).Invoke(null, args);
-        }
-
-        private void SetOutputText(string outputLit)
-		{
-			lit_output.Text = outputLit;
-		}
-
-		private void SendPrivateMessage(string serviceType, string nameOfHook, string toName)
-		{
-			//Commands.SendMessage(serviceType, nameOfHook, "This is a bit of text", "SlackMud", toName);
+			//TODO implement class builder to get the class object dynamically
+			if (command.Command.CommandClass.Contains("SMCharacter"))
+			{
+				object obj = new SlackMud().GetCharacter(Utils.GetQueryParam("user_id"));
+				Utils.CallUserFuncArray(obj, command.Command.CommandMethod, command.Parameters.ToArray());
+			}
+			else
+			{
+				Utils.CallUserFuncArray(command.Command.CommandClass, command.Command.CommandMethod, command.Parameters.ToArray());
+			}
 		}
 	}
 }
