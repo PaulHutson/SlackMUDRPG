@@ -79,6 +79,10 @@
       "CommandDescription": "This will move you to a room defined by the exit.",
       "CommandSyntax": "move <locationshortcut>",
       "CommandExpression": "move {.+}",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+      "CommandMethod": "Move",
+      "PassCommandAsFirstArg": false,
+      "PassQueryParamAsFirstArg":  null,
       "ExampleUsage": "move n (would move you north if n was a location exit shortcut)",
       "RequiredSkill": null
     }
