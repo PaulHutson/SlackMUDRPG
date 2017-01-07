@@ -85,6 +85,7 @@
   <ItemGroup>
     <Content Include="GameAccess.aspx" />
     <Content Include="Index.aspx" />
+    <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
     <Content Include="JSON\Commands\NewCharacter.json" />
@@ -100,7 +101,6 @@
     <Content Include="JSON\Misc\Attribute.BaseCharacter.json" />
     <Content Include="JSON\Misc\Attribute.Blacksmith.json" />
     <Content Include="JSON\Misc\Attribute.Warrior.json" />
-    <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Skills\Skill.Sword.json" />
     <Content Include="JSON\Skills\Skill.Axe.json" />
     <Content Include="JSON\Skills\Skill.Dagger.json" />
@@ -120,6 +120,7 @@
     <Content Include="JSON\Locations\LocTrainingYard.json" />
     <Content Include="JSON\Objects\Environment.OldTree.json" />
     <Content Include="WebPlay.aspx" />
+    <Content Include="Handlers\WebSocketHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -160,6 +161,9 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\WebSocketHandler.ashx.cs">
+      <DependentUpon>WebSocketHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

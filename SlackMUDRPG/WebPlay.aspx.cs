@@ -13,5 +13,10 @@ namespace SlackMUDRPG
 		{
 
 		}
+
+		protected void btn_PushTestButton_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
