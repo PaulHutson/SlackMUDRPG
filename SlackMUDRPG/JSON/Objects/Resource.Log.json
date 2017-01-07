@@ -1,6 +1,6 @@
 ﻿{
 	"ItemName": "Log",
-  "ItemType": "resource",
+  "ItemType": "Resource",
   "ItemFamily": "Log",
 	"ItemDescription": "A cut up log ready for use",
 	"ItemWeight": 2,
@@ -9,6 +9,5 @@
   "MaxHitPoints": 2,
   "BaseDamage": 0.001,
   "Toughness": 3,
-  "DestroyedOutput": null,
 	"CanHoldOtherItems": false
 }

@@ -1,6 +1,6 @@
 ﻿{
 	"ItemName": "Young Tree",
-  "ItemType": "environment",
+  "ItemType": "Environment",
   "ItemFamily": "Tree",
 	"ItemDescription": "This tree looks young judging by it's age",
 	"ItemWeight": 50,

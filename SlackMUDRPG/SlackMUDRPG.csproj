@@ -114,6 +114,10 @@
     <Content Include="JSON\Objects\Resource.Log.json" />
     <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Characters\CharU3KLW47QC.json" />
+    <Content Include="JSON\Objects\Misc.Pell.json" />
+    <Content Include="JSON\Locations\LocOutside1.json" />
+    <Content Include="JSON\Locations\LocTrainingYard.json" />
+    <Content Include="JSON\Objects\Environment.OldTree.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

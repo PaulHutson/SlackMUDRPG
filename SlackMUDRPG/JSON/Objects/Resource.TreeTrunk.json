@@ -1,6 +1,6 @@
 ﻿{
 	"ItemName": "Tree Trunk",
-  "ItemType": "resource",
+  "ItemType": "Resource",
   "ItemFamily": "TreeTrunks",
 	"ItemDescription": "A fallen tree trunk",
 	"ItemWeight": 50,

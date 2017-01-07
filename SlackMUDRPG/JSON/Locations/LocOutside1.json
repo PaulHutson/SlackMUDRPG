@@ -1,0 +1,121 @@
+{
+	"RoomID": "1",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "A wooded area, filled with wonderously tall trees... ready for you to chop down.\nYou can't see much through the foliage, but the forest looks like it goes on for some time...\n\n.There's a strange building off to one side of this wooded area with an archway leading to what looks like an open courtyard with a sandy floor.",
+	"RoomExits": [
+		{
+			"Shortcut": "TY",
+			"Description": "An archway leading to a courtyard",
+			"RoomID": "TrainingYard"
+		}
+	],
+	"RoomItems": [
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9a",
+			"ItemName": "Old Tree",
+			"ItemType": "Environment",
+			"ItemFamily": "Tree",
+			"ItemDescription": "This tree looks very old.",
+			"ItemWeight": 500,
+			"ItemSize": 500,
+			"HitPoints": 500,
+			"MaxHitPoints": 500,
+			"BaseDamage": 15,
+			"Toughness": 6,
+			"DestroyedOutput": "Resource.TreeTrunk,5",
+			"CanHoldOtherItems": false
+		},
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9b",
+			"ItemName": "Old Tree",
+			"ItemType": "Environment",
+			"ItemFamily": "Tree",
+			"ItemDescription": "This tree looks very old.",
+			"ItemWeight": 500,
+			"ItemSize": 500,
+			"HitPoints": 500,
+			"MaxHitPoints": 500,
+			"BaseDamage": 15,
+			"Toughness": 6,
+			"DestroyedOutput": "Resource.TreeTrunk,5",
+			"CanHoldOtherItems": false
+		},
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9e",
+			"ItemName": "Young Tree",
+			"ItemType": "Environment",
+			"ItemFamily": "Tree",
+			"ItemDescription": "This tree looks young judging by it's age",
+			"ItemWeight": 50,
+			"ItemSize": 50,
+			"HitPoints": 100,
+			"MaxHitPoints": 100,
+			"BaseDamage": 0.001,
+			"Toughness": 3,
+			"DestroyedOutput":  "Resource.TreeTrunk,1",
+			"CanHoldOtherItems": false
+		},
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9c",
+			"ItemName": "Old Tree",
+			"ItemType": "Environment",
+			"ItemFamily": "Tree",
+			"ItemDescription": "This tree looks very old.",
+			"ItemWeight": 500,
+			"ItemSize": 500,
+			"HitPoints": 500,
+			"MaxHitPoints": 500,
+			"BaseDamage": 15,
+			"Toughness": 6,
+			"DestroyedOutput":  "Resource.TreeTrunk,5",
+			"CanHoldOtherItems": false
+		},
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9d",
+			"ItemName": "Young Tree",
+			"ItemType": "Environment",
+			"ItemFamily": "Tree",
+			"ItemDescription": "This tree looks young judging by it's age",
+			"ItemWeight": 50,
+			"ItemSize": 50,
+			"HitPoints": 100,
+			"MaxHitPoints": 100,
+			"BaseDamage": 0.001,
+			"Toughness": 3,
+			"DestroyedOutput":  "Resource.TreeTrunk,1",
+			"CanHoldOtherItems": false
+		},
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9f",
+			"ItemName": "Young Tree",
+			"ItemType": "Environment",
+			"ItemFamily": "Tree",
+			"ItemDescription": "This tree looks young judging by it's age",
+			"ItemWeight": 50,
+			"ItemSize": 50,
+			"HitPoints": 100,
+			"MaxHitPoints": 100,
+			"BaseDamage": 0.001,
+			"Toughness": 3,
+			"DestroyedOutput":  "Resource.TreeTrunk,1",
+			"CanHoldOtherItems": false
+		},
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9g",
+			"ItemName": "Young Tree",
+			"ItemType": "Environment",
+			"ItemFamily": "Tree",
+			"ItemDescription": "This tree looks young judging by it's age",
+			"ItemWeight": 50,
+			"ItemSize": 50,
+			"HitPoints": 100,
+			"MaxHitPoints": 100,
+			"BaseDamage": 0.001,
+			"Toughness": 3,
+			"DestroyedOutput":  "Resource.TreeTrunk,1",
+			"CanHoldOtherItems": false
+		}
+	]
+}
