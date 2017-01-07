@@ -295,6 +295,11 @@ namespace SlackMUDRPG.CommandClasses
 
 	}
 
+	#region "Other Class Structures for use"
+
+	/// <summary>
+	/// A character skill that is associated with the character, also storing their level.
+	/// </summary>
 	public class SMCharacterSkill
 	{
 		[JsonProperty("SkillName")]
@@ -306,6 +311,9 @@ namespace SlackMUDRPG.CommandClasses
 		
 	}
 
+	/// <summary>
+	/// A skill prerequisite (i.e. something the need before they can train the skill).
+	/// </summary>
 	public class SMSkillPrerequisite
 	{
 		[JsonProperty("IsSkill")]
@@ -318,6 +326,9 @@ namespace SlackMUDRPG.CommandClasses
 		public int PreReqLevel { get; set; }
 	}
 
+	/// <summary>
+	/// A skill type, because different types group together.
+	/// </summary>
 	public class SMSkillType
 	{
 		[JsonProperty("SkillTypeName")]
@@ -362,5 +373,7 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("SuccessOutput")]
 		public string SuccessOutput { get; set; }
 	}
+
+	#endregion
 
 }
