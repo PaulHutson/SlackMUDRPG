@@ -354,12 +354,22 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
-		public void Announce(string msg)
+		public void Announce(string msg, SMCharacter sender = null, bool suppressMessageToSender = false)
 		{
 			// Send the message to all people connected to the room
 			foreach (SMCharacter smc in this.GetPeople())
 			{
-				this.ChatSendMessage(smc, msg);
+				bool sendMessage = true;
+
+				if ((suppressMessageToSender) && (sender != null) && (sender.UserID == smc.UserID))
+				{
+					sendMessage = false;
+				}
+
+				if (sendMessage)
+				{
+					this.ChatSendMessage(smc, msg);
+				}
 			}
 		}
 

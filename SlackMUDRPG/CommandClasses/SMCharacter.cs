@@ -155,7 +155,7 @@ namespace SlackMUDRPG.CommandClasses
 					this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
 
 					// Announce arrival to other players in the same place
-					smr.Announce("_" + this.GetFullName() + " walks in._");
+					smr.Announce("_" + this.GetFullName() + " walks in._", this, true);
 
 				}
 			}
