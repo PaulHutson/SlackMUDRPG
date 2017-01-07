@@ -24,24 +24,32 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("CommandSyntax")]
 		public string CommandSyntax { get; set; }
 
-        [JsonProperty("CommandExpression")]
-        public string CommandExpression { get; set; }
+		[JsonProperty("CommandExpression")]
+		public string CommandExpression { get; set; }
 
-        [JsonProperty("CommandClass")]
-        public string CommandClass { get; set; }
+		[JsonProperty("CommandClass")]
+		public string CommandClass { get; set; }
 
-        [JsonProperty("CommandMethod")]
-        public string CommandMethod { get; set; }
-        
-        [JsonProperty("PassQueryParam")]
-        public string PassQueryParam { get; set; }
+		[JsonProperty("CommandMethod")]
+		public string CommandMethod { get; set; }
 
-        [JsonProperty("ExampleUsage")]
+		[JsonProperty("PassCommandAsFirstArg")]
+		public bool PassCommandAsFirstArg { get; set; }
+
+		[JsonProperty("PassQueryParamAsFirstArg")]
+		public string PassQueryParamAsFirstArg { get; set; }
+
+		[JsonProperty("ExampleUsage")]
 		public string ExampleUsage { get; set; }
 
 		[JsonProperty("RequiredSkill")]
 		public string RequiredSkill { get; set; }
 
+		/// <summary>
+		/// Parses the CommandExpression into a Regex pattern to extra params from the users command, e.g.
+		/// equip {.+} from {.+}? becomes ^equip (?:equip (.+?)(?: from |$)(.+)?)$
+		/// </summary>
+		/// <returns>The parsed regex patthern string</returns>
 		public string ParseExpression()
 		{
 			string pattern = @"(?:\{([^}]+)\}(\?)?)(?:$|)";
