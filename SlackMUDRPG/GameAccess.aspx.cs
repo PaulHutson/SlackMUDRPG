@@ -25,6 +25,8 @@ namespace SlackMUDRPG
 			catch (Exception expection)
 			{
 				// TODO report error to person
+				SMCharacter smc = SlackMUDRPG.CommandClasses.SlackMud.GetCharacter(Utils.GetQueryParam("user_id"));
+				smc.sendMessageToPlayer(expection.Message);
 			}
 		}
 
