@@ -1,7 +1,7 @@
 ﻿{
 	"ItemName": "Young Tree",
 	"SingularPronoun": "a",
-	"PluralName": "Young Tree",
+	"PluralName": "Young Trees",
 	"PluralPronoun": "some",
   "ItemType": "environment",
   "ItemFamily": "Tree",
