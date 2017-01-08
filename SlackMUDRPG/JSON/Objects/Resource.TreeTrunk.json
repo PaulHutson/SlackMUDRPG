@@ -1,6 +1,9 @@
 ﻿{
 	"ItemName": "Tree Trunk",
-  "ItemType": "Resource",
+	"SingularPronoun": "a",
+	"PluralName": "Tree Trunks",
+	"PluralPronoun": "some",
+  "ItemType": "resource",
   "ItemFamily": "TreeTrunks",
 	"ItemDescription": "A fallen tree trunk",
 	"ItemWeight": 50,

@@ -1,6 +1,9 @@
 ﻿{
 	"ItemName": "Young Tree",
-  "ItemType": "Environment",
+	"SingularPronoun": "a",
+	"PluralName": "Young Tree",
+	"PluralPronoun": "some",
+  "ItemType": "environment",
   "ItemFamily": "Tree",
 	"ItemDescription": "This tree looks young judging by it's age",
 	"ItemWeight": 50,

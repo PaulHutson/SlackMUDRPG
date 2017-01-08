@@ -14,6 +14,15 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("ItemName")]
 		public string ItemName { get; set; }
 
+		[JsonProperty("SingularPronoun")]
+		public string SingularPronoun { get; set; }
+
+		[JsonProperty("PluralName")]
+		public string PluralName { get; set; }
+
+		[JsonProperty("PluralPronoun")]
+		public string PluralPronoun { get; set; }
+
 		[JsonProperty("ItemType")]
 		public string ItemType { get; set; }
 

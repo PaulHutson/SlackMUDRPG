@@ -1,5 +1,8 @@
 ﻿{
 	"ItemName": "Wooden Stick",
+	"SingularPronoun": "a",
+	"PluralName": "Wooden Sticks",
+	"PluralPronoun": "some",
 	"ItemType": "Weapon",
 	"ItemFamily": "Stick",
 	"ItemDescription": "A small wooden stick.",

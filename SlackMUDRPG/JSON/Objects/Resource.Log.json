@@ -1,6 +1,9 @@
 ﻿{
 	"ItemName": "Log",
-  "ItemType": "Resource",
+	"SingularPronoun": "a",
+	"PluralName": "Logs",
+	"PluralPronoun": "some",
+  "ItemType": "resource",
   "ItemFamily": "Log",
 	"ItemDescription": "A cut up log ready for use",
 	"ItemWeight": 2,
