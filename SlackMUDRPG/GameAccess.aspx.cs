@@ -165,7 +165,11 @@ namespace SlackMUDRPG
 			smc.sendMessageToPlayer(commandClassName);
 
 			// Get class instance from ClassBuilder to run the command with
-			object commandClass = new ClassBuilder(commandClassName).GetClassInstance();
+			ClassBuilder cb = new ClassBuilder(commandClassName);
+
+			smc.sendMessageToPlayer("new cb");
+
+			object commandClass = cb.GetClassInstance();
 
 			smc.sendMessageToPlayer(commandClass.GetType().ToString());
 
