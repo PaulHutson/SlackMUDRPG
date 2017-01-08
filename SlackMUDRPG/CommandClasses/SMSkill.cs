@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SlackMUDRPG.CommandsClasses
+namespace SlackMUDRPG.CommandClasses
 {
 	public class SMSkill
 	{
@@ -80,7 +80,6 @@ namespace SlackMUDRPG.CommandsClasses
 							}
 							else
 							{
-								smc.CurrentActivity = null;
 								SkillIncrease(smc, true);
 							}
 							break;
@@ -161,9 +160,15 @@ namespace SlackMUDRPG.CommandsClasses
 		{
 			// Get the object to hit the target with.
 			// TODO Get the objects from the equipped items.
-			SMItem charItemToUse = new SMItem(); // TODO REPLACE THIS WITH CORRECT ITEM.
-			float charItembaseDamage = charItemToUse.BaseDamage; // TODO GET THE REAL VALUE OF THE DAMAGE DEALT!
-
+			string itemName = smss.StepRequiredObject;
+			float charItembaseDamage = smc.Attributes.Strength/10;
+			if (itemName != null)
+			{ 
+				string[] splitItemName = itemName.Split('.');
+				SMItem charItemToUse = smc.GetEquippedItem(splitItemName[1]);
+				charItembaseDamage = charItemToUse.BaseDamage;
+			}
+			
 			// Get the base attribute from the character
 			int baseStatValue = smc.Attributes.GetBaseStatValue(baseStat);
 
@@ -208,6 +213,7 @@ namespace SlackMUDRPG.CommandsClasses
 
 			// Reduce the targets HP
 			int newTargetHP = targetHP - (int)actualDamageAmount;
+			
 			// if the targets HP reaches 0 it has "died" or been "destroyed"
 			if (newTargetHP < 0)
 			{
@@ -222,7 +228,7 @@ namespace SlackMUDRPG.CommandsClasses
 					// Get the target item
 					targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
 					string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
-					int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[0]);
+					int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[1]);
 					while (numberOfObjectsToCreate > 0)
 					{
 						// Reduce the number of items waiting to be created
@@ -237,6 +243,18 @@ namespace SlackMUDRPG.CommandsClasses
 				}
 				smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetID));
 				SkillIncrease(smc);
+				smc.CurrentActivity = null;
+			} else
+			{
+				if (targetType == "Character")
+				{
+					// TODO Update a character HP
+				}
+				else
+				{
+					targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+					smc.GetRoom().UpdateItem(targetItem.ItemID, "HP", newTargetHP);
+				}
 			}
 
 			// Check to see if we should reduce the objects HP (wear and tear)
@@ -251,9 +269,9 @@ namespace SlackMUDRPG.CommandsClasses
 		private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetName, string objectDestroyedName)
 		{
 			// replace the elements as needed
-			successOutput.Replace("{TARGETNAME}", targetName);
-			successOutput.Replace("{CHARNAME}", smc.GetFullName());
-			successOutput.Replace("{Object.DestroyedOutput}", objectDestroyedName);
+			successOutput = successOutput.Replace("{TARGETNAME}", targetName);
+			successOutput = successOutput.Replace("{CHARNAME}", smc.GetFullName());
+			successOutput = successOutput.Replace("{Object.DestroyedOutput}", objectDestroyedName);
 
 			return successOutput;
 		}
@@ -295,12 +313,25 @@ namespace SlackMUDRPG.CommandsClasses
 
 	}
 
-	public class SMCharacterSkill : SMSkill
+	#region "Other Class Structures for use"
+
+	/// <summary>
+	/// A character skill that is associated with the character, also storing their level.
+	/// </summary>
+	public class SMCharacterSkill
 	{
+		[JsonProperty("SkillName")]
+		public string SkillName { get; set; }
+
 		[JsonProperty("SkillLevel")]
 		public int SkillLevel { get; set; }
+
+		
 	}
 
+	/// <summary>
+	/// A skill prerequisite (i.e. something the need before they can train the skill).
+	/// </summary>
 	public class SMSkillPrerequisite
 	{
 		[JsonProperty("IsSkill")]
@@ -313,6 +344,9 @@ namespace SlackMUDRPG.CommandsClasses
 		public int PreReqLevel { get; set; }
 	}
 
+	/// <summary>
+	/// A skill type, because different types group together.
+	/// </summary>
 	public class SMSkillType
 	{
 		[JsonProperty("SkillTypeName")]
@@ -357,5 +391,7 @@ namespace SlackMUDRPG.CommandsClasses
 		[JsonProperty("SuccessOutput")]
 		public string SuccessOutput { get; set; }
 	}
+
+	#endregion
 
 }

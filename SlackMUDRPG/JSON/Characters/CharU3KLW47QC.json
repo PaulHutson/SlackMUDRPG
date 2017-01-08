@@ -7,7 +7,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "2",
+  "RoomID": "Outside1",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -20,7 +20,12 @@
     "maxhp": 10,
     "SocialStanding": 8
   },
-  "Skills": null,
+  "Skills": [
+    {
+      "SkillName": "Chop",
+      "SkillLevel": 1
+    }
+  ],
   "CharacterSlots": [
     {
       "Name": "RightHand",
@@ -49,7 +54,19 @@
       "AllowedTypes": [
         "any"
       ],
-      "EquippedItem": null
+      "EquippedItem": {
+				"ItemName": "Shoddy Axe",
+				"ItemType": "Weapons",
+				"ItemFamily": "Axe",
+				"ItemDescription": "This shoddy axe doesn't do much damage but it's a start.",
+				"ItemWeight": 1,
+				"ItemSize": 1,
+				"HitPoints": 50,
+				"MaxHitPoints": 50,
+				"BaseDamage": 5,
+				"Toughness": 3,
+				"CanHoldOtherItems": true
+			}
     },
     {
       "Name": "Back",
@@ -73,5 +90,6 @@
         "HeldItems": null
       }
     }
-  ]
+  ],
+  "ResponseURL": null
 }

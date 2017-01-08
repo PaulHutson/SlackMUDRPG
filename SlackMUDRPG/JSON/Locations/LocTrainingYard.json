@@ -1,0 +1,35 @@
+{
+	"RoomID": "TrainingYard",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "Looking around the courtyard you can see a sandy well used floor.  Obviously somewhere where someone could practice weapon fighting.",
+	"RoomExits": [
+		{
+			"Shortcut": "D1",
+			"Description": "Door back to the house",
+			"RoomID": "1"
+		},
+		{
+			"Shortcut": "A",
+			"Description": "Archway to Forest",
+			"RoomID": "Outside1"
+		}
+	],
+	"RoomItems": [
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcapell",
+			"ItemName": "Wooden Pell",
+			"ItemType": "Misc",
+			"ItemFamily": "Misc",
+			"ItemDescription": "This is a wooden Pell, used for melee training.",
+			"ItemWeight": 50,
+			"ItemSize": 25,
+			"HitPoints": 1000000000,
+			"MaxHitPoints": 1000000000,
+			"BaseDamage": 0.1,
+			"Toughness": 5,
+			"CanHoldOtherItems": false
+		}
+	]
+}

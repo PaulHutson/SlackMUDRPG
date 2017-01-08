@@ -1,0 +1,13 @@
+﻿{
+  "ItemName": "Wooden Pell",
+  "ItemType": "Misc",
+  "ItemFamily": "Misc",
+  "ItemDescription": "This is a wooden Pell, used for melee training.",
+  "ItemWeight": 20,
+  "ItemSize": 20,
+  "HitPoints": 1000000000,
+  "MaxHitPoints": 1000000000,
+  "BaseDamage": 0.1,
+  "Toughness": 5,
+  "CanHoldOtherItems": false
+}

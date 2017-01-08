@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using SlackMUDRPG.CommandClasses;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Web;
 using SlackMUDRPG.Utility;
 
-namespace SlackMUDRPG.CommandsClasses
+namespace SlackMUDRPG.CommandClasses
 {
 	public class SMCharacter
 	{
@@ -50,6 +49,8 @@ namespace SlackMUDRPG.CommandsClasses
 		[JsonProperty("CharacterSlots")]
 		public List<SMCharacterSlot> CharacterSlots { get; set; }
 
+        public string ResponseURL { get; set; }
+
 		#region "General Player Functions"
 
 		/// <summary>
@@ -79,7 +80,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// </summary>
 		public void SaveToApplication()
 		{
-			List<SMCharacter> smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
 			SMCharacter characterInMem = smcs.FirstOrDefault(smc => smc.UserID == this.UserID);
 
@@ -97,7 +98,15 @@ namespace SlackMUDRPG.CommandsClasses
 		/// </summary>
 		public SMRoom GetRoom()
 		{
-			return SlackMud.GetRoom(this.RoomID);
+			return new SlackMud().GetRoom(this.RoomID);
+		}
+
+		/// <summary>
+		/// Gets the characters current room details,
+		/// </summary>
+		public void GetRoomDetails()
+		{
+			this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this.UserID));
 		}
 
 		/// <summary>
@@ -106,14 +115,11 @@ namespace SlackMUDRPG.CommandsClasses
 		/// <param name="charID"></param>
 		/// <param name="exitShortcut"></param>
 		/// <returns></returns>
-		public string Move(string exitShortcut)
+		public void Move(string exitShortcut)
 		{
-			// Create returnString
-			string returnString = "";
-
 			// Get the current character location
 			List<SMCharacter> smcs = new List<SMCharacter>();
-			smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			SMCharacter charToMove = new SMCharacter();
 			bool foundCharacter = false;
 
@@ -128,12 +134,12 @@ namespace SlackMUDRPG.CommandsClasses
 				}
 				else
 				{
-					returnString = "Character not logged in, please login before trying to move.";
+					this.sendMessageToPlayer("Character not logged in, please login before trying to move.");
 				}
 			}
 			else
 			{
-				returnString = "Character not logged in, please login before trying to move.";
+				this.sendMessageToPlayer("Character not logged in, please login before trying to move.");
 			}
 
 			if (foundCharacter)
@@ -147,22 +153,108 @@ namespace SlackMUDRPG.CommandsClasses
 				sme = roomInMem.RoomExits.FirstOrDefault(smes => smes.Shortcut == exitShortcut);
 
 				// Get the new room (and check that it's loaded in memory).
-				SMRoom smr = SlackMud.GetRoom(sme.RoomID);
+				SMRoom smr = new SlackMud().GetRoom(sme.RoomID);
 
 				if (smr != null)
 				{
 					// Move the player to the new location
 					this.RoomID = smr.RoomID;
 					this.SaveToFile();
-					returnString = SlackMud.GetLocationDetails(this.RoomID);
+					this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
 
 					// Announce arrival to other players in the same place
-					smr.Announce("_" + this.GetFullName() + " walks in._");
+					smr.Announce("_" + this.GetFullName() + " walks in._", this, true);
 
 				}
 			}
+		}
 
-			return returnString;
+		/// <summary>
+		/// Use a skill
+		/// </summary>
+		/// <param name="skillName">The name of the skill to use</param>
+		/// <param name="targetName">The name of a (the) target to use the skill on (optional)</param>
+		public void UseSkill(string skillName, string targetName = null)
+		{
+			// Find out if the character has the skill.
+			SMCharacterSkill smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName == skillName);
+
+			// If the character has the skill
+			if (smcs != null)
+			{
+				// Variables for use later
+				string targetType = null, targetID = null;
+				bool useSkill = true;
+
+				// If there's a target we need to look at...
+				if (targetName != null) {
+					// .. get the room
+					SMRoom currentRoom = this.GetRoom();
+
+					// find any players with that target name first
+					SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName() == targetName);
+
+					// If it's not null set the target details
+					if (targetCharacter != null)
+					{
+						// Set the target as a character and set the target id
+						targetType = "Character";
+						targetID = targetCharacter.UserID;
+					}
+					else // We need to see if there's an object with the name
+					{
+						// get a target item with the target name
+						SMItem targetItem = currentRoom.GetItemByName(targetName);
+
+						// if we find one...
+						if (targetItem != null)
+						{
+							// .. set the target type to be an item and set the target id
+							targetType = "Item";
+							targetID = targetItem.ItemID;
+						}
+						else
+						{
+							// get a target item with the target name
+							targetItem = currentRoom.GetItemByFamilyName(targetName);
+
+							// if we find one...
+							if (targetItem != null)
+							{
+								// .. set the target type to be an item and set the target id
+								targetType = "Item";
+								targetID = targetItem.ItemID;
+							}
+							else
+							{
+								// Not found the target with the name.. so send a message...
+								this.sendMessageToPlayer("The target you've specified is not valid");
+
+								// And we can't use the skill because we can't find the target.
+								useSkill = false;
+							}
+						}
+					}
+				}
+
+				// Check if we're able to use the skill...
+				if (useSkill) { 
+					// Output variables we don't need
+					string messageOut;
+					float floatOut;
+
+					// Create a new instance of the skill.
+					SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName == skillName);
+
+					// Execute the skill
+					smc.UseSkill(this, out messageOut, out floatOut, true, targetType, targetID);
+				}
+			}
+			else
+			{
+				// Can't use the skill so let the player know!
+				this.sendMessageToPlayer("You need to learn the \"" + skillName + "\" skill before you can use it.");
+			}
 		}
 
 		#endregion
@@ -346,12 +438,38 @@ namespace SlackMUDRPG.CommandsClasses
             return false;
         }
 
-        /// <summary>
-        /// Counts the number of a named item the character owns.
-        /// </summary>
-        /// <returns>The count.</returns>
-        /// <param name="name">ItemName.</param>
-        public int CountOwnedItemsByName(string name)
+		/// <summary>
+		/// Gets an item by name / family name
+		/// </summary>
+		/// <param name="itemName">The name / family name of the item</param>
+		/// <returns>The equipped item</returns>
+		public SMItem GetEquippedItem(string itemName)
+		{
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (slot.EquippedItem.ItemName == itemName)
+					{
+						return slot.EquippedItem;
+					}
+
+					if (slot.EquippedItem.ItemFamily == itemName)
+					{
+						return slot.EquippedItem;
+					}
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Counts the number of a named item the character owns.
+		/// </summary>
+		/// <returns>The count.</returns>
+		/// <param name="name">ItemName.</param>
+		public int CountOwnedItemsByName(string name)
 		{
 			int count = 0;
 
@@ -360,6 +478,10 @@ namespace SlackMUDRPG.CommandsClasses
 				if (!slot.isEmpty())
 				{
 					if (slot.EquippedItem.ItemName == name)
+					{
+						count++;
+					}
+					else if (slot.EquippedItem.ItemFamily == name)
 					{
 						count++;
 					}
@@ -558,7 +680,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// <param name="speech">What the character is saying</param>
 		public void Say(string speech)
 		{
-			SlackMud.GetRoom(this.RoomID).ChatSay(speech, this);
+            new SlackMud().GetRoom(this.RoomID).ChatSay(speech, this);
 		}
 
 		/// <summary>
@@ -568,7 +690,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// /// <param name="whisperToName">Who the character is whispering to (name)</param>
 		public void Whisper(string speech, string whisperToName)
 		{
-			SlackMud.GetRoom(this.RoomID).ChatWhisper(speech, this, whisperToName);
+            new SlackMud().GetRoom(this.RoomID).ChatWhisper(speech, this, whisperToName);
 		}
 
 		/// <summary>
@@ -577,7 +699,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// <param name="speech">What the character is shouting</param>
 		public void Shout(string speech)
 		{
-			SlackMud.GetRoom(this.RoomID).ChatShout(speech, this);
+            new SlackMud().GetRoom(this.RoomID).ChatShout(speech, this);
 		}
 
 		/// <summary>
@@ -596,7 +718,7 @@ namespace SlackMUDRPG.CommandsClasses
 		public void sendMessageToPlayer(string message)
 		{
 			// TODO Change the name of the service based on the one used to send the information!
-			Commands.SendToChannelMessage("", "SlackMud", message, "SlackMud", this.UserID);
+			Commands.SendMessage("", "SlackMud", message, "SlackMud", this.UserID, this.ResponseURL);
 		}
 
 		#endregion

@@ -3,7 +3,7 @@
 	"SingularPronoun": "a",
 	"PluralName": "Small Backpacks",
 	"PluralPronoun": "some",
-	"ItemType": "container",
+	"ItemType": "Container",
 	"ItemDescription": "Basic small backpack that all players start with.",
 	"ItemWeight": 0,
   "ItemSize": 1,

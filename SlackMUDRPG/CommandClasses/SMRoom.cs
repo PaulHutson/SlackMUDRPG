@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using SlackMUDRPG.Utility;
 
-namespace SlackMUDRPG.CommandsClasses
+namespace SlackMUDRPG.CommandClasses
 {
 	public class SMRoom
 	{
@@ -103,11 +103,11 @@ namespace SlackMUDRPG.CommandsClasses
 
 			if (this.RoomExits.Count == 0)
 			{
-				returnString = "No Exits are found from this room...";
+				returnString = "> No Exits are found from this room...";
 			}
 			else
 			{
-				returnString += "\n\nRoom Exits:\n";
+				returnString += "\n> \n> Room Exits:\n";
 				bool isFirst = true;
 
 				foreach (SMExit sme in this.RoomExits)
@@ -119,6 +119,7 @@ namespace SlackMUDRPG.CommandsClasses
 					else
 					{
 						isFirst = false;
+						returnString += "> ";
 					}
 					returnString += sme.Description + " (" + sme.Shortcut + ")";
 				}
@@ -134,7 +135,7 @@ namespace SlackMUDRPG.CommandsClasses
 
 			// Search through logged in users to see which are in this location
 			List<SMCharacter> smcs = new List<SMCharacter>();
-			smcs = (List<SlackMUDRPG.CommandsClasses.SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
 			// Check if the character already exists or not.
 			if (smcs != null)
@@ -153,7 +154,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// </summary>
 		public string GetPeopleDetails(string userID = "0")
 		{
-			string returnString = "\n\nPeople:\n";
+			string returnString = "\n> \n> People:\n";
 
 			// Get the people within the location
 			List<SMCharacter> smcs = this.GetPeople();
@@ -171,6 +172,7 @@ namespace SlackMUDRPG.CommandsClasses
 					else
 					{
 						isFirst = false;
+						returnString += "> ";
 					}
 
 					if (smc.UserID == userID)
@@ -186,7 +188,7 @@ namespace SlackMUDRPG.CommandsClasses
 			}
 			else
 			{
-				returnString += "There's noone here.";
+				returnString += "> There's noone here.";
 			}
 
 			return returnString;
@@ -197,7 +199,7 @@ namespace SlackMUDRPG.CommandsClasses
 		/// </summary>
 		public string GetItemDetails()
         {
-            string returnString = "\n\nObjects:\n";
+            string returnString = "\n> \n> Objects:\n";
 
             // Check if the character already exists or not.
             if (this.RoomItems.Count > 0)
@@ -212,15 +214,15 @@ namespace SlackMUDRPG.CommandsClasses
                     else
                     {
                         isFirst = false;
-                    }
+						returnString += "> ";
+					}
 
                     returnString += smi.ItemName;
-
                 }
             }
             else
             {
-                returnString += "Nothing";
+                returnString += "> Nothing";
             }
 
             return returnString;
@@ -234,8 +236,10 @@ namespace SlackMUDRPG.CommandsClasses
         public string GetLocationInformation(string userID = "0")
 		{
 			// Construct the room string.
+			string returnString = "*Location Details:*\n";
+
 			// Create the string and add the basic room description.
-			string returnString = this.RoomDescription;
+			returnString += "> " + this.RoomDescription;
 
 			// Add the people within the location
 			returnString += this.GetPeopleDetails(userID);
@@ -267,6 +271,41 @@ namespace SlackMUDRPG.CommandsClasses
 			}
 
 			return this.RoomItems.FirstOrDefault(smi => smi.ItemName == name);
+		}
+
+		/// <summary>
+		/// Gets an item in the room by its ItemName.
+		/// </summary>
+		/// <returns>The item.</returns>
+		/// <param name="name">ItemName.</param>
+		public SMItem GetItemByFamilyName(string familyName)
+		{
+			if (this.RoomItems == null)
+			{
+				return null;
+			}
+
+			return this.RoomItems.FirstOrDefault(smi => smi.ItemFamily == familyName);
+		}
+
+		/// <summary>
+		/// Update an item
+		/// </summary>
+		/// <param name="itemID">The ID of the item</param>
+		/// <param name="attributeType">The attribute to update</param>
+		/// <param name="newValue">The new value of the attribue</param>
+		public void UpdateItem(string itemID, string attributeType, int newValue)
+		{
+			if (this.RoomItems != null)
+			{
+				switch (attributeType)
+				{
+					case "HP":
+						this.RoomItems.FirstOrDefault(smitem => smitem.ItemID == itemID).HitPoints = newValue;
+						break;
+				}
+				this.SaveToApplication();
+			}
 		}
 
 		#endregion
@@ -338,7 +377,7 @@ namespace SlackMUDRPG.CommandsClasses
 				// Get the room details from the exit id
 				SMRoom otherRooms = new SMRoom();
 
-				otherRooms = SlackMud.GetRoom(sme.RoomID);
+				otherRooms = new SlackMud().GetRoom(sme.RoomID);
 
 				// Get the "from" location
 				SMExit smre = otherRooms.RoomExits.FirstOrDefault(smef => smef.RoomID == this.RoomID);
@@ -354,12 +393,22 @@ namespace SlackMUDRPG.CommandsClasses
 			}
 		}
 
-		public void Announce(string msg)
+		public void Announce(string msg, SMCharacter sender = null, bool suppressMessageToSender = false)
 		{
 			// Send the message to all people connected to the room
 			foreach (SMCharacter smc in this.GetPeople())
 			{
-				this.ChatSendMessage(smc, msg);
+				bool sendMessage = true;
+
+				if ((suppressMessageToSender) && (sender != null) && (sender.UserID == smc.UserID))
+				{
+					sendMessage = false;
+				}
+
+				if (sendMessage)
+				{
+					this.ChatSendMessage(smc, msg);
+				}
 			}
 		}
 

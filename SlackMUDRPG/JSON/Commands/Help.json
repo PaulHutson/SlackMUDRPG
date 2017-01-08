@@ -1,10 +1,104 @@
 ﻿{
-    "Command": 
+  "SMCommandList":[
     {
-        "CommandText": "help",
-        "CommandShortcut": "h",
-        "Description": "This will show a list of all the commands available to you.\nYou can get a list of all commands or a specific one as needed.",
-        "Example": "'help' or 'help look' (to see what the look command does)",
-        "CommandFormat": "command {option}"
+      "CommandFamily": "General",
+      "CommandBaseName": "login",
+      "CommandName": "login",
+      "CommandDescription": "Logs you into the game.",
+      "CommandSyntax": "login",
+      "CommandExpression": "login",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SlackMud",
+      "CommandMethod": "Login",
+      "PassCommandAsFirstArg": false,
+      "PassQueryParamAsFirstArg": "user_id",
+      "ExampleUsage": "login",
+      "RequiredSkill": null
+    },
+    {
+      "CommandFamily": "Environment",
+      "CommandBaseName": "chop",
+      "CommandName": "chop",
+      "CommandDescription": "Enables the player to chop something.",
+      "CommandSyntax": "chop <TargetName>",
+      "CommandExpression": "chop {.+}",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+      "CommandMethod": "UseSkill",
+      "PassCommandAsFirstArg": true,
+      "PassQueryParamAsFirstArg": null,
+      "ExampleUsage": "chop tree1",
+      "RequiredSkill": "Skill.Chop"
+    },
+    {
+      "CommandFamily": "Chat",
+      "CommandBaseName": "say",
+      "CommandName": "say",
+      "CommandDescription": "Enables the player to say something to the people within the same location.",
+      "CommandSyntax": "say <whatever-you-want>",
+      "CommandExpression": "say {.+}",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+      "CommandMethod": "Say",
+      "PassCommandAsFirstArg": false,
+      "PassQueryParamAsFirstArg":  null,
+      "ExampleUsage": "say Hello!",
+      "RequiredSkill": null
+    },
+    {
+      "CommandFamily": "Chat",
+      "CommandBaseName": "shout",
+      "CommandName": "shout",
+      "CommandDescription": "Enables the player to shout something which will be heard in the current location and locations all around.",
+      "CommandSyntax": "shout <whatever-you-want>",
+      "CommandExpression": "shout {.+}",
+      "ExampleUsage": "shout HELLO!",
+      "RequiredSkill": null
+    },
+    {
+      "CommandFamily": "Chat",
+      "CommandBaseName": "whisper",
+      "CommandName": "whisper",
+      "CommandDescription": "Enables the player to whisper something to another player.",
+      "CommandSyntax": "whisper <\"playername\"> <whatever-you-want>",
+      "CommandExpression": "whisper {\".+\"} {.+}",
+      "ExampleUsage": "whisper \"Paul Almighty\" Hellloooo",
+      "RequiredSkill": null
+    },
+    {
+      "CommandFamily": "General",
+      "CommandBaseName": "help",
+      "CommandName": "help",
+      "CommandDescription": "This will show a list of all the commands available to you.\nYou can get a list of all commands or a specific one as needed.",
+      "CommandSyntax": "help [command]",
+      "CommandExpression": "help {.+}?",
+      "ExampleUsage": "help or help equip",
+      "RequiredSkill": null
+    },
+    {
+      "CommandFamily": "General",
+      "CommandBaseName": "move",
+      "CommandName": "move",
+      "CommandDescription": "This will move you to a room defined by the exit.",
+      "CommandSyntax": "move <locationshortcut>",
+      "CommandExpression": "move {.+}",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+      "CommandMethod": "Move",
+      "PassCommandAsFirstArg": false,
+      "PassQueryParamAsFirstArg":  null,
+      "ExampleUsage": "move n (would move you north if n was a location exit shortcut)",
+      "RequiredSkill": null
+    },
+    {
+      "CommandFamily": "Location",
+      "CommandBaseName": "look",
+      "CommandName": "look",
+      "CommandDescription": "This will move you to a room defined by the exit.",
+      "CommandSyntax": "look",
+      "CommandExpression": "look",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+      "CommandMethod": "GetRoomDetails",
+      "PassCommandAsFirstArg": false,
+      "PassQueryParamAsFirstArg":  null,
+      "ExampleUsage": "look",
+      "RequiredSkill": null
     }
+  ]
 }

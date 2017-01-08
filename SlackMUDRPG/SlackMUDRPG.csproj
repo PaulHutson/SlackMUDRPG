@@ -84,9 +84,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GameAccess.aspx" />
+    <Content Include="Index.aspx" />
+    <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
-    <Content Include="JSON\Commands\Help.json" />
     <Content Include="JSON\Commands\NewCharacter.json" />
     <Content Include="JSON\GeneralText\NoCharacter.json" />
     <Content Include="JSON\GeneralText\WelcomeMessage.json" />
@@ -100,7 +101,6 @@
     <Content Include="JSON\Misc\Attribute.BaseCharacter.json" />
     <Content Include="JSON\Misc\Attribute.Blacksmith.json" />
     <Content Include="JSON\Misc\Attribute.Warrior.json" />
-    <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Skills\Skill.Sword.json" />
     <Content Include="JSON\Skills\Skill.Axe.json" />
     <Content Include="JSON\Skills\Skill.Dagger.json" />
@@ -113,9 +113,14 @@
     <Content Include="JSON\Objects\Environment.YoungTree.json" />
     <Content Include="JSON\Objects\Resource.TreeTrunk.json" />
     <Content Include="JSON\Objects\Resource.Log.json" />
-    <Content Include="JSON\Misc\Help.json" />
     <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Characters\CharU3KLW47QC.json" />
+    <Content Include="JSON\Objects\Misc.Pell.json" />
+    <Content Include="JSON\Locations\LocOutside1.json" />
+    <Content Include="JSON\Locations\LocTrainingYard.json" />
+    <Content Include="JSON\Objects\Environment.OldTree.json" />
+    <Content Include="WebPlay.aspx" />
+    <Content Include="Handlers\WebSocketHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -126,15 +131,14 @@
     <Content Include="JSON\Objects\Weapons.WoodenSword.json" />
     <None Include="JSON\Misc\Slots.BaseCharacter.json" />
     <Content Include="JSON\Objects\Weapons.WoodenStick.json" />
+    <Content Include="JSON\Commands\Help.json" />
+    <None Include="JSON\Commands\ClassBuilder.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.1.0.4-build00190.js" />
     <Content Include="scripts\ai.1.0.4-build00190.min.js" />
-    <Content Include="SlackCommands.aspx" />
     <Content Include="TestButton.aspx" />
-    <Content Include="TestOutput.aspx" />
-    <Content Include="TestPost.aspx" />
     <Content Include="ToDo.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -159,14 +163,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SlackCommands.aspx.cs">
-      <DependentUpon>SlackCommands.aspx</DependentUpon>
+    <Compile Include="Handlers\WebSocketHandler.ashx.cs">
+      <DependentUpon>WebSocketHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SlackCommands.aspx.designer.cs">
-      <DependentUpon>SlackCommands.aspx</DependentUpon>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestButton.aspx.cs">
       <DependentUpon>TestButton.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -174,24 +181,19 @@
     <Compile Include="TestButton.aspx.designer.cs">
       <DependentUpon>TestButton.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TestOutput.aspx.cs">
-      <DependentUpon>TestOutput.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestOutput.aspx.designer.cs">
-      <DependentUpon>TestOutput.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TestPost.aspx.cs">
-      <DependentUpon>TestPost.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestPost.aspx.designer.cs">
-      <DependentUpon>TestPost.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Utility\Path.cs" />
     <Compile Include="Utility\SlackWebHooks.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />
     <Compile Include="CommandClasses\SMCharacterSlot.cs" />
+    <Compile Include="Utility\Utils.cs" />
+    <Compile Include="Utility\ClassBuilder.cs" />
+    <Compile Include="WebPlay.aspx.cs">
+      <DependentUpon>WebPlay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebPlay.aspx.designer.cs">
+      <DependentUpon>WebPlay.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -224,7 +226,7 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

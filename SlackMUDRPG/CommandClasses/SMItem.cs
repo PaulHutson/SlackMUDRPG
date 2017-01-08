@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SlackMUDRPG.CommandsClasses
+namespace SlackMUDRPG.CommandClasses
 {
 	public class SMItem
 	{
@@ -61,7 +61,13 @@ namespace SlackMUDRPG.CommandsClasses
 
 		public SMItem GetDestroyedItem()
 		{
-			return SlackMud.CreateItemFromJson(this.DestroyedOutput);
+			string createFileItemName = this.DestroyedOutput;
+			if (createFileItemName.Contains("."))
+			{
+				createFileItemName = createFileItemName.Split('.')[0];
+			}
+
+			return new SlackMud().CreateItemFromJson(createFileItemName);
 		}
 	}
 }
