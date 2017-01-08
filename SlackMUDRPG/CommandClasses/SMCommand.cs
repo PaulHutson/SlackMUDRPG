@@ -136,6 +136,6 @@ namespace SlackMUDRPG.CommandClasses
 
 		public SMCommand Command;
 
-		public List<object> Parameters;
+		public object[] Parameters;
 	}
 }

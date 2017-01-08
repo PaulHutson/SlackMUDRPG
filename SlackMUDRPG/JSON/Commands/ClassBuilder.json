@@ -1,0 +1,15 @@
+﻿{
+	"ClassBuilderSpecList": [
+		{
+			"CommandClassName": "SMCharacter",
+			"BuildClassName": "SlackMUDRPG.CommandClasses.SlackMud",
+			"BuildMethodName": "GetCharacter",
+			"BuildArgs": [
+				{
+					"ArgName": "user_id",
+					"ArgSource": "query_param"
+				}
+			]
+		}
+	]
+}

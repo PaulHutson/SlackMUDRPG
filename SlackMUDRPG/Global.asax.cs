@@ -45,6 +45,23 @@ namespace SlackMUDRPG
 			}
 			Application["SMCommands"] = lsmc;
 
+			// Load class builder specs into memory for usage later
+			// Used for creating objects that are used to call user commands on
+			ClassBuilderSpecs cbs = new ClassBuilderSpecs();
+			string specsPath = FilePathSystem.GetFilePath("Commands", "ClassBuilder");
+
+			if (File.Exists(specsPath))
+			{
+				using (StreamReader r = new StreamReader(specsPath))
+				{
+					string json = r.ReadToEnd();
+
+					cbs = JsonConvert.DeserializeObject<ClassBuilderSpecs>(json);
+				}
+			}
+
+			Application["ClassBuilderSpecs"] = cbs;
+
 			// Load the Skills into memory for usage later
 			// Used for both parsing commands sent in and also for help output
 			List<SMSkill> lsk = new List<SMSkill>();

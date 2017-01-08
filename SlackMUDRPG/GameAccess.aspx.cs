@@ -62,7 +62,7 @@ namespace SlackMUDRPG
 			// If the command if found extra the params and return the parsed command object.
 			if (command != null)
 			{
-				List<object> parameters = this.GetParamsFromCommandString(command, cmdString);
+				object[] parameters = this.GetParamsFromCommandString(command, cmdString);
 
 				cmd.CommandName = commandName;
 				cmd.Command = command;
@@ -112,7 +112,7 @@ namespace SlackMUDRPG
 		/// <returns>List of extrated parameters to use when running the user command</returns>
 		/// <param name="command">SMCommand object.</param>
 		/// <param name="cmdString">User entered command string.</param>
-		private List<object> GetParamsFromCommandString(SMCommand command, string cmdString)
+		private object[] GetParamsFromCommandString(SMCommand command, string cmdString)
 		{
 			// Create a new generic object list to hold the commands parameters
 			List<object> parameters = new List<object>();
@@ -149,7 +149,7 @@ namespace SlackMUDRPG
 				}
 			}
 
-			return parameters;
+			return parameters.ToArray();
 		}
 
 		/// <summary>
@@ -158,15 +158,29 @@ namespace SlackMUDRPG
 		/// <param name="command">Parsed Command.</param>
 		private void RunAction(SMParsedCommand command)
 		{
-			//TODO implement class builder to get the class object dynamically
-			if (command.Command.CommandClass.Contains("SMCharacter"))
+			// Get the Class name of the command class for use in the ClassBuilder
+			string commandClassName = command.Command.CommandClass.Split('.').Last();
+
+			// Get class instance from ClassBuilder to run the command with
+			object commandClass = new ClassBuilder(commandClassName).GetClassInstance();
+
+			// if null returned by ClassBuilder
+			if (commandClass == null)
 			{
-				object obj = new SlackMud().GetCharacter(Utils.GetQueryParam("user_id"));
-				Utils.CallUserFuncArray(obj, command.Command.CommandMethod, command.Parameters.ToArray());
+				Utils.CallUserFuncArray(
+					command.Command.CommandClass,
+					command.Command.CommandMethod,
+					command.Parameters
+				);
 			}
+			// Using instance returned by the ClassBuilder
 			else
 			{
-				Utils.CallUserFuncArray(command.Command.CommandClass, command.Command.CommandMethod, command.Parameters.ToArray());
+				Utils.CallUserFuncArray(
+					commandClass,
+					command.Command.CommandMethod,
+					command.Parameters
+				);
 			}
 		}
 	}
