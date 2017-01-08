@@ -15,10 +15,6 @@ namespace SlackMUDRPG
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-
-			SMCharacter smc = new SlackMud().GetCharacter(Utils.GetQueryParam("user_id"));
-			smc.sendMessageToPlayer("Page_Load");
-
 			// Command text (this works for both form submissions and also query strings)
 			string commandText = Utils.GetQueryParam("text");
 
@@ -29,8 +25,6 @@ namespace SlackMUDRPG
 			catch (Exception expection)
 			{
 				// TODO report error to person
-				smc.sendMessageToPlayer(expection.Message);
-				smc.sendMessageToPlayer(expection.Source);
 			}
 		}
 
@@ -166,6 +160,9 @@ namespace SlackMUDRPG
 		{
 			// Get the Class name of the command class for use in the ClassBuilder
 			string commandClassName = command.Command.CommandClass.Split('.').Last();
+
+			SMCharacter smc = new SlackMud().GetCharacter(Utils.GetQueryParam("user_id"));
+			smc.sendMessageToPlayer(commandClassName);
 
 			// Get class instance from ClassBuilder to run the command with
 			object commandClass = new ClassBuilder(commandClassName).GetClassInstance();
