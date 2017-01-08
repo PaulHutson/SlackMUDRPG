@@ -17,7 +17,7 @@ namespace SlackMUDRPG
 
 		protected void btn_Test_Click(object sender, EventArgs e)
 		{
-			//OutputUpdate(SlackMUDRPG.CommandClasses.SlackMud.Login(tb_CharID.Text));
+			new SlackMud().Login(tb_CharID.Text);
 		}
 
 		protected void btn_CreateCharacter_Click(object sender, EventArgs e)
@@ -28,7 +28,7 @@ namespace SlackMUDRPG
 		protected void btn_TestLoc_Click(object sender, EventArgs e)
 		{
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
-			//OutputUpdate(SlackMUDRPG.CommandClasses.SlackMud.GetLocationDetails(smc.RoomID, smc.UserID));
+			new SlackMud().GetLocationDetails(smc.RoomID, smc.UserID);
 		}
 
 		protected void btn_MoveRoom_Click(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace SlackMUDRPG
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 
 			// Move the char to a new location
-			//OutputUpdate(smc.Move(tb_RoomShortcutText.Text));
+			smc.Move(tb_RoomShortcutText.Text);
 		}
 
 		protected void btn_Say_Click(object sender, EventArgs e)
