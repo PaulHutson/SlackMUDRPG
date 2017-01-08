@@ -102,6 +102,14 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Gets the characters current room details,
+		/// </summary>
+		public void GetRoomDetails()
+		{
+			this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this.UserID));
+		}
+
+		/// <summary>
 		/// Move the character.
 		/// </summary>
 		/// <param name="charID"></param>

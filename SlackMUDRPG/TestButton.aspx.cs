@@ -98,5 +98,10 @@ namespace SlackMUDRPG
 			tb_TextAreaOutput.Text += s + "\n\n";
 		}
 
+		protected void btn_Look_Click(object sender, EventArgs e)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+			smc.GetRoomDetails();
+		}
 	}
 }

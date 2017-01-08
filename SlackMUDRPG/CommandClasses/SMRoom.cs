@@ -103,11 +103,11 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (this.RoomExits.Count == 0)
 			{
-				returnString = "No Exits are found from this room...";
+				returnString = "> No Exits are found from this room...";
 			}
 			else
 			{
-				returnString += "\n\nRoom Exits:\n";
+				returnString += "\n> \n> Room Exits:\n";
 				bool isFirst = true;
 
 				foreach (SMExit sme in this.RoomExits)
@@ -119,6 +119,7 @@ namespace SlackMUDRPG.CommandClasses
 					else
 					{
 						isFirst = false;
+						returnString += "> ";
 					}
 					returnString += sme.Description + " (" + sme.Shortcut + ")";
 				}
@@ -153,7 +154,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		public string GetPeopleDetails(string userID = "0")
 		{
-			string returnString = "\n\nPeople:\n";
+			string returnString = "\n> \n> People:\n";
 
 			// Get the people within the location
 			List<SMCharacter> smcs = this.GetPeople();
@@ -171,6 +172,7 @@ namespace SlackMUDRPG.CommandClasses
 					else
 					{
 						isFirst = false;
+						returnString += "> ";
 					}
 
 					if (smc.UserID == userID)
@@ -186,7 +188,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 			else
 			{
-				returnString += "There's noone here.";
+				returnString += "> There's noone here.";
 			}
 
 			return returnString;
@@ -197,7 +199,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		public string GetItemDetails()
         {
-            string returnString = "\n\nObjects:\n";
+            string returnString = "\n> \n> Objects:\n";
 
             // Check if the character already exists or not.
             if (this.RoomItems.Count > 0)
@@ -212,15 +214,15 @@ namespace SlackMUDRPG.CommandClasses
                     else
                     {
                         isFirst = false;
-                    }
+						returnString += "> ";
+					}
 
                     returnString += smi.ItemName;
-
                 }
             }
             else
             {
-                returnString += "Nothing";
+                returnString += "> Nothing";
             }
 
             return returnString;
@@ -234,8 +236,10 @@ namespace SlackMUDRPG.CommandClasses
         public string GetLocationInformation(string userID = "0")
 		{
 			// Construct the room string.
+			string returnString = "*Location Details:*\n";
+
 			// Create the string and add the basic room description.
-			string returnString = this.RoomDescription;
+			returnString += "> " + this.RoomDescription;
 
 			// Add the people within the location
 			returnString += this.GetPeopleDetails(userID);
