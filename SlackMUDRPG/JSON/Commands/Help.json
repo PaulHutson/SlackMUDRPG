@@ -85,6 +85,20 @@
       "PassQueryParamAsFirstArg":  null,
       "ExampleUsage": "move n (would move you north if n was a location exit shortcut)",
       "RequiredSkill": null
+    },
+    {
+      "CommandFamily": "Location",
+      "CommandBaseName": "look",
+      "CommandName": "look",
+      "CommandDescription": "This will move you to a room defined by the exit.",
+      "CommandSyntax": "look",
+      "CommandExpression": "look",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+      "CommandMethod": "GetRoomDetails",
+      "PassCommandAsFirstArg": false,
+      "PassQueryParamAsFirstArg":  null,
+      "ExampleUsage": "look",
+      "RequiredSkill": null
     }
   ]
 }

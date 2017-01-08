@@ -7,7 +7,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "2",
+  "RoomID": "TrainingYard",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -20,12 +20,12 @@
     "maxhp": 10,
     "SocialStanding": 8
   },
-	"Skills": [
-		{
-			"SkillName": "Chop",
-			"SkillLevel":  1
-		}
-	],
+  "Skills": [
+    {
+      "SkillName": "Chop",
+      "SkillLevel": 1
+    }
+  ],
   "CharacterSlots": [
     {
       "Name": "RightHand",
@@ -78,5 +78,6 @@
         "HeldItems": null
       }
     }
-  ]
+  ],
+  "ResponseURL": null
 }
