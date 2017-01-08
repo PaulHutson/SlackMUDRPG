@@ -29,7 +29,7 @@ namespace SlackMUDRPG
 			catch (Exception expection)
 			{
 				// TODO report error to person
-				smc.sendMessageToPlayer(expection.Message);
+				smc.sendMessageToPlayer(expection);
 			}
 		}
 
