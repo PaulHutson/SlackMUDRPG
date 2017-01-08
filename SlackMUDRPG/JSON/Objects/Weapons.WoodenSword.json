@@ -1,5 +1,8 @@
 ﻿{
   "ItemName": "Wooden Sword",
+	"SingularPronoun": "a",
+	"PluralName": "Wooden Swords",
+	"PluralPronoun": "some",
   "ItemType": "weapon",
   "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
   "ItemWeight": 1,

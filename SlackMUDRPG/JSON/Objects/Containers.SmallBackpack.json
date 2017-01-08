@@ -1,5 +1,8 @@
 ﻿{
 	"ItemName": "Small Backpack",
+	"SingularPronoun": "a",
+	"PluralName": "Small Backpacks",
+	"PluralPronoun": "some",
 	"ItemType": "container",
 	"ItemDescription": "Basic small backpack that all players start with.",
 	"ItemWeight": 0,
