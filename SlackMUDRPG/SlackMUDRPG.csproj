@@ -132,6 +132,7 @@
     <None Include="JSON\Misc\Slots.BaseCharacter.json" />
     <Content Include="JSON\Objects\Weapons.WoodenStick.json" />
     <Content Include="JSON\Commands\Help.json" />
+    <None Include="JSON\Commands\ClassBuilder.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -184,6 +185,8 @@
     <Compile Include="Utility\SlackWebHooks.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />
     <Compile Include="CommandClasses\SMCharacterSlot.cs" />
+    <Compile Include="Utility\Utils.cs" />
+    <Compile Include="Utility\ClassBuilder.cs" />
     <Compile Include="WebPlay.aspx.cs">
       <DependentUpon>WebPlay.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -191,7 +194,6 @@
     <Compile Include="WebPlay.aspx.designer.cs">
       <DependentUpon>WebPlay.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Utility\Utils.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

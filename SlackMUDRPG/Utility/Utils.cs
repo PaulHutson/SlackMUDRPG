@@ -44,7 +44,7 @@ namespace SlackMUDRPG.Utility
 		/// <param name="className">Class name.</param>
 		/// <param name="methodName">Method name.</param>
 		/// <param name="args">Arguments.</param>
-		public static void CallUserFuncArray(string className, string methodName, params object[] args)
+		public static object CallUserFuncArray(string className, string methodName, params object[] args)
 		{
 			// Gets class object instance
 			object obj = Type.GetType(className).GetConstructor(Type.EmptyTypes).Invoke(new object[] { });
@@ -56,7 +56,7 @@ namespace SlackMUDRPG.Utility
 			object[] parameters = GetParamsArrayForMethod(method, args);
 
 			// Calls the method
-			method.Invoke(method.IsStatic ? null : obj, parameters);
+			return method.Invoke(method.IsStatic ? null : obj, parameters);
 		}
 
 		/// <summary>
@@ -65,7 +65,7 @@ namespace SlackMUDRPG.Utility
 		/// <param name="obj">Object instance to call methodName on.</param>
 		/// <param name="methodName">Method name.</param>
 		/// <param name="args">Arguments.</param>
-		public static void CallUserFuncArray(object obj, string methodName, params object[] args)
+		public static object CallUserFuncArray(object obj, string methodName, params object[] args)
 		{
 			// Gets the class name of the object
 			string className = obj.GetType().ToString();
@@ -77,7 +77,7 @@ namespace SlackMUDRPG.Utility
 			object[] parameters = GetParamsArrayForMethod(method, args).ToArray();
 
 			// Calls the method
-			method.Invoke(method.IsStatic ? null : obj, parameters);
+			return method.Invoke(method.IsStatic ? null : obj, parameters);
 		}
 
 		/// <summary>
