@@ -65,7 +65,7 @@
       "SuccessOutput": null
     },
     {
-      "StepType": "Repeat.Chop",
+      "StepType": "Repeat",
       "StepRequiredObject": "Activity.Chopping",
       "RequiredObjectAmount": 0,
       "FailureOutput": null,

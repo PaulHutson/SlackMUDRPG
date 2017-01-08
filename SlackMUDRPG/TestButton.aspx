@@ -44,6 +44,11 @@
 				<asp:Button runat="server" ID="btn_PickUpStick" Text="Pick Up Wooden Stick" OnClick="btn_PickUpStick_Click" OnClientClick="scrollBoxToBottom();" />
 				<asp:Button runat="server" ID="btn_DropUpStick" Text="Drop Wooden Stick" OnClick="btn_DropStick_Click" OnClientClick="scrollBoxToBottom();" />
 		</div>
+		
+		<div>
+			Skill:
+				<asp:Button runat="server" ID="btn_ChopTree" Text="Chop Tree" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopTree_Click" />
+		</div>
     </form>
 </body>
 </html>
