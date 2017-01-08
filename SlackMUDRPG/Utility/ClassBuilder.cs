@@ -155,6 +155,10 @@ namespace SlackMUDRPG.Utility
 				args.Add(this.GetBuildArgValue(buildArg));
 			}
 
+			if (args.Count == 0)
+			{
+				return null;
+			}
 			return args.ToArray();
 		}
 
