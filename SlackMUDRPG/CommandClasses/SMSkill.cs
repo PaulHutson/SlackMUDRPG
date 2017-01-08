@@ -263,10 +263,8 @@ namespace SlackMUDRPG.CommandClasses
 						smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
 
 						// Remove the destroyed item from the room.
-						// TODO Need to remove the item from the room.
+						smc.GetRoom().RemoveItem(targetItem);
 					}
-					
-					
 				}
 				
 				smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
