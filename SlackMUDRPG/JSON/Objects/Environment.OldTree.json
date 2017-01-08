@@ -8,7 +8,7 @@
   "HitPoints": 500,
   "MaxHitPoints": 500,
   "BaseDamage": 15,
-  "Toughness": 6,
+  "Toughness": 3,
   "DestroyedOutput":  "Resource.TreeTrunk,5",
 	"CanHoldOtherItems": false
 }

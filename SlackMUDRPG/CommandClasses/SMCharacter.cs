@@ -215,11 +215,24 @@ namespace SlackMUDRPG.CommandClasses
 						}
 						else
 						{
-							// Not found the target with the name.. so send a message...
-							this.sendMessageToPlayer("The target you've specified is not valid");
+							// get a target item with the target name
+							targetItem = currentRoom.GetItemByFamilyName(targetName);
 
-							// And we can't use the skill because we can't find the target.
-							useSkill = false;
+							// if we find one...
+							if (targetItem != null)
+							{
+								// .. set the target type to be an item and set the target id
+								targetType = "Item";
+								targetID = targetItem.ItemID;
+							}
+							else
+							{
+								// Not found the target with the name.. so send a message...
+								this.sendMessageToPlayer("The target you've specified is not valid");
+
+								// And we can't use the skill because we can't find the target.
+								useSkill = false;
+							}
 						}
 					}
 				}
@@ -425,12 +438,38 @@ namespace SlackMUDRPG.CommandClasses
             return false;
         }
 
-        /// <summary>
-        /// Counts the number of a named item the character owns.
-        /// </summary>
-        /// <returns>The count.</returns>
-        /// <param name="name">ItemName.</param>
-        public int CountOwnedItemsByName(string name)
+		/// <summary>
+		/// Gets an item by name / family name
+		/// </summary>
+		/// <param name="itemName">The name / family name of the item</param>
+		/// <returns>The equipped item</returns>
+		public SMItem GetEquippedItem(string itemName)
+		{
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (slot.EquippedItem.ItemName == itemName)
+					{
+						return slot.EquippedItem;
+					}
+
+					if (slot.EquippedItem.ItemFamily == itemName)
+					{
+						return slot.EquippedItem;
+					}
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Counts the number of a named item the character owns.
+		/// </summary>
+		/// <returns>The count.</returns>
+		/// <param name="name">ItemName.</param>
+		public int CountOwnedItemsByName(string name)
 		{
 			int count = 0;
 
@@ -439,6 +478,10 @@ namespace SlackMUDRPG.CommandClasses
 				if (!slot.isEmpty())
 				{
 					if (slot.EquippedItem.ItemName == name)
+					{
+						count++;
+					}
+					else if (slot.EquippedItem.ItemFamily == name)
 					{
 						count++;
 					}
