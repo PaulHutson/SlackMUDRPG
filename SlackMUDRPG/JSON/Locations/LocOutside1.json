@@ -20,10 +20,10 @@
 			"ItemDescription": "This tree looks very old.",
 			"ItemWeight": 500,
 			"ItemSize": 500,
-			"HitPoints": 500,
+			"HitPoints": 5,
 			"MaxHitPoints": 500,
 			"BaseDamage": 15,
-			"Toughness": 6,
+			"Toughness": 3,
 			"DestroyedOutput": "Resource.TreeTrunk,5",
 			"CanHoldOtherItems": false
 		},
@@ -38,7 +38,7 @@
 			"HitPoints": 500,
 			"MaxHitPoints": 500,
 			"BaseDamage": 15,
-			"Toughness": 6,
+			"Toughness": 3,
 			"DestroyedOutput": "Resource.TreeTrunk,5",
 			"CanHoldOtherItems": false
 		},
@@ -53,7 +53,7 @@
 			"HitPoints": 100,
 			"MaxHitPoints": 100,
 			"BaseDamage": 0.001,
-			"Toughness": 3,
+			"Toughness": 2,
 			"DestroyedOutput":  "Resource.TreeTrunk,1",
 			"CanHoldOtherItems": false
 		},
@@ -68,7 +68,7 @@
 			"HitPoints": 500,
 			"MaxHitPoints": 500,
 			"BaseDamage": 15,
-			"Toughness": 6,
+			"Toughness": 3,
 			"DestroyedOutput":  "Resource.TreeTrunk,5",
 			"CanHoldOtherItems": false
 		},
@@ -83,7 +83,7 @@
 			"HitPoints": 100,
 			"MaxHitPoints": 100,
 			"BaseDamage": 0.001,
-			"Toughness": 3,
+			"Toughness": 2,
 			"DestroyedOutput":  "Resource.TreeTrunk,1",
 			"CanHoldOtherItems": false
 		},
@@ -98,7 +98,7 @@
 			"HitPoints": 100,
 			"MaxHitPoints": 100,
 			"BaseDamage": 0.001,
-			"Toughness": 3,
+			"Toughness": 2,
 			"DestroyedOutput":  "Resource.TreeTrunk,1",
 			"CanHoldOtherItems": false
 		},
@@ -113,7 +113,7 @@
 			"HitPoints": 100,
 			"MaxHitPoints": 100,
 			"BaseDamage": 0.001,
-			"Toughness": 3,
+			"Toughness": 2,
 			"DestroyedOutput":  "Resource.TreeTrunk,1",
 			"CanHoldOtherItems": false
 		}

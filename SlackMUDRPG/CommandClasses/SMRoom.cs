@@ -273,6 +273,41 @@ namespace SlackMUDRPG.CommandClasses
 			return this.RoomItems.FirstOrDefault(smi => smi.ItemName == name);
 		}
 
+		/// <summary>
+		/// Gets an item in the room by its ItemName.
+		/// </summary>
+		/// <returns>The item.</returns>
+		/// <param name="name">ItemName.</param>
+		public SMItem GetItemByFamilyName(string familyName)
+		{
+			if (this.RoomItems == null)
+			{
+				return null;
+			}
+
+			return this.RoomItems.FirstOrDefault(smi => smi.ItemFamily == familyName);
+		}
+
+		/// <summary>
+		/// Update an item
+		/// </summary>
+		/// <param name="itemID">The ID of the item</param>
+		/// <param name="attributeType">The attribute to update</param>
+		/// <param name="newValue">The new value of the attribue</param>
+		public void UpdateItem(string itemID, string attributeType, int newValue)
+		{
+			if (this.RoomItems != null)
+			{
+				switch (attributeType)
+				{
+					case "HP":
+						this.RoomItems.FirstOrDefault(smitem => smitem.ItemID == itemID).HitPoints = newValue;
+						break;
+				}
+				this.SaveToApplication();
+			}
+		}
+
 		#endregion
 
 		#region "Room Chat Functions"
