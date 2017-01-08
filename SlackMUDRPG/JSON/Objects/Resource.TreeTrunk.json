@@ -4,7 +4,7 @@
 	"PluralName": "Tree Trunks",
 	"PluralPronoun": "some",
   "ItemType": "resource",
-  "ItemFamily": "TreeTrunks",
+  "ItemFamily": "Trunk",
 	"ItemDescription": "A fallen tree trunk",
 	"ItemWeight": 50,
   "ItemSize": 50,
@@ -12,6 +12,6 @@
   "MaxHitPoints": 50,
   "BaseDamage": 0.001,
   "Toughness": 3,
-  "DestroyedOutput":  "Logs,20",
+  "DestroyedOutput":  "Resource.Log,20",
 	"CanHoldOtherItems": false
 }

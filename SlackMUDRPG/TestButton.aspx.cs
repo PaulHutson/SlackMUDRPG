@@ -109,5 +109,17 @@ namespace SlackMUDRPG
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			smc.UseSkill("Chop", "Tree");
 		}
+
+		protected void btn_ChopLog_Click(object sender, EventArgs e)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+			smc.UseSkill("Chop", "Log");
+		}
+
+		protected void btn_ChopTreeTrunk_Click(object sender, EventArgs e)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+			smc.UseSkill("Chop", "Trunk");
+		}
 	}
 }
