@@ -48,6 +48,8 @@
 		<div>
 			Skill:
 				<asp:Button runat="server" ID="btn_ChopTree" Text="Chop Tree" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopTree_Click" />
+				<asp:Button runat="server" ID="btn_ChopLog" Text="Chop Log" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopLog_Click"  />
+				<asp:Button runat="server" ID="btn_ChopTreeTrunk" Text="Chop Tree Trunk" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopTreeTrunk_Click"  />
 		</div>
     </form>
 </body>

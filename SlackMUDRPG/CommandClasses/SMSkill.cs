@@ -84,7 +84,17 @@ namespace SlackMUDRPG.CommandClasses
 							}
 							break;
 						case "Information":
-							smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetID));
+							if (targetType == "Character")
+							{
+								// Get the character
+								var targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+								smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetChar.GetFullName(), ""));
+							}
+							else
+							{
+								var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+								smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetItem.SingularPronoun + " " + targetItem.ItemName, ""));
+							}
 							break;
 						case "Pause":
 							System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
@@ -217,10 +227,13 @@ namespace SlackMUDRPG.CommandClasses
 			// if the targets HP reaches 0 it has "died" or been "destroyed"
 			if (newTargetHP < 0)
 			{
+				string newItemName = "", oldItemName = "";
+
 				// Replace the object with the alterobject type
 				if (targetType == "Character")
 				{
 					// TODO Add "Die" method to the characer
+					newItemName = "A corpse";
 				}
 				else // Assume it's an item
 				{
@@ -229,6 +242,18 @@ namespace SlackMUDRPG.CommandClasses
 					targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
 					string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
 					int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[1]);
+					oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
+					SMItem destroyedItemType = targetItem.GetDestroyedItem();
+					if (numberOfObjectsToCreate > 1)
+					{
+						newItemName = destroyedItemType.PluralPronoun + " " + destroyedItemType.PluralName + "(" + numberOfObjectsToCreate + ")";
+					}
+					else
+					{
+						newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
+					}
+
+					// Loop around and create the required number of objects
 					while (numberOfObjectsToCreate > 0)
 					{
 						// Reduce the number of items waiting to be created
@@ -238,13 +263,15 @@ namespace SlackMUDRPG.CommandClasses
 						smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
 
 						// Remove the destroyed item from the room.
-						// TODO Need to remove the item from the room.
+						smc.GetRoom().RemoveItem(targetItem);
 					}
 				}
-				smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetType, targetID));
+				
+				smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
 				SkillIncrease(smc);
 				smc.CurrentActivity = null;
-			} else
+			}
+			else
 			{
 				if (targetType == "Character")
 				{

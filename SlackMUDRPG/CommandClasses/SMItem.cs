@@ -62,11 +62,11 @@ namespace SlackMUDRPG.CommandClasses
 		public SMItem GetDestroyedItem()
 		{
 			string createFileItemName = this.DestroyedOutput;
-			if (createFileItemName.Contains("."))
+			if (createFileItemName.Contains(","))
 			{
-				createFileItemName = createFileItemName.Split('.')[0];
+				createFileItemName = createFileItemName.Split(',')[0];
 			}
-
+			
 			return new SlackMud().CreateItemFromJson(createFileItemName);
 		}
 	}
