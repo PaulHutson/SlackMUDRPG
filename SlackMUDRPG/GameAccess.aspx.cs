@@ -161,17 +161,10 @@ namespace SlackMUDRPG
 			// Get the Class name of the command class for use in the ClassBuilder
 			string commandClassName = command.Command.CommandClass.Split('.').Last();
 
-			SMCharacter smc = new SlackMud().GetCharacter(Utils.GetQueryParam("user_id"));
-			smc.sendMessageToPlayer(commandClassName);
-
 			// Get class instance from ClassBuilder to run the command with
 			ClassBuilder cb = new ClassBuilder(commandClassName);
 
-			smc.sendMessageToPlayer("new cb");
-
 			object commandClass = cb.GetClassInstance();
-
-			smc.sendMessageToPlayer(commandClass.GetType().ToString());
 
 			// if null returned by ClassBuilder
 			if (commandClass == null)

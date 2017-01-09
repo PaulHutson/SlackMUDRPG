@@ -108,13 +108,8 @@ namespace SlackMUDRPG.Utility
 				return null;
 			}
 
-			SMCharacter smc = new SlackMud().GetCharacter(Utils.GetQueryParam("user_id"));
-			smc.sendMessageToPlayer("here");
-
 			// Get the args array for the BuildMethod
 			object[] parameters = this.GetArgs();
-
-			smc.sendMessageToPlayer("here1");
 
 			// Call the BuildMethod and return the new class instance
 			object CommandClass = Utils.CallUserFuncArray(
@@ -122,8 +117,6 @@ namespace SlackMUDRPG.Utility
 				this.Spec.BuildMethodName,
 				parameters
 			);
-
-			smc.sendMessageToPlayer("here2");
 
 			return CommandClass;
 		}
