@@ -132,7 +132,7 @@
     <None Include="JSON\Misc\Slots.BaseCharacter.json" />
     <Content Include="JSON\Objects\Weapons.WoodenStick.json" />
     <Content Include="JSON\Commands\Help.json" />
-    <None Include="JSON\Commands\ClassBuilder.json" />
+    <Content Include="JSON\Commands\ClassBuilder.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
