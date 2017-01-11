@@ -277,10 +277,27 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Picks up an item from the characters current room, by the items name.
+		/// </summary>
+		/// <param itemName="The name of the item."></param>
+		public void PickUpItem(string itemName)
+		{
+			string itemID = this.GetRoom().GetRoomItemID(itemName);
+
+			if (itemID == null)
+			{
+				this.sendMessageToPlayer($"Cannot find that item in this room");
+				return;
+			}
+
+			this.PickUpItemByID(itemID);
+		}
+
+		/// <summary>
 		/// Picks up an item from the characters current room, by the items ItemID.
 		/// </summary>
 		/// <param name="id">The ItemID if the item to pick up.</param>
-		public void PickUpItem(string id)
+		public void PickUpItemByID(string id)
 		{
 			SMRoom room = this.GetRoom();
 
@@ -323,13 +340,13 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Drops an item the character is holding.
+		/// Drops an item the character is holding by its name.
 		/// </summary>
-		/// <param name="id">ItemID.</param>
-		public void DropItem(string id)
+		/// <param name="itemName">Name of the item.</param>
+		public void DropItem(string itemName)
 		{
 			// check item is in a hand
-			SMCharacterSlot hand = GetHandWithItemEquipped(id);
+			SMCharacterSlot hand = GetHandWithItemEquipped(itemName);
 
 			if (hand == null)
 			{
@@ -337,7 +354,7 @@ namespace SlackMUDRPG.CommandClasses
 				return;
 			}
 
-			SMItem item = this.GetEquippedItemByID(id);
+			SMItem item = this.GetEquippedItem(itemName);
 
 			// remove item from slot
 			hand.EquippedItem = null;
@@ -620,17 +637,17 @@ namespace SlackMUDRPG.CommandClasses
 		/// Gets the hand (SMCharacterSlot) which has the item equipped.
 		/// </summary>
 		/// <returns>The hand (SMCharacterSlot) with item equipped, or null.</returns>
-		/// <param name="id">The id of the item.</param>
-		private SMCharacterSlot GetHandWithItemEquipped(string id)
+		/// <param name="itemName">The name of the item.</param>
+		private SMCharacterSlot GetHandWithItemEquipped(string itemName)
 		{
 			SMCharacterSlot rightHand = this.GetSlotByName("RightHand");
 			SMCharacterSlot leftHand = this.GetSlotByName("LeftHand");
 
-			if (!rightHand.isEmpty() && rightHand.EquippedItem.ItemID == id)
+			if (!rightHand.isEmpty() && rightHand.EquippedItem.ItemName == itemName)
 			{
 				return rightHand;
 			}
-			else if (!leftHand.isEmpty() && leftHand.EquippedItem.ItemID == id)
+			else if (!leftHand.isEmpty() && leftHand.EquippedItem.ItemName == itemName)
 			{
 				return leftHand;
 			}
