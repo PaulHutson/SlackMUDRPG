@@ -289,6 +289,23 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Gets the id of an item in the room by its name
+		/// </summary>
+		/// <param name="itemName"></param>
+		/// <returns>The ItemID</returns>
+		public string GetRoomItemID(string itemName)
+		{
+			SMItem item = this.GetItemByName(itemName);
+
+			if (item != null)
+			{
+				return item.ItemID;
+			}
+
+			return null;
+		}
+
+		/// <summary>
 		/// Update an item
 		/// </summary>
 		/// <param name="itemID">The ID of the item</param>
