@@ -51,6 +51,11 @@
 				<asp:Button runat="server" ID="btn_ChopLog" Text="Chop Log" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopLog_Click"  />
 				<asp:Button runat="server" ID="btn_ChopTreeTrunk" Text="Chop Tree Trunk" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopTreeTrunk_Click"  />
 		</div>
+		
+		<div>
+			Combat:
+				<asp:Button runat="server" ID="btn_AttackRob" Text="Attack Robert Curran" OnClientClick="scrollBoxToBottom();" OnClick="btn_AttackRob_Click" />
+		</div>
     </form>
 </body>
 </html>

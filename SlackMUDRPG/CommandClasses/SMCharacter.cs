@@ -169,18 +169,22 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
+		#endregion
+
+		#region "Skill Related Items"
+		
 		/// <summary>
 		/// Use a skill
 		/// </summary>
 		/// <param name="skillName">The name of the skill to use</param>
 		/// <param name="targetName">The name of a (the) target to use the skill on (optional)</param>
-		public void UseSkill(string skillName, string targetName = null)
+		public void UseSkill(string skillName, string targetName = null, bool isCombat = false)
 		{
 			// Find out if the character has the skill.
 			SMCharacterSkill smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName == skillName);
 
 			// If the character has the skill
-			if (smcs != null)
+			if ((isCombat) || (smcs != null))
 			{
 				// Variables for use later
 				string targetType = null, targetID = null;
@@ -254,6 +258,70 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				// Can't use the skill so let the player know!
 				this.sendMessageToPlayer("You need to learn the \"" + skillName + "\" skill before you can use it.");
+			}
+		}
+
+		/// <summary>
+		/// Check that a player has the required skill level (by name)
+		/// </summary>
+		/// <param name="skillName">Name of the skill</param>
+		/// <param name="skillLevel">The skill level the player has</param>
+		/// <returns></returns>
+		public bool HasRequiredSkill(string skillName, string skillLevel)
+		{
+			return this.Skills.FirstOrDefault(skill => skill.SkillName == skillName && skill.SkillLevel >= int.Parse(skillLevel)) != null;
+		}
+
+		#endregion
+
+		#region "Combat Related Functions"
+
+		public void Attack(string targetName)
+		{
+			// If there's a target we need to look at...
+			if (targetName != null)
+			{
+				// .. get the room
+				SMRoom currentRoom = this.GetRoom();
+
+				// find any players with that target name first
+				SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName() == targetName);
+
+				// If it's not null set the target details
+				if (targetCharacter != null)
+				{
+					// Attack the character
+					SMCombat.Attack(this, targetCharacter);
+				}
+				else // We need to see if there's an object with the name
+				{
+					// get a target item with the target name
+					SMItem targetItem = currentRoom.GetItemByName(targetName);
+
+					// if we find one...
+					if (targetItem != null)
+					{
+						// Attack the item
+						SMCombat.Attack(this, targetItem);
+					}
+					else
+					{
+						// get a target item with the target name
+						targetItem = currentRoom.GetItemByFamilyName(targetName);
+
+						// if we find one...
+						if (targetItem != null)
+						{
+							// Attack the item
+							SMCombat.Attack(this, targetItem);
+						}
+						else
+						{
+							// Not found the target with the name.. so send a message...
+							this.sendMessageToPlayer("The target you've specified is not valid");
+						}
+					}
+				}
 			}
 		}
 
@@ -385,7 +453,7 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Hases the item equipped.
+		/// Has the item equipped.
 		/// </summary>
 		/// <returns><c>true</c>, if item equipped was hased, <c>false</c> otherwise.</returns>
 		/// <param name="id">ItemID.</param>
@@ -633,6 +701,23 @@ namespace SlackMUDRPG.CommandClasses
 			else if (!leftHand.isEmpty() && leftHand.EquippedItem.ItemID == id)
 			{
 				return leftHand;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Get the first item a player is holding
+		/// </summary>
+		/// <returns>The equipped item</returns>
+		public SMItem GetEquippedItem()
+		{
+			foreach (SMCharacterSlot slot in CharacterSlots)
+			{
+				if (!slot.isEmpty())
+				{
+					return slot.EquippedItem;
+				}
 			}
 
 			return null;

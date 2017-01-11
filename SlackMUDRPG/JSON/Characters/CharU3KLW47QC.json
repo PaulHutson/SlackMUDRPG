@@ -7,7 +7,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Outside1",
+  "RoomID": "1",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -21,9 +21,13 @@
     "SocialStanding": 8
   },
   "Skills": [
-    {
-      "SkillName": "Chop",
-      "SkillLevel": 1
+		{
+			"SkillName": "Chop",
+			"SkillLevel": 1
+		},
+		{
+      "SkillName": "Sword Use",
+      "SkillLevel": 10
     }
   ],
   "CharacterSlots": [
@@ -35,18 +39,28 @@
       "EquippedItem": {
         "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453",
         "ItemName": "Wooden Sword",
+				"SingularPronoun": "a",
+				"PluralName": "Wooden Swords",
+				"PluralPronoun": "some",
         "ItemType": "weapon",
-        "ItemFamily": null,
+        "ItemFamily": "Sword",
         "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
         "ItemWeight": 1,
         "ItemSize": 1,
         "CanHoldOtherItems": false,
-        "HitPoints": 0,
-        "MaxHitPoints": 0,
-        "BaseDamage": 0.0,
-        "Toughness": 0,
+        "HitPoints": 10,
+        "MaxHitPoints": 10,
+        "BaseDamage": 2.0,
+        "Toughness": 1,
         "DestroyedOutput": null,
-        "HeldItems": null
+        "RequiredSkills": null,
+        "HeldItems": null,
+				"RequiredSkills": [
+					{
+						"SkillName": "Sword Use",
+						"SkillLevel":  "1"
+					}
+				]
       }
     },
     {
@@ -55,18 +69,25 @@
         "any"
       ],
       "EquippedItem": {
-				"ItemName": "Shoddy Axe",
-				"ItemType": "Weapons",
-				"ItemFamily": "Axe",
-				"ItemDescription": "This shoddy axe doesn't do much damage but it's a start.",
-				"ItemWeight": 1,
-				"ItemSize": 1,
-				"HitPoints": 50,
-				"MaxHitPoints": 50,
-				"BaseDamage": 5,
-				"Toughness": 3,
-				"CanHoldOtherItems": true
-			}
+        "ItemID": null,
+        "ItemName": "Shoddy Axe",
+        "SingularPronoun": null,
+        "PluralName": null,
+        "PluralPronoun": null,
+        "ItemType": "Weapons",
+        "ItemFamily": "Axe",
+        "ItemDescription": "This shoddy axe doesn't do much damage but it's a start.",
+        "ItemWeight": 1,
+        "ItemSize": 1,
+        "CanHoldOtherItems": true,
+        "HitPoints": 50,
+        "MaxHitPoints": 50,
+        "BaseDamage": 5.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": null,
+        "HeldItems": null
+      }
     },
     {
       "Name": "Back",
@@ -76,6 +97,9 @@
       "EquippedItem": {
         "ItemID": "1def209c-8dc5-4208-877a-5de64c13e12c",
         "ItemName": "Small Backpack",
+        "SingularPronoun": null,
+        "PluralName": null,
+        "PluralPronoun": null,
         "ItemType": "container",
         "ItemFamily": null,
         "ItemDescription": "Basic small backpack that all players start with.",
@@ -87,6 +111,7 @@
         "BaseDamage": 0.0,
         "Toughness": 0,
         "DestroyedOutput": null,
+        "RequiredSkills": null,
         "HeldItems": null
       }
     }

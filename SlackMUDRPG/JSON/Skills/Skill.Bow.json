@@ -3,21 +3,68 @@
     "SkillTypeName": "Ranged",
     "SkillTypeDescription": "Combat Related Skill for Ranged fighting"
   },
-    "SkillName": "Bow Use",
-    "SkillDescription": "The ability to competently use a bow",
-    "BaseStat": "DEX",
-    "LevelMultiplier": 10,
-    "ImprovementSpeed": 10,
-    "Prerequisites": [
-      {
-        "IsSkill": false,
-        "SkillStatName": "STR",
-        "PreReqLevel": 5
-      },
-      {
-        "IsSkill": false,
-        "SkillStatName": "DEX",
-        "PreReqLevel": 8
-      }
-    ]
+  "SkillName": "Bow Use",
+  "SkillDescription": "The ability to competently use a bow",
+  "SkillLearnText": "You've learnt how to use a bow",
+  "LevelIncreaseText":  "You feel you've gotten better at shooting bows",
+  "ActivityType":  "Bow.Attacking",
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 5
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 8
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Bow",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have a bow equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Target",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You must target something",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Hit",
+      "StepRequiredObject": "Family.Bow",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to hit {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Repeat",
+      "StepRequiredObject": "Activity.Bow.Attacking",
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    }
+  ]
   }

@@ -121,6 +121,7 @@
     <Content Include="JSON\Objects\Environment.OldTree.json" />
     <Content Include="WebPlay.aspx" />
     <Content Include="Handlers\WebSocketHandler.ashx" />
+    <Content Include="JSON\Objects\Misc.Corpse.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -148,7 +149,9 @@
     <Compile Include="CommandClasses\SlackMud.cs" />
     <Compile Include="CommandClasses\SMAttributes.cs" />
     <Compile Include="CommandClasses\SMCharacter.cs" />
+    <Compile Include="CommandClasses\SMCombat.cs" />
     <Compile Include="CommandClasses\SMCommand.cs" />
+    <Compile Include="CommandClasses\SMCreature.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />

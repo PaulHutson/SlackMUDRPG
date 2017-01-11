@@ -1,0 +1,17 @@
+﻿{
+	"ItemName": "Corpse",
+	"SingularPronoun": "a",
+	"PluralName": "Corpses",
+	"PluralPronoun": "some",
+  "ItemType": "Misc",
+  "ItemFamily": "Corpse",
+	"ItemDescription": "A corpse",
+	"ItemWeight": 15,
+  "ItemSize": 10,
+  "HitPoints": 15,
+  "MaxHitPoints": 15,
+  "BaseDamage": 0.001,
+  "Toughness": 3,
+	"CanHoldOtherItems": true,
+	"HeldItems": null
+}

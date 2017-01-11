@@ -56,6 +56,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("DestroyedOutput")]
 		public string DestroyedOutput { get; set; }
 
+		[JsonProperty("RequiredSkills")]
+		public List<SMRequiredSkill> RequiredSkills { get; set; }
+
 		[JsonProperty("HeldItems")]
 		public List<SMItem> HeldItems { get; set; }
 
@@ -69,5 +72,14 @@ namespace SlackMUDRPG.CommandClasses
 			
 			return new SlackMud().CreateItemFromJson(createFileItemName);
 		}
+	}
+
+	public class SMRequiredSkill
+	{
+		[JsonProperty("SkillName")]
+		public string SkillName { get; set; }
+
+		[JsonProperty("SkillLevel")]
+		public string SkillLevel { get; set; }
 	}
 }
