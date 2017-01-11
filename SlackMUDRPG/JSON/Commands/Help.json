@@ -114,7 +114,6 @@
 			"ExampleUsage": "pickup wooden stick",
 			"RequiredSkill": null
 		},
-		"+",
 		{
 			"CommandFamily": "Inventory",
 			"CommandBaseName": "drop",
