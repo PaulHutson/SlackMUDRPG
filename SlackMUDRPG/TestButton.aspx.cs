@@ -102,5 +102,11 @@ namespace SlackMUDRPG
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			smc.UseSkill("Chop", "Trunk");
 		}
+
+		protected void btn_AttackRob_Click(object sender, EventArgs e)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+			smc.Attack("Rob Curran2");
+		}
 	}
 }

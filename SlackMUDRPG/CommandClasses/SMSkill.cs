@@ -139,28 +139,31 @@ namespace SlackMUDRPG.CommandClasses
 
 		private bool StepRequiredTarget(SMCharacter smc, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
 		{
-			// Check the type of target they've specified is correct...
-			// Get the target item
-			SMItem targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-
-			// Look through the items in the room to see if there are any items with the target id
-			if (targetItem != null)
+			if (targetType != "Character")
 			{
-				if (requiredTargetObjectType != null)
+				// Check the type of target they've specified is correct...
+				// Get the target item
+				SMItem targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+
+				// Look through the items in the room to see if there are any items with the target id
+				if (targetItem != null)
 				{
-					if (targetItem.ItemFamily != requiredTargetObjectType)
+					if (requiredTargetObjectType != null)
 					{
-						return false;
+						if (targetItem.ItemFamily != requiredTargetObjectType)
+						{
+							return false;
+						}
+					}
+					else
+					{
+						return true;
 					}
 				}
 				else
 				{
-					return true;
+					return false;
 				}
-			}
-			else
-			{
-				return false;
 			}
 
 			return true;
@@ -169,7 +172,6 @@ namespace SlackMUDRPG.CommandClasses
 		private bool StepHit(SMSkillStep smss, SMCharacter smc, string baseStat, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
 		{
 			// Get the object to hit the target with.
-			// TODO Get the objects from the equipped items.
 			string itemName = smss.StepRequiredObject;
 			float charItembaseDamage = smc.Attributes.Strength/10;
 			if (itemName != null)
@@ -177,6 +179,20 @@ namespace SlackMUDRPG.CommandClasses
 				string[] splitItemName = itemName.Split('.');
 				SMItem charItemToUse = smc.GetEquippedItem(splitItemName[1]);
 				charItembaseDamage = charItemToUse.BaseDamage;
+
+				// Check that the person has the skill to use the item (if there are any required skills)
+				// Check the player has the required skills
+				bool hasAllRequiredSkills = true;
+				foreach (SMRequiredSkill smrs in charItemToUse.RequiredSkills)
+				{
+					hasAllRequiredSkills = smc.HasRequiredSkill(smrs.SkillName, smrs.SkillLevel);
+				}
+
+				// If they don't have have all the required skills, set the damage to be 10% of what it should be.
+				if (!hasAllRequiredSkills)
+				{
+					charItembaseDamage = charItembaseDamage * (float)0.1;
+				}
 			}
 			
 			// Get the base attribute from the character
@@ -185,7 +201,12 @@ namespace SlackMUDRPG.CommandClasses
 			// Work out the damage multiplier based on attribute level (+/-)
 			int baseStatRequiredAmount = this.Prerequisites.First(pr => pr.SkillStatName == baseStat).PreReqLevel;
 			float positiveNegativeBaseStat = baseStatValue - baseStatRequiredAmount;
-			int charLevelOfSkill = smc.Skills.First(skill => skill.SkillName == this.SkillName).SkillLevel;
+			SMCharacterSkill theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+			int charLevelOfSkill = 0;
+			if (theCharacterSkill != null)
+			{
+				charLevelOfSkill = theCharacterSkill.SkillLevel;
+			}
 			float damageMultiplier = (positiveNegativeBaseStat + charLevelOfSkill) / 100;
 
 			// Get the target toughness and HP
@@ -220,6 +241,10 @@ namespace SlackMUDRPG.CommandClasses
 			// Hit the target
 			// calculate the actual damage amount
 			float actualDamageAmount = (charItembaseDamage * (1 + damageMultiplier)) - targetToughness;
+			if (actualDamageAmount < 0)
+			{
+				actualDamageAmount = 0;
+			}
 
 			// Reduce the targets HP
 			int newTargetHP = targetHP - (int)actualDamageAmount;
@@ -276,11 +301,30 @@ namespace SlackMUDRPG.CommandClasses
 				if (targetType == "Character")
 				{
 					// TODO Update a character HP
+					targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+					if ((int)actualDamageAmount > 0)
+					{
+						smc.sendMessageToPlayer("_Hit " + targetChar.GetFullName() + " for " + (int)actualDamageAmount + " damage_");
+					}
+					else
+					{
+						smc.sendMessageToPlayer("_You're unable to damage " + targetChar.GetFullName() + "_");
+					}
+					
 				}
 				else
 				{
 					targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
 					smc.GetRoom().UpdateItem(targetItem.ItemID, "HP", newTargetHP);
+					if ((int)actualDamageAmount > 0)
+					{
+						smc.sendMessageToPlayer("_Hit " + targetItem.ItemName + " for " + (int)actualDamageAmount + " damage_");
+					}
+					else
+					{
+						smc.sendMessageToPlayer("_You're unable to damage " + targetItem.ItemName + "_");
+					}
+					
 				}
 			}
 
@@ -315,7 +359,12 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Get characters current skill level
-			int currentSkillLevel = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName).SkillLevel;
+			SMCharacterSkill theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+			int currentSkillLevel = 0;
+			if (theCharacterSkill!=null)
+			{
+				currentSkillLevel = theCharacterSkill.SkillLevel;
+			}
 
 			// Chance of the skill increasing in level
 			double chanceOfSkillIncrease = ((maxSkillLevel - (currentSkillLevel * failureMultipler)) / 100) / 4;

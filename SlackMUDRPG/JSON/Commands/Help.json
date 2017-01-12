@@ -1,4 +1,4 @@
-﻿{
+{
 	"SMCommandList": [
 		{
 			"CommandFamily": "General",
@@ -28,6 +28,20 @@
 			"ExampleUsage": "chop tree1",
 			"RequiredSkill": "Skill.Chop"
 		},
+    {
+      "CommandFamily": "Character",
+      "CommandBaseName": "attack",
+      "CommandName": "attack",
+      "CommandDescription": "Enables the player to attack something.",
+      "CommandSyntax": "attack <TargetName>",
+      "CommandExpression": "attack {.+}",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+      "CommandMethod": "Attack",
+      "PassCommandAsFirstArg": true,
+      "PassQueryParamAsFirstArg": null,
+      "ExampleUsage": "attack Big Jim",
+      "RequiredSkill": null
+    },
 		{
 			"CommandFamily": "Chat",
 			"CommandBaseName": "say",

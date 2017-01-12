@@ -10,7 +10,13 @@
   "ItemSize": 2,
   "HitPoints": 25,
   "MaxHitPoints": 25,
-  "BaseDamage": 0.1,
+  "BaseDamage": 2.0,
   "Toughness": 3,
-  "CanHoldOtherItems": false
+	"CanHoldOtherItems": false,
+	"RequiredSkills": [
+		{
+			"SkillName": "Sword Use",
+			"SkillLevel":  "1"
+		}
+	]
 }

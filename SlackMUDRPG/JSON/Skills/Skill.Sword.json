@@ -7,10 +7,10 @@
   "SkillDescription": "The ability to competently use a sword",
   "SkillLearnText": "You've learnt how to use a sword",
   "LevelIncreaseText":  "You feel you've gotten better using swords",
-  "ActivityType":  "Passive",
+  "ActivityType":  "Sword.Attacking",
   "BaseStat": "DEX",
   "LevelMultiplier": 10,
-  "ImprovementSpeed": 10,
+	"ImprovementSpeed": 10,
   "Prerequisites": [
     {
       "IsSkill": false,
@@ -21,6 +21,50 @@
       "IsSkill": false,
       "SkillStatName": "STR",
       "PreReqLevel": 5
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Sword",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have a sword equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Target",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You must choose something to attack",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Hit",
+      "StepRequiredObject": "Family.Sword",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to hit {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Repeat",
+      "StepRequiredObject": "Activity.Sword.Attacking",
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": null
     }
   ]
 }
