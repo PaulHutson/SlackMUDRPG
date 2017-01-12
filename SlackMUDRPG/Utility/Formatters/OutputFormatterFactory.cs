@@ -20,7 +20,9 @@ namespace SlackMUDRPG.Utility.Formatters
 				targetPlatform = Utils.GetQueryParam("st");
 			}
 
-			switch (targetPlatform.ToString().ToLower())
+			targetPlatform = targetPlatform == null ? targetPlatform : targetPlatform.ToString().ToLower();
+
+			switch (targetPlatform)
 			{
 				case "slack":
 					return new SlackOutputFormatter();
