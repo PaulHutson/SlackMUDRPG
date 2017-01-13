@@ -153,6 +153,7 @@
     <Compile Include="CommandClasses\SMCommand.cs" />
     <Compile Include="CommandClasses\SMCreature.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
+    <Compile Include="CommandClasses\SMItemUtils.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
