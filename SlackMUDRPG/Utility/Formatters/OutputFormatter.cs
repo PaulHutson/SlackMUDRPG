@@ -15,6 +15,13 @@ namespace SlackMUDRPG.Utility.Formatters
 		public abstract string Announcement(string text);
 
 		/// <summary>
+		/// Formats a text string as a code block.
+		/// </summary>
+		/// <param name="text"></param>
+		/// <returns>Formatted text string.</returns>
+		public abstract string CodeBlock(string text);
+
+		/// <summary>
 		/// Formats a general text string.
 		/// </summary>
 		/// <param name="text"></param>
