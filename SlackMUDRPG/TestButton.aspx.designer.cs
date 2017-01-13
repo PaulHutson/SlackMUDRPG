@@ -139,6 +139,15 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.Button btn_Look;
         
         /// <summary>
+        /// InvInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox InvInput;
+        
+        /// <summary>
         /// btn_PickUpStick control.
         /// </summary>
         /// <remarks>
@@ -155,6 +164,15 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_DropUpStick;
+        
+        /// <summary>
+        /// btn_ListInventory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_ListInventory;
         
         /// <summary>
         /// btn_ChopTree control.
