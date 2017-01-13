@@ -12,5 +12,5 @@
   "MaxHitPoints": 50,
   "BaseDamage": 5,
   "Toughness": 3,
-	"CanHoldOtherItems": true
+	"CanHoldOtherItems": false
 }
