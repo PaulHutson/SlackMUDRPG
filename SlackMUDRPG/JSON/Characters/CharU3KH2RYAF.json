@@ -1,66 +1,128 @@
 {
-  "firstname": "Robert",
-  "lastname": "Curran",
-  "lastinteractiondate": "2017-01-02T21:18:51.556181+00:00",
-  "lastlogindate": "2017-01-02T21:18:51.556071+00:00",
-  "age": 0,
-  "sex": "m",
-  "PKFlag": false,
-  "UserID": "U3KH2RYAF",
-  "RoomID": "1",
-  "CurrentActivity": null,
-  "Attributes": {
-    "str": 10,
-    "int": 10,
-    "chr": 10,
-    "dex": 10,
-    "wp": 10,
-    "hp": 10,
-    "maxhp": 10,
-    "SocialStanding": 8
-  },
-  "CharacterItems": null,
-  "Skills": null,
-  "CharacterSlots": [
-    {
-      "Name": "RightHand",
-      "AllowedTypes": [
-        "any"
-      ],
-      "EquippedItem": {
-        "ItemID": "2de61885-2a88-42c5-b5ee-961a7528f4ce",
-        "ItemName": "Wooden Sword",
-        "ItemType": "weapon",
-        "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
-        "ItemWeight": 1,
-        "ItemSize": 1,
-        "CanHoldOtherItems": false,
-        "HeldItems": null
-      }
-    },
-    {
-      "Name": "LeftHand",
-      "AllowedTypes": [
-        "any"
-      ],
-      "EquippedItem": null
-    },
-    {
-      "Name": "Back",
-      "AllowedTypes": [
-        "containers"
-      ],
-      "EquippedItem": {
-        "ItemID": "c1eeeac1-4428-4840-84fc-e9aa9c1ae19b",
-        "ItemName": "Small Backpack",
-        "ItemType": "container",
-        "ItemDescription": "Basic small backpack that all players start with.",
-        "ItemWeight": 0,
-        "ItemSize": 1,
-        "CanHoldOtherItems": true,
-        "HeldItems": null
-      }
-    }
-  ],
-  "Skills": null
+	"firstname": "Robert",
+	"lastname": "Curran",
+	"lastinteractiondate": "2017-01-02T21:18:51.556181+00:00",
+	"lastlogindate": "2017-01-02T21:18:51.556071+00:00",
+	"age": 0,
+	"sex": "m",
+	"PKFlag": false,
+	"UserID": "U3KH2RYAF",
+	"RoomID": "1",
+	"CurrentActivity": null,
+	"Attributes": {
+		"str": 10,
+		"int": 10,
+		"chr": 10,
+		"dex": 10,
+		"wp": 10,
+		"hp": 10,
+		"maxhp": 10,
+		"SocialStanding": 8
+	},
+	"CharacterItems": null,
+	"Skills": null,
+	"CharacterSlots": [
+		{
+			"Name": "RightHand",
+			"AllowedTypes": [
+				"any"
+			],
+			"EquippedItem": {
+				"ItemID": "2de61885-2a88-42c5-b5ee-961a7528f4ce",
+				"ItemName": "Wooden Sword",
+				"ItemType": "weapon",
+				"ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+				"ItemWeight": 1,
+				"ItemSize": 1,
+				"CanHoldOtherItems": false,
+				"HeldItems": null
+			}
+		},
+		{
+			"Name": "LeftHand",
+			"AllowedTypes": [
+				"any"
+			],
+			"EquippedItem": null
+		},
+		{
+			"Name": "Back",
+			"AllowedTypes": [
+				"containers"
+			],
+			"EquippedItem": {
+				"ItemID": "c1eeeac1-4428-4840-84fc-e9aa9c1ae19b",
+				"ItemName": "Small Backpack",
+				"ItemType": "container",
+				"ItemDescription": "Basic small backpack that all players start with.",
+				"ItemWeight": 0,
+				"ItemSize": 1,
+				"CanHoldOtherItems": true,
+				"HeldItems": [
+					{
+						"ItemID": "e07bc890-7533-4d2d-ab0d-0b05deed1f64",
+						"ItemName": "Log",
+						"SingularPronoun": "a",
+						"PluralName": "Logs",
+						"PluralPronoun": "some",
+						"ItemType": "resource",
+						"ItemFamily": "Log",
+						"ItemDescription": "A cut up log ready for use",
+						"ItemWeight": 2,
+						"ItemSize": 2,
+						"HitPoints": 2,
+						"MaxHitPoints": 2,
+						"BaseDamage": 0.001,
+						"Toughness": 3,
+						"CanHoldOtherItems": false
+					},
+					{
+						"ItemID": "511bbd1a-3c42-4a27-a6fe-59a8b24ec426",
+						"ItemName": "Log",
+						"SingularPronoun": "a",
+						"PluralName": "Logs",
+						"PluralPronoun": "some",
+						"ItemType": "resource",
+						"ItemFamily": "Log",
+						"ItemDescription": "A cut up log ready for use",
+						"ItemWeight": 2,
+						"ItemSize": 2,
+						"HitPoints": 2,
+						"MaxHitPoints": 2,
+						"BaseDamage": 0.001,
+						"Toughness": 3,
+						"CanHoldOtherItems": false
+					},
+					{
+						"ItemID": "4de1791a-d3fc-4f98-a921-95fe85a7f9d0",
+						"ItemName": "Shoddy Axe",
+						"SingularPronoun": "a",
+						"PluralName": "Shoddy Axes",
+						"PluralPronoun": "some",
+						"ItemType": "weapons",
+						"ItemFamily": "Axe",
+						"ItemDescription": "This shoddy axe doesn't do much damage but it's a start.",
+						"ItemWeight": 1,
+						"ItemSize": 1,
+						"HitPoints": 50,
+						"MaxHitPoints": 50,
+						"BaseDamage": 5,
+						"Toughness": 3,
+						"CanHoldOtherItems": false
+					},
+					{
+						"ItemID": "4e2461ad-2572-4f02-99da-7ec30d531939",
+						"ItemName": "Small Backpack",
+						"ItemType": "container",
+						"ItemDescription": "Basic small backpack that all players start with.",
+						"ItemWeight": 0,
+						"ItemSize": 1,
+						"CanHoldOtherItems": true,
+						"HeldItems": null
+					}
+				]
+			}
+		}
+	],
+	"Skills": null
 }
