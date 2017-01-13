@@ -453,10 +453,10 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
 
-			string inventory = outputFormatter.Title("Your Inventory:");
+			string inventory = outputFormatter.Bold("Your Inventory:");
 
 			//TODO capacity indicator
-			inventory += outputFormatter.General($"Weight: {this.GetCurrentWeight()} / {this.GetWeightLimit()}");
+			inventory += outputFormatter.Italic($"Weight: {this.GetCurrentWeight()} / {this.GetWeightLimit()}", 2);
 
 			if (slotName == null)
 			{
@@ -485,8 +485,7 @@ namespace SlackMUDRPG.CommandClasses
 			foreach (SMCharacterSlot slot in this.CharacterSlots)
 			{
 				inventory += outputFormatter.General($"{slot.GetReadableName()}:");
-				inventory += outputFormatter.ListItem(slot.GetEquippedItemName());
-				inventory += "\n";
+				inventory += outputFormatter.ListItem(slot.GetEquippedItemName(), 2);
 			}
 
 			return inventory;
@@ -507,15 +506,15 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (slot != null)
 			{
-				inventory += outputFormatter.General($"{slot.GetReadableName()}:");
-				inventory += outputFormatter.ListItem(slot.GetEquippedItemName());
+				inventory += outputFormatter.Bold($"{slot.GetReadableName()}:", 0);
+				inventory += outputFormatter.General($" {slot.GetEquippedItemName()}");
 
 				// If the equipped item can hold other items get details of these
 				if (slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems == true)
 				{
 					if (slot.EquippedItem.HeldItems != null && slot.EquippedItem.HeldItems.Count > 0)
 					{
-						inventory += outputFormatter.Announcement($"This \"{slot.EquippedItem.ItemName}\" contains the following items.");
+						inventory += outputFormatter.Italic($"This \"{slot.EquippedItem.ItemName}\" contains the following items.");
 
 						List<ItemCountObject> lines = SMItemUtils.GetItemCountList(slot.EquippedItem.HeldItems);
 
@@ -526,7 +525,7 @@ namespace SlackMUDRPG.CommandClasses
 					}
 					else
 					{
-						inventory += outputFormatter.Announcement($"This \"{slot.EquippedItem.ItemName}\" is empty.");
+						inventory += outputFormatter.Italic($"This \"{slot.EquippedItem.ItemName}\" is empty.");
 					}
 				}
 				inventory += "\n";

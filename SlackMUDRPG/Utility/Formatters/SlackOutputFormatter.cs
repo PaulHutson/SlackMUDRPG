@@ -7,29 +7,31 @@ namespace SlackMUDRPG.Utility.Formatters
 {
 	public class SlackOutputFormatter : OutputFormatter
 	{
-		public override string Announcement(string text)
+		public override string NewLine { get { return "\n"; } }
+
+		public override string Bold(string text, int newlines = 2)
 		{
-			return $"_{text}_\n";
+			return $"*{text}*" + this.GetNewLines(newlines);
 		}
 
-		public override string CodeBlock(string text)
+		public override string CodeBlock(string text, int newlines = 1)
 		{
-			return $"```{text}```\n";
+			return $"```{text}```" + this.GetNewLines(newlines);
 		}
 
-		public override string General(string text)
+		public override string General(string text, int newlines = 1)
 		{
-			return $"{text}\n";
+			return $"{text}" + this.GetNewLines(newlines);
 		}
 
-		public override string ListItem(string text)
+		public override string Italic(string text, int newlines = 1)
 		{
-			return $"> {text}\n";
+			return $"_{text}_" + this.GetNewLines(newlines);
 		}
 
-		public override string Title(string text)
+		public override string ListItem(string text, int newlines = 1)
 		{
-			return $"*{text}*\n\n";
+			return $"> {text}" + this.GetNewLines(newlines);
 		}
 	}
 }
