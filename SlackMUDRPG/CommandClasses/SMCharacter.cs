@@ -455,6 +455,9 @@ namespace SlackMUDRPG.CommandClasses
 
 			string inventory = outputFormatter.Title("Your Inventory:");
 
+			//TODO capacity indicator
+			inventory += outputFormatter.General($"Weight: {this.GetCurrentWeight()} / {this.GetWeightLimit()}");
+
 			if (slotName == null)
 			{
 				inventory += this.ListAllSlots();
@@ -490,7 +493,7 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Builds a string of equipped item and its contents in the specified slot.
+		/// Builds a string of the equipped item and its contents from the specified slot.
 		/// </summary>
 		/// <param name="slotName">The name of the slot to look in.</param>
 		/// <returns>String detailing slot inventory.</returns>
@@ -507,15 +510,23 @@ namespace SlackMUDRPG.CommandClasses
 				inventory += outputFormatter.General($"{slot.GetReadableName()}:");
 				inventory += outputFormatter.ListItem(slot.GetEquippedItemName());
 
+				// If the equipped item can hold other items get details of these
 				if (slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems == true)
 				{
 					if (slot.EquippedItem.HeldItems != null && slot.EquippedItem.HeldItems.Count > 0)
 					{
-						// TODO recursivly list item in equiped container
+						inventory += outputFormatter.Announcement($"This \"{slot.EquippedItem.ItemName}\" contains the following items.");
+
+						List<ItemCountObject> lines = SMItemUtils.GetItemCountList(slot.EquippedItem.HeldItems);
+
+						foreach (ItemCountObject line in lines)
+						{
+							inventory += outputFormatter.General($"{line.Count} x {line.Name}");
+						}
 					}
 					else
 					{
-						inventory += outputFormatter.Announcement($"This {slot.EquippedItem.ItemName} is empty.");
+						inventory += outputFormatter.Announcement($"This \"{slot.EquippedItem.ItemName}\" is empty.");
 					}
 				}
 				inventory += "\n";
