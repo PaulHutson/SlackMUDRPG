@@ -257,8 +257,9 @@ namespace SlackMUDRPG.CommandClasses
 				// Replace the object with the alterobject type
 				if (targetType == "Character")
 				{
-					// TODO Add "Die" method to the characer
-					newItemName = "A corpse";
+                    // TODO Add "Die" method to the character
+                    targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+                    targetChar.Die();
 				}
 				else // Assume it's an item
 				{
@@ -302,10 +303,12 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					// TODO Update a character HP
 					targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-					if ((int)actualDamageAmount > 0)
+                    targetChar.Attributes.HitPoints = targetChar.Attributes.HitPoints - (int)actualDamageAmount;
+                    if ((int)actualDamageAmount > 0)
 					{
 						smc.sendMessageToPlayer("_Hit " + targetChar.GetFullName() + " for " + (int)actualDamageAmount + " damage_");
-					}
+                        targetChar.SaveToApplication();
+                    }
 					else
 					{
 						smc.sendMessageToPlayer("_You're unable to damage " + targetChar.GetFullName() + "_");

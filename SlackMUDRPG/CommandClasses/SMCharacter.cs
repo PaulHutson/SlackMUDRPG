@@ -325,6 +325,42 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
+        /// <summary>
+        /// Kill the character, at present they'll just respawn in the "hospital"
+        /// Later we need to extend this to have a limit to the number of lives!
+        /// </summary>
+        public void Die()
+        {
+            // First create a corpse where they are, with all the associated items attached!
+            // Drop all the items the character is holding
+            foreach (SMCharacterSlot smcs in this.CharacterSlots)
+            {
+                if (!smcs.isEmpty())
+                {
+                    this.GetRoom().AddItem(smcs.EquippedItem);
+                    smcs.EquippedItem = null;
+                }
+            }
+
+            SMItem smi = new SlackMud().CreateItemFromJson("Misc.Corpse");
+            smi.ItemName = "Corpse of " + this.GetFullName();
+
+            // Then move the player back to the hospital
+            this.RoomID = "Hospital";
+            this.Attributes.HitPoints = this.Attributes.MaxHitPoints/2;
+
+            // Tell the player they've died and announce their new location
+            this.sendMessageToPlayer("You have died and have awoken feeling groggy - you won't be at full health yet, you'll need to recharge yourself!");
+            this.GetRoomDetails();
+
+            // TODO reduce the number of rerolls they have
+            // If they get to 0 rerolls the character is permenant dead.
+
+            // Save the player
+            this.SaveToApplication();
+            this.SaveToFile();
+        }
+
 		#endregion
 
 		#region "Inventory Functions"

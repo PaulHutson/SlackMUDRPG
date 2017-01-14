@@ -86,8 +86,9 @@
 					- sword would use an additional sub skill of "Weaponsmithing"
 						- Which would be a subskill of "BlackSmithing"
 	- Implement Commands/Skills
-		- Attack ("ATTACK PlayerName") - will use default item in their hand
-			- Hit points must reduce
+		DONE- Attack ("ATTACK PlayerName") - will use default item in their hand
+			DONE- Hit points must reduce
+			DONE- Character death
 		- Make ("MAKE Torch") - will use the items from their inventory to make the torch.
 			- Make advanced ("MAKE Sword USING Anvil")
 		- Build ("BUILD Shed") - will use items in a location to build something.
