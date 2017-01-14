@@ -38,6 +38,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("ItemSize")]
 		public int ItemSize { get; set; }
 
+		[JsonProperty("ItemCapacity")]
+		public int ItemCapacity { get; set; }
+
 		[JsonProperty("CanHoldOtherItems")]
 		public bool CanHoldOtherItems { get; set; }
 
