@@ -202,7 +202,7 @@ namespace SlackMUDRPG.CommandClasses
             string returnString = "\n> \n> Objects:\n";
 
             // Check if the character already exists or not.
-            if (this.RoomItems.Count > 0)
+            if ((this.RoomItems != null) && (this.RoomItems.Count > 0))
             {
                 bool isFirst = true;
                 foreach (SMItem smi in RoomItems)
@@ -445,7 +445,16 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("Description")]
 		public string Description { get; set; }
 
-		[JsonProperty("RoomID")]
-		public string RoomID { get; set; }
-	}
+        [JsonProperty("RoomID")]
+        public string RoomID { get; set; }
+
+        [JsonProperty("RoomLockID")]
+        public string RoomLockID { get; set; }
+
+        [JsonProperty("Lockable")]
+        public bool Lockable { get; set; }
+
+        [JsonProperty("Locked")]
+        public bool Locked { get; set; }
+    }
 }

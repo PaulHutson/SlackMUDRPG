@@ -19,6 +19,14 @@
 			"Shortcut": "TY",
 			"Description": "Training Yard",
 			"RoomID": "TrainingYard"
+		},
+		{
+			"Shortcut": "LD",
+			"Description": "Locked Door",
+      "RoomID": "LockedPlace1",
+      "RoomLockID": "KeyLockExample101",
+      "Locked": true,
+      "Lockable": true
 		}
 	],
 	"RoomItems": [

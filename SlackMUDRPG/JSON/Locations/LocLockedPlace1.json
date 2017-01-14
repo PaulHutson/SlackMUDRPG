@@ -1,0 +1,18 @@
+{
+	"RoomID": "LockedPlace1",
+	"RoomLocationX": "4",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "This is a locked room, that you can't enter unless you have a key of the right type!",
+	"RoomExits": [
+		{
+			"Shortcut": "D1",
+			"Description": "Door One leads back to room 1",
+      "RoomID": "1",
+      "RoomLockID": "KeyLockExample101",
+      "Locked": true,
+      "Lockable": true
+		}
+	],
+	"RoomItems": null
+}

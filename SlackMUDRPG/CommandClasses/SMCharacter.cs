@@ -158,15 +158,31 @@ namespace SlackMUDRPG.CommandClasses
 
 				if (smr != null)
 				{
-					// Move the player to the new location
-					this.RoomID = smr.RoomID;
-					this.SaveToFile();
-					this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
+                    // Variable for use in a moment
+                    bool initiateMove = true;
 
-					// Announce arrival to other players in the same place
-					smr.Announce("_" + this.GetFullName() + " walks in._", this, true);
+                    // Check if the room is locked
+                    if (sme.Locked)
+                    {
+                        // Find out if the character has keys for the location
+                        if (!this.CheckKey(sme.RoomLockID))
+                        {
+                            this.sendMessageToPlayer("_The door is locked and you do not have a key_");
+                            initiateMove = false;
+                        }
+                    }
 
-				}
+                    // If the room is not lot or the character has the right key, let them in.
+                    if (initiateMove) { 
+					    // Move the player to the new location
+					    this.RoomID = smr.RoomID;
+					    this.SaveToFile();
+					    this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
+
+					    // Announce arrival to other players in the same place
+					    smr.Announce("_" + this.GetFullName() + " walks in._", this, true);
+                    }
+                }
 			}
 		}
 
@@ -971,14 +987,46 @@ namespace SlackMUDRPG.CommandClasses
 			return null;
 		}
 
-		/// <summary>
-		/// Finds an item by id in a container by recursivly searching through the container
+        /// <summary>
+		/// Finds an item by AdditionalData in a container by recursivly searching through the container
 		/// and any containers it contains.
 		/// </summary>
 		/// <returns>The item in a container.</returns>
-		/// <param itemID="itemID">ItemID.</param>
+		/// <param name="name">additionalData.</param>
 		/// <param name="container">Container to look in.</param>
-		private SMItem FindItemInContainerByID(string itemID, SMItem container)
+		private SMItem FindItemInContainerByAdditionalData(string additionalData, SMItem container)
+        {
+            if (container.HeldItems != null)
+            {
+                foreach (SMItem item in container.HeldItems)
+                {
+                    if (item.AdditionalData.ToLower() == additionalData.ToLower())
+                    {
+                        return item;
+                    }
+
+                    if (item.ItemType == "container")
+                    {
+                        SMItem smi = this.FindItemInContainerByAdditionalData(additionalData, item);
+                        if (smi != null)
+                        {
+                            return smi;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Finds an item by id in a container by recursivly searching through the container
+        /// and any containers it contains.
+        /// </summary>
+        /// <returns>The item in a container.</returns>
+        /// <param itemID="itemID">ItemID.</param>
+        /// <param name="container">Container to look in.</param>
+        private SMItem FindItemInContainerByID(string itemID, SMItem container)
 		{
 			if (container.HeldItems != null)
 			{
@@ -1086,15 +1134,45 @@ namespace SlackMUDRPG.CommandClasses
 			return false;
 		}
 
-		#endregion
-
-		#region "Chat Functions"
-
-		/// <summary>
-		/// Make the character say something
+        /// <summary>
+		/// Tests if the character has a key for a location
 		/// </summary>
-		/// <param name="speech">What the character is saying</param>
-		public void Say(string speech)
+		/// <param name="LocationName">The location name for the key</param>
+		/// <returns>True/False result of ownership test.</returns>
+		private bool CheckKey(string lockedKeyCode)
+        {
+            foreach (SMCharacterSlot slot in CharacterSlots)
+            {
+                if (!slot.isEmpty())
+                {
+                    if (slot.EquippedItem.AdditionalData == lockedKeyCode)
+                    {
+                        return true;
+                    }
+
+                    if (slot.EquippedItem.ItemType == "container")
+                    {
+                        SMItem item = this.FindItemInContainerByAdditionalData(lockedKeyCode, slot.EquippedItem);
+                        if (item != null)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        #endregion
+
+        #region "Chat Functions"
+
+        /// <summary>
+        /// Make the character say something
+        /// </summary>
+        /// <param name="speech">What the character is saying</param>
+        public void Say(string speech)
 		{
             new SlackMud().GetRoom(this.RoomID).ChatSay(speech, this);
 		}
