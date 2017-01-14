@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Text.RegularExpressions;
 
 namespace SlackMUDRPG.CommandClasses
 {
@@ -16,6 +17,16 @@ namespace SlackMUDRPG.CommandClasses
 
 		[JsonProperty("EquippedItem")]
 		public SMItem EquippedItem { get; set; }
+
+		/// <summary>
+		/// Get a human readable string representing the slots name by adding spaces before uppercase characters.
+		/// </summary>
+		/// <returns>Readable verion of the slot name.</returns>
+		public string GetReadableName()
+		{
+			Regex exp = new Regex(@"(?!^)(?=[A-Z])");
+			return exp.Replace(this.Name, " ");
+		}
 
 		/// <summary>
 		/// Checks if the slot is empty
@@ -44,6 +55,20 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return false;
+		}
+
+		/// <summary>
+		/// Gets the name of the item equiped in this slot.
+		/// </summary>
+		/// <returns>Name of the equipped item or Empty</returns>
+		public string GetEquippedItemName()
+		{
+			if (this.isEmpty())
+			{
+				return "Empty";
+			}
+
+			return this.EquippedItem.ItemName;
 		}
 	}
 }

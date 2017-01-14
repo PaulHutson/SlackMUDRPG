@@ -154,6 +154,7 @@
     <Compile Include="CommandClasses\SMCommand.cs" />
     <Compile Include="CommandClasses\SMCreature.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
+    <Compile Include="CommandClasses\SMItemUtils.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
@@ -185,6 +186,10 @@
     <Compile Include="TestButton.aspx.designer.cs">
       <DependentUpon>TestButton.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Formatters\DefaultOutputFormatter.cs" />
+    <Compile Include="Utility\Formatters\SlackOutputFormatter.cs" />
+    <Compile Include="Utility\Formatters\OutputFormatterFactory.cs" />
+    <Compile Include="Utility\Formatters\OutputFormatter.cs" />
     <Compile Include="Utility\Path.cs" />
     <Compile Include="Utility\SlackWebHooks.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />

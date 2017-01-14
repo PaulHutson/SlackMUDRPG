@@ -41,8 +41,10 @@
 
 		<div>
 			Inventory:
+				Inventory Input : <asp:TextBox runat="server" ID="InvInput">123</asp:TextBox><br />
 				<asp:Button runat="server" ID="btn_PickUpStick" Text="Pick Up Wooden Stick" OnClick="btn_PickUpStick_Click" OnClientClick="scrollBoxToBottom();" />
 				<asp:Button runat="server" ID="btn_DropUpStick" Text="Drop Wooden Stick" OnClick="btn_DropStick_Click" OnClientClick="scrollBoxToBottom();" />
+				<asp:Button runat="server" ID="btn_ListInventory" Text="List Inventory" OnClick="btn_ListInventory_Click" OnClientClick="scrollBoxToBottom();" />
 		</div>
 		
 		<div>
