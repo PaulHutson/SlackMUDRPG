@@ -19,10 +19,10 @@
 			DONE- Use start script to add a few items to the player inventory to stat with.
 			DONE- Get items from room location, add to inventory. ("TAKE ItemName")
 				- Check that there is room in the inventory (weight and space)
-				- Look at items being held (equipped to slots)
+			DONE- Look at items being held (equipped to slots)
 				- Add item to container
-				- Look at items in a container (containers can contain containers)
-				- Eqiup item from bag to any slot or a specific slot (so it can be used)
+			DONE- Look at items in a container (containers can contain containers)
+			DONE- Eqiup item from bag to any slot or a specific slot (so it can be used)
 		DONE- Remove items from inventory
 			DONE- Add items to the room
 		- Use items
