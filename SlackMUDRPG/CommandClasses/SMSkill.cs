@@ -41,7 +41,7 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("SkillSteps")]
 		public List<SMSkillStep> SkillSteps { get; set; }
 
-		public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, bool beginSkillUse = true, string targetType = null, string targetID = null)
+		public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, bool beginSkillUse = true, string targetType = null, string targetID = null, bool isPassive = false)
 		{
 			// Output variables for passive skills that need output (like "dodge")
 			messageOut = "";
@@ -61,22 +61,25 @@ namespace SlackMUDRPG.CommandClasses
 					switch (smss.StepType)
 					{
 						case "Object":
-							if (!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount))
+							if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
 								smc.sendMessageToPlayer(smss.FailureOutput);
 							break;
                         case "EquippedObject":
-                            if (!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true))
+                            if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true)) && (!isPassive))
                                 smc.sendMessageToPlayer(smss.FailureOutput);
                             break;
                         case "Target":
-							if (!StepRequiredTarget(smc, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+							if ((!StepRequiredTarget(smc, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID)) && (!isPassive))
 								smc.sendMessageToPlayer(smss.FailureOutput);
 							break;
 						case "Hit":
 							if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
 							{
-								smc.sendMessageToPlayer(smss.FailureOutput);
-								SkillIncrease(smc, false);
+                                if (!isPassive)
+                                {
+                                    smc.sendMessageToPlayer(smss.FailureOutput);
+                                }
+                                SkillIncrease(smc, false);
 							}
 							else
 							{
@@ -100,7 +103,7 @@ namespace SlackMUDRPG.CommandClasses
 							System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
 							break;
 						case "Repeat":
-							this.UseSkill(smc, out messageOut, out floatOut, false, targetType, targetID);
+							this.UseSkill(smc, out messageOut, out floatOut, false, targetType, targetID, isPassive);
 							break;
 					}
 				}
@@ -121,7 +124,8 @@ namespace SlackMUDRPG.CommandClasses
                 if (splitRequiredObjectType[0] == "Family")
                 {
                     hasItem = smc.HasItemFamilyTypeEquipped(splitRequiredObjectType[1]);
-                } else
+                }
+                else
                 {
                     hasItem = smc.HasItemTypeEquipped(splitRequiredObjectType[1]);
                 }

@@ -550,11 +550,11 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
         /// <summary>
-		/// Has an item of a given family type equipped.
-		/// </summary>
-		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
-		/// <param name="familyType">Item Type Family.</param>
-		public bool HasItemFamilyTypeEquipped(string familyType)
+        /// Has an item of a given family type equipped.
+        /// </summary>
+        /// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
+        /// <param name="familyType">Item Type Family.</param>
+        public bool HasItemFamilyTypeEquipped(string familyType)
         {
             foreach (SMCharacterSlot slot in CharacterSlots)
             {
@@ -567,12 +567,12 @@ namespace SlackMUDRPG.CommandClasses
             return false;
         }
 
-		/// <summary>
-		/// Gets an item by name / family name
-		/// </summary>
-		/// <param name="itemName">The name / family name of the item</param>
-		/// <returns>The equipped item</returns>
-		public SMItem GetEquippedItem(string itemName)
+        /// <summary>
+        /// Gets an item by name / family name
+        /// </summary>
+        /// <param name="itemName">The name / family name of the item</param>
+        /// <returns>The equipped item</returns>
+        public SMItem GetEquippedItem(string itemName)
 		{
 			foreach (SMCharacterSlot slot in CharacterSlots)
 			{
