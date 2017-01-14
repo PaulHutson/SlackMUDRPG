@@ -155,6 +155,20 @@
 			"PassQueryParamAsFirstArg": null,
 			"ExampleUsage": "inventory or inventory Right Hand",
 			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Inventory",
+			"CommandBaseName": "equip",
+			"CommandName": "equip",
+			"CommandDescription": "Trys to equit an item by name, optionally to a specific slot.",
+			"CommandSyntax": "equip <item name> to [slot name]",
+			"CommandExpression": "equip {.+} to {.+}?",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "EquipItem",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "equip Wooden Sword or equip Wooden Sword to Right Hand",
+			"RequiredSkill": null
 		}
 	]
 }

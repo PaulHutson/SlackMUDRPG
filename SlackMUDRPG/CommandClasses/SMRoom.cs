@@ -259,7 +259,7 @@ namespace SlackMUDRPG.CommandClasses
 		#region "Inventory Function"
 
 		/// <summary>
-		/// Gets an item in the room by its ItemName.
+		/// Gets an item in the room by its ItemName (case insensitive).
 		/// </summary>
 		/// <returns>The item.</returns>
 		/// <param name="name">ItemName.</param>
@@ -270,7 +270,7 @@ namespace SlackMUDRPG.CommandClasses
 				return null;
 			}
 
-			return this.RoomItems.FirstOrDefault(smi => smi.ItemName == name);
+			return this.RoomItems.FirstOrDefault(smi => smi.ItemName.ToLower() == name.ToLower());
 		}
 
 		/// <summary>
