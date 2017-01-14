@@ -369,6 +369,44 @@ namespace SlackMUDRPG.CommandClasses
             this.SaveToFile();
         }
 
+        /// <summary>
+        /// Check if the player dodges or parry's the attack.
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckDodgeParry()
+        {
+            // Ensure that the character has skills...
+            if (this.Skills != null) { 
+                // Check Dodge
+                // Does the character have the dodge skill?
+                SMSkillHeld smsh = this.Skills.FirstOrDefault(skill => skill.SkillName == "Dodge");
+                int rndChance = new Random().Next(1, 100);
+                if (smsh != null)
+                {
+                    int dodgeChance = (int)(smsh.SkillLevel * 2);
+                    if (rndChance <= dodgeChance)
+                    {
+                        this.sendMessageToPlayer("_You have dodged an attack..._");
+                        return true;
+                    }
+                }
+            
+                // Does the character have the parry skill and something equipped?
+                smsh = this.Skills.FirstOrDefault(skill => skill.SkillName == "Parry");
+                if ((!this.AreHandsEmpty()) && (smsh != null) && (this.HasItemTypeEquipped("Weapon")))
+                {
+                    int parryChance = (int)(smsh.SkillLevel * 4);
+                    if (rndChance <= parryChance)
+                    {
+                        this.sendMessageToPlayer("_You have parried an attack..._");
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
 		#endregion
 
 		#region "Inventory Functions"

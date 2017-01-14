@@ -60,5 +60,14 @@
       }
     }
   ],
-  "Skills": null
+  "Skills": [
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 20
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 20
+    }
+  ]
 }
