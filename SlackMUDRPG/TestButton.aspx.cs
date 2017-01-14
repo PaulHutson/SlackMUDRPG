@@ -74,6 +74,13 @@ namespace SlackMUDRPG
 			smc.DropItem("Wooden Stick");
 		}
 
+		protected void btn_ListInventory_Click(object sender, EventArgs e)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+			string invInput = InvInput.Text == "" ? null : InvInput.Text;
+			smc.ListInventory(invInput);
+		}
+
 		private void OutputUpdate(string s)
 		{
 			tb_TextAreaOutput.Text += s + "\n\n";
