@@ -61,10 +61,10 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Attack a character
+		/// Attack an item
 		/// </summary>
 		/// <param name="attackingCharacter">The attacking character</param>
-		/// <param name="targetCharacter">The target character</param>
+		/// <param name="targetItem">The target item</param>
 		public static void Attack(SMCharacter attackingCharacter, SMItem targetItem)
 		{
 			// Check that the target has hitpoints

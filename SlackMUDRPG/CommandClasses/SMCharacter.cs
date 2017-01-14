@@ -272,11 +272,19 @@ namespace SlackMUDRPG.CommandClasses
 			return this.Skills.FirstOrDefault(skill => skill.SkillName == skillName && skill.SkillLevel >= int.Parse(skillLevel)) != null;
 		}
 
-		#endregion
+        /// <summary>
+        /// Stops the current activity happening.
+        /// </summary>
+        public void StopActivity()
+        {
+            this.CurrentActivity = null;
+        }
 
-		#region "Combat Related Functions"
+        #endregion
 
-		public void Attack(string targetName)
+        #region "Combat Related Functions"
+
+        public void Attack(string targetName)
 		{
 			// If there's a target we need to look at...
 			if (targetName != null)
