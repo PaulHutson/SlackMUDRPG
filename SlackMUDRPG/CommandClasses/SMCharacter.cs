@@ -44,7 +44,7 @@ namespace SlackMUDRPG.CommandClasses
 		public SMAttributes Attributes { get; set; }
 
 		[JsonProperty("Skills")]
-		public List<SMCharacterSkill> Skills { get; set; }
+		public List<SMSkillHeld> Skills { get; set; }
 
 		[JsonProperty("CharacterSlots")]
 		public List<SMCharacterSlot> CharacterSlots { get; set; }
@@ -180,8 +180,8 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="targetName">The name of a (the) target to use the skill on (optional)</param>
 		public void UseSkill(string skillName, string targetName = null, bool isCombat = false)
 		{
-			// Find out if the character has the skill.
-			SMCharacterSkill smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName == skillName);
+            // Find out if the character has the skill.
+            SMSkillHeld smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName == skillName);
 
 			// If the character has the skill
 			if ((isCombat) || (smcs != null))

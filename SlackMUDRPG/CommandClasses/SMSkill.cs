@@ -201,7 +201,7 @@ namespace SlackMUDRPG.CommandClasses
 			// Work out the damage multiplier based on attribute level (+/-)
 			int baseStatRequiredAmount = this.Prerequisites.First(pr => pr.SkillStatName == baseStat).PreReqLevel;
 			float positiveNegativeBaseStat = baseStatValue - baseStatRequiredAmount;
-			SMCharacterSkill theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+            SMSkillHeld theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
 			int charLevelOfSkill = 0;
 			if (theCharacterSkill != null)
 			{
@@ -361,8 +361,8 @@ namespace SlackMUDRPG.CommandClasses
 				failureMultipler = 1;
 			}
 
-			// Get characters current skill level
-			SMCharacterSkill theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+            // Get characters current skill level
+            SMSkillHeld theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
 			int currentSkillLevel = 0;
 			if (theCharacterSkill!=null)
 			{
@@ -397,15 +397,13 @@ namespace SlackMUDRPG.CommandClasses
 	/// <summary>
 	/// A character skill that is associated with the character, also storing their level.
 	/// </summary>
-	public class SMCharacterSkill
+	public class SMSkillHeld
 	{
 		[JsonProperty("SkillName")]
 		public string SkillName { get; set; }
 
 		[JsonProperty("SkillLevel")]
 		public int SkillLevel { get; set; }
-
-		
 	}
 
 	/// <summary>
