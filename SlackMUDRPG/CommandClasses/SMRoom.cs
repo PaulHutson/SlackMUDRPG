@@ -338,7 +338,7 @@ namespace SlackMUDRPG.CommandClasses
 		public void ChatSay(string speech, SMCharacter charSpeaking)
 		{
 			// Construct the message
-			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " says:") + "\"" + speech + "\"";
+			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " says:", 0) + "\"" + speech + "\"";
 
 			// Send the message to all people connected to the room
 			foreach (SMCharacter smc in this.GetPeople())
@@ -356,7 +356,7 @@ namespace SlackMUDRPG.CommandClasses
 		public void ChatWhisper(string speech, SMCharacter charSpeaking, string whisperToName)
 		{
 			// Construct the message
-			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " whispers:") + "\"" + speech + "\"";
+			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " whispers:", 0) + "\"" + speech + "\"";
 
 			// See if the person being whispered to is in the room
 			SMCharacter smc = this.GetPeople().FirstOrDefault(charWhisperedto => charWhisperedto.GetFullName() == whisperToName);
@@ -385,7 +385,7 @@ namespace SlackMUDRPG.CommandClasses
 			foreach (SMCharacter smc in this.GetPeople())
 			{
 				// construct the local message to be sent.
-				message = OutputFormatterFactory.Get().Bold(charSpeaking.GetFullName() + " shouts:") + "\"" + speech + "\"";
+				message = OutputFormatterFactory.Get().Bold(charSpeaking.GetFullName() + " shouts:", 0) + "\"" + speech + "\"";
 				this.ChatSendMessage(smc, message);
 			}
 
@@ -401,7 +401,7 @@ namespace SlackMUDRPG.CommandClasses
 				SMExit smre = otherRooms.RoomExits.FirstOrDefault(smef => smef.RoomID == this.RoomID);
 
 				// Construct the message
-				message = OutputFormatterFactory.Get().Italic("Someone shouts from " + smre.Description + " (" + smre.Shortcut + "):") + "\"" + speech + "\"";
+				message = OutputFormatterFactory.Get().Italic("Someone shouts from " + smre.Description + " (" + smre.Shortcut + "):",0) + "\"" + speech + "\"";
 
 				// Send the message to all people connected to the room
 				foreach (SMCharacter smcInOtherRoom in otherRooms.GetPeople())
