@@ -14,9 +14,6 @@
 			"ExampleUsage": "help or help equip",
 			"RequiredSkill": null
 		},
-
-
-
 		{
 			"CommandFamily": "General",
 			"CommandBaseName": "login",
@@ -29,6 +26,34 @@
 			"PassCommandAsFirstArg": false,
 			"PassQueryParamAsFirstArg": "user_id",
 			"ExampleUsage": "login",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "General",
+			"CommandBaseName": "move",
+			"CommandName": "move",
+			"CommandDescription": "This will move you to a room defined by the exit.",
+			"CommandSyntax": "move <locationshortcut>",
+			"CommandExpression": "move {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "Move",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "move n (would move you north if n was a location exit shortcut)",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "General",
+			"CommandBaseName": "stop",
+			"CommandName": "stop",
+			"CommandDescription": "Stops the activity that the character is currently doing.",
+			"CommandSyntax": "stop",
+			"CommandExpression": "stop",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "StopActivity",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "stop",
 			"RequiredSkill": null
 		},
 		{
@@ -66,6 +91,10 @@
 			"CommandDescription": "Enables the player to shout something which will be heard in the current location and locations all around.",
 			"CommandSyntax": "shout <whatever-you-want>",
 			"CommandExpression": "shout {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "Shout",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
 			"ExampleUsage": "shout HELLO!",
 			"RequiredSkill": null
 		},
@@ -76,22 +105,11 @@
 			"CommandDescription": "Enables the player to whisper something to another player.",
 			"CommandSyntax": "whisper <\"playername\"> <whatever-you-want>",
 			"CommandExpression": "whisper {\".+\"} {.+}",
-			"ExampleUsage": "whisper \"Paul Almighty\" Hellloooo",
-			"RequiredSkill": null
-		},
-
-		{
-			"CommandFamily": "General",
-			"CommandBaseName": "move",
-			"CommandName": "move",
-			"CommandDescription": "This will move you to a room defined by the exit.",
-			"CommandSyntax": "move <locationshortcut>",
-			"CommandExpression": "move {.+}",
 			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
-			"CommandMethod": "Move",
+			"CommandMethod": "Whisper",
 			"PassCommandAsFirstArg": false,
 			"PassQueryParamAsFirstArg": null,
-			"ExampleUsage": "move n (would move you north if n was a location exit shortcut)",
+			"ExampleUsage": "whisper \"Paul Almighty\" Hellloooo",
 			"RequiredSkill": null
 		},
 		{
@@ -137,48 +155,6 @@
 			"RequiredSkill": null
 		},
 		{
-			"CommandFamily": "General",
-			"CommandBaseName": "stop",
-			"CommandName": "stop",
-			"CommandDescription": "Stops the activity that the character is currently doing.",
-			"CommandSyntax": "stop",
-			"CommandExpression": "stop",
-			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
-			"CommandMethod": "StopActivity",
-			"PassCommandAsFirstArg": false,
-			"PassQueryParamAsFirstArg": null,
-			"ExampleUsage": "stop",
-			"RequiredSkill": null
-		},
-		{
-			"CommandFamily": "Combat",
-			"CommandBaseName": "attack",
-			"CommandName": "attack",
-			"CommandDescription": "Attacks a character, creature or object with whatever you're holding (or your bare hands).",
-			"CommandSyntax": "attack [thing]",
-			"CommandExpression": "attack {.+}",
-			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
-			"CommandMethod": "Attack",
-			"PassCommandAsFirstArg": false,
-			"PassQueryParamAsFirstArg": null,
-			"ExampleUsage": "Attack Big Bob",
-			"RequiredSkill": null
-		},
-		{
-			"CommandFamily": "Combat",
-			"CommandBaseName": "hit",
-			"CommandName": "hit",
-			"CommandDescription": "Hits a character, creature or object with whatever you're holding (or your bare hands).",
-			"CommandSyntax": "hit [thing]",
-			"CommandExpression": "hit {.+}",
-			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
-			"CommandMethod": "Attack",
-			"PassCommandAsFirstArg": false,
-			"PassQueryParamAsFirstArg": null,
-			"ExampleUsage": "Hit Wooden Pell",
-			"RequiredSkill": null
-		},
-		{
 			"CommandFamily": "Inventory",
 			"CommandBaseName": "inventory",
 			"CommandName": "inventory",
@@ -204,6 +180,34 @@
 			"PassCommandAsFirstArg": false,
 			"PassQueryParamAsFirstArg": null,
 			"ExampleUsage": "equip Wooden Sword or equip Wooden Sword to Right Hand",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Combat",
+			"CommandBaseName": "attack",
+			"CommandName": "attack",
+			"CommandDescription": "Attacks a character, creature or object with whatever you're holding (or your bare hands).",
+			"CommandSyntax": "attack <thing>",
+			"CommandExpression": "attack {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "Attack",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "Attack Big Bob",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Combat",
+			"CommandBaseName": "hit",
+			"CommandName": "hit",
+			"CommandDescription": "Hits a character, creature or object with whatever you're holding (or your bare hands).",
+			"CommandSyntax": "hit <thing>",
+			"CommandExpression": "hit {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "Attack",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "Hit Wooden Pell",
 			"RequiredSkill": null
 		}
 	]
