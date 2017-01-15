@@ -2,6 +2,23 @@
 	"SMCommandList": [
 		{
 			"CommandFamily": "General",
+			"CommandBaseName": "help",
+			"CommandName": "help",
+			"CommandDescription": "Get general help or help with a specific command.",
+			"CommandSyntax": "help [command family or command]",
+			"CommandExpression": "help {.+}?",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMHelp",
+			"CommandMethod": "Help",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "help or help equip",
+			"RequiredSkill": null
+		},
+
+
+
+		{
+			"CommandFamily": "General",
 			"CommandBaseName": "login",
 			"CommandName": "login",
 			"CommandDescription": "Logs you into the game.",
@@ -62,16 +79,7 @@
 			"ExampleUsage": "whisper \"Paul Almighty\" Hellloooo",
 			"RequiredSkill": null
 		},
-		{
-			"CommandFamily": "General",
-			"CommandBaseName": "help",
-			"CommandName": "help",
-			"CommandDescription": "This will show a list of all the commands available to you.\nYou can get a list of all commands or a specific one as needed.",
-			"CommandSyntax": "help [command]",
-			"CommandExpression": "help {.+}?",
-			"ExampleUsage": "help or help equip",
-			"RequiredSkill": null
-		},
+
 		{
 			"CommandFamily": "General",
 			"CommandBaseName": "move",
@@ -169,8 +177,8 @@
 			"PassQueryParamAsFirstArg": null,
 			"ExampleUsage": "Hit Wooden Pell",
 			"RequiredSkill": null
-    },
-    {
+		},
+		{
 			"CommandFamily": "Inventory",
 			"CommandBaseName": "inventory",
 			"CommandName": "inventory",
