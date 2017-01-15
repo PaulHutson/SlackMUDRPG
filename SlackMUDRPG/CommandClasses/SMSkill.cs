@@ -260,7 +260,7 @@ namespace SlackMUDRPG.CommandClasses
 			    int newTargetHP = targetHP - (int)actualDamageAmount;
 			
 			    // if the targets HP reaches 0 it has "died" or been "destroyed"
-			    if (newTargetHP < 0)
+			    if (newTargetHP <= 0)
 			    {
 				    string newItemName = "", oldItemName = "";
 
