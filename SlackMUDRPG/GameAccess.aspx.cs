@@ -22,7 +22,7 @@ namespace SlackMUDRPG
 			{
 				this.ProcessUserCommand(commandText);
 			}
-			catch (Exception expection)
+			catch //(Exception expection)
 			{
 				// TODO report error to person
 			}

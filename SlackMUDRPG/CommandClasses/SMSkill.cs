@@ -41,7 +41,7 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("SkillSteps")]
 		public List<SMSkillStep> SkillSteps { get; set; }
 
-		public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, bool beginSkillUse = true, string targetType = null, string targetID = null)
+		public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, bool beginSkillUse = true, string targetType = null, string targetID = null, bool isPassive = false)
 		{
 			// Output variables for passive skills that need output (like "dodge")
 			messageOut = "";
@@ -61,22 +61,25 @@ namespace SlackMUDRPG.CommandClasses
 					switch (smss.StepType)
 					{
 						case "Object":
-							if (!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount))
+							if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
 								smc.sendMessageToPlayer(smss.FailureOutput);
 							break;
                         case "EquippedObject":
-                            if (!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true))
+                            if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true)) && (!isPassive))
                                 smc.sendMessageToPlayer(smss.FailureOutput);
                             break;
                         case "Target":
-							if (!StepRequiredTarget(smc, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+							if ((!StepRequiredTarget(smc, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID)) && (!isPassive))
 								smc.sendMessageToPlayer(smss.FailureOutput);
 							break;
 						case "Hit":
 							if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
 							{
-								smc.sendMessageToPlayer(smss.FailureOutput);
-								SkillIncrease(smc, false);
+                                if (!isPassive)
+                                {
+                                    smc.sendMessageToPlayer(smss.FailureOutput);
+                                }
+                                SkillIncrease(smc, false);
 							}
 							else
 							{
@@ -100,7 +103,7 @@ namespace SlackMUDRPG.CommandClasses
 							System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
 							break;
 						case "Repeat":
-							this.UseSkill(smc, out messageOut, out floatOut, false, targetType, targetID);
+							this.UseSkill(smc, out messageOut, out floatOut, false, targetType, targetID, isPassive);
 							break;
 					}
 				}
@@ -121,7 +124,8 @@ namespace SlackMUDRPG.CommandClasses
                 if (splitRequiredObjectType[0] == "Family")
                 {
                     hasItem = smc.HasItemFamilyTypeEquipped(splitRequiredObjectType[1]);
-                } else
+                }
+                else
                 {
                     hasItem = smc.HasItemTypeEquipped(splitRequiredObjectType[1]);
                 }
@@ -201,7 +205,7 @@ namespace SlackMUDRPG.CommandClasses
 			// Work out the damage multiplier based on attribute level (+/-)
 			int baseStatRequiredAmount = this.Prerequisites.First(pr => pr.SkillStatName == baseStat).PreReqLevel;
 			float positiveNegativeBaseStat = baseStatValue - baseStatRequiredAmount;
-			SMCharacterSkill theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+            SMSkillHeld theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
 			int charLevelOfSkill = 0;
 			if (theCharacterSkill != null)
 			{
@@ -225,7 +229,10 @@ namespace SlackMUDRPG.CommandClasses
 				targetHP = targetChar.Attributes.HitPoints;
 				targetName = targetChar.GetFullName();
 				destroyedObjectType = "Corpse of " + targetName;
-			}
+
+                // See if they dodge or parry the hit.
+                objectAvoidedHit = targetChar.CheckDodgeParry();
+            }
 			else // Assume it's an item
 			{
 				// Get the target item
@@ -238,103 +245,112 @@ namespace SlackMUDRPG.CommandClasses
 				destroyedObjectType = targetItem.DestroyedOutput;
 			}
 
-			// Hit the target
-			// calculate the actual damage amount
-			float actualDamageAmount = (charItembaseDamage * (1 + damageMultiplier)) - targetToughness;
-			if (actualDamageAmount < 0)
-			{
-				actualDamageAmount = 0;
-			}
+            if (!objectAvoidedHit)
+            {
 
-			// Reduce the targets HP
-			int newTargetHP = targetHP - (int)actualDamageAmount;
+			    // Hit the target
+			    // calculate the actual damage amount
+			    float actualDamageAmount = (charItembaseDamage * (1 + damageMultiplier)) - targetToughness;
+			    if (actualDamageAmount < 0)
+			    {
+				    actualDamageAmount = 0;
+			    }
+
+			    // Reduce the targets HP
+			    int newTargetHP = targetHP - (int)actualDamageAmount;
 			
-			// if the targets HP reaches 0 it has "died" or been "destroyed"
-			if (newTargetHP < 0)
-			{
-				string newItemName = "", oldItemName = "";
+			    // if the targets HP reaches 0 it has "died" or been "destroyed"
+			    if (newTargetHP < 0)
+			    {
+				    string newItemName = "", oldItemName = "";
 
-				// Replace the object with the alterobject type
-				if (targetType == "Character")
-				{
-					// TODO Add "Die" method to the characer
-					newItemName = "A corpse";
-				}
-				else // Assume it's an item
-				{
-					// Todo add the new item to the room.
-					// Get the target item
-					targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-					string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
-					int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[1]);
-					oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
-					SMItem destroyedItemType = targetItem.GetDestroyedItem();
-					if (numberOfObjectsToCreate > 1)
-					{
-						newItemName = destroyedItemType.PluralPronoun + " " + destroyedItemType.PluralName + "(" + numberOfObjectsToCreate + ")";
-					}
-					else
-					{
-						newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
-					}
+				    // Replace the object with the alterobject type
+				    if (targetType == "Character")
+				    {
+                        // TODO Add "Die" method to the character
+                        targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+                        targetChar.Die();
+				    }
+				    else // Assume it's an item
+				    {
+					    // Todo add the new item to the room.
+					    // Get the target item
+					    targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+					    string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
+					    int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[1]);
+					    oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
+					    SMItem destroyedItemType = targetItem.GetDestroyedItem();
+					    if (numberOfObjectsToCreate > 1)
+					    {
+						    newItemName = destroyedItemType.PluralPronoun + " " + destroyedItemType.PluralName + "(" + numberOfObjectsToCreate + ")";
+					    }
+					    else
+					    {
+						    newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
+					    }
 
-					// Loop around and create the required number of objects
-					while (numberOfObjectsToCreate > 0)
-					{
-						// Reduce the number of items waiting to be created
-						numberOfObjectsToCreate--;
+					    // Loop around and create the required number of objects
+					    while (numberOfObjectsToCreate > 0)
+					    {
+						    // Reduce the number of items waiting to be created
+						    numberOfObjectsToCreate--;
 
-						// Add the item to the room
-						smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
+						    // Add the item to the room
+						    smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
 
-						// Remove the destroyed item from the room.
-						smc.GetRoom().RemoveItem(targetItem);
-					}
-				}
+						    // Remove the destroyed item from the room.
+						    smc.GetRoom().RemoveItem(targetItem);
+					    }
+				    }
 				
-				smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
-				SkillIncrease(smc);
-				smc.CurrentActivity = null;
-			}
-			else
-			{
-				if (targetType == "Character")
-				{
-					// TODO Update a character HP
-					targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-					if ((int)actualDamageAmount > 0)
-					{
-						smc.sendMessageToPlayer("_Hit " + targetChar.GetFullName() + " for " + (int)actualDamageAmount + " damage_");
-					}
-					else
-					{
-						smc.sendMessageToPlayer("_You're unable to damage " + targetChar.GetFullName() + "_");
-					}
-					
-				}
-				else
-				{
-					targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-					smc.GetRoom().UpdateItem(targetItem.ItemID, "HP", newTargetHP);
-					if ((int)actualDamageAmount > 0)
-					{
-						smc.sendMessageToPlayer("_Hit " + targetItem.ItemName + " for " + (int)actualDamageAmount + " damage_");
-					}
-					else
-					{
-						smc.sendMessageToPlayer("_You're unable to damage " + targetItem.ItemName + "_");
-					}
-					
-				}
-			}
+				    smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
+				    SkillIncrease(smc);
+				    smc.CurrentActivity = null;
+			    }
+			    else
+			    {
+				    if (targetType == "Character")
+				    {
+					    // TODO Update a character HP
+					    targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+                        targetChar.Attributes.HitPoints = targetChar.Attributes.HitPoints - (int)actualDamageAmount;
+                        if ((int)actualDamageAmount > 0)
+					    {
+						    smc.sendMessageToPlayer("_Hit " + targetChar.GetFullName() + " for " + (int)actualDamageAmount + " damage_");
+                            targetChar.SaveToApplication();
+                        }
+					    else
+					    {
+						    smc.sendMessageToPlayer("_You're unable to damage " + targetChar.GetFullName() + "_");
+					    }
+				    }
+				    else
+				    {
+					    targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+					    smc.GetRoom().UpdateItem(targetItem.ItemID, "HP", newTargetHP);
+					    if ((int)actualDamageAmount > 0)
+					    {
+						    smc.sendMessageToPlayer("_Hit " + targetItem.ItemName + " for " + (int)actualDamageAmount + " damage_");
+					    }
+					    else
+					    {
+						    smc.sendMessageToPlayer("_You're unable to damage " + targetItem.ItemName + "_");
+					    }
+				    }
+			    }
+            }
+            else
+            {
+                return false;
+            }
 
-			// Check to see if we should reduce the objects HP (wear and tear)
-			// TODO - Add Method to the object method for wear and tear
-			// reduce the objects HP
-			//      if the objects HP reaches 0 then the item is "broken" and the player needs to be told via a message.
-			//      Stop any repeat actions against the character happening.
+            // Check to see if we should reduce the objects HP (wear and tear)
+            // TODO - Add Method to the object method for wear and tear
+            // reduce the objects HP
+            //      if the objects HP reaches 0 then the item is "broken" and the player needs to be told via a message.
+            //      Stop any repeat actions against the character happening.
 
-			return true;
+            return true;
 		}
 
 		private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetName, string objectDestroyedName)
@@ -358,8 +374,8 @@ namespace SlackMUDRPG.CommandClasses
 				failureMultipler = 1;
 			}
 
-			// Get characters current skill level
-			SMCharacterSkill theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+            // Get characters current skill level
+            SMSkillHeld theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
 			int currentSkillLevel = 0;
 			if (theCharacterSkill!=null)
 			{
@@ -394,15 +410,13 @@ namespace SlackMUDRPG.CommandClasses
 	/// <summary>
 	/// A character skill that is associated with the character, also storing their level.
 	/// </summary>
-	public class SMCharacterSkill
+	public class SMSkillHeld
 	{
 		[JsonProperty("SkillName")]
 		public string SkillName { get; set; }
 
 		[JsonProperty("SkillLevel")]
 		public int SkillLevel { get; set; }
-
-		
 	}
 
 	/// <summary>
