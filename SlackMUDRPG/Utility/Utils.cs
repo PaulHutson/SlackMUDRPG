@@ -9,6 +9,8 @@ namespace SlackMUDRPG.Utility
 {
 	public static class Utils
 	{
+		#region "HTTP"
+
 		/// <summary>
 		/// Gets a parameter from the Request Form or QueryString
 		/// </summary>
@@ -18,6 +20,10 @@ namespace SlackMUDRPG.Utility
 		{
 			return HttpContext.Current.Request.Form[paramName] ?? HttpContext.Current.Request.QueryString[paramName];
 		}
+
+		#endregion
+
+		#region "String Processing"
 
 		/// <summary>
 		/// Cleans a string, trimming whitespace and optionally removing specifed leading chars
@@ -46,9 +52,23 @@ namespace SlackMUDRPG.Utility
 		/// <returns>The sanitised string.</returns>
 		public static string SanitiseString(string input)
 		{
-			string nonAlphaNumeric = @"[^\w\.@- ]";
-			return Regex.Replace(input, nonAlphaNumeric, string.Empty);
+			string nonAlphaNumeric = @"[^\w\.@ -]";
+			return Regex.Replace(input, nonAlphaNumeric, "");
 		}
+
+		/// <summary>
+		/// Converts a string to TitleCase
+		/// </summary>
+		/// <param name="input">The string to convert.</param>
+		/// <returns>The title case string.</returns>
+		public static string ToTitleCase(string input)
+		{
+			return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(input.ToLower());
+		}
+
+		#endregion
+
+		#region "Reflection"
 
 		/// <summary>
 		/// Calls methodName on className with the args supplied.
@@ -126,4 +146,6 @@ namespace SlackMUDRPG.Utility
 			return calulatedArgs;
 		}
 	}
+
+	#endregion
 }
