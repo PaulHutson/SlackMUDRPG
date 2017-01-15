@@ -122,6 +122,7 @@
     <Content Include="WebPlay.aspx" />
     <Content Include="Handlers\WebSocketHandler.ashx" />
     <Content Include="JSON\Objects\Misc.Corpse.json" />
+    <Content Include="JSON\Locations\LocHospital.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -53,7 +53,7 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				catch
 				{
-					string responseText = "Error";
+					// Log this somewhere.
 				}
 
 			}

@@ -1,0 +1,15 @@
+{
+	"RoomID": "Hospital",
+	"RoomLocationX": "0",
+	"RoomLocationY": "0",
+	"RoomLocationZ": "1",
+	"RoomDescription": "There are several empty hospital beds shown around this obviously well used room... clearly many people have been through here before!",
+	"RoomExits": [
+		{
+			"Shortcut": "D1",
+			"Description": "A portal leads you back out to the real world...",
+			"RoomID": "1"
+		}
+	],
+	"RoomItems": null
+}

@@ -45,7 +45,7 @@ namespace SlackMUDRPG.CommandClasses
 		public SMAttributes Attributes { get; set; }
 
 		[JsonProperty("Skills")]
-		public List<SMCharacterSkill> Skills { get; set; }
+		public List<SMSkillHeld> Skills { get; set; }
 
 		[JsonProperty("CharacterSlots")]
 		public List<SMCharacterSlot> CharacterSlots { get; set; }
@@ -181,8 +181,8 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="targetName">The name of a (the) target to use the skill on (optional)</param>
 		public void UseSkill(string skillName, string targetName = null, bool isCombat = false)
 		{
-			// Find out if the character has the skill.
-			SMCharacterSkill smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName == skillName);
+            // Find out if the character has the skill.
+            SMSkillHeld smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName == skillName);
 
 			// If the character has the skill
 			if ((isCombat) || (smcs != null))
@@ -273,11 +273,19 @@ namespace SlackMUDRPG.CommandClasses
 			return this.Skills.FirstOrDefault(skill => skill.SkillName == skillName && skill.SkillLevel >= int.Parse(skillLevel)) != null;
 		}
 
-		#endregion
+        /// <summary>
+        /// Stops the current activity happening.
+        /// </summary>
+        public void StopActivity()
+        {
+            this.CurrentActivity = null;
+        }
 
-		#region "Combat Related Functions"
+        #endregion
 
-		public void Attack(string targetName)
+        #region "Combat Related Functions"
+
+        public void Attack(string targetName)
 		{
 			// If there's a target we need to look at...
 			if (targetName != null)
@@ -325,6 +333,80 @@ namespace SlackMUDRPG.CommandClasses
 				}
 			}
 		}
+
+        /// <summary>
+        /// Kill the character, at present they'll just respawn in the "hospital"
+        /// Later we need to extend this to have a limit to the number of lives!
+        /// </summary>
+        public void Die()
+        {
+            // First create a corpse where they are, with all the associated items attached!
+            // Drop all the items the character is holding
+            foreach (SMCharacterSlot smcs in this.CharacterSlots)
+            {
+                if (!smcs.isEmpty())
+                {
+                    this.GetRoom().AddItem(smcs.EquippedItem);
+                    smcs.EquippedItem = null;
+                }
+            }
+
+            SMItem smi = new SlackMud().CreateItemFromJson("Misc.Corpse");
+            smi.ItemName = "Corpse of " + this.GetFullName();
+
+            // Then move the player back to the hospital
+            this.RoomID = "Hospital";
+            this.Attributes.HitPoints = this.Attributes.MaxHitPoints/2;
+
+            // Tell the player they've died and announce their new location
+            this.sendMessageToPlayer("You have died and have awoken feeling groggy - you won't be at full health yet, you'll need to recharge yourself!");
+            this.GetRoomDetails();
+
+            // TODO reduce the number of rerolls they have
+            // If they get to 0 rerolls the character is permenant dead.
+
+            // Save the player
+            this.SaveToApplication();
+            this.SaveToFile();
+        }
+
+        /// <summary>
+        /// Check if the player dodges or parry's the attack.
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckDodgeParry()
+        {
+            // Ensure that the character has skills...
+            if (this.Skills != null) { 
+                // Check Dodge
+                // Does the character have the dodge skill?
+                SMSkillHeld smsh = this.Skills.FirstOrDefault(skill => skill.SkillName == "Dodge");
+                int rndChance = new Random().Next(1, 100);
+                if (smsh != null)
+                {
+                    int dodgeChance = (int)(smsh.SkillLevel * 2);
+                    if (rndChance <= dodgeChance)
+                    {
+                        this.sendMessageToPlayer("_You have dodged an attack..._");
+                        return true;
+                    }
+                }
+            
+                // Does the character have the parry skill and something equipped?
+                smsh = this.Skills.FirstOrDefault(skill => skill.SkillName == "Parry");
+                if ((!this.AreHandsEmpty()) && (smsh != null) && (this.HasItemTypeEquipped("Weapon")))
+                {
+                    int parryChance = (int)(smsh.SkillLevel * 4);
+                    if (rndChance <= parryChance)
+                    {
+                        this.sendMessageToPlayer("_You have parried an attack..._");
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
 
 		#endregion
 
@@ -686,11 +768,11 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
         /// <summary>
-		/// Has an item of a given family type equipped.
-		/// </summary>
-		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
-		/// <param name="familyType">Item Type Family.</param>
-		public bool HasItemFamilyTypeEquipped(string familyType)
+        /// Has an item of a given family type equipped.
+        /// </summary>
+        /// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
+        /// <param name="familyType">Item Type Family.</param>
+        public bool HasItemFamilyTypeEquipped(string familyType)
         {
             foreach (SMCharacterSlot slot in CharacterSlots)
             {
@@ -703,12 +785,12 @@ namespace SlackMUDRPG.CommandClasses
             return false;
         }
 
-		/// <summary>
-		/// Gets an item by name / family name
-		/// </summary>
-		/// <param name="itemName">The name / family name of the item</param>
-		/// <returns>The equipped item</returns>
-		public SMItem GetEquippedItem(string itemName)
+        /// <summary>
+        /// Gets an item by name / family name
+        /// </summary>
+        /// <param name="itemName">The name / family name of the item</param>
+        /// <returns>The equipped item</returns>
+        public SMItem GetEquippedItem(string itemName)
 		{
 			foreach (SMCharacterSlot slot in CharacterSlots)
 			{

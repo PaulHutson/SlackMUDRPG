@@ -22,5 +22,14 @@
       "SkillStatName": "STR",
       "PreReqLevel": 6
     }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Type.Weapon",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have a weapon equipped",
+      "SuccessOutput": null
+    }
   ]
 }
