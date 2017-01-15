@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace SlackMUDRPG.Utility
 {
@@ -36,6 +37,17 @@ namespace SlackMUDRPG.Utility
 			}
 
 			return str;
+		}
+
+		/// <summary>
+		/// Sanitises a string by removing any characters that are not alpha numberic, spaces, -, _ @ or .
+		/// </summary>
+		/// <param name="input">The string to sanitise.</param>
+		/// <returns>The sanitised string.</returns>
+		public static string SanitiseString(string input)
+		{
+			string nonAlphaNumeric = @"[^\w\.@- ]";
+			return Regex.Replace(input, nonAlphaNumeric, string.Empty);
 		}
 
 		/// <summary>
