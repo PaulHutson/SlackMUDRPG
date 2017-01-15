@@ -118,7 +118,22 @@
 						"ItemWeight": 0,
 						"ItemSize": 1,
 						"CanHoldOtherItems": true,
-						"HeldItems": null
+            "HeldItems": [
+              {
+                "ItemID": "4e2461ad-2572-4f02-99da-7ec30d53193z",
+                "ItemName": "Key for Locked Room(LR)",
+                "ItemType": "Key",
+                "ItemFamily": "Key",
+                "ItemDescription": "This is a key",
+                "ItemWeight": 0,
+                "ItemSize": 0,
+                "HitPoints": 1000000000,
+                "MaxHitPoints": 1000000000,
+                "BaseDamage": 0.001,
+                "Toughness": 1,
+                "CanHoldOtherItems": false
+              }
+            ]
 					}
 				]
 			}

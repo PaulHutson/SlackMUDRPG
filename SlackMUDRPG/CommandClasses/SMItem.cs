@@ -62,7 +62,10 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("RequiredSkills")]
 		public List<SMRequiredSkill> RequiredSkills { get; set; }
 
-		[JsonProperty("HeldItems")]
+        [JsonProperty("AdditionalData")]
+        public string AdditionalData { get; set; }
+
+        [JsonProperty("HeldItems")]
 		public List<SMItem> HeldItems { get; set; }
 
 		public SMItem GetDestroyedItem()

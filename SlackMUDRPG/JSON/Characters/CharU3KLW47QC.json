@@ -21,11 +21,11 @@
     "SocialStanding": 8
   },
   "Skills": [
-		{
-			"SkillName": "Chop",
-			"SkillLevel": 1
-		},
-		{
+    {
+      "SkillName": "Chop",
+      "SkillLevel": 1
+    },
+    {
       "SkillName": "Sword Use",
       "SkillLevel": 10
     }
@@ -39,28 +39,29 @@
       "EquippedItem": {
         "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453",
         "ItemName": "Wooden Sword",
-				"SingularPronoun": "a",
-				"PluralName": "Wooden Swords",
-				"PluralPronoun": "some",
+        "SingularPronoun": "a",
+        "PluralName": "Wooden Swords",
+        "PluralPronoun": "some",
         "ItemType": "weapon",
         "ItemFamily": "Sword",
         "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
         "ItemWeight": 1,
         "ItemSize": 1,
+        "ItemCapacity": 0,
         "CanHoldOtherItems": false,
         "HitPoints": 10,
         "MaxHitPoints": 10,
         "BaseDamage": 2.0,
         "Toughness": 1,
         "DestroyedOutput": null,
-        "RequiredSkills": null,
-        "HeldItems": null,
-				"RequiredSkills": [
-					{
-						"SkillName": "Sword Use",
-						"SkillLevel":  "1"
-					}
-				]
+        "RequiredSkills": [
+          {
+            "SkillName": "Sword Use",
+            "SkillLevel": "1"
+          }
+        ],
+        "AdditionalData": null,
+        "HeldItems": null
       }
     },
     {
@@ -79,6 +80,7 @@
         "ItemDescription": "This shoddy axe doesn't do much damage but it's a start.",
         "ItemWeight": 1,
         "ItemSize": 1,
+        "ItemCapacity": 0,
         "CanHoldOtherItems": false,
         "HitPoints": 50,
         "MaxHitPoints": 50,
@@ -86,6 +88,7 @@
         "Toughness": 3,
         "DestroyedOutput": null,
         "RequiredSkills": null,
+        "AdditionalData": null,
         "HeldItems": null
       }
     },
@@ -105,6 +108,7 @@
         "ItemDescription": "Basic small backpack that all players start with.",
         "ItemWeight": 0,
         "ItemSize": 1,
+        "ItemCapacity": 0,
         "CanHoldOtherItems": true,
         "HitPoints": 0,
         "MaxHitPoints": 0,
@@ -112,7 +116,31 @@
         "Toughness": 0,
         "DestroyedOutput": null,
         "RequiredSkills": null,
-        "HeldItems": null
+        "AdditionalData": null,
+        "HeldItems": [
+          {
+            "ItemID": "4e2461ad-2572-4f02-99da-7ec30d53193z",
+            "ItemName": "Key for Locked Room (LR)",
+            "SingularPronoun": null,
+            "PluralName": null,
+            "PluralPronoun": null,
+            "ItemType": "Key",
+            "ItemFamily": "Key",
+            "ItemDescription": "This is a key",
+            "ItemWeight": 0,
+            "ItemSize": 0,
+            "ItemCapacity": 0,
+            "CanHoldOtherItems": false,
+            "HitPoints": 1000000000,
+            "MaxHitPoints": 1000000000,
+            "BaseDamage": 0.001,
+            "Toughness": 1,
+            "DestroyedOutput": null,
+            "RequiredSkills": null,
+            "AdditionalData": "KeyLockExample101",
+            "HeldItems": null
+          }
+        ]
       }
     }
   ],
