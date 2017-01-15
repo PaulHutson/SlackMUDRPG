@@ -1279,6 +1279,15 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Make the character emote something
+		/// </summary>
+		/// <param name="thingtoEmote">What the character is emoting</param>
+		public void Emote(string thingtoEmote)
+		{
+			new SlackMud().GetRoom(this.RoomID).ChatEmote(thingtoEmote, this);
+		}
+
+		/// <summary>
 		/// Announce something to the player
 		/// </summary>
 		/// <param name="announcement">What is being announced to the player</param>

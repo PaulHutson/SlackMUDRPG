@@ -113,6 +113,20 @@
 			"RequiredSkill": null
 		},
 		{
+			"CommandFamily": "Chat",
+			"CommandBaseName": "emote",
+			"CommandName": "me",
+			"CommandDescription": "Enables the player to emote something.",
+			"CommandSyntax": "me <whatever-you-want>",
+			"CommandExpression": "me {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "Emote",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "me looks around the room inquisitively",
+			"RequiredSkill": null
+		},
+		{
 			"CommandFamily": "Location",
 			"CommandBaseName": "look",
 			"CommandName": "look",

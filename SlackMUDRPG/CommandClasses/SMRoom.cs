@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using SlackMUDRPG.Utility;
+using SlackMUDRPG.Utility.Formatters;
 
 namespace SlackMUDRPG.CommandClasses
 {
@@ -337,7 +338,7 @@ namespace SlackMUDRPG.CommandClasses
 		public void ChatSay(string speech, SMCharacter charSpeaking)
 		{
 			// Construct the message
-			string message = "_" + charSpeaking.GetFullName() + " says:_ \"" + speech + "\"";
+			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " says:") + "\"" + speech + "\"";
 
 			// Send the message to all people connected to the room
 			foreach (SMCharacter smc in this.GetPeople())
@@ -355,7 +356,7 @@ namespace SlackMUDRPG.CommandClasses
 		public void ChatWhisper(string speech, SMCharacter charSpeaking, string whisperToName)
 		{
 			// Construct the message
-			string message = "_" + charSpeaking.GetFullName() + " whispers:_ \"" + speech + "\"";
+			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " whispers:") + "\"" + speech + "\"";
 
 			// See if the person being whispered to is in the room
 			SMCharacter smc = this.GetPeople().FirstOrDefault(charWhisperedto => charWhisperedto.GetFullName() == whisperToName);
@@ -384,7 +385,7 @@ namespace SlackMUDRPG.CommandClasses
 			foreach (SMCharacter smc in this.GetPeople())
 			{
 				// construct the local message to be sent.
-				message = "*" + charSpeaking.GetFullName() + " shouts:* \"" + speech + "\"";
+				message = OutputFormatterFactory.Get().Bold(charSpeaking.GetFullName() + " shouts:") + "\"" + speech + "\"";
 				this.ChatSendMessage(smc, message);
 			}
 
@@ -400,13 +401,30 @@ namespace SlackMUDRPG.CommandClasses
 				SMExit smre = otherRooms.RoomExits.FirstOrDefault(smef => smef.RoomID == this.RoomID);
 
 				// Construct the message
-				message = "_Someone shouts from " + smre.Description + " (" + smre.Shortcut + "):_ \"" + speech + "\"";
+				message = OutputFormatterFactory.Get().Italic("Someone shouts from " + smre.Description + " (" + smre.Shortcut + "):") + "\"" + speech + "\"";
 
 				// Send the message to all people connected to the room
 				foreach (SMCharacter smcInOtherRoom in otherRooms.GetPeople())
 				{
 					otherRooms.ChatSendMessage(smcInOtherRoom, message);
 				}
+			}
+		}
+
+		/// <summary>
+		/// Character "EMOTE" method
+		/// </summary>
+		/// <param name="emoting">What the character is "Emoting"</param>
+		/// <param name="charSpeaking">The character who is emoting</param>
+		public void ChatEmote(string speech, SMCharacter charSpeaking)
+		{
+			// Construct the message
+			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " " + speech);
+
+			// Send the message to all people connected to the room
+			foreach (SMCharacter smc in this.GetPeople())
+			{
+				this.ChatSendMessage(smc, message);
 			}
 		}
 
