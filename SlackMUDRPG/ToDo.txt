@@ -89,12 +89,17 @@
 		DONE- Attack ("ATTACK PlayerName") - will use default item in their hand
 			DONE- Hit points must reduce
 			DONE- Character death
-		- Make ("MAKE Torch") - will use the items from their inventory to make the torch.
-			- Make advanced ("MAKE Sword USING Anvil")
-		- Build ("BUILD Shed") - will use items in a location to build something.
-			- This should take time (as per the object stub).
-			- Not sure if the build system should be split up a bit - i.e. you can build 5% of the house, depending on how
-				long you take doing it or until resources run out.
+		- BUILD/MAKE PROCESS
+			- Build steps class (like the skills one).
+			- Different states for the item during manufacture.
+			- Consumption of receipe items during steps.
+			Implementation
+				- Make ("MAKE Torch") - will use the items from their inventory to make the torch.
+					- Make advanced ("MAKE Sword USING Anvil")
+				- Build ("BUILD Shed") - will use items in a location to build something.
+					- This should take time (as per the object stub).
+					- Not sure if the build system should be split up a bit - i.e. you can build 5% of the house, depending on how
+					long you take doing it or until resources run out.
 
 7) Implement Story element
 	- Jobs system (get jobs from a notice board)
