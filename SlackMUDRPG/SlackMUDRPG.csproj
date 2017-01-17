@@ -133,7 +133,7 @@
     </None>
     <Content Include="JSON\Objects\Containers.SmallBackpack.json" />
     <Content Include="JSON\Objects\Weapons.WoodenSword.json" />
-    <None Include="JSON\Misc\Slots.BaseCharacter.json" />
+    <Content Include="JSON\Misc\Slots.BaseCharacter.json" />
     <Content Include="JSON\Objects\Weapons.WoodenStick.json" />
     <Content Include="JSON\Commands\Help.json" />
     <Content Include="JSON\Commands\ClassBuilder.json" />
