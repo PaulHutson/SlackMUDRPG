@@ -180,7 +180,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="sexIn">M or F for the male / Female character</param>
 		/// <param name="characterType">M or F for the male / Female character</param>
 		/// <returns>A string with the character information</returns>
-		public void CreateCharacter(string userID, string firstName, string lastName, int age, char sexIn, string characterType = "BaseCharacter", string responseURL = null)
+		public void CreateCharacter(string userID, string firstName, string lastName, string sexIn, string age, string characterType = "BaseCharacter", string responseURL = null)
 		{
 			// Get the path for the character
 			string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
@@ -196,7 +196,8 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.LastLogindate = DateTime.Now;
 				SMChar.LastInteractionDate = DateTime.Now;
 				SMChar.PKFlag = false;
-				SMChar.Sex = sexIn;
+				SMChar.Sex = char.Parse(sexIn);
+				SMChar.Age = int.Parse(age);
 
 				// Add default attributes to the character
 				SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);

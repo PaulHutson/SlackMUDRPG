@@ -1,8 +1,10 @@
 ﻿{
-  "str": "10",
-  "int": "10",
-  "chr": "10",
-  "dex": "10",
-  "wp": "10",
-  "SocialStanding": "8"
+  "str": 10,
+	"int": 10,
+	"chr": 10,
+	"dex": 10,
+	"wp": 10,
+	"hp": 10,
+	"maxhp": 10,
+	"SocialStanding": 8
 }

@@ -22,7 +22,7 @@ namespace SlackMUDRPG
 
 		protected void btn_CreateCharacter_Click(object sender, EventArgs e)
 		{
-			//OutputUpdate(SlackMUDRPG.CommandClasses.SlackMud.CreateCharacter(tb_CharID.Text, "Paul", "Hutson", 34, 'm'));
+			new SlackMud().CreateCharacter(tb_CharID.Text, "Testy", "McTestface", "f", "8");
 		}
 
 		protected void btn_TestLoc_Click(object sender, EventArgs e)

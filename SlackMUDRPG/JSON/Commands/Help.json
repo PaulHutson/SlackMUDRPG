@@ -30,6 +30,20 @@
 		},
 		{
 			"CommandFamily": "General",
+			"CommandBaseName": "createcharacter",
+			"CommandName": "createcharacter",
+			"CommandDescription": "Creates a new character.",
+			"CommandSyntax": "createcharacter [First Name],[Last Name],[Sex m / f],[Age of character]",
+			"CommandExpression": "createcharacter {.+},{.+},{.+},{.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SlackMud",
+			"CommandMethod": "CreateCharacter",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": "user_id",
+			"ExampleUsage": "createcharacter Paul,Hutson,m,36",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "General",
 			"CommandBaseName": "move",
 			"CommandName": "move",
 			"CommandDescription": "This will move you to a room defined by the exit.",
