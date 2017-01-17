@@ -367,11 +367,12 @@ namespace SlackMUDRPG.CommandClasses
                 }
             }
 
-            SMItem smi = new SlackMud().CreateItemFromJson("Misc.Corpse");
-            smi.ItemName = "Corpse of " + this.GetFullName();
+            SMItem corpse = new SlackMud().CreateItemFromJson("Misc.Corpse");
+			corpse.ItemName = "Corpse of " + this.GetFullName();
+			this.GetRoom().AddItem(corpse);
 
-            // Then move the player back to the hospital
-            this.RoomID = "Hospital";
+			// Then move the player back to the hospital
+			this.RoomID = "Hospital";
             this.Attributes.HitPoints = this.Attributes.MaxHitPoints/2;
 
             // Tell the player they've died and announce their new location

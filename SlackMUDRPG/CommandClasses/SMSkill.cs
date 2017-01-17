@@ -228,7 +228,7 @@ namespace SlackMUDRPG.CommandClasses
 				targetToughness = targetChar.Attributes.GetToughness();
 				targetHP = targetChar.Attributes.HitPoints;
 				targetName = targetChar.GetFullName();
-				destroyedObjectType = "Corpse of " + targetName;
+				destroyedObjectType = "the corpse of " + targetName;
 
                 // See if they dodge or parry the hit.
                 objectAvoidedHit = targetChar.CheckDodgeParry();
@@ -270,7 +270,9 @@ namespace SlackMUDRPG.CommandClasses
                         // TODO Add "Die" method to the character
                         targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
                         targetChar.Die();
-				    }
+						oldItemName = targetChar.GetFullName();
+						newItemName = destroyedObjectType;
+					}
 				    else // Assume it's an item
 				    {
 					    // Todo add the new item to the room.
