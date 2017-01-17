@@ -52,11 +52,13 @@
 				<asp:Button runat="server" ID="btn_ChopTree" Text="Chop Tree" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopTree_Click" />
 				<asp:Button runat="server" ID="btn_ChopLog" Text="Chop Log" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopLog_Click"  />
 				<asp:Button runat="server" ID="btn_ChopTreeTrunk" Text="Chop Tree Trunk" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopTreeTrunk_Click"  />
+				<asp:Button runat="server" ID="btn_Stop" Text="STOP Activity" OnClientClick="scrollBoxToBottom();" OnClick="btn_Stop_Click"   />
 		</div>
 		
 		<div>
 			Combat:
 				<asp:Button runat="server" ID="btn_AttackRob" Text="Attack Robert Curran" OnClientClick="scrollBoxToBottom();" OnClick="btn_AttackRob_Click" />
+				<asp:Button runat="server" ID="btn_AttackPell" Text="Attack Pell" OnClientClick="scrollBoxToBottom();" OnClick="btn_AttackPell_Click" />
 		</div>
     </form>
 </body>

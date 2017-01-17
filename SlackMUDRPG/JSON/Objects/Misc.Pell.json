@@ -1,7 +1,10 @@
 ﻿{
-  "ItemName": "Wooden Pell",
+	"ItemName": "Wooden Pell",
+	"SingularPronoun": "a",
+	"PluralName": "Wooden Pells",
+	"PluralPronoun": "some",
   "ItemType": "Misc",
-  "ItemFamily": "Misc",
+  "ItemFamily": "Pell",
   "ItemDescription": "This is a wooden Pell, used for melee training.",
   "ItemWeight": 20,
   "ItemSize": 20,

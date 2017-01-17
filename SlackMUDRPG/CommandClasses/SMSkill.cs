@@ -47,6 +47,9 @@ namespace SlackMUDRPG.CommandClasses
 			messageOut = "";
 			floatOut = 0;
 
+			// Get the actual instance of the character!
+			smc = new SlackMud().GetCharacter(smc.UserID);
+
 			// Set the character activity
 			if (beginSkillUse)
 			{
@@ -56,6 +59,9 @@ namespace SlackMUDRPG.CommandClasses
 			// Loop around the steps
 			foreach (SMSkillStep smss in this.SkillSteps)
 			{
+				// Get the character again each time we go around the loop
+				smc = new SlackMud().GetCharacter(smc.UserID);
+
 				if (smc.CurrentActivity == this.ActivityType)
 				{
 					switch (smss.StepType)

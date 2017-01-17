@@ -202,6 +202,15 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.Button btn_ChopTreeTrunk;
         
         /// <summary>
+        /// btn_Stop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Stop;
+        
+        /// <summary>
         /// btn_AttackRob control.
         /// </summary>
         /// <remarks>
@@ -209,5 +218,14 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_AttackRob;
+        
+        /// <summary>
+        /// btn_AttackPell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_AttackPell;
     }
 }
