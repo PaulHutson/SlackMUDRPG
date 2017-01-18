@@ -4,6 +4,7 @@
     "SkillTypeDescription": "Combat Related Skill for Unarmed Fighting"
   },
   "SkillName": "Brawl",
+	"CanUseWithoutLearning":  true,
   "SkillDescription": "The ability to competently fight with nothing but your hands",
   "SkillLearnText": "You've learnt how to fight with nothing but your bare hands",
   "LevelIncreaseText": "You feel you've gotten better at brawling",

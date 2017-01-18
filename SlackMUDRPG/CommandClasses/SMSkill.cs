@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using SlackMUDRPG.Utility.Formatters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,9 @@ namespace SlackMUDRPG.CommandClasses
 
 		[JsonProperty("ImprovementSpeed")]
 		public int ImprovementSpeed { get; set; }
+
+		[JsonProperty("CanUseWithoutLearning")]
+		public bool CanUseWithoutLearning { get; set; }
 
 		[JsonProperty("Prerequisites")]
 		public List<SMSkillPrerequisite> Prerequisites { get; set; }
@@ -211,7 +215,12 @@ namespace SlackMUDRPG.CommandClasses
 			// Work out the damage multiplier based on attribute level (+/-)
 			int baseStatRequiredAmount = this.Prerequisites.First(pr => pr.SkillStatName == baseStat).PreReqLevel;
 			float positiveNegativeBaseStat = baseStatValue - baseStatRequiredAmount;
-            SMSkillHeld theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+
+			SMSkillHeld theCharacterSkill = null;
+			if (smc.Skills != null)
+			{
+				smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+			}
 			int charLevelOfSkill = 0;
 			if (theCharacterSkill != null)
 			{
@@ -382,8 +391,12 @@ namespace SlackMUDRPG.CommandClasses
 				failureMultipler = 1;
 			}
 
-            // Get characters current skill level
-            SMSkillHeld theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+			// Get characters current skill level
+			SMSkillHeld theCharacterSkill = null;
+			if (smc.Skills != null)
+			{
+				smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+			}
 			int currentSkillLevel = 0;
 			if (theCharacterSkill!=null)
 			{
@@ -391,22 +404,46 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Chance of the skill increasing in level
-			double chanceOfSkillIncrease = ((maxSkillLevel - (currentSkillLevel * failureMultipler)) / 100) / 4;
+			double chanceOfSkillIncrease = ((maxSkillLevel - (currentSkillLevel * failureMultipler)) / (10+currentSkillLevel));
 
 			// Random chance to see if someone achieves the skill increase change
 			Random r = new Random();
 			double rDouble = r.NextDouble();
-			if (rDouble < chanceOfSkillIncrease)
+			if ((rDouble*100) < chanceOfSkillIncrease)
 			{
 				// Increase the skill lebel by one.
-				smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName).SkillLevel++;
+				if (smc.Skills != null)
+				{
+					SMSkillHeld smshincrease = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
 
-				// Send message to the player.
-				smc.sendMessageToPlayer(this.SkillName + " increased in level to " + (currentSkillLevel + 1));
+					if (smshincrease != null)
+					{
+						smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName).SkillLevel++;
+					} else
+					{
+						LearnNewSkill(smc);
+					}
+					// Send message to the player.
+					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.SkillName + " increased in level to " + (currentSkillLevel + 1)));
+				} else
+				{
+					LearnNewSkill(smc);
+				}
 			}
 
 			// Attribute Increase
 			// TODO add an attribute increase method check to SMAttributes, very very low chance!
+		}
+
+		public void LearnNewSkill(SMCharacter smc)
+		{
+			SMSkillHeld newSkill = new SMSkillHeld();
+			newSkill.SkillName = this.SkillName;
+			newSkill.SkillLevel = 1;
+			smc.Skills.Add(newSkill);
+			
+			smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.SkillLearnText));
+			smc.SaveToApplication();
 		}
 
 		#endregion

@@ -20,16 +20,7 @@
     "maxhp": 10,
     "SocialStanding": 8
   },
-  "Skills": [
-    {
-      "SkillName": "Chop",
-      "SkillLevel": 1
-    },
-    {
-      "SkillName": "Sword Use",
-      "SkillLevel": 10
-    }
-  ],
+  "Skills": null,
   "CharacterSlots": [
     {
       "Name": "RightHand",

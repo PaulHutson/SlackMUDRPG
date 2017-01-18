@@ -197,11 +197,18 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="targetName">The name of a (the) target to use the skill on (optional)</param>
 		public void UseSkill(string skillName, string targetName = null, bool isCombat = false)
 		{
-            // Find out if the character has the skill.
-            SMSkillHeld smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName == skillName);
+			// Create a new instance of the skill.
+			SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName == skillName);
+			SMSkillHeld smcs = null;
 
+			// Find out if the character has the skill.
+			if (this.Skills != null)
+			{
+				smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName == skillName);
+			}
+            
 			// If the character has the skill
-			if ((isCombat) || (smcs != null))
+			if ((isCombat) || ((smcs != null)||(smc.CanUseWithoutLearning)))
 			{
 				// Variables for use later
 				string targetType = null, targetID = null;
@@ -264,8 +271,7 @@ namespace SlackMUDRPG.CommandClasses
 					string messageOut;
 					float floatOut;
 
-					// Create a new instance of the skill.
-					SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName == skillName);
+					
 
 					// Execute the skill
 					smc.UseSkill(this, out messageOut, out floatOut, true, targetType, targetID);
@@ -286,7 +292,11 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns></returns>
 		public bool HasRequiredSkill(string skillName, string skillLevel)
 		{
-			return this.Skills.FirstOrDefault(skill => skill.SkillName == skillName && skill.SkillLevel >= int.Parse(skillLevel)) != null;
+			if (this.Skills != null)
+			{
+				return this.Skills.FirstOrDefault(skill => skill.SkillName == skillName && skill.SkillLevel >= int.Parse(skillLevel)) != null;
+			}
+			return false;
 		}
 
         /// <summary>
