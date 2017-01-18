@@ -173,9 +173,12 @@ namespace SlackMUDRPG.CommandClasses
                     }
 
                     // If the room is not lot or the character has the right key, let them in.
-                    if (initiateMove) { 
-					    // Move the player to the new location
-					    this.RoomID = smr.RoomID;
+                    if (initiateMove) {
+						// Walk out of the room code.
+						this.GetRoom().Announce("_" + this.GetFullName() + " walks out._", this, true);
+
+						// Move the player to the new location
+						this.RoomID = smr.RoomID;
 					    this.SaveToFile();
 					    this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
 
