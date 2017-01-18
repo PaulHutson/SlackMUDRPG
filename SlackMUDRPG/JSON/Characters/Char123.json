@@ -7,7 +7,8 @@
   "sex": "f",
   "PKFlag": false,
   "UserID": "123",
-  "RoomID": "1",
+  "RoomID": "Hospital",
+  "CurrentActivity": null,
   "Attributes": {
     "str": 10,
     "int": 10,
@@ -15,26 +16,27 @@
     "dex": 10,
     "wp": 10,
     "ft": 10,
-    "hp": 10,
+    "hp": 5,
     "maxhp": 10,
     "SocialStanding": 8
   },
+  "Skills": [
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 20
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 20
+    }
+  ],
   "CharacterSlots": [
     {
       "Name": "RightHand",
       "AllowedTypes": [
         "any"
       ],
-      "EquippedItem": {
-        "ItemID": "ef875a1a-efb0-4871-a36f-de3a0fb03056",
-        "ItemName": "Wooden Sword",
-        "ItemType": "weapon",
-        "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
-        "ItemWeight": 1,
-        "ItemSize": 1,
-        "CanHoldOtherItems": false,
-        "HeldItems": null
-      }
+      "EquippedItem": null
     },
     {
       "Name": "LeftHand",
@@ -48,26 +50,8 @@
       "AllowedTypes": [
         "containers"
       ],
-      "EquippedItem": {
-        "ItemID": "cde0b214-6c3b-4a1a-9b3e-c36ac336f779",
-        "ItemName": "Small Backpack",
-        "ItemType": "container",
-        "ItemDescription": "Basic small backpack that all players start with.",
-        "ItemWeight": 0,
-        "ItemSize": 1,
-        "CanHoldOtherItems": true,
-        "HeldItems": null
-      }
+      "EquippedItem": null
     }
   ],
-  "Skills": [
-    {
-      "SkillName": "Dodge",
-      "SkillLevel": 20
-    },
-    {
-      "SkillName": "Parry",
-      "SkillLevel": 20
-    }
-  ]
+  "ResponseURL": null
 }

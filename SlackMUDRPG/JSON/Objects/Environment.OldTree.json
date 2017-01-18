@@ -1,5 +1,8 @@
 ﻿{
 	"ItemName": "Old Tree",
+	"SingularPronoun": "an",
+	"PluralName": "Old Trees",
+	"PluralPronoun": "some",
   "ItemType": "Environment",
   "ItemFamily": "Tree",
 	"ItemDescription": "This tree looks very old.",

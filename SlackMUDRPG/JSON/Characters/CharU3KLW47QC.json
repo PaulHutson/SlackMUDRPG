@@ -7,7 +7,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "1",
+  "RoomID": "TrainingYard",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -51,7 +51,7 @@
         "CanHoldOtherItems": false,
         "HitPoints": 10,
         "MaxHitPoints": 10,
-        "BaseDamage": 2.0,
+        "BaseDamage": 10.0,
         "Toughness": 1,
         "DestroyedOutput": null,
         "RequiredSkills": [

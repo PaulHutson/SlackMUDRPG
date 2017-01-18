@@ -1,0 +1,11 @@
+﻿{
+  "Produces": "Weapons.WoodenSword",
+	"Materials": null,
+	"Steps": null,
+	"RequiredSkills": [
+		{
+			"SkillName": "Carpentry",
+			"SkillLevel":  "1"
+		}
+	]
+}

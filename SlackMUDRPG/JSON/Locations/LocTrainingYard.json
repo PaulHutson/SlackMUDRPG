@@ -20,8 +20,11 @@
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcapell",
 			"ItemName": "Wooden Pell",
+			"SingularPronoun": "a",
+			"PluralName": "Wooden Pells",
+			"PluralPronoun": "some",
 			"ItemType": "Misc",
-			"ItemFamily": "Misc",
+			"ItemFamily": "Pell",
 			"ItemDescription": "This is a wooden Pell, used for melee training.",
 			"ItemWeight": 50,
 			"ItemSize": 25,
