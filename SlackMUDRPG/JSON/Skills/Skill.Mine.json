@@ -1,0 +1,78 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Environment",
+    "SkillTypeDescription": "Skills related to manipulating the environment"
+  },
+  "SkillName": "Mine",
+	"CanUseWithoutLearning":  true,
+  "SkillDescription": "The ability to use a pick axe to mine things",
+  "SkillLearnText": "You've learnt how to mine things with a pick axe",
+  "LevelIncreaseText":  "You feel you've gotten better at mining things",
+  "ActivityType":  "Mining",
+  "BaseStat": "STR",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 8
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "INT",
+      "PreReqLevel": 5
+    },
+    {
+      "IsSkill": true,
+      "SkillStatName": "Axe",
+      "PreReqLevel": 1
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.PickAxe",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have a pick axe equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Target",
+      "StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": "Trait.isMineable",
+      "FailureOutput": "You must choose something to mine",
+      "SuccessOutput": "You can not mine that"
+    },
+    {
+      "StepType": "HitMulti",
+      "StepRequiredObject": "Family.PickAxe",
+			"RequiredObjectAmount": 1,
+			"ExtraData": "10",
+      "FailureOutput": "Failed to mine {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} mines {TARGETNAME} to produce {Object.DestroyedOutput}"
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} mines {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 10,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Repeat",
+      "StepRequiredObject": "Activity.Mining",
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    }
+  ]
+}

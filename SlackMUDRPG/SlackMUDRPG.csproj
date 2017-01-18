@@ -126,6 +126,10 @@
     <Content Include="JSON\Locations\LocLockedPlace1.json" />
     <Content Include="JSON\Locations\LocHospital.json" />
     <Content Include="JSON\Objects\Building.Hut.json" />
+    <Content Include="JSON\Objects\Weapons.ShoddyPickAxe.json" />
+    <Content Include="JSON\Skills\Skill.Mine.json" />
+    <Content Include="JSON\Objects\Resource.GoldVein.json" />
+    <Content Include="JSON\Objects\Resource.GoldNugget.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

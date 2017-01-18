@@ -65,7 +65,10 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("AdditionalData")]
         public string AdditionalData { get; set; }
 
-        [JsonProperty("HeldItems")]
+		[JsonProperty("ObjectTrait")]
+		public string ObjectTrait { get; set; }
+
+		[JsonProperty("HeldItems")]
 		public List<SMItem> HeldItems { get; set; }
 
 		public SMItem GetDestroyedItem()
