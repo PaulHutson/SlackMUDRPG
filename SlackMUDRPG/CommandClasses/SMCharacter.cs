@@ -17,7 +17,10 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("lastname")]
 		public string LastName { get; set; }
 
-		[JsonProperty("lastinteractiondate")]
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
+        [JsonProperty("lastinteractiondate")]
 		public DateTime LastInteractionDate { get; set; }
 
 		[JsonProperty("lastlogindate")]
@@ -188,6 +191,24 @@ namespace SlackMUDRPG.CommandClasses
                 }
 			}
 		}
+
+        /// <summary>
+        /// Inspect an thing in the room...
+        /// </summary>
+        /// <param name="thingToInspect">The thing to inspect</param>
+        public void InspectObject(string thingToInspect)
+        {
+            this.GetRoom().InspectThing(this, thingToInspect);
+        }
+
+        /// <summary>
+        /// Set the description of the character
+        /// </summary>
+        /// <param name="newDescription">The description of the character</param>
+        public void SetDescription(string newDescription)
+        {
+            this.Description = newDescription;
+        }
 
 		#endregion
 
@@ -646,35 +667,46 @@ namespace SlackMUDRPG.CommandClasses
 		/// Send the character a message listing their inventory. If a slot is specified only items is that
 		/// slot are listed, but containers contents in rescurivly displayed
 		/// </summary>
-		/// <param name="slotName">The naem of the slot (case and space insensitive).</param>
+		/// <param name="slotName">The name of the slot (case and space insensitive).</param>
 		public void ListInventory(string slotName = null)
 		{
-			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
+            OutputFormatter outputFormatter = OutputFormatterFactory.Get();
+            string inventory = outputFormatter.Bold("Your Inventory:");
+            //TODO capacity indicator
+            inventory += outputFormatter.Italic($"Weight: {this.GetCurrentWeight()} / {this.GetWeightLimit()}", 2);
 
-			string inventory = outputFormatter.Bold("Your Inventory:");
-
-			//TODO capacity indicator
-			inventory += outputFormatter.Italic($"Weight: {this.GetCurrentWeight()} / {this.GetWeightLimit()}", 2);
-
-			if (slotName == null)
-			{
-				inventory += this.ListAllSlots();
-			}
-			else
-			{
-				inventory += this.ListSlot(slotName);
-			}
-
-			// TODO list clothing (body parts)
-
-			this.sendMessageToPlayer(inventory);
+            this.sendMessageToPlayer(inventory + GetInventoryList(slotName));
 		}
 
-		/// <summary>
-		/// Builds a sting of the equipped items in each character slot. Containers contents is ignored.
-		/// </summary>
-		/// <returns>String detailing all slots inventory.</returns>
-		private string ListAllSlots()
+        /// <summary>
+        /// Gets the players inventory
+        /// </summary>
+        /// <param name="slotName">The name of the slot (case and space insensitive)</param>
+        /// <returns>The inventory list</returns>
+        public string GetInventoryList(string slotName = null)
+        {
+            OutputFormatter outputFormatter = OutputFormatterFactory.Get();
+
+            string inventory = "";
+            
+            if (slotName == null)
+            {
+                inventory += this.ListAllSlots();
+            }
+            else
+            {
+                inventory += this.ListSlot(slotName);
+            }
+
+            // TODO list clothing (body parts)
+            return inventory;
+        }
+
+        /// <summary>
+        /// Builds a sting of the equipped items in each character slot. Containers contents is ignored.
+        /// </summary>
+        /// <returns>String detailing all slots inventory.</returns>
+        private string ListAllSlots()
 		{
 			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
 

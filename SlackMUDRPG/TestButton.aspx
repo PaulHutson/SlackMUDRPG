@@ -36,7 +36,9 @@
             <asp:Button runat="server" ID="btn_GetLocation" Text="Get Location Details" OnClick="btn_TestLoc_Click" OnClientClick="scrollBoxToBottom();" />
             <asp:Button runat="server" ID="btn_CreateCharacter" Text="Test Create Character" OnClick="btn_CreateCharacter_Click" OnClientClick="scrollBoxToBottom();" /><br />
             <asp:Button runat="server" ID="btn_MoveToRoom" Text="Move To Room Shortcut" OnClick="btn_MoveRoom_Click" OnClientClick="scrollBoxToBottom();" />
-			<asp:Button runat="server" ID="btn_Look" Text="Look (at current location)" OnClientClick="scrollBoxToBottom();" OnClick="btn_Look_Click" />
+			<asp:Button runat="server" ID="btn_Look" Text="Look (at current location)" OnClientClick="scrollBoxToBottom();" OnClick="btn_Look_Click" /><br />
+            <asp:Button runat="server" ID="btn_Inspect_Rob" Text="Inspect Rob Curren2" OnClientClick="scrollBoxToBottom();" OnClick="btn_Inspect_Rob_Click" />
+            <asp:Button runat="server" ID="Button1" Text="Inspect Wooden Pell" OnClientClick="scrollBoxToBottom();" OnClick="Button1_Click" />
         </div>
 
 		<div>

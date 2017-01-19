@@ -214,7 +214,7 @@
 			"CommandFamily": "Inventory",
 			"CommandBaseName": "equip",
 			"CommandName": "equip",
-			"CommandDescription": "Trys to equit an item by name, optionally to a specific slot.",
+			"CommandDescription": "Trys to equip an item by name, optionally to a specific slot.",
 			"CommandSyntax": "equip <item name> to [slot name]",
 			"CommandExpression": "equip {.+} to {.+}?",
 			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
@@ -222,6 +222,34 @@
 			"PassCommandAsFirstArg": false,
 			"PassQueryParamAsFirstArg": null,
 			"ExampleUsage": "equip Wooden Sword or equip Wooden Sword to Right Hand",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Character",
+			"CommandBaseName": "setdescription",
+			"CommandName": "setdescription",
+			"CommandDescription": "Update your character description.",
+			"CommandSyntax": "setdescription <New description>",
+			"CommandExpression": "setdescription {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "SetDescription",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "setdescription A suave looking young chap with black hair and a big nose.",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Character",
+			"CommandBaseName": "inspect",
+			"CommandName": "inspect",
+			"CommandDescription": "Inspect a chatracter or an object within a location.",
+			"CommandSyntax": "inspect <thing to inspect>",
+			"CommandExpression": "inspect {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "InspectObject",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "inspect Paul Hutson or inspect Wooden Pell",
 			"RequiredSkill": null
 		},
 		{
