@@ -255,6 +255,49 @@ namespace SlackMUDRPG.CommandClasses
 			return returnString;
 		}
 
+        /// <summary>
+        /// Inspect a person, object, etc.
+        /// </summary>
+        /// <param name="smc">The character doing the inspecting</param>
+        /// <param name="thingToInspect">The thing that the person wants to inspect</param>
+        public void InspectThing(SMCharacter smc, string thingToInspect)
+        {
+            // Check if it's a character first
+            SMCharacter targetCharacter = this.GetPeople().FirstOrDefault(checkChar => checkChar.GetFullName() == thingToInspect);
+
+            if (targetCharacter != null)
+            {
+                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description:"));
+                if ((targetCharacter.Description != null) || (targetCharacter.Description != ""))
+                {
+                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetCharacter.Description));
+                }
+                else
+                {
+                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock("No description set..."));
+                }
+                smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetCharacter.GetInventoryList()));
+            }
+            else // If not a character, check the objects in the room
+            {
+                SMItem smi = this.RoomItems.FirstOrDefault(item => item.ItemName == thingToInspect);
+                if (smi == null)
+                {
+                    smi = this.RoomItems.FirstOrDefault(item => item.ItemFamily == thingToInspect);
+                }
+
+                if (smi != null)
+                {
+                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description:"));
+                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(smi.ItemDescription));
+                }
+                else
+                {
+                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not inspect that item."));
+                }
+            }
+        }
+
 		#endregion
 
 		#region "Inventory Function"

@@ -252,9 +252,7 @@ namespace SlackMUDRPG.CommandClasses
                 SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
 
                 character.sendMessageToPlayer("You already have a character, you cannot create another.");
-			}
-
-            
+			}   
         }
 
 		#endregion
