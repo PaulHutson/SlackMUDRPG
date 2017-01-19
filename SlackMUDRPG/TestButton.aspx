@@ -53,6 +53,7 @@
 				<asp:Button runat="server" ID="btn_ChopLog" Text="Chop Log" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopLog_Click"  />
 				<asp:Button runat="server" ID="btn_ChopTreeTrunk" Text="Chop Tree Trunk" OnClientClick="scrollBoxToBottom();" OnClick="btn_ChopTreeTrunk_Click"  />
 				<asp:Button runat="server" ID="btn_Stop" Text="STOP Activity" OnClientClick="scrollBoxToBottom();" OnClick="btn_Stop_Click"   />
+                <asp:Button runat="server" ID="btn_Mining" Text="Mine Gold" OnClientClick="scrollBoxToBottom();" OnClick="btn_Mining_Click" />
 		</div>
 		
 		<div>

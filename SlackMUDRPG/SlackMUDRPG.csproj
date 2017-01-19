@@ -128,8 +128,13 @@
     <Content Include="JSON\Objects\Building.Hut.json" />
     <Content Include="JSON\Objects\Weapons.ShoddyPickAxe.json" />
     <Content Include="JSON\Skills\Skill.Mine.json" />
-    <Content Include="JSON\Objects\Resource.GoldVein.json" />
+    <Content Include="JSON\Objects\Environment.GoldVein.json" />
     <Content Include="JSON\Objects\Resource.GoldNugget.json" />
+    <Content Include="JSON\Objects\Resource.IronNugget.json" />
+    <Content Include="JSON\Objects\Environment.IronVein.json" />
+    <Content Include="JSON\Objects\Resource.CopperNugget.json" />
+    <Content Include="JSON\Objects\Environment.CopperVein.json" />
+    <Content Include="JSON\Locations\LocOutside2.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

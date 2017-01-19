@@ -127,5 +127,11 @@ namespace SlackMUDRPG
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			smc.StopActivity();
 		}
-	}
+
+        protected void btn_Mining_Click(object sender, EventArgs e)
+        {
+            SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+            smc.UseSkill("Mine", "Gold");
+        }
+    }
 }

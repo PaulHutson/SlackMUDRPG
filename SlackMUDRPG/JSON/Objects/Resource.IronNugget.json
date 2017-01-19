@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Iron Nugget",
+	"SingularPronoun": "an",
+	"PluralName": "Iron Nuggets",
+	"PluralPronoun": "some",
+  "ItemType": "resource",
+  "ItemFamily": "Nugget",
+	"ItemDescription": "A nugget of iron",
+	"ItemWeight": 5,
+  "ItemSize": 5,
+  "HitPoints": 5,
+  "MaxHitPoints": 5,
+  "BaseDamage": 0.001,
+  "Toughness": 5,
+	"CanHoldOtherItems": false
+}
