@@ -127,17 +127,22 @@ namespace SlackMUDRPG
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			smc.StopActivity();
 		}
+    
+    protected void btn_Inspect_Rob_Click(object sender, EventArgs e)
+    {
+        SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+        smc.InspectObject("Rob Curran2");
+    }
 
-        protected void btn_Inspect_Rob_Click(object sender, EventArgs e)
-        {
-            SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
-            smc.InspectObject("Rob Curran2");
-        }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+        smc.InspectObject("Wooden Pell");
+    }
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
-            smc.InspectObject("Wooden Pell");
-        }
+    protected void btn_Mining_Click(object sender, EventArgs e)
+    {
+        SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+        smc.UseSkill("Mine", "Gold");
     }
 }
