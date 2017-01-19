@@ -277,7 +277,7 @@ namespace SlackMUDRPG.CommandClasses
 					
 
 					// Execute the skill
-					smc.UseSkill(this, out messageOut, out floatOut, true, targetType, targetID);
+					smc.UseSkill(this, out messageOut, out floatOut, 0, true, targetType, targetID);
 				}
 			}
 			else

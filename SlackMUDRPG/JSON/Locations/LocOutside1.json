@@ -5,10 +5,15 @@
 	"RoomLocationZ": "1",
 	"RoomDescription": "A wooded area, filled with wonderously tall trees... ready for you to chop down.\n> You can't see much through the foliage, but the forest looks like it goes on for some time...\n> \n> There's a strange building off to one side of this wooded area with an archway leading to what looks like an open courtyard with a sandy floor.",
 	"RoomExits": [
-		{
-			"Shortcut": "TY",
-			"Description": "An archway leading to a courtyard",
-			"RoomID": "TrainingYard"
+    {
+      "Shortcut": "TY",
+      "Description": "An archway leading to a courtyard",
+      "RoomID": "TrainingYard"
+    },
+    {
+			"Shortcut": "SP2",
+			"Description": "A steep path leading to a rocky outcropping",
+			"RoomID": "Outside2"
 		}
 	],
 	"RoomItems": [
@@ -78,7 +83,7 @@
 			"HitPoints": 500000,
 			"MaxHitPoints": 500000,
 			"BaseDamage": 0.001,
-			"Toughness": 5,
+			"Toughness": 4,
 			"DestroyedOutput": "Resource.GoldNugget,1",
 			"ObjectTrait": "isMineable",
 			"CanHoldOtherItems": false

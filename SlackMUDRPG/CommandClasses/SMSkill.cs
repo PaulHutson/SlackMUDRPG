@@ -45,95 +45,104 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("SkillSteps")]
 		public List<SMSkillStep> SkillSteps { get; set; }
 
-		public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, bool beginSkillUse = true, string targetType = null, string targetID = null, bool isPassive = false)
+		public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, int skillLoop, bool beginSkillUse = true, string targetType = null, string targetID = null, bool isPassive = false)
 		{
 			// Output variables for passive skills that need output (like "dodge")
 			messageOut = "";
 			floatOut = 0;
 
-			// Get the actual instance of the character!
-			smc = new SlackMud().GetCharacter(smc.UserID);
+            if (skillLoop < 5)
+            {
+                // Increase the loop number
+                var newSkillLoop = skillLoop + 1;
 
-			// Set the character activity
-			if (beginSkillUse)
-			{
-				smc.CurrentActivity = this.ActivityType;
-			}
+			    // Get the actual instance of the character!
+			    smc = new SlackMud().GetCharacter(smc.UserID);
 
-			// Loop around the steps
-			foreach (SMSkillStep smss in this.SkillSteps)
-			{
-				// Get the character again each time we go around the loop
-				smc = new SlackMud().GetCharacter(smc.UserID);
+			    // Set the character activity
+			    if (beginSkillUse)
+			    {
+				    smc.CurrentActivity = this.ActivityType;
+			    }
 
-				if (smc.CurrentActivity == this.ActivityType)
-				{
-					switch (smss.StepType)
-					{
-						case "Object":
-							if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
-								smc.sendMessageToPlayer(smss.FailureOutput);
-							break;
-                        case "EquippedObject":
-                            if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true)) && (!isPassive))
-                                smc.sendMessageToPlayer(smss.FailureOutput);
-                            break;
-                        case "Target":
-							if ((!StepRequiredTarget(smc, smss, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID)) && (!isPassive))
-								smc.sendMessageToPlayer(smss.FailureOutput);
-							break;
-						case "Hit":
-							if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
-							{
-                                if (!isPassive)
-                                {
+			    // Loop around the steps
+			    foreach (SMSkillStep smss in this.SkillSteps)
+			    {
+				    // Get the character again each time we go around the loop
+				    smc = new SlackMud().GetCharacter(smc.UserID);
+
+				    if (smc.CurrentActivity == this.ActivityType)
+				    {
+					    switch (smss.StepType)
+					    {
+						    case "Object":
+							    if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
+								    smc.sendMessageToPlayer(smss.FailureOutput);
+							    break;
+                            case "EquippedObject":
+                                if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true)) && (!isPassive))
                                     smc.sendMessageToPlayer(smss.FailureOutput);
-                                }
-                                SkillIncrease(smc, false);
-							}
-							else
-							{
-								SkillIncrease(smc, true);
-							}
-							break;
-						case "HitMulti":
-							if (!StepHitMulti(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
-							{
-								if (!isPassive)
-								{
-									smc.sendMessageToPlayer(smss.FailureOutput);
-								}
-								SkillIncrease(smc, false);
-							}
-							else
-							{
-								SkillIncrease(smc, true);
-							}
-							break;
-						case "Information":
-							if (targetType == "Character")
-							{
-								// Get the character
-								var targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-								smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetChar.GetFullName(), ""));
-							}
-							else
-							{
-								var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-								smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetItem.SingularPronoun + " " + targetItem.ItemName, ""));
-							}
-							break;
-						case "Pause":
-							System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
-							break;
-						case "Repeat":
-							this.UseSkill(smc, out messageOut, out floatOut, false, targetType, targetID, isPassive);
-							break;
-					}
-				}
-			}
-
-		}
+                                break;
+                            case "Target":
+							    if ((!StepRequiredTarget(smc, smss, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID)) && (!isPassive))
+								    smc.sendMessageToPlayer(smss.FailureOutput);
+							    break;
+						    case "Hit":
+							    if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+							    {
+                                    if (!isPassive)
+                                    {
+                                        smc.sendMessageToPlayer(smss.FailureOutput);
+                                    }
+                                    SkillIncrease(smc, false);
+							    }
+							    else
+							    {
+								    SkillIncrease(smc, true);
+							    }
+							    break;
+						    case "HitMulti":
+							    if (!StepHitMulti(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+							    {
+								    if (!isPassive)
+								    {
+									    smc.sendMessageToPlayer(smss.FailureOutput);
+								    }
+								    SkillIncrease(smc, false);
+							    }
+							    else
+							    {
+								    SkillIncrease(smc, true);
+							    }
+							    break;
+						    case "Information":
+							    if (targetType == "Character")
+							    {
+								    // Get the character
+								    var targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+								    smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetChar.GetFullName(), ""));
+							    }
+							    else
+							    {
+								    var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+								    smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetItem.SingularPronoun + " " + targetItem.ItemName, ""));
+							    }
+							    break;
+						    case "Pause":
+							    System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
+							    break;
+						    case "Repeat":
+							    this.UseSkill(smc, out messageOut, out floatOut, newSkillLoop, false, targetType, targetID, isPassive);
+							    break;
+					    }
+				    }
+			    }
+            }
+            else
+            {
+                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Finished " + this.ActivityType));
+            }
+        }
 
 		#region "Skill Step Methods"
 
@@ -229,13 +238,16 @@ namespace SlackMUDRPG.CommandClasses
 				// Check that the person has the skill to use the item (if there are any required skills)
 				// Check the player has the required skills
 				bool hasAllRequiredSkills = true;
-				foreach (SMRequiredSkill smrs in charItemToUse.RequiredSkills)
-				{
-					hasAllRequiredSkills = smc.HasRequiredSkill(smrs.SkillName, smrs.SkillLevel);
-				}
+                if (charItemToUse.RequiredSkills != null)
+                {
+				    foreach (SMRequiredSkill smrs in charItemToUse.RequiredSkills)
+				    {
+					    hasAllRequiredSkills = smc.HasRequiredSkill(smrs.SkillName, smrs.SkillLevel);
+				    }
+                }
 
-				// If they don't have have all the required skills, set the damage to be 10% of what it should be.
-				if (!hasAllRequiredSkills)
+                // If they don't have have all the required skills, set the damage to be 10% of what it should be.
+                if (!hasAllRequiredSkills)
 				{
 					charItembaseDamage = charItembaseDamage * (float)0.1;
 				}
@@ -251,7 +263,7 @@ namespace SlackMUDRPG.CommandClasses
 			SMSkillHeld theCharacterSkill = null;
 			if (smc.Skills != null)
 			{
-				smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+                theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
 			}
 			int charLevelOfSkill = 0;
 			if (theCharacterSkill != null)
@@ -622,7 +634,7 @@ namespace SlackMUDRPG.CommandClasses
 			SMSkillHeld theCharacterSkill = null;
 			if (smc.Skills != null)
 			{
-				smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+                theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
 			}
 			int currentSkillLevel = 0;
 			if (theCharacterSkill!=null)
@@ -658,6 +670,9 @@ namespace SlackMUDRPG.CommandClasses
 				}
 			}
 
+            smc.SaveToApplication();
+            smc.SaveToFile();
+
 			// Attribute Increase
 			// TODO add an attribute increase method check to SMAttributes, very very low chance!
 		}
@@ -667,7 +682,16 @@ namespace SlackMUDRPG.CommandClasses
 			SMSkillHeld newSkill = new SMSkillHeld();
 			newSkill.SkillName = this.SkillName;
 			newSkill.SkillLevel = 1;
-			smc.Skills.Add(newSkill);
+            if (smc.Skills!=null)
+            {
+                smc.Skills.Add(newSkill);
+            }
+            else
+            {
+                List<SMSkillHeld> newSkillGroup = null;
+                newSkillGroup.Add(newSkill);
+                smc.Skills = newSkillGroup;
+            }
 			
 			smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.SkillLearnText));
 			smc.SaveToApplication();
