@@ -67,88 +67,104 @@ namespace SlackMUDRPG.CommandClasses
 
 				var continueCycle = true;
 
-			    // Loop around the steps
-			    foreach (SMSkillStep smss in this.SkillSteps)
-			    {
-				    // Get the character again each time we go around the loop
-				    smc = new SlackMud().GetCharacter(smc.UserID);
+				// Loop around the steps
+				foreach (SMSkillStep smss in this.SkillSteps)
+				{
+					if (continueCycle)
+					{
+						// Get the character again each time we go around the loop
+						smc = new SlackMud().GetCharacter(smc.UserID);
 
-				    if (smc.CurrentActivity == this.ActivityType)
-				    {
-						switch (smss.StepType)
+						if (smc.CurrentActivity == this.ActivityType)
 						{
-							case "Object":
-								if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
-								{
-									smc.sendMessageToPlayer(smss.FailureOutput);
-									continueCycle = false;
-								}
-								break;
-                            case "EquippedObject":
-                                if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true)) && (!isPassive))
-								{
-									smc.sendMessageToPlayer(smss.FailureOutput);
-									continueCycle = false;
-								}
-								break;
-                            case "Target":
-							    if ((!StepRequiredTarget(smc, smss, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID)) && (!isPassive))
-								{
-									smc.sendMessageToPlayer(smss.FailureOutput);
-									continueCycle = false;
-								}
-							    break;
-						    case "Hit":
-							    if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
-							    {
-                                    if (!isPassive)
-                                    {
-                                        smc.sendMessageToPlayer(smss.FailureOutput);
-                                    }
-                                    SkillIncrease(smc, false);
-							    }
-							    else
-							    {
-								    SkillIncrease(smc, true);
-							    }
-							    break;
-						    case "HitMulti":
-							    if (!StepHitMulti(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
-							    {
-								    if (!isPassive)
-								    {
-									    smc.sendMessageToPlayer(smss.FailureOutput);
-								    }
-								    SkillIncrease(smc, false);
-							    }
-							    else
-							    {
-								    SkillIncrease(smc, true);
-							    }
-							    break;
-						    case "Information":
-							    if (targetType == "Character")
-							    {
-								    // Get the character
-								    var targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-								    smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetChar.GetFullName(), ""));
-							    }
-							    else
-							    {
-								    var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-								    smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetItem.SingularPronoun + " " + targetItem.ItemName, ""));
-							    }
-							    break;
-						    case "Pause":
-							    System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
-							    break;
-						    case "Repeat":
-							    this.UseSkill(smc, out messageOut, out floatOut, extraData, newSkillLoop, false, targetType, targetID, isPassive);
-							    break;
-					    }
-				    }
-			    }
-            }
+							switch (smss.StepType)
+							{
+								case "Object":
+									if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
+									{
+										smc.sendMessageToPlayer(smss.FailureOutput);
+										continueCycle = false;
+									}
+									break;
+								case "EquippedObject":
+									if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true)) && (!isPassive))
+									{
+										smc.sendMessageToPlayer(smss.FailureOutput);
+										continueCycle = false;
+									}
+									break;
+								case "Target":
+									if ((!StepRequiredTarget(smc, smss, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID)) && (!isPassive))
+									{
+										smc.sendMessageToPlayer(smss.FailureOutput);
+										continueCycle = false;
+									}
+									break;
+								case "Hit":
+									if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+									{
+										if (!isPassive)
+										{
+											smc.sendMessageToPlayer(smss.FailureOutput);
+										}
+										SkillIncrease(smc, false);
+									}
+									else
+									{
+										SkillIncrease(smc, true);
+									}
+									break;
+								case "HitMulti":
+									if (!StepHitMulti(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+									{
+										if (!isPassive)
+										{
+											smc.sendMessageToPlayer(smss.FailureOutput);
+										}
+										SkillIncrease(smc, false);
+									}
+									else
+									{
+										SkillIncrease(smc, true);
+									}
+									break;
+								case "CheckReceipe":
+									if (!CheckReceipe(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+									{
+										continueCycle = false;
+									}
+									break;
+								case "UseReceipe":
+									if (!UseReceipe(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+									{
+										smc.sendMessageToPlayer(smss.FailureOutput);
+										continueCycle = false;
+									}
+									break;
+								case "Information":
+									if (targetType == "Character")
+									{
+										// Get the character
+										var targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+										smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetChar.GetFullName(), ""));
+									}
+									else
+									{
+										var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+										smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetItem.SingularPronoun + " " + targetItem.ItemName, ""));
+									}
+									break;
+								case "Pause":
+									System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
+									break;
+								case "Repeat":
+									this.UseSkill(smc, out messageOut, out floatOut, extraData, newSkillLoop, false, targetType, targetID, isPassive);
+									break;
+							}
+						}
+					}
+				}
+			}
             else
             {
                 smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Finished " + this.ActivityType));
@@ -632,6 +648,142 @@ namespace SlackMUDRPG.CommandClasses
 			//      if the objects HP reaches 0 then the item is "broken" and the player needs to be told via a message.
 			//      Stop any repeat actions against the character happening.
 
+			return true;
+		}
+
+		private bool CheckReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
+		{
+			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
+			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
+			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == targetType);
+			if (smr != null)
+			{
+				if (smr.NeedToLearn)
+				{
+					// TODO Check the character knows the receipe
+					// return false if they don't know it.
+				}
+
+				// If the extra data field is filled in there is a required trait.
+				if (smss.ExtraData != null)
+				{
+					// Check that the item they're trying to make has the right trait.
+					if (smr.ProductionTrait.Contains(smss.ExtraData))
+					{
+						return false;
+					}
+				}
+			} 
+			else // The receipe they've specified doesn't exist.
+			{
+				return false;
+			}
+			
+			return true;
+		}
+
+		private bool UseReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
+		{
+			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
+			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
+			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == targetType);
+			if (smr != null)
+			{
+				var continueCycle = true;
+
+				// Loop around the steps
+				foreach (SMSkillStep receipeStep in smr.SkillSteps)
+				{
+					if (continueCycle)
+					{
+						// Get the character again each time we go around the loop
+						smc = new SlackMud().GetCharacter(smc.UserID);
+
+						if (smc.CurrentActivity == this.ActivityType)
+						{
+							switch (receipeStep.StepType)
+							{
+								case "CheckConsumeItems":
+									// Check that the items needed for this task are available.
+									foreach (SMReceipeMaterial smrm in smr.Materials)
+									{
+										// Check if the character is holding the item
+										// TODO
+
+										// Check if the items are in the location with the character
+										// TODO
+									}
+									break;
+								case "ConsumeItems":
+									// Consume the items.
+									foreach (SMReceipeMaterial smrm in smr.Materials)
+									{
+										// If the item is in the hand..
+										// ... consume it.
+										// TODO
+
+										// else // if the item is in the location.
+										// ... consume it
+										// TODO
+									}
+									break;
+								case "CreateObject":
+									// Create the object.
+									// Create a new object of the type for the receipe.
+									SMItem smi = smr.GetProducedItem();
+									smi.ItemID = Guid.NewGuid().ToString();
+
+									// Check the threshold reached for this item...
+									Random r = new Random();
+									double rDouble = r.NextDouble();
+									int baseItemWeight = smi.ItemWeight;
+									int baseItemSize = smi.ItemSize;
+									int baseHitPoints = smi.HitPoints;
+									float baseDamage = smi.BaseDamage;
+									int baseToughness = smi.Toughness;
+
+									foreach (SMReceipeStepThreshold smrst in smr.StepThresholds)
+									{
+										if ((rDouble * 100) < smrst.ThresholdLevel) // TODO add extra chance the better they are at the skill to get to the next threshold
+										{
+											foreach (SMReceipeStepThresholdBonus smrstb in smrst.ThresholdBonus)
+											{
+												switch (smrstb.ThresholdName)
+												{
+													case "BaseDamage":
+														smi.BaseDamage = baseDamage + smrstb.ThresholdBonusValue;
+														break;
+													case "Toughness":
+														smi.Toughness = baseToughness + smrstb.ThresholdBonusValue;
+														break;
+													case "HitPoints":
+														smi.HitPoints = baseHitPoints + smrstb.ThresholdBonusValue;
+														break;
+													case "ItemSize":
+														smi.ItemSize = baseItemSize + smrstb.ThresholdBonusValue;
+														break;
+													case "ItemWeight":
+														smi.ItemWeight = baseItemWeight + smrstb.ThresholdBonusValue;
+														break;
+												}
+											}
+										}
+									}
+
+									// Place it in the location where the character is.
+									smc.GetRoom().AddItem(smi);
+
+									break;
+								case "Pause":
+									System.Threading.Thread.Sleep(receipeStep.RequiredObjectAmount * 1000);
+									break;
+							}
+						}
+					}
+				}
+			}
+
+			// Return true from this
 			return true;
 		}
 
