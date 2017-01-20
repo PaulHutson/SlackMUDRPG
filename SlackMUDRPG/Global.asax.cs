@@ -85,6 +85,30 @@ namespace SlackMUDRPG
 			}
 
 			Application["SMSkills"] = lsk;
+
+			// Load the Receipes into memory for usage later
+			// Used for both parsing commands sent in and also for help output
+			List<SMReceipe> smrl = new List<SMReceipe>();
+
+			// Get all filenames from path
+			string receipeFolderFilePath = FilePathSystem.GetFilePathFromFolder("Receipe");
+			d = new DirectoryInfo(receipeFolderFilePath);//Assuming Test is your Folder
+			Files = d.GetFiles();
+			foreach (FileInfo file in Files)
+			{
+				string receipeFilePath = FilePathSystem.GetFilePath("Skills", file.Name, "");
+				// Use a stream reader to read the file in (based on the path)
+				using (StreamReader r = new StreamReader(receipeFilePath))
+				{
+					// Create a new JSON string to be used...
+					string json = r.ReadToEnd();
+
+					// ... get the information from the help file
+					smrl.Add(JsonConvert.DeserializeObject<SMReceipe>(json));
+				}
+			}
+
+			Application["SMReceipes"] = smrl;
 		}
 
 		protected void Session_Start(object sender, EventArgs e)
