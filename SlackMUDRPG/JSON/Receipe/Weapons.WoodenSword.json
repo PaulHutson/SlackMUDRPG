@@ -1,6 +1,10 @@
 ﻿{
+	"Name": "Wooden Sword",
+	"Description": "The knowledge of how to craft a Wooden Sword.",
 	"Produces": "Weapons.WoodenSword",
-	"PauseTime": "15",
+	"PauseTime": 15,
+	"NeedToLearn": false,
+	"ProductionTrait": "Trait.Carpentry",
 	"Materials": [
 		{
 			"MaterialType": "Log",
@@ -14,38 +18,35 @@
 	"RequiredSkills": [
 		{
 			"SkillName": "Carpentry",
-			"SkillLevel":  "1"
+			"SkillLevel": "1"
+		}
+	],
+	"StepThresholds": [
+		{
+			"ThresholdName": "Shoddy",
+			"ThresholdLevel": "100",
+			"ThresholdBonus": [
+				{
+					"ThresholdName": "BaseDamage",
+					"ThresholdBonusValue": 1
+				}
+			]
 		}
 	],
 	"Steps": [
 		{
-      "StepType": "EquippedObject",
-      "StepRequiredObject": "Family.Hammer",
-      "RequiredObjectAmount": 1,
-      "FailureOutput": "You don't have a hammer equipped",
-      "SuccessOutput": null
-    },
-    {
-      "StepType": "EquippedObject",
-      "StepRequiredObject": "Family.Chisel",
-      "RequiredObjectAmount": 1,
-      "FailureOutput": "You don't have a chisel equipped",
-      "SuccessOutput": null
-    },
-    {
-      "StepType": "Receipe",
-      "StepRequiredObject": null,
-			"RequiredObjectAmount": 1,
-			"ExtraData": "Trait.Carpentry",
-      "FailureOutput": "The item you're trying to make is not something you use carpentry for",
-      "SuccessOutput": null
-    },
-    {
       "StepType": "Information",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
       "SuccessOutput": "{CHARNAME} begins to craft a {TARGETNAME}"
+    },
+    {
+      "StepType": "CheckConsumeItems",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": "You do not have enough of {ITEMNAME} to complete the task.",
+      "SuccessOutput": null
     },
     {
       "StepType": "Pause",
@@ -94,7 +95,7 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} puts the final touches on the {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} puts the final touches on the {ITEMNAME}"
     },
     {
       "StepType": "Pause",
@@ -106,8 +107,8 @@
     {
       "StepType": "CreateObject",
       "StepRequiredObject": null,
-      "RequiredObjectAmount": 0,
-      "FailureOutput": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to create {ITEMNAME}",
       "SuccessOutput": "Created {ITEMNAME}"
     }
 	]
