@@ -1,6 +1,7 @@
 {
   "firstname": "Paul",
   "lastname": "Hutson",
+  "description": null,
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
   "age": 0,

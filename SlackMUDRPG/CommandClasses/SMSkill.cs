@@ -45,7 +45,7 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("SkillSteps")]
 		public List<SMSkillStep> SkillSteps { get; set; }
 
-		public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, int skillLoop, bool beginSkillUse = true, string targetType = null, string targetID = null, bool isPassive = false)
+		public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, string extraData, int skillLoop, bool beginSkillUse = true, string targetType = null, string targetID = null, bool isPassive = false)
 		{
 			// Output variables for passive skills that need output (like "dodge")
 			messageOut = "";
@@ -65,6 +65,8 @@ namespace SlackMUDRPG.CommandClasses
 				    smc.CurrentActivity = this.ActivityType;
 			    }
 
+				var continueCycle = true;
+
 			    // Loop around the steps
 			    foreach (SMSkillStep smss in this.SkillSteps)
 			    {
@@ -73,19 +75,28 @@ namespace SlackMUDRPG.CommandClasses
 
 				    if (smc.CurrentActivity == this.ActivityType)
 				    {
-					    switch (smss.StepType)
-					    {
-						    case "Object":
-							    if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
-								    smc.sendMessageToPlayer(smss.FailureOutput);
-							    break;
+						switch (smss.StepType)
+						{
+							case "Object":
+								if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
+								{
+									smc.sendMessageToPlayer(smss.FailureOutput);
+									continueCycle = false;
+								}
+								break;
                             case "EquippedObject":
                                 if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true)) && (!isPassive))
-                                    smc.sendMessageToPlayer(smss.FailureOutput);
-                                break;
+								{
+									smc.sendMessageToPlayer(smss.FailureOutput);
+									continueCycle = false;
+								}
+								break;
                             case "Target":
 							    if ((!StepRequiredTarget(smc, smss, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID)) && (!isPassive))
-								    smc.sendMessageToPlayer(smss.FailureOutput);
+								{
+									smc.sendMessageToPlayer(smss.FailureOutput);
+									continueCycle = false;
+								}
 							    break;
 						    case "Hit":
 							    if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
@@ -132,7 +143,7 @@ namespace SlackMUDRPG.CommandClasses
 							    System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
 							    break;
 						    case "Repeat":
-							    this.UseSkill(smc, out messageOut, out floatOut, newSkillLoop, false, targetType, targetID, isPassive);
+							    this.UseSkill(smc, out messageOut, out floatOut, extraData, newSkillLoop, false, targetType, targetID, isPassive);
 							    break;
 					    }
 				    }
@@ -233,23 +244,31 @@ namespace SlackMUDRPG.CommandClasses
 			{ 
 				string[] splitItemName = itemName.Split('.');
 				SMItem charItemToUse = smc.GetEquippedItem(splitItemName[1]);
-				charItembaseDamage = charItemToUse.BaseDamage;
-
-				// Check that the person has the skill to use the item (if there are any required skills)
-				// Check the player has the required skills
-				bool hasAllRequiredSkills = true;
-                if (charItemToUse.RequiredSkills != null)
-                {
-				    foreach (SMRequiredSkill smrs in charItemToUse.RequiredSkills)
-				    {
-					    hasAllRequiredSkills = smc.HasRequiredSkill(smrs.SkillName, smrs.SkillLevel);
-				    }
-                }
-
-                // If they don't have have all the required skills, set the damage to be 10% of what it should be.
-                if (!hasAllRequiredSkills)
+				if (charItemToUse != null)
 				{
-					charItembaseDamage = charItembaseDamage * (float)0.1;
+					charItembaseDamage = charItemToUse.BaseDamage;
+
+					// Check that the person has the skill to use the item (if there are any required skills)
+					// Check the player has the required skills
+					bool hasAllRequiredSkills = true;
+					if (charItemToUse.RequiredSkills != null)
+					{
+						foreach (SMRequiredSkill smrs in charItemToUse.RequiredSkills)
+						{
+							hasAllRequiredSkills = smc.HasRequiredSkill(smrs.SkillName, smrs.SkillLevel);
+						}
+					}
+
+					// If they don't have have all the required skills, set the damage to be 10% of what it should be.
+					if (!hasAllRequiredSkills)
+					{
+						charItembaseDamage = charItembaseDamage * (float)0.1;
+					}
+				}
+				else
+				{
+					smc.sendMessageToPlayer("You do not have the required item equipped");
+					return false;
 				}
 			}
 			
@@ -431,20 +450,27 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				string[] splitItemName = itemName.Split('.');
 				SMItem charItemToUse = smc.GetEquippedItem(splitItemName[1]);
-				charItembaseDamage = charItemToUse.BaseDamage;
-
-				// Check that the person has the skill to use the item (if there are any required skills)
-				// Check the player has the required skills
-				bool hasAllRequiredSkills = true;
-				foreach (SMRequiredSkill smrs in charItemToUse.RequiredSkills)
+				if (charItemToUse != null)
 				{
-					hasAllRequiredSkills = smc.HasRequiredSkill(smrs.SkillName, smrs.SkillLevel);
+					charItembaseDamage = charItemToUse.BaseDamage;
+
+					// Check that the person has the skill to use the item (if there are any required skills)
+					// Check the player has the required skills
+					bool hasAllRequiredSkills = true;
+					foreach (SMRequiredSkill smrs in charItemToUse.RequiredSkills)
+					{
+						hasAllRequiredSkills = smc.HasRequiredSkill(smrs.SkillName, smrs.SkillLevel);
+					}
+
+					// If they don't have have all the required skills, set the damage to be 10% of what it should be.
+					if (!hasAllRequiredSkills)
+					{
+						charItembaseDamage = charItembaseDamage * (float)0.1;
+					}
 				}
-
-				// If they don't have have all the required skills, set the damage to be 10% of what it should be.
-				if (!hasAllRequiredSkills)
+				else
 				{
-					charItembaseDamage = charItembaseDamage * (float)0.1;
+					return false;
 				}
 			}
 
