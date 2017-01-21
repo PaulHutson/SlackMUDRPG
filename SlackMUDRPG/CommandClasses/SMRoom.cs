@@ -270,13 +270,13 @@ namespace SlackMUDRPG.CommandClasses
                 smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of " + targetCharacter.GetFullName() + " :"));
                 if ((targetCharacter.Description != null) || (targetCharacter.Description != ""))
                 {
-                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(targetCharacter.Description));
+                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(targetCharacter.Description));
                 }
                 else
                 {
-                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock("No description set..."));
+                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("No description set..."));
                 }
-                smc.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(targetCharacter.GetInventoryList()));
+                smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetCharacter.GetInventoryList()));
 				targetCharacter.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(smc.GetFullName() + " looks at you"));
             }
             else // If not a character, check the objects in the room

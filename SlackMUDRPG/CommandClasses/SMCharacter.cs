@@ -270,8 +270,7 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		#endregion
-
-
+		
 		#region "Skill Related Items"
 
 		/// <summary>
