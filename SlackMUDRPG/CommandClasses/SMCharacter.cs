@@ -288,12 +288,13 @@ namespace SlackMUDRPG.CommandClasses
 		public string CalculateLevel()
 		{
 			int characterLevel = 0;
-			
-			foreach(SMSkillHeld smsh in this.Skills)
+			if (this.Skills != null)
 			{
-				characterLevel += smsh.SkillLevel;
+				foreach (SMSkillHeld smsh in this.Skills)
+				{
+					characterLevel += smsh.SkillLevel;
+				}
 			}
-			
 			return characterLevel.ToString();
 		}
 
