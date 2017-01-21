@@ -86,6 +86,7 @@
     <Content Include="GameAccess.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="JSON\Characters\Char123.json" />
+    <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
     <Content Include="JSON\Commands\NewCharacter.json" />
