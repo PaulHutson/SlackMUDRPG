@@ -22,9 +22,21 @@
     "SocialStanding": 8
   },
   "Skills": [
-    {
-      "SkillName": "Mine",
-      "SkillLevel": 2
+		{
+			"SkillName": "Mine",
+			"SkillLevel": 2
+		},
+		{
+      "SkillName": "Dodge",
+      "SkillLevel": 1
+    },
+		{
+      "SkillName": "Sword Use",
+      "SkillLevel": 1
+    },
+		{
+      "SkillName": "Chop",
+      "SkillLevel": 1
     }
   ],
   "CharacterSlots": [

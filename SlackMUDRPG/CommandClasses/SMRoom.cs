@@ -267,7 +267,7 @@ namespace SlackMUDRPG.CommandClasses
 
             if (targetCharacter != null)
             {
-                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of " + targetCharacter.GetFullName() + " :"));
+                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of " + targetCharacter.GetFullName() + " (Level " + targetCharacter.CalculateLevel() + "):"));
                 if ((targetCharacter.Description != null) || (targetCharacter.Description != ""))
                 {
                     smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(targetCharacter.Description));

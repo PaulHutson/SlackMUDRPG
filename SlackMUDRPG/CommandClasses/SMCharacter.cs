@@ -257,20 +257,48 @@ namespace SlackMUDRPG.CommandClasses
 			string messageToSend = OutputFormatterFactory.Get().Bold("Statistics:");
 
 			// Craft all of the output elements.
+			messageToSend += OutputFormatterFactory.Get().ListItem("Level: " + this.CalculateLevel());
+			messageToSend += OutputFormatterFactory.Get().ListItem("-----------------------");
 			messageToSend += OutputFormatterFactory.Get().ListItem("Charisma: " + this.Attributes.Charisma);
 			messageToSend += OutputFormatterFactory.Get().ListItem("Dexterity: " + this.Attributes.Dexterity);
 			messageToSend += OutputFormatterFactory.Get().ListItem("Fortitude: " + this.Attributes.Fortitude);
 			messageToSend += OutputFormatterFactory.Get().ListItem("Hit Points: " + this.Attributes.HitPoints + " / " + this.Attributes.MaxHitPoints);
 			messageToSend += OutputFormatterFactory.Get().ListItem("Social Standing: " + this.Attributes.SocialStanding);
 			messageToSend += OutputFormatterFactory.Get().ListItem("Strength: " + this.Attributes.Strength);
+			messageToSend += OutputFormatterFactory.Get().ListItem("Toughness: " + this.Attributes.GetToughness());
 			messageToSend += OutputFormatterFactory.Get().ListItem("WillPower: " + this.Attributes.WillPower);
-
+			
 			// Tell the player
 			this.sendMessageToPlayer(messageToSend);
 		}
 
+		/// <summary>
+		/// Get the level for the player
+		/// </summary>
+		public void GetLevel()
+		{
+			// Tell the player
+			this.sendMessageToPlayer(this.CalculateLevel());
+		}
+
+		/// <summary>
+		/// Get the character level
+		/// </summary>
+		/// <returns></returns>
+		public string CalculateLevel()
+		{
+			int characterLevel = 0;
+			
+			foreach(SMSkillHeld smsh in this.Skills)
+			{
+				characterLevel += smsh.SkillLevel;
+			}
+			
+			return characterLevel.ToString();
+		}
+
 		#endregion
-		
+
 		#region "Skill Related Items"
 
 		/// <summary>

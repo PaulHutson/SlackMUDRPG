@@ -309,6 +309,20 @@
 			"RequiredSkill": null
 		},
 		{
+			"CommandFamily": "Character",
+			"CommandBaseName": "level",
+			"CommandName": "level",
+			"CommandDescription": "Get the character level.",
+			"CommandSyntax": "level",
+			"CommandExpression": "level",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "GetLevel",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "level",
+			"RequiredSkill": null
+		},
+		{
 			"CommandFamily": "Combat",
 			"CommandBaseName": "attack",
 			"CommandName": "attack",

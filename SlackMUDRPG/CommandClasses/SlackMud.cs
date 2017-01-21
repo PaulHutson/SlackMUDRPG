@@ -63,7 +63,7 @@ namespace SlackMUDRPG.CommandClasses
 
 					if (!newCharacter)
 					{
-						returnString = "Welcome back " + character.FirstName + " " + character.LastName + "\n";
+						returnString = "Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")\n";
 					}
 					else
 					{
