@@ -71,6 +71,20 @@
 			"RequiredSkill": null
 		},
 		{
+			"CommandFamily": "Location",
+			"CommandBaseName": "getexits",
+			"CommandName": "getexits",
+			"CommandDescription": "Get the available location exits.",
+			"CommandSyntax": "getexits",
+			"CommandExpression": "getexits",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "GetRoomExits",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "getexits",
+			"RequiredSkill": null
+		},
+		{
 			"CommandFamily": "Environment",
 			"CommandBaseName": "chop",
 			"CommandName": "chop",

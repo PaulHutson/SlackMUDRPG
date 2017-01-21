@@ -114,6 +114,14 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Get the exits from the room.
+		/// </summary>
+		public void GetRoomExits()
+		{
+			this.sendMessageToPlayer(this.GetRoom().GetExitDetails());
+		}
+
+		/// <summary>
 		/// Move the character.
 		/// </summary>
 		/// <param name="charID"></param>

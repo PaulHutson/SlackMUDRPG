@@ -94,7 +94,7 @@ namespace SlackMUDRPG.CommandClasses
 			smrs.Add(this);
 			HttpContext.Current.Application["SMRooms"] = smrs;
 		}
-
+		
 		/// <summary>
 		/// Gets the room exit details
 		/// </summary>
