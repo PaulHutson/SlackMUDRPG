@@ -267,16 +267,17 @@ namespace SlackMUDRPG.CommandClasses
 
             if (targetCharacter != null)
             {
-                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description:"));
+                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of " + targetCharacter.GetFullName() + " :"));
                 if ((targetCharacter.Description != null) || (targetCharacter.Description != ""))
                 {
-                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetCharacter.Description));
+                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(targetCharacter.Description));
                 }
                 else
                 {
                     smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock("No description set..."));
                 }
-                smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetCharacter.GetInventoryList()));
+                smc.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(targetCharacter.GetInventoryList()));
+				targetCharacter.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(smc.GetFullName() + " looks at you"));
             }
             else // If not a character, check the objects in the room
             {
@@ -288,8 +289,8 @@ namespace SlackMUDRPG.CommandClasses
 
                 if (smi != null)
                 {
-                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description:"));
-                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(smi.ItemDescription));
+                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":"));
+                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(smi.ItemDescription));
                 }
                 else
                 {
