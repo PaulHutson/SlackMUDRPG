@@ -23,10 +23,15 @@
 		{
 			"Shortcut": "LD",
 			"Description": "Locked Door",
-      "RoomID": "LockedPlace1",
-      "RoomLockID": "KeyLockExample101",
-      "Locked": true,
-      "Lockable": true
+			"RoomID": "LockedPlace1",
+			"RoomLockID": "KeyLockExample101",
+			"Locked": true,
+			"Lockable": true
+		},
+		{
+			"Shortcut": "AA",
+			"Description": "Arrivals Area",
+			"RoomID": "Ravensmere.RavensmereHarbour.ArrivalsArea"
 		}
 	],
 	"RoomItems": [
