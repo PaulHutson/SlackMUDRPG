@@ -119,8 +119,6 @@
     <Content Include="JSON\Locations\LocOutside1.json" />
     <Content Include="JSON\Locations\LocTrainingYard.json" />
     <Content Include="JSON\Objects\Environment.OldTree.json" />
-    <Content Include="WebPlay.aspx" />
-    <Content Include="Handlers\WebSocketHandler.ashx" />
     <Content Include="JSON\Objects\Misc.Corpse.json" />
     <Content Include="JSON\Objects\Misc.Key.json" />
     <Content Include="JSON\Locations\LocLockedPlace1.json" />
@@ -186,9 +184,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Handlers\WebSocketHandler.ashx.cs">
-      <DependentUpon>WebSocketHandler.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -214,13 +209,6 @@
     <Compile Include="CommandClasses\SMCharacterSlot.cs" />
     <Compile Include="Utility\Utils.cs" />
     <Compile Include="Utility\ClassBuilder.cs" />
-    <Compile Include="WebPlay.aspx.cs">
-      <DependentUpon>WebPlay.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebPlay.aspx.designer.cs">
-      <DependentUpon>WebPlay.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
