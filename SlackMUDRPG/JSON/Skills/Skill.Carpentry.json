@@ -1,0 +1,59 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Environment",
+    "SkillTypeDescription": "Skills related to manipulating the environment"
+  },
+  "SkillName": "Carpentry",
+	"CanUseWithoutLearning":  true,
+  "SkillDescription": "The ability to craft things made of wood.",
+  "SkillLearnText": "You've learnt how to craft things from wood.",
+  "LevelIncreaseText":  "You feel you've gotten better at carpentry.",
+  "ActivityType":  "Carpentry",
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 6
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "INT",
+      "PreReqLevel": 5
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Hammer",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have a hammer equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Chisel",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have a chisel equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "CheckReceipe",
+      "StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": "Trait.Carpentry",
+      "FailureOutput": "The item you're trying to make is not something you use carpentry for.",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "UseReceipe",
+      "StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+      "FailureOutput": "Failed to make {PRODUCTNAME}.",
+      "SuccessOutput": null
+    }      
+  ]
+}

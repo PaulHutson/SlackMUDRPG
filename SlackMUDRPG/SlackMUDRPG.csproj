@@ -135,8 +135,8 @@
     <Content Include="JSON\Objects\Resource.CopperNugget.json" />
     <Content Include="JSON\Objects\Environment.CopperVein.json" />
     <Content Include="JSON\Locations\LocOutside2.json" />
-    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.ArrivalsArea.json" />
-    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.LandingArea.json" />
+    <Content Include="JSON\Skills\Skill.Carpentry.json" />
+    <Content Include="JSON\Receipe\Weapons.WoodenSword.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -171,6 +171,7 @@
     <Compile Include="CommandClasses\SMItem.cs" />
     <Compile Include="CommandClasses\SMItemUtils.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
+    <Compile Include="CommandClasses\SMReceipe.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
     <Compile Include="GameAccess.aspx.cs">
@@ -219,9 +220,7 @@
       <DependentUpon>WebPlay.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="JSON\Receipe\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

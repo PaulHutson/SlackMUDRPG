@@ -1,11 +1,115 @@
 ﻿{
-  "Produces": "Weapons.WoodenSword",
-	"Materials": null,
-	"Steps": null,
+	"Name": "Wooden Sword",
+	"Description": "The knowledge of how to craft a Wooden Sword.",
+	"Produces": "Weapons.WoodenSword",
+	"PauseTime": 15,
+	"NeedToLearn": false,
+	"ProductionTrait": "Trait.Carpentry",
+	"Materials": [
+		{
+			"MaterialType": "Log",
+			"MaterialQuantity": 1
+		},
+		{
+			"MaterialType": "Leather",
+			"MaterialQuantity": 1
+		}
+	],
 	"RequiredSkills": [
 		{
 			"SkillName": "Carpentry",
-			"SkillLevel":  "1"
+			"SkillLevel": "1"
 		}
+	],
+	"StepThresholds": [
+		{
+			"ThresholdName": "Shoddy",
+			"ThresholdLevel": "100",
+			"ThresholdBonus": [
+				{
+					"ThresholdName": "BaseDamage",
+					"ThresholdBonusValue": 1
+				}
+			]
+		}
+	],
+	"Steps": [
+		{
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} begins to craft a {TARGETNAME}"
+    },
+    {
+      "StepType": "CheckConsumeItems",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": "You do not have enough of {ITEMNAME} to complete the task.",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 15,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} continues to craft a {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 15,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} continues to craft a {TARGETNAME}"
+    },
+    {
+      "StepType": "ConsumeItems",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": "You do not have enough of {ITEMNAME} to complete the task.",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 15,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} puts the final touches on the {ITEMNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 15,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "CreateObject",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to create {ITEMNAME}",
+      "SuccessOutput": "Created {ITEMNAME}"
+    }
 	]
 }
