@@ -707,24 +707,58 @@ namespace SlackMUDRPG.CommandClasses
 									// Check that the items needed for this task are available.
 									foreach (SMReceipeMaterial smrm in smr.Materials)
 									{
+										bool materialFound = false;
+										string[] materialType = smrm.MaterialType.Split('.');
 										// Check if the character is holding the item
-										// TODO
+										if (smc.HasItemFamilyTypeEquipped(materialType[1]))
+										{
+											materialFound = true;
+										}
 
 										// Check if the items are in the location with the character
-										// TODO
+										if (!materialFound)
+										{
+											SMItem checkForItem = smc.GetRoom().GetItemByFamilyName(materialType[1]);
+											if (checkForItem != null)
+											{
+												materialFound = true;
+											}
+											else
+											{
+												smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(SuccessOutputParse(smss.FailureOutput, smc, materialType[1], "")));
+											}
+										}
 									}
 									break;
 								case "ConsumeItems":
 									// Consume the items.
 									foreach (SMReceipeMaterial smrm in smr.Materials)
 									{
-										// If the item is in the hand..
-										// ... consume it.
-										// TODO
+										bool materialFound = false;
+										string[] materialType = smrm.MaterialType.Split('.');
+										int currentNumber = smrm.
+										
+										// Check if the character is holding the item
+										if (smc.HasItemFamilyTypeEquipped(materialType[1]))
+										{
+											materialFound = true;
+											// consume the item
 
-										// else // if the item is in the location.
-										// ... consume it
-										// TODO
+										}
+
+										// Check if the items are in the location with the character
+										if (!materialFound)
+										{
+											SMItem checkForItem = smc.GetRoom().GetItemByFamilyName(materialType[1]);
+											if (checkForItem != null)
+											{
+												materialFound = true;
+											}
+											else
+											{
+												smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(SuccessOutputParse(smss.FailureOutput, smc, materialType[1], "")));
+											}
+										}
 									}
 									break;
 								case "CreateObject":

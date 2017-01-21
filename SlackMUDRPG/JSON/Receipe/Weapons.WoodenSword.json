@@ -7,11 +7,11 @@
 	"ProductionTrait": "Trait.Carpentry",
 	"Materials": [
 		{
-			"MaterialType": "Log",
+			"MaterialType": "Family.Log",
 			"MaterialQuantity": 1
 		},
 		{
-			"MaterialType": "Leather",
+			"MaterialType": "Family.Leather",
 			"MaterialQuantity": 1
 		}
 	],
@@ -45,7 +45,7 @@
       "StepType": "CheckConsumeItems",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
-      "FailureOutput": "You do not have enough of {ITEMNAME} to complete the task.",
+      "FailureOutput": "You do not have enough of the material \"{TARGETNAME}\" to complete the task.",
       "SuccessOutput": null
     },
     {
