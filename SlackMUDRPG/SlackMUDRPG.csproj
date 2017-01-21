@@ -137,6 +137,8 @@
     <Content Include="JSON\Locations\LocOutside2.json" />
     <Content Include="JSON\Skills\Skill.Carpentry.json" />
     <Content Include="JSON\Receipe\Weapons.WoodenSword.json" />
+    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.ArrivalsArea.json" />
+    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.LandingArea.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -96,7 +96,7 @@ namespace SlackMUDRPG
 			Files = d.GetFiles();
 			foreach (FileInfo file in Files)
 			{
-				string receipeFilePath = FilePathSystem.GetFilePath("Skills", file.Name, "");
+				string receipeFilePath = FilePathSystem.GetFilePath("Receipe", file.Name, "");
 				// Use a stream reader to read the file in (based on the path)
 				using (StreamReader r = new StreamReader(receipeFilePath))
 				{
