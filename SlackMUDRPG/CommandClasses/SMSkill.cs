@@ -615,6 +615,7 @@ namespace SlackMUDRPG.CommandClasses
 						if ((int)actualDamageAmount > 0)
 						{
 							smc.sendMessageToPlayer("_Hit " + targetChar.GetFullName() + " for " + (int)actualDamageAmount + " damage_");
+							targetChar.sendMessageToPlayer("_You were hit by " + smc.GetFullName() + " for " + (int)actualDamageAmount + " damage (HP " + targetChar.Attributes.HitPoints + "/" + targetChar.Attributes.MaxHitPoints + " remaining)_");
 							targetChar.SaveToApplication();
 						}
 						else
