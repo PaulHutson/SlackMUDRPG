@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Threading;
 using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
 
@@ -18,14 +19,17 @@ namespace SlackMUDRPG
 			// Command text (this works for both form submissions and also query strings)
 			string commandText = Utils.GetQueryParam("text");
 
-			try
+			// TODO Validate user command before thrading the command
+
+			HttpContext ctx = HttpContext.Current;
+
+			Thread commandThread = new Thread(new ThreadStart(() =>
 			{
+				HttpContext.Current = ctx;
 				this.ProcessUserCommand(commandText);
-			}
-			catch //(Exception expection)
-			{
-				// TODO report error to person
-			}
+			}));
+
+			commandThread.Start();
 		}
 
 		/// <summary>
@@ -36,7 +40,10 @@ namespace SlackMUDRPG
 		{
 			SMParsedCommand parsedCmd = this.ParseCommandString(cmd);
 
-			this.RunAction(parsedCmd);
+			if (parsedCmd != null)
+			{
+				this.RunAction(parsedCmd);
+			}
         }
 
 		/// <summary>
@@ -47,6 +54,11 @@ namespace SlackMUDRPG
 		/// <thorws>NullReferenceException if command not found.
 		private SMParsedCommand ParseCommandString(string cmdString)
 		{
+			if (cmdString == null)
+			{
+				return null;
+			}
+
 			SMParsedCommand cmd = new SMParsedCommand();
 
 			// Trim white space and remove leading /
