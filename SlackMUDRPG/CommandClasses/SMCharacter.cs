@@ -216,12 +216,64 @@ namespace SlackMUDRPG.CommandClasses
         public void SetDescription(string newDescription)
         {
             this.Description = newDescription;
+			this.SaveToApplication();
         }
 
 		#endregion
 
+		#region "CharacterCommands"
+
+		/// <summary>
+		/// Get the skills for the player
+		/// </summary>
+		public void GetSkills()
+		{
+			// Variables for output
+			string messageToSend = OutputFormatterFactory.Get().Bold("Skills:");
+			string actualSkills = "";
+
+			// Craft all of the output elements.
+			foreach (SMSkillHeld smsh in this.Skills)
+			{
+				actualSkills += OutputFormatterFactory.Get().ListItem(smsh.SkillName + " level " + smsh.SkillLevel);
+			}
+
+			// Check if they actually had any skills...
+			if (actualSkills == "")
+			{
+				actualSkills = OutputFormatterFactory.Get().ListItem("You do not have any skills yet, try to use some to learn them.");
+			}
+
+			// Tell the player
+			this.sendMessageToPlayer(messageToSend + actualSkills);
+		}
+
+		/// <summary>
+		/// Get the stats for the player
+		/// </summary>
+		public void GetStats()
+		{
+			// Set up the output
+			string messageToSend = OutputFormatterFactory.Get().Bold("Statistics:");
+
+			// Craft all of the output elements.
+			messageToSend += OutputFormatterFactory.Get().ListItem("Charisma: " + this.Attributes.Charisma);
+			messageToSend += OutputFormatterFactory.Get().ListItem("Dexterity: " + this.Attributes.Dexterity);
+			messageToSend += OutputFormatterFactory.Get().ListItem("Fortitude: " + this.Attributes.Fortitude);
+			messageToSend += OutputFormatterFactory.Get().ListItem("Hit Points: " + this.Attributes.HitPoints + " / " + this.Attributes.MaxHitPoints);
+			messageToSend += OutputFormatterFactory.Get().ListItem("Social Standing: " + this.Attributes.SocialStanding);
+			messageToSend += OutputFormatterFactory.Get().ListItem("Strength: " + this.Attributes.Strength);
+			messageToSend += OutputFormatterFactory.Get().ListItem("WillPower: " + this.Attributes.WillPower);
+
+			// Tell the player
+			this.sendMessageToPlayer(messageToSend);
+		}
+
+		#endregion
+
+
 		#region "Skill Related Items"
-		
+
 		/// <summary>
 		/// Use a skill
 		/// </summary>
