@@ -403,7 +403,7 @@ namespace SlackMUDRPG.CommandClasses
 						double rDouble = r.NextDouble();
 						
 						// Check if the object is created.
-						if ((rDouble * 100) < chanceOfObjectCreation+theCharacterSkill.SkillLevel)
+						if ((rDouble * 100) < chanceOfObjectCreation+charLevelOfSkill)
 						{
 							SMItem destroyedItemType = targetItem.GetDestroyedItem();
 							
