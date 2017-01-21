@@ -334,6 +334,7 @@ namespace SlackMUDRPG.CommandClasses
         /// </summary>
         public void StopActivity()
         {
+			this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Stopped " + this.CurrentActivity));
             this.CurrentActivity = null;
         }
 
