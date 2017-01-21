@@ -219,16 +219,16 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="skillName">The name of the skill to use</param>
 		/// <param name="targetName">The name of a (the) target to use the skill on (optional)</param>
-		public void UseSkill(string skillName, string targetName = null, bool isCombat = false)
+		public void UseSkill(string skillName, string targetName = null, bool isCombat = false, string extraData = null)
 		{
 			// Create a new instance of the skill.
-			SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName == skillName);
+			SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName.ToLower() == skillName.ToLower());
 			SMSkillHeld smcs = null;
 
 			// Find out if the character has the skill.
 			if (this.Skills != null)
 			{
-				smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName == skillName);
+				smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName.ToLower() == skillName.ToLower());
 			}
             
 			// If the character has the skill
@@ -244,7 +244,7 @@ namespace SlackMUDRPG.CommandClasses
 					SMRoom currentRoom = this.GetRoom();
 
 					// find any players with that target name first
-					SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName() == targetName);
+					SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
 
 					// If it's not null set the target details
 					if (targetCharacter != null)
@@ -294,11 +294,9 @@ namespace SlackMUDRPG.CommandClasses
 					// Output variables we don't need
 					string messageOut;
 					float floatOut;
-
 					
-
 					// Execute the skill
-					smc.UseSkill(this, out messageOut, out floatOut, 0, true, targetType, targetID);
+					smc.UseSkill(this, out messageOut, out floatOut, extraData, 0, true, targetType, targetID);
 				}
 			}
 			else
