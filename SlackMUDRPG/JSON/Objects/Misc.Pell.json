@@ -1,16 +1,15 @@
 ﻿{
-	"ItemName": "Wooden Pell",
 	"SingularPronoun": "a",
-	"PluralName": "Wooden Pells",
+	"ItemName": "Wooden Pell",
 	"PluralPronoun": "some",
-  "ItemType": "Misc",
-  "ItemFamily": "Pell",
-  "ItemDescription": "This is a wooden Pell, used for melee training.",
-  "ItemWeight": 20,
-  "ItemSize": 20,
-  "HitPoints": 1000000000,
-  "MaxHitPoints": 1000000000,
-  "BaseDamage": 0.1,
-  "Toughness": 5,
-  "CanHoldOtherItems": false
+	"PluralName": "Wooden Pells",
+	"ItemType": "Misc",
+	"ItemFamily": "Pell",
+	"ItemDescription": "This is a wooden Pell, used for melee training.",
+	"ItemWeight": 20,
+	"ItemSize": 20,
+	"HitPoints": 1000000000,
+	"MaxHitPoints": 1000000000,
+	"BaseDamage": 0.1,
+	"Toughness": 5
 }

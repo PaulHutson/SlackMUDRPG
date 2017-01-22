@@ -1,0 +1,21 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Wooden Sword",
+	"PluralPronoun": "some",
+	"PluralName": "Wooden Swords",
+	"ItemType": "Weapon",
+	"ItemFamily": "Sword",
+	"ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+	"ItemWeight": 2,
+	"ItemSize": 2,
+	"HitPoints": 25,
+	"MaxHitPoints": 25,
+	"BaseDamage": 2.0,
+	"Toughness": 3,
+	"RequiredSkills": [
+		{
+			"SkillName": "Sword Use",
+			"SkillLevel":  "1"
+		}
+	]
+}

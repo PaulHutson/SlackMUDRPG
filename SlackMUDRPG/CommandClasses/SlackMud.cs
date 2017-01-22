@@ -207,10 +207,10 @@ namespace SlackMUDRPG.CommandClasses
 
 				// Add default items to the character
 				SMSlot rightHand = SMChar.GetSlotByName("RightHand");
-				rightHand.EquippedItem = CreateItemFromJson("Weapons.WoodenSword");
+				rightHand.EquippedItem = CreateItemFromJson("Weapon.WoodenSword");
 
 				SMSlot back = SMChar.GetSlotByName("Back");
-				back.EquippedItem = CreateItemFromJson("Containers.SmallBackpack");
+				back.EquippedItem = CreateItemFromJson("Container.SmallBackpack");
 
 				// Add default body parts to the new character
 				SMChar.BodyParts = CreateBodyPartsFromJSON("BodyParts." + characterType);

@@ -11,15 +11,23 @@
 			"RoomID": "1"
 		}
 	],
-		"RoomItems": [
+	"RoomItems": [
 		{
 			"ItemID": "0e7eed12-b2e0-460a-be38-01d0a6476082",
+			"SingularPronoun": "a",
 			"ItemName": "Wooden Stick",
-			"ItemType": "weapon",
-			"ItemDescription": "This wooden stick is just for testing.",
+			"PluralPronoun": "some",
+			"PluralName": "Wooden Sticks",
+			"ItemType": "Weapon",
+			"ItemFamily": "Stick",
+			"ItemDescription": "A small wooden stick.",
 			"ItemWeight": 1,
 			"ItemSize": 1,
-			"CanHoldOtherItems": false
+			"HitPoints": 10,
+			"MaxHitPoints": 10,
+			"BaseDamage": 0.1,
+			"Toughness": 1,
+			"DestroyedOutput": "Logs,20"
 		}
 	]
 }

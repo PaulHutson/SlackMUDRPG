@@ -1,16 +1,15 @@
 ﻿{
-	"ItemName": "Copper Nugget",
 	"SingularPronoun": "a",
-	"PluralName": "Copper Nuggets",
+	"ItemName": "Copper Nugget",
 	"PluralPronoun": "some",
-  "ItemType": "resource",
-  "ItemFamily": "Nugget",
+	"PluralName": "Copper Nuggets",
+	"ItemType": "Resource",
+	"ItemFamily": "Nugget",
 	"ItemDescription": "A nugget of copper",
 	"ItemWeight": 5,
-  "ItemSize": 5,
-  "HitPoints": 5,
-  "MaxHitPoints": 5,
-  "BaseDamage": 0.001,
-  "Toughness": 5,
-	"CanHoldOtherItems": false
+	"ItemSize": 5,
+	"HitPoints": 5,
+	"MaxHitPoints": 5,
+	"BaseDamage": 0.001,
+	"Toughness": 5
 }
