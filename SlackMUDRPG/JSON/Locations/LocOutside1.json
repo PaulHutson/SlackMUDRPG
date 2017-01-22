@@ -19,29 +19,28 @@
 	"RoomItems": [
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9a",
-			"ItemName": "Old Tree",
 			"SingularPronoun": "an",
-			"PluralName": "Old Trees",
+			"ItemName": "Old Tree",
 			"PluralPronoun": "some",
+			"PluralName": "Old Trees",
 			"ItemType": "Environment",
 			"ItemFamily": "Tree",
 			"ItemDescription": "This tree looks very old.",
 			"ItemWeight": 500,
 			"ItemSize": 500,
-			"HitPoints": 5,
+			"HitPoints": 500,
 			"MaxHitPoints": 500,
 			"BaseDamage": 15,
 			"Toughness": 3,
-			"DestroyedOutput": "Resource.TreeTrunk,5",
-			"CanHoldOtherItems": false
+			"DestroyedOutput": "Resource.TreeTrunk,5"
 		},
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcacagg",
-			"ItemName": "Shoddy Pick Axe",
 			"SingularPronoun": "a",
-			"PluralName": "Shoddy Pick Axes",
+			"ItemName": "Shoddy Pick Axe",
 			"PluralPronoun": "some",
-			"ItemType": "weapons",
+			"PluralName": "Shoddy Pick Axes",
+			"ItemType": "Weapon",
 			"ItemFamily": "PickAxe",
 			"ItemDescription": "This shoddy pick axe doesn't do much damage but it's a start.",
 			"ItemWeight": 1,
@@ -49,16 +48,15 @@
 			"HitPoints": 50,
 			"MaxHitPoints": 50,
 			"BaseDamage": 5,
-			"Toughness": 3,
-			"CanHoldOtherItems": false
+			"Toughness": 3
 		},
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcacahh",
-			"ItemName": "Shoddy Pick Axe",
 			"SingularPronoun": "a",
-			"PluralName": "Shoddy Pick Axes",
+			"ItemName": "Shoddy Pick Axe",
 			"PluralPronoun": "some",
-			"ItemType": "weapons",
+			"PluralName": "Shoddy Pick Axes",
+			"ItemType": "Weapon",
 			"ItemFamily": "PickAxe",
 			"ItemDescription": "This shoddy pick axe doesn't do much damage but it's a start.",
 			"ItemWeight": 1,
@@ -66,16 +64,15 @@
 			"HitPoints": 50,
 			"MaxHitPoints": 50,
 			"BaseDamage": 5,
-			"Toughness": 3,
-			"CanHoldOtherItems": false
+			"Toughness": 3
 		},
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca6y",
-			"ItemName": "Gold Vein Outcropping",
 			"SingularPronoun": "a",
-			"PluralName": "Cold Vein Outcroppings",
+			"ItemName": "Gold Vein Outcropping",
 			"PluralPronoun": "some",
-			"ItemType": "resource",
+			"PluralName": "Gold Vein Outcroppings",
+			"ItemType": "Environment",
 			"ItemFamily": "Gold",
 			"ItemDescription": "A rocky outcropping with a gold vein within it",
 			"ItemWeight": 500000,
@@ -85,15 +82,14 @@
 			"BaseDamage": 0.001,
 			"Toughness": 4,
 			"DestroyedOutput": "Resource.GoldNugget,1",
-			"ObjectTrait": "isMineable",
-			"CanHoldOtherItems": false
+			"ObjectTrait": "isMineable"
 		},
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9b",
-			"ItemName": "Old Tree",
 			"SingularPronoun": "an",
-			"PluralName": "Old Trees",
+			"ItemName": "Old Tree",
 			"PluralPronoun": "some",
+			"PluralName": "Old Trees",
 			"ItemType": "Environment",
 			"ItemFamily": "Tree",
 			"ItemDescription": "This tree looks very old.",
@@ -103,15 +99,14 @@
 			"MaxHitPoints": 500,
 			"BaseDamage": 15,
 			"Toughness": 3,
-			"DestroyedOutput": "Resource.TreeTrunk,5",
-			"CanHoldOtherItems": false
+			"DestroyedOutput": "Resource.TreeTrunk,5"
 		},
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9e",
-			"ItemName": "Young Tree",
 			"SingularPronoun": "a",
-			"PluralName": "Young Trees",
+			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
+			"PluralName": "Young Trees",
 			"ItemType": "Environment",
 			"ItemFamily": "Tree",
 			"ItemDescription": "This tree looks young judging by it's age",
@@ -121,15 +116,14 @@
 			"MaxHitPoints": 100,
 			"BaseDamage": 0.001,
 			"Toughness": 2,
-			"DestroyedOutput":  "Resource.TreeTrunk,1",
-			"CanHoldOtherItems": false
+			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9c",
-			"ItemName": "Old Tree",
 			"SingularPronoun": "an",
-			"PluralName": "Old Trees",
+			"ItemName": "Old Tree",
 			"PluralPronoun": "some",
+			"PluralName": "Old Trees",
 			"ItemType": "Environment",
 			"ItemFamily": "Tree",
 			"ItemDescription": "This tree looks very old.",
@@ -139,15 +133,14 @@
 			"MaxHitPoints": 500,
 			"BaseDamage": 15,
 			"Toughness": 3,
-			"DestroyedOutput":  "Resource.TreeTrunk,5",
-			"CanHoldOtherItems": false
+			"DestroyedOutput": "Resource.TreeTrunk,5"
 		},
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9d",
-			"ItemName": "Young Tree",
 			"SingularPronoun": "a",
-			"PluralName": "Young Trees",
+			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
+			"PluralName": "Young Trees",
 			"ItemType": "Environment",
 			"ItemFamily": "Tree",
 			"ItemDescription": "This tree looks young judging by it's age",
@@ -157,15 +150,14 @@
 			"MaxHitPoints": 100,
 			"BaseDamage": 0.001,
 			"Toughness": 2,
-			"DestroyedOutput":  "Resource.TreeTrunk,1",
-			"CanHoldOtherItems": false
+			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9f",
-			"ItemName": "Young Tree",
 			"SingularPronoun": "a",
-			"PluralName": "Young Trees",
+			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
+			"PluralName": "Young Trees",
 			"ItemType": "Environment",
 			"ItemFamily": "Tree",
 			"ItemDescription": "This tree looks young judging by it's age",
@@ -175,15 +167,14 @@
 			"MaxHitPoints": 100,
 			"BaseDamage": 0.001,
 			"Toughness": 2,
-			"DestroyedOutput":  "Resource.TreeTrunk,1",
-			"CanHoldOtherItems": false
+			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca9g",
-			"ItemName": "Young Tree",
 			"SingularPronoun": "a",
-			"PluralName": "Young Tree",
+			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
+			"PluralName": "Young Trees",
 			"ItemType": "Environment",
 			"ItemFamily": "Tree",
 			"ItemDescription": "This tree looks young judging by it's age",
@@ -193,8 +184,7 @@
 			"MaxHitPoints": 100,
 			"BaseDamage": 0.001,
 			"Toughness": 2,
-			"DestroyedOutput":  "Resource.TreeTrunk,1",
-			"CanHoldOtherItems": false
+			"DestroyedOutput": "Resource.TreeTrunk,1"
 		}
 	]
 }

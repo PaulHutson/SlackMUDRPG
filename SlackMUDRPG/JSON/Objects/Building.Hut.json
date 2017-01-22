@@ -1,16 +1,15 @@
 ﻿{
-  "ItemName": "Wooden Hut",
 	"SingularPronoun": "a",
-	"PluralName": "Wooden Hut",
+	"ItemName": "Wooden Hut",
 	"PluralPronoun": "some",
-  "ItemType": "Wooden Huts",
-  "ItemFamily": "Hut",
-  "ItemDescription": "A lovely wooden hut.",
-  "ItemWeight": 250,
-  "ItemSize": 500,
-  "HitPoints": 2500,
-  "MaxHitPoints": 2500,
-  "BaseDamage": 100.0,
-  "Toughness": 10,
-	"CanHoldOtherItems": false
+	"PluralName": "Wooden Huts",
+	"ItemType": "Building",
+	"ItemFamily": "Hut",
+	"ItemDescription": "A lovely wooden hut.",
+	"ItemWeight": 250,
+	"ItemSize": 500,
+	"HitPoints": 2500,
+	"MaxHitPoints": 2500,
+	"BaseDamage": 100.0,
+	"Toughness": 10
 }

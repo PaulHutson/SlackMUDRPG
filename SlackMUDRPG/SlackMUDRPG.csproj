@@ -110,7 +110,7 @@
     <Content Include="JSON\Skills\Skill.Dodge.json" />
     <Content Include="JSON\Skills\Skill.Parry.json" />
     <Content Include="JSON\Skills\Skill.Chop.json" />
-    <Content Include="JSON\Objects\Weapons.ShoddyAxe.json" />
+    <Content Include="JSON\Objects\Weapon.ShoddyAxe.json" />
     <Content Include="JSON\Objects\Environment.YoungTree.json" />
     <Content Include="JSON\Objects\Resource.TreeTrunk.json" />
     <Content Include="JSON\Objects\Resource.Log.json" />
@@ -124,7 +124,7 @@
     <Content Include="JSON\Locations\LocLockedPlace1.json" />
     <Content Include="JSON\Locations\LocHospital.json" />
     <Content Include="JSON\Objects\Building.Hut.json" />
-    <Content Include="JSON\Objects\Weapons.ShoddyPickAxe.json" />
+    <Content Include="JSON\Objects\Weapon.ShoddyPickAxe.json" />
     <Content Include="JSON\Skills\Skill.Mine.json" />
     <Content Include="JSON\Objects\Environment.GoldVein.json" />
     <Content Include="JSON\Objects\Resource.GoldNugget.json" />
@@ -150,10 +150,10 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="JSON\Objects\Containers.SmallBackpack.json" />
-    <Content Include="JSON\Objects\Weapons.WoodenSword.json" />
+    <Content Include="JSON\Objects\Container.SmallBackpack.json" />
+    <Content Include="JSON\Objects\Weapon.WoodenSword.json" />
     <Content Include="JSON\Misc\Slots.BaseCharacter.json" />
-    <Content Include="JSON\Objects\Weapons.WoodenStick.json" />
+    <Content Include="JSON\Objects\Weapon.WoodenStick.json" />
     <Content Include="JSON\Commands\Help.json" />
     <Content Include="JSON\Commands\ClassBuilder.json" />
   </ItemGroup>
@@ -177,9 +177,11 @@
     <Compile Include="CommandClasses\SMCreature.cs" />
     <Compile Include="CommandClasses\SMHelp.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
+    <Compile Include="CommandClasses\SMItemFactory.cs" />
     <Compile Include="CommandClasses\SMItemUtils.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMReceipe.cs" />
+    <Compile Include="CommandClasses\SMRequiredSkill.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
     <Compile Include="GameAccess.aspx.cs">

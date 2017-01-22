@@ -207,10 +207,10 @@ namespace SlackMUDRPG.CommandClasses
 
 				// Add default items to the character
 				SMSlot rightHand = SMChar.GetSlotByName("RightHand");
-				rightHand.EquippedItem = CreateItemFromJson("Weapons.WoodenSword");
+				rightHand.EquippedItem = SMItemFactory.Get("Weapon", "WoodenSword");
 
 				SMSlot back = SMChar.GetSlotByName("Back");
-				back.EquippedItem = CreateItemFromJson("Containers.SmallBackpack");
+				back.EquippedItem = SMItemFactory.Get("Container", "SmallBackpack");
 
 				// Add default body parts to the new character
 				SMChar.BodyParts = CreateBodyPartsFromJSON("BodyParts." + characterType);
@@ -366,34 +366,6 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return parts;
-		}
-
-		#endregion
-
-		#region "Item Methods"
-
-		/// <summary>
-		/// Internal Method to create a new item with data from an Objects json file
-		/// </summary>
-		/// <returns>The item.</returns>
-		/// <param name="fileName">File name of the objects json file.</param>
-		public SMItem CreateItemFromJson(string fileName)
-		{
-			string path = FilePathSystem.GetFilePath("Objects", fileName);
-
-			SMItem item = new SMItem();
-
-			if (File.Exists(path))
-			{
-				using (StreamReader r = new StreamReader(path))
-				{
-					string json = r.ReadToEnd();
-					item = JsonConvert.DeserializeObject<SMItem>(json);
-					item.ItemID = Guid.NewGuid().ToString();
-				}
-			}
-
-			return item;
 		}
 
 		#endregion

@@ -1,7 +1,7 @@
 ﻿{
 	"Name": "Wooden Sword",
 	"Description": "The knowledge of how to craft a Wooden Sword.",
-	"Produces": "Weapons.WoodenSword",
+	"Produces": "Weapon.WoodenSword",
 	"PauseTime": 15,
 	"NeedToLearn": false,
 	"ProductionTrait": "Trait.Carpentry",

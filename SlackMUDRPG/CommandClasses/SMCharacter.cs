@@ -491,7 +491,7 @@ namespace SlackMUDRPG.CommandClasses
                 }
             }
 
-            SMItem corpse = new SlackMud().CreateItemFromJson("Misc.Corpse");
+            SMItem corpse = SMItemFactory.Get("Misc", "Corpse");
 			corpse.ItemName = "Corpse of " + this.GetFullName();
 			this.GetRoom().AddItem(corpse);
 
@@ -830,7 +830,7 @@ namespace SlackMUDRPG.CommandClasses
 				inventory += outputFormatter.General($" {slot.GetEquippedItemName()}");
 
 				// If the equipped item can hold other items get details of these
-				if (slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems == true)
+				if (slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems() == true)
 				{
 					if (slot.EquippedItem.HeldItems != null && slot.EquippedItem.HeldItems.Count > 0)
 					{
