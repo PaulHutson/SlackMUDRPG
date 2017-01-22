@@ -206,10 +206,10 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.CharacterSlots = CreateCharacterSlotsFromJSON("Slots." + characterType);
 
 				// Add default items to the character
-				SMCharacterSlot rightHand = SMChar.GetSlotByName("RightHand");
+				SMSlot rightHand = SMChar.GetSlotByName("RightHand");
 				rightHand.EquippedItem = CreateItemFromJson("Weapons.WoodenSword");
 
-				SMCharacterSlot back = SMChar.GetSlotByName("Back");
+				SMSlot back = SMChar.GetSlotByName("Back");
 				back.EquippedItem = CreateItemFromJson("Containers.SmallBackpack");
 
 				// Set the start location
@@ -325,18 +325,18 @@ namespace SlackMUDRPG.CommandClasses
 
 		#region "Slots Methods"
 
-		private List<SMCharacterSlot> CreateCharacterSlotsFromJSON(string filename)
+		private List<SMSlot> CreateCharacterSlotsFromJSON(string filename)
 		{
 			string path = FilePathSystem.GetFilePath("Misc", filename);
 
-			List<SMCharacterSlot> slots = new List<SMCharacterSlot>();
+			List<SMSlot> slots = new List<SMSlot>();
 
 			if (File.Exists(path))
 			{
 				using (StreamReader r = new StreamReader(path))
 				{
 					string json = r.ReadToEnd();
-					slots = JsonConvert.DeserializeObject<List<SMCharacterSlot>>(json);
+					slots = JsonConvert.DeserializeObject<List<SMSlot>>(json);
 				}
 			}
 
