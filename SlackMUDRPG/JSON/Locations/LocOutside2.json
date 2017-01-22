@@ -45,7 +45,7 @@
 			"Toughness": 3
 		},
 		{
-			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca6y",
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca6G",
 			"SingularPronoun": "a",
 			"ItemName": "Gold Vein Outcropping",
 			"PluralPronoun": "some",
@@ -63,7 +63,7 @@
 			"ObjectTrait": "isMineable"
 		},
 		{
-			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca6y",
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca6C",
 			"SingularPronoun": "a",
 			"ItemName": "Copper Vein Outcropping",
 			"PluralPronoun": "some",
@@ -81,7 +81,7 @@
 			"ObjectTrait": "isMineable"
 		},
 		{
-			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca6y",
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca6I",
 			"SingularPronoun": "a",
 			"ItemName": "Iron Vein Outcropping",
 			"PluralPronoun": "some",
