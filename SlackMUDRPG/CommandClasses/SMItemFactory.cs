@@ -24,13 +24,7 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				string guid = Guid.NewGuid().ToString();
 
-				switch (itemType)
-				{
-					case "container":
-						return GetContainer(guid, itemSpec);
-					default:
-						return GetItem(guid, itemSpec);
-				}
+				return GetItem(guid, itemSpec);
 			}
 
 			return null;
@@ -58,20 +52,6 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return objectSpecJson;
-		}
-
-		/// <summary>
-		/// Gets a new container item based on the spec provided.
-		/// </summary>
-		/// <param name="guid">A guid for the new item.</param>
-		/// <param name="jsonSpec">The spec of the item as a json string.</param>
-		/// <returns>An SMContainer instance.</returns>
-		private static SMItemContainer GetContainer(string guid, string jsonSpec)
-		{
-			SMItemContainer item = JsonConvert.DeserializeObject<SMItemContainer>(jsonSpec);
-			item.ItemID = guid;
-
-			return item;
 		}
 
 		/// <summary>

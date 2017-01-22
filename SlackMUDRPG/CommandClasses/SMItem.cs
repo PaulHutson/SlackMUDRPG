@@ -35,6 +35,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("ItemWeight")]
 		public int ItemWeight { get; set; }
 
+		[JsonProperty("ItemCapacity")]
+		public int ItemCapacity { get; set; }
+
 		[JsonProperty("ItemSize")]
 		public int ItemSize { get; set; }
 
@@ -62,20 +65,22 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("ObjectTrait")]
 		public string ObjectTrait { get; set; }
 
+		[JsonProperty("HeldItems")]
+		public List<SMItem> HeldItems { get; set; }
+
 		/// <summary>
 		/// Determines if the item can hold other items.
-		/// Decalred virtual so this can be overridden in sub classes
 		/// </summary>
 		/// <returns>Bool indicating if the item can hold other items.</returns>
-		public virtual bool CanHoldOtherItems()
+		public bool CanHoldOtherItems()
 		{
-			return false;
+			return this.ItemType == "Container";
 		}
 
 		/// <summary>
-		/// Gets a new instance of the items DestroyedOutput
+		/// Gets a new instance of the items DestroyedOutput.
 		/// </summary>
-		/// <returns>New item or null</returns>
+		/// <returns>New item or null.</returns>
 		public SMItem GetDestroyedItem()
 		{
 			if (this.DestroyedOutput != null)
