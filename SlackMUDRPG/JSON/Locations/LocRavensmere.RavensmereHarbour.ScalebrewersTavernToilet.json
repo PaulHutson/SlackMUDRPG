@@ -1,0 +1,15 @@
+{
+	"RoomID": "Ravensmere.RavensmereHarbour.ScalebrewersTavernToilet",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "Oddly enough, the toilet is cleaner than the bar...",
+	"RoomExits": [
+		{
+			"Shortcut": "ST",
+			"Description": "Scalebrewers Tavern",
+			"RoomID": "Ravensmere.RavensmereHarbour.ScalebrewersTavern"
+		}
+	],
+	"RoomItems": null
+}

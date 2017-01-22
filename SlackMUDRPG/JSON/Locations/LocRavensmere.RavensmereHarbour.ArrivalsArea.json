@@ -13,7 +13,7 @@
 		{
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "1"
+			"RoomID": "Ravensmere.RavensmereHarbour.DocklandsWaySouth"
 		}
 	],
 	"RoomItems": null
