@@ -3,7 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
-	"RoomDescription": "You enter a shop filled to the brim with unusual objects. Colourful crystal vials and spinning gizmos stand on shelves, each with a price tag attached.\n>\n>What appear to be butterflys flitter around the head of a toll gangly bald man with round spectacles. His eyes are half closed and he seems to be muttering strange words.",
+	"RoomDescription": "You enter a shop filled to the brim with unusual objects. Colourful crystal vials and spinning gizmos stand on shelves, each with a price tag attached.",
 	"RoomExits": [
 		{
 			"Shortcut": "DWS",
