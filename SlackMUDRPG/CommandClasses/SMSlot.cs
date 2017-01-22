@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace SlackMUDRPG.CommandClasses
 {
-	public class SMCharacterSlot
+	public class SMSlot
 	{
 		[JsonProperty("Name")]
 		public string Name { get; set; }

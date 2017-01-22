@@ -50,10 +50,13 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("Skills")]
 		public List<SMSkillHeld> Skills { get; set; }
 
-		[JsonProperty("CharacterSlots")]
-		public List<SMCharacterSlot> CharacterSlots { get; set; }
+		[JsonProperty("Slots")]
+		public List<SMSlot> Slots { get; set; }
 
-        public string ResponseURL { get; set; }
+		[JsonProperty("BodyParts")]
+		public List<SMBodyPart> BodyParts { get; set; }
+
+		public string ResponseURL { get; set; }
 
 		#region "General Player Functions"
 
@@ -479,7 +482,7 @@ namespace SlackMUDRPG.CommandClasses
         {
             // First create a corpse where they are, with all the associated items attached!
             // Drop all the items the character is holding
-            foreach (SMCharacterSlot smcs in this.CharacterSlots)
+            foreach (SMSlot smcs in this.Slots)
             {
                 if (!smcs.isEmpty())
                 {
@@ -551,18 +554,18 @@ namespace SlackMUDRPG.CommandClasses
 		#region "Inventory Functions"
 
 		/// <summary>
-		/// Gets an SMCharacterSlot by name, case and space insensitive.
+		/// Gets an SMSlot by name, case and space insensitive.
 		/// </summary>
 		/// <returns>The slot.</returns>
 		/// <param name="name">Name of the slot.</param>
-		public SMCharacterSlot GetSlotByName(string name)
+		public SMSlot GetSlotByName(string name)
 		{
 			// Removes spaces and makes string lower case.
 			string slotName = name.Replace(" ", "").ToLower();
 
-			if (this.CharacterSlots != null)
+			if (this.Slots != null)
 			{
-				return this.CharacterSlots.FirstOrDefault(slot => slot.Name.ToLower() == slotName);
+				return this.Slots.FirstOrDefault(slot => slot.Name.ToLower() == slotName);
 			}
 
 			return null;
@@ -602,7 +605,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// check for an empty hand to pick up the item
-			SMCharacterSlot hand = this.GetEmptyHand();
+			SMSlot hand = this.GetEmptyHand();
 
 			if (hand == null)
 			{
@@ -635,7 +638,7 @@ namespace SlackMUDRPG.CommandClasses
 		public void DropItem(string itemName)
 		{
 			// check item is in a hand
-			SMCharacterSlot hand = GetHandWithItemEquipped(itemName);
+			SMSlot hand = GetHandWithItemEquipped(itemName);
 
 			if (hand == null)
 			{
@@ -682,7 +685,7 @@ namespace SlackMUDRPG.CommandClasses
 			bool charOwnsItem = this.OwnsItem(itemToEquip.ItemID);
 
 			//find empty slot that can equip item (character slots and clothing slots)
-			SMCharacterSlot targetSlot = null;
+			SMSlot targetSlot = null;
 
 			// Try slot by name supplied
 			if (toSlot != null)
@@ -799,7 +802,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			string inventory = "";
 
-			foreach (SMCharacterSlot slot in this.CharacterSlots)
+			foreach (SMSlot slot in this.Slots)
 			{
 				inventory += outputFormatter.General($"{slot.GetReadableName()}:");
 				inventory += outputFormatter.ListItem(slot.GetEquippedItemName(), 2);
@@ -819,7 +822,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			string inventory = "";
 
-			SMCharacterSlot slot = this.GetSlotByName(slotName);
+			SMSlot slot = this.GetSlotByName(slotName);
 
 			if (slot != null)
 			{
@@ -857,7 +860,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		public string GetOwnedItemIDByName(string name)
 		{
-			foreach (SMCharacterSlot slot in CharacterSlots)
+			foreach (SMSlot slot in Slots)
 			{
 				if (!slot.isEmpty())
 				{
@@ -887,7 +890,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="id">ItemID.</param>
 		public bool HasItemEquipped(string id)
 		{
-			foreach (SMCharacterSlot slot in CharacterSlots)
+			foreach (SMSlot slot in Slots)
 			{
 				if (!slot.isEmpty() && slot.EquippedItem.ItemID == id)
 				{
@@ -905,7 +908,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="type">ItemType.</param>
 		public bool HasItemTypeEquipped(string type)
 		{
-			foreach (SMCharacterSlot slot in CharacterSlots)
+			foreach (SMSlot slot in Slots)
 			{
 				if (!slot.isEmpty() && slot.EquippedItem.ItemType == type)
 				{
@@ -923,7 +926,7 @@ namespace SlackMUDRPG.CommandClasses
         /// <param name="familyType">Item Type Family.</param>
         public bool HasItemFamilyTypeEquipped(string familyType)
         {
-            foreach (SMCharacterSlot slot in CharacterSlots)
+            foreach (SMSlot slot in Slots)
             {
                 if (!slot.isEmpty() && slot.EquippedItem.ItemFamily == familyType)
                 {
@@ -941,7 +944,7 @@ namespace SlackMUDRPG.CommandClasses
         /// <returns>The equipped item</returns>
         public SMItem GetEquippedItem(string itemName)
 		{
-			foreach (SMCharacterSlot slot in CharacterSlots)
+			foreach (SMSlot slot in Slots)
 			{
 				if (!slot.isEmpty())
 				{
@@ -969,7 +972,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			int count = 0;
 
-			foreach (SMCharacterSlot slot in CharacterSlots)
+			foreach (SMSlot slot in Slots)
 			{
 				if (!slot.isEmpty())
 				{
@@ -1002,20 +1005,20 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns><c>true</c>, if hands are empty, <c>false</c> otherwise.</returns>
 		public bool AreHandsEmpty()
 		{
-			SMCharacterSlot rightHand = this.GetSlotByName("RightHand");
-			SMCharacterSlot leftHand = this.GetSlotByName("LeftHand");
+			SMSlot rightHand = this.GetSlotByName("RightHand");
+			SMSlot leftHand = this.GetSlotByName("LeftHand");
 
 			return rightHand.isEmpty() && leftHand.isEmpty();
 		}
 
 		/// <summary>
-		/// Gets an emptySMCharacterSlot that is a hand.
+		/// Gets an empty SMSlot that is a hand.
 		/// </summary>
-		/// <returns>The empty hand SMCharacterSlot or null.</returns>
-		private SMCharacterSlot GetEmptyHand()
+		/// <returns>The empty hand SMSlot or null.</returns>
+		private SMSlot GetEmptyHand()
 		{
-			SMCharacterSlot rightHand = this.GetSlotByName("RightHand");
-			SMCharacterSlot leftHand = this.GetSlotByName("LeftHand");
+			SMSlot rightHand = this.GetSlotByName("RightHand");
+			SMSlot leftHand = this.GetSlotByName("LeftHand");
 
 			if (rightHand.isEmpty())
 			{
@@ -1065,7 +1068,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			int weight = 0;
 
-			foreach (SMCharacterSlot slot in this.CharacterSlots)
+			foreach (SMSlot slot in this.Slots)
 			{
 				if (!slot.isEmpty())
 				{
@@ -1117,7 +1120,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="id">ItemID.</param>
 		private SMItem GetEquippedItemByID(string id)
 		{
-			foreach (SMCharacterSlot slot in this.CharacterSlots)
+			foreach (SMSlot slot in this.Slots)
 			{
 				if (slot.EquippedItem != null)
 				{
@@ -1132,14 +1135,14 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Gets the hand (SMCharacterSlot) which has the item equipped.
+		/// Gets the hand (SMSlot) which has the item equipped.
 		/// </summary>
-		/// <returns>The hand (SMCharacterSlot) with item equipped, or null.</returns>
+		/// <returns>The hand (SMSlot) with item equipped, or null.</returns>
 		/// <param name="itemName">The name of the item.</param>
-		private SMCharacterSlot GetHandWithItemEquipped(string itemName)
+		private SMSlot GetHandWithItemEquipped(string itemName)
 		{
-			SMCharacterSlot rightHand = this.GetSlotByName("RightHand");
-			SMCharacterSlot leftHand = this.GetSlotByName("LeftHand");
+			SMSlot rightHand = this.GetSlotByName("RightHand");
+			SMSlot leftHand = this.GetSlotByName("LeftHand");
 
 			if (!rightHand.isEmpty() && rightHand.EquippedItem.ItemName == itemName)
 			{
@@ -1159,7 +1162,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns>The equipped item</returns>
 		public SMItem GetEquippedItem()
 		{
-			foreach (SMCharacterSlot slot in CharacterSlots)
+			foreach (SMSlot slot in Slots)
 			{
 				if (!slot.isEmpty())
 				{
@@ -1277,7 +1280,7 @@ namespace SlackMUDRPG.CommandClasses
 			SMItem foundItem = null;
 
 			// check in containers equipped to a slot for the item
-			foreach (SMCharacterSlot slot in this.CharacterSlots)
+			foreach (SMSlot slot in this.Slots)
 			{
 				if (slot.EquippedItem != null && slot.EquippedItem.ItemType == "container")
 				{
@@ -1304,10 +1307,10 @@ namespace SlackMUDRPG.CommandClasses
 		/// Looks for a slot on the character to equip a given item.
 		/// </summary>
 		/// <param name="item">The SMItem object to be equipped.</param>
-		/// <returns>The SMCharacterSlot that could hold the item or null.</returns>
-		private SMCharacterSlot FindSlotToEquipItem(SMItem item)
+		/// <returns>The SMSlot that could hold the item or null.</returns>
+		private SMSlot FindSlotToEquipItem(SMItem item)
 		{
-			foreach (SMCharacterSlot slot in this.CharacterSlots)
+			foreach (SMSlot slot in this.Slots)
 			{
 				if (slot.isEmpty() && slot.canEquipItem(item))
 				{
@@ -1326,7 +1329,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns>True/False result of ownership test.</returns>
 		private bool OwnsItem(string itemID)
 		{
-			foreach (SMCharacterSlot slot in CharacterSlots)
+			foreach (SMSlot slot in Slots)
 			{
 				if (!slot.isEmpty())
 				{
@@ -1356,7 +1359,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns>True/False result of ownership test.</returns>
 		private bool CheckKey(string lockedKeyCode)
         {
-            foreach (SMCharacterSlot slot in CharacterSlots)
+            foreach (SMSlot slot in Slots)
             {
                 if (!slot.isEmpty())
                 {

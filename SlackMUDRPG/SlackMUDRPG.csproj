@@ -137,10 +137,7 @@
     <Content Include="JSON\Receipe\Weapons.WoodenSword.json" />
     <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.ArrivalsArea.json" />
     <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.LandingArea.json" />
-    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.DocklandsWaySouth.json" />
-    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.ScalebrewersTavern.json" />
-    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.ScalebrewersTavernToilet.json" />
-    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.ScalebrewersTavernCellar.json" />
+    <Content Include="JSON\Misc\BodyParts.BaseCharacter.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -167,6 +164,7 @@
     <Compile Include="CommandClasses\SlackClient.cs" />
     <Compile Include="CommandClasses\SlackMud.cs" />
     <Compile Include="CommandClasses\SMAttributes.cs" />
+    <Compile Include="CommandClasses\SMBodyPart.cs" />
     <Compile Include="CommandClasses\SMCharacter.cs" />
     <Compile Include="CommandClasses\SMCombat.cs" />
     <Compile Include="CommandClasses\SMCommand.cs" />
@@ -210,7 +208,7 @@
     <Compile Include="Utility\Path.cs" />
     <Compile Include="Utility\SlackWebHooks.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />
-    <Compile Include="CommandClasses\SMCharacterSlot.cs" />
+    <Compile Include="CommandClasses\SMSlot.cs" />
     <Compile Include="Utility\Utils.cs" />
     <Compile Include="Utility\ClassBuilder.cs" />
   </ItemGroup>

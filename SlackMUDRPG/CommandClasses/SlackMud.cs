@@ -203,14 +203,17 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);
 
 				// Set default character slots before adding items to them
-				SMChar.CharacterSlots = CreateCharacterSlotsFromJSON("Slots." + characterType);
+				SMChar.Slots = CreateSlotsFromJSON("Slots." + characterType);
 
 				// Add default items to the character
-				SMCharacterSlot rightHand = SMChar.GetSlotByName("RightHand");
+				SMSlot rightHand = SMChar.GetSlotByName("RightHand");
 				rightHand.EquippedItem = CreateItemFromJson("Weapons.WoodenSword");
 
-				SMCharacterSlot back = SMChar.GetSlotByName("Back");
+				SMSlot back = SMChar.GetSlotByName("Back");
 				back.EquippedItem = CreateItemFromJson("Containers.SmallBackpack");
+
+				// Add default body parts to the new character
+				SMChar.BodyParts = CreateBodyPartsFromJSON("BodyParts." + characterType);
 
 				// Set the start location
 				SMChar.RoomID = "1";
@@ -325,22 +328,44 @@ namespace SlackMUDRPG.CommandClasses
 
 		#region "Slots Methods"
 
-		private List<SMCharacterSlot> CreateCharacterSlotsFromJSON(string filename)
+		private List<SMSlot> CreateSlotsFromJSON(string filename)
 		{
 			string path = FilePathSystem.GetFilePath("Misc", filename);
 
-			List<SMCharacterSlot> slots = new List<SMCharacterSlot>();
+			List<SMSlot> slots = new List<SMSlot>();
 
 			if (File.Exists(path))
 			{
 				using (StreamReader r = new StreamReader(path))
 				{
 					string json = r.ReadToEnd();
-					slots = JsonConvert.DeserializeObject<List<SMCharacterSlot>>(json);
+					slots = JsonConvert.DeserializeObject<List<SMSlot>>(json);
 				}
 			}
 
 			return slots;
+		}
+
+		#endregion
+
+		#region "BodyPart Methods"
+
+		private List<SMBodyPart> CreateBodyPartsFromJSON(string filename)
+		{
+			string path = FilePathSystem.GetFilePath("Misc", filename);
+
+			List<SMBodyPart> parts = new List<SMBodyPart>();
+
+			if (File.Exists(path))
+			{
+				using (StreamReader r = new StreamReader(path))
+				{
+					string json = r.ReadToEnd();
+					parts = JsonConvert.DeserializeObject<List<SMBodyPart>>(json);
+				}
+			}
+
+			return parts;
 		}
 
 		#endregion
