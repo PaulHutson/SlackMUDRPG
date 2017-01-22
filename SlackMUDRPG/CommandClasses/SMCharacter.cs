@@ -491,7 +491,7 @@ namespace SlackMUDRPG.CommandClasses
                 }
             }
 
-            SMItem corpse = new SlackMud().CreateItemFromJson("Misc.Corpse");
+            SMItem corpse = SMItemFactory.Get("Misc", "Corpse");
 			corpse.ItemName = "Corpse of " + this.GetFullName();
 			this.GetRoom().AddItem(corpse);
 

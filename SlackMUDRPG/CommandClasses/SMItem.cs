@@ -11,11 +11,11 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("ItemID")]
 		public string ItemID { get; set; }
 
-		[JsonProperty("ItemName")]
-		public string ItemName { get; set; }
-
 		[JsonProperty("SingularPronoun")]
 		public string SingularPronoun { get; set; }
+
+		[JsonProperty("ItemName")]
+		public string ItemName { get; set; }
 
 		[JsonProperty("PluralName")]
 		public string PluralName { get; set; }
@@ -37,12 +37,6 @@ namespace SlackMUDRPG.CommandClasses
 
 		[JsonProperty("ItemSize")]
 		public int ItemSize { get; set; }
-
-		[JsonProperty("ItemCapacity")]
-		public int ItemCapacity { get; set; }
-
-		[JsonProperty("CanHoldOtherItems")]
-		public bool CanHoldOtherItems { get; set; }
 
 		[JsonProperty("HitPoints")]
 		public int HitPoints { get; set; }
@@ -68,27 +62,42 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("ObjectTrait")]
 		public string ObjectTrait { get; set; }
 
-		[JsonProperty("HeldItems")]
-		public List<SMItem> HeldItems { get; set; }
+		/// <summary>
+		/// Determines if the item can hold other items.
+		/// Decalred virtual so this can be overridden in sub classes
+		/// </summary>
+		/// <returns>Bool indicating if the item can hold other items.</returns>
+		public virtual bool canHoldOtherItems()
+		{
+			return false;
+		}
 
+		/// <summary>
+		/// Gets a new instance of the items DestroyedOutput
+		/// </summary>
+		/// <returns>New item or null</returns>
 		public SMItem GetDestroyedItem()
 		{
-			string createFileItemName = this.DestroyedOutput;
-			if (createFileItemName.Contains(","))
+			if (this.DestroyedOutput != null)
 			{
-				createFileItemName = createFileItemName.Split(',')[0];
+				// get "xxx.yyy.zzz" from "xxx.yyy.zzz,n"
+				string item = this.DestroyedOutput.Split(',')[0];
+
+				// get list of parts x, y, z from x.y.z
+				List<string> parts = item.Split('.').ToList();
+
+				// get and remove x from the list
+				string category = parts[0];
+				parts.RemoveAt(0);
+
+				// get y.z by joining the remaining elements
+				string name = string.Join(".", parts);
+
+				// Return a newly factoried item
+				return SMItemFactory.Get(category, name);
 			}
-			
-			return new SlackMud().CreateItemFromJson(createFileItemName);
+
+			return null;
 		}
-	}
-
-	public class SMRequiredSkill
-	{
-		[JsonProperty("SkillName")]
-		public string SkillName { get; set; }
-
-		[JsonProperty("SkillLevel")]
-		public string SkillLevel { get; set; }
 	}
 }
