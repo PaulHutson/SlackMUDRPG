@@ -8,7 +8,7 @@
 		{
 			"Shortcut": "AAE",
 			"Description": "Arrivals Area Entrance",
-			"RoomID": "Ravensmere.RavensmereHarbour.ArrivalsArea"
+			"RoomID": "Ravensmere.MerchantSouth.ArrivalsArea"
 		}
 	],
 	"RoomItems": [
