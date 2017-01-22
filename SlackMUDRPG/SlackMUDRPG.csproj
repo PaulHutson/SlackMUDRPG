@@ -138,6 +138,10 @@
     <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.ArrivalsArea.json" />
     <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.LandingArea.json" />
     <Content Include="JSON\Misc\BodyParts.BaseCharacter.json" />
+    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.DocklandsWaySouth.json" />
+    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.ScalebrewersTavern.json" />
+    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.ScalebrewersTavernCellar.json" />
+    <Content Include="JSON\Locations\LocRavensmere.RavensmereHarbour.ScalebrewersTavernToilet.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
