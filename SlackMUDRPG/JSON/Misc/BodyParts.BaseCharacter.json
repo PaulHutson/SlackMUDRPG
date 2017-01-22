@@ -1,0 +1,29 @@
+﻿[
+	{
+		"Name": "Head"
+	},
+	{
+		"Name": "Neck"
+	},
+	{
+		"Name": "Torso"
+	},
+	{
+		"Name": "Arms"
+	},
+	{
+		"Name": "RightHand"
+	},
+	{
+		"Name": "LeftHand"
+	},
+	{
+		"Name": "Legs"
+	},
+	{
+		"Name": "RigthFoot"
+	},
+	{
+		"Name": "LeftFoot"
+	}
+]

@@ -1,57 +1,86 @@
 {
-  "firstname": "Rob",
-  "lastname": "Curran2",
-  "lastinteractiondate": "2016-12-31T15:49:35.3550031+00:00",
-  "lastlogindate": "2016-12-31T15:49:35.3550031+00:00",
-  "age": 10,
-  "sex": "f",
-  "PKFlag": false,
-  "UserID": "123",
-  "RoomID": "TrainingYard",
-  "CurrentActivity": null,
-  "Attributes": {
-    "str": 10,
-    "int": 10,
-    "chr": 10,
-    "dex": 10,
-    "wp": 10,
-    "ft": 10,
-    "hp": 5,
-    "maxhp": 10,
-    "SocialStanding": 8
-  },
-  "Skills": [
-    {
-      "SkillName": "Dodge",
-      "SkillLevel": 20
-    },
-    {
-      "SkillName": "Parry",
-      "SkillLevel": 20
-    }
-  ],
-  "Slots": [
-    {
-      "Name": "RightHand",
-      "AllowedTypes": [
-        "any"
-      ],
-      "EquippedItem": null
-    },
-    {
-      "Name": "LeftHand",
-      "AllowedTypes": [
-        "any"
-      ],
-      "EquippedItem": null
-    },
-    {
-      "Name": "Back",
-      "AllowedTypes": [
-        "containers"
-      ],
-      "EquippedItem": null
-    }
-  ],
-  "ResponseURL": null
+	"firstname": "Rob",
+	"lastname": "Curran2",
+	"lastinteractiondate": "2016-12-31T15:49:35.3550031+00:00",
+	"lastlogindate": "2016-12-31T15:49:35.3550031+00:00",
+	"age": 10,
+	"sex": "f",
+	"PKFlag": false,
+	"UserID": "123",
+	"RoomID": "TrainingYard",
+	"CurrentActivity": null,
+	"Attributes": {
+		"str": 10,
+		"int": 10,
+		"chr": 10,
+		"dex": 10,
+		"wp": 10,
+		"ft": 10,
+		"hp": 5,
+		"maxhp": 10,
+		"SocialStanding": 8
+	},
+	"Skills": [
+		{
+			"SkillName": "Dodge",
+			"SkillLevel": 20
+		},
+		{
+			"SkillName": "Parry",
+			"SkillLevel": 20
+		}
+	],
+	"Slots": [
+		{
+			"Name": "RightHand",
+			"AllowedTypes": [
+				"any"
+			],
+			"EquippedItem": null
+		},
+		{
+			"Name": "LeftHand",
+			"AllowedTypes": [
+				"any"
+			],
+			"EquippedItem": null
+		},
+		{
+			"Name": "Back",
+			"AllowedTypes": [
+				"containers"
+			],
+			"EquippedItem": null
+		}
+	],
+	"BodyParts": [
+		{
+			"Name": "Head"
+		},
+		{
+			"Name": "Neck"
+		},
+		{
+			"Name": "Torso"
+		},
+		{
+			"Name": "Arms"
+		},
+		{
+			"Name": "RightHand"
+		},
+		{
+			"Name": "LeftHand"
+		},
+		{
+			"Name": "Legs"
+		},
+		{
+			"Name": "RigthFoot"
+		},
+		{
+			"Name": "LeftFoot"
+		}
+	],
+	"ResponseURL": null
 }

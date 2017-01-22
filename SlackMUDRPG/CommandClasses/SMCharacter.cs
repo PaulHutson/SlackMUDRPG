@@ -53,7 +53,10 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("Slots")]
 		public List<SMSlot> Slots { get; set; }
 
-        public string ResponseURL { get; set; }
+		[JsonProperty("BodyParts")]
+		public List<SMBodyPart> BodyParts { get; set; }
+
+		public string ResponseURL { get; set; }
 
 		#region "General Player Functions"
 

@@ -212,6 +212,9 @@ namespace SlackMUDRPG.CommandClasses
 				SMSlot back = SMChar.GetSlotByName("Back");
 				back.EquippedItem = CreateItemFromJson("Containers.SmallBackpack");
 
+				// Add default body parts to the new character
+				SMChar.BodyParts = CreateBodyPartsFromJSON("BodyParts." + characterType);
+
 				// Set the start location
 				SMChar.RoomID = "1";
 				string defaultRoomPath = FilePathSystem.GetFilePath("Scripts", "EnterWorldProcess-FirstLocation");
@@ -341,6 +344,28 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return slots;
+		}
+
+		#endregion
+
+		#region "BodyPart Methods"
+
+		private List<SMBodyPart> CreateBodyPartsFromJSON(string filename)
+		{
+			string path = FilePathSystem.GetFilePath("Misc", filename);
+
+			List<SMBodyPart> parts = new List<SMBodyPart>();
+
+			if (File.Exists(path))
+			{
+				using (StreamReader r = new StreamReader(path))
+				{
+					string json = r.ReadToEnd();
+					parts = JsonConvert.DeserializeObject<List<SMBodyPart>>(json);
+				}
+			}
+
+			return parts;
 		}
 
 		#endregion
