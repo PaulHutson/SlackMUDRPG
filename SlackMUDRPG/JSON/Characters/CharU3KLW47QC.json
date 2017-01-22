@@ -8,8 +8,8 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Ravensmere.MerchantSouth.ArrivalsArea",
-  "CurrentActivity": "",
+  "RoomID": "Outside2",
+  "CurrentActivity": "Mining",
   "Attributes": {
     "str": 10,
     "int": 10,

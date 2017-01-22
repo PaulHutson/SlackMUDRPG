@@ -18,7 +18,7 @@
 		{
 			"Shortcut": "STC",
 			"Description": "Scalebrewers Tavern Cellar",
-			"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavernCelar"
+			"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavernCellar"
 		}
 	],
 	"RoomItems": [
