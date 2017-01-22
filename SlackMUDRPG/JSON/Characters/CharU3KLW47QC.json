@@ -8,7 +8,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Ravensmere.RavensmereHarbour.LandingArea",
+  "RoomID": "Ravensmere.MerchantSouth.ArrivalsArea",
   "CurrentActivity": "",
   "Attributes": {
     "str": 10,
@@ -22,143 +22,169 @@
     "SocialStanding": 8
   },
   "Skills": [
-		{
-			"SkillName": "Mine",
-			"SkillLevel": 2
-		},
-		{
+    {
+      "SkillName": "Mine",
+      "SkillLevel": 2
+    },
+    {
       "SkillName": "Dodge",
       "SkillLevel": 1
     },
-		{
+    {
       "SkillName": "Sword Use",
       "SkillLevel": 1
     },
-		{
+    {
       "SkillName": "Chop",
       "SkillLevel": 1
     }
   ],
-	"Slots": [
-		{
-			"Name": "RightHand",
-			"AllowedTypes": [
-				"any"
-			],
-			"EquippedItem": {
-				"ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453",
-				"SingularPronoun": "a",
-				"ItemName": "Wooden Sword",
-				"PluralPronoun": "some",
-				"PluralName": "Wooden Swords",
-				"ItemType": "Weapon",
-				"ItemFamily": "Sword",
-				"ItemDescription": "This wooden sword won't do much damage, but it's a start.",
-				"ItemWeight": 2,
-				"ItemSize": 2,
-				"HitPoints": 25,
-				"MaxHitPoints": 25,
-				"BaseDamage": 2.0,
-				"Toughness": 3,
-				"RequiredSkills": [
-					{
-						"SkillName": "Sword Use",
-						"SkillLevel": "1"
-					}
-				]
-			}
-		},
-		{
-			"Name": "LeftHand",
-			"AllowedTypes": [
-				"any"
-			],
-			"EquippedItem": {
-				"ItemID": "1def209c-8dc5-4208-877a-5de64c49e12e",
-				"SingularPronoun": "a",
-				"ItemName": "Shoddy Pick Axe",
-				"PluralPronoun": "some",
-				"PluralName": "Shoddy Pick Axes",
-				"ItemType": "Weapon",
-				"ItemFamily": "PickAxe",
-				"ItemDescription": "This shoddy pick axe doesn't do much damage but it's a start.",
-				"ItemWeight": 1,
-				"ItemSize": 1,
-				"HitPoints": 50,
-				"MaxHitPoints": 50,
-				"BaseDamage": 5,
-				"Toughness": 3
-			}
-		},
-		{
-			"Name": "Back",
-			"AllowedTypes": [
-				"containers"
-			],
-			"EquippedItem": {
-				"ItemID": "1def209c-8dc5-4208-877a-5de64c13e12c",
-				"SingularPronoun": "a",
-				"ItemName": "Small Backpack",
-				"PluralPronoun": "some",
-				"PluralName": "Small Backpacks",
-				"ItemType": "Container",
-				"ItemDescription": "Basic small backpack that all players start with.",
-				"ItemWeight": 0,
-				"ItemSize": 1,
-				"HitPoints": 5,
-				"MaxHitPoints": 5,
-				"BaseDamage": 0.0000000001,
-				"Toughness": 1,
-				"ItemCapacity": 25,
-				"HeldItems": [
-					{
-						"ItemID": "4e2461ad-2572-4f02-99da-7ec30d53193z",
-						"SingularPronoun": "a",
-						"ItemName": "Key for Locked Room (LR)",
-						"PluralPronoun": "some",
-						"PluralName": "Keys",
-						"ItemType": "Misc",
-						"ItemFamily": "Key",
-						"ItemDescription": "This is a key",
-						"ItemWeight": 0,
-						"ItemSize": 0,
-						"HitPoints": 1000000000,
-						"MaxHitPoints": 1000000000,
-						"BaseDamage": 0.001,
-						"Toughness": 1
-					}
-				]
-			}
-		}
-	],
-	"BodyParts": [
-		{
-			"Name": "Head"
-		},
-		{
-			"Name": "Neck"
-		},
-		{
-			"Name": "Torso"
-		},
-		{
-			"Name": "Arms"
-		},
-		{
-			"Name": "RightHand"
-		},
-		{
-			"Name": "LeftHand"
-		},
-		{
-			"Name": "Legs"
-		},
-		{
-			"Name": "RigthFoot"
-		},
-		{
-			"Name": "LeftFoot"
-		}
-	]
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453",
+        "ItemName": "Wooden Sword",
+        "SingularPronoun": "a",
+        "PluralName": "Wooden Swords",
+        "PluralPronoun": "some",
+        "ItemType": "weapon",
+        "ItemFamily": "Sword",
+        "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+        "ItemWeight": 1,
+        "ItemSize": 1,
+        "ItemCapacity": 0,
+        "CanHoldOtherItems": false,
+        "HitPoints": 10,
+        "MaxHitPoints": 10,
+        "BaseDamage": 10.0,
+        "Toughness": 1,
+        "DestroyedOutput": null,
+        "RequiredSkills": [
+          {
+            "SkillName": "Sword Use",
+            "SkillLevel": "1"
+          }
+        ],
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "abc",
+        "ItemName": "Shoddy Pick Axe",
+        "SingularPronoun": "a",
+        "PluralName": "Shoddy Pick Axes",
+        "PluralPronoun": "some",
+        "ItemType": "weapons",
+        "ItemFamily": "PickAxe",
+        "ItemDescription": "This shoddy pick axe doesn't do much damage but it's a start.",
+        "ItemWeight": 1,
+        "ItemSize": 1,
+        "ItemCapacity": 0,
+        "CanHoldOtherItems": false,
+        "HitPoints": 50,
+        "MaxHitPoints": 50,
+        "BaseDamage": 5.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": null,
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": {
+        "ItemID": "1def209c-8dc5-4208-877a-5de64c13e12c",
+        "ItemName": "Small Backpack",
+        "SingularPronoun": null,
+        "PluralName": null,
+        "PluralPronoun": null,
+        "ItemType": "container",
+        "ItemFamily": null,
+        "ItemDescription": "Basic small backpack that all players start with.",
+        "ItemWeight": 0,
+        "ItemSize": 1,
+        "ItemCapacity": 0,
+        "CanHoldOtherItems": true,
+        "HitPoints": 0,
+        "MaxHitPoints": 0,
+        "BaseDamage": 0.0,
+        "Toughness": 0,
+        "DestroyedOutput": null,
+        "RequiredSkills": null,
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": [
+          {
+            "ItemID": "4e2461ad-2572-4f02-99da-7ec30d53193z",
+            "ItemName": "Key for Locked Room (LR)",
+            "SingularPronoun": null,
+            "PluralName": null,
+            "PluralPronoun": null,
+            "ItemType": "Key",
+            "ItemFamily": "Key",
+            "ItemDescription": "This is a key",
+            "ItemWeight": 0,
+            "ItemSize": 0,
+            "ItemCapacity": 0,
+            "CanHoldOtherItems": false,
+            "HitPoints": 1000000000,
+            "MaxHitPoints": 1000000000,
+            "BaseDamage": 0.001,
+            "Toughness": 1,
+            "DestroyedOutput": null,
+            "RequiredSkills": null,
+            "AdditionalData": "KeyLockExample101",
+            "ObjectTrait": null,
+            "HeldItems": null
+          }
+        ]
+      }
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RigthFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
   "ResponseURL": null
 }
