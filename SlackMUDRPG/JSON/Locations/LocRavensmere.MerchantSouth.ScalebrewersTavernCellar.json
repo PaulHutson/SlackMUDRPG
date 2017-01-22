@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.RavensmereHarbour.ScalebrewersCellar",
+	"RoomID": "Ravensmere.MerchantSouth.ScalebrewersCellar",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -8,7 +8,7 @@
 		{
 			"Shortcut": "ST",
 			"Description": "Scalebrewers Tavern",
-			"RoomID": "Ravensmere.RavensmereHarbour.ScalebrewersTavern"
+			"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavern"
 		}
 	],
 	"RoomItems": null
