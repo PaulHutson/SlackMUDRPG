@@ -30,7 +30,7 @@
       "SkillLevel": 20
     }
   ],
-  "CharacterSlots": [
+  "Slots": [
     {
       "Name": "RightHand",
       "AllowedTypes": [

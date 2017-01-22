@@ -203,7 +203,7 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);
 
 				// Set default character slots before adding items to them
-				SMChar.CharacterSlots = CreateCharacterSlotsFromJSON("Slots." + characterType);
+				SMChar.Slots = CreateSlotsFromJSON("Slots." + characterType);
 
 				// Add default items to the character
 				SMSlot rightHand = SMChar.GetSlotByName("RightHand");
@@ -325,7 +325,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		#region "Slots Methods"
 
-		private List<SMSlot> CreateCharacterSlotsFromJSON(string filename)
+		private List<SMSlot> CreateSlotsFromJSON(string filename)
 		{
 			string path = FilePathSystem.GetFilePath("Misc", filename);
 
