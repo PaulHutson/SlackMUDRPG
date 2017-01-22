@@ -15,7 +15,7 @@ namespace SlackMUDRPG.CommandClasses
 		public List<SMItem> HeldItems { get; set; }
 
 		/// <inheritdoc />
-		public override bool canHoldOtherItems()
+		public override bool CanHoldOtherItems()
 		{
 			return true;
 		}

@@ -830,7 +830,7 @@ namespace SlackMUDRPG.CommandClasses
 				inventory += outputFormatter.General($" {slot.GetEquippedItemName()}");
 
 				// If the equipped item can hold other items get details of these
-				if (slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems == true)
+				if (slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems() == true)
 				{
 					if (slot.EquippedItem.HeldItems != null && slot.EquippedItem.HeldItems.Count > 0)
 					{

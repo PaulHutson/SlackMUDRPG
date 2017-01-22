@@ -67,7 +67,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// Decalred virtual so this can be overridden in sub classes
 		/// </summary>
 		/// <returns>Bool indicating if the item can hold other items.</returns>
-		public virtual bool canHoldOtherItems()
+		public virtual bool CanHoldOtherItems()
 		{
 			return false;
 		}
