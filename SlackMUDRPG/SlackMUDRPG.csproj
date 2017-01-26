@@ -138,15 +138,21 @@
     <Content Include="JSON\Objects\Resource.LeatherStrip.json" />
     <Content Include="JSON\Objects\Tools.Chisel.json" />
     <Content Include="JSON\Objects\Weapons.CarpenterHammer.json" />
-    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ArrivalsArea.json" />
-    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.LandingArea.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.ArrivalsArea.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.LandingArea.json" />
     <Content Include="JSON\Misc\BodyParts.BaseCharacter.json" />
-    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.DocklandsWaySouth.json" />
-    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ScalebrewersTavern.json" />
-    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ScalebrewersTavernCellar.json" />
-    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ScalebrewersTavernToilet.json" />
-    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.SwabbiesLane.json" />
-    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ZogsArcanum.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.DocklandsWaySouth.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.ScalebrewersTavern.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.ScalebrewersTavernCellar.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.ScalebrewersTavernToilet.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.SwabbiesLane.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.ZogsArcanum.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.Ravensmere Promenade South.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.Princes Auction House.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.Felhirsts Tannery.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.EmptyShop3.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.EmptyShop1.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.EmptyShop2.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

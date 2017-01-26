@@ -1,0 +1,45 @@
+{
+	"RoomID": "Ravensmere.HarbourSouth.Ravensmere Promande South",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "The boardwalk creeks under your feet, smells of tar and fresh fish invade your senses and men and women barter for the goods hauled from vessels recently arrived.",
+	"RoomExits": [
+		{
+			"Shortcut": "DWS",
+			"Description": "Docklands Way South",
+			"RoomID": "Ravensmere.HarbourSouth.DockalandsWaySouth"
+		},
+		{
+			"Shortcut": "STC",
+			"Description": "Scalebrewers Tavern Cellar",
+			"RoomID": "Ravensmere.HarbourSouth.ScalebrewersTavernCellar"
+		},
+		{
+			"Shortcut": "PAH",
+			"Description": "Princes Auction House",
+			"RoomID": "Ravensmere.HarbourSouth.Princes Auction House"
+		},
+		{
+			"Shortcut": "FT",
+			"Description": "Felhirsts Tannery",
+			"RoomID": "Ravensmere.HarbourSouth.Felhirsts Tannery"
+		},
+    {
+			"Shortcut": "ES1",
+			"Description": "Large Empty Shop",
+			"RoomID": "Ravensmere.HarbourSouth.EmptyShop1"
+		},
+    {
+			"Shortcut": "ES2",
+			"Description": "Mediums Sized Empty Shop",
+			"RoomID": "Ravensmere.HarbourSouth.EmptyShop2"
+		},
+    {
+			"Shortcut": "ES2",
+			"Description": "Small Empty Shop",
+			"RoomID": "Ravensmere.HarbourSouth.EmptyShop3"
+		}
+	],
+	"RoomItems": null
+}

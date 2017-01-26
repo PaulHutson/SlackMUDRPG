@@ -1,0 +1,55 @@
+{
+	"RoomID": "Ravensmere.HarbourSouth.DocklandsWaySouth",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "A long and winding street lies ahead. Buildings of varying shapes and sizes lean over from both sides to shadow the cobbles. \nThere are shops and inns dotted up and down and empty washing lines reach from window to window.\nThe street continues round a corner and there are several smaller narrow passageways to the side.",
+	"RoomExits": [
+		{
+			"Shortcut": "AAE",
+			"Description": "Arrivals Area Entrance",
+			"RoomID": "Ravensmere.HarbourSouth.ArrivalsArea"
+		},
+		{
+			"Shortcut": "ST",
+			"Description": "Scalebrewers Tavern",
+			"RoomID": "Ravensmere.HarbourSouth.ScalebrewersTavern"
+		},
+		{
+			"Shortcut": "SL",
+			"Description": "Swabbies Lane",
+			"RoomID": "Ravensmere.HarbourSouth.SwabbiesLane"
+		},
+    {
+      "Shortcut": "RPS",
+      "Description": "Ravensmere Promenade South",
+      "RoomID": "Ravensmere.HarbourSouth.Ravensmere Promenade South"
+    },
+    {
+			"Shortcut": "FT",
+			"Description": "Felhirsts Tannery",
+			"RoomID": "Ravensmere.HarbourSouth.Felhirsts Tannery"
+		},
+    {
+			"Shortcut": "ES1",
+			"Description": "Large Empty Shop",
+			"RoomID": "Ravensmere.HarbourSouth.EmptyShop1"
+		},
+    {
+			"Shortcut": "ES2",
+			"Description": "Mediums Sized Empty Shop",
+			"RoomID": "Ravensmere.HarbourSouth.EmptyShop2"
+		},
+    {
+			"Shortcut": "ES2",
+			"Description": "Small Empty Shop",
+			"RoomID": "Ravensmere.HarbourSouth.EmptyShop3"
+		},
+		{
+			"Shortcut": "TC",
+			"Description": "The construct",
+			"RoomID": "1"
+		}
+	],
+	"RoomItems": null
+}

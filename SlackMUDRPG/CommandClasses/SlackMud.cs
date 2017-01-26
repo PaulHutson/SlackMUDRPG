@@ -258,6 +258,28 @@ namespace SlackMUDRPG.CommandClasses
 			}   
         }
 
+        public string GetStartingLocation()
+        {
+            string defaultRoomPath = FilePathSystem.GetFilePath("Scripts", "EnterWorldProcess-FirstLocation");
+            if (File.Exists(defaultRoomPath))
+            {
+                // Use a stream reader to read the file in (based on the path)
+                using (StreamReader r = new StreamReader(defaultRoomPath))
+                {
+                    // Create a new JSON string to be used...
+                    string json = r.ReadToEnd();
+
+                    // ... get the information from the the start location token..
+                    SMStartLocation sl = JsonConvert.DeserializeObject<SMStartLocation>(json);
+
+                    // Set the start location.
+                    return sl.StartLocation;
+                }
+            }
+
+            return "1";
+        }
+
 		#endregion
 
 		#region "Location Methods"
