@@ -11,11 +11,6 @@
 			"RoomID": "Ravensmere.HarbourSouth.DockalandsWaySouth"
 		},
 		{
-			"Shortcut": "STC",
-			"Description": "Scalebrewers Tavern Cellar",
-			"RoomID": "Ravensmere.HarbourSouth.ScalebrewersTavernCellar"
-		},
-		{
 			"Shortcut": "PAH",
 			"Description": "Princes Auction House",
 			"RoomID": "Ravensmere.HarbourSouth.Princes Auction House"
