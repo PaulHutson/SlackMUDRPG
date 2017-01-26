@@ -1440,7 +1440,7 @@ namespace SlackMUDRPG.CommandClasses
         public bool RemoveItem(string name, bool includeRoom)
         {
             // Scroll around the character slots and remove an item.
-            foreach (SMCharacterSlot slot in CharacterSlots)
+            foreach (SMSlot slot in Slots)
             {
                 if (!slot.isEmpty())
                 {

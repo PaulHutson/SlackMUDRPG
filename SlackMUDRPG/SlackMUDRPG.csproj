@@ -175,6 +175,7 @@
     <Compile Include="CommandClasses\SMAttributes.cs" />
     <Compile Include="CommandClasses\SMBodyPart.cs" />
     <Compile Include="CommandClasses\SMCharacter.cs" />
+    <Compile Include="CommandClasses\SMCharacterSlot.cs" />
     <Compile Include="CommandClasses\SMCombat.cs" />
     <Compile Include="CommandClasses\SMCommand.cs" />
     <Compile Include="CommandClasses\SMCreature.cs" />
