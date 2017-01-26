@@ -81,7 +81,7 @@
 					DONE- dodging
 			- Functional Skills
 				DONE- CHOP item i.e. CHOP TREE to chop a tree, if the character has an axe equipped.
-				- MAKE item i.e. MAKE SWORD (would need to have an available, unused anvil)
+				DONE- MAKE item i.e. MAKE SWORD (would need to have an available, unused anvil)
 					- Using an item marks it as "in use" until the thing is done or the player is logged out.
 					- sword would use an additional sub skill of "Weaponsmithing"
 						- Which would be a subskill of "BlackSmithing"
@@ -89,25 +89,28 @@
 		DONE- Attack ("ATTACK PlayerName") - will use default item in their hand
 			DONE- Hit points must reduce
 			DONE- Character death
-		- BUILD/MAKE PROCESS
-			- Build steps class (like the skills one).
+		DONE- BUILD/MAKE PROCESS
+			DONE- Build steps class (like the skills one).
 			- Different states for the item during manufacture.
-			- Consumption of receipe items during steps.
-			Implementation
-				- Make ("MAKE Torch") - will use the items from their inventory to make the torch.
-					- Make advanced ("MAKE Sword USING Anvil")
+			DONE- Consumption of receipe items during steps.
+			DONEImplementation
+				DONE- Make Wooden Sword now works - can use anvils for metal swords if needed.
 				- Build ("BUILD Shed") - will use items in a location to build something.
 					- This should take time (as per the object stub).
 					- Not sure if the build system should be split up a bit - i.e. you can build 5% of the house, depending on how
 					long you take doing it or until resources run out.
 
-7) Implement Story element
+7) More Stuff
+	- NPCs - basic talk system.
+	- NPCs - more advanced action system.
+	- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)
+
+8) Implement Story element
 	- Jobs system (get jobs from a notice board)
 		- Means we need a new notice board system, with a "LOOK AT" and/or "EXAMINE" command.
 	- Implement story arcs (locations you need to go to, get clues, clues generate if someone is on a quest on entry to the location / they can only see them themselves)
 
-8) More Stuff
-	- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)
+
 
 V0.2 Items
 
