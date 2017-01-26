@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavern",
+	"RoomID": "Ravensmere.HarbourSouth.ScalebrewersTavern",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -8,17 +8,17 @@
 		{
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.MerchantSouth.DocklandsWaySouth"
+			"RoomID": "Ravensmere.HarbourSouth.DocklandsWaySouth"
 		},
 		{
 			"Shortcut": "STT",
 			"Description": "Scalebrewers Tavern Toilet",
-			"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavernToilet"
+			"RoomID": "Ravensmere.HarbourSouth.ScalebrewersTavernToilet"
 		},
 		{
 			"Shortcut": "STC",
 			"Description": "Scalebrewers Tavern Cellar",
-			"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavernCellar"
+			"RoomID": "Ravensmere.HarbourSouth.ScalebrewersTavernCellar"
 		}
 	],
 	"RoomItems": [

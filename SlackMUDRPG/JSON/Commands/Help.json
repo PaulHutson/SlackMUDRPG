@@ -71,6 +71,20 @@
 			"RequiredSkill": null
 		},
 		{
+			"CommandFamily": "General",
+			"CommandBaseName": "flush",
+			"CommandName": "flush",
+			"CommandDescription": "Flush the character from menu and set them at the start location.",
+			"CommandSyntax": "flush",
+			"CommandExpression": "flush",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "Flush",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "flush",
+			"RequiredSkill": null
+		},
+		{
 			"CommandFamily": "Location",
 			"CommandBaseName": "exits",
 			"CommandName": "exits",

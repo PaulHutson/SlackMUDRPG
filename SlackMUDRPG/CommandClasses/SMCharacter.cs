@@ -222,6 +222,14 @@ namespace SlackMUDRPG.CommandClasses
 			this.SaveToApplication();
         }
 
+        public void Flush()
+        {
+            this.RoomID = new SlackMud().GetStartingLocation();
+            this.GetRoomDetails();
+            this.SaveToApplication();
+            this.SaveToFile();
+        }
+
 		#endregion
 
 		#region "CharacterCommands"

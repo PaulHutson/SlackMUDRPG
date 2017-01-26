@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.MerchantSouth.ArrivalsArea",
+	"RoomID": "Ravensmere.HarbourSouth.ArrivalsArea",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -8,12 +8,12 @@
 		{
 			"Shortcut": "AAE",
 			"Description": "Arrivals Area Entrance",
-			"RoomID": "Ravensmere.MerchantSouth.LandingArea"
+			"RoomID": "Ravensmere.HarbourSouth.LandingArea"
 		},
 		{
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.MerchantSouth.DocklandsWaySouth"
+			"RoomID": "Ravensmere.HarbourSouth.DocklandsWaySouth"
 		}
 	],
 	"RoomItems": null

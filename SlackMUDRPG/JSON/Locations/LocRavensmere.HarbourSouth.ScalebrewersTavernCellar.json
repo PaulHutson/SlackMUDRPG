@@ -1,0 +1,20 @@
+{
+	"RoomID": "Ravensmere.HarbourSouth.ScalebrewersCellar",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "A single gaslight illuminates a room full of dark figures sitting around a hexagonal table with a gold scorpian embossed on the surface. The room falls quiet and every head turns to you.",
+	"RoomExits": [
+    {
+      "Shortcut": "ST",
+      "Description": "Scalebrewers Tavern",
+      "RoomID": "Ravensmere.HarbourSouth.ScalebrewersTavern"
+    },
+    {
+			"Shortcut": "RPS",
+			"Description": "Ravensmere Promande South",
+			"RoomID": "Ravensmere.HarbourSouth.Ravensmere Promande South"
+		}
+	],
+	"RoomItems": null
+}
