@@ -113,6 +113,48 @@
 			"RequiredSkill": "Skill.Mine"
 		},
 		{
+			"CommandFamily": "Skill",
+			"CommandBaseName": "craft",
+			"CommandName": "craft",
+			"CommandDescription": "Enables the player to craft something.",
+			"CommandSyntax": "craft <Name Of item>",
+			"CommandExpression": "craft {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "CraftItem",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "craft Wooden Sword",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Skill",
+			"CommandBaseName": "make",
+			"CommandName": "make",
+			"CommandDescription": "Enables the player to make something.",
+			"CommandSyntax": "make <Name Of item>",
+			"CommandExpression": "make {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "CraftItem",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "make Wooden Sword",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Skill",
+			"CommandBaseName": "build",
+			"CommandName": "build",
+			"CommandDescription": "Enables the player to build something.",
+			"CommandSyntax": "build <Name Of item>",
+			"CommandExpression": "build {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "CraftItem",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "build Wooden Hut",
+			"RequiredSkill": null
+		},
+		{
 			"CommandFamily": "Chat",
 			"CommandBaseName": "say",
 			"CommandName": "say",

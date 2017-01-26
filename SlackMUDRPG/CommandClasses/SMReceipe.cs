@@ -85,10 +85,10 @@ namespace SlackMUDRPG.CommandClasses
 
 	public class SMReceipeStepThresholdBonus
 	{
-		[JsonProperty("ThresholdBonusType")]
-		public string ThresholdName { get; set; }
+		[JsonProperty("ThresholdBonusName")]
+		public string ThresholdBonusName { get; set; }
 
-		[JsonProperty("ThresholdBonusValueIncrease")]
+		[JsonProperty("ThresholdBonusValue")]
 		public int ThresholdBonusValue { get; set; }
 	}
 }

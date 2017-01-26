@@ -129,13 +129,14 @@ namespace SlackMUDRPG.CommandClasses
 									}
 									break;
 								case "CheckReceipe":
-									if (!CheckReceipe(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+									if (!CheckReceipe(smss, smc, this.BaseStat, extraData, null, 0, null))
 									{
-										continueCycle = false;
+                                        smc.sendMessageToPlayer(smss.FailureOutput);
+                                        continueCycle = false;
 									}
 									break;
 								case "UseReceipe":
-									if (!UseReceipe(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+									if (!UseReceipe(smss, smc, this.BaseStat, extraData, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
 									{
 										smc.sendMessageToPlayer(smss.FailureOutput);
 										continueCycle = false;
@@ -652,11 +653,11 @@ namespace SlackMUDRPG.CommandClasses
 			return true;
 		}
 
-		private bool CheckReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
+		private bool CheckReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string nameOfReceipe, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
 		{
 			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
 			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
-			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == targetType);
+			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == nameOfReceipe);
 			if (smr != null)
 			{
 				if (smr.NeedToLearn)
@@ -669,7 +670,7 @@ namespace SlackMUDRPG.CommandClasses
 				if (smss.ExtraData != null)
 				{
 					// Check that the item they're trying to make has the right trait.
-					if (smr.ProductionTrait.Contains(smss.ExtraData))
+					if (!smr.ProductionTrait.Contains(smss.ExtraData))
 					{
 						return false;
 					}
@@ -683,11 +684,11 @@ namespace SlackMUDRPG.CommandClasses
 			return true;
 		}
 
-		private bool UseReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
+		private bool UseReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string nameOfReceipe, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
 		{
 			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
 			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
-			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == targetType);
+			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == nameOfReceipe);
 			if (smr != null)
 			{
 				var continueCycle = true;
@@ -708,30 +709,67 @@ namespace SlackMUDRPG.CommandClasses
 									// Check that the items needed for this task are available.
 									foreach (SMReceipeMaterial smrm in smr.Materials)
 									{
-										// Check if the character is holding the item
-										// TODO
+										bool materialFound = false;
+										string[] materialType = smrm.MaterialType.Split('.');
+                                        // Check if the character is holding the item or has it equipped
+
+                                        int numberFound = smc.CountOwnedItemsByName(materialType[1]);
+
+                                        if (numberFound > 0)
+										{
+											materialFound = true;
+										}
+
+                                        // Is the item in a container the character is wearing?
+                                        
 
 										// Check if the items are in the location with the character
-										// TODO
+										if (!materialFound)
+										{
+											SMItem checkForItem = smc.GetRoom().GetItemByFamilyName(materialType[1]);
+											if (checkForItem != null)
+											{
+												materialFound = true;
+											}
+											else
+											{
+												smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(SuccessOutputParse(receipeStep.FailureOutput, smc, materialType[1], "")));
+											}
+										}
 									}
 									break;
 								case "ConsumeItems":
 									// Consume the items.
 									foreach (SMReceipeMaterial smrm in smr.Materials)
 									{
-										// If the item is in the hand..
-										// ... consume it.
-										// TODO
+										string[] materialType = smrm.MaterialType.Split('.');
+                                        int currentNumber = smrm.MaterialQuantity;
+										
+										// Check if the character is holding the item
+                                        while (currentNumber>0)
+                                        {
+                                            bool materialFound = false;
 
-										// else // if the item is in the location.
-										// ... consume it
-										// TODO
+                                            materialFound = smc.RemoveItem(materialType[1], true);
+                                            
+                                            if (!materialFound)
+                                            {
+                                                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(SuccessOutputParse(receipeStep.FailureOutput, smc, materialType[1], "")));
+                                                currentNumber = 0;
+                                                return false;
+                                            }
+                                            else
+                                            {
+                                                currentNumber--;
+                                            }
+                                        }
 									}
 									break;
 								case "CreateObject":
 									// Create the object.
 									// Create a new object of the type for the receipe.
 									SMItem smi = smr.GetProducedItem();
+                                    string originalItemName = smi.ItemName;
 									smi.ItemID = Guid.NewGuid().ToString();
 
 									// Check the threshold reached for this item...
@@ -743,13 +781,23 @@ namespace SlackMUDRPG.CommandClasses
 									float baseDamage = smi.BaseDamage;
 									int baseToughness = smi.Toughness;
 
+                                    // Get the character level
+                                    SMSkillHeld smsh = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+                                    int characterSkillLevel = 0;
+                                    if (smsh != null)
+                                    {
+                                        characterSkillLevel = (int)smsh.SkillLevel;
+                                    }
+                                    
 									foreach (SMReceipeStepThreshold smrst in smr.StepThresholds)
 									{
-										if ((rDouble * 100) < smrst.ThresholdLevel) // TODO add extra chance the better they are at the skill to get to the next threshold
-										{
+										if (((rDouble * 100) + characterSkillLevel) >= smrst.ThresholdLevel)
+                                        {
+                                            smi.ItemName = smrst.ThresholdName + " " + originalItemName;
+
 											foreach (SMReceipeStepThresholdBonus smrstb in smrst.ThresholdBonus)
 											{
-												switch (smrstb.ThresholdName)
+												switch (smrstb.ThresholdBonusName)
 												{
 													case "BaseDamage":
 														smi.BaseDamage = baseDamage + smrstb.ThresholdBonusValue;
@@ -773,8 +821,13 @@ namespace SlackMUDRPG.CommandClasses
 
 									// Place it in the location where the character is.
 									smc.GetRoom().AddItem(smi);
+                                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(SuccessOutputParse(receipeStep.SuccessOutput, smc, smi.SingularPronoun + " " + smi.ItemName, "")));
 
-									break;
+                                    break;
+                                case "Information":
+                                    SMItem producedItem = smr.GetProducedItem();
+                                    smc.GetRoom().Announce(SuccessOutputParse(receipeStep.SuccessOutput, smc, producedItem.SingularPronoun + " " + producedItem.ItemName, ""));
+                                    break;
 								case "Pause":
 									System.Threading.Thread.Sleep(receipeStep.RequiredObjectAmount * 1000);
 									break;
@@ -790,9 +843,10 @@ namespace SlackMUDRPG.CommandClasses
 
 		private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetName, string objectDestroyedName)
 		{
-			// replace the elements as needed
-			successOutput = successOutput.Replace("{TARGETNAME}", targetName);
-			successOutput = successOutput.Replace("{CHARNAME}", smc.GetFullName());
+            // replace the elements as needed
+            successOutput = successOutput.Replace("{TARGETNAME}", targetName);
+            successOutput = successOutput.Replace("{ITEMNAME}", targetName);
+            successOutput = successOutput.Replace("{CHARNAME}", smc.GetFullName());
 			successOutput = successOutput.Replace("{Object.DestroyedOutput}", objectDestroyedName);
 
 			return successOutput;
@@ -802,7 +856,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Skill Increase
 			// Max skill level
-			int maxSkillLevel = 100;
+			int maxSkillLevel = 20;
 			int failureMultipler = 2;
 			if (skillSuccess)
 			{
@@ -821,39 +875,44 @@ namespace SlackMUDRPG.CommandClasses
 				currentSkillLevel = theCharacterSkill.SkillLevel;
 			}
 
-			// Chance of the skill increasing in level
-			double chanceOfSkillIncrease = ((maxSkillLevel - (currentSkillLevel * failureMultipler)) / (10+currentSkillLevel));
+            if (currentSkillLevel < 20)
+            {
+                // Chance of the skill increasing in level
+                double chanceOfSkillIncrease = 20;
 
-			// Random chance to see if someone achieves the skill increase change
-			Random r = new Random();
-			double rDouble = r.NextDouble();
-			if ((rDouble*100) < chanceOfSkillIncrease)
-			{
-				// Increase the skill lebel by one.
-				if (smc.Skills != null)
-				{
-					SMSkillHeld smshincrease = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+                // Random chance to see if someone achieves the skill increase change
+                Random r = new Random();
+                double rDouble = r.NextDouble();
+                if ((rDouble * 100) < chanceOfSkillIncrease - currentSkillLevel)
+                {
+                    // Increase the skill lebel by one.
+                    if (smc.Skills != null)
+                    {
+                        SMSkillHeld smshincrease = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
 
-					if (smshincrease != null)
-					{
-						smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName).SkillLevel++;
-					} else
-					{
-						LearnNewSkill(smc);
-					}
-					// Send message to the player.
-					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.SkillName + " increased in level to " + (currentSkillLevel + 1)));
-				} else
-				{
-					LearnNewSkill(smc);
-				}
-			}
+                        if (smshincrease != null)
+                        {
+                            smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName).SkillLevel++;
+                        }
+                        else
+                        {
+                            LearnNewSkill(smc);
+                        }
+                        // Send message to the player.
+                        smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.SkillName + " increased in level to " + (currentSkillLevel + 1)));
+                    }
+                    else
+                    {
+                        LearnNewSkill(smc);
+                    }
+                }
 
-            smc.SaveToApplication();
-            smc.SaveToFile();
+                // Attribute Increase
+                // TODO add an attribute increase method check to SMAttributes, very very low chance!
 
-			// Attribute Increase
-			// TODO add an attribute increase method check to SMAttributes, very very low chance!
+                smc.SaveToApplication();
+                smc.SaveToFile();
+            }
 		}
 
 		public void LearnNewSkill(SMCharacter smc)

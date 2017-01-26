@@ -146,10 +146,10 @@ namespace SlackMUDRPG
 			smc.UseSkill("Mine", "Gold");
 		}
 
-		protected void btn_Mining_Copper_Click(object sender, EventArgs e)
+		protected void btn_CraftSword_Click(object sender, EventArgs e)
 		{
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
-			smc.UseSkill("Mine", "Copper");
+			smc.UseSkill("Carpentry", null, false, "Wooden Sword");
 		}
 	}
 }
