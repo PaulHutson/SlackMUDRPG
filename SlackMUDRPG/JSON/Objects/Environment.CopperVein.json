@@ -1,18 +1,17 @@
 ﻿{
-	"ItemName": "Copper Vein Outcropping",
 	"SingularPronoun": "a",
-	"PluralName": "Copper Vein Outcroppings",
+	"ItemName": "Copper Vein Outcropping",
 	"PluralPronoun": "some",
-  "ItemType": "resource",
-  "ItemFamily": "Copper",
+	"PluralName": "Copper Vein Outcroppings",
+	"ItemType": "Environment",
+	"ItemFamily": "Copper",
 	"ItemDescription": "A rocky outcropping with a Copper vein within it",
 	"ItemWeight": 500000,
-  "ItemSize": 500000,
-  "HitPoints": 500000,
-  "MaxHitPoints": 500000,
-  "BaseDamage": 0.001,
-  "Toughness": 4,
+	"ItemSize": 500000,
+	"HitPoints": 500000,
+	"MaxHitPoints": 500000,
+	"BaseDamage": 0.001,
+	"Toughness": 4,
 	"DestroyedOutput": "Resource.CopperNugget,1",
-	"ObjectTrait": "isMineable",
-	"CanHoldOtherItems": false
+	"ObjectTrait": "isMineable"
 }

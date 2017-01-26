@@ -1,18 +1,17 @@
 ﻿{
-	"ItemName": "Gold Vein Outcropping",
 	"SingularPronoun": "a",
-	"PluralName": "Gold Vein Outcroppings",
+	"ItemName": "Gold Vein Outcropping",
 	"PluralPronoun": "some",
-  "ItemType": "resource",
-  "ItemFamily": "Gold",
+	"PluralName": "Gold Vein Outcroppings",
+	"ItemType": "Environment",
+	"ItemFamily": "Gold",
 	"ItemDescription": "A rocky outcropping with a gold vein within it",
 	"ItemWeight": 500000,
-  "ItemSize": 500000,
-  "HitPoints": 500000,
-  "MaxHitPoints": 500000,
-  "BaseDamage": 0.001,
-  "Toughness": 4,
+	"ItemSize": 500000,
+	"HitPoints": 500000,
+	"MaxHitPoints": 500000,
+	"BaseDamage": 0.001,
+	"Toughness": 4,
 	"DestroyedOutput": "Resource.GoldNugget,1",
-	"ObjectTrait": "isMineable",
-	"CanHoldOtherItems": false
+	"ObjectTrait": "isMineable"
 }

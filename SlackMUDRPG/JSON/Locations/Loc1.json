@@ -23,21 +23,34 @@
 		{
 			"Shortcut": "LD",
 			"Description": "Locked Door",
-      "RoomID": "LockedPlace1",
-      "RoomLockID": "KeyLockExample101",
-      "Locked": true,
-      "Lockable": true
+			"RoomID": "LockedPlace1",
+			"RoomLockID": "KeyLockExample101",
+			"Locked": true,
+			"Lockable": true
+		},
+		{
+			"Shortcut": "AA",
+			"Description": "Arrivals Area",
+			"RoomID": "Ravensmere.MerchantSouth.ArrivalsArea"
 		}
 	],
 	"RoomItems": [
 		{
 			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca99",
+			"SingularPronoun": "a",
 			"ItemName": "Wooden Stick",
-			"ItemType": "weapon",
-			"ItemDescription": "This wooden stick is just for testing.",
+			"PluralPronoun": "some",
+			"PluralName": "Wooden Sticks",
+			"ItemType": "Weapon",
+			"ItemFamily": "Stick",
+			"ItemDescription": "A small wooden stick.",
 			"ItemWeight": 1,
 			"ItemSize": 1,
-			"CanHoldOtherItems": false
+			"HitPoints": 10,
+			"MaxHitPoints": 10,
+			"BaseDamage": 0.1,
+			"Toughness": 1,
+			"DestroyedOutput": "Logs,20"
 		}
 	]
 }

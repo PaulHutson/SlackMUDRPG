@@ -1,17 +1,15 @@
 ﻿{
-	"ItemName": "Corpse",
 	"SingularPronoun": "a",
-	"PluralName": "Corpses",
+	"ItemName": "Corpse",
 	"PluralPronoun": "some",
-  "ItemType": "Misc",
-  "ItemFamily": "Corpse",
+	"PluralName": "Corpses",
+	"ItemType": "Misc",
+	"ItemFamily": "Corpse",
 	"ItemDescription": "A corpse",
 	"ItemWeight": 15,
-  "ItemSize": 10,
-  "HitPoints": 15,
-  "MaxHitPoints": 15,
-  "BaseDamage": 0.001,
-  "Toughness": 3,
-	"CanHoldOtherItems": false,
-	"HeldItems": null
+	"ItemSize": 10,
+	"HitPoints": 15,
+	"MaxHitPoints": 15,
+	"BaseDamage": 0.001,
+	"Toughness": 3
 }

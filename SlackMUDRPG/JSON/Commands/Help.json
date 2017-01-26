@@ -71,6 +71,20 @@
 			"RequiredSkill": null
 		},
 		{
+			"CommandFamily": "Location",
+			"CommandBaseName": "exits",
+			"CommandName": "exits",
+			"CommandDescription": "Get the available location exits.",
+			"CommandSyntax": "exits",
+			"CommandExpression": "exits",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "GetRoomExits",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "exits",
+			"RequiredSkill": null
+		},
+		{
 			"CommandFamily": "Environment",
 			"CommandBaseName": "chop",
 			"CommandName": "chop",
@@ -292,6 +306,62 @@
 			"PassCommandAsFirstArg": false,
 			"PassQueryParamAsFirstArg": null,
 			"ExampleUsage": "inspect Paul Hutson or inspect Wooden Pell",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Character",
+			"CommandBaseName": "examine",
+			"CommandName": "examine",
+			"CommandDescription": "Examine a chatracter or an object within a location.",
+			"CommandSyntax": "examine <thing to examine>",
+			"CommandExpression": "examine {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "InspectObject",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "examine Paul Hutson or examine Wooden Pell",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Character",
+			"CommandBaseName": "skills",
+			"CommandName": "skills",
+			"CommandDescription": "Get the skills of your character.",
+			"CommandSyntax": "skills",
+			"CommandExpression": "skills",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "GetSkills",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "skills",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Character",
+			"CommandBaseName": "stats",
+			"CommandName": "stats",
+			"CommandDescription": "Get the statistics of your character.",
+			"CommandSyntax": "stats",
+			"CommandExpression": "stats",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "GetStats",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "stats",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Character",
+			"CommandBaseName": "level",
+			"CommandName": "level",
+			"CommandDescription": "Get the character level.",
+			"CommandSyntax": "level",
+			"CommandExpression": "level",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "GetLevel",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "level",
 			"RequiredSkill": null
 		},
 		{

@@ -86,6 +86,7 @@
     <Content Include="GameAccess.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="JSON\Characters\Char123.json" />
+    <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
     <Content Include="JSON\Commands\NewCharacter.json" />
@@ -109,24 +110,21 @@
     <Content Include="JSON\Skills\Skill.Dodge.json" />
     <Content Include="JSON\Skills\Skill.Parry.json" />
     <Content Include="JSON\Skills\Skill.Chop.json" />
-    <Content Include="JSON\Objects\Weapons.ShoddyAxe.json" />
+    <Content Include="JSON\Objects\Weapon.ShoddyAxe.json" />
     <Content Include="JSON\Objects\Environment.YoungTree.json" />
     <Content Include="JSON\Objects\Resource.TreeTrunk.json" />
     <Content Include="JSON\Objects\Resource.Log.json" />
-    <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Characters\CharU3KLW47QC.json" />
     <Content Include="JSON\Objects\Misc.Pell.json" />
     <Content Include="JSON\Locations\LocOutside1.json" />
     <Content Include="JSON\Locations\LocTrainingYard.json" />
     <Content Include="JSON\Objects\Environment.OldTree.json" />
-    <Content Include="WebPlay.aspx" />
-    <Content Include="Handlers\WebSocketHandler.ashx" />
     <Content Include="JSON\Objects\Misc.Corpse.json" />
     <Content Include="JSON\Objects\Misc.Key.json" />
     <Content Include="JSON\Locations\LocLockedPlace1.json" />
     <Content Include="JSON\Locations\LocHospital.json" />
     <Content Include="JSON\Objects\Building.Hut.json" />
-    <Content Include="JSON\Objects\Weapons.ShoddyPickAxe.json" />
+    <Content Include="JSON\Objects\Weapon.ShoddyPickAxe.json" />
     <Content Include="JSON\Skills\Skill.Mine.json" />
     <Content Include="JSON\Objects\Environment.GoldVein.json" />
     <Content Include="JSON\Objects\Resource.GoldNugget.json" />
@@ -140,16 +138,25 @@
     <Content Include="JSON\Objects\Resource.LeatherStrip.json" />
     <Content Include="JSON\Objects\Tools.Chisel.json" />
     <Content Include="JSON\Objects\Weapons.CarpenterHammer.json" />
+    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ArrivalsArea.json" />
+    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.LandingArea.json" />
+    <Content Include="JSON\Misc\BodyParts.BaseCharacter.json" />
+    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.DocklandsWaySouth.json" />
+    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ScalebrewersTavern.json" />
+    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ScalebrewersTavernCellar.json" />
+    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ScalebrewersTavernToilet.json" />
+    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.SwabbiesLane.json" />
+    <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ZogsArcanum.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="JSON\Objects\Containers.SmallBackpack.json" />
-    <Content Include="JSON\Objects\Weapons.WoodenSword.json" />
+    <Content Include="JSON\Objects\Container.SmallBackpack.json" />
+    <Content Include="JSON\Objects\Weapon.WoodenSword.json" />
     <Content Include="JSON\Misc\Slots.BaseCharacter.json" />
-    <Content Include="JSON\Objects\Weapons.WoodenStick.json" />
+    <Content Include="JSON\Objects\Weapon.WoodenStick.json" />
     <Content Include="JSON\Commands\Help.json" />
     <Content Include="JSON\Commands\ClassBuilder.json" />
   </ItemGroup>
@@ -166,15 +173,18 @@
     <Compile Include="CommandClasses\SlackClient.cs" />
     <Compile Include="CommandClasses\SlackMud.cs" />
     <Compile Include="CommandClasses\SMAttributes.cs" />
+    <Compile Include="CommandClasses\SMBodyPart.cs" />
     <Compile Include="CommandClasses\SMCharacter.cs" />
     <Compile Include="CommandClasses\SMCombat.cs" />
     <Compile Include="CommandClasses\SMCommand.cs" />
     <Compile Include="CommandClasses\SMCreature.cs" />
     <Compile Include="CommandClasses\SMHelp.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
+    <Compile Include="CommandClasses\SMItemFactory.cs" />
     <Compile Include="CommandClasses\SMItemUtils.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMReceipe.cs" />
+    <Compile Include="CommandClasses\SMRequiredSkill.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
     <Compile Include="GameAccess.aspx.cs">
@@ -186,9 +196,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Handlers\WebSocketHandler.ashx.cs">
-      <DependentUpon>WebSocketHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -212,16 +219,9 @@
     <Compile Include="Utility\Path.cs" />
     <Compile Include="Utility\SlackWebHooks.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />
-    <Compile Include="CommandClasses\SMCharacterSlot.cs" />
+    <Compile Include="CommandClasses\SMSlot.cs" />
     <Compile Include="Utility\Utils.cs" />
     <Compile Include="Utility\ClassBuilder.cs" />
-    <Compile Include="WebPlay.aspx.cs">
-      <DependentUpon>WebPlay.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebPlay.aspx.designer.cs">
-      <DependentUpon>WebPlay.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

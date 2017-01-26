@@ -1,0 +1,30 @@
+{
+	"RoomID": "Ravensmere.MerchantSouth.DocklandsWaySouth",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "A long and winding street lies ahead. Buildings of varying shapes and sizes lean over from both sides to shadow the cobbles. \nThere are shops and inns dotted up and down and empty washing lines reach from window to window.\nThe street continues round a corner and there are several smaller narrow passageways to the side.",
+	"RoomExits": [
+		{
+			"Shortcut": "AAE",
+			"Description": "Arrivals Area Entrance",
+			"RoomID": "Ravensmere.MerchantSouth.ArrivalsArea"
+		},
+		{
+			"Shortcut": "ST",
+			"Description": "Scalebrewers Tavern",
+			"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavern"
+		},
+		{
+			"Shortcut": "SL",
+			"Description": "Swabbies Lane",
+			"RoomID": "Ravensmere.MerchantSouth.SwabbiesLane"
+		},
+		{
+			"Shortcut": "TC",
+			"Description": "The construct",
+			"RoomID": "1"
+		}
+	],
+	"RoomItems": null
+}

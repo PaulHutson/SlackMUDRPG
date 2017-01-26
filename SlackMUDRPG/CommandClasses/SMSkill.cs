@@ -404,7 +404,7 @@ namespace SlackMUDRPG.CommandClasses
 						double rDouble = r.NextDouble();
 						
 						// Check if the object is created.
-						if ((rDouble * 100) < chanceOfObjectCreation+theCharacterSkill.SkillLevel)
+						if ((rDouble * 100) < chanceOfObjectCreation+charLevelOfSkill)
 						{
 							SMItem destroyedItemType = targetItem.GetDestroyedItem();
 							
@@ -616,6 +616,7 @@ namespace SlackMUDRPG.CommandClasses
 						if ((int)actualDamageAmount > 0)
 						{
 							smc.sendMessageToPlayer("_Hit " + targetChar.GetFullName() + " for " + (int)actualDamageAmount + " damage_");
+							targetChar.sendMessageToPlayer("_You were hit by " + smc.GetFullName() + " for " + (int)actualDamageAmount + " damage (HP " + targetChar.Attributes.HitPoints + "/" + targetChar.Attributes.MaxHitPoints + " remaining)_");
 							targetChar.SaveToApplication();
 						}
 						else

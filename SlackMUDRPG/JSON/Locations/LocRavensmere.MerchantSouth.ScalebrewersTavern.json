@@ -1,0 +1,35 @@
+{
+	"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavern",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "This tavern has seen better days, and although the spitoons are overflowing and the floor feels like tar, the atmosphere is quite lively and people make merry all around.",
+	"RoomExits": [
+		{
+			"Shortcut": "DWS",
+			"Description": "Docklands Way South",
+			"RoomID": "Ravensmere.MerchantSouth.DocklandsWaySouth"
+		},
+		{
+			"Shortcut": "STT",
+			"Description": "Scalebrewers Tavern Toilet",
+			"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavernToilet"
+		},
+		{
+			"Shortcut": "STC",
+			"Description": "Scalebrewers Tavern Cellar",
+			"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavernCellar"
+		}
+	],
+	"RoomItems": [
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca99",
+			"ItemName": "Wooden Stick",
+			"ItemType": "weapon",
+			"ItemDescription": "A wooden stick.",
+			"ItemWeight": 1,
+			"ItemSize": 1,
+			"CanHoldOtherItems": false
+		}
+	]
+}

@@ -1,0 +1,33 @@
+{
+	"RoomID": "Ravensmere.RavensmereHarbour.LandingArea",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "You stand on a busy wooden dock surrounded by a bustling crowd. There are many ships arriving along the waterfront, and people are filing out and heading into an arrivals area. Over the tops of large wooden buildings, tall blue spires can be seen and beyond, a large mountain range which seems to surround this foreign settlement.",
+	"RoomExits": [
+		{
+			"Shortcut": "AAE",
+			"Description": "Arrivals Area Entrance",
+			"RoomID": "Ravensmere.MerchantSouth.ArrivalsArea"
+		}
+	],
+	"RoomItems": [
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca99",
+			"SingularPronoun": "a",
+			"ItemName": "Wooden Stick",
+			"PluralPronoun": "some",
+			"PluralName": "Wooden Sticks",
+			"ItemType": "Weapon",
+			"ItemFamily": "Stick",
+			"ItemDescription": "A small wooden stick.",
+			"ItemWeight": 1,
+			"ItemSize": 1,
+			"HitPoints": 10,
+			"MaxHitPoints": 10,
+			"BaseDamage": 0.1,
+			"Toughness": 1,
+			"DestroyedOutput": "Logs,20"
+		}
+	]
+}

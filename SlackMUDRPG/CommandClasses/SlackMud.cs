@@ -63,7 +63,7 @@ namespace SlackMUDRPG.CommandClasses
 
 					if (!newCharacter)
 					{
-						returnString = "Welcome back " + character.FirstName + " " + character.LastName + "\n";
+						returnString = "Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")\n";
 					}
 					else
 					{
@@ -203,14 +203,17 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);
 
 				// Set default character slots before adding items to them
-				SMChar.CharacterSlots = CreateCharacterSlotsFromJSON("Slots." + characterType);
+				SMChar.Slots = CreateSlotsFromJSON("Slots." + characterType);
 
 				// Add default items to the character
-				SMCharacterSlot rightHand = SMChar.GetSlotByName("RightHand");
-				rightHand.EquippedItem = CreateItemFromJson("Weapons.WoodenSword");
+				SMSlot rightHand = SMChar.GetSlotByName("RightHand");
+				rightHand.EquippedItem = SMItemFactory.Get("Weapon", "WoodenSword");
 
-				SMCharacterSlot back = SMChar.GetSlotByName("Back");
-				back.EquippedItem = CreateItemFromJson("Containers.SmallBackpack");
+				SMSlot back = SMChar.GetSlotByName("Back");
+				back.EquippedItem = SMItemFactory.Get("Container", "SmallBackpack");
+
+				// Add default body parts to the new character
+				SMChar.BodyParts = CreateBodyPartsFromJSON("BodyParts." + characterType);
 
 				// Set the start location
 				SMChar.RoomID = "1";
@@ -325,18 +328,18 @@ namespace SlackMUDRPG.CommandClasses
 
 		#region "Slots Methods"
 
-		private List<SMCharacterSlot> CreateCharacterSlotsFromJSON(string filename)
+		private List<SMSlot> CreateSlotsFromJSON(string filename)
 		{
 			string path = FilePathSystem.GetFilePath("Misc", filename);
 
-			List<SMCharacterSlot> slots = new List<SMCharacterSlot>();
+			List<SMSlot> slots = new List<SMSlot>();
 
 			if (File.Exists(path))
 			{
 				using (StreamReader r = new StreamReader(path))
 				{
 					string json = r.ReadToEnd();
-					slots = JsonConvert.DeserializeObject<List<SMCharacterSlot>>(json);
+					slots = JsonConvert.DeserializeObject<List<SMSlot>>(json);
 				}
 			}
 
@@ -345,30 +348,24 @@ namespace SlackMUDRPG.CommandClasses
 
 		#endregion
 
-		#region "Item Methods"
+		#region "BodyPart Methods"
 
-		/// <summary>
-		/// Internal Method to create a new item with data from an Objects json file
-		/// </summary>
-		/// <returns>The item.</returns>
-		/// <param name="fileName">File name of the objects json file.</param>
-		public SMItem CreateItemFromJson(string fileName)
+		private List<SMBodyPart> CreateBodyPartsFromJSON(string filename)
 		{
-			string path = FilePathSystem.GetFilePath("Objects", fileName);
+			string path = FilePathSystem.GetFilePath("Misc", filename);
 
-			SMItem item = new SMItem();
+			List<SMBodyPart> parts = new List<SMBodyPart>();
 
 			if (File.Exists(path))
 			{
 				using (StreamReader r = new StreamReader(path))
 				{
 					string json = r.ReadToEnd();
-					item = JsonConvert.DeserializeObject<SMItem>(json);
-					item.ItemID = Guid.NewGuid().ToString();
+					parts = JsonConvert.DeserializeObject<List<SMBodyPart>>(json);
 				}
 			}
 
-			return item;
+			return parts;
 		}
 
 		#endregion

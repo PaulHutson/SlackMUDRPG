@@ -130,7 +130,7 @@ namespace SlackMUDRPG.CommandClasses
 		public List<SMCommand> SMCommandList { get; set; }
 	}
 
-	public struct SMParsedCommand
+	public class SMParsedCommand
 	{
 		public string CommandName;
 

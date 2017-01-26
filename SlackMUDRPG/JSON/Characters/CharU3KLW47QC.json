@@ -1,7 +1,7 @@
 {
   "firstname": "Paul",
   "lastname": "Hutson",
-  "description": null,
+  "description": "A swarthy looking man with a big nose.",
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
   "age": 0,
@@ -29,9 +29,21 @@
     {
       "SkillName": "Carpentry",
       "SkillLevel": 2
+    },
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 1
+    },
+    {
+      "SkillName": "Sword Use",
+      "SkillLevel": 1
+    },
+    {
+      "SkillName": "Chop",
+      "SkillLevel": 1
     }
   ],
-  "CharacterSlots": [
+  "Slots": [
     {
       "Name": "RightHand",
       "AllowedTypes": [
@@ -182,6 +194,35 @@
           }
         ]
       }
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RigthFoot"
+    },
+    {
+      "Name": "LeftFoot"
     }
   ],
   "ResponseURL": null
