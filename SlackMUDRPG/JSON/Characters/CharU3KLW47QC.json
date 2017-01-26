@@ -9,7 +9,7 @@
   "PKFlag": false,
   "UserID": "U3KLW47QC",
   "RoomID": "Outside2",
-  "CurrentActivity": "Mining",
+  "CurrentActivity": "Carpentry",
   "Attributes": {
     "str": 10,
     "int": 10,
@@ -25,6 +25,10 @@
     {
       "SkillName": "Mine",
       "SkillLevel": 2
+    },
+    {
+      "SkillName": "Carpentry",
+      "SkillLevel": 2
     }
   ],
   "CharacterSlots": [
@@ -35,47 +39,13 @@
       ],
       "EquippedItem": {
         "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453",
-        "ItemName": "Wooden Sword",
+        "ItemName": "Shoddy Carpenter Hammer",
         "SingularPronoun": "a",
-        "PluralName": "Wooden Swords",
-        "PluralPronoun": "some",
-        "ItemType": "weapon",
-        "ItemFamily": "Sword",
-        "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
-        "ItemWeight": 1,
-        "ItemSize": 1,
-        "ItemCapacity": 0,
-        "CanHoldOtherItems": false,
-        "HitPoints": 10,
-        "MaxHitPoints": 10,
-        "BaseDamage": 10.0,
-        "Toughness": 1,
-        "DestroyedOutput": null,
-        "RequiredSkills": [
-          {
-            "SkillName": "Sword Use",
-            "SkillLevel": "1"
-          }
-        ],
-        "AdditionalData": null,
-        "ObjectTrait": null,
-        "HeldItems": null
-      }
-    },
-    {
-      "Name": "LeftHand",
-      "AllowedTypes": [
-        "any"
-      ],
-      "EquippedItem": {
-        "ItemID": "abc",
-        "ItemName": "Shoddy Pick Axe",
-        "SingularPronoun": "a",
-        "PluralName": "Shoddy Pick Axes",
+        "PluralName": "Shoddy Carpenter Hammers",
         "PluralPronoun": "some",
         "ItemType": "weapons",
-        "ItemFamily": "PickAxe",
-        "ItemDescription": "This shoddy pick axe doesn't do much damage but it's a start.",
+        "ItemFamily": "Hammer",
+        "ItemDescription": "This hammer is made for use in carpentry.",
         "ItemWeight": 1,
         "ItemSize": 1,
         "ItemCapacity": 0,
@@ -92,6 +62,35 @@
       }
     },
     {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "abc",
+        "ItemName": "Shoddy Chisel",
+        "SingularPronoun": "a",
+        "PluralName": "Shoddy Chisels",
+        "PluralPronoun": "some",
+        "ItemType": "tools",
+        "ItemFamily": "Chisel",
+        "ItemDescription": "This shoddy chisel is used for things like Carpentry.",
+        "ItemWeight": 1,
+        "ItemSize": 1,
+        "ItemCapacity": 0,
+        "CanHoldOtherItems": false,
+        "HitPoints": 50,
+        "MaxHitPoints": 50,
+        "BaseDamage": 1.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": null,
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    },
+    {
       "Name": "Back",
       "AllowedTypes": [
         "containers"
@@ -99,11 +98,11 @@
       "EquippedItem": {
         "ItemID": "1def209c-8dc5-4208-877a-5de64c13e12c",
         "ItemName": "Small Backpack",
-        "SingularPronoun": null,
-        "PluralName": null,
-        "PluralPronoun": null,
-        "ItemType": "container",
-        "ItemFamily": null,
+        "SingularPronoun": "a",
+        "PluralName": "Small Backpacks",
+        "PluralPronoun": "some",
+        "ItemType": "Container",
+        "ItemFamily": "Backpack",
         "ItemDescription": "Basic small backpack that all players start with.",
         "ItemWeight": 0,
         "ItemSize": 1,
@@ -140,6 +139,46 @@
             "AdditionalData": "KeyLockExample101",
             "ObjectTrait": null,
             "HeldItems": null
+          },
+          {
+            "ItemID": "4e2461ad-2572-4f02-99da-7ec30d53193LeatherStrip",
+            "ItemName": "Leather Strip",
+            "SingularPronoun": "a",
+            "PluralName": "Leather Strips",
+            "PluralPronoun": "some",
+            "ItemType": "resource",
+            "ItemFamily": "Leather",
+            "ItemDescription": "A strip of leather ready for use",
+            "ItemWeight": 1,
+            "ItemSize": 1,
+            "ItemCapacity": 0,
+            "CanHoldOtherItems": false,
+            "HitPoints": 2,
+            "MaxHitPoints": 2,
+            "BaseDamage": 0.001,
+            "Toughness": 3,
+            "DestroyedOutput": null,
+            "RequiredSkills": null,
+            "AdditionalData": null,
+            "ObjectTrait": null,
+            "HeldItems": null
+          },
+          {
+            "ItemID": "4e2461ad-2572-4f02-99da-7ec30d53193Logmclog",
+            "ItemName": "Log",
+	          "SingularPronoun": "a",
+	          "PluralName": "Logs",
+	          "PluralPronoun": "some",
+            "ItemType": "resource",
+            "ItemFamily": "Log",
+	          "ItemDescription": "A cut up log ready for use",
+	          "ItemWeight": 2,
+            "ItemSize": 2,
+            "HitPoints": 2,
+            "MaxHitPoints": 2,
+            "BaseDamage": 0.001,
+            "Toughness": 3,
+	          "CanHoldOtherItems": false
           }
         ]
       }

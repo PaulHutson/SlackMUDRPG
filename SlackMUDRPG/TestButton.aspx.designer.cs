@@ -238,6 +238,15 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.Button btn_Mining;
         
         /// <summary>
+        /// btn_CraftSword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_CraftSword;
+        
+        /// <summary>
         /// btn_AttackRob control.
         /// </summary>
         /// <remarks>

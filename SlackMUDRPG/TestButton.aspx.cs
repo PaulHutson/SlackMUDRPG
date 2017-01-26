@@ -145,5 +145,11 @@ namespace SlackMUDRPG
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			smc.UseSkill("Mine", "Gold");
 		}
-	}
+
+        protected void btn_CraftSword_Click(object sender, EventArgs e)
+        {
+            SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+            smc.UseSkill("Carpentry", null, false, "Wooden Sword");
+        }
+    }
 }

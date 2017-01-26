@@ -59,6 +59,11 @@
 		</div>
 		
 		<div>
+			Crafting:
+				<asp:Button runat="server" ID="btn_CraftSword" Text="Craft Sword" OnClientClick="scrollBoxToBottom();" OnClick="btn_CraftSword_Click"/>
+		</div>
+		
+		<div>
 			Combat:
 				<asp:Button runat="server" ID="btn_AttackRob" Text="Attack Robert Curran" OnClientClick="scrollBoxToBottom();" OnClick="btn_AttackRob_Click" />
 				<asp:Button runat="server" ID="btn_AttackPell" Text="Attack Pell" OnClientClick="scrollBoxToBottom();" OnClick="btn_AttackPell_Click" />

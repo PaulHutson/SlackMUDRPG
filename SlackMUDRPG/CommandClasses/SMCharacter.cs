@@ -321,6 +321,21 @@ namespace SlackMUDRPG.CommandClasses
 			return false;
 		}
 
+        public void CraftItem(string nameOfReceipe)
+        {
+            List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
+            SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == nameOfReceipe);
+
+            if (smr != null)
+            {
+                this.UseSkill(smr.RequiredSkills.First().SkillName, null, false, nameOfReceipe);
+            }
+            else
+            {
+                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("The receipe for the item " + nameOfReceipe + " does not exist"));
+            }
+        }
+
         /// <summary>
         /// Stops the current activity happening.
         /// </summary>
@@ -884,22 +899,24 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				if (!slot.isEmpty())
 				{
-					if (slot.EquippedItem.ItemName == name)
+					if (slot.EquippedItem.ItemName.ToLower() == name.ToLower())
 					{
 						count++;
 					}
-					else if (slot.EquippedItem.ItemFamily == name)
+					else if (slot.EquippedItem.ItemFamily.ToLower() == name.ToLower())
 					{
 						count++;
 					}
 
-					if (slot.EquippedItem.ItemType == "container")
+					if (slot.EquippedItem.ItemType.ToLower() == "container")
 					{
-						SMItem item = this.FindItemInContainerByName(name, slot.EquippedItem);
-						if (item != null && item.ItemName == name)
-						{
-							count++;
-						}
+                        foreach (SMItem itemInCountainer in slot.EquippedItem.HeldItems)
+                        {
+                            if ((itemInCountainer != null && itemInCountainer.ItemName.ToLower() == name.ToLower()) || (itemInCountainer.ItemFamily.ToLower() == name.ToLower()))
+                            {
+                                count++;
+                            }
+                        }
 					}
 				}
 			}
@@ -1081,37 +1098,69 @@ namespace SlackMUDRPG.CommandClasses
 			return null;
 		}
 
-		/// <summary>
-		/// Finds an item by name in a container by recursivly searching through the container
+        /// <summary>
+        /// Finds an item by name in a container by recursivly searching through the container
+        /// and any containers it contains.
+        /// </summary>
+        /// <returns>The item in a container.</returns>
+        /// <param name="name">ItemName.</param>
+        /// <param name="container">Container to look in.</param>
+        private SMItem FindItemInContainerByName(string name, SMItem container)
+        {
+            if (container.HeldItems != null)
+            {
+                foreach (SMItem item in container.HeldItems)
+                {
+                    if (item.ItemName.ToLower() == name.ToLower())
+                    {
+                        return item;
+                    }
+
+                    if (item.ItemType == "container")
+                    {
+                        SMItem smi = this.FindItemInContainerByName(name, item);
+                        if (smi != null)
+                        {
+                            return smi;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+		/// Removes an item by name in a container by recursivly searching through the container
 		/// and any containers it contains.
 		/// </summary>
 		/// <returns>The item in a container.</returns>
 		/// <param name="name">ItemName.</param>
 		/// <param name="container">Container to look in.</param>
-		private SMItem FindItemInContainerByName(string name, SMItem container)
-		{
-			if (container.HeldItems != null)
-			{
-				foreach (SMItem item in container.HeldItems)
-				{
-					if (item.ItemName.ToLower() == name.ToLower())
-					{
-						return item;
-					}
+		private SMItem RemoveItemInContainerByName(string name, SMItem container)
+        {
+            //if (container.HeldItems != null)
+            //{
+            //    foreach (SMItem item in container.HeldItems)
+            //    {
+            //        if (item.ItemName.ToLower() == name.ToLower())
+            //        {
+            //            return item;
+            //        }
 
-					if (item.ItemType == "container")
-					{
-						SMItem smi = this.FindItemInContainerByName(name, item);
-						if (smi != null)
-						{
-							return smi;
-						}
-					}
-				}
-			}
+            //        if (item.ItemType == "container")
+            //        {
+            //            SMItem smi = this.RemoveItemInContainerByName(name, item);
+            //            if (smi != null)
+            //            {
+            //                return smi;
+            //            }
+            //        }
+            //    }
+            //}
 
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
 		/// Finds an item by AdditionalData in a container by recursivly searching through the container
@@ -1287,6 +1336,85 @@ namespace SlackMUDRPG.CommandClasses
                 }
             }
 
+            return false;
+        }
+
+        /// <summary>
+        /// Remove an item by it's name.
+        /// </summary>
+        /// <param name="name">Name of the item that is going to be removed</param>
+        /// <param name="includeRoom">Check the items in the room as well as the character</param>
+        /// <returns></returns>
+        public bool RemoveItem(string name, bool includeRoom)
+        {
+            // Scroll around the character slots and remove an item.
+            foreach (SMCharacterSlot slot in CharacterSlots)
+            {
+                if (!slot.isEmpty())
+                {
+                    if (slot.EquippedItem.ItemName.ToLower() == name.ToLower())
+                    {
+                        slot.EquippedItem = null;
+                        this.SaveToApplication();
+                        this.SaveToFile();
+                        return true;
+                    }
+                    else if (slot.EquippedItem.ItemFamily.ToLower() == name.ToLower())
+                    {
+                        slot.EquippedItem = null;
+                        this.SaveToApplication();
+                        this.SaveToFile();
+                        return true;
+                    }
+
+                    if (slot.EquippedItem.ItemType.ToLower() == "container")
+                    {
+                        foreach (SMItem item in slot.EquippedItem.HeldItems)
+                        {
+                            if ((item.ItemName.ToLower() == name.ToLower()) || (item.ItemFamily.ToLower() == name.ToLower()))
+                            {
+                                slot.EquippedItem.HeldItems.Remove(item);
+                                this.SaveToApplication();
+                                this.SaveToFile();
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Remove items from the room.
+            if (includeRoom)
+            {
+                // Scroll around all the items in the room
+                foreach (SMItem item in this.GetRoom().RoomItems)
+                {
+                    // Remove items that are just in the room by themselves...
+                    if ((item.ItemName.ToLower() == name.ToLower()) || (item.ItemFamily.ToLower() == name.ToLower()))
+                    {
+                        this.GetRoom().RoomItems.Remove(item);
+                        return true;
+                    }
+
+                    // If there is a container in the room then you can look in that too
+                    // TODO : Add a check to ensure that they're not locked, if they are the character needs the key on their chain to access it.
+                    if (item.ItemType.ToLower() == "container")
+                    {
+                        // Scroll around the inner items remove any that are there..
+                        foreach (SMItem innerItem in item.HeldItems)
+                        {
+                            // Check the name / family name and remove it if it's the right type.
+                            if ((innerItem.ItemName.ToLower() == name.ToLower()) || (innerItem.ItemFamily.ToLower() == name.ToLower()))
+                            {
+                                item.HeldItems.Remove(innerItem);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Finally return false if the item isn't found.
             return false;
         }
 
