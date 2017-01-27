@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.HarbourSouth.DocklandsWaySouth",
+	"RoomID": "Ravensmere.Harbour South.Docklands Way South",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -8,42 +8,47 @@
 		{
 			"Shortcut": "AAE",
 			"Description": "Arrivals Area Entrance",
-			"RoomID": "Ravensmere.HarbourSouth.ArrivalsArea"
+			"RoomID": "Ravensmere.Harbour South.Arrivals Area"
 		},
 		{
 			"Shortcut": "ST",
 			"Description": "Scalebrewers Tavern",
-			"RoomID": "Ravensmere.HarbourSouth.ScalebrewersTavern"
+			"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern"
 		},
 		{
 			"Shortcut": "SL",
 			"Description": "Swabbies Lane",
-			"RoomID": "Ravensmere.HarbourSouth.SwabbiesLane"
+			"RoomID": "Ravensmere.Harbour South.Swabbies Lane"
 		},
     {
       "Shortcut": "RPS",
       "Description": "Ravensmere Promenade South",
-      "RoomID": "Ravensmere.HarbourSouth.Ravensmere Promenade South"
+      "RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South"
     },
     {
 			"Shortcut": "FT",
 			"Description": "Felhirsts Tannery",
-			"RoomID": "Ravensmere.HarbourSouth.Felhirsts Tannery"
+			"RoomID": "Ravensmere.Harbour South.Felhirsts Tannery"
 		},
     {
 			"Shortcut": "ES1",
 			"Description": "Large Empty Shop",
-			"RoomID": "Ravensmere.HarbourSouth.EmptyShop1"
+			"RoomID": "Ravensmere.Harbour South.EmptyShop1"
 		},
     {
 			"Shortcut": "ES2",
 			"Description": "Mediums Sized Empty Shop",
-			"RoomID": "Ravensmere.HarbourSouth.EmptyShop2"
+			"RoomID": "Ravensmere.Harbour South.EmptyShop2"
 		},
     {
 			"Shortcut": "ES2",
 			"Description": "Small Empty Shop",
-			"RoomID": "Ravensmere.HarbourSouth.EmptyShop3"
+			"RoomID": "Ravensmere.Harbour South.EmptyShop3"
+		},
+    {
+			"Shortcut": "ZA",
+			"Description": "Zogs Arcanum (Shop)",
+			"RoomID": "Ravensmere.Harbour South.Zogs Arcanum"
 		},
 		{
 			"Shortcut": "TC",

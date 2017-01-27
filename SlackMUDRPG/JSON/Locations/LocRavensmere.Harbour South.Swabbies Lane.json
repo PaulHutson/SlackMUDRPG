@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.HarbourSouth.SwabbiesLane",
+	"RoomID": "Ravensmere.Harbour South.Swabbies Lane",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -8,12 +8,12 @@
     {
       "Shortcut": "DWS",
       "Description": "Docklands Way South",
-      "RoomID": "Ravensmere.HarbourSouth.DocklandsWaySouth"
+      "RoomID": "Ravensmere.Harbour South.Docklands Way South"
     },
     {
 			"Shortcut": "MS",
 			"Description": "Mizzens Snicket (Alleyway)",
-			"RoomID": "Ravensmere.HarbourSouth.Mizzens Snicket"
+			"RoomID": "Ravensmere.Harbour South.Mizzens Snicket"
 		}
 	],
 	"RoomItems": null

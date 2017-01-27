@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.HarbourSouth.Ravensmere Promande South",
+	"RoomID": "Ravensmere.Harbour South.Ravensmere Promande South",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -8,32 +8,32 @@
 		{
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.HarbourSouth.DockalandsWaySouth"
+			"RoomID": "Ravensmere.Harbour South.DockalandsWaySouth"
 		},
 		{
 			"Shortcut": "PAH",
 			"Description": "Princes Auction House",
-			"RoomID": "Ravensmere.HarbourSouth.Princes Auction House"
+			"RoomID": "Ravensmere.Harbour South.Princes Auction House"
 		},
 		{
 			"Shortcut": "FT",
 			"Description": "Felhirsts Tannery",
-			"RoomID": "Ravensmere.HarbourSouth.Felhirsts Tannery"
+			"RoomID": "Ravensmere.Harbour South.Felhirsts Tannery"
 		},
     {
 			"Shortcut": "ES1",
 			"Description": "Large Empty Shop",
-			"RoomID": "Ravensmere.HarbourSouth.EmptyShop1"
+			"RoomID": "Ravensmere.Harbour South.EmptyShop1"
 		},
     {
 			"Shortcut": "ES2",
 			"Description": "Mediums Sized Empty Shop",
-			"RoomID": "Ravensmere.HarbourSouth.EmptyShop2"
+			"RoomID": "Ravensmere.Harbour South.EmptyShop2"
 		},
     {
 			"Shortcut": "ES2",
 			"Description": "Small Empty Shop",
-			"RoomID": "Ravensmere.HarbourSouth.EmptyShop3"
+			"RoomID": "Ravensmere.Harbour South.EmptyShop3"
 		}
 	],
 	"RoomItems": null

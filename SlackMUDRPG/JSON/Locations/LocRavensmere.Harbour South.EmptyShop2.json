@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.HarbourSouth.EmptyShop2",
+	"RoomID": "Ravensmere.Harbour South.EmptyShop2",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -8,12 +8,12 @@
 		{
       "Shortcut": "RPS",
       "Description": "Ravensmere Promenade South",
-      "RoomID": "Ravensmere.HarbourSouth.Ravensmere Promenade South"
+      "RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South"
     },
     {
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.HarbourSouth.DockalandsWaySouth"
+			"RoomID": "Ravensmere.Harbour South.DockalandsWaySouth"
 		}
 	],
 	"RoomItems": null

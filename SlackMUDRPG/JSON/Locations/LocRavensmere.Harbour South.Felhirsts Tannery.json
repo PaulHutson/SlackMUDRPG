@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.HarbourSouth.Felhirsts Tannery",
+	"RoomID": "Ravensmere.Harbour South.Felhirsts Tannery",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -8,12 +8,12 @@
     {
       "Shortcut": "RPS",
       "Description": "Ravensmere Promenade South",
-      "RoomID": "Ravensmere.HarbourSouth.Ravensmere Promenade South"
+      "RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South"
     },
     {
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.HarbourSouth.DocklandsWaySouth"
+			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
 		}
 	],
 	"RoomItems": null

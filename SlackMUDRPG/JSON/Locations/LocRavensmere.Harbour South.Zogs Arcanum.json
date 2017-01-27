@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.HarbourSouth.DocklandsWaySouth",
+	"RoomID": "Ravensmere.Harbour South.Docklands Way South",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -8,7 +8,7 @@
 		{
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.HarbourSouth.DocklandsWaySouth"
+			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
 		}
 	],
 	"RoomItems": null

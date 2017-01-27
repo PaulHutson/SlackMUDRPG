@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.HarbourSouth.ScalebrewersCellar",
+	"RoomID": "Ravensmere.Harbour South.Scalebrewers Cellar",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -8,12 +8,12 @@
     {
       "Shortcut": "ST",
       "Description": "Scalebrewers Tavern",
-      "RoomID": "Ravensmere.HarbourSouth.ScalebrewersTavern"
+      "RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern"
     },
     {
 			"Shortcut": "RPS",
 			"Description": "Ravensmere Promande South",
-			"RoomID": "Ravensmere.HarbourSouth.Ravensmere Promande South"
+			"RoomID": "Ravensmere.Harbour South.Ravensmere Promande South"
 		}
 	],
 	"RoomItems": null
