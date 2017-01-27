@@ -237,7 +237,7 @@ namespace SlackMUDRPG.CommandClasses
         public string GetLocationInformation(string userID = "0")
 		{
 			// Construct the room string.
-			string returnString = "*Location Details - " + this.RoomID.Replace('.',' ')  + ":*\n";
+			string returnString = "*Location Details - " + this.RoomID.Replace(".",", ")  + ":*\n";
 
 			// Create the string and add the basic room description.
 			returnString += "> " + this.RoomDescription;
