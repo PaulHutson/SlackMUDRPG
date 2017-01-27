@@ -1,0 +1,64 @@
+﻿{
+  "SkillType": {
+    "SkillTypeName": "Basic Attack",
+    "SkillTypeDescription": "Use anything to hit someone even if it isn't a real weapon."
+  },
+  "SkillName": "Basic Attack",
+  "SkillDescription": "The ability to attack someone with anything",
+  "SkillLearnText": "You've learnt how to use basic attack",
+  "LevelIncreaseText":  "You feel you've gotten better at attacking someone",
+	"ActivityType": "Attacking",
+	"CanUseWithoutLearning":  true,
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+	"ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 10
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 5
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "Target",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You must choose something to attack",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Hit",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to hit {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Repeat",
+      "StepRequiredObject": "Activity.Basic.Attacking",
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    }
+  ]
+}
