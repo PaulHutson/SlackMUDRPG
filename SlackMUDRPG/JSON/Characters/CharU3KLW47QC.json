@@ -49,6 +49,10 @@
     {
       "SkillName": "Basic Attack",
       "SkillLevel": 1
+    },
+    {
+      "SkillName": "Sword Use",
+      "SkillLevel": 10
     }
   ],
   "Slots": [
