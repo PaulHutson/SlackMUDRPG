@@ -1,0 +1,20 @@
+{
+	"RoomID": "Ravensmere.HarbourSouth.Mizzens Snicket",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"RoomDescription": "Mizzens Snicket. Never have you seen a place so devoid of wholesomeness as this. You feel an impendeding sense of danger as you walk down this alleyway.",
+	"RoomExits": [
+		{
+			"Shortcut": "SL",
+			"Description": "Swabbies Lane",
+			"RoomID": "Ravensmere.HarbourSouth.SwabbiesLane"
+		},
+    {
+      "Shortcut": "SMI",
+      "Description": "The Sailmakers Inn",
+      "RoomID": "Ravensmere.HarbourSouth.The Sailmakers Inn"
+    }
+	],
+	"RoomItems": null
+}

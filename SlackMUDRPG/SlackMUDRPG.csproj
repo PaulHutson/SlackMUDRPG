@@ -153,6 +153,8 @@
     <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.EmptyShop3.json" />
     <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.EmptyShop1.json" />
     <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.EmptyShop2.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.Mizzens Snicket.json" />
+    <Content Include="JSON\Locations\LocRavensmere.HarbourSouth.The Sailmakers Inn.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

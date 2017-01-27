@@ -5,10 +5,15 @@
 	"RoomLocationZ": "1",
 	"RoomDescription": "The light seems to have been sucked out of this small alleyway. A thick sludge runs through the gutters and dark figures pass by, never making eye contact.",
 	"RoomExits": [
-		{
-			"Shortcut": "DWS",
-			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.HarbourSouth.DocklandsWaySouth"
+    {
+      "Shortcut": "DWS",
+      "Description": "Docklands Way South",
+      "RoomID": "Ravensmere.HarbourSouth.DocklandsWaySouth"
+    },
+    {
+			"Shortcut": "MS",
+			"Description": "Mizzens Snicket (Alleyway)",
+			"RoomID": "Ravensmere.HarbourSouth.Mizzens Snicket"
 		}
 	],
 	"RoomItems": null
