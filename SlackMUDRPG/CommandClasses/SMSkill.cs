@@ -168,7 +168,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
             else
             {
-                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Finished " + this.ActivityType));
+                smc.StopActivity();
             }
         }
 
