@@ -156,6 +156,7 @@
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Mizzens Snicket.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.The Sailmakers Arms.json" />
     <Content Include="JSON\Skills\Skill.BasicAttack.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Bridge Row.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
