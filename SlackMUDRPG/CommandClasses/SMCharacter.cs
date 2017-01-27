@@ -161,44 +161,53 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				// Get the room for the characters location
 				List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
-				SMRoom roomInMem = smrs.FirstOrDefault(smrn => smrn.RoomID == charToMove.RoomID);
+				SMRoom roomInMem = smrs.FirstOrDefault(smrn => smrn.RoomID.ToLower() == charToMove.RoomID.ToLower());
 
 				// Get the specific exit from the location referred to by the shortcut
 				SMExit sme = new SMExit();
-				sme = roomInMem.RoomExits.FirstOrDefault(smes => smes.Shortcut == exitShortcut);
+				sme = roomInMem.RoomExits.FirstOrDefault(smes => smes.Shortcut.ToLower() == exitShortcut.ToLower());
 
-				// Get the new room (and check that it's loaded in memory).
-				SMRoom smr = new SlackMud().GetRoom(sme.RoomID);
+                // Check that the exit isn't null (i.e. they've entered the right text!)
+                if (sme != null)
+                {
+                    // Get the new room (and check that it's loaded in memory).
+                    SMRoom smr = new SlackMud().GetRoom(sme.RoomID);
 
-				if (smr != null)
-				{
-                    // Variable for use in a moment
-                    bool initiateMove = true;
-
-                    // Check if the room is locked
-                    if (sme.Locked)
+                    if (smr != null)
                     {
-                        // Find out if the character has keys for the location
-                        if (!this.CheckKey(sme.RoomLockID))
+                        // Variable for use in a moment
+                        bool initiateMove = true;
+
+                        // Check if the room is locked
+                        if (sme.Locked)
                         {
-                            this.sendMessageToPlayer("_The door is locked and you do not have a key_");
-                            initiateMove = false;
+                            // Find out if the character has keys for the location
+                            if (!this.CheckKey(sme.RoomLockID))
+                            {
+                                this.sendMessageToPlayer("_The door is locked and you do not have a key_");
+                                initiateMove = false;
+                            }
+                        }
+
+                        // If the room is not lot or the character has the right key, let them in.
+                        if (initiateMove)
+                        {
+                            // Walk out of the room code.
+                            this.GetRoom().Announce("_" + this.GetFullName() + " walks out._", this, true);
+
+                            // Move the player to the new location
+                            this.RoomID = smr.RoomID;
+                            this.SaveToFile();
+                            this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
+
+                            // Announce arrival to other players in the same place
+                            smr.Announce("_" + this.GetFullName() + " walks in._", this, true);
                         }
                     }
-
-                    // If the room is not lot or the character has the right key, let them in.
-                    if (initiateMove) {
-						// Walk out of the room code.
-						this.GetRoom().Announce("_" + this.GetFullName() + " walks out._", this, true);
-
-						// Move the player to the new location
-						this.RoomID = smr.RoomID;
-					    this.SaveToFile();
-					    this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
-
-					    // Announce arrival to other players in the same place
-					    smr.Announce("_" + this.GetFullName() + " walks in._", this, true);
-                    }
+                } 
+                else
+                {
+                    this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Exit name: " + exitShortcut + " not found, please check and try again"));
                 }
 			}
 		}
