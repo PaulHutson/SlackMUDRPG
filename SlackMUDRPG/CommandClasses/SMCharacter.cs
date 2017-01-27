@@ -229,6 +229,7 @@ namespace SlackMUDRPG.CommandClasses
         public void SetDescription(string newDescription)
         {
             this.Description = newDescription;
+            this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Description Updated to: " + newDescription));
 			this.SaveToApplication();
         }
 

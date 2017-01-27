@@ -193,6 +193,7 @@
     <Compile Include="CommandClasses\SMItemFactory.cs" />
     <Compile Include="CommandClasses\SMItemUtils.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
+    <Compile Include="CommandClasses\SMNPC.cs" />
     <Compile Include="CommandClasses\SMReceipe.cs" />
     <Compile Include="CommandClasses\SMRequiredSkill.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
