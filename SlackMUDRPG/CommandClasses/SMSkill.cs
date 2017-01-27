@@ -434,8 +434,9 @@ namespace SlackMUDRPG.CommandClasses
 								// Add the item to the room
 								smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
 							}
-							
-							SkillIncrease(smc);
+
+                            smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
+                            SkillIncrease(smc);
 						}
 					}
 					else
