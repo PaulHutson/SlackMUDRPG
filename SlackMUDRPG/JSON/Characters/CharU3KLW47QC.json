@@ -4,12 +4,12 @@
   "description": "A swarthy looking man with a big nose.",
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
-  "age": 30,
+  "age": 36,
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
   "RoomID": "TrainingYard",
-  "CurrentActivity": "Attacking",
+  "CurrentActivity": null,
   "Attributes": {
     "str": 10,
     "int": 10,
@@ -21,7 +21,36 @@
     "maxhp": 10,
     "SocialStanding": 8
   },
-  "Skills": null,
+  "Skills": [
+    {
+      "SkillName": "Mine",
+      "SkillLevel": 2
+    },
+    {
+      "SkillName": "Carpentry",
+      "SkillLevel": 2
+    },
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 1
+    },
+    {
+      "SkillName": "Axe Use",
+      "SkillLevel": 1
+    },
+    {
+      "SkillName": "Chop",
+      "SkillLevel": 1
+    },
+    {
+      "SkillName": "Basic Attack",
+      "SkillLevel": 1
+    },
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 10
+    }
+  ],
   "Slots": [
     {
       "Name": "RightHand",
@@ -61,28 +90,7 @@
       "AllowedTypes": [
         "any"
       ],
-      "EquippedItem": {
-        "ItemID": "abc",
-        "SingularPronoun": "a",
-        "ItemName": "Shoddy Chisel",
-        "PluralName": "Shoddy Chisels",
-        "PluralPronoun": "some",
-        "ItemType": "tools",
-        "ItemFamily": "Chisel",
-        "ItemDescription": "This shoddy chisel is used for things like Carpentry.",
-        "ItemWeight": 1,
-        "ItemCapacity": 0,
-        "ItemSize": 1,
-        "HitPoints": 50,
-        "MaxHitPoints": 50,
-        "BaseDamage": 1.0,
-        "Toughness": 3,
-        "DestroyedOutput": null,
-        "RequiredSkills": null,
-        "AdditionalData": null,
-        "ObjectTrait": null,
-        "HeldItems": null
-      }
+      "EquippedItem": null
     },
     {
       "Name": "Back",
@@ -147,6 +155,28 @@
             "HitPoints": 50,
             "MaxHitPoints": 50,
             "BaseDamage": 5.0,
+            "Toughness": 3,
+            "DestroyedOutput": null,
+            "RequiredSkills": null,
+            "AdditionalData": null,
+            "ObjectTrait": null,
+            "HeldItems": null
+          },
+          {
+            "ItemID": "abc",
+            "SingularPronoun": "a",
+            "ItemName": "Shoddy Chisel",
+            "PluralName": "Shoddy Chisels",
+            "PluralPronoun": "some",
+            "ItemType": "tools",
+            "ItemFamily": "Chisel",
+            "ItemDescription": "This shoddy chisel is used for things like Carpentry.",
+            "ItemWeight": 1,
+            "ItemCapacity": 0,
+            "ItemSize": 1,
+            "HitPoints": 50,
+            "MaxHitPoints": 50,
+            "BaseDamage": 1.0,
             "Toughness": 3,
             "DestroyedOutput": null,
             "RequiredSkills": null,

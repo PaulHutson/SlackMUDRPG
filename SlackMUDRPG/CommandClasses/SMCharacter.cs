@@ -1019,11 +1019,14 @@ namespace SlackMUDRPG.CommandClasses
 
 					if (slot.EquippedItem.ItemType.ToLower() == "container")
 					{
-                        foreach (SMItem itemInCountainer in slot.EquippedItem.HeldItems)
+                        if (slot.EquippedItem.HeldItems != null)
                         {
-                            if ((itemInCountainer != null && itemInCountainer.ItemName.ToLower() == name.ToLower()) || (itemInCountainer.ItemFamily.ToLower() == name.ToLower()))
+                            foreach (SMItem itemInCountainer in slot.EquippedItem.HeldItems)
                             {
-                                count++;
+                                if ((itemInCountainer != null && itemInCountainer.ItemName.ToLower() == name.ToLower()) || (itemInCountainer.ItemFamily.ToLower() == name.ToLower()))
+                                {
+                                    count++;
+                                }
                             }
                         }
 					}
