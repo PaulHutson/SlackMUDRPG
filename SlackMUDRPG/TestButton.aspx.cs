@@ -151,5 +151,11 @@ namespace SlackMUDRPG
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			smc.UseSkill("Carpentry", null, false, "Wooden Sword");
 		}
-	}
+
+        protected void btn_AttackPaul_Click(object sender, EventArgs e)
+        {
+            SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+            smc.Attack("Paul Hutson");
+        }
+    }
 }

@@ -32,7 +32,11 @@
     },
     {
       "SkillName": "Dodge",
-      "SkillLevel": 1
+      "SkillLevel": 10
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 5
     },
     {
       "SkillName": "Axe Use",
@@ -45,10 +49,6 @@
     {
       "SkillName": "Basic Attack",
       "SkillLevel": 1
-    },
-    {
-      "SkillName": "Dodge",
-      "SkillLevel": 10
     }
   ],
   "Slots": [

@@ -197,6 +197,7 @@ namespace SlackMUDRPG.CommandClasses
 
                             // Move the player to the new location
                             this.RoomID = smr.RoomID;
+                            this.SaveToApplication();
                             this.SaveToFile();
                             this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
 
@@ -560,7 +561,13 @@ namespace SlackMUDRPG.CommandClasses
                     int dodgeChance = (int)(smsh.SkillLevel * 2);
                     if (rndChance <= dodgeChance)
                     {
+                        // Send the message to the player that they've dodged...
                         this.sendMessageToPlayer("_You have dodged an attack..._");
+
+                        // Check whether the player should get better at the skill
+                        SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName.ToLower() == "Dodge".ToLower());
+                        smc.SkillIncrease(this);
+
                         return true;
                     }
                 }
@@ -569,10 +576,25 @@ namespace SlackMUDRPG.CommandClasses
                 smsh = this.Skills.FirstOrDefault(skill => skill.SkillName == "Parry");
                 if ((!this.AreHandsEmpty()) && (smsh != null) && (this.HasItemTypeEquipped("Weapon")))
                 {
-                    int parryChance = (int)(smsh.SkillLevel * 4);
+                    // Weapon check
+                    SMItem weapon = this.GetEquippedItem();
+                    int bonusValue = 0;
+                    if (this.Skills != null)
+                    {
+                        SMSkillHeld playerWeaponSkill = this.Skills.FirstOrDefault(sms => sms.SkillName.Contains(weapon.ItemFamily));
+                        bonusValue = playerWeaponSkill.SkillLevel;
+                    }
+                    
+                    int parryChance = (int)(smsh.SkillLevel * 2) + bonusValue;
                     if (rndChance <= parryChance)
                     {
+                        // Send the message to the player that they've parried
                         this.sendMessageToPlayer("_You have parried an attack..._");
+
+                        // Check whether the player should get better at the skill
+                        SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName.ToLower() == "Parry".ToLower());
+                        smc.SkillIncrease(this);
+
                         return true;
                     }
                 }

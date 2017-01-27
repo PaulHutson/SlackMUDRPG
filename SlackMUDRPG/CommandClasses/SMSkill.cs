@@ -856,7 +856,7 @@ namespace SlackMUDRPG.CommandClasses
 			return successOutput;
 		}
 
-		private void SkillIncrease(SMCharacter smc, bool skillSuccess = true)
+		public void SkillIncrease(SMCharacter smc, bool skillSuccess = true)
 		{
 			// Skill Increase
 			// Max skill level
@@ -882,12 +882,16 @@ namespace SlackMUDRPG.CommandClasses
             if (currentSkillLevel < 20)
             {
                 // Chance of the skill increasing in level
-                double chanceOfSkillIncrease = 20;
+                double chanceOfSkillIncrease = 10 - currentSkillLevel;
+                if (chanceOfSkillIncrease < 0)
+                {
+                    chanceOfSkillIncrease = 1;
+                }
 
                 // Random chance to see if someone achieves the skill increase change
                 Random r = new Random();
                 double rDouble = r.NextDouble();
-                if ((rDouble * 100) < chanceOfSkillIncrease - currentSkillLevel)
+                if ((rDouble * 100) < chanceOfSkillIncrease)
                 {
                     // Increase the skill lebel by one.
                     if (smc.Skills != null)
@@ -897,13 +901,14 @@ namespace SlackMUDRPG.CommandClasses
                         if (smshincrease != null)
                         {
                             smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName).SkillLevel++;
+
+                            // Send message to the player.
+                            smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.LevelIncreaseText + " (" + this.SkillName + " increased in level to " + (currentSkillLevel + 1) + ")"));
                         }
                         else
                         {
-                            LearnNewSkill(smc);
+                            LearnNewSkill(smc); 
                         }
-                        // Send message to the player.
-                        smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.SkillName + " increased in level to " + (currentSkillLevel + 1)));
                     }
                     else
                     {
@@ -936,7 +941,6 @@ namespace SlackMUDRPG.CommandClasses
             }
 			
 			smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.SkillLearnText));
-			smc.SaveToApplication();
 		}
 
 		#endregion

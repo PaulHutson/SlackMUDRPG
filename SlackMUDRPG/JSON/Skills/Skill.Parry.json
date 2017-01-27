@@ -7,7 +7,7 @@
   "SkillDescription": "The ability to parry attacks using a melee weapon",
   "SkillLearnText": "You've learnt how to parry",
   "LevelIncreaseText": "You feel you've gotten better at parrying attacks",
-  "ActivityType":  "Passive",
+  "ActivityType": "Passive",
   "BaseStat": "DEX",
   "LevelMultiplier": 10,
   "ImprovementSpeed": 10,
