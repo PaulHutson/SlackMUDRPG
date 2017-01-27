@@ -144,20 +144,20 @@ namespace SlackMUDRPG
         protected void Application_Disposed(object sender, EventArgs e)
         {
             // If the application closes flush everything to disk.
-            List<SMCharacter> smcl = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+            //List<SMCharacter> smcl = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
-            foreach (SMCharacter smc in smcl)
-            {
-                smc.SaveToFile();
-            }
+            //foreach (SMCharacter smc in smcl)
+            //{
+            //    smc.SaveToFile();
+            //}
 
-            // TODO Save Rooms
-            List<SMRoom> smrl = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+            //// TODO Save Rooms
+            //List<SMRoom> smrl = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
 
-            foreach (SMRoom smr in smrl)
-            {
-                smr.SaveToFile();
-            }
+            //foreach (SMRoom smr in smrl)
+            //{
+            //    smr.SaveToFile();
+            //}
         }
 
     }

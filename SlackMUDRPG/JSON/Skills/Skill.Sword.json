@@ -7,7 +7,7 @@
   "SkillDescription": "The ability to competently use a sword",
   "SkillLearnText": "You've learnt how to use a sword",
   "LevelIncreaseText":  "You feel you've gotten better using swords",
-	"ActivityType": "Sword.Attacking",
+	"ActivityType": "Attacking",
 	"CanUseWithoutLearning":  true,
   "BaseStat": "DEX",
   "LevelMultiplier": 10,
@@ -62,7 +62,7 @@
     },
     {
       "StepType": "Repeat",
-      "StepRequiredObject": "Activity.Sword.Attacking",
+      "StepRequiredObject": "Activity.Attacking",
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
       "SuccessOutput": null

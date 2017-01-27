@@ -4,12 +4,12 @@
   "description": "A swarthy looking man with a big nose.",
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
-  "age": 0,
+  "age": 30,
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Ravensmere.Harbour South.Docklands Way South",
-  "CurrentActivity": "Carpentry",
+  "RoomID": "TrainingYard",
+  "CurrentActivity": "Attacking",
   "Attributes": {
     "str": 10,
     "int": 10,
@@ -21,28 +21,7 @@
     "maxhp": 10,
     "SocialStanding": 8
   },
-  "Skills": [
-    {
-      "SkillName": "Mine",
-      "SkillLevel": 2
-    },
-    {
-      "SkillName": "Carpentry",
-      "SkillLevel": 2
-    },
-    {
-      "SkillName": "Dodge",
-      "SkillLevel": 1
-    },
-    {
-      "SkillName": "Sword Use",
-      "SkillLevel": 1
-    },
-    {
-      "SkillName": "Chop",
-      "SkillLevel": 1
-    }
-  ],
+  "Skills": null,
   "Slots": [
     {
       "Name": "RightHand",
@@ -52,21 +31,26 @@
       "EquippedItem": {
         "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453",
         "SingularPronoun": "a",
-        "ItemName": "Shoddy Carpenter Hammer",
-        "PluralName": "Shoddy Carpenter Hammers",
+        "ItemName": "Wooden Sword",
+        "PluralName": "Wooden Swords",
         "PluralPronoun": "some",
-        "ItemType": "weapons",
-        "ItemFamily": "Hammer",
-        "ItemDescription": "This hammer is made for use in carpentry.",
-        "ItemWeight": 1,
+        "ItemType": "Weapon",
+        "ItemFamily": "Sword",
+        "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+        "ItemWeight": 2,
         "ItemCapacity": 0,
-        "ItemSize": 1,
-        "HitPoints": 50,
-        "MaxHitPoints": 50,
-        "BaseDamage": 5.0,
+        "ItemSize": 2,
+        "HitPoints": 25,
+        "MaxHitPoints": 25,
+        "BaseDamage": 2.0,
         "Toughness": 3,
         "DestroyedOutput": null,
-        "RequiredSkills": null,
+        "RequiredSkills": [
+          {
+            "SkillName": "Sword Use",
+            "SkillLevel": "1"
+          }
+        ],
         "AdditionalData": null,
         "ObjectTrait": null,
         "HeldItems": null
@@ -145,6 +129,28 @@
             "DestroyedOutput": null,
             "RequiredSkills": null,
             "AdditionalData": "KeyLockExample101",
+            "ObjectTrait": null,
+            "HeldItems": null
+          },
+          {
+            "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2SCH",
+            "SingularPronoun": "a",
+            "ItemName": "Shoddy Carpenter Hammer",
+            "PluralName": "Shoddy Carpenter Hammers",
+            "PluralPronoun": "some",
+            "ItemType": "weapons",
+            "ItemFamily": "Hammer",
+            "ItemDescription": "This hammer is made for use in carpentry.",
+            "ItemWeight": 1,
+            "ItemCapacity": 0,
+            "ItemSize": 1,
+            "HitPoints": 50,
+            "MaxHitPoints": 50,
+            "BaseDamage": 5.0,
+            "Toughness": 3,
+            "DestroyedOutput": null,
+            "RequiredSkills": null,
+            "AdditionalData": null,
             "ObjectTrait": null,
             "HeldItems": null
           }

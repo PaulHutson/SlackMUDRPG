@@ -490,6 +490,10 @@ namespace SlackMUDRPG.CommandClasses
 					return false;
 				}
 			}
+            else // lets just use whatever is equipped in their hands.
+            {
+                charItembaseDamage = smc.GetEquippedItem().BaseDamage * (float)0.1;
+            }
 
 			// Get the base attribute from the character
 			int baseStatValue = smc.Attributes.GetBaseStatValue(baseStat);
@@ -926,7 +930,7 @@ namespace SlackMUDRPG.CommandClasses
             }
             else
             {
-                List<SMSkillHeld> newSkillGroup = null;
+                List<SMSkillHeld> newSkillGroup = new List<SMSkillHeld>();
                 newSkillGroup.Add(newSkill);
                 smc.Skills = newSkillGroup;
             }
