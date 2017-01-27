@@ -861,11 +861,6 @@ namespace SlackMUDRPG.CommandClasses
 			// Skill Increase
 			// Max skill level
 			int maxSkillLevel = 20;
-			int failureMultipler = 2;
-			if (skillSuccess)
-			{
-				failureMultipler = 1;
-			}
 
 			// Get characters current skill level
 			SMSkillHeld theCharacterSkill = null;
@@ -879,11 +874,11 @@ namespace SlackMUDRPG.CommandClasses
 				currentSkillLevel = theCharacterSkill.SkillLevel;
 			}
 
-            if (currentSkillLevel < 20)
+            if (currentSkillLevel < maxSkillLevel)
             {
                 // Chance of the skill increasing in level
                 double chanceOfSkillIncrease = 10 - currentSkillLevel;
-                if (chanceOfSkillIncrease < 0)
+                if ((chanceOfSkillIncrease < 0) || (!skillSuccess))
                 {
                     chanceOfSkillIncrease = 1;
                 }
