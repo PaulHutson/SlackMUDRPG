@@ -333,88 +333,96 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Create a new instance of the skill.
 			SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName.ToLower() == skillName.ToLower());
-			SMSkillHeld smcs = null;
 
-			// Find out if the character has the skill.
-			if (this.Skills != null)
-			{
-				smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName.ToLower() == skillName.ToLower());
-			}
+            if (this.CurrentActivity != smc.ActivityType)
+            {
+                SMSkillHeld smcs = null;
+
+			    // Find out if the character has the skill.
+			    if (this.Skills != null)
+			    {
+				    smcs = this.Skills.FirstOrDefault(charskill => charskill.SkillName.ToLower() == skillName.ToLower());
+			    }
             
-			// If the character has the skill
-			if ((isCombat) || ((smcs != null)||(smc.CanUseWithoutLearning)))
-			{
-				// Variables for use later
-				string targetType = null, targetID = null;
-				bool useSkill = true;
+			    // If the character has the skill
+			    if ((isCombat) || ((smcs != null)||(smc.CanUseWithoutLearning)))
+			    {
+				    // Variables for use later
+				    string targetType = null, targetID = null;
+				    bool useSkill = true;
 
-				// If there's a target we need to look at...
-				if (targetName != null) {
-					// .. get the room
-					SMRoom currentRoom = this.GetRoom();
+				    // If there's a target we need to look at...
+				    if (targetName != null) {
+					    // .. get the room
+					    SMRoom currentRoom = this.GetRoom();
 
-					// find any players with that target name first
-					SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
+					    // find any players with that target name first
+					    SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
 
-					// If it's not null set the target details
-					if (targetCharacter != null)
-					{
-						// Set the target as a character and set the target id
-						targetType = "Character";
-						targetID = targetCharacter.UserID;
-					}
-					else // We need to see if there's an object with the name
-					{
-						// get a target item with the target name
-						SMItem targetItem = currentRoom.GetItemByName(targetName);
+					    // If it's not null set the target details
+					    if (targetCharacter != null)
+					    {
+						    // Set the target as a character and set the target id
+						    targetType = "Character";
+						    targetID = targetCharacter.UserID;
+					    }
+					    else // We need to see if there's an object with the name
+					    {
+						    // get a target item with the target name
+						    SMItem targetItem = currentRoom.GetItemByName(targetName);
 
-						// if we find one...
-						if (targetItem != null)
-						{
-							// .. set the target type to be an item and set the target id
-							targetType = "Item";
-							targetID = targetItem.ItemID;
-						}
-						else
-						{
-							// get a target item with the target name
-							targetItem = currentRoom.GetItemByFamilyName(targetName);
+						    // if we find one...
+						    if (targetItem != null)
+						    {
+							    // .. set the target type to be an item and set the target id
+							    targetType = "Item";
+							    targetID = targetItem.ItemID;
+						    }
+						    else
+						    {
+							    // get a target item with the target name
+							    targetItem = currentRoom.GetItemByFamilyName(targetName);
 
-							// if we find one...
-							if (targetItem != null)
-							{
-								// .. set the target type to be an item and set the target id
-								targetType = "Item";
-								targetID = targetItem.ItemID;
-							}
-							else
-							{
-								// Not found the target with the name.. so send a message...
-								this.sendMessageToPlayer("The target you've specified is not valid");
+							    // if we find one...
+							    if (targetItem != null)
+							    {
+								    // .. set the target type to be an item and set the target id
+								    targetType = "Item";
+								    targetID = targetItem.ItemID;
+							    }
+							    else
+							    {
+								    // Not found the target with the name.. so send a message...
+								    this.sendMessageToPlayer("The target you've specified is not valid");
 
-								// And we can't use the skill because we can't find the target.
-								useSkill = false;
-							}
-						}
-					}
-				}
+								    // And we can't use the skill because we can't find the target.
+								    useSkill = false;
+							    }
+						    }
+					    }
+				    }
 
-				// Check if we're able to use the skill...
-				if (useSkill) { 
-					// Output variables we don't need
-					string messageOut;
-					float floatOut;
+				    // Check if we're able to use the skill...
+				    if (useSkill) { 
+					    // Output variables we don't need
+					    string messageOut;
+					    float floatOut;
 					
-					// Execute the skill
-					smc.UseSkill(this, out messageOut, out floatOut, extraData, 0, true, targetType, targetID);
-				}
-			}
-			else
-			{
-				// Can't use the skill so let the player know!
-				this.sendMessageToPlayer("You need to learn the \"" + skillName + "\" skill before you can use it.");
-			}
-		}
+					    // Execute the skill
+					    smc.UseSkill(this, out messageOut, out floatOut, extraData, 0, true, targetType, targetID);
+				    }
+			    }
+			    else
+			    {
+				    // Can't use the skill so let the player know!
+				    this.sendMessageToPlayer("You need to learn the \"" + skillName + "\" skill before you can use it.");
+			    }
+            }
+            else
+            {
+                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("You are already " + this.CurrentActivity));
+            }
+        }
 
 		/// <summary>
 		/// Check that a player has the required skill level (by name)
