@@ -48,6 +48,9 @@ namespace SlackMUDRPG.CommandClasses
 					// Get the character
 					character = GetCharacter(userID);
 
+                    // Reset the character activity, just in case!
+                    character.CurrentActivity = null;
+
                     // Set the response URL of the character
                     if (responseURL != null)
                     {

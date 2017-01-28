@@ -572,6 +572,9 @@ namespace SlackMUDRPG.CommandClasses
             // Announce the items the player dropped.
             currentRoom.Announce("While dying " + this.GetFullName() + " dropped the following items: " + droppedItemsAnnouncement);
 
+            // Reset the character activity
+            this.CurrentActivity = null;
+
             // Save the player
             this.SaveToApplication();
             this.SaveToFile();
