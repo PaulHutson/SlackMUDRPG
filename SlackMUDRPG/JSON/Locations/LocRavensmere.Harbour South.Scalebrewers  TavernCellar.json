@@ -3,6 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "A single gaslight illuminates a room full of dark figures sitting around a hexagonal table with a gold scorpian embossed on the surface. The room falls quiet and every head turns to you.",
 	"RoomExits": [
     {

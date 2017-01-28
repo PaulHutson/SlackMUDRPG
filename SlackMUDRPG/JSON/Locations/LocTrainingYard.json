@@ -3,6 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": true,
 	"RoomDescription": "Looking around the courtyard you can see a sandy well used floor.  Obviously somewhere where someone could practice weapon fighting.",
 	"RoomExits": [
 		{

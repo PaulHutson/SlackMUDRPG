@@ -23,7 +23,10 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("RoomLocationZ")]
 		public int RoomLocationZ { get; set; }
 
-		[JsonProperty("RoomDescription")]
+        [JsonProperty("Outside")]
+        public bool Outside { get; set; }
+
+        [JsonProperty("RoomDescription")]
 		public string RoomDescription { get; set; }
 
 		[JsonProperty("RoomExits")]

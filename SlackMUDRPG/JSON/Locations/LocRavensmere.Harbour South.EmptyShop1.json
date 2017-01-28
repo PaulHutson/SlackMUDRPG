@@ -3,6 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "This large shop would be perfect for trading - The price is X [Currency] per 30 days",
 	"RoomExits": [
 		{

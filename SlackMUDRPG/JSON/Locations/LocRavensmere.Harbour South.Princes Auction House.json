@@ -3,6 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "A busy hive of commerce. Large boxes of goods are for sale and money changes hands between craftsman and wealthy merchants.",
 	"RoomExits": [
 		{

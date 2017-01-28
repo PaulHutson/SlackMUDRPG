@@ -2,7 +2,8 @@
 	"RoomID": "1",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
-	"RoomLocationZ": "1",
+  "RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "This is the starter room, around you is infinite nothingness, barring a couple of doors that lead to places elsewhere.\n\nOne of the doors leads off to an ourside area.",
 	"RoomExits": [
 		{

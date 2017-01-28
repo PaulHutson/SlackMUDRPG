@@ -3,6 +3,7 @@
 	"RoomLocationX": "0",
 	"RoomLocationY": "0",
 	"RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "There are several empty hospital beds shown around this obviously well used room... clearly many people have been through here before!",
 	"RoomExits": [
 		{

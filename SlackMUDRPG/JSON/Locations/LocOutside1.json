@@ -3,6 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": true,
 	"RoomDescription": "A wooded area, filled with wonderously tall trees... ready for you to chop down.\n> You can't see much through the foliage, but the forest looks like it goes on for some time...\n> \n> There's a strange building off to one side of this wooded area with an archway leading to what looks like an open courtyard with a sandy floor.",
 	"RoomExits": [
     {

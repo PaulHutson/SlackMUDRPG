@@ -3,6 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": true,
 	"RoomDescription": "A mountainous area with many rocky outcroppings - this place looks like a good place to mine!",
 	"RoomExits": [
 		{

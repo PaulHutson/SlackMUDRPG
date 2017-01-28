@@ -3,6 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": true,
 	"RoomDescription": "A wide throughfare with large sandy coloured flagstones. The buildings on this road are large and splendid in thier contruction.  Horse drawn carts filled with goods move on both sides and youngsters carry the uppercrust of society on fine palanquins.  Every building has the same large wooden lintels above the door.",
 	"RoomExits": [
 		{

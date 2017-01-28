@@ -3,6 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "This tavern has seen better days, and although the spitoons are overflowing and the floor feels like tar, the atmosphere is quite lively and people make merry all around.",
 	"RoomExits": [
 		{

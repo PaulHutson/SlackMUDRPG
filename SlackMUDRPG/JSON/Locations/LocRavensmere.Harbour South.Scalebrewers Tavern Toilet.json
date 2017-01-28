@@ -3,6 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "Oddly enough, the toilet is cleaner than the bar...",
 	"RoomExits": [
 		{
