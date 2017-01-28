@@ -25,11 +25,24 @@ namespace SlackMUDRPG.CommandClasses
     {
         [JsonProperty("ResponseType")]
         public string ResponseType { get; set; }
+        
+        [JsonProperty("ResponseSteps")]
+        public List<NPCResponseStep> ResponseSteps { get; set; }
+    }
+
+    public class NPCResponseStep
+    {
+        [JsonProperty("ResponseStepType")]
+        public string ResponseStepType { get; set; }
+
+        [JsonProperty("ResponseStepData")]
+        public string ResponseStepData { get; set; }
     }
 
     public class NPCConversations
     {
-
+        [JsonProperty("ConversationID")]
+        public string ConversationID { get; set; }
     }
 
     public class NPCMovements
