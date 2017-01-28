@@ -1648,6 +1648,30 @@ namespace SlackMUDRPG.CommandClasses
 			Commands.SendMessage("", "SlackMud", message, "SlackMud", this.UserID, this.ResponseURL);
 		}
 
-		#endregion
-	}
+        /// <summary>
+        /// Sends an ooc message to the zone you're in ...
+        /// ... or globally if the "global" bool is true
+        /// </summary>
+        /// <param name="message">the message being sent to the player</param>
+        /// <param name="global">If "global" is sent into this it will send the message globally</param>
+        public void SendOOC(string message, string global = "")
+        {
+            List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+            string region = "GLOBAL";
+            string currentRoomName = this.GetRoom().RoomID;
+            if (global.ToLower() == "global")
+            {
+                string currentArea = currentRoomName.Substring(0, currentRoomName.IndexOf('.') - 1);
+                region = currentArea;
+                smcs = smcs.FindAll(smc => smc.RoomID.Substring(0, smc.RoomID.IndexOf('.')) == currentRoomName);
+            }
+
+            foreach (SMCharacter smc in smcs)
+            {
+                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.GetFullName() + " OOC[" + currentRoomName + "]: " + message));
+            }
+        }
+
+        #endregion
+    }
 }
