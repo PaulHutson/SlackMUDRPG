@@ -524,21 +524,42 @@ namespace SlackMUDRPG.CommandClasses
         {
             // First create a corpse where they are, with all the associated items attached!
             // Drop all the items the character is holding
+            string droppedItemsAnnouncement = "";
+            bool isFirstDroppedItem = true;
             foreach (SMSlot smcs in this.Slots)
             {
-                if (!smcs.isEmpty())
+                if (((smcs.Name == "RightHand")||(smcs.Name == "LeftHand")) && (!smcs.isEmpty()))
                 {
-                    this.GetRoom().AddItem(smcs.EquippedItem);
+                    SMItem droppedItem = smcs.EquippedItem;
+                    this.GetRoom().AddItem(droppedItem);
+                    if (!isFirstDroppedItem)
+                    {
+                        droppedItemsAnnouncement += ", ";
+                    }
+                    else
+                    {
+                        isFirstDroppedItem = false;
+                    }
+                    droppedItemsAnnouncement += droppedItem.SingularPronoun + " " + droppedItem.ItemName;
                     smcs.EquippedItem = null;
                 }
             }
 
+            // Create the corpse
             SMItem corpse = SMItemFactory.Get("Misc", "Corpse");
 			corpse.ItemName = "Corpse of " + this.GetFullName();
-			this.GetRoom().AddItem(corpse);
+            corpse.HeldItems = new List<SMItem>();
 
-			// Then move the player back to the hospital
-			this.RoomID = "Hospital";
+            // TODO Add clothing / armour items to the held items list ready for looting.
+
+            SMRoom currentRoom = this.GetRoom();
+
+            currentRoom.AddItem(corpse);
+            currentRoom.Announce("While dying " + this.GetFullName() + "dropped the following items: " + droppedItemsAnnouncement);
+
+
+            // Then move the player back to the hospital
+            this.RoomID = "Hospital";
             this.Attributes.HitPoints = this.Attributes.MaxHitPoints/2;
 
             // Tell the player they've died and announce their new location
@@ -547,6 +568,9 @@ namespace SlackMUDRPG.CommandClasses
 
             // TODO reduce the number of rerolls they have
             // If they get to 0 rerolls the character is permenant dead.
+
+            // Announce the items the player dropped.
+            currentRoom.Announce("While dying " + this.GetFullName() + " dropped the following items: " + droppedItemsAnnouncement);
 
             // Save the player
             this.SaveToApplication();
