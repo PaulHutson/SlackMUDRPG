@@ -26,8 +26,8 @@
 		DONE- Remove items from inventory
 			DONE- Add items to the room
 		- Use items
-			- Add player locations to character file
-			- Add item use locations to items stub
+			DONE - Add player locations to character file
+			DONE - Add item use locations to items stub
 			- Implement use item method for using on the character
 				- Check whether something is alredy in the slot
 				- If nothing is in the slot use the item
@@ -46,6 +46,11 @@
 			- Implement body parts on character
 			- Wear item (type clothing)
 			- Remove items (type clothing)
+		- Key Chain
+			- Implement a key chain on the player
+			- Keys lock containers and doors
+				- lock mechanism
+				- unlock mechanism
 
 4) Implement Chat System PAUL WORKING ON THIS
 	DONE- Implement Say command which will talk to all people in a location ("SAY Hello")
