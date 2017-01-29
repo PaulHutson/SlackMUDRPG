@@ -124,12 +124,6 @@ namespace SlackMUDRPG.CommandClasses
 		}
 	}
 
-	public class SMCommands
-	{
-		[JsonProperty("SMCommandList")]
-		public List<SMCommand> SMCommandList { get; set; }
-	}
-
 	public class SMParsedCommand
 	{
 		public string CommandName;

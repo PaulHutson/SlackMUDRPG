@@ -1,0 +1,30 @@
+[
+	{
+		"CommandFamily": "Environment",
+		"CommandBaseName": "chop",
+		"CommandName": "chop",
+		"CommandDescription": "Enables the player to chop something.",
+		"CommandSyntax": "chop <TargetName>",
+		"CommandExpression": "chop {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "UseSkill",
+		"PassCommandAsFirstArg": true,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "chop tree1",
+		"RequiredSkill": "Skill.Chop"
+	},
+	{
+		"CommandFamily": "Environment",
+		"CommandBaseName": "mine",
+		"CommandName": "mine",
+		"CommandDescription": "Enables the player to mine something.",
+		"CommandSyntax": "mine <TargetName>",
+		"CommandExpression": "mine {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "UseSkill",
+		"PassCommandAsFirstArg": true,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "mine Gold",
+		"RequiredSkill": "Skill.Mine"
+	}
+]

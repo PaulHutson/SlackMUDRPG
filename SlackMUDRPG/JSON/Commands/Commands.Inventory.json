@@ -1,0 +1,72 @@
+[
+	{
+		"CommandFamily": "Inventory",
+		"CommandBaseName": "pickup",
+		"CommandName": "pickup",
+		"CommandDescription": "Attempts to pick up the item from your current room.",
+		"CommandSyntax": "pickup <item_name>",
+		"CommandExpression": "pickup {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "PickUpItem",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "pickup wooden stick",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Inventory",
+		"CommandBaseName": "drop",
+		"CommandName": "drop",
+		"CommandDescription": "Drops a currently held item into your current room.",
+		"CommandSyntax": "drop <item_name>",
+		"CommandExpression": "drop {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "DropItem",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "drop wooden stick",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Inventory",
+		"CommandBaseName": "inventory",
+		"CommandName": "inventory",
+		"CommandDescription": "Shows a list of the items you have equipped or those in a specific slot.",
+		"CommandSyntax": "inventory [slot name]",
+		"CommandExpression": "inventory {.+}?",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "ListInventory",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "inventory or inventory Right Hand",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Inventory",
+		"CommandBaseName": "equip",
+		"CommandName": "equip",
+		"CommandDescription": "Trys to equip an item by name, optionally to a specific slot.",
+		"CommandSyntax": "equip <item name> to [slot name]",
+		"CommandExpression": "equip {.+} to {.+}?",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "EquipItem",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "equip Wooden Sword or equip Wooden Sword to Right Hand",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Inventory",
+		"CommandBaseName": "put",
+		"CommandName": "put",
+		"CommandDescription": "Trys to put an item in a container..",
+		"CommandSyntax": "equip <item identifier> in <container identifier>",
+		"CommandExpression": "put {.+} in {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "PutItem",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "put Wooden Sword in Small Backpack",
+		"RequiredSkill": null
+	}
+]

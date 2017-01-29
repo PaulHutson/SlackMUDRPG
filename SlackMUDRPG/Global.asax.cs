@@ -28,27 +28,33 @@ namespace SlackMUDRPG
 
 			// Load the Commands into memory for usage later
 			// Used for both parsing commands sent in and also for help output
-			SMCommands lsmc = new SMCommands();
-			string commandsPath = FilePathSystem.GetFilePath("Commands", "Help");
-			// Check if the character exists..
-			if (File.Exists(commandsPath))
+			List<SMCommand> smcl = new List<SMCommand>();
+
+			// Get all files from the Commands path
+			string commandsFolderPath = FilePathSystem.GetFilePathFromFolder("Commands");
+			DirectoryInfo dirInfo = new DirectoryInfo(commandsFolderPath);
+			FileInfo[] CommandFiles = dirInfo.GetFiles("Commands.*.json");
+
+			foreach (FileInfo file in CommandFiles)
 			{
+				string path = FilePathSystem.GetFilePath("Commands", file.Name, "");
 				// Use a stream reader to read the file in (based on the path)
-				using (StreamReader r = new StreamReader(commandsPath))
+				using (StreamReader r = new StreamReader(path))
 				{
 					// Create a new JSON string to be used...
 					string json = r.ReadToEnd();
 
-					// ... get the information from the help file
-					lsmc = JsonConvert.DeserializeObject<SMCommands>(json);
+					// Get all the commands from the commands file
+					smcl.AddRange(JsonConvert.DeserializeObject<List<SMCommand>>(json));
 				}
 			}
-			Application["SMCommands"] = lsmc;
+
+			Application["SMCommands"] = smcl;
 
 			// Load class builder specs into memory for usage later
 			// Used for creating objects that are used to call user commands on
 			ClassBuilderSpecs cbs = new ClassBuilderSpecs();
-			string specsPath = FilePathSystem.GetFilePath("Commands", "ClassBuilder");
+			string specsPath = FilePathSystem.GetFilePath("Misc", "ClassBuilder");
 
 			if (File.Exists(specsPath))
 			{
