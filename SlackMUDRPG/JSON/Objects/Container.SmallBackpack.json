@@ -8,7 +8,7 @@
 	"ItemDescription": "Basic small backpack that all players start with.",
 	"ItemWeight": 0,
 	"ItemCapacity": 25,
-	"ItemSize": 1,
+	"ItemSize": 25,
 	"HitPoints": 5,
 	"MaxHitPoints": 5,
 	"BaseDamage": 0.0000000001,

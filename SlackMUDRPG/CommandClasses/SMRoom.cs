@@ -53,14 +53,14 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Removes an item from the room.
+		/// Removes an item from the room, recursively looks through containers for the item if required.
 		/// </summary>
-		/// <param name="item">Item.</param>
+		/// <param name="item">SMItem to remove.</param>
 		public void RemoveItem(SMItem item)
 		{
 			if (this.RoomItems != null)
 			{
-				this.RoomItems.Remove(item);
+				SMItemHelper.RemoveItemFromList(this.RoomItems, item.ItemID);
 			}
 
 			this.SaveToApplication();
@@ -97,7 +97,7 @@ namespace SlackMUDRPG.CommandClasses
 			smrs.Add(this);
 			HttpContext.Current.Application["SMRooms"] = smrs;
 		}
-		
+
 		/// <summary>
 		/// Gets the room exit details
 		/// </summary>
@@ -239,7 +239,7 @@ namespace SlackMUDRPG.CommandClasses
                         isFirst = false;
                         returnString += "\n> \n> NPCs:\n> ";
                     }
-                    
+
                     returnString += smNPC.GetFullName();
                 }
             }
@@ -296,7 +296,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			// Add the people within the location
 			returnString += this.GetPeopleDetails(userID);
-            
+
             // Add the NPCs within the location
             returnString += this.GetNPCDetails();
 
@@ -355,21 +355,25 @@ namespace SlackMUDRPG.CommandClasses
 				else // If not an NPC, check the objects in the room
 				{
 
-					SMItem smi = this.RoomItems.FirstOrDefault(item => item.ItemName == thingToInspect);
-					if (smi == null)
-					{
-						smi = this.RoomItems.FirstOrDefault(item => item.ItemFamily == thingToInspect);
-					}
+					SMItem smi = SMItemHelper.GetItemFromList(this.RoomItems, thingToInspect);
 
 					if (smi != null)
 					{
-						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":"));
-						smc.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(smi.ItemDescription));
-					}
-					else
-					{
-						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not inspect that item."));
-					}
+						string itemDeatils = OutputFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":");
+						itemDeatils += OutputFormatterFactory.Get().ListItem(smi.ItemDescription);
+
+						if (smi.CanHoldOtherItems())
+						{
+							itemDeatils += OutputFormatterFactory.Get().Italic($"This \"{smi.ItemName}\" contains the following items:");
+							itemDeatils += SMItemHelper.GetContainerContents(smi);
+						}
+
+						smc.sendMessageToPlayer(itemDeatils);
+	                }
+	                else
+	                {
+	                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not inspect that item."));
+	                }
 				}
             }
         }

@@ -18,102 +18,242 @@
 		}
 	],
 	"RoomItems": [
-    {
-      "ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcapell",
-      "SingularPronoun": "a",
-      "ItemName": "Wooden Pell",
-      "PluralPronoun": "some",
-      "PluralName": "Wooden Pells",
-      "ItemType": "Misc",
-      "ItemFamily": "Pell",
-      "ItemDescription": "This is a wooden Pell, used for melee training.",
-      "ItemWeight": 20,
-      "ItemSize": 20,
-      "HitPoints": 1000000000,
-      "MaxHitPoints": 1000000000,
-      "BaseDamage": 0.1,
-      "Toughness": 5
-    },
-    {
-      "ItemID": "2c0f0627-ef24-401d-9acb-WoodenSword1",
-      "SingularPronoun": "a",
-      "ItemName": "Wooden Sword",
-      "PluralName": "Wooden Swords",
-      "PluralPronoun": "some",
-      "ItemType": "Weapon",
-      "ItemFamily": "Sword",
-      "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
-      "ItemWeight": 2,
-      "ItemCapacity": 0,
-      "ItemSize": 2,
-      "HitPoints": 25,
-      "MaxHitPoints": 25,
-      "BaseDamage": 2.0,
-      "Toughness": 3,
-      "DestroyedOutput": null,
-      "RequiredSkills": [
-        {
-          "SkillName": "Sword Use",
-          "SkillLevel": "1"
-        }
-      ],
-      "AdditionalData": null,
-      "ObjectTrait": null,
-      "HeldItems": null
-    },
-    {
-      "ItemID": "2c0f0627-ef24-401d-9acb-WoodenSword2",
-      "SingularPronoun": "a",
-      "ItemName": "Wooden Sword",
-      "PluralName": "Wooden Swords",
-      "PluralPronoun": "some",
-      "ItemType": "Weapon",
-      "ItemFamily": "Sword",
-      "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
-      "ItemWeight": 2,
-      "ItemCapacity": 0,
-      "ItemSize": 2,
-      "HitPoints": 25,
-      "MaxHitPoints": 25,
-      "BaseDamage": 2.0,
-      "Toughness": 3,
-      "DestroyedOutput": null,
-      "RequiredSkills": [
-        {
-          "SkillName": "Sword Use",
-          "SkillLevel": "1"
-        }
-      ],
-      "AdditionalData": null,
-      "ObjectTrait": null,
-      "HeldItems": null
-    },
-    {
-      "ItemID": "2c0f0627-ef24-401d-9acb-WoodenSword3",
-      "SingularPronoun": "a",
-      "ItemName": "Shoddy Wooden Sword",
-      "PluralName": "Shoddy Wooden Swords",
-      "PluralPronoun": "some",
-      "ItemType": "Weapon",
-      "ItemFamily": "Sword",
-      "ItemDescription": "This Shoddy wooden sword won't do much damage, but it's a start.",
-      "ItemWeight": 2,
-      "ItemCapacity": 0,
-      "ItemSize": 2,
-      "HitPoints": 25,
-      "MaxHitPoints": 25,
-      "BaseDamage": 2.0,
-      "Toughness": 3,
-      "DestroyedOutput": null,
-      "RequiredSkills": [
-        {
-          "SkillName": "Sword Use",
-          "SkillLevel": "1"
-        }
-      ],
-      "AdditionalData": null,
-      "ObjectTrait": null,
-      "HeldItems": null
-    }
+		{
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcapell",
+			"SingularPronoun": "a",
+			"ItemName": "Wooden Pell",
+			"PluralPronoun": "some",
+			"PluralName": "Wooden Pells",
+			"ItemType": "Misc",
+			"ItemFamily": "Pell",
+			"ItemDescription": "This is a wooden Pell, used for melee training.",
+			"ItemWeight": 20,
+			"ItemSize": 20,
+			"HitPoints": 1000000000,
+			"MaxHitPoints": 1000000000,
+			"BaseDamage": 0.1,
+			"Toughness": 5
+		},
+		{
+		  "ItemID": "2c0f0627-ef24-401d-9acb-WoodenSword1",
+		  "SingularPronoun": "a",
+		  "ItemName": "Wooden Sword",
+		  "PluralName": "Wooden Swords",
+		  "PluralPronoun": "some",
+		  "ItemType": "Weapon",
+		  "ItemFamily": "Sword",
+		  "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+		  "ItemWeight": 2,
+		  "ItemCapacity": 0,
+		  "ItemSize": 2,
+		  "HitPoints": 25,
+		  "MaxHitPoints": 25,
+		  "BaseDamage": 2.0,
+		  "Toughness": 3,
+		  "DestroyedOutput": null,
+		  "RequiredSkills": [
+			{
+			  "SkillName": "Sword Use",
+			  "SkillLevel": "1"
+			}
+		  ],
+		  "AdditionalData": null,
+		  "ObjectTrait": null,
+		  "HeldItems": null
+		},
+		{
+		  "ItemID": "2c0f0627-ef24-401d-9acb-WoodenSword2",
+		  "SingularPronoun": "a",
+		  "ItemName": "Wooden Sword",
+		  "PluralName": "Wooden Swords",
+		  "PluralPronoun": "some",
+		  "ItemType": "Weapon",
+		  "ItemFamily": "Sword",
+		  "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+		  "ItemWeight": 2,
+		  "ItemCapacity": 0,
+		  "ItemSize": 2,
+		  "HitPoints": 25,
+		  "MaxHitPoints": 25,
+		  "BaseDamage": 2.0,
+		  "Toughness": 3,
+		  "DestroyedOutput": null,
+		  "RequiredSkills": [
+			{
+			  "SkillName": "Sword Use",
+			  "SkillLevel": "1"
+			}
+		  ],
+		  "AdditionalData": null,
+		  "ObjectTrait": null,
+		  "HeldItems": null
+		},
+		{
+		  "ItemID": "2c0f0627-ef24-401d-9acb-WoodenSword3",
+		  "SingularPronoun": "a",
+		  "ItemName": "Shoddy Wooden Sword",
+		  "PluralName": "Shoddy Wooden Swords",
+		  "PluralPronoun": "some",
+		  "ItemType": "Weapon",
+		  "ItemFamily": "Sword",
+		  "ItemDescription": "This Shoddy wooden sword won't do much damage, but it's a start.",
+		  "ItemWeight": 2,
+		  "ItemCapacity": 0,
+		  "ItemSize": 2,
+		  "HitPoints": 25,
+		  "MaxHitPoints": 25,
+		  "BaseDamage": 2.0,
+		  "Toughness": 3,
+		  "DestroyedOutput": null,
+		  "RequiredSkills": [
+			{
+			  "SkillName": "Sword Use",
+			  "SkillLevel": "1"
+			}
+		  ],
+		  "AdditionalData": null,
+		  "ObjectTrait": null,
+		  "HeldItems": null
+		},
+		{
+			"ItemID": "9bb97e52-2bff-4990-9711-cef24132d2b1",
+			"SingularPronoun": "a",
+			"ItemName": "Wooden Chest",
+			"PluralPronoun": "some",
+			"PluralName": "Wooden Chests",
+			"ItemType": "Container",
+			"ItemFamily": "Chest",
+			"ItemDescription": "This solid wooden chest is great for storing items but not very portable.",
+			"ItemWeight": 100,
+			"ItemCapacity": 50,
+			"ItemSize": 50,
+			"HitPoints": 50000,
+			"MaxHitPoints": 50000,
+			"BaseDamage": 20,
+			"Toughness": 5,
+			"HeldItems": [
+				{
+					"ItemID": "8b614ad2-0abc-4711-bed1-dbae7c9d9eab",
+					"SingularPronoun": "a",
+					"ItemName": "Small Backpack",
+					"PluralPronoun": "some",
+					"PluralName": "Small Backpacks",
+					"ItemType": "Container",
+					"ItemFamily": "Backpack",
+					"ItemDescription": "Basic small backpack that all players start with.",
+					"ItemWeight": 0,
+					"ItemCapacity": 25,
+					"ItemSize": 25,
+					"HitPoints": 5,
+					"MaxHitPoints": 5,
+					"BaseDamage": 0.0000000001,
+					"Toughness": 1,
+					"HeldItems": null
+				},
+				{
+					"ItemID": "a6df9f5f-03d6-4200-9fc7-53e196354a5c",
+					"SingularPronoun": "a",
+					"ItemName": "Wooden Sword",
+					"PluralPronoun": "some",
+					"PluralName": "Wooden Swords",
+					"ItemType": "Weapon",
+					"ItemFamily": "Sword",
+					"ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+					"ItemWeight": 2,
+					"ItemSize": 2,
+					"HitPoints": 25,
+					"MaxHitPoints": 25,
+					"BaseDamage": 2.0,
+					"Toughness": 3,
+					"RequiredSkills": [
+						{
+							"SkillName": "Sword Use",
+							"SkillLevel": "1"
+						}
+					]
+				},
+				{
+					"ItemID": "85917aef-c5fc-42da-88d5-b12c886b606f",
+					"ItemName": "Shoddy Axe",
+					"SingularPronoun": "a",
+					"PluralName": "Shoddy Axes",
+					"PluralPronoun": "some",
+					"ItemType": "Weapon",
+					"ItemFamily": "Axe",
+					"ItemDescription": "This shoddy axe doesn't do much damage but it's a start.",
+					"ItemWeight": 1,
+					"ItemSize": 1,
+					"HitPoints": 50,
+					"MaxHitPoints": 50,
+					"BaseDamage": 5,
+					"Toughness": 3
+				},
+				{
+					"ItemID": "fdde13e6-3f35-44fa-bdbe-b58678c0fa0b",
+					"SingularPronoun": "a",
+					"ItemName": "Copper Nugget",
+					"PluralPronoun": "some",
+					"PluralName": "Copper Nuggets",
+					"ItemType": "Resource",
+					"ItemFamily": "Nugget",
+					"ItemDescription": "A nugget of copper",
+					"ItemWeight": 5,
+					"ItemSize": 5,
+					"HitPoints": 5,
+					"MaxHitPoints": 5,
+					"BaseDamage": 0.001,
+					"Toughness": 5
+				},
+				{
+					"ItemID": "098efa2a-3a33-42aa-a3de-d726d3b87505",
+					"SingularPronoun": "a",
+					"ItemName": "Copper Nugget",
+					"PluralPronoun": "some",
+					"PluralName": "Copper Nuggets",
+					"ItemType": "Resource",
+					"ItemFamily": "Nugget",
+					"ItemDescription": "A nugget of copper",
+					"ItemWeight": 5,
+					"ItemSize": 5,
+					"HitPoints": 5,
+					"MaxHitPoints": 5,
+					"BaseDamage": 0.001,
+					"Toughness": 5
+				},
+				{
+					"ItemID": "9297ffa2-5f0a-4d4e-8de2-b722c663b32f",
+					"SingularPronoun": "a",
+					"ItemName": "Copper Nugget",
+					"PluralPronoun": "some",
+					"PluralName": "Copper Nuggets",
+					"ItemType": "Resource",
+					"ItemFamily": "Nugget",
+					"ItemDescription": "A nugget of copper",
+					"ItemWeight": 5,
+					"ItemSize": 5,
+					"HitPoints": 5,
+					"MaxHitPoints": 5,
+					"BaseDamage": 0.001,
+					"Toughness": 5
+				},
+				{
+					"ItemID": "5c4a4282-53c0-41f4-9037-ce0c7882afa2",
+					"SingularPronoun": "an",
+					"ItemName": "Iron Nugget",
+					"PluralPronoun": "some",
+					"PluralName": "Iron Nuggets",
+					"ItemType": "Resource",
+					"ItemFamily": "Nugget",
+					"ItemDescription": "A nugget of iron",
+					"ItemWeight": 5,
+					"ItemSize": 5,
+					"HitPoints": 5,
+					"MaxHitPoints": 5,
+					"BaseDamage": 0.001,
+					"Toughness": 5
+				}
+			]
+		}
+
 	]
 }

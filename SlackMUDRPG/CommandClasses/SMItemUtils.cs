@@ -10,7 +10,8 @@ namespace SlackMUDRPG.CommandClasses
 	/// </summary>
 	public class ItemCountObject
 	{
-		public string Name { get; set; }
+		public string SingularName { get; set; }
+		public string PluralName { get; set; }
 		public int Count { get; set; }
 	}
 
@@ -30,7 +31,8 @@ namespace SlackMUDRPG.CommandClasses
 						group item by item.ItemName into grp
 						select new ItemCountObject()
 						{
-							Name = grp.Key,
+							SingularName = grp.Key,
+							PluralName = grp.ToList().First().PluralName,
 							Count = grp.Count()
 						};
 

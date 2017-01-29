@@ -241,6 +241,7 @@
     <Compile Include="CommandClasses\SMSlot.cs" />
     <Compile Include="Utility\Utils.cs" />
     <Compile Include="Utility\ClassBuilder.cs" />
+    <Compile Include="CommandClasses\SMItemHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

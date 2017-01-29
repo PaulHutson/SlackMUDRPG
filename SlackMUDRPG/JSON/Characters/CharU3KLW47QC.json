@@ -110,7 +110,7 @@
     {
       "Name": "Back",
       "AllowedTypes": [
-        "containers"
+        "Container"
       ],
       "EquippedItem": {
         "ItemID": "1def209c-8dc5-4208-877a-5de64c13e12c",

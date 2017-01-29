@@ -16,7 +16,7 @@
 	{
 		"Name":"Back",
 		"AllowedTypes": [
-			"containers"
+			"Container"
 		],
 		"EquippedItem": null
 	}
