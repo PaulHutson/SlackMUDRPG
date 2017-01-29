@@ -193,7 +193,11 @@ namespace SlackMUDRPG.CommandClasses
                         if (initiateMove)
                         {
                             // Walk out of the room code.
-                            this.GetRoom().Announce("_" + this.GetFullName() + " walks out._", this, true);
+                            SMRoom currentRoom = this.GetRoom();
+
+                            currentRoom.Announce("_" + this.GetFullName() + " walks out._", this, true);
+                            currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
+
 
                             // Move the player to the new location
                             this.RoomID = smr.RoomID;
@@ -203,6 +207,7 @@ namespace SlackMUDRPG.CommandClasses
 
                             // Announce arrival to other players in the same place
                             smr.Announce("_" + this.GetFullName() + " walks in._", this, true);
+                            smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
                         }
                     }
                 } 

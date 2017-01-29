@@ -1,0 +1,260 @@
+﻿{
+  "firstname": "Weary",
+  "lastname": "Traveller",
+  "description": "A weary looking traveller, sitting on some boxes on the dock.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 22,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "WearyTraveller1",
+  "RoomID": "Ravensmere.Harbour South.Landing Area",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 10,
+    "hp": 10,
+    "maxhp": 10,
+    "SocialStanding": 8
+  },
+  "Skills": null,
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RigthFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "GeneralChitChat.Choice"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Leave",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "NotWanted",
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Farewell.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.ExaminesThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 50,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Examines.1"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "GeneralChitChat",
+      "ConversationStep": [
+        {
+          "StepID": "Choice",
+          "Scope": "choice",
+          "AdditionalData": "random1,random2",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Welcome to Ravensmere!",
+          "NextStep": "random1-1.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random1-1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "smiles and dips his head respectively towards {playercharacter}.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random2",
+          "Scope": "say",
+          "AdditionalData": "It's cold sitting out here on this dock, I wish they'd process me in the arrivals area soon!",
+          "NextStep": "random2-2.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random2-2",
+          "Scope": "emote",
+          "AdditionalData": "wraps his arms around himself and rubs to try to keep warm.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Farewell",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Good luck getting through the arrivals crowd quickly!",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Examines",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "notices you looking at them...",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Like what you see?",
+          "NextStep": "3.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "winks in your direction.",
+          "NextStep": "6.30",
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes I do",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Examines.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Examines.5"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "I",
+              "ResponseOptionText": "Ignore",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Examines.6"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Hah!",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "5",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Suit yourself...",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "6",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "shrugs his shoulders",
+          "NextStep": "6-1.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "6-1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "You're a friendly one aren't you...",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

@@ -21,9 +21,9 @@ namespace SlackMUDRPG
 			// Character List
 			List<SMCharacter> smc = new List<SMCharacter>();
 			Application["SMCharacters"] = smc;
-
-			// Room List
-			List<SMRoom> smr = new List<SMRoom>();
+            
+            // Room List
+            List<SMRoom> smr = new List<SMRoom>();
 			Application["SMRooms"] = smr;
 
 			// Load the Commands into memory for usage later
@@ -109,7 +109,31 @@ namespace SlackMUDRPG
 			}
 
 			Application["SMReceipes"] = smrl;
-		}
+
+            // Load the Skills into memory for usage later
+            // Used for both parsing commands sent in and also for help output
+            List<SMNPC> lnpcs = new List<SMNPC>();
+
+            // Get all filenames from path
+            string NPCsFolderFilePath = FilePathSystem.GetFilePathFromFolder("NPCs");
+            d = new DirectoryInfo(NPCsFolderFilePath);//Assuming Test is your Folder
+            Files = d.GetFiles();
+            foreach (FileInfo file in Files)
+            {
+                string NPCFilePath = FilePathSystem.GetFilePath("NPCs", file.Name, "");
+                // Use a stream reader to read the file in (based on the path)
+                using (StreamReader r = new StreamReader(NPCFilePath))
+                {
+                    // Create a new JSON string to be used...
+                    string json = r.ReadToEnd();
+
+                    // ... get the information from the help file
+                    lnpcs.Add(JsonConvert.DeserializeObject<SMNPC>(json));
+                }
+            }
+
+            Application["SMNPCs"] = lnpcs;
+        }
 
 		protected void Session_Start(object sender, EventArgs e)
 		{
