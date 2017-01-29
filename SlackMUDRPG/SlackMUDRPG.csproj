@@ -87,6 +87,7 @@
     <Content Include="Index.aspx" />
     <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
+    <Content Include="JSON\Commands\Commands.General.json" />
     <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
     <Content Include="JSON\GeneralText\NoCharacter.json" />
@@ -163,6 +164,12 @@
     <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Armorsmith.json" />
     <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Craftsmiths.json" />
     <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Weaponsmith.json" />
+    <Content Include="JSON\Commands\Commands.Location.json" />
+    <Content Include="JSON\Commands\Commands.Environment.json" />
+    <Content Include="JSON\Commands\Commands.Skill.json" />
+    <Content Include="JSON\Commands\Commands.Chat.json" />
+    <Content Include="JSON\Commands\Commands.Inventory.json" />
+    <Content Include="JSON\Commands\Commands.Character.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -173,7 +180,7 @@
     <Content Include="JSON\Objects\Weapon.WoodenSword.json" />
     <Content Include="JSON\Misc\Slots.BaseCharacter.json" />
     <Content Include="JSON\Objects\Weapon.WoodenStick.json" />
-    <Content Include="JSON\Commands\Help.json" />
+    <Content Include="JSON\Commands\Commands.Combat.json" />
     <Content Include="JSON\Misc\ClassBuilder.json" />
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +273,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties JSON_4Commands_4Commands_1Environment_1json__JSONSchema="http://json.schemastore.org/config" />
     </VisualStudio>
     <MonoDevelop>
       <Properties>
