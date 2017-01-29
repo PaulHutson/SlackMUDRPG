@@ -144,6 +144,7 @@
     <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ScalebrewersTavernToilet.json" />
     <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.SwabbiesLane.json" />
     <Content Include="JSON\Locations\LocRavensmere.MerchantSouth.ZogsArcanum.json" />
+    <Content Include="JSON\Objects\Container.WoodenChect.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -219,6 +220,7 @@
     <Compile Include="CommandClasses\SMSlot.cs" />
     <Compile Include="Utility\Utils.cs" />
     <Compile Include="Utility\ClassBuilder.cs" />
+    <Compile Include="CommandClasses\SMItemHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

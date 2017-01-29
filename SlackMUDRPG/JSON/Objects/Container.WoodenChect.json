@@ -1,0 +1,17 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Wooden Chest",
+	"PluralPronoun": "some",
+	"PluralName": "Wooden Chests",
+	"ItemType": "Container",
+	"ItemFamily": "Chest",
+	"ItemDescription": "This solid wooden chest is great for storing items but not very portable.",
+	"ItemWeight": 100,
+	"ItemCapacity": 50,
+	"ItemSize": 50,
+	"HitPoints": 50000,
+	"MaxHitPoints": 50000,
+	"BaseDamage": 20,
+	"Toughness": 5,
+	"HeldItems": null
+}
