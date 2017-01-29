@@ -45,8 +45,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns></returns>
 		private List<SMCommand> GetCommandsList()
 		{
-			SMCommands commands = (SMCommands)HttpContext.Current.Application["SMCommands"];
-			return commands.SMCommandList;
+			return (List<SMCommand>)HttpContext.Current.Application["SMCommands"];
 		}
 
 		/// <summary>
