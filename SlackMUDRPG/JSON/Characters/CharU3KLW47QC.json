@@ -2,6 +2,17 @@
   "firstname": "Paul",
   "lastname": "Hutson",
   "description": "A swarthy looking man with a big nose.",
+  "notes": [
+    {
+      "Note": "Test 2"
+    },
+    {
+      "Note": "Test22"
+    },
+    {
+      "Note": "Test234"
+    }
+  ],
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
   "age": 36,
