@@ -50,14 +50,14 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Removes an item from the room.
+		/// Removes an item from the room, recursively looks through containers for the item if required.
 		/// </summary>
-		/// <param name="item">Item.</param>
+		/// <param name="item">SMItem to remove.</param>
 		public void RemoveItem(SMItem item)
 		{
 			if (this.RoomItems != null)
 			{
-				this.RoomItems.Remove(item);
+				SMItemHelper.RemoveItemFromList(this.RoomItems, item.ItemID);
 			}
 
 			this.SaveToApplication();
@@ -281,16 +281,20 @@ namespace SlackMUDRPG.CommandClasses
             }
             else // If not a character, check the objects in the room
             {
-                SMItem smi = this.RoomItems.FirstOrDefault(item => item.ItemName == thingToInspect);
-                if (smi == null)
-                {
-                    smi = this.RoomItems.FirstOrDefault(item => item.ItemFamily == thingToInspect);
-                }
+				SMItem smi = SMItemHelper.GetItemFromList(this.RoomItems, thingToInspect);
 
-                if (smi != null)
-                {
-                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":"));
-                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(smi.ItemDescription));
+				if (smi != null)
+				{
+					string itemDeatils = OutputFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":");
+					itemDeatils += OutputFormatterFactory.Get().ListItem(smi.ItemDescription);
+
+					if (smi.CanHoldOtherItems())
+					{
+						itemDeatils += OutputFormatterFactory.Get().Italic($"This \"{smi.ItemName}\" contains the following items:");
+						itemDeatils += SMItemHelper.GetContainerContents(smi);
+					}
+
+					smc.sendMessageToPlayer(itemDeatils);
                 }
                 else
                 {
