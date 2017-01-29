@@ -1,0 +1,198 @@
+﻿{
+  "firstname": "Podgy",
+  "lastname": "Clerk",
+  "description": "A podgy looking clerk with a round face and small glasses that he seems to peer over.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 34,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "PodgyClerk",
+  "RoomID": "Ravensmere.Harbour South.Arrivals Area",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 7,
+    "int": 15,
+    "chr": 10,
+    "dex": 12,
+    "wp": 12,
+    "ft": 20,
+    "hp": 20,
+    "maxhp": 20,
+    "SocialStanding": 8
+  },
+  "Skills": null,
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453Quill",
+        "SingularPronoun": "a",
+        "ItemName": "Well used Quill",
+        "PluralName": "Well used Quills",
+        "PluralPronoun": "some",
+        "ItemType": "Misc",
+        "ItemFamily": "Quill",
+        "ItemDescription": "A well used quill.",
+        "ItemWeight": 2,
+        "ItemCapacity": 0,
+        "ItemSize": 2,
+        "HitPoints": 25,
+        "MaxHitPoints": 25,
+        "BaseDamage": 6.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": [
+          {
+            "SkillName": "Sword Use",
+            "SkillLevel": "1"
+          }
+        ],
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RigthFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Enter.1"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "Enter",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "waves you forward to the front of the queue...",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Welcome to Ravensmere traveller. Would this be your first time here?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.5-1"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.4-1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4-1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "regards you with narrow eyes",
+          "NextStep": "4-2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4-2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Very well, take this pass and head through either of the doors ahead to enter the city",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "5-1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "sneers at you over his glasses",
+          "NextStep": "5-2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "5-2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "I see...and do you have anything to offer the town and its people? or are you another freeloader, scrounging from the pockets of the hardworking people of Ravensmere?!",
+          "NextStep": "5-3.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "5-3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Look, I've got people to process... I've got your name down here as... {playercharacter}... move along, as you can I have more people to register.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

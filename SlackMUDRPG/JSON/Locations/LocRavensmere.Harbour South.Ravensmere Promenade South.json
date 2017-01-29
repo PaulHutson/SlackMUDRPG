@@ -4,7 +4,7 @@
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
   "Outside": true,
-	"RoomDescription": "The boardwalk creeks under your feet, smells of tar and fresh fish invade your senses and men and women barter for the goods hauled from vessels recently arrived.",
+	"RoomDescription": "The boardwalk creeks under your feet, smells of tar and fresh fish invade your senses and men and women barter for the goods hauled from vessels recently arrived. A cold breeze blows in from the ocean beyond the bay and the masts of the many docked ships sway from side to side. ",
 	"RoomExits": [
 		{
 			"Shortcut": "DWS",

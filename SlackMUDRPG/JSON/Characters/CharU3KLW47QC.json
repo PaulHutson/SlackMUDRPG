@@ -19,7 +19,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Ravensmere.Military District.Grand Parade",
+  "RoomID": "Ravensmere.Harbour South.Arrivals Area",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -232,6 +232,8 @@
       "Name": "LeftFoot"
     }
   ],
+  "CharacterWeight": 50,
+  "CharacterSize": 160,
   "ResponseURL": null,
   "NPCsWaitingForResponses": [
     {
@@ -263,6 +265,42 @@
         }
       ],
       "TimeOut": 1485700932
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1485726803
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1485726927
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1485727012
     }
   ]
 }

@@ -4,7 +4,7 @@
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
   "Outside": false,
-	"RoomDescription": "Awaiting description",
+	"RoomDescription": "A myriad of metal objects sit in wooden crates. Horseshoes, nuts and bolts of various sizes and workman tools for different crafts are just a few of the items on offer. Four great anvils on stone pedestals sit center stage flanked by large buckets of water.",
 	"RoomExits": [
 		{
 			"Shortcut": "SFB",
