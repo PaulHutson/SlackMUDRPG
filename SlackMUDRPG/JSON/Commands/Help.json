@@ -224,6 +224,20 @@
 			"ExampleUsage": "me looks around the room inquisitively",
 			"RequiredSkill": null
 		},
+    {
+      "CommandFamily": "Chat",
+      "CommandBaseName": "ooc",
+      "CommandName": "ooc",
+      "CommandDescription": "Enables the player to talk in the region or optionally globally (if you write \"global\" at the end.",
+      "CommandSyntax": "ooc <whatever-you-want> {global}",
+      "CommandExpression": "ooc {.+} {global?}",
+      "CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+      "CommandMethod": "SendOOC",
+      "PassCommandAsFirstArg": false,
+      "PassQueryParamAsFirstArg": null,
+      "ExampleUsage": "ooc I need help!",
+      "RequiredSkill": null
+    },
 		{
 			"CommandFamily": "Chat",
 			"CommandBaseName": "response",

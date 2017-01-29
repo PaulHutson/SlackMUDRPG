@@ -8,8 +8,8 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KH2RYAF",
-  "RoomID": "TrainingYard",
-  "CurrentActivity": "Attacking",
+  "RoomID": "1",
+  "CurrentActivity": null,
   "Attributes": {
     "str": 10,
     "int": 10,

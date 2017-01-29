@@ -605,10 +605,13 @@ namespace SlackMUDRPG.CommandClasses
 							// Remove the destroyed item from the room.
 							smc.GetRoom().RemoveItem(targetItem);
 						}
-					}
 
-					smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
-					SkillIncrease(smc);
+                    }
+                    // Announce the creation of the item.
+                    smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
+
+                    // Skill Increase
+                    SkillIncrease(smc);
 					smc.CurrentActivity = null;
 				}
 				else
