@@ -531,21 +531,42 @@ namespace SlackMUDRPG.CommandClasses
         {
             // First create a corpse where they are, with all the associated items attached!
             // Drop all the items the character is holding
+            string droppedItemsAnnouncement = "";
+            bool isFirstDroppedItem = true;
             foreach (SMSlot smcs in this.Slots)
             {
-                if (!smcs.isEmpty())
+                if (((smcs.Name == "RightHand")||(smcs.Name == "LeftHand")) && (!smcs.isEmpty()))
                 {
-                    this.GetRoom().AddItem(smcs.EquippedItem);
+                    SMItem droppedItem = smcs.EquippedItem;
+                    this.GetRoom().AddItem(droppedItem);
+                    if (!isFirstDroppedItem)
+                    {
+                        droppedItemsAnnouncement += ", ";
+                    }
+                    else
+                    {
+                        isFirstDroppedItem = false;
+                    }
+                    droppedItemsAnnouncement += droppedItem.SingularPronoun + " " + droppedItem.ItemName;
                     smcs.EquippedItem = null;
                 }
             }
 
+            // Create the corpse
             SMItem corpse = SMItemFactory.Get("Misc", "Corpse");
 			corpse.ItemName = "Corpse of " + this.GetFullName();
-			this.GetRoom().AddItem(corpse);
+            corpse.HeldItems = new List<SMItem>();
 
-			// Then move the player back to the hospital
-			this.RoomID = "Hospital";
+            // TODO Add clothing / armour items to the held items list ready for looting.
+
+            SMRoom currentRoom = this.GetRoom();
+
+            currentRoom.AddItem(corpse);
+            currentRoom.Announce("While dying " + this.GetFullName() + "dropped the following items: " + droppedItemsAnnouncement);
+
+
+            // Then move the player back to the hospital
+            this.RoomID = "Hospital";
             this.Attributes.HitPoints = this.Attributes.MaxHitPoints/2;
 
             // Tell the player they've died and announce their new location
@@ -554,6 +575,12 @@ namespace SlackMUDRPG.CommandClasses
 
             // TODO reduce the number of rerolls they have
             // If they get to 0 rerolls the character is permenant dead.
+
+            // Announce the items the player dropped.
+            currentRoom.Announce("While dying " + this.GetFullName() + " dropped the following items: " + droppedItemsAnnouncement);
+
+            // Reset the character activity
+            this.CurrentActivity = null;
 
             // Save the player
             this.SaveToApplication();
@@ -1628,6 +1655,30 @@ namespace SlackMUDRPG.CommandClasses
 			// TODO Change the name of the service based on the one used to send the information!
 			Commands.SendMessage("", "SlackMud", message, "SlackMud", this.UserID, this.ResponseURL);
 		}
+    
+    /// <summary>
+    /// Sends an ooc message to the zone you're in ...
+    /// ... or globally if the "global" bool is true
+    /// </summary>
+    /// <param name="message">the message being sent to the player</param>
+    /// <param name="global">If "global" is sent into this it will send the message globally</param>
+    public void SendOOC(string message, string global = "")
+    {
+        List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+        string region = "GLOBAL";
+        string currentRoomName = this.GetRoom().RoomID;
+        if (global.ToLower() == "global")
+        {
+            string currentArea = currentRoomName.Substring(0, currentRoomName.IndexOf('.') - 1);
+            region = currentArea;
+            smcs = smcs.FindAll(smc => smc.RoomID.Substring(0, smc.RoomID.IndexOf('.')) == currentRoomName);
+        }
+
+        foreach (SMCharacter smc in smcs)
+        {
+            smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.GetFullName() + " OOC[" + currentRoomName + "]: " + message));
+        }
+    }
 
 		#endregion
 

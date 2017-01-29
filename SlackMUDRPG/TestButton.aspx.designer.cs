@@ -101,7 +101,16 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_Resp;
-        
+
+        /// <summary>
+        /// btn_OOC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_OOC;
+  
         /// <summary>
         /// btn_Whisper control.
         /// </summary>

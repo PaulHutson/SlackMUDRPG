@@ -113,7 +113,7 @@ namespace SlackMUDRPG
 		protected void btn_AttackRob_Click(object sender, EventArgs e)
 		{
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
-			smc.Attack("Rob Curran2");
+			smc.Attack("Robert Curran");
 		}
 
 		protected void btn_AttackPell_Click(object sender, EventArgs e)
@@ -152,11 +152,11 @@ namespace SlackMUDRPG
 			smc.UseSkill("Carpentry", null, false, "Wooden Sword");
 		}
 
-        protected void btn_AttackPaul_Click(object sender, EventArgs e)
-        {
-            SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
-            smc.Attack("Paul Hutson");
-        }
+    protected void btn_AttackPaul_Click(object sender, EventArgs e)
+    {
+        SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+        smc.Attack("Paul Hutson");
+    }
 
 		protected void btn_Inspect_WearyTraveller_Click(object sender, EventArgs e)
 		{
@@ -170,11 +170,10 @@ namespace SlackMUDRPG
 			smc.ProcessResponse(tb_ChatText.Text);
 		}
 
-		protected void btn_Whisper_Click(object sender, EventArgs e)
-		{
-			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
-			string[] whisperToChat = tb_ChatText.Text.Split(',');
-			smc.Whisper(whisperToChat[0], whisperToChat[1]);
-		}
-	}
+    protected void btn_OOC_Click(object sender, EventArgs e)
+    {
+        SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+        smc.SendOOC(tb_ChatText.Text);
+    }
+  }
 }
