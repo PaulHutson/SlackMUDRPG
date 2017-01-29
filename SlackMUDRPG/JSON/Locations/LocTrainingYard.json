@@ -151,6 +151,24 @@
 					"HeldItems": null
 				},
 				{
+					"ItemID": "\"22b66fae-d928-43a6-b044-af5488c1c2ea",
+					"SingularPronoun": "a",
+					"ItemName": "Small Backpack",
+					"PluralPronoun": "some",
+					"PluralName": "Small Backpacks",
+					"ItemType": "Container",
+					"ItemFamily": "Backpack",
+					"ItemDescription": "Basic small backpack that all players start with.",
+					"ItemWeight": 0,
+					"ItemCapacity": 25,
+					"ItemSize": 25,
+					"HitPoints": 5,
+					"MaxHitPoints": 5,
+					"BaseDamage": 0.0000000001,
+					"Toughness": 1,
+					"HeldItems": null
+				},
+				{
 					"ItemID": "a6df9f5f-03d6-4200-9fc7-53e196354a5c",
 					"SingularPronoun": "a",
 					"ItemName": "Wooden Sword",
