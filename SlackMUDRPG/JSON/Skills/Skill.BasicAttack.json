@@ -1,12 +1,12 @@
-{
+﻿{
   "SkillType": {
-    "SkillTypeName": "Weapon",
-    "SkillTypeDescription": "Related to use of weapons"
+    "SkillTypeName": "Basic Attack",
+    "SkillTypeDescription": "Use anything to hit someone even if it isn't a real weapon."
   },
-  "SkillName": "Sword Use",
-  "SkillDescription": "The ability to competently use a sword",
-  "SkillLearnText": "You've learnt how to use a sword",
-  "LevelIncreaseText":  "You feel you've gotten better using swords",
+  "SkillName": "Basic Attack",
+  "SkillDescription": "The ability to attack someone with anything",
+  "SkillLearnText": "You've learnt how to use basic attack",
+  "LevelIncreaseText":  "You feel you've gotten better at attacking someone",
 	"ActivityType": "Attacking",
 	"CanUseWithoutLearning":  true,
   "BaseStat": "DEX",
@@ -26,13 +26,6 @@
   ],
   "SkillSteps": [
     {
-      "StepType": "EquippedObject",
-      "StepRequiredObject": "Family.Sword",
-      "RequiredObjectAmount": 1,
-      "FailureOutput": "You don't have a sword equipped",
-      "SuccessOutput": null
-    },
-    {
       "StepType": "Target",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 1,
@@ -41,7 +34,7 @@
     },
     {
       "StepType": "Hit",
-      "StepRequiredObject": "Family.Sword",
+      "StepRequiredObject": null,
       "RequiredObjectAmount": 1,
       "FailureOutput": "Failed to hit {TARGETNAME}",
       "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
@@ -51,7 +44,7 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} uses his sword to attack {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME}"
     },
     {
       "StepType": "Pause",
@@ -62,7 +55,7 @@
     },
     {
       "StepType": "Repeat",
-      "StepRequiredObject": "Activity.Attacking",
+      "StepRequiredObject": "Activity.Basic.Attacking",
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
       "SuccessOutput": null

@@ -1,14 +1,15 @@
 {
-	"RoomID": "Ravensmere.MerchantSouth.DocklandsWaySouth",
+	"RoomID": "Ravensmere.Harbour South.Docklands Way South",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "You enter a shop filled to the brim with unusual objects. Colourful crystal vials and spinning gizmos stand on shelves, each with a price tag attached.",
 	"RoomExits": [
 		{
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.MerchantSouth.DocklandsWaySouth"
+			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
 		}
 	],
 	"RoomItems": null

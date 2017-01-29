@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Leather Strip",
+	"SingularPronoun": "a",
+	"PluralName": "Leather Strips",
+	"PluralPronoun": "some",
+  "ItemType": "resource",
+  "ItemFamily": "Leather",
+	"ItemDescription": "A strip of leather ready for use",
+	"ItemWeight": 1,
+  "ItemSize": 1,
+  "HitPoints": 2,
+  "MaxHitPoints": 2,
+  "BaseDamage": 0.001,
+  "Toughness": 3,
+	"CanHoldOtherItems": false
+}

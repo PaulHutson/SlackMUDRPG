@@ -3,6 +3,7 @@
 	"RoomLocationX": "3",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "The red room is aptly named by being painted red, even the floor and ceiling are red.  Why?  Because Paul likes red.",
 	"RoomExits": [
 		{

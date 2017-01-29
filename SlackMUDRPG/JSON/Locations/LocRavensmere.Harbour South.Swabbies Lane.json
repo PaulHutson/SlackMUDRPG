@@ -1,0 +1,26 @@
+{
+	"RoomID": "Ravensmere.Harbour South.Swabbies Lane",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "The light seems to have been sucked out of this small alleyway. A thick sludge runs through the gutters and dark figures pass by, never making eye contact.",
+	"RoomExits": [
+    {
+      "Shortcut": "DWS",
+      "Description": "Docklands Way South",
+      "RoomID": "Ravensmere.Harbour South.Docklands Way South"
+    },
+    {
+			"Shortcut": "MS",
+			"Description": "Mizzens Snicket (Alleyway)",
+			"RoomID": "Ravensmere.Harbour South.Mizzens Snicket"
+		},
+    {
+			"Shortcut": "BR",
+			"Description": "Bridge Row (Road)",
+			"RoomID": "Ravensmere.Harbour South.Bridge Row"
+		}
+	],
+	"RoomItems": null
+}

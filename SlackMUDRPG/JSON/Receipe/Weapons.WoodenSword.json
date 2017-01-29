@@ -7,11 +7,11 @@
 	"ProductionTrait": "Trait.Carpentry",
 	"Materials": [
 		{
-			"MaterialType": "Log",
+			"MaterialType": "Family.Log",
 			"MaterialQuantity": 1
 		},
 		{
-			"MaterialType": "Leather",
+			"MaterialType": "Family.Leather",
 			"MaterialQuantity": 1
 		}
 	],
@@ -22,30 +22,60 @@
 		}
 	],
 	"StepThresholds": [
-		{
-			"ThresholdName": "Shoddy",
-			"ThresholdLevel": "100",
+    {
+      "ThresholdName": "Shoddy",
+      "ThresholdLevel": "0",
+      "ThresholdBonus": [
+        {
+          "ThresholdBonusName": "BaseDamage",
+          "ThresholdBonusValue": -1
+        }
+      ]
+    },
+    {
+      "ThresholdName": "",
+      "ThresholdLevel": "50",
+      "ThresholdBonus": [
+        {
+          "ThresholdBonusName": "BaseDamage",
+          "ThresholdBonusValue": 1
+        }
+      ]
+    },
+    {
+			"ThresholdName": "Good Quality",
+			"ThresholdLevel": "80",
 			"ThresholdBonus": [
 				{
-					"ThresholdName": "BaseDamage",
-					"ThresholdBonusValue": 1
+					"ThresholdBonusName": "BaseDamage",
+					"ThresholdBonusValue": 2
+				}
+			]
+		},
+    {
+			"ThresholdName": "Best Quality",
+			"ThresholdLevel": "95",
+			"ThresholdBonus": [
+				{
+					"ThresholdBonusName": "BaseDamage",
+					"ThresholdBonusValue": 5
 				}
 			]
 		}
 	],
-	"Steps": [
+	"SkillSteps": [
 		{
       "StepType": "Information",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} begins to craft a {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} begins to craft {TARGETNAME}"
     },
     {
       "StepType": "CheckConsumeItems",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
-      "FailureOutput": "You do not have enough of {ITEMNAME} to complete the task.",
+      "FailureOutput": "You do not have enough of the material \"{TARGETNAME}\" to complete the task.",
       "SuccessOutput": null
     },
     {
@@ -60,7 +90,7 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} continues to craft a {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} continues to craft {TARGETNAME}"
     },
     {
       "StepType": "Pause",
@@ -74,13 +104,13 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} continues to craft a {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} continues to craft {TARGETNAME}"
     },
     {
       "StepType": "ConsumeItems",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
-      "FailureOutput": "You do not have enough of {ITEMNAME} to complete the task.",
+      "FailureOutput": "You do not have enough {ITEMNAME} to complete the task.",
       "SuccessOutput": null
     },
     {
@@ -95,7 +125,7 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} puts the final touches on the {ITEMNAME}"
+      "SuccessOutput": "{CHARNAME} puts the final touches on {ITEMNAME}"
     },
     {
       "StepType": "Pause",
@@ -109,7 +139,7 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 1,
       "FailureOutput": "Failed to create {ITEMNAME}",
-      "SuccessOutput": "Created {ITEMNAME}"
+      "SuccessOutput": "Created {ITEMNAME} (it is located in the same room as you)."
     }
 	]
 }

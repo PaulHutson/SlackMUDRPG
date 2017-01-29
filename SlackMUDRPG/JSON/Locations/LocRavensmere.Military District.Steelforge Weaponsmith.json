@@ -1,0 +1,16 @@
+{
+	"RoomID": "Ravensmere.Military District.Steelforge Weaponsmith",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "This room could pass for an armory in itself. Swords, polearms and other weaponry hang from wooden racks, waiting to be collected and large leather buckets full of arrows line up agaisnt the wall. The whooshing beat of the bellows mirrors the pulsing glow of the forge.",
+	"RoomExits": [
+		{
+			"Shortcut": "SFB",
+			"Description": "Steelforge Blacksmith Entrance",
+			"RoomID": "Ravensmere.Military District.Steelforge Blacksmiths"
+		}
+	],
+	"RoomItems": null
+}

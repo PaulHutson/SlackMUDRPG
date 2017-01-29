@@ -1,0 +1,31 @@
+{
+	"RoomID": "Ravensmere.Military District.Ramparts Parade",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "This road is significantly larger than any other you have seen so far in Ravensmere. At least wide enough for 30 men to walk shoulder to shoulder. At one side of the road is a large outdoor training area where men and women spar with various weapons. And at the other, a dome shaped building with people coming and going through the large metal doors.",
+	"RoomExits": [
+		{
+			"Shortcut": "BR",
+			"Description": "Bridge Row (Road)",
+			"RoomID": "Ravensmere.Harbour South.Bridge Row"
+		},
+		{
+			"Shortcut": "GP",
+			"Description": "Grand Parade (Road)",
+			"RoomID": "Ravensmere.Military District.Grand Parade"
+		},
+		{
+			"Shortcut": "TG",
+			"Description": "Training Ground",
+			"RoomID": "Ravensmere.Military District.Training Ground"
+		},
+		{
+			"Shortcut": "GA",
+			"Description": "Grand Arena",
+			"RoomID": "Ravensmere.Military District.Grand Arena"
+		}
+	],
+	"RoomItems": null
+}

@@ -1,0 +1,21 @@
+{
+	"RoomID": "Ravensmere.Harbour South.Mizzens Snicket",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "Mizzens Snicket. Never have you seen a place so devoid of wholesomeness as this. The filthy shanty style buildings look as though a light breeze would bring them all crashing down. A few flickering lights in the upper windows are the only signs of life.  You feel an impending sense of danger as you walk down this alleyway.",
+	"RoomExits": [
+		{
+			"Shortcut": "SL",
+			"Description": "Swabbies Lane",
+			"RoomID": "Ravensmere.Harbour South.Swabbies Lane"
+		},
+    {
+      "Shortcut": "SMI",
+      "Description": "The Sailmakers Arms (Inn)",
+      "RoomID": "Ravensmere.Harbour South.The Sailmakers Arms"
+    }
+	],
+	"RoomItems": null
+}

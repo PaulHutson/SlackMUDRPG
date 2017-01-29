@@ -1,14 +1,15 @@
 {
-	"RoomID": "Ravensmere.RavensmereHarbour.LandingArea",
+	"RoomID": "Ravensmere.Harbour South.Landing Area",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": true,
 	"RoomDescription": "You stand on a busy wooden dock surrounded by a bustling crowd. There are many ships arriving along the waterfront, and people are filing out and heading into an arrivals area. Over the tops of large wooden buildings, tall blue spires can be seen and beyond, a large mountain range which seems to surround this foreign settlement.",
 	"RoomExits": [
 		{
 			"Shortcut": "AAE",
 			"Description": "Arrivals Area Entrance",
-			"RoomID": "Ravensmere.MerchantSouth.ArrivalsArea"
+			"RoomID": "Ravensmere.Harbour South.Arrivals Area"
 		}
 	],
 	"RoomItems": [

@@ -1,0 +1,21 @@
+{
+	"RoomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "The stench of amonia brings tears to your eyes. Cured hides of varying colour and size obscure every inch of the walls and discarded animal hair litters the floor. ",
+	"RoomExits": [
+    {
+      "Shortcut": "RPS",
+      "Description": "Ravensmere Promenade South",
+      "RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South"
+    },
+    {
+			"Shortcut": "DWS",
+			"Description": "Docklands Way South",
+			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
+		}
+	],
+	"RoomItems": null
+}

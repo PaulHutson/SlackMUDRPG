@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Threading;
 using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
+using SlackMUDRPG.Utility.Formatters;
 
 namespace SlackMUDRPG
 {
@@ -19,17 +20,25 @@ namespace SlackMUDRPG
 			// Command text (this works for both form submissions and also query strings)
 			string commandText = Utils.GetQueryParam("text");
 
-			// TODO Validate user command before thrading the command
+            // TODO Validate user command before threading the command
+            if (this.GetCommandByName(this.GetCommandNameFromString(commandText))!=null)
+            {
+                HttpContext ctx = HttpContext.Current;
 
-			HttpContext ctx = HttpContext.Current;
+                Thread commandThread = new Thread(new ThreadStart(() =>
+                {
+                    HttpContext.Current = ctx;
+                    this.ProcessUserCommand(commandText);
+                }));
 
-			Thread commandThread = new Thread(new ThreadStart(() =>
-			{
-				HttpContext.Current = ctx;
-				this.ProcessUserCommand(commandText);
-			}));
-
-			commandThread.Start();
+                commandThread.Start();
+            }
+            else
+            {
+                SMCharacter smc = new SlackMud().GetCharacter(Utils.GetQueryParam("user_id"));
+                string commandNotRecognisedMessage = "Command \"" + commandText + "\" not recognised, please check and try again";
+                lit_output.Text = commandNotRecognisedMessage;
+            }
 		}
 
 		/// <summary>

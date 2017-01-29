@@ -1,0 +1,16 @@
+{
+	"RoomID": "Ravensmere.Military District.Steelforge Armoursmith",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "Awaiting description",
+	"RoomExits": [
+		{
+			"Shortcut": "SFB",
+			"Description": "Steelforge Blacksmith Entrance",
+			"RoomID": "Ravensmere.Military District.Steelforge Blacksmiths"
+		}
+	],
+	"RoomItems": null
+}

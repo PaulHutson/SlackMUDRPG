@@ -70,12 +70,12 @@ namespace SlackMUDRPG.CommandClasses
 
         public static string GetSkillToUse(SMCharacter attackingCharacter)
         {
-            string skillToUse = "Skill.Brawl";
+            string skillToUse = "Brawl";
             if (!attackingCharacter.AreHandsEmpty())
             {
                 // Get the equipped item from the character if any
                 SMItem smi = attackingCharacter.GetEquippedItem();
-                skillToUse = "Skill.BasicAttack";
+                skillToUse = "Basic Attack";
 
                 if ((smi != null) && (smi.RequiredSkills != null))
                 {

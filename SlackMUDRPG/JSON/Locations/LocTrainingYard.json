@@ -3,6 +3,7 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": true,
 	"RoomDescription": "Looking around the courtyard you can see a sandy well used floor.  Obviously somewhere where someone could practice weapon fighting.",
 	"RoomExits": [
 		{
@@ -32,6 +33,87 @@
 			"MaxHitPoints": 1000000000,
 			"BaseDamage": 0.1,
 			"Toughness": 5
+		},
+		{
+		  "ItemID": "2c0f0627-ef24-401d-9acb-WoodenSword1",
+		  "SingularPronoun": "a",
+		  "ItemName": "Wooden Sword",
+		  "PluralName": "Wooden Swords",
+		  "PluralPronoun": "some",
+		  "ItemType": "Weapon",
+		  "ItemFamily": "Sword",
+		  "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+		  "ItemWeight": 2,
+		  "ItemCapacity": 0,
+		  "ItemSize": 2,
+		  "HitPoints": 25,
+		  "MaxHitPoints": 25,
+		  "BaseDamage": 2.0,
+		  "Toughness": 3,
+		  "DestroyedOutput": null,
+		  "RequiredSkills": [
+			{
+			  "SkillName": "Sword Use",
+			  "SkillLevel": "1"
+			}
+		  ],
+		  "AdditionalData": null,
+		  "ObjectTrait": null,
+		  "HeldItems": null
+		},
+		{
+		  "ItemID": "2c0f0627-ef24-401d-9acb-WoodenSword2",
+		  "SingularPronoun": "a",
+		  "ItemName": "Wooden Sword",
+		  "PluralName": "Wooden Swords",
+		  "PluralPronoun": "some",
+		  "ItemType": "Weapon",
+		  "ItemFamily": "Sword",
+		  "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+		  "ItemWeight": 2,
+		  "ItemCapacity": 0,
+		  "ItemSize": 2,
+		  "HitPoints": 25,
+		  "MaxHitPoints": 25,
+		  "BaseDamage": 2.0,
+		  "Toughness": 3,
+		  "DestroyedOutput": null,
+		  "RequiredSkills": [
+			{
+			  "SkillName": "Sword Use",
+			  "SkillLevel": "1"
+			}
+		  ],
+		  "AdditionalData": null,
+		  "ObjectTrait": null,
+		  "HeldItems": null
+		},
+		{
+		  "ItemID": "2c0f0627-ef24-401d-9acb-WoodenSword3",
+		  "SingularPronoun": "a",
+		  "ItemName": "Shoddy Wooden Sword",
+		  "PluralName": "Shoddy Wooden Swords",
+		  "PluralPronoun": "some",
+		  "ItemType": "Weapon",
+		  "ItemFamily": "Sword",
+		  "ItemDescription": "This Shoddy wooden sword won't do much damage, but it's a start.",
+		  "ItemWeight": 2,
+		  "ItemCapacity": 0,
+		  "ItemSize": 2,
+		  "HitPoints": 25,
+		  "MaxHitPoints": 25,
+		  "BaseDamage": 2.0,
+		  "Toughness": 3,
+		  "DestroyedOutput": null,
+		  "RequiredSkills": [
+			{
+			  "SkillName": "Sword Use",
+			  "SkillLevel": "1"
+			}
+		  ],
+		  "AdditionalData": null,
+		  "ObjectTrait": null,
+		  "HeldItems": null
 		},
 		{
 			"ItemID": "9bb97e52-2bff-4990-9711-cef24132d2b1",
@@ -172,5 +254,6 @@
 				}
 			]
 		}
+
 	]
 }

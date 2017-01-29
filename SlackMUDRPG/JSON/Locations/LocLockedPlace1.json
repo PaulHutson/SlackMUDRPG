@@ -3,6 +3,7 @@
 	"RoomLocationX": "4",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "This is a locked room, that you can't enter unless you have a key of the right type!",
 	"RoomExits": [
 		{

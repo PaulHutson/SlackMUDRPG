@@ -2,14 +2,25 @@
   "firstname": "Paul",
   "lastname": "Hutson",
   "description": "A swarthy looking man with a big nose.",
+  "notes": [
+    {
+      "Note": "Test 2"
+    },
+    {
+      "Note": "Test22"
+    },
+    {
+      "Note": "Test234"
+    }
+  ],
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
-  "age": 0,
+  "age": 36,
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Outside2",
-  "CurrentActivity": "Mining",
+  "RoomID": "Ravensmere.Military District.Grand Parade",
+  "CurrentActivity": null,
   "Attributes": {
     "str": 10,
     "int": 10,
@@ -27,16 +38,32 @@
       "SkillLevel": 2
     },
     {
-      "SkillName": "Dodge",
-      "SkillLevel": 1
+      "SkillName": "Carpentry",
+      "SkillLevel": 2
     },
     {
-      "SkillName": "Sword Use",
+      "SkillName": "Dodge",
+      "SkillLevel": 10
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 5
+    },
+    {
+      "SkillName": "Axe Use",
       "SkillLevel": 1
     },
     {
       "SkillName": "Chop",
       "SkillLevel": 1
+    },
+    {
+      "SkillName": "Basic Attack",
+      "SkillLevel": 1
+    },
+    {
+      "SkillName": "Sword Use",
+      "SkillLevel": 10
     }
   ],
   "Slots": [
@@ -47,21 +74,20 @@
       ],
       "EquippedItem": {
         "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453",
-        "ItemName": "Wooden Sword",
-        "SingularPronoun": "a",
-        "PluralName": "Wooden Swords",
+        "SingularPronoun": "an",
+        "ItemName": "Iron Sword",
+        "PluralName": "Iron Swords",
         "PluralPronoun": "some",
-        "ItemType": "weapon",
+        "ItemType": "Weapon",
         "ItemFamily": "Sword",
-        "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
-        "ItemWeight": 1,
-        "ItemSize": 1,
+        "ItemDescription": "This Iron sword is good for keeping the masses down.",
+        "ItemWeight": 2,
         "ItemCapacity": 0,
-        "CanHoldOtherItems": false,
-        "HitPoints": 10,
-        "MaxHitPoints": 10,
-        "BaseDamage": 10.0,
-        "Toughness": 1,
+        "ItemSize": 2,
+        "HitPoints": 25,
+        "MaxHitPoints": 25,
+        "BaseDamage": 6.0,
+        "Toughness": 3,
         "DestroyedOutput": null,
         "RequiredSkills": [
           {
@@ -79,29 +105,7 @@
       "AllowedTypes": [
         "any"
       ],
-      "EquippedItem": {
-        "ItemID": "abc",
-        "ItemName": "Shoddy Pick Axe",
-        "SingularPronoun": "a",
-        "PluralName": "Shoddy Pick Axes",
-        "PluralPronoun": "some",
-        "ItemType": "weapons",
-        "ItemFamily": "PickAxe",
-        "ItemDescription": "This shoddy pick axe doesn't do much damage but it's a start.",
-        "ItemWeight": 1,
-        "ItemSize": 1,
-        "ItemCapacity": 0,
-        "CanHoldOtherItems": false,
-        "HitPoints": 50,
-        "MaxHitPoints": 50,
-        "BaseDamage": 5.0,
-        "Toughness": 3,
-        "DestroyedOutput": null,
-        "RequiredSkills": null,
-        "AdditionalData": null,
-        "ObjectTrait": null,
-        "HeldItems": null
-      }
+      "EquippedItem": null
     },
     {
       "Name": "Back",
@@ -110,17 +114,16 @@
       ],
       "EquippedItem": {
         "ItemID": "1def209c-8dc5-4208-877a-5de64c13e12c",
+        "SingularPronoun": "a",
         "ItemName": "Small Backpack",
-        "SingularPronoun": null,
-        "PluralName": null,
-        "PluralPronoun": null,
-        "ItemType": "container",
+        "PluralName": "Small Backpacks",
+        "PluralPronoun": "some",
+        "ItemType": "Container",
         "ItemFamily": "Backpack",
         "ItemDescription": "Basic small backpack that all players start with.",
         "ItemWeight": 0,
-        "ItemSize": 1,
         "ItemCapacity": 0,
-        "CanHoldOtherItems": true,
+        "ItemSize": 1,
         "HitPoints": 0,
         "MaxHitPoints": 0,
         "BaseDamage": 0.0,
@@ -132,17 +135,16 @@
         "HeldItems": [
           {
             "ItemID": "4e2461ad-2572-4f02-99da-7ec30d53193z",
-            "ItemName": "Key for Locked Room (LR)",
             "SingularPronoun": null,
+            "ItemName": "Key for Locked Room (LR)",
             "PluralName": null,
             "PluralPronoun": null,
             "ItemType": "Key",
             "ItemFamily": "Key",
             "ItemDescription": "This is a key",
             "ItemWeight": 0,
-            "ItemSize": 0,
             "ItemCapacity": 0,
-            "CanHoldOtherItems": false,
+            "ItemSize": 0,
             "HitPoints": 1000000000,
             "MaxHitPoints": 1000000000,
             "BaseDamage": 0.001,
@@ -150,6 +152,50 @@
             "DestroyedOutput": null,
             "RequiredSkills": null,
             "AdditionalData": "KeyLockExample101",
+            "ObjectTrait": null,
+            "HeldItems": null
+          },
+          {
+            "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2SCH",
+            "SingularPronoun": "a",
+            "ItemName": "Shoddy Carpenter Hammer",
+            "PluralName": "Shoddy Carpenter Hammers",
+            "PluralPronoun": "some",
+            "ItemType": "weapons",
+            "ItemFamily": "Hammer",
+            "ItemDescription": "This hammer is made for use in carpentry.",
+            "ItemWeight": 1,
+            "ItemCapacity": 0,
+            "ItemSize": 1,
+            "HitPoints": 50,
+            "MaxHitPoints": 50,
+            "BaseDamage": 5.0,
+            "Toughness": 3,
+            "DestroyedOutput": null,
+            "RequiredSkills": null,
+            "AdditionalData": null,
+            "ObjectTrait": null,
+            "HeldItems": null
+          },
+          {
+            "ItemID": "abc",
+            "SingularPronoun": "a",
+            "ItemName": "Shoddy Chisel",
+            "PluralName": "Shoddy Chisels",
+            "PluralPronoun": "some",
+            "ItemType": "tools",
+            "ItemFamily": "Chisel",
+            "ItemDescription": "This shoddy chisel is used for things like Carpentry.",
+            "ItemWeight": 1,
+            "ItemCapacity": 0,
+            "ItemSize": 1,
+            "HitPoints": 50,
+            "MaxHitPoints": 50,
+            "BaseDamage": 1.0,
+            "Toughness": 3,
+            "DestroyedOutput": null,
+            "RequiredSkills": null,
+            "AdditionalData": null,
             "ObjectTrait": null,
             "HeldItems": null
           }
@@ -186,5 +232,37 @@
       "Name": "LeftFoot"
     }
   ],
-  "ResponseURL": null
+  "ResponseURL": null,
+  "NPCsWaitingForResponses": [
+    {
+      "NPCID": "WearyTraveller1",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        },
+        {
+          "ShortCutToken": "I"
+        }
+      ],
+      "TimeOut": 1485700760
+    },
+    {
+      "NPCID": "WearyTraveller1",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        },
+        {
+          "ShortCutToken": "I"
+        }
+      ],
+      "TimeOut": 1485700932
+    }
+  ]
 }

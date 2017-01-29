@@ -23,7 +23,10 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("RoomLocationZ")]
 		public int RoomLocationZ { get; set; }
 
-		[JsonProperty("RoomDescription")]
+        [JsonProperty("Outside")]
+        public bool Outside { get; set; }
+
+        [JsonProperty("RoomDescription")]
 		public string RoomDescription { get; set; }
 
 		[JsonProperty("RoomExits")]
@@ -94,7 +97,7 @@ namespace SlackMUDRPG.CommandClasses
 			smrs.Add(this);
 			HttpContext.Current.Application["SMRooms"] = smrs;
 		}
-		
+
 		/// <summary>
 		/// Gets the room exit details
 		/// </summary>
@@ -150,10 +153,31 @@ namespace SlackMUDRPG.CommandClasses
 			return charsInLocation;
 		}
 
-		/// <summary>
-		/// Gets a list of all the people in the room.
-		/// </summary>
-		public string GetPeopleDetails(string userID = "0")
+        public List<SMNPC> GetNPCs()
+        {
+            // Return element.
+            List<SMNPC> npcsInLocation = new List<SMNPC>();
+
+            // Search through logged in users to see which are in this location
+            List<SMNPC> lNPCs = new List<SMNPC>();
+            lNPCs = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+
+            // Get the NPCs.
+            if (lNPCs != null)
+            {
+                if (lNPCs.Count(smc => smc.RoomID == this.RoomID) > 0)
+                {
+                    npcsInLocation = lNPCs.FindAll(s => s.RoomID == this.RoomID);
+                }
+            }
+
+            return npcsInLocation;
+        }
+
+        /// <summary>
+        /// Gets a list of all the people in the room.
+        /// </summary>
+        public string GetPeopleDetails(string userID = "0")
 		{
 			string returnString = "\n> \n> People:\n";
 
@@ -182,18 +206,46 @@ namespace SlackMUDRPG.CommandClasses
 					}
 					else
 					{
-						returnString += smc.FirstName + " " + smc.LastName;
+						returnString += smc.GetFullName();
 					}
-
 				}
 			}
-			else
+            else
 			{
 				returnString += "> There's noone here.";
 			}
 
 			return returnString;
 		}
+
+        public string GetNPCDetails()
+        {
+            string returnString = "";
+
+            List<SMNPC> SMNPCs = this.GetNPCs();
+
+            // Check if the character already exists or not.
+            if (SMNPCs != null)
+            {
+                bool isFirst = true;
+                foreach (SMNPC smNPC in SMNPCs)
+                {
+                    if (!isFirst)
+                    {
+                        returnString += ", ";
+                    }
+                    else
+                    {
+                        isFirst = false;
+                        returnString += "\n> \n> NPCs:\n> ";
+                    }
+
+                    returnString += smNPC.GetFullName();
+                }
+            }
+
+            return returnString;
+        }
 
         /// <summary>
 		/// Gets a list of all the items in the room.
@@ -237,7 +289,7 @@ namespace SlackMUDRPG.CommandClasses
         public string GetLocationInformation(string userID = "0")
 		{
 			// Construct the room string.
-			string returnString = "*Location Details:*\n";
+			string returnString = "*Location Details - " + this.RoomID.Replace(".",", ")  + ":*\n";
 
 			// Create the string and add the basic room description.
 			returnString += "> " + this.RoomDescription;
@@ -245,8 +297,11 @@ namespace SlackMUDRPG.CommandClasses
 			// Add the people within the location
 			returnString += this.GetPeopleDetails(userID);
 
-			// Add the exits to the room so that someone can leave.
-			returnString += this.GetExitDetails();
+            // Add the NPCs within the location
+            returnString += this.GetNPCDetails();
+
+            // Add the exits to the room so that someone can leave.
+            returnString += this.GetExitDetails();
 
 			// Show all the items within the room that can be returned.
 			returnString += this.GetItemDetails();
@@ -265,7 +320,7 @@ namespace SlackMUDRPG.CommandClasses
             // Check if it's a character first
             SMCharacter targetCharacter = this.GetPeople().FirstOrDefault(checkChar => checkChar.GetFullName() == thingToInspect);
 
-            if (targetCharacter != null)
+			if (targetCharacter != null)
             {
                 smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of " + targetCharacter.GetFullName() + " (Level " + targetCharacter.CalculateLevel() + "):"));
                 if ((targetCharacter.Description != null) || (targetCharacter.Description != ""))
@@ -279,27 +334,47 @@ namespace SlackMUDRPG.CommandClasses
                 smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetCharacter.GetInventoryList()));
 				targetCharacter.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(smc.GetFullName() + " looks at you"));
             }
-            else // If not a character, check the objects in the room
+            else // If not a character, check if it is an NPC...
             {
-				SMItem smi = SMItemHelper.GetItemFromList(this.RoomItems, thingToInspect);
+				SMNPC targetNPC = this.GetNPCs().FirstOrDefault(checkChar => checkChar.GetFullName() == thingToInspect);
 
-				if (smi != null)
+				if (targetNPC != null)
 				{
-					string itemDeatils = OutputFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":");
-					itemDeatils += OutputFormatterFactory.Get().ListItem(smi.ItemDescription);
-
-					if (smi.CanHoldOtherItems())
+					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of " + targetNPC.GetFullName() + " (Level " + targetNPC.CalculateLevel() + "):"));
+					if ((targetNPC.Description != null) || (targetNPC.Description != ""))
 					{
-						itemDeatils += OutputFormatterFactory.Get().Italic($"This \"{smi.ItemName}\" contains the following items:");
-						itemDeatils += SMItemHelper.GetContainerContents(smi);
+						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(targetNPC.Description));
 					}
+					else
+					{
+						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("No description set..."));
+					}
+					smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetNPC.GetInventoryList()));
+					targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.ExaminesThem", smc);
+				}
+				else // If not an NPC, check the objects in the room
+				{
 
-					smc.sendMessageToPlayer(itemDeatils);
-                }
-                else
-                {
-                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not inspect that item."));
-                }
+					SMItem smi = SMItemHelper.GetItemFromList(this.RoomItems, thingToInspect);
+
+					if (smi != null)
+					{
+						string itemDeatils = OutputFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":");
+						itemDeatils += OutputFormatterFactory.Get().ListItem(smi.ItemDescription);
+
+						if (smi.CanHoldOtherItems())
+						{
+							itemDeatils += OutputFormatterFactory.Get().Italic($"This \"{smi.ItemName}\" contains the following items:");
+							itemDeatils += SMItemHelper.GetContainerContents(smi);
+						}
+
+						smc.sendMessageToPlayer(itemDeatils);
+	                }
+	                else
+	                {
+	                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not inspect that item."));
+	                }
+				}
             }
         }
 
@@ -500,10 +575,34 @@ namespace SlackMUDRPG.CommandClasses
 			smc.sendMessageToPlayer(msg);
 		}
 
-		#endregion
-	}
+        #endregion
 
-	public class SMExit
+        #region "NPC Functions"
+
+        public void ProcessNPCReactions(string actionType, SMCharacter invokingCharacter)
+        {
+            List<SMNPC> lNPCs = new List<SMNPC>();
+            lNPCs = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+
+            // Check if the character already exists or not.
+            if (lNPCs != null)
+            {
+                // Get the NPCs who have a response of the right type
+                lNPCs = lNPCs.FindAll(npc => npc.NPCResponses.Count(npcr => npcr.ResponseType == actionType) > 0);
+                if (lNPCs != null)
+                {
+                    foreach (SMNPC reactingNPC in lNPCs)
+                    {
+                        reactingNPC.RespondToAction(actionType, invokingCharacter);
+                    }
+                }
+            }
+        }
+
+        #endregion
+    }
+
+    public class SMExit
 	{
 		[JsonProperty("Shortcut")]
 		public string Shortcut { get; set; }

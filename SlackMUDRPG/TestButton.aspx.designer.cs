@@ -94,6 +94,24 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.Button btn_Shout;
         
         /// <summary>
+        /// btn_Resp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Resp;
+
+        /// <summary>
+        /// btn_OOC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_OOC;
+  
+        /// <summary>
         /// btn_Test control.
         /// </summary>
         /// <remarks>
@@ -146,6 +164,15 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_Inspect_Rob;
+        
+        /// <summary>
+        /// btn_Inspect_WearyTraveller control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Inspect_WearyTraveller;
         
         /// <summary>
         /// Button1 control.
@@ -238,13 +265,13 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.Button btn_Mining;
         
         /// <summary>
-        /// btn_Mining_Copper control.
+        /// btn_CraftSword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Mining_Copper;
+        protected global::System.Web.UI.WebControls.Button btn_CraftSword;
         
         /// <summary>
         /// btn_AttackRob control.
@@ -254,6 +281,15 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_AttackRob;
+        
+        /// <summary>
+        /// btn_AttackPaul control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_AttackPaul;
         
         /// <summary>
         /// btn_AttackPell control.

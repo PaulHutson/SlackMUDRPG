@@ -1,0 +1,16 @@
+{
+	"RoomID": "Ravensmere.Harbour South.The Sailmakers Arms",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "A table illuminated by a single candle sits at the centre of this small inn. The corners of the room are in shadow and you get the crawling sensation that someone is watching you.",
+	"RoomExits": [
+		{
+			"Shortcut": "MS",
+			"Description": "Mizzens Snicket (Alleyway)",
+			"RoomID": "Ravensmere.Harbour South.Mizzens Snicket"
+		}
+	],
+	"RoomItems": null
+}

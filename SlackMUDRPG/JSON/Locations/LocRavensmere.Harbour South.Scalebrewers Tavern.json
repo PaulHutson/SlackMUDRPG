@@ -1,24 +1,25 @@
 {
-	"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavern",
+	"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
+  "Outside": false,
 	"RoomDescription": "This tavern has seen better days, and although the spitoons are overflowing and the floor feels like tar, the atmosphere is quite lively and people make merry all around.",
 	"RoomExits": [
 		{
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.MerchantSouth.DocklandsWaySouth"
+			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
 		},
 		{
 			"Shortcut": "STT",
 			"Description": "Scalebrewers Tavern Toilet",
-			"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavernToilet"
+			"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Toilet"
 		},
 		{
 			"Shortcut": "STC",
 			"Description": "Scalebrewers Tavern Cellar",
-			"RoomID": "Ravensmere.MerchantSouth.ScalebrewersTavernCellar"
+			"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Cellar"
 		}
 	],
 	"RoomItems": [

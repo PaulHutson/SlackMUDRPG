@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Shoddy Chisel",
+	"SingularPronoun": "a",
+	"PluralName": "Shoddy Chisels",
+	"PluralPronoun": "some",
+  "ItemType": "tools",
+  "ItemFamily": "Chisel",
+	"ItemDescription": "This shoddy chisel is used for things like Carpentry.",
+	"ItemWeight": 1,
+  "ItemSize": 1,
+  "HitPoints": 50,
+  "MaxHitPoints": 50,
+  "BaseDamage": 1,
+  "Toughness": 3,
+	"CanHoldOtherItems": false
+}
