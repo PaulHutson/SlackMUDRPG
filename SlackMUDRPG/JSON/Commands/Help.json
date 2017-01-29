@@ -239,6 +239,20 @@
 			"RequiredSkill": null
 		},
 		{
+			"CommandFamily": "Inventory",
+			"CommandBaseName": "put",
+			"CommandName": "put",
+			"CommandDescription": "Trys to put an item in a container..",
+			"CommandSyntax": "equip <item identifier> in <container identifier>",
+			"CommandExpression": "put {.+} in {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "PutItem",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "put Wooden Sword in Small Backpack",
+			"RequiredSkill": null
+		},
+		{
 			"CommandFamily": "Character",
 			"CommandBaseName": "setdescription",
 			"CommandName": "setdescription",
