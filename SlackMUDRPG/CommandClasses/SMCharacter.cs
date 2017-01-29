@@ -1615,7 +1615,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			sendMessageToPlayer(announcement);
 		}
-
+        
 		/// <summary>
 		/// Send the message to the player
 		/// </summary>
@@ -1626,6 +1626,15 @@ namespace SlackMUDRPG.CommandClasses
 			Commands.SendMessage("", "SlackMud", message, "SlackMud", this.UserID, this.ResponseURL);
 		}
 
-		#endregion
-	}
+        /// <summary>
+		/// Process a response to a question
+		/// </summary>
+		/// <param name="announcement">What is being announced to the player</param>
+		//public void Announce(string announcement)
+  //      {
+  //          sendMessageToPlayer(announcement);
+  //      }
+
+        #endregion
+    }
 }

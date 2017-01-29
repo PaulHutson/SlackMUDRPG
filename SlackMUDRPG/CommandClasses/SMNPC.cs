@@ -21,6 +21,9 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("NPCMovementTarget")]
         public NPCMovementTarget NPCMovementTarget { get; set; }
 
+        // Used for in memory storing of responses requested from a character
+        public List<SMNPCAwaitingCharacterResponse> AwaitingCharacterResponses { get; set; }
+
         public void RespondToAction(string actionType, SMCharacter invokingCharacter)
         {
             // Get a list of characters that respond to this action type in the room
@@ -157,6 +160,40 @@ namespace SlackMUDRPG.CommandClasses
             }
         }
 
+        private void ProcessrResponseOptions(NPCConversationStep npccs, SMCharacter invokingCharacter)
+        {
+            string responseOptions = OutputFormatterFactory.Get().Bold(this.GetFullName() + " Responses:" + OutputFormatterFactory.Get().NewLine);
+            foreach(NPCConversationStepResponseOptions npcccsro in npccs.ResponseOptions)
+            {
+                responseOptions += OutputFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " (" + npcccsro.ResponseOptionShortcut + ")");
+            }
+
+            if (this.AwaitingCharacterResponses == null)
+            {
+                this.AwaitingCharacterResponses = new List<SMNPCAwaitingCharacterResponse>();
+            }
+
+            
+
+            SMNPCAwaitingCharacterResponse acr = new SMNPCAwaitingCharacterResponse();
+            acr.ConversationStep = npccs;
+            acr.WaitingForCharacter = invokingCharacter;
+
+            string nextStepAfterTimeout = null;
+            int timeout = 0;
+            if (npccs.NextStep != null)
+            {
+                string[] getNextStep = npccs.NextStep.Split('.');
+                nextStepAfterTimeout = getNextStep[0];
+                timeout = int.Parse(getNextStep[1]);
+            }
+            
+            acr.ConversationStepAfterTimeout = nextStepAfterTimeout;
+            acr.UnixTimeStampTimeout = Utility.Utils.GetUnixTimeOffset(timeout);
+
+            this.AwaitingCharacterResponses.Add(acr);
+        }
+
         private string ProcessResponseString(string responseStringToProcess, SMCharacter invokingCharacter)
         {
             string responseString = responseStringToProcess;
@@ -165,6 +202,8 @@ namespace SlackMUDRPG.CommandClasses
             return responseString;
         }
      }
+
+    #region "NPC Structures"
 
     /// <summary>
     /// Response types can be of the following types:
@@ -309,6 +348,17 @@ namespace SlackMUDRPG.CommandClasses
         public string AdditionalData { get; set; }
     }
 
+    /// <summary>
+    /// In memory store of awaiting responses and their timeout (if any)
+    /// </summary>
+    public class SMNPCAwaitingCharacterResponse
+    {
+        public SMCharacter WaitingForCharacter { get; set; }
+        public NPCConversationStep ConversationStep { get; set; }
+        public int UnixTimeStampTimeout { get; set; }
+        public string ConversationStepAfterTimeout { get; set; }
+    }
+
     public class NPCMovements
     {
         [JsonProperty("TimeOfDay")]
@@ -332,4 +382,6 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("LastMoveUnixTime")]
         public int LastMoveUnixTime { get; set; }
     }
+
+    #endregion
 }
