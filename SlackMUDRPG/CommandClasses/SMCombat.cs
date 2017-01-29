@@ -22,7 +22,22 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				// Use the skill
 				attackingCharacter.UseSkill(GetSkillToUse(attackingCharacter), targetCharacter.GetFullName(), true);
-			}
+
+                // Work out if this is an NPC or not
+                SMNPC targetNPC = targetCharacter.GetRoom().GetNPCs().FirstOrDefault(checkChar => checkChar.GetFullName() == targetCharacter.GetFullName());
+
+                if (targetNPC != null)
+                {
+                    targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.AttacksThem", attackingCharacter);
+                }
+
+                List<SMNPC> NPCsInRoom = targetCharacter.GetRoom().GetNPCs();
+
+                foreach(SMNPC NPCInRoom in NPCsInRoom)
+                {
+                    NPCInRoom.GetRoom().ProcessNPCReactions("PlayerCharacter.Attacks", attackingCharacter);
+                }
+            }
 			else // Report that the target is already dead...
 			{
 				attackingCharacter.sendMessageToPlayer(targetCharacter.GetFullName() + " is already dead!");

@@ -146,7 +146,7 @@ namespace SlackMUDRPG.CommandClasses
 									if (targetType == "Character")
 									{
 										// Get the character
-										var targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+										var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
 										smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetChar.GetFullName(), ""));
 									}
 									else
@@ -317,7 +317,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (targetType == "Character")
 			{
 				// Get the character
-				targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+				targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
 
 				// Get the toughness and the hitpoints
 				targetToughness = targetChar.Attributes.GetToughness();
@@ -524,10 +524,10 @@ namespace SlackMUDRPG.CommandClasses
 			if (targetType == "Character")
 			{
 				// Get the character
-				targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+				targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
 
-				// Get the toughness and the hitpoints
-				targetToughness = targetChar.Attributes.GetToughness();
+                // Get the toughness and the hitpoints
+                targetToughness = targetChar.Attributes.GetToughness();
 				targetHP = targetChar.Attributes.HitPoints;
 				targetName = targetChar.GetFullName();
 				destroyedObjectType = "the corpse of " + targetName;
@@ -570,7 +570,7 @@ namespace SlackMUDRPG.CommandClasses
 					if (targetType == "Character")
 					{
 						// TODO Add "Die" method to the character
-						targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+						targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
 						targetChar.Die();
 						oldItemName = targetChar.GetFullName();
 						newItemName = destroyedObjectType;
@@ -619,7 +619,7 @@ namespace SlackMUDRPG.CommandClasses
 					if (targetType == "Character")
 					{
 						// TODO Update a character HP
-						targetChar = smc.GetRoom().GetPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+						targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
 						targetChar.Attributes.HitPoints = targetChar.Attributes.HitPoints - (int)actualDamageAmount;
 						if ((int)actualDamageAmount > 0)
 						{

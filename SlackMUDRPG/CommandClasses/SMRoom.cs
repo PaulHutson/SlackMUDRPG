@@ -174,6 +174,22 @@ namespace SlackMUDRPG.CommandClasses
             return npcsInLocation;
         }
 
+        public List<SMCharacter> GetAllPeople()
+        {
+            List<SMCharacter> lsmc = this.GetPeople();
+            List<SMNPC> lnpcs = this.GetNPCs();
+
+            if (lnpcs != null)
+            {
+                foreach(SMNPC npc in lnpcs)
+                {
+                    lsmc.Add(npc);
+                }
+            }
+
+            return lsmc;
+        }
+
         /// <summary>
         /// Gets a list of all the people in the room.
         /// </summary>

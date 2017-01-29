@@ -166,6 +166,7 @@
     <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Weaponsmith.json" />
     <Content Include="JSON\NPCs\Guard-LandingArea.json" />
     <Content Include="JSON\NPCs\PodgyClerk.json" />
+    <Content Include="JSON\Objects\Container.WoodenChest.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

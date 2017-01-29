@@ -76,7 +76,7 @@ namespace SlackMUDRPG.CommandClasses
                             ProcessConversation(NPCRS, invokingCharacter);
                             break;
 						case "Attack":
-                            // TODO
+                            this.Attack(invokingCharacter.GetFullName());
                             break;
                         case "UseSkill":
                             // TODO
