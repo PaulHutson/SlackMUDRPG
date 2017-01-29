@@ -21,6 +21,9 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("NPCMovementTarget")]
         public NPCMovementTarget NPCMovementTarget { get; set; }
 
+        // Used for in memory storing of responses requested from a character
+        public List<SMNPCAwaitingCharacterResponse> AwaitingCharacterResponses { get; set; }
+
         public void RespondToAction(string actionType, SMCharacter invokingCharacter)
         {
             // Get a list of characters that respond to this action type in the room
@@ -72,7 +75,7 @@ namespace SlackMUDRPG.CommandClasses
                         case "Conversation":
                             ProcessConversation(NPCRS, invokingCharacter);
                             break;
-                        case "Attack":
+						case "Attack":
                             // TODO
                             break;
                         case "UseSkill":
@@ -145,17 +148,125 @@ namespace SlackMUDRPG.CommandClasses
                         break;
                 }
 
-                if (npccs.NextStep != null)
-                {
-                    string[] splitNextStep = npccs.NextStep.Split('.');
-                    if (splitNextStep[1] != "0")
-                    {
-                        System.Threading.Thread.Sleep(int.Parse(splitNextStep[1]) * 1000);
-                        ProcessConversationStep(npcc, splitNextStep[0], invokingCharacter);
-                    }
-                }
+				if (npccs.ResponseOptions != null)
+				{
+					if (npccs.ResponseOptions.Count > 0)
+					{
+						ProcessResponseOptions(npcc, npccs, invokingCharacter);
+					}
+				}
+
+				if (npccs.NextStep != null)
+				{
+					string[] splitNextStep = npccs.NextStep.Split('.');
+					if (splitNextStep[1] != "0")
+					{
+						System.Threading.Thread.Sleep(int.Parse(splitNextStep[1]) * 1000);
+					}
+					ProcessConversationStep(npcc, splitNextStep[0], invokingCharacter);
+				}
             }
         }
+
+        private void ProcessResponseOptions(NPCConversations npcc, NPCConversationStep npccs, SMCharacter invokingCharacter)
+        {
+            string responseOptions = OutputFormatterFactory.Get().Bold(this.GetFullName() + " Responses:" + OutputFormatterFactory.Get().NewLine);
+			List<ShortcutToken> stl = new List<ShortcutToken>();
+
+			foreach (NPCConversationStepResponseOptions npcccsro in npccs.ResponseOptions)
+            {
+                responseOptions += OutputFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " (" + npcccsro.ResponseOptionShortcut + ")");
+				ShortcutToken st = new ShortcutToken();
+				st.ShortCutToken = npcccsro.ResponseOptionShortcut;
+				stl.Add(st);
+			}
+
+            if (this.AwaitingCharacterResponses == null)
+            {
+                this.AwaitingCharacterResponses = new List<SMNPCAwaitingCharacterResponse>();
+            }
+			
+            SMNPCAwaitingCharacterResponse acr = new SMNPCAwaitingCharacterResponse();
+			acr.ConversationID = npcc.ConversationID;
+            acr.ConversationStep = npccs.StepID;
+            acr.WaitingForCharacter = invokingCharacter;
+
+            string nextStepAfterTimeout = null;
+            int timeout = 60;
+            if (npccs.NextStep != null)
+            {
+                string[] getNextStep = npccs.NextStep.Split('.');
+                nextStepAfterTimeout = getNextStep[0];
+                timeout = int.Parse(getNextStep[1]);
+            }
+            
+            acr.ConversationStepAfterTimeout = nextStepAfterTimeout;
+            acr.UnixTimeStampTimeout = Utility.Utils.GetUnixTimeOffset(timeout);
+
+            this.AwaitingCharacterResponses.Add(acr);
+
+			invokingCharacter.SetAwaitingResponse(this.UserID, stl, timeout);
+			invokingCharacter.sendMessageToPlayer(responseOptions);
+		}
+
+		public void ProcessCharacterResponse(string responseShortCut, SMCharacter invokingCharacter)
+		{
+			// Get the current unix time
+			int currentUnixTime = Utility.Utils.GetUnixTime();
+
+			// Double check we're not going to get a null exception
+			if (this.AwaitingCharacterResponses != null)
+			{
+				// Delete all responses over that time
+				this.AwaitingCharacterResponses.RemoveAll(awaitingitems => awaitingitems.UnixTimeStampTimeout < currentUnixTime);
+
+				if (this.AwaitingCharacterResponses.Count > 0)
+				{
+					// Get the Character Response.
+					SMNPCAwaitingCharacterResponse acr = this.AwaitingCharacterResponses.FirstOrDefault(rw => rw.WaitingForCharacter.UserID == invokingCharacter.UserID);
+
+					// Make sure we've returned something
+					if (acr != null)
+					{
+						// Load the conversation
+						NPCConversations npcc = this.NPCConversationStructures.FirstOrDefault(nc => nc.ConversationID == acr.ConversationID);
+						if (npcc != null)
+						{
+							// Get the relevant part of the conversation to go to
+							NPCConversationStep currentStep = npcc.ConversationSteps.FirstOrDefault(step => step.StepID == acr.ConversationStep);
+							
+							if (currentStep != null)
+							{
+								NPCConversationStepResponseOptions nextstep = currentStep.ResponseOptions.FirstOrDefault(ro => ro.ResponseOptionShortcut == responseShortCut);
+								
+								if (nextstep != null)
+								{
+									NPCResponseOptionAction nroa = nextstep.ResponseOptionActionSteps.FirstOrDefault();
+
+									if (nroa != null)
+									{
+										// Get the conversation / step to go to.
+										string[] convostep = nroa.AdditionalData.Split('.');
+
+										// check whether the conversation is the same as the original if not get the new one
+										if (convostep[0] != npcc.ConversationID)
+										{
+											npcc = this.NPCConversationStructures.FirstOrDefault(nc => nc.ConversationID == convostep[0]);
+										}
+
+										// Remove the item from the awaiting items.
+										AwaitingCharacterResponses.Remove(acr);
+
+										// process it
+										ProcessConversationStep(npcc, convostep[1], invokingCharacter);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 
         private string ProcessResponseString(string responseStringToProcess, SMCharacter invokingCharacter)
         {
@@ -165,6 +276,8 @@ namespace SlackMUDRPG.CommandClasses
             return responseString;
         }
      }
+
+    #region "NPC Structures"
 
     /// <summary>
     /// Response types can be of the following types:
@@ -309,6 +422,18 @@ namespace SlackMUDRPG.CommandClasses
         public string AdditionalData { get; set; }
     }
 
+    /// <summary>
+    /// In memory store of awaiting responses and their timeout (if any)
+    /// </summary>
+    public class SMNPCAwaitingCharacterResponse
+    {
+        public SMCharacter WaitingForCharacter { get; set; }
+		public string ConversationID { get; set; }
+		public string ConversationStep { get; set; }
+        public int UnixTimeStampTimeout { get; set; }
+        public string ConversationStepAfterTimeout { get; set; }
+    }
+
     public class NPCMovements
     {
         [JsonProperty("TimeOfDay")]
@@ -332,4 +457,6 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("LastMoveUnixTime")]
         public int LastMoveUnixTime { get; set; }
     }
+
+    #endregion
 }

@@ -137,7 +137,7 @@
         {
           "StepID": "random1-1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "smiles and dips his head respectively towards {playercharacter}.",
+          "AdditionalData": "smiles and dips his head respectfully towards {playercharacter}.",
           "NextStep": null,
           "ResponseOptions": null
         },
@@ -190,7 +190,7 @@
           "StepID": "3",
           "Scope": "emotetoplayer",
           "AdditionalData": "winks in your direction.",
-          "NextStep": "6.30",
+          "NextStep": null,
           "ResponseOptions": [
             {
               "ResponseOptionShortcut": "Y",

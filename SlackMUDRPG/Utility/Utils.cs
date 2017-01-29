@@ -145,7 +145,21 @@ namespace SlackMUDRPG.Utility
 
 			return calulatedArgs;
 		}
-	}
 
-	#endregion
+        #endregion
+
+        #region "Time Functions"
+
+        public static int GetUnixTime()
+        {
+            return (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+        }
+
+        public static int GetUnixTimeOffset(int additionalSeconds)
+        {
+            return GetUnixTime() + additionalSeconds;
+        }
+
+        #endregion
+    }
 }

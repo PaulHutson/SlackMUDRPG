@@ -239,6 +239,48 @@
       "RequiredSkill": null
     },
 		{
+			"CommandFamily": "Chat",
+			"CommandBaseName": "response",
+			"CommandName": "resp",
+			"CommandDescription": "Enables the player to respond to a question posed by an NPC in game.",
+			"CommandSyntax": "resp <option shortcut>",
+			"CommandExpression": "resp {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "ProcessResponse",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "resp Y  (would be responding Y to a question from an NPC).",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Chat",
+			"CommandBaseName": "response",
+			"CommandName": "respond",
+			"CommandDescription": "Enables the player to respond to a question posed by an NPC in game.",
+			"CommandSyntax": "respond <option shortcut>",
+			"CommandExpression": "respond {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "ProcessResponse",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "respond Y  (would be responding Y to a question from an NPC).",
+			"RequiredSkill": null
+		},
+		{
+			"CommandFamily": "Chat",
+			"CommandBaseName": "answer",
+			"CommandName": "answer",
+			"CommandDescription": "Enables the player to answer a question posed by an NPC in game.",
+			"CommandSyntax": "answer <option shortcut>",
+			"CommandExpression": "answer {.+}",
+			"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+			"CommandMethod": "ProcessResponse",
+			"PassCommandAsFirstArg": false,
+			"PassQueryParamAsFirstArg": null,
+			"ExampleUsage": "answer Y  (would be answering Y to a question from an NPC).",
+			"RequiredSkill": null
+		},
+		{
 			"CommandFamily": "Location",
 			"CommandBaseName": "look",
 			"CommandName": "look",

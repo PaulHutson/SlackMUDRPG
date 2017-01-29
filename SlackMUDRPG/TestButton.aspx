@@ -29,11 +29,8 @@
         <div>
             CharID : <asp:TextBox runat="server" ID="tb_CharID">123</asp:TextBox><br />
             ShortcutRoomMove : <asp:TextBox runat="server" ID="tb_RoomShortcutText"></asp:TextBox><br />
-            Talk : <asp:TextBox runat="server" ID="tb_ChatText"></asp:TextBox> <asp:Button runat="server" ID="btn_Say" Text="Say" OnClick="btn_Say_Click" OnClientClick="scrollBoxToBottom();" />  
-            <asp:Button runat="server" ID="btn_Shout" Text="Shout" OnClick="btn_Shout_Click" OnClientClick="scrollBoxToBottom();" />  
-            <asp:Button runat="server" ID="btn_OOC" Text="OOC" OnClientClick="scrollBoxToBottom();" OnClick="btn_OOC_Click" />  
-            <%--<asp:Button runat="server" ID="btn_Whisper" Text="Whisper" OnClick="btn_Whisper_Click" OnClientClick="scrollBoxToBottom();" />--%>
-            <br /><br />
+            Talk :	<asp:TextBox runat="server" ID="tb_ChatText"></asp:TextBox> <asp:Button runat="server" ID="btn_Say" Text="Say" OnClick="btn_Say_Click" OnClientClick="scrollBoxToBottom();" />  <asp:Button runat="server" ID="btn_Shout" Text="Shout" OnClick="btn_Shout_Click" OnClientClick="scrollBoxToBottom();" />
+					          <asp:Button runat="server" ID="btn_Resp" Text="Respond" OnClientClick="scrollBoxToBottom();" OnClick="btn_Resp_Click" />  <%--<asp:Button runat="server" ID="btn_Whisper" Text="Whisper" OnClick="btn_Whisper_Click" OnClientClick="scrollBoxToBottom();" />--%><br /><br />
         </div>
         <div>
             <asp:Button runat="server" ID="btn_Test" Text="Test Login" OnClick="btn_Test_Click" OnClientClick="scrollBoxToBottom();" />
@@ -42,6 +39,7 @@
             <asp:Button runat="server" ID="btn_MoveToRoom" Text="Move To Room Shortcut" OnClick="btn_MoveRoom_Click" OnClientClick="scrollBoxToBottom();" />
 			<asp:Button runat="server" ID="btn_Look" Text="Look (at current location)" OnClientClick="scrollBoxToBottom();" OnClick="btn_Look_Click" /><br />
             <asp:Button runat="server" ID="btn_Inspect_Rob" Text="Inspect Rob Curren2" OnClientClick="scrollBoxToBottom();" OnClick="btn_Inspect_Rob_Click" />
+			<asp:Button runat="server" ID="btn_Inspect_WearyTraveller" Text="Inspect Weary Traveller" OnClientClick="scrollBoxToBottom();" OnClick="btn_Inspect_WearyTraveller_Click" />
             <asp:Button runat="server" ID="Button1" Text="Inspect Wooden Pell" OnClientClick="scrollBoxToBottom();" OnClick="Button1_Click" />
         </div>
 
