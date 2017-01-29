@@ -1085,7 +1085,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			// Add item to container
 			output = $"Congratulations you put {itemToPut.SingularPronoun} \"{itemToPut.ItemName}\" ";
-			output += $"in your {targetContainer.ItemName}!";
+			output += $"in {targetContainer.SingularPronoun} {targetContainer.ItemName}!";
 
 			targetContainer.HeldItems.Add(itemToPut); this.sendMessageToPlayer(this.Outputer.Italic(output));
 			this.SaveToApplication();
