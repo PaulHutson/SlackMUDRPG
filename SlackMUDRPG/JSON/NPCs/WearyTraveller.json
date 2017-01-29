@@ -122,21 +122,21 @@
       "ConversationStep": [
         {
           "StepID": "Choice",
-          "Scope": null,
+          "Scope": "choice",
           "AdditionalData": "random1,random2",
           "NextStep": null,
           "ResponseOptions": null
         },
         {
           "StepID": "random1",
-          "Scope": "say",
+          "Scope": "saytoplayer",
           "AdditionalData": "Welcome to Ravensmere!",
           "NextStep": "random1-1.1",
           "ResponseOptions": null
         },
         {
           "StepID": "random1-1",
-          "Scope": "emote",
+          "Scope": "emotetoplayer",
           "AdditionalData": "smiles and dips his head respectively towards {playercharacter}.",
           "NextStep": null,
           "ResponseOptions": null

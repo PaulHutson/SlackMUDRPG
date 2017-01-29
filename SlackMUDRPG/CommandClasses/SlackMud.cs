@@ -36,13 +36,15 @@ namespace SlackMUDRPG.CommandClasses
 				// If they don't exist inform the person as to how to create a new user
 				returnString = "You must create a character, to do so, use the command /sm CreateCharacter FIRSTNAME,LASTNAME,SEX,AGE\n";
 				returnString += "i.e. /sm CreateCharacter Paul,Hutson,m,34";
-			}
+
+                character.sendMessageToPlayer(returnString);
+            }
 			else
 			{
 				if ((character != null) && (!newCharacter))
 				{
-                    returnString = "You're already logged in!";
-				}
+                    character.sendMessageToPlayer("You're already logged in!");
+                }
 				else
 				{
 					// Get the character
@@ -53,14 +55,7 @@ namespace SlackMUDRPG.CommandClasses
                     {
                         character.ResponseURL = responseURL;
                     }
-
-					SMRoom room = character.GetRoom();
-					if (room != null)
-					{
-						// Announce someone has walked into the room.
-						room.Announce("_" + character.GetFullName() + " walks in._");
-					}
-
+                    
 					if (!newCharacter)
 					{
 						returnString = "Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")\n";
@@ -71,11 +66,21 @@ namespace SlackMUDRPG.CommandClasses
 						returnString += "We've created your character in the magical world of Arrelvia!\n"; // TODO, use a welcome script!
 					}
 					returnString += GetLocationDetails(character.RoomID, character.UserID);
-				}
-			}
+                    
+                    // Return the text output
+                    character.sendMessageToPlayer(returnString);
 
-            // Return the text output
-            character.sendMessageToPlayer(returnString);
+                    // Walk the character in
+                    SMRoom room = character.GetRoom();
+                    if (room != null)
+                    {
+                        // Announce someone has walked into the room.
+                        room.Announce("_" + character.GetFullName() + " walks in._");
+                        room.ProcessNPCReactions("PlayerCharacter.Enter", character);
+                    }
+
+                }
+			}
 		}
 
 		/// <summary>
@@ -295,6 +300,7 @@ namespace SlackMUDRPG.CommandClasses
 			List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
 			SMRoom roomInMem = smrs.FirstOrDefault(smr => smr.RoomID == roomID);
 
+            // If the room is not already in memory load the room
 			if (roomInMem == null)
 			{
 				// Get the right path, and work out if the file exists.
