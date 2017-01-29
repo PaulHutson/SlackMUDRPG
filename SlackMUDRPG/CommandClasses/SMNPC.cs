@@ -124,7 +124,7 @@ namespace SlackMUDRPG.CommandClasses
                         this.Shout(ProcessResponseString(npccs.AdditionalData, invokingCharacter));
                         break;
                     case "whisper":
-                        this.Whisper(ProcessResponseString(npccs.AdditionalData, invokingCharacter), invokingCharacter.GetFullName());
+                        this.Whisper(invokingCharacter.GetFullName(), ProcessResponseString(npccs.AdditionalData, invokingCharacter));
                         break;
                     case "emote":
                         this.Emote(ProcessResponseString(npccs.AdditionalData, invokingCharacter));

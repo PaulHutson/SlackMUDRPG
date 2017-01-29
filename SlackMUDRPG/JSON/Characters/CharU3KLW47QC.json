@@ -252,6 +252,21 @@
         }
       ],
       "TimeOut": 1485700932
+    },
+    {
+      "NPCID": "WearyTraveller1",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        },
+        {
+          "ShortCutToken": "I"
+        }
+      ],
+      "TimeOut": 1485701577
     }
   ]
 }

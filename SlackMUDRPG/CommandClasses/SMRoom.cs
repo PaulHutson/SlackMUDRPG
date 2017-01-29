@@ -474,19 +474,18 @@ namespace SlackMUDRPG.CommandClasses
 		/// /// <param name="whisperToName">The character who is being whispered to</param>
 		public void ChatWhisper(string speech, SMCharacter charSpeaking, string whisperToName)
 		{
-			// Construct the message
-			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " whispers:", 0) + " \"" + speech + "\"";
-
+			
 			// See if the person being whispered to is in the room
 			SMCharacter smc = this.GetPeople().FirstOrDefault(charWhisperedto => charWhisperedto.GetFullName() == whisperToName);
 			if (smc != null)
 			{
+				// Construct the message
+				string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " whispers:", 0) + " \"" + speech + "\"";
 				this.ChatSendMessage(smc, message);
 			}
 			else
 			{
-				message = "That person doesn't appear to be here?";
-				// TODO Send message to player to say they can't whisper to that person.
+				charSpeaking.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("That person doesn't appear to be here?"));
 			}
 		}
 

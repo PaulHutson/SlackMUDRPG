@@ -1586,8 +1586,9 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="speech">What the character is whispering</param>
 		/// /// <param name="whisperToName">Who the character is whispering to (name)</param>
-		public void Whisper(string speech, string whisperToName)
+		public void Whisper(string whisperToName, string speech)
 		{
+			whisperToName = whisperToName.Replace("\"", "");
             new SlackMud().GetRoom(this.RoomID).ChatWhisper(speech, this, whisperToName);
 		}
 

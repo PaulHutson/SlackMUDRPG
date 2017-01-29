@@ -169,5 +169,12 @@ namespace SlackMUDRPG
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
 			smc.ProcessResponse(tb_ChatText.Text);
 		}
+
+		protected void btn_Whisper_Click(object sender, EventArgs e)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+			string[] whisperToChat = tb_ChatText.Text.Split(',');
+			smc.Whisper(whisperToChat[0], whisperToChat[1]);
+		}
 	}
 }
