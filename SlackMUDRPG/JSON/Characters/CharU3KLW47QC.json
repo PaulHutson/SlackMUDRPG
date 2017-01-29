@@ -8,7 +8,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Ravensmere.Harbour South.Arrivals Area",
+  "RoomID": "Ravensmere.Harbour South.Landing Area",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -221,5 +221,37 @@
       "Name": "LeftFoot"
     }
   ],
-  "ResponseURL": null
+  "ResponseURL": null,
+  "NPCsWaitingForResponses": [
+    {
+      "NPCID": "WearyTraveller1",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        },
+        {
+          "ShortCutToken": "I"
+        }
+      ],
+      "TimeOut": 1485700760
+    },
+    {
+      "NPCID": "WearyTraveller1",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        },
+        {
+          "ShortCutToken": "I"
+        }
+      ],
+      "TimeOut": 1485700932
+    }
+  ]
 }

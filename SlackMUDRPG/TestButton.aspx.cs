@@ -157,5 +157,17 @@ namespace SlackMUDRPG
             SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
             smc.Attack("Paul Hutson");
         }
-    }
+
+		protected void btn_Inspect_WearyTraveller_Click(object sender, EventArgs e)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+			smc.InspectObject("Weary Traveller");
+		}
+
+		protected void btn_Resp_Click(object sender, EventArgs e)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
+			smc.ProcessResponse(tb_ChatText.Text);
+		}
+	}
 }

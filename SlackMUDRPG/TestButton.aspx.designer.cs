@@ -94,6 +94,15 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.Button btn_Shout;
         
         /// <summary>
+        /// btn_Resp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Resp;
+        
+        /// <summary>
         /// btn_Test control.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,15 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_Inspect_Rob;
+        
+        /// <summary>
+        /// btn_Inspect_WearyTraveller control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Inspect_WearyTraveller;
         
         /// <summary>
         /// Button1 control.

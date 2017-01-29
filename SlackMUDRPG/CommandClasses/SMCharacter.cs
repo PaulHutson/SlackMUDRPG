@@ -58,6 +58,8 @@ namespace SlackMUDRPG.CommandClasses
 
 		public string ResponseURL { get; set; }
 
+		public List<AwaitingResponseFromCharacter> NPCsWaitingForResponses { get; set; }
+
 		#region "General Player Functions"
 
 		/// <summary>
@@ -1626,15 +1628,93 @@ namespace SlackMUDRPG.CommandClasses
 			Commands.SendMessage("", "SlackMud", message, "SlackMud", this.UserID, this.ResponseURL);
 		}
 
-        /// <summary>
+		#endregion
+
+		#region "NPC Interaction"
+
+		/// <summary>
+		/// Add an awaiting response item
+		/// </summary>
+		/// <param name="NPCID">The id of the NPC awaiting the response</param>
+		/// <param name="timeOut">The timeout for the response (unix time) response</param>
+		public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut)
+		{
+			if (this.NPCsWaitingForResponses == null)
+			{
+				this.NPCsWaitingForResponses = new List<AwaitingResponseFromCharacter>();
+			}
+
+			AwaitingResponseFromCharacter arfc = new AwaitingResponseFromCharacter();
+			arfc.NPCID = NPCID;
+			arfc.ShortCutTokens = shortCutTokens;
+			arfc.TimeOut = Utility.Utils.GetUnixTimeOffset(timeOut);
+
+			this.NPCsWaitingForResponses.Add(arfc);
+			this.SaveToApplication();
+			this.SaveToFile();
+		}
+
+		/// <summary>
 		/// Process a response to a question
 		/// </summary>
-		/// <param name="announcement">What is being announced to the player</param>
-		//public void Announce(string announcement)
-  //      {
-  //          sendMessageToPlayer(announcement);
-  //      }
+		/// <param name="responseShortcut">The shortcut for the response</param>
+		public void ProcessResponse(string responseShortcut)
+		{
+			// Responded to player
+			bool respondedToPlayer = false;
 
-        #endregion
-    }
+			// Get the current unix time
+			int currentUnixTime = Utility.Utils.GetUnixTime();
+
+			// Delete all awaiting responses after time
+			this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.TimeOut < currentUnixTime);
+
+			// If there are still characters awaiting responses
+			if (this.NPCsWaitingForResponses.Count() > 0)
+			{
+				// First check if we are awaiting any responses with that shortcut token (and aren't timed out)
+				List<AwaitingResponseFromCharacter> NPCIDs = this.NPCsWaitingForResponses.FindAll(awaitingitems => awaitingitems.ShortCutTokens.Count(sct => sct.ShortCutToken == responseShortcut) > 0);
+
+				// If there is something waiting
+				if (NPCIDs.Count > 0)
+				{
+					// Get the NPCs
+					List<SMNPC> lNPCs = new List<SMNPC>();
+					lNPCs = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+
+					foreach (AwaitingResponseFromCharacter NPC in NPCIDs)
+					{
+						// Find out if the NPC is in the same room as the character
+						SMNPC targetNPC = lNPCs.FirstOrDefault(npc => ((npc.UserID == NPC.NPCID) && (npc.RoomID == this.RoomID)));
+						if (targetNPC != null)
+						{
+							// Process the response.
+							targetNPC.ProcessCharacterResponse(responseShortcut, this);
+							respondedToPlayer = true;
+						}
+					}
+					
+				}
+			}
+			
+			if (!respondedToPlayer)
+			{
+				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find a waiting response with that shortcut... did you wait too long to respond?"));
+			}
+		}
+
+		#endregion
+	}
+
+	public class AwaitingResponseFromCharacter
+	{
+		public string NPCID { get; set; }
+		public List<ShortcutToken> ShortCutTokens { get; set; }
+		public int TimeOut { get; set; }
+	}
+
+	public class ShortcutToken
+	{
+		public string ShortCutToken;
+	}
 }
