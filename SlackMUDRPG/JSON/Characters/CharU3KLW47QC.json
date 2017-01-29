@@ -122,7 +122,7 @@
         "ItemFamily": "Backpack",
         "ItemDescription": "Basic small backpack that all players start with.",
         "ItemWeight": 0,
-        "ItemCapacity": 0,
+        "ItemCapacity": 10,
         "ItemSize": 1,
         "HitPoints": 0,
         "MaxHitPoints": 0,
