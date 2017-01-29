@@ -170,6 +170,8 @@
     <Content Include="JSON\Commands\Commands.Chat.json" />
     <Content Include="JSON\Commands\Commands.Inventory.json" />
     <Content Include="JSON\Commands\Commands.Character.json" />
+    <Content Include="JSON\NPCs\Guard-LandingArea.json" />
+    <Content Include="JSON\NPCs\PodgyClerk.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

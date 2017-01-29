@@ -4,7 +4,7 @@
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
   "Outside": false,
-	"RoomDescription": "Awaiting description",
+	"RoomDescription": "Everything from resplendent shining plate armor, to guilded chainmail vests hang from the walls. Great shields emblazoned with colourful crests rest on the workshop tables, thier magnificent artistic detail just as important as their protection. ",
 	"RoomExits": [
 		{
 			"Shortcut": "SFB",
