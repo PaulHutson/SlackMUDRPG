@@ -1,0 +1,31 @@
+{
+	"RoomID": "Ravensmere.Military District.Steelforge Blacksmiths",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "The intense heat hits you as you walk in and the acrid smell of coal smoke and sulpher are so powerful you struggle to breathe. It's quite dark in here but for the warm glow of molten metal waiting to be moulded by the blacksmiths. There seem to be seperate workshops for different disciplines of smithing...",
+	"RoomExits": [
+		{
+			"Shortcut": "GP",
+			"Description": "Grand Parade (Road)",
+			"RoomID": "Ravensmere.Military District.Grand Parade"
+		},
+		{
+			"Shortcut": "WS",
+			"Description": "Steelforge Weaponsmith",
+			"RoomID": "Ravensmere.Military District.Steelforge Weaponsmith"
+		},
+		{
+			"Shortcut": "AS",
+			"Description": "Steelforge Armoursmith",
+			"RoomID": "Ravensmere.Military District.Steelforge Armoursmith"
+		},
+		{
+			"Shortcut": "CS",
+			"Description": "Steelforge Craftsmith",
+			"RoomID": "Ravensmere.Military District.Steelforge Craftsmith"
+		}
+	],
+	"RoomItems": null
+}

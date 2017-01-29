@@ -10,6 +10,11 @@
 			"Shortcut": "SL",
 			"Description": "Swabbies Lane",
 			"RoomID": "Ravensmere.Harbour South.Swabbies Lane"
+		},
+		{
+			"Shortcut": "RP",
+			"Description": "Ramparts Parade",
+			"RoomID": "Ravensmere.Military District.Ramparts Parade"
 		}
 	],
 	"RoomItems": null

@@ -158,6 +158,12 @@
     <Content Include="JSON\Skills\Skill.BasicAttack.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Bridge Row.json" />
     <Content Include="JSON\NPCs\WearyTraveller.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Ramparts Parade.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Grand Parade.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Blacksmiths.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Armorsmith.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Craftsmiths.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Weaponsmith.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
