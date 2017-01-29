@@ -89,7 +89,6 @@
     <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
-    <Content Include="JSON\Commands\NewCharacter.json" />
     <Content Include="JSON\GeneralText\NoCharacter.json" />
     <Content Include="JSON\GeneralText\WelcomeMessage.json" />
     <Content Include="JSON\Scripts\EnterWorldProcess.json" />
@@ -175,7 +174,7 @@
     <Content Include="JSON\Misc\Slots.BaseCharacter.json" />
     <Content Include="JSON\Objects\Weapon.WoodenStick.json" />
     <Content Include="JSON\Commands\Help.json" />
-    <Content Include="JSON\Commands\ClassBuilder.json" />
+    <Content Include="JSON\Misc\ClassBuilder.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

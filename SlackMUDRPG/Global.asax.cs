@@ -48,7 +48,7 @@ namespace SlackMUDRPG
 			// Load class builder specs into memory for usage later
 			// Used for creating objects that are used to call user commands on
 			ClassBuilderSpecs cbs = new ClassBuilderSpecs();
-			string specsPath = FilePathSystem.GetFilePath("Commands", "ClassBuilder");
+			string specsPath = FilePathSystem.GetFilePath("Misc", "ClassBuilder");
 
 			if (File.Exists(specsPath))
 			{
