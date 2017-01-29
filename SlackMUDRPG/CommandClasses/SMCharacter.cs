@@ -20,7 +20,10 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("description")]
         public string Description { get; set; }
 
-        [JsonProperty("lastinteractiondate")]
+		[JsonProperty("notes")]
+		public List<PlayerNote> Notes { get; set; }
+
+		[JsonProperty("lastinteractiondate")]
 		public DateTime LastInteractionDate { get; set; }
 
 		[JsonProperty("lastlogindate")]
@@ -325,6 +328,68 @@ namespace SlackMUDRPG.CommandClasses
 				}
 			}
 			return characterLevel.ToString();
+		}
+
+		/// <summary>
+		/// Add a new note to the player notes
+		/// </summary>
+		/// <param name="addition">The note to add</param>
+		public void AddToNotes(string addition)
+		{
+			if (Notes == null)
+			{
+				this.Notes = new List<PlayerNote>();
+			}
+			PlayerNote newNote = new PlayerNote();
+			newNote.Note = addition;
+			this.Notes.Add(newNote);
+			this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Note added to journal"));
+
+			this.SaveToApplication();
+			this.SaveToFile();
+		}
+
+		/// <summary>
+		/// Get the notes
+		/// </summary>
+		public void GetNotes()
+		{
+			string notes = OutputFormatterFactory.Get().Bold("Your Journal:");
+			if ((Notes != null) && (Notes.Count>0))
+			{
+				int countNotes = 0;
+				foreach(PlayerNote pn in this.Notes)
+				{
+					countNotes++;
+					notes += OutputFormatterFactory.Get().ListItem(countNotes + ") " + pn.Note);
+				}
+			}
+			else
+			{
+				notes += OutputFormatterFactory.Get().ListItem("You have no notes, to add a note use the command \"add note whateveryouwant\"");
+			}
+			this.sendMessageToPlayer(notes);
+		}
+
+		/// <summary>
+		/// Remove a note from player notes
+		/// </summary>
+		/// <param name="removeitem">The item to remove</param>
+		public void RemoveFromNotes(string removeitem)
+		{
+			if (Notes != null)
+			{
+				try
+				{
+					this.Notes.RemoveAt(int.Parse(removeitem)-1);
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Note removed from journal."));
+					this.SaveToApplication();
+					this.SaveToFile();
+				} catch
+				{
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not remove that note, please check the number and try again."));
+				}
+			}
 		}
 
 		#endregion
@@ -1767,5 +1832,10 @@ namespace SlackMUDRPG.CommandClasses
 	public class ShortcutToken
 	{
 		public string ShortCutToken;
+	}
+
+	public class PlayerNote
+	{
+		public string Note;
 	}
 }
