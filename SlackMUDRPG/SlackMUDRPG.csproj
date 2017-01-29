@@ -164,6 +164,8 @@
     <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Armorsmith.json" />
     <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Craftsmiths.json" />
     <Content Include="JSON\Locations\LocRavensmere.Military District.Steelforge Weaponsmith.json" />
+    <Content Include="JSON\NPCs\Guard-LandingArea.json" />
+    <Content Include="JSON\NPCs\PodgyClerk.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
