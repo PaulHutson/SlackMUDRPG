@@ -1144,6 +1144,36 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Counts the number of items owned by the character that match a given id, name or family.
+		/// </summary>
+		/// <param name="itemIdentifier">Id, name or family to match.</param>
+		/// <returns>Coutn of matching items.</returns>
+		public int CountOwnedItems(string itemIdentifier)
+		{
+			int count = 0;
+
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+					{
+						count++;
+					}
+
+					if (slot.EquippedItem.CanHoldOtherItems())
+					{
+						count += SMItemHelper.CountItemsInContainer(slot.EquippedItem, itemIdentifier);
+					}
+				}
+			}
+
+			// TODO account for slot in clothing e.g. pockets
+
+			return count;
+		}
+
+		/// <summary>
 		/// Finds an item in the current room with a matching identifier.
 		/// </summary>
 		/// <returns>The item in room.</returns>
@@ -1260,11 +1290,6 @@ namespace SlackMUDRPG.CommandClasses
 
 			return item;
 		}
-
-		//private int CountOwnedItems(string itemIdentifier)
-		//{
-
-		//}
 
 		/// <summary>
 		/// Gets an SMSlot representing an empty hand on the character, optionally weighted to the right hand first.
@@ -1532,48 +1557,6 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return false;
-		}
-
-
-		/// <summary>
-		/// Counts the number of a named item the character owns.
-		/// </summary>
-		/// <returns>The count.</returns>
-		/// <param name="name">ItemName.</param>
-		public int CountOwnedItemsByName(string name)
-		{
-			int count = 0;
-
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					if (slot.EquippedItem.ItemName.ToLower() == name.ToLower())
-					{
-						count++;
-					}
-					else if (slot.EquippedItem.ItemFamily.ToLower() == name.ToLower())
-					{
-						count++;
-					}
-
-					if (slot.EquippedItem.ItemType.ToLower() == "container")
-					{
-                        if (slot.EquippedItem.HeldItems != null)
-                        {
-                            foreach (SMItem itemInCountainer in slot.EquippedItem.HeldItems)
-                            {
-                                if ((itemInCountainer != null && itemInCountainer.ItemName.ToLower() == name.ToLower()) || (itemInCountainer.ItemFamily.ToLower() == name.ToLower()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-					}
-				}
-			}
-
-			return count;
 		}
 
 		/// <summary>

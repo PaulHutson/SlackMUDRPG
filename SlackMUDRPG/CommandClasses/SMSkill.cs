@@ -196,7 +196,7 @@ namespace SlackMUDRPG.CommandClasses
             if (hasItem)
             {
                 // Check if, in the list, they have the required item / amount
-                hasEnoughOfItem = (smc.CountOwnedItemsByName(splitRequiredObjectType[1]) >= requiredObjectAmount);
+                hasEnoughOfItem = (smc.CountOwnedItems(splitRequiredObjectType[1]) >= requiredObjectAmount);
             }
             
             return hasItem && hasEnoughOfItem;
@@ -721,7 +721,7 @@ namespace SlackMUDRPG.CommandClasses
 										string[] materialType = smrm.MaterialType.Split('.');
                                         // Check if the character is holding the item or has it equipped
 
-                                        int numberFound = smc.CountOwnedItemsByName(materialType[1]);
+                                        int numberFound = smc.CountOwnedItems(materialType[1]);
 
                                         if (numberFound > 0)
 										{

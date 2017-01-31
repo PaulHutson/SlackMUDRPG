@@ -185,6 +185,30 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Counts the number of items in a given container that match a given id, name or family.
+		/// </summary>
+		/// <param name="container">The countainer to look in.</param>
+		/// <param name="itemIdentiifier">The id, name or family to match.</param>
+		/// <returns>The count of matching items.</returns>
+		public static int CountItemsInContainer(SMItem container, string itemIdentiifier)
+		{
+			int count = 0;
+
+			if (container.HeldItems != null && container.HeldItems.Any())
+			{
+				foreach (SMItem item in container.HeldItems)
+				{
+					if (ItemMatches(item, itemIdentiifier))
+					{
+						count++;
+					}
+				}
+			}
+
+			return count;
+		}
+
+		/// <summary>
 		/// Finds an item in a list recursivly looking through containers within containers.
 		/// </summary>
 		/// <returns>The item from the list.</returns>
