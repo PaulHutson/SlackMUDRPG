@@ -1087,7 +1087,10 @@ namespace SlackMUDRPG.CommandClasses
 			output = $"Congratulations you put {itemToPut.SingularPronoun} \"{itemToPut.ItemName}\" ";
 			output += $"in {targetContainer.SingularPronoun} {targetContainer.ItemName}!";
 
-			targetContainer.HeldItems.Add(itemToPut); this.sendMessageToPlayer(this.Outputer.Italic(output));
+			SMItemHelper.PutItemInContainer(itemToPut, targetContainer);
+			this.sendMessageToPlayer(this.Outputer.Italic(output));
+
+			this.GetRoom().SaveToApplication();
 			this.SaveToApplication();
 		}
 
@@ -1325,6 +1328,7 @@ namespace SlackMUDRPG.CommandClasses
 					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
 					{
 						slot.EquippedItem = null;
+						this.SaveToApplication();
 						break;
 					}
 				}
