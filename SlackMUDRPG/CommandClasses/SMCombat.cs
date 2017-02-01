@@ -20,24 +20,26 @@ namespace SlackMUDRPG.CommandClasses
 			// Check that the target has hitpoints
 			if (targetCharacter.Attributes.HitPoints > 0)
 			{
-				// Use the skill
-				attackingCharacter.UseSkill(GetSkillToUse(attackingCharacter), targetCharacter.GetFullName(), true);
+				// Work out if this is an NPC or not
+				SMRoom room = attackingCharacter.GetRoom();
 
-                // Work out if this is an NPC or not
-                SMNPC targetNPC = targetCharacter.GetRoom().GetNPCs().FirstOrDefault(checkChar => checkChar.GetFullName() == targetCharacter.GetFullName());
+				SMNPC targetNPC = room.GetNPCs().FirstOrDefault(checkChar => checkChar.GetFullName() == targetCharacter.GetFullName());
 
                 if (targetNPC != null)
                 {
-                    targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.AttacksThem", attackingCharacter);
+                    room.ProcessNPCReactions("PlayerCharacter.AttacksThem", attackingCharacter);
                 }
 
-                List<SMNPC> NPCsInRoom = targetCharacter.GetRoom().GetNPCs();
+                List<SMNPC> NPCsInRoom = targetCharacter.GetRoom().GetNPCs().FindAll(npc => npc.GetFullName() != attackingCharacter.GetFullName());
 
-                foreach(SMNPC NPCInRoom in NPCsInRoom)
+                if (NPCsInRoom.Count > 0)
                 {
-                    NPCInRoom.GetRoom().ProcessNPCReactions("PlayerCharacter.Attacks", attackingCharacter);
+					room.ProcessNPCReactions("PlayerCharacter.Attack", attackingCharacter);
                 }
-            }
+
+				// Use the skill
+				attackingCharacter.UseSkill(GetSkillToUse(attackingCharacter), targetCharacter.GetFullName(), true);
+			}
 			else // Report that the target is already dead...
 			{
 				attackingCharacter.sendMessageToPlayer(targetCharacter.GetFullName() + " is already dead!");

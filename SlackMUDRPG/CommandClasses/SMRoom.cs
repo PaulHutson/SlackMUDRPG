@@ -598,7 +598,7 @@ namespace SlackMUDRPG.CommandClasses
         public void ProcessNPCReactions(string actionType, SMCharacter invokingCharacter)
         {
             List<SMNPC> lNPCs = new List<SMNPC>();
-            lNPCs = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+            lNPCs = ((List<SMNPC>)HttpContext.Current.Application["SMNPCs"]).FindAll(npc => ((npc.RoomID == invokingCharacter.RoomID) && (npc.GetFullName() != invokingCharacter.GetFullName())));
 
             // Check if the character already exists or not.
             if (lNPCs != null)

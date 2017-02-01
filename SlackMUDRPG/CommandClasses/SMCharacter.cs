@@ -686,9 +686,7 @@ namespace SlackMUDRPG.CommandClasses
             SMRoom currentRoom = this.GetRoom();
 
             currentRoom.AddItem(corpse);
-            currentRoom.Announce("While dying " + this.GetFullName() + "dropped the following items: " + droppedItemsAnnouncement);
-
-
+			
             // Then move the player back to the hospital
             this.RoomID = "Hospital";
             this.Attributes.HitPoints = this.Attributes.MaxHitPoints/2;

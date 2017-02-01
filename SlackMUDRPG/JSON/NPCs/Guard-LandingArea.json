@@ -146,11 +146,15 @@
       "ResponseTimeOfDay": "all",
       "AdditionalData": null,
       "Faction": null,
-      "Frequency": 50,
+      "Frequency": 100,
       "ResponseSteps": [
-        {
-          "ResponseStepType": "Conversation",
-          "ResponseStepData": "Attack.1"
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Attack.1"
+				},
+				{
+          "ResponseStepType": "Attack",
+          "ResponseStepData": null
         }
       ]
     }
@@ -194,14 +198,14 @@
           "StepID": "1",
           "Scope": "saytoplayer",
           "AdditionalData": "You're going to regret that...",
-          "NextStep": "2.5",
+          "NextStep": null,
           "ResponseOptions": null
         },
         {
-          "StepID": "1",
+          "StepID": "2",
           "Scope": "Attack",
           "AdditionalData": "InvokingCharacter",
-          "NextStep": "1.60",
+          "NextStep": null,
           "ResponseOptions": null
         }
       ]

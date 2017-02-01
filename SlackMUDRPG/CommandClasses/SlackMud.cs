@@ -122,6 +122,19 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Gets a character and also loads the character to memory if it isn't already there.
+		/// </summary>
+		/// <param name="userID">The id of the character you want to load</param>
+		/// <returns>A character</returns>
+		public SMNPC GetNPC(string userID)
+		{
+			// Get the room file if it exists
+			SMNPC charInMem = ((List<SMNPC>)HttpContext.Current.Application["SMNPCs"]).FirstOrDefault(smc => smc.UserID == userID);
+			
+			return charInMem;
+		}
+
+		/// <summary>
 		/// Gets a character object, and loads it into memory.
 		/// </summary>
 		/// <param name="userID">userID is based on the id from the slack channel</param>

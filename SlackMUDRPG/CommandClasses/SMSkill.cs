@@ -55,9 +55,14 @@ namespace SlackMUDRPG.CommandClasses
             {
                 // Increase the loop number
                 var newSkillLoop = skillLoop + 1;
+				string originCharUserID = smc.UserID;
 
 			    // Get the actual instance of the character!
-			    smc = new SlackMud().GetCharacter(smc.UserID);
+			    smc = new SlackMud().GetCharacter(originCharUserID); // TODO make this work with an NPC!
+				if (smc == null)
+				{
+					smc = new SlackMud().GetNPC(originCharUserID);
+				}
 
 			    // Set the character activity
 			    if (beginSkillUse)
@@ -84,6 +89,7 @@ namespace SlackMUDRPG.CommandClasses
 									{
 										smc.sendMessageToPlayer(smss.FailureOutput);
 										continueCycle = false;
+										smc.StopActivity();
 									}
 									break;
 								case "EquippedObject":
@@ -91,6 +97,7 @@ namespace SlackMUDRPG.CommandClasses
 									{
 										smc.sendMessageToPlayer(smss.FailureOutput);
 										continueCycle = false;
+										smc.StopActivity();
 									}
 									break;
 								case "Target":
@@ -98,6 +105,7 @@ namespace SlackMUDRPG.CommandClasses
 									{
 										smc.sendMessageToPlayer(smss.FailureOutput);
 										continueCycle = false;
+										smc.StopActivity();
 									}
 									break;
 								case "Hit":
@@ -133,6 +141,7 @@ namespace SlackMUDRPG.CommandClasses
 									{
                                         smc.sendMessageToPlayer(smss.FailureOutput);
                                         continueCycle = false;
+										smc.StopActivity();
 									}
 									break;
 								case "UseReceipe":
@@ -140,6 +149,7 @@ namespace SlackMUDRPG.CommandClasses
 									{
 										smc.sendMessageToPlayer(smss.FailureOutput);
 										continueCycle = false;
+										smc.StopActivity();
 									}
 									break;
 								case "Information":
@@ -319,25 +329,43 @@ namespace SlackMUDRPG.CommandClasses
 				// Get the character
 				targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
 
-				// Get the toughness and the hitpoints
-				targetToughness = targetChar.Attributes.GetToughness();
-				targetHP = targetChar.Attributes.HitPoints;
-				targetName = targetChar.GetFullName();
-				destroyedObjectType = "the corpse of " + targetName;
+				if (targetChar != null)
+				{
+					// Get the toughness and the hitpoints
+					targetToughness = targetChar.Attributes.GetToughness();
+					targetHP = targetChar.Attributes.HitPoints;
+					targetName = targetChar.GetFullName();
+					destroyedObjectType = "the corpse of " + targetName;
 
-                // See if they dodge or parry the hit.
-                objectAvoidedHit = targetChar.CheckDodgeParry();
-            }
+					// See if they dodge or parry the hit.
+					objectAvoidedHit = targetChar.CheckDodgeParry();
+				}
+				else
+				{
+					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+					smc.StopActivity();
+					return false;
+				}
+			}
 			else // Assume it's an item
 			{
 				// Get the target item
 				targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
 
-				// Get the toughness and the hitpoints
-				targetToughness = targetItem.Toughness;
-				targetHP = targetItem.HitPoints;
-				targetName = targetItem.ItemName;
-				destroyedObjectType = targetItem.DestroyedOutput;
+				if (targetItem != null)
+				{
+					// Get the toughness and the hitpoints
+					targetToughness = targetItem.Toughness;
+					targetHP = targetItem.HitPoints;
+					targetName = targetItem.ItemName;
+					destroyedObjectType = targetItem.DestroyedOutput;
+				}
+				else
+				{
+					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+					smc.StopActivity();
+					return false;
+				}
 			}
 
             if (!objectAvoidedHit)
@@ -353,97 +381,117 @@ namespace SlackMUDRPG.CommandClasses
 
 			    // Reduce the targets HP
 			    int newTargetHP = targetHP - (int)actualDamageAmount;
-			
-			    // if the targets HP reaches 0 it has "died" or been "destroyed"
-			    if (newTargetHP <= 0)
-			    {
-				    string newItemName = "", oldItemName = "";
-				    
+
+				// if the targets HP reaches 0 it has "died" or been "destroyed"
+				if (newTargetHP <= 0)
+				{
+					string newItemName = "", oldItemName = "";
+
 					// Todo add the new item to the room.
 					// Get the target item
 					targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-					string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
-					int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[1]);
-					oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
-					SMItem destroyedItemType = targetItem.GetDestroyedItem();
-					if (numberOfObjectsToCreate > 1)
+
+					if (targetItem != null)
 					{
-						newItemName = destroyedItemType.PluralPronoun + " " + destroyedItemType.PluralName + "(" + numberOfObjectsToCreate + ")";
+						string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
+						int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[1]);
+						oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
+						SMItem destroyedItemType = targetItem.GetDestroyedItem();
+						if (numberOfObjectsToCreate > 1)
+						{
+							newItemName = destroyedItemType.PluralPronoun + " " + destroyedItemType.PluralName + "(" + numberOfObjectsToCreate + ")";
+						}
+						else
+						{
+							newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
+						}
+
+						// Loop around and create the required number of objects
+						while (numberOfObjectsToCreate > 0)
+						{
+							// Reduce the number of items waiting to be created
+							numberOfObjectsToCreate--;
+
+							// Add the item to the room
+							smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
+
+							// Remove the destroyed item from the room.
+							smc.GetRoom().RemoveItem(targetItem);
+						}
+
+						smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
+						SkillIncrease(smc);
+						smc.CurrentActivity = null;
 					}
 					else
 					{
-						newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
+						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+						smc.StopActivity();
+						return false;
 					}
+				}
+				else
+				{
+					targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
 
-					// Loop around and create the required number of objects
-					while (numberOfObjectsToCreate > 0)
+					if (targetItem != null)
 					{
-						// Reduce the number of items waiting to be created
-						numberOfObjectsToCreate--;
-
-						// Add the item to the room
-						smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
-
-						// Remove the destroyed item from the room.
-						smc.GetRoom().RemoveItem(targetItem);
-					}
-					
-				    smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
-				    SkillIncrease(smc);
-				    smc.CurrentActivity = null;
-			    }
-			    else
-			    {
-				    targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-					smc.GetRoom().UpdateItem(targetItem.ItemID, "HP", newTargetHP);
-					if ((int)actualDamageAmount > 0)
-					{
-						double chanceOfObjectCreation = double.Parse(smss.ExtraData);
-						// Random chance to see if someone achieves the skill increase change
-						Random r = new Random();
-						double rDouble = r.NextDouble();
-						
-						// Check if the object is created.
-						if ((rDouble * 100) < chanceOfObjectCreation+charLevelOfSkill)
+						smc.GetRoom().UpdateItem(targetItem.ItemID, "HP", newTargetHP);
+						if ((int)actualDamageAmount > 0)
 						{
-							SMItem destroyedItemType = targetItem.GetDestroyedItem();
+							double chanceOfObjectCreation = double.Parse(smss.ExtraData);
+							// Random chance to see if someone achieves the skill increase change
+							Random r = new Random();
+							double rDouble = r.NextDouble();
+						
+							// Check if the object is created.
+							if ((rDouble * 100) < chanceOfObjectCreation+charLevelOfSkill)
+							{
+								SMItem destroyedItemType = targetItem.GetDestroyedItem();
 							
-							string newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
-							string oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
+								string newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
+								string oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
 
-							targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-							string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
-							int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[1]);
-							oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
+								targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+								string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
+								int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[1]);
+								oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
 
-							if (numberOfObjectsToCreate > 1)
-							{
-								newItemName = destroyedItemType.PluralPronoun + " " + destroyedItemType.PluralName + "(" + numberOfObjectsToCreate + ")";
+								if (numberOfObjectsToCreate > 1)
+								{
+									newItemName = destroyedItemType.PluralPronoun + " " + destroyedItemType.PluralName + "(" + numberOfObjectsToCreate + ")";
+								}
+								else
+								{
+									newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
+								}
+
+								// Loop around and create the required number of objects
+								while (numberOfObjectsToCreate > 0)
+								{
+									// Reduce the number of items waiting to be created
+									numberOfObjectsToCreate--;
+
+									// Add the item to the room
+									smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
+								}
+
+								smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
+								SkillIncrease(smc);
 							}
-							else
-							{
-								newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
-							}
-
-							// Loop around and create the required number of objects
-							while (numberOfObjectsToCreate > 0)
-							{
-								// Reduce the number of items waiting to be created
-								numberOfObjectsToCreate--;
-
-								// Add the item to the room
-								smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
-							}
-
-                            smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
-                            SkillIncrease(smc);
+						}
+						else
+						{
+							smc.sendMessageToPlayer("_You're unable to damage " + targetItem.ItemName + "_");
 						}
 					}
 					else
 					{
-						smc.sendMessageToPlayer("_You're unable to damage " + targetItem.ItemName + "_");
+						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+						smc.StopActivity();
+						return false;
 					}
-			    }
+				}
             }
             else
             {
@@ -526,25 +574,43 @@ namespace SlackMUDRPG.CommandClasses
 				// Get the character
 				targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
 
-                // Get the toughness and the hitpoints
-                targetToughness = targetChar.Attributes.GetToughness();
-				targetHP = targetChar.Attributes.HitPoints;
-				targetName = targetChar.GetFullName();
-				destroyedObjectType = "the corpse of " + targetName;
+				if (targetChar != null)
+				{
+					// Get the toughness and the hitpoints
+					targetToughness = targetChar.Attributes.GetToughness();
+					targetHP = targetChar.Attributes.HitPoints;
+					targetName = targetChar.GetFullName();
+					destroyedObjectType = "the corpse of " + targetName;
 
-				// See if they dodge or parry the hit.
-				objectAvoidedHit = targetChar.CheckDodgeParry();
+					// See if they dodge or parry the hit.
+					objectAvoidedHit = targetChar.CheckDodgeParry();
+				}
+				else
+				{
+					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+					smc.StopActivity();
+					return false;
+				}
 			}
 			else // Assume it's an item
 			{
 				// Get the target item
 				targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
 
-				// Get the toughness and the hitpoints
-				targetToughness = targetItem.Toughness;
-				targetHP = targetItem.HitPoints;
-				targetName = targetItem.ItemName;
-				destroyedObjectType = targetItem.DestroyedOutput;
+				if (targetItem != null)
+				{
+					// Get the toughness and the hitpoints
+					targetToughness = targetItem.Toughness;
+					targetHP = targetItem.HitPoints;
+					targetName = targetItem.ItemName;
+					destroyedObjectType = targetItem.DestroyedOutput;
+				}
+				else
+				{
+					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+					smc.StopActivity();
+					return false;
+				}
 			}
 
 			if (!objectAvoidedHit)
@@ -571,41 +637,60 @@ namespace SlackMUDRPG.CommandClasses
 					{
 						// TODO Add "Die" method to the character
 						targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-						targetChar.Die();
-						oldItemName = targetChar.GetFullName();
-						newItemName = destroyedObjectType;
+
+						if (targetChar != null)
+						{
+							targetChar.Die();
+							oldItemName = targetChar.GetFullName();
+							newItemName = destroyedObjectType;
+						}
+						else
+						{
+							smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+							smc.StopActivity();
+							return false;
+						}
 					}
 					else // Assume it's an item
 					{
 						// Todo add the new item to the room.
 						// Get the target item
 						targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-						string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
-						int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[1]);
-						oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
-						SMItem destroyedItemType = targetItem.GetDestroyedItem();
-						if (numberOfObjectsToCreate > 1)
+
+						if (targetItem != null)
 						{
-							newItemName = destroyedItemType.PluralPronoun + " " + destroyedItemType.PluralName + "(" + numberOfObjectsToCreate + ")";
+							string[] destroyedObjectInfo = targetItem.DestroyedOutput.Split(',');
+							int numberOfObjectsToCreate = int.Parse(destroyedObjectInfo[1]);
+							oldItemName = targetItem.SingularPronoun + " " + targetItem.ItemName;
+							SMItem destroyedItemType = targetItem.GetDestroyedItem();
+							if (numberOfObjectsToCreate > 1)
+							{
+								newItemName = destroyedItemType.PluralPronoun + " " + destroyedItemType.PluralName + "(" + numberOfObjectsToCreate + ")";
+							}
+							else
+							{
+								newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
+							}
+
+							// Loop around and create the required number of objects
+							while (numberOfObjectsToCreate > 0)
+							{
+								// Reduce the number of items waiting to be created
+								numberOfObjectsToCreate--;
+
+								// Add the item to the room
+								smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
+
+								// Remove the destroyed item from the room.
+								smc.GetRoom().RemoveItem(targetItem);
+							}
 						}
 						else
 						{
-							newItemName = destroyedItemType.SingularPronoun + " " + destroyedItemType.ItemName;
+							smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+							smc.StopActivity();
+							return false;
 						}
-
-						// Loop around and create the required number of objects
-						while (numberOfObjectsToCreate > 0)
-						{
-							// Reduce the number of items waiting to be created
-							numberOfObjectsToCreate--;
-
-							// Add the item to the room
-							smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
-
-							// Remove the destroyed item from the room.
-							smc.GetRoom().RemoveItem(targetItem);
-						}
-
                     }
                     // Announce the creation of the item.
                     smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
@@ -620,29 +705,49 @@ namespace SlackMUDRPG.CommandClasses
 					{
 						// TODO Update a character HP
 						targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-						targetChar.Attributes.HitPoints = targetChar.Attributes.HitPoints - (int)actualDamageAmount;
-						if ((int)actualDamageAmount > 0)
+
+						if (targetChar != null)
 						{
-							smc.sendMessageToPlayer("_Hit " + targetChar.GetFullName() + " for " + (int)actualDamageAmount + " damage_");
-							targetChar.sendMessageToPlayer("_You were hit by " + smc.GetFullName() + " for " + (int)actualDamageAmount + " damage (HP " + targetChar.Attributes.HitPoints + "/" + targetChar.Attributes.MaxHitPoints + " remaining)_");
-							targetChar.SaveToApplication();
+							targetChar.Attributes.HitPoints = targetChar.Attributes.HitPoints - (int)actualDamageAmount;
+							if ((int)actualDamageAmount > 0)
+							{
+								smc.sendMessageToPlayer("_Hit " + targetChar.GetFullName() + " for " + (int)actualDamageAmount + " damage_");
+								targetChar.sendMessageToPlayer("_You were hit by " + smc.GetFullName() + " for " + (int)actualDamageAmount + " damage (HP " + targetChar.Attributes.HitPoints + "/" + targetChar.Attributes.MaxHitPoints + " remaining)_");
+								targetChar.SaveToApplication();
+							}
+							else
+							{
+								smc.sendMessageToPlayer("_You're unable to damage " + targetChar.GetFullName() + "_");
+							}
 						}
 						else
 						{
-							smc.sendMessageToPlayer("_You're unable to damage " + targetChar.GetFullName() + "_");
+							smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+							smc.StopActivity();
+							return false;
 						}
 					}
 					else
 					{
 						targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-						smc.GetRoom().UpdateItem(targetItem.ItemID, "HP", newTargetHP);
-						if ((int)actualDamageAmount > 0)
+
+						if (targetItem != null)
 						{
-							smc.sendMessageToPlayer("_Hit " + targetItem.ItemName + " for " + (int)actualDamageAmount + " damage_");
+							smc.GetRoom().UpdateItem(targetItem.ItemID, "HP", newTargetHP);
+							if ((int)actualDamageAmount > 0)
+							{
+								smc.sendMessageToPlayer("_Hit " + targetItem.ItemName + " for " + (int)actualDamageAmount + " damage_");
+							}
+							else
+							{
+								smc.sendMessageToPlayer("_You're unable to damage " + targetItem.ItemName + "_");
+							}
 						}
 						else
 						{
-							smc.sendMessageToPlayer("_You're unable to damage " + targetItem.ItemName + "_");
+							smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+							smc.StopActivity();
+							return false;
 						}
 					}
 				}
