@@ -19,7 +19,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Ravensmere.Military District.Target Practice",
+  "RoomID": "Hospital",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -28,7 +28,7 @@
     "dex": 10,
     "wp": 10,
     "ft": 10,
-    "hp": 10,
+    "hp": 5,
     "maxhp": 10,
     "SocialStanding": 8
   },
@@ -72,33 +72,7 @@
       "AllowedTypes": [
         "any"
       ],
-      "EquippedItem": {
-        "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453",
-        "SingularPronoun": "an",
-        "ItemName": "Iron Sword",
-        "PluralName": "Iron Swords",
-        "PluralPronoun": "some",
-        "ItemType": "Weapon",
-        "ItemFamily": "Sword",
-        "ItemDescription": "This Iron sword is good for keeping the masses down.",
-        "ItemWeight": 2,
-        "ItemCapacity": 0,
-        "ItemSize": 2,
-        "HitPoints": 25,
-        "MaxHitPoints": 25,
-        "BaseDamage": 6.0,
-        "Toughness": 3,
-        "DestroyedOutput": null,
-        "RequiredSkills": [
-          {
-            "SkillName": "Sword Use",
-            "SkillLevel": "1"
-          }
-        ],
-        "AdditionalData": null,
-        "ObjectTrait": null,
-        "HeldItems": null
-      }
+      "EquippedItem": null
     },
     {
       "Name": "LeftHand",

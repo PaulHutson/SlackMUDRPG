@@ -79,7 +79,18 @@ namespace SlackMUDRPG.CommandClasses
                             this.Attack(invokingCharacter.GetFullName());
                             break;
                         case "UseSkill":
-                            // TODO
+							string[] dataSplit = null;
+							if (NPCRS.ResponseStepData.Contains('.'))
+							{
+								dataSplit = NPCRS.ResponseStepData.Split('.');
+							}
+							else
+							{
+								dataSplit[0] = NPCRS.ResponseStepData;
+								dataSplit[1] = null;
+							}
+							
+							this.UseSkill(dataSplit[0], dataSplit[1]);
                             break;
                     }
                 }
