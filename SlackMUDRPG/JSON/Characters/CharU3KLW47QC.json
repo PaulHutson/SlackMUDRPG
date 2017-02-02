@@ -72,7 +72,33 @@
       "AllowedTypes": [
         "any"
       ],
-      "EquippedItem": null
+      "EquippedItem": {
+        "ItemID": "2de61885-2a88-42c5-b5ee-961a7528f4ce",
+        "SingularPronoun": "a",
+        "ItemName": "Iron Sword",
+        "PluralName": "Iron Swords",
+        "PluralPronoun": "some",
+        "ItemType": "Weapon",
+        "ItemFamily": "Sword",
+        "ItemDescription": "This Iron sword ain't too bad",
+        "ItemWeight": 2,
+        "ItemCapacity": 0,
+        "ItemSize": 2,
+        "HitPoints": 25,
+        "MaxHitPoints": 25,
+        "BaseDamage": 8.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": [
+          {
+            "SkillName": "Sword Use",
+            "SkillLevel": "1"
+          }
+        ],
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
     },
     {
       "Name": "LeftHand",

@@ -544,7 +544,11 @@ namespace SlackMUDRPG.CommandClasses
 			int baseStatValue = smc.Attributes.GetBaseStatValue(baseStat);
 
 			// Work out the damage multiplier based on attribute level (+/-)
-			int baseStatRequiredAmount = this.Prerequisites.First(pr => pr.SkillStatName == baseStat).PreReqLevel;
+			int baseStatRequiredAmount = 0;
+			if (this.Prerequisites != null) {
+				baseStatRequiredAmount = this.Prerequisites.First(pr => pr.SkillStatName == baseStat).PreReqLevel;
+			}
+			
 			float positiveNegativeBaseStat = baseStatValue - baseStatRequiredAmount;
 
 			SMSkillHeld theCharacterSkill = null;
