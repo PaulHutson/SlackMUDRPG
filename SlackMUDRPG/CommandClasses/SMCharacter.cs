@@ -1531,24 +1531,6 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Check if adding a given item to the characters inventory is allowed
-		/// based on the characters weight restrictions
-		/// </summary>
-		/// <param item="item">The SMItem to be added</param>
-		/// <returns>Bool</returns>
-		private bool CheckWeightWithNewItem(SMItem item)
-		{
-			int currentWeight = this.GetCurrentWeight();
-
-			if ((currentWeight + item.ItemWeight) <= this.WeightLimit)
-			{
-				return true;
-			}
-
-			return false;
-		}
-
-		/// <summary>
 		/// Gets the weight of items in a container, this will recursivley call itself to resolve the weights of
 		/// containers inside other containers that hold items.
 		/// </summary>
