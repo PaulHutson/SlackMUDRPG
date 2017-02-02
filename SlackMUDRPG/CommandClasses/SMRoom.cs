@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using SlackMUDRPG.Utility;
 using SlackMUDRPG.Utility.Formatters;
+using System.Threading;
 
 namespace SlackMUDRPG.CommandClasses
 {
@@ -609,7 +610,15 @@ namespace SlackMUDRPG.CommandClasses
                 {
                     foreach (SMNPC reactingNPC in lNPCs)
                     {
-                        reactingNPC.RespondToAction(actionType, invokingCharacter);
+						HttpContext ctx = HttpContext.Current;
+
+						Thread npcReactionThread = new Thread(new ThreadStart(() =>
+						{
+							HttpContext.Current = ctx;
+							reactingNPC.RespondToAction(actionType, invokingCharacter);
+						}));
+
+						npcReactionThread.Start();
                     }
                 }
             }
