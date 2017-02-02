@@ -1,0 +1,26 @@
+{
+	"RoomID": "Ravensmere.Military District.Grand Arena",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "The sounds of cheering and chanting fill the air. The pang of sword on shield are the only sounds which pierce the clamour. At the top of the building a large circular opening lets in light which falls on a sandy arena floor. Seating extends around the building and spectators make bets on who they think will win each bout. To one side, competitors stand near the battle coordinators office, waiting for organised duels to be arranged.",
+	"RoomExits": [
+		{
+			"Shortcut": "RP",
+			"Description": "Ramparts Parade (Road)",
+			"RoomID": "Ravensmere.Military District.Ramparts Parade"
+		},
+		{
+			"Shortcut": "AF",
+			"Description": "Arena Floor",
+			"RoomID": "Ravensmere.Military District.Arena Floor"
+		},
+		{
+			"Shortcut": "BCO",
+			"Description": "Battle Coordinators Office",
+			"RoomID": "Ravensmere.Military District.Battle Coordinators Office"
+		}
+	],
+	"RoomItems": null
+}
