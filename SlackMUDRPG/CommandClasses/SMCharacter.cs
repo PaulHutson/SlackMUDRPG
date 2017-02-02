@@ -1118,11 +1118,11 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Gets an equipped item by searching all slots for a given identifier.
+		/// Gets an equipped item by searching all slots for a given identifier. If not identifier is given the item in the first non-empty slot is returned.
 		/// </summary>
 		/// <param name="itemIdentifier"></param>
 		/// <returns>The equipped item or null.</returns>
-		public SMItem GetEquippedItem(string itemIdentifier)
+		public SMItem GetEquippedItem(string itemIdentifier = null)
 		{
 			SMItem item = null;
 
@@ -1130,7 +1130,11 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				if (!slot.isEmpty())
 				{
-					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+					if (itemIdentifier == null)
+					{
+						return slot.EquippedItem;
+					}
+					else if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
 					{
 						item = slot.EquippedItem;
 						break;
@@ -1528,23 +1532,6 @@ namespace SlackMUDRPG.CommandClasses
 			SMSlot leftHand = this.GetSlotByName("LeftHand");
 
 			return rightHand.isEmpty() && leftHand.isEmpty();
-		}
-
-		/// <summary>
-		/// Get the first item a player is holding
-		/// </summary>
-		/// <returns>The equipped item</returns>
-		public SMItem GetEquippedItem()
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					return slot.EquippedItem;
-				}
-			}
-
-			return null;
 		}
 
         /// <summary>
