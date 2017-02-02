@@ -1479,24 +1479,6 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Has the item equipped.
-		/// </summary>
-		/// <returns><c>true</c>, if item equipped was hased, <c>false</c> otherwise.</returns>
-		/// <param name="id">ItemID.</param>
-		public bool HasItemEquipped(string id)
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty() && slot.EquippedItem.ItemID == id)
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		/// <summary>
 		/// Has an item of a given type equipped.
 		/// </summary>
 		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
