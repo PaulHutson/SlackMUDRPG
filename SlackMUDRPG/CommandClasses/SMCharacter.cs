@@ -1376,6 +1376,24 @@ namespace SlackMUDRPG.CommandClasses
 			return false;
 		}
 
+		/// <summary>
+		/// Checks in the character has an item equipped matching a given identifier (id, name, family)
+		/// </summary>
+		/// <returns><c>true</c>, if a matching item is equipped, <c>false</c> otherwise.</returns>
+		/// <param name="familyType">Item identifier.</param>
+		public bool HasItemEquipped(string itemIdentifier)
+		{
+			foreach (SMSlot slot in Slots)
+			{
+				if (!slot.isEmpty() && SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		#endregion
 
 		#region "Inventory Functions"
@@ -1498,23 +1516,7 @@ namespace SlackMUDRPG.CommandClasses
 
 
 
-		/// <summary>
-		/// Has an item of a given family type equipped.
-		/// </summary>
-		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
-		/// <param name="familyType">Item Type Family.</param>
-		public bool HasItemFamilyTypeEquipped(string familyType)
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty() && slot.EquippedItem.ItemFamily == familyType)
-				{
-					return true;
-				}
-			}
 
-			return false;
-		}
 
 		/// <summary>
 		/// Are the characters hands empty.

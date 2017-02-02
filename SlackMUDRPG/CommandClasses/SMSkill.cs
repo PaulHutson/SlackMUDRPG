@@ -190,7 +190,7 @@ namespace SlackMUDRPG.CommandClasses
                 // Check if the player has the type of object equipped.
                 if (splitRequiredObjectType[0] == "Family")
                 {
-                    hasItem = smc.HasItemFamilyTypeEquipped(splitRequiredObjectType[1]);
+                    hasItem = smc.HasItemEquipped(splitRequiredObjectType[1]);
                 }
                 else
                 {
