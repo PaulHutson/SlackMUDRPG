@@ -1530,6 +1530,7 @@ namespace SlackMUDRPG.CommandClasses
 			return inventory;
 		}
 
+		// TODO will refactor when addressing locks and keys on containers
 		/// <summary>
 		/// Finds an item by AdditionalData in a container by recursivly searching through the container
 		/// and any containers it contains.
@@ -1562,6 +1563,7 @@ namespace SlackMUDRPG.CommandClasses
 			return null;
 		}
 
+		// TODO will refactor when addressing locks and keys on containers
 		/// <summary>
 		/// Tests if the character has a key for a location
 		/// </summary>
@@ -1592,6 +1594,7 @@ namespace SlackMUDRPG.CommandClasses
             return false;
         }
 
+        // TODO will refactor when addressing useable items
         /// <summary>
         /// Remove an item by it's name.
         /// </summary>
