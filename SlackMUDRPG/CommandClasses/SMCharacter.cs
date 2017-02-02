@@ -213,12 +213,12 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else
 				{
-					this.sendMessageToPlayer("Character not logged in, please login before trying to move.");
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Character not logged in, please login before trying to move."));
 				}
 			}
 			else
 			{
-				this.sendMessageToPlayer("Character not logged in, please login before trying to move.");
+				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Character not logged in, please login before trying to move."));
 			}
 
 			if (foundCharacter)
@@ -248,7 +248,7 @@ namespace SlackMUDRPG.CommandClasses
                             // Find out if the character has keys for the location
                             if (!this.CheckKey(sme.RoomLockID))
                             {
-                                this.sendMessageToPlayer("_The door is locked and you do not have a key_");
+                                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("The door is locked and you do not have a key"));
                                 initiateMove = false;
                             }
                         }
@@ -259,7 +259,7 @@ namespace SlackMUDRPG.CommandClasses
                             // Walk out of the room code.
                             SMRoom currentRoom = this.GetRoom();
 
-                            currentRoom.Announce("_" + this.GetFullName() + " walks out._", this, true);
+                            currentRoom.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " walks out."), this, true);
                             currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
 
 
@@ -270,7 +270,7 @@ namespace SlackMUDRPG.CommandClasses
                             this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
 
                             // Announce arrival to other players in the same place
-                            smr.Announce("_" + this.GetFullName() + " walks in._", this, true);
+                            smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " walks in."), this, true);
                             smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
                         }
                     }
@@ -279,6 +279,53 @@ namespace SlackMUDRPG.CommandClasses
                 {
                     this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Exit name: " + exitShortcut + " not found, please check and try again"));
                 }
+			}
+		}
+
+		/// <summary>
+		/// Flee from a location via a random exit.
+		/// </summary>
+		public void Flee()
+		{
+			// Get the room for the characters location
+			List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+			SMRoom roomInMem = smrs.FirstOrDefault(smrn => smrn.RoomID.ToLower() == this.RoomID.ToLower());
+
+			// Get the specific exit from the location referred to by the shortcut
+			List<SMExit> sme = roomInMem.RoomExits.FindAll(exit => exit.Locked == false);
+
+			// Check that the exit isn't null (i.e. they've entered the right text!)
+			if (sme != null)
+			{
+				if (sme.Count > 1)
+				{
+					sme = sme.OrderBy(item => new Random().Next()).ToList();
+				}
+
+				SMRoom smr = new SlackMud().GetRoom(sme.First().RoomID);
+
+				if (smr != null)
+				{
+					// Walk out of the room code.
+					SMRoom currentRoom = this.GetRoom();
+
+					currentRoom.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " flees."), this, true);
+					currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
+				
+					// Move the player to the new location
+					this.RoomID = smr.RoomID;
+					this.SaveToApplication();
+					this.SaveToFile();
+					this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
+
+					// Announce arrival to other players in the same place
+					smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " arrives in haste."), this, true);
+					smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
+				}
+				else
+				{
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find an exit to flee through."));
+				}
 			}
 		}
 
@@ -2152,6 +2199,8 @@ namespace SlackMUDRPG.CommandClasses
 		#endregion
 	}
 
+	#region "Other Class Structures"
+
 	public class AwaitingResponseFromCharacter
 	{
 		public string NPCID { get; set; }
@@ -2168,4 +2217,6 @@ namespace SlackMUDRPG.CommandClasses
 	{
 		public string Note;
 	}
+
+	#endregion
 }
