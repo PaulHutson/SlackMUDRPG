@@ -98,12 +98,42 @@ namespace SlackMUDRPG.CommandClasses
 
 			int used = 0;
 
-			foreach (SMItem smi in item.HeldItems)
+			if (item.HeldItems.Any())
 			{
-				used += GetItemWeight(smi);
+				foreach (SMItem smi in item.HeldItems)
+				{
+					used += GetItemWeight(smi);
+				}
 			}
 
 			return item.ItemCapacity - used;
+
+		}
+
+
+		/// <summary>
+		/// Calculates the used capacity of a container.
+		/// </summary>
+		/// <param name="item">The container to look at.</param>
+		/// <returns>The containers used capacity.</returns>
+		public static int GetItemUsedCapacity(SMItem item)
+		{
+			if (!item.CanHoldOtherItems())
+			{
+				return 0;
+			}
+
+			int used = 0;
+
+			if (item.HeldItems.Any())
+			{
+				foreach (SMItem smi in item.HeldItems)
+				{
+					used += GetItemWeight(smi);
+				}
+			}
+
+			return used;
 
 		}
 
