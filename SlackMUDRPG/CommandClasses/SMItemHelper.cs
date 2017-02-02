@@ -170,6 +170,21 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Puts an item in a container, initialising the containers HeldItems property to an new list if required.
+		/// </summary>
+		/// <param name="item">The item to put.</param>
+		/// <param name="container">The container to put in.</param>
+		public static void PutItemInContainer(SMItem item, SMItem container)
+		{
+			if (container.HeldItems == null)
+			{
+				container.HeldItems = new List<SMItem>();
+			}
+
+			container.HeldItems.Add(item);
+		}
+
+		/// <summary>
 		/// Finds an item in a list recursivly looking through containers within containers.
 		/// </summary>
 		/// <returns>The item from the list.</returns>

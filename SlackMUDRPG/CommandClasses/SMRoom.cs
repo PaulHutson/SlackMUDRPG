@@ -174,6 +174,22 @@ namespace SlackMUDRPG.CommandClasses
             return npcsInLocation;
         }
 
+        public List<SMCharacter> GetAllPeople()
+        {
+            List<SMCharacter> lsmc = this.GetPeople();
+            List<SMNPC> lnpcs = this.GetNPCs();
+
+            if (lnpcs != null)
+            {
+                foreach(SMNPC npc in lnpcs)
+                {
+                    lsmc.Add(npc);
+                }
+            }
+
+            return lsmc;
+        }
+
         /// <summary>
         /// Gets a list of all the people in the room.
         /// </summary>
@@ -582,7 +598,7 @@ namespace SlackMUDRPG.CommandClasses
         public void ProcessNPCReactions(string actionType, SMCharacter invokingCharacter)
         {
             List<SMNPC> lNPCs = new List<SMNPC>();
-            lNPCs = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+            lNPCs = ((List<SMNPC>)HttpContext.Current.Application["SMNPCs"]).FindAll(npc => ((npc.RoomID == invokingCharacter.RoomID) && (npc.GetFullName() != invokingCharacter.GetFullName())));
 
             // Check if the character already exists or not.
             if (lNPCs != null)
