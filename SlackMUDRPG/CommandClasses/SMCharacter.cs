@@ -1398,6 +1398,18 @@ namespace SlackMUDRPG.CommandClasses
 			return false;
 		}
 
+		/// <summary>
+		/// Are the characters hands empty.
+		/// </summary>
+		/// <returns><c>true</c>, if hands are empty, <c>false</c> otherwise.</returns>
+		public bool AreHandsEmpty()
+		{
+			SMSlot rightHand = this.GetSlotByName("RightHand");
+			SMSlot leftHand = this.GetSlotByName("LeftHand");
+
+			return rightHand.isEmpty() && leftHand.isEmpty();
+		}
+
 		#endregion
 
 		#region "Inventory Functions"
@@ -1518,54 +1530,6 @@ namespace SlackMUDRPG.CommandClasses
 			return inventory;
 		}
 
-
-
-
-
-		/// <summary>
-		/// Are the characters hands empty.
-		/// </summary>
-		/// <returns><c>true</c>, if hands are empty, <c>false</c> otherwise.</returns>
-		public bool AreHandsEmpty()
-		{
-			SMSlot rightHand = this.GetSlotByName("RightHand");
-			SMSlot leftHand = this.GetSlotByName("LeftHand");
-
-			return rightHand.isEmpty() && leftHand.isEmpty();
-		}
-
-        /// <summary>
-        /// Finds an item by name in a container by recursivly searching through the container
-        /// and any containers it contains.
-        /// </summary>
-        /// <returns>The item in a container.</returns>
-        /// <param name="name">ItemName.</param>
-        /// <param name="container">Container to look in.</param>
-        private SMItem FindItemInContainerByName(string name, SMItem container)
-        {
-            if (container.HeldItems != null)
-            {
-                foreach (SMItem item in container.HeldItems)
-                {
-                    if (item.ItemName.ToLower() == name.ToLower())
-                    {
-                        return item;
-                    }
-
-                    if (item.ItemType == "container")
-                    {
-                        SMItem smi = this.FindItemInContainerByName(name, item);
-                        if (smi != null)
-                        {
-                            return smi;
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
-
 		/// <summary>
 		/// Finds an item by AdditionalData in a container by recursivly searching through the container
 		/// and any containers it contains.
@@ -1592,57 +1556,6 @@ namespace SlackMUDRPG.CommandClasses
 							return smi;
 						}
 					}
-				}
-			}
-
-			return null;
-		}
-
-		/// <summary>
-		/// Finds an item by id in a container by recursivly searching through the container
-		/// and any containers it contains.
-		/// </summary>
-		/// <returns>The item in a container.</returns>
-		/// <param itemID="itemID">ItemID.</param>
-		/// <param name="container">Container to look in.</param>
-		private SMItem FindItemInContainerByID(string itemID, SMItem container)
-		{
-			if (container.HeldItems != null)
-			{
-				foreach (SMItem item in container.HeldItems)
-				{
-					if (item.ItemID == itemID)
-					{
-						return item;
-					}
-
-					if (item.ItemType == "container")
-					{
-						SMItem smi = this.FindItemInContainerByID(itemID, item);
-						if (smi != null)
-						{
-							return smi;
-						}
-					}
-				}
-			}
-
-			return null;
-		}
-
-		/// <summary>
-		/// Looks for a slot on the character to equip a given item.
-		/// </summary>
-		/// <param name="item">The SMItem object to be equipped.</param>
-		/// <returns>The SMSlot that could hold the item or null.</returns>
-		private SMSlot FindSlotToEquipItem(SMItem item)
-		{
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (slot.isEmpty() && slot.canEquipItem(item))
-				{
-
-					return slot;
 				}
 			}
 
