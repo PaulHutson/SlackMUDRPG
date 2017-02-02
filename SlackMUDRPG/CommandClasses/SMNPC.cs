@@ -76,7 +76,7 @@ namespace SlackMUDRPG.CommandClasses
                             ProcessConversation(NPCRS, invokingCharacter);
                             break;
 						case "Attack":
-                            // TODO
+                            this.Attack(invokingCharacter.GetFullName());
                             break;
                         case "UseSkill":
                             // TODO
@@ -277,29 +277,30 @@ namespace SlackMUDRPG.CommandClasses
         }
      }
 
-    #region "NPC Structures"
+	#region "NPC Structures"
 
-    /// <summary>
-    /// Response types can be of the following types:
-    /// - PlayerCharacter.Enter (Faction = FactionName.Threshold, AdditionalData = Player.Known)
-    /// - PlayerCharacter.Leave (Faction = FactionName.Threshold, AdditionalData = Player.Known)
-    /// - PlayerCharacter.Attack
-    /// - PlayerCharacter.SayNPCName (Faction = FactionName.Threshold, AdditionalData = Player.Known)
-    /// - PlayerCharacter.SayKeyWord (Faction = FactionName.Threshold, AdditionalData = Player.Known)
-    /// - PlayerCharacter.UseSkillOnThem (AdditionalData = the skill used)
-    /// - PlayerCharacter.UseSkillNotOnThem (AdditionalData = the skill used)
-    /// - PlayerCharacter.ExaminesThem
-    /// - PlayerCharacter.InRoom (Faction = FactionName.Threshold, frequency should be lower on this)
-    /// - NPC.Enter
-    /// - NPC.Leave
-    /// - NPC.ExaminesThem
-    /// - NPC.Attack
-    /// 
-    /// Frequency is set to how often a character will do something
-    /// this is automatically set to be 100 by default (i.e. they will
-    /// do it 100% of the time).
-    /// </summary>
-    public class NPCResponses
+	/// <summary>
+	/// Response types can be of the following types:
+	/// - PlayerCharacter.Enter (Faction = FactionName.Threshold, AdditionalData = Player.Known)
+	/// - PlayerCharacter.Leave (Faction = FactionName.Threshold, AdditionalData = Player.Known)
+	/// - PlayerCharacter.Attack
+	/// - PlayerCharacter.AttacksThem
+	/// - PlayerCharacter.SayNPCName (Faction = FactionName.Threshold, AdditionalData = Player.Known)
+	/// - PlayerCharacter.SayKeyWord (Faction = FactionName.Threshold, AdditionalData = Player.Known)
+	/// - PlayerCharacter.UseSkillOnThem (AdditionalData = the skill used)
+	/// - PlayerCharacter.UseSkillNotOnThem (AdditionalData = the skill used)
+	/// - PlayerCharacter.ExaminesThem
+	/// - PlayerCharacter.InRoom (Faction = FactionName.Threshold, frequency should be lower on this)
+	/// - NPC.Enter
+	/// - NPC.Leave
+	/// - NPC.ExaminesThem
+	/// - NPC.Attack
+	/// 
+	/// Frequency is set to how often a character will do something
+	/// this is automatically set to be 100 by default (i.e. they will
+	/// do it 100% of the time).
+	/// </summary>
+	public class NPCResponses
     {
         [JsonProperty("ResponseType")]
         public string ResponseType { get; set; }

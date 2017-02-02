@@ -1,0 +1,16 @@
+{
+	"RoomID": "Ravensmere.Military District.Arena Floor",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "The arena floor is covered in fine well trodden sand, here and there there are ominous darker patches where blood has dried into the sand.",
+	"RoomExits": [
+		{
+			"Shortcut": "GA",
+			"Description": "Grand Arena",
+			"RoomID": "Ravensmere.Military District.Grand Arena"
+		}
+	],
+	"RoomItems": null
+}

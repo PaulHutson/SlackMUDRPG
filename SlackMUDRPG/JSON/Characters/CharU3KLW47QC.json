@@ -19,7 +19,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Ravensmere.Harbour South.Arrivals Area",
+  "RoomID": "Ravensmere.Military District.Target Practice",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -301,6 +301,18 @@
         }
       ],
       "TimeOut": 1485727012
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1486026292
     }
   ]
 }

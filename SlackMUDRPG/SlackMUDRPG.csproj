@@ -172,6 +172,13 @@
     <Content Include="JSON\Commands\Commands.Character.json" />
     <Content Include="JSON\NPCs\Guard-LandingArea.json" />
     <Content Include="JSON\NPCs\PodgyClerk.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Sparring Area.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Target Practice.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Training Ground.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Grand Arena.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Arena Floor.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Battle Coordinators Office.json" />
+    <Content Include="JSON\Objects\Container.WoodenChest.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -275,7 +282,6 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties JSON_4Commands_4Commands_1Environment_1json__JSONSchema="http://json.schemastore.org/config" />
     </VisualStudio>
     <MonoDevelop>
       <Properties>
