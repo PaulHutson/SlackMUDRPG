@@ -1478,31 +1478,6 @@ namespace SlackMUDRPG.CommandClasses
 			return inventory;
 		}
 
-		public string GetOwnedItemIDByName(string name)
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					if (slot.EquippedItem.ItemName == name)
-					{
-						return slot.EquippedItem.ItemID;
-					}
-
-					if (slot.EquippedItem.ItemType == "container")
-					{
-						SMItem item = this.FindItemInContainerByName(name, slot.EquippedItem);
-						if (item != null)
-						{
-							return item.ItemID;
-						}
-					}
-				}
-			}
-
-			return null;
-		}
-
 		/// <summary>
 		/// Has the item equipped.
 		/// </summary>
