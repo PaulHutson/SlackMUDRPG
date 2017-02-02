@@ -1,0 +1,16 @@
+{
+	"RoomID": "Ravensmere.Military District.Battle Coordinators Office",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "You enter the battle co-ordinators office. In here you can challenge another player to an official fight in the area. Tales will be told of how you vanquished your foe or how you crawled out of the arena in a bloody mess.",
+	"RoomExits": [
+		{
+			"Shortcut": "GA",
+			"Description": "Grand Arena",
+			"RoomID": "Ravensmere.Military District.Grand Arena"
+		}
+	],
+	"RoomItems": null
+}

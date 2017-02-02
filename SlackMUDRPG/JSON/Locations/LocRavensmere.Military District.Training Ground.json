@@ -1,0 +1,31 @@
+{
+	"RoomID": "Ravensmere.Military District.Training Ground",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "You stand on a long straight gravel track. A wooden fence seperates you from two grassed areas at either side. In one area archers loose arrows at round targets, while in the other, melee hack relentlessly at wooden practice dummies.",
+	"RoomExits": [
+    {
+      "Shortcut": "RP",
+      "Description": "Ramparts Parade (Road)",
+      "RoomID": "Ravensmere.Military District.Ramparts Parade"
+    },
+    {
+			"Shortcut": "GP",
+			"Description": "Grand Parade (Road)",
+			"RoomID": "Ravensmere.Military District.Grand Parade"
+		},
+		{
+			"Shortcut": "SA",
+			"Description": "Sparring Area",
+			"RoomID": "Ravensmere.Military District.Sparring Area"
+		},
+		{
+			"Shortcut": "TP",
+			"Description": "Target Practice",
+			"RoomID": "Ravensmere.Military District.Target Practice"
+		}
+	],
+	"RoomItems": null
+}
