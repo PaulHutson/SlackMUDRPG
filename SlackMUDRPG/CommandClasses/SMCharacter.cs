@@ -1358,6 +1358,24 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
+		/// <summary>
+		/// Checks if the characters has an item of a given type equipped.
+		/// </summary>
+		/// <returns><c>true</c>, if item of given type is equipped, <c>false</c> otherwise.</returns>
+		/// <param name="type">ItemType.</param>
+		public bool HasItemTypeEquipped(string type)
+		{
+			foreach (SMSlot slot in Slots)
+			{
+				if (!slot.isEmpty() && slot.EquippedItem.ItemType.ToLower() == type.ToLower())
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		#endregion
 
 		#region "Inventory Functions"
@@ -1478,23 +1496,7 @@ namespace SlackMUDRPG.CommandClasses
 			return inventory;
 		}
 
-		/// <summary>
-		/// Has an item of a given type equipped.
-		/// </summary>
-		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
-		/// <param name="type">ItemType.</param>
-		public bool HasItemTypeEquipped(string type)
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty() && slot.EquippedItem.ItemType == type)
-				{
-					return true;
-				}
-			}
 
-			return false;
-		}
 
 		/// <summary>
 		/// Has an item of a given family type equipped.
