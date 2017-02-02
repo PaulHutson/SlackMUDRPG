@@ -487,11 +487,11 @@ namespace SlackMUDRPG.CommandClasses
 					    // .. get the room
 					    SMRoom currentRoom = this.GetRoom();
 
-					    // find any players with that target name first
-					    SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
-
-					    // If it's not null set the target details
-					    if (targetCharacter != null)
+                        // find any players with that target name first
+                        SMCharacter targetCharacter = currentRoom.GetAllPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
+                        
+                        // If it's not null set the target details
+                        if (targetCharacter != null)
 					    {
 						    // Set the target as a character and set the target id
 						    targetType = "Character";
@@ -607,7 +607,7 @@ namespace SlackMUDRPG.CommandClasses
 				SMRoom currentRoom = this.GetRoom();
 
 				// find any players with that target name first
-				SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName() == targetName);
+				SMCharacter targetCharacter = currentRoom.GetAllPeople().FirstOrDefault(tC => tC.GetFullName() == targetName);
 
 				// If it's not null set the target details
 				if (targetCharacter != null)
@@ -639,8 +639,8 @@ namespace SlackMUDRPG.CommandClasses
 						}
 						else
 						{
-							// Not found the target with the name.. so send a message...
-							this.sendMessageToPlayer("The target you've specified is not valid");
+                            // Not found the target with the name.. so send a message...
+                            this.sendMessageToPlayer("The target you've specified is not valid");   
 						}
 					}
 				}
@@ -686,9 +686,7 @@ namespace SlackMUDRPG.CommandClasses
             SMRoom currentRoom = this.GetRoom();
 
             currentRoom.AddItem(corpse);
-            currentRoom.Announce("While dying " + this.GetFullName() + "dropped the following items: " + droppedItemsAnnouncement);
-
-
+			
             // Then move the player back to the hospital
             this.RoomID = "Hospital";
             this.Attributes.HitPoints = this.Attributes.MaxHitPoints/2;
