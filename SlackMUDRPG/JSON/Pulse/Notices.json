@@ -1,0 +1,18 @@
+﻿[
+	{
+		"NoticeType": "Dawn",
+		"Notice": "The sky begins to brighten"
+	},
+	{
+		"NoticeType": "DayStart",
+		"Notice": "Daylight surrounds you"
+	},
+	{
+		"NoticeType": "Sunset",
+		"Notice": "The sky begins to darken"
+	},
+	{
+		"NoticeType": "NightStart",
+		"Notice": "Night falls"
+	}
+]
