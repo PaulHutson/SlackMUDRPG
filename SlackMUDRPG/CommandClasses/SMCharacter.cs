@@ -817,7 +817,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		#endregion
 
-		#region "Inventory Functions New"
+		#region "Inventory Functions"
 
 		/// <summary>
 		/// Picks up item from the current room.
@@ -1139,15 +1139,51 @@ namespace SlackMUDRPG.CommandClasses
 			this.SaveToApplication();
 		}
 
-		//public void ListInventory(string slot = null)
-		//{
+		/// <summary>
+		/// Lists the characters inventory slot by slot. If a slot is specified by name only details of that slot are listed, but it is done recursivly.
+		/// </summary>
+		/// <param name="slotName">Optional name of the slot to list.</param>
+		public void ListInventory(string slotName = null)
+		{
+			string inventory = this.Outputer.Bold("Your Inventory:");
 
-		//}
+			// Weight Indicator
+			inventory += this.Outputer.Italic($"Weight: {this.GetCurrentWeight()} / {this.WeightLimit}", 2);
 
-		//public void ListSlot()
-		//{
+			// Append details of the characters actual inventory
+			if (slotName == null)
+			{
+				foreach (SMSlot slot in this.Slots)
+				{
+					inventory += this.ListSlotDetails(slot.Name);
+				}
+			}
+			else
+			{
+				inventory += this.ListSlotDetails(slotName, true);
+			}
 
-		//}
+			// TODO include details of items within clothing
+
+			this.sendMessageToPlayer(inventory);
+		}
+
+		/// <summary>
+		/// Gets a string listsing the contents of each slot, optionally listing containet contents.
+		/// </summary>
+		/// <param name="listContainerContents">Optionally list containet contents.</param>
+		/// <returns></returns>
+		public string GetInventoryList(bool listContainerContents = false)
+		{
+			string inventory = string.Empty;
+
+			foreach (SMSlot slot in this.Slots)
+			{
+				inventory += this.ListSlotDetails(slot.Name, listContainerContents);
+			}
+
+			return inventory;
+		}
 
 		/// <summary>
 		/// Gets an SMSlot by name, case insensitive.
@@ -1165,11 +1201,11 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Gets an equipped item by searching all slots for a given identifier.
+		/// Gets an equipped item by searching all slots for a given identifier. If not identifier is given the item in the first non-empty slot is returned.
 		/// </summary>
 		/// <param name="itemIdentifier"></param>
 		/// <returns>The equipped item or null.</returns>
-		public SMItem GetEquippedItem(string itemIdentifier)
+		public SMItem GetEquippedItem(string itemIdentifier = null)
 		{
 			SMItem item = null;
 
@@ -1177,7 +1213,11 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				if (!slot.isEmpty())
 				{
-					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+					if (itemIdentifier == null)
+					{
+						return slot.EquippedItem;
+					}
+					else if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
 					{
 						item = slot.EquippedItem;
 						break;
@@ -1186,6 +1226,36 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return item;
+		}
+
+		/// <summary>
+		/// Counts the number of items owned by the character that match a given id, name or family.
+		/// </summary>
+		/// <param name="itemIdentifier">Id, name or family to match.</param>
+		/// <returns>Coutn of matching items.</returns>
+		public int CountOwnedItems(string itemIdentifier)
+		{
+			int count = 0;
+
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+					{
+						count++;
+					}
+
+					if (slot.EquippedItem.CanHoldOtherItems())
+					{
+						count += SMItemHelper.CountItemsInContainer(slot.EquippedItem, itemIdentifier);
+					}
+				}
+			}
+
+			// TODO account for slot in clothing e.g. pockets
+
+			return count;
 		}
 
 		/// <summary>
@@ -1306,11 +1376,6 @@ namespace SlackMUDRPG.CommandClasses
 			return item;
 		}
 
-		//private int CountOwnedItems(string itemIdentifier)
-		//{
-
-		//}
-
 		/// <summary>
 		/// Gets an SMSlot representing an empty hand on the character, optionally weighted to the right hand first.
 		/// </summary>
@@ -1361,6 +1426,46 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Lists the contents of a given slot, optionally including container contents.
+		/// </summary>
+		/// <param name="slotName">The name of the slot to list.</param>
+		/// <param name="listContainerContents"></param>
+		/// <returns></returns>
+		private string ListSlotDetails(string slotName, bool listContainerContents = false)
+		{
+			SMSlot slot = this.GetSlotByName(slotName);
+
+			if (slot == null)
+			{
+				return this.Outputer.Italic($"Sorry unable to find a slot called \"{Utils.SanitiseString(slotName)}\"!");
+			}
+
+			string listing = string.Empty;
+
+			listing += this.Outputer.Bold($"{slot.GetReadableName()}:", 0);
+			listing += this.Outputer.General($" {slot.GetEquippedItemName()}");
+
+			// If the item in the slot is a container list its contents if required
+			if (listContainerContents && slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems())
+			{
+				if (slot.EquippedItem.HeldItems.Any())
+				{
+					listing += this.Outputer.Italic($"Capacity: {SMItemHelper.GetItemUsedCapacity(slot.EquippedItem)} / {slot.EquippedItem.ItemCapacity}");
+					listing += this.Outputer.Italic($"This \"{slot.EquippedItem.ItemName}\" contains the following items:");
+					listing += SMItemHelper.GetContainerContents(slot.EquippedItem);
+				}
+				else
+				{
+					listing += this.Outputer.Italic($"This \"{slot.EquippedItem.ItemName}\" is empty.");
+				}
+			}
+
+			listing += this.Outputer.General(string.Empty);
+
+			return listing;
+		}
+
+		/// <summary>
 		/// Removes an equipped item by searching all slots for a given identifier.
 		/// </summary>
 		/// <param name="itemIdentifier"></param>
@@ -1380,179 +1485,16 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
-		#endregion
-
-		#region "Inventory Functions"
-
 		/// <summary>
-		/// Send the character a message listing their inventory. If a slot is specified only items is that
-		/// slot are listed, but containers contents in rescurivly displayed
+		/// Checks if the characters has an item of a given type equipped.
 		/// </summary>
-		/// <param name="slotName">The name of the slot (case and space insensitive).</param>
-		public void ListInventory(string slotName = null)
-		{
-			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
-			string inventory = outputFormatter.Bold("Your Inventory:");
-			//TODO capacity indicator
-			inventory += outputFormatter.Italic($"Weight: {this.GetCurrentWeight()} / {this.WeightLimit}", 2);
-
-			this.sendMessageToPlayer(inventory + GetInventoryList(slotName));
-		}
-
-		/// <summary>
-		/// Gets the players inventory
-		/// </summary>
-		/// <param name="slotName">The name of the slot (case and space insensitive)</param>
-		/// <returns>The inventory list</returns>
-		public string GetInventoryList(string slotName = null)
-		{
-			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
-
-			string inventory = "";
-
-			if (slotName == null)
-			{
-				inventory += this.ListAllSlots();
-			}
-			else
-			{
-				inventory += this.ListSlot(slotName);
-			}
-
-			// TODO list clothing (body parts)
-			return inventory;
-		}
-
-		/// <summary>
-		/// Builds a sting of the equipped items in each character slot. Containers contents is ignored.
-		/// </summary>
-		/// <returns>String detailing all slots inventory.</returns>
-		private string ListAllSlots()
-		{
-			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
-
-			string inventory = "";
-
-			foreach (SMSlot slot in this.Slots)
-			{
-				inventory += outputFormatter.General($"{slot.GetReadableName()}:");
-				inventory += outputFormatter.ListItem(slot.GetEquippedItemName(), 2);
-			}
-
-			return inventory;
-		}
-
-		/// <summary>
-		/// Builds a string of the equipped item and its contents from the specified slot.
-		/// </summary>
-		/// <param name="slotName">The name of the slot to look in.</param>
-		/// <returns>String detailing slot inventory.</returns>
-		private string ListSlot(string slotName)
-		{
-			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
-
-			string inventory = "";
-
-			SMSlot slot = this.GetSlotByName(slotName);
-
-			if (slot != null)
-			{
-				inventory += outputFormatter.Bold($"{slot.GetReadableName()}:", 0);
-				inventory += outputFormatter.General($" {slot.GetEquippedItemName()}");
-
-				// If the equipped item can hold other items get details of these
-				if (slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems() == true)
-				{
-					if (slot.EquippedItem.HeldItems != null && slot.EquippedItem.HeldItems.Count > 0)
-					{
-						inventory += outputFormatter.Italic($"This \"{slot.EquippedItem.ItemName}\" contains the following items:");
-
-						List<ItemCountObject> lines = SMItemUtils.GetItemCountList(slot.EquippedItem.HeldItems);
-
-						foreach (ItemCountObject line in lines)
-						{
-							string itemDetails = $"{line.Count} x ";
-
-							if (line.Count > 1)
-							{
-								itemDetails += line.PluralName;
-							}
-							else
-							{
-								itemDetails += line.SingularName;
-							}
-
-							inventory += outputFormatter.General(itemDetails);
-						}
-					}
-					else
-					{
-						inventory += outputFormatter.Italic($"This \"{slot.EquippedItem.ItemName}\" is empty.");
-					}
-				}
-				inventory += "\n";
-			}
-			else
-			{
-				inventory += outputFormatter.General("Sorry can't find a slot by that name.");
-			}
-
-			return inventory;
-		}
-
-		public string GetOwnedItemIDByName(string name)
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					if (slot.EquippedItem.ItemName == name)
-					{
-						return slot.EquippedItem.ItemID;
-					}
-
-					if (slot.EquippedItem.ItemType == "container")
-					{
-						SMItem item = this.FindItemInContainerByName(name, slot.EquippedItem);
-						if (item != null)
-						{
-							return item.ItemID;
-						}
-					}
-				}
-			}
-
-			return null;
-		}
-
-		/// <summary>
-		/// Has the item equipped.
-		/// </summary>
-		/// <returns><c>true</c>, if item equipped was hased, <c>false</c> otherwise.</returns>
-		/// <param name="id">ItemID.</param>
-		public bool HasItemEquipped(string id)
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty() && slot.EquippedItem.ItemID == id)
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		/// <summary>
-		/// Has an item of a given type equipped.
-		/// </summary>
-		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
+		/// <returns><c>true</c>, if item of given type is equipped, <c>false</c> otherwise.</returns>
 		/// <param name="type">ItemType.</param>
 		public bool HasItemTypeEquipped(string type)
 		{
 			foreach (SMSlot slot in Slots)
 			{
-				if (!slot.isEmpty() && slot.EquippedItem.ItemType == type)
+				if (!slot.isEmpty() && slot.EquippedItem.ItemType.ToLower() == type.ToLower())
 				{
 					return true;
 				}
@@ -1562,63 +1504,21 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Has an item of a given family type equipped.
+		/// Checks in the character has an item equipped matching a given identifier (id, name, family)
 		/// </summary>
-		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
-		/// <param name="familyType">Item Type Family.</param>
-		public bool HasItemFamilyTypeEquipped(string familyType)
+		/// <returns><c>true</c>, if a matching item is equipped, <c>false</c> otherwise.</returns>
+		/// <param name="familyType">Item identifier.</param>
+		public bool HasItemEquipped(string itemIdentifier)
 		{
 			foreach (SMSlot slot in Slots)
 			{
-				if (!slot.isEmpty() && slot.EquippedItem.ItemFamily == familyType)
+				if (!slot.isEmpty() && SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
 				{
 					return true;
 				}
 			}
 
 			return false;
-		}
-
-
-		/// <summary>
-		/// Counts the number of a named item the character owns.
-		/// </summary>
-		/// <returns>The count.</returns>
-		/// <param name="name">ItemName.</param>
-		public int CountOwnedItemsByName(string name)
-		{
-			int count = 0;
-
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					if (slot.EquippedItem.ItemName.ToLower() == name.ToLower())
-					{
-						count++;
-					}
-					else if (slot.EquippedItem.ItemFamily.ToLower() == name.ToLower())
-					{
-						count++;
-					}
-
-					if (slot.EquippedItem.ItemType.ToLower() == "container")
-					{
-                        if (slot.EquippedItem.HeldItems != null)
-                        {
-                            foreach (SMItem itemInCountainer in slot.EquippedItem.HeldItems)
-                            {
-                                if ((itemInCountainer != null && itemInCountainer.ItemName.ToLower() == name.ToLower()) || (itemInCountainer.ItemFamily.ToLower() == name.ToLower()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-					}
-				}
-			}
-
-			return count;
 		}
 
 		/// <summary>
@@ -1633,154 +1533,11 @@ namespace SlackMUDRPG.CommandClasses
 			return rightHand.isEmpty() && leftHand.isEmpty();
 		}
 
-		/// <summary>
-		/// Check if adding a given item to the characters inventory is allowed
-		/// based on the characters weight restrictions
-		/// </summary>
-		/// <param item="item">The SMItem to be added</param>
-		/// <returns>Bool</returns>
-		private bool CheckWeightWithNewItem(SMItem item)
-		{
-			int currentWeight = this.GetCurrentWeight();
+		#endregion
 
-			if ((currentWeight + item.ItemWeight) <= this.WeightLimit)
-			{
-				return true;
-			}
+		#region "Inventory Functions Old"
 
-			return false;
-		}
-
-		/// <summary>
-		/// Gets the weight of items in a container, this will recursivley call itself to resolve the weights of
-		/// containers inside other containers that hold items.
-		/// </summary>
-		/// <returns>The weight.</returns>
-		private int GetContainerWeight(SMItem container)
-		{
-			int weight = container.ItemWeight;
-
-			if (container.HeldItems != null)
-			{
-				foreach (SMItem item in container.HeldItems)
-				{
-					if (item.ItemType == "container")
-					{
-						weight += this.GetContainerWeight(item);
-					}
-					else
-					{
-						weight += item.ItemWeight;
-					}
-				}
-			}
-
-			return weight;
-		}
-
-		/// <summary>
-		/// Gets the hand (SMSlot) which has the item equipped.
-		/// </summary>
-		/// <returns>The hand (SMSlot) with item equipped, or null.</returns>
-		/// <param name="itemName">The name of the item.</param>
-		private SMSlot GetHandWithItemEquipped(string itemName)
-		{
-			SMSlot rightHand = this.GetSlotByName("RightHand");
-			SMSlot leftHand = this.GetSlotByName("LeftHand");
-
-			if (!rightHand.isEmpty() && rightHand.EquippedItem.ItemName == itemName)
-			{
-				return rightHand;
-			}
-			else if (!leftHand.isEmpty() && leftHand.EquippedItem.ItemName == itemName)
-			{
-				return leftHand;
-			}
-
-			return null;
-		}
-
-		/// <summary>
-		/// Get the first item a player is holding
-		/// </summary>
-		/// <returns>The equipped item</returns>
-		public SMItem GetEquippedItem()
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					return slot.EquippedItem;
-				}
-			}
-
-			return null;
-		}
-
-        /// <summary>
-        /// Finds an item by name in a container by recursivly searching through the container
-        /// and any containers it contains.
-        /// </summary>
-        /// <returns>The item in a container.</returns>
-        /// <param name="name">ItemName.</param>
-        /// <param name="container">Container to look in.</param>
-        private SMItem FindItemInContainerByName(string name, SMItem container)
-        {
-            if (container.HeldItems != null)
-            {
-                foreach (SMItem item in container.HeldItems)
-                {
-                    if (item.ItemName.ToLower() == name.ToLower())
-                    {
-                        return item;
-                    }
-
-                    if (item.ItemType == "container")
-                    {
-                        SMItem smi = this.FindItemInContainerByName(name, item);
-                        if (smi != null)
-                        {
-                            return smi;
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        /// <summary>
-		/// Removes an item by name in a container by recursivly searching through the container
-		/// and any containers it contains.
-		/// </summary>
-		/// <returns>The item in a container.</returns>
-		/// <param name="name">ItemName.</param>
-		/// <param name="container">Container to look in.</param>
-		private SMItem RemoveItemInContainerByName(string name, SMItem container)
-        {
-            //if (container.HeldItems != null)
-            //{
-            //    foreach (SMItem item in container.HeldItems)
-            //    {
-            //        if (item.ItemName.ToLower() == name.ToLower())
-            //        {
-            //            return item;
-            //        }
-
-            //        if (item.ItemType == "container")
-            //        {
-            //            SMItem smi = this.RemoveItemInContainerByName(name, item);
-            //            if (smi != null)
-            //            {
-            //                return smi;
-            //            }
-            //        }
-            //    }
-            //}
-
-            return null;
-        }
-
+		// TODO will refactor when addressing locks and keys on containers
 		/// <summary>
 		/// Finds an item by AdditionalData in a container by recursivly searching through the container
 		/// and any containers it contains.
@@ -1813,121 +1570,7 @@ namespace SlackMUDRPG.CommandClasses
 			return null;
 		}
 
-		/// <summary>
-		/// Finds an item by id in a container by recursivly searching through the container
-		/// and any containers it contains.
-		/// </summary>
-		/// <returns>The item in a container.</returns>
-		/// <param itemID="itemID">ItemID.</param>
-		/// <param name="container">Container to look in.</param>
-		private SMItem FindItemInContainerByID(string itemID, SMItem container)
-		{
-			if (container.HeldItems != null)
-			{
-				foreach (SMItem item in container.HeldItems)
-				{
-					if (item.ItemID == itemID)
-					{
-						return item;
-					}
-
-					if (item.ItemType == "container")
-					{
-						SMItem smi = this.FindItemInContainerByID(itemID, item);
-						if (smi != null)
-						{
-							return smi;
-						}
-					}
-				}
-			}
-
-			return null;
-		}
-
-		/// <summary>
-		/// Finds an item by name (case insensitive) by looking in the characters slots, then its current room.
-		/// </summary>
-		/// <param name="itemName">Name of the item to look for.</param>
-		/// <param name="itemContainer">Output param to hold the container (SMItem) the item is found in, null if not found or in room.</param>
-		/// <returns>SMItem or null</returns>
-		private SMItem FindItem(string itemName, out SMItem itemContainer)
-		{
-			SMItem foundItem = null;
-
-			// check in containers equipped to a slot for the item
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (slot.EquippedItem != null && slot.EquippedItem.ItemType == "container")
-				{
-					foundItem = this.FindItemInContainerByName(itemName, slot.EquippedItem);
-
-					if (foundItem != null)
-					{
-						itemContainer = slot.EquippedItem;
-						return foundItem;
-					}
-				}
-			}
-
-			// TODO check in equipped clothing, e.g. trouser pockets
-
-			// check in the room for the item
-			foundItem = this.GetRoom().GetItemByName(itemName);
-
-			itemContainer = null;
-			return foundItem;
-		}
-
-		/// <summary>
-		/// Looks for a slot on the character to equip a given item.
-		/// </summary>
-		/// <param name="item">The SMItem object to be equipped.</param>
-		/// <returns>The SMSlot that could hold the item or null.</returns>
-		private SMSlot FindSlotToEquipItem(SMItem item)
-		{
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (slot.isEmpty() && slot.canEquipItem(item))
-				{
-
-					return slot;
-				}
-			}
-
-			return null;
-		}
-
-		/// <summary>
-		/// Tests if the character owns a given item by its ItemID
-		/// </summary>
-		/// <param name="itemID">ItemID to test</param>
-		/// <returns>True/False result of ownership test.</returns>
-		private bool OwnsItem(string itemID)
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					if (slot.EquippedItem.ItemID == itemID)
-					{
-						return true;
-					}
-
-					if (slot.EquippedItem.ItemType == "container")
-					{
-						SMItem item = this.FindItemInContainerByID(itemID, slot.EquippedItem);
-						if (item != null)
-						{
-							return true;
-						}
-					}
-				}
-			}
-
-			return false;
-		}
-
+		// TODO will refactor when addressing locks and keys on containers
 		/// <summary>
 		/// Tests if the character has a key for a location
 		/// </summary>
@@ -1958,6 +1601,7 @@ namespace SlackMUDRPG.CommandClasses
             return false;
         }
 
+        // TODO will refactor when addressing useable items
         /// <summary>
         /// Remove an item by it's name.
         /// </summary>
