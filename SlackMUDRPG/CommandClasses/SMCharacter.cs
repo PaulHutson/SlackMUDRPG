@@ -607,7 +607,7 @@ namespace SlackMUDRPG.CommandClasses
 				SMRoom currentRoom = this.GetRoom();
 
 				// find any players with that target name first
-				SMCharacter targetCharacter = currentRoom.GetAllPeople().FirstOrDefault(tC => tC.GetFullName() == targetName);
+				SMCharacter targetCharacter = currentRoom.GetAllPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
 
 				// If it's not null set the target details
 				if (targetCharacter != null)
