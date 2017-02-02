@@ -33,8 +33,8 @@ namespace SlackMUDRPG.CommandClasses
             if (listToChooseFrom != null)
             {
                 // If there is more than one of the item randomise the list
-                if (listToChooseFrom.Count > 1) { 
-                    listToChooseFrom.OrderBy(item => new Random().Next());
+                if (listToChooseFrom.Count > 1) {
+					listToChooseFrom = listToChooseFrom.OrderBy(item => new Random().Next()).ToList();
                 }
 
                 // Loop around until a response is selected

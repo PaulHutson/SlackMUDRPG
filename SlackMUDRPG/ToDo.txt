@@ -106,8 +106,8 @@
 					long you take doing it or until resources run out.
 
 7) More Stuff
-	- NPCs - basic talk system.
-	- NPCs - more advanced action system.
+	DONE- NPCs - basic talk system.
+	DONE- NPCs - more advanced action system.
 	- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)
 
 8) Implement Story element

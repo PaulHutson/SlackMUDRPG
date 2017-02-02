@@ -19,7 +19,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Hospital",
+  "RoomID": "Ravensmere.Harbour South.Docklands Way South",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -28,8 +28,8 @@
     "dex": 10,
     "wp": 10,
     "ft": 10,
-    "hp": 5,
-    "maxhp": 10,
+    "hp": 20,
+    "maxhp": 20,
     "SocialStanding": 8
   },
   "Skills": [
@@ -287,6 +287,114 @@
         }
       ],
       "TimeOut": 1486026292
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1486070822
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1486070836
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1486070846
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1486070856
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1486070958
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1486070972
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1486070987
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1486071002
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1486071024
     }
   ]
 }
