@@ -172,6 +172,7 @@
     <Content Include="JSON\Commands\Commands.Character.json" />
     <Content Include="JSON\NPCs\Guard-LandingArea.json" />
     <Content Include="JSON\NPCs\PodgyClerk.json" />
+    <Content Include="JSON\Objects\Container.WoodenChest.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

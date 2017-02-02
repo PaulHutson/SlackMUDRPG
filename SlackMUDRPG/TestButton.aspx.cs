@@ -113,7 +113,7 @@ namespace SlackMUDRPG
 		protected void btn_AttackRob_Click(object sender, EventArgs e)
 		{
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
-			smc.Attack("Robert Curran");
+			smc.Attack("Rob Curran2");
 		}
 
 		protected void btn_AttackPell_Click(object sender, EventArgs e)

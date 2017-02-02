@@ -20,6 +20,23 @@ namespace SlackMUDRPG.CommandClasses
 			// Check that the target has hitpoints
 			if (targetCharacter.Attributes.HitPoints > 0)
 			{
+				// Work out if this is an NPC or not
+				SMRoom room = attackingCharacter.GetRoom();
+
+				SMNPC targetNPC = room.GetNPCs().FirstOrDefault(checkChar => checkChar.GetFullName() == targetCharacter.GetFullName());
+
+                if (targetNPC != null)
+                {
+                    room.ProcessNPCReactions("PlayerCharacter.AttacksThem", attackingCharacter);
+                }
+
+                List<SMNPC> NPCsInRoom = targetCharacter.GetRoom().GetNPCs().FindAll(npc => npc.GetFullName() != attackingCharacter.GetFullName());
+
+                if (NPCsInRoom.Count > 0)
+                {
+					room.ProcessNPCReactions("PlayerCharacter.Attack", attackingCharacter);
+                }
+
 				// Use the skill
 				attackingCharacter.UseSkill(GetSkillToUse(attackingCharacter), targetCharacter.GetFullName(), true);
 			}

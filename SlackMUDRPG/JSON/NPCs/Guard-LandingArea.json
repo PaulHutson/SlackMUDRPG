@@ -140,6 +140,23 @@
           "ResponseStepData": "Examines.1"
         }
       ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Attack",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Attack.1"
+				},
+				{
+          "ResponseStepType": "Attack",
+          "ResponseStepData": null
+        }
+      ]
     }
   ],
   "NPCConversationStructures": [
@@ -156,7 +173,7 @@
         {
           "StepID": "2",
           "Scope": "emote",
-          "AdditionalData": "Gestures towards the Arrivals Area Entrance",
+          "AdditionalData": "gestures towards the Arrivals Area Entrance",
           "NextStep": null,
           "ResponseOptions": null
         }
@@ -168,7 +185,19 @@
         {
           "StepID": "1",
           "Scope": "saytoplayer",
-          "AdditionalData": "stop eyeballing me, get off this dock",
+          "AdditionalData": "Stop eyeballing me, get off this dock",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Attack",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "You're going to regret that...",
           "NextStep": null,
           "ResponseOptions": null
         }
