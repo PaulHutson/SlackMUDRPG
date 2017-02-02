@@ -58,11 +58,7 @@ namespace SlackMUDRPG.CommandClasses
 				string originCharUserID = smc.UserID;
 
 			    // Get the actual instance of the character!
-			    smc = new SlackMud().GetCharacter(originCharUserID); // TODO make this work with an NPC!
-				if (smc == null)
-				{
-					smc = new SlackMud().GetNPC(originCharUserID);
-				}
+			    smc = new SlackMud().GetAllCharacters(originCharUserID); // TODO make this work with an NPC!
 
 			    // Set the character activity
 			    if (beginSkillUse)
@@ -78,7 +74,7 @@ namespace SlackMUDRPG.CommandClasses
 					if (continueCycle)
 					{
 						// Get the character again each time we go around the loop
-						smc = new SlackMud().GetCharacter(smc.UserID);
+						smc = new SlackMud().GetAllCharacters(originCharUserID);
 
 						if (smc.CurrentActivity == this.ActivityType)
 						{
@@ -812,7 +808,7 @@ namespace SlackMUDRPG.CommandClasses
 					if (continueCycle)
 					{
 						// Get the character again each time we go around the loop
-						smc = new SlackMud().GetCharacter(smc.UserID);
+						smc = new SlackMud().GetAllCharacters(smc.UserID);
 
 						if (smc.CurrentActivity == this.ActivityType)
 						{

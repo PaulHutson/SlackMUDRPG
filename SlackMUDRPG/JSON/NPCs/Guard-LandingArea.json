@@ -200,13 +200,6 @@
           "AdditionalData": "You're going to regret that...",
           "NextStep": null,
           "ResponseOptions": null
-        },
-        {
-          "StepID": "2",
-          "Scope": "Attack",
-          "AdditionalData": "InvokingCharacter",
-          "NextStep": null,
-          "ResponseOptions": null
         }
       ]
     }
