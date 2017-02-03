@@ -63,6 +63,7 @@
     <Folder Include="JSON\Objects\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="JSON\Characters\Char123.json" />
     <None Include="JSON\Commands\Help.json" />
     <None Include="JSON\Commands\NewCharacter.json" />
