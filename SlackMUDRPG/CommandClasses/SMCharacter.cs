@@ -349,6 +349,9 @@ namespace SlackMUDRPG.CommandClasses
 			this.SaveToApplication();
 		}
 
+        /// <summary>
+        /// Admin Command - move the player back to the landing area
+        /// </summary>
         public void Flush()
         {
             this.RoomID = new SlackMud().GetStartingLocation();
@@ -498,6 +501,9 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
+        /// <summary>
+        /// Allows a player to go to sleep in a location if an item with the itemfamily "Bed" in a room.
+        /// </summary>
         public void Sleep()
         {
             // Get the room that the character is in.
