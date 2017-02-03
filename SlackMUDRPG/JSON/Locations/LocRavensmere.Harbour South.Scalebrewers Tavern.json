@@ -20,6 +20,11 @@
 			"Shortcut": "STC",
 			"Description": "Scalebrewers Tavern Cellar",
 			"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Cellar"
+		},
+		{
+			"Shortcut": "STR",
+			"Description": "Scalebrewers Tavern Rooms",
+			"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Upstairs Rooms"
 		}
 	],
 	"RoomItems": [

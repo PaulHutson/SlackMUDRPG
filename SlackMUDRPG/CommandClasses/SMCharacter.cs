@@ -498,6 +498,29 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
+        public void Sleep()
+        {
+            // Get the room that the character is in.
+            SMRoom smr = this.GetRoom();
+            
+            // Check if there is a bed in the room
+            if (smr.RoomItems.Count(roomitem => roomitem.ItemFamily.ToLower() == "bed") > 0) 
+            {
+                // If there is a bed send them a message to say they're logging out.
+                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("You feel weary and slip into a pleasant sleep (you have been logged out from the game world)."));
+
+                // .. remove them from the world.
+                List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+                smcs.Remove(this);
+                HttpContext.Current.Application["SMCharacters"] = smcs;
+                smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " falls into a deep sleep"));
+            }
+            else // If there isn't a bed tell them that they can't log out here.
+            {
+                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("There is no bed in this location so you can not sleep here."));
+            }
+        }
+
 		#endregion
 
 		#region "Skill Related Items"
