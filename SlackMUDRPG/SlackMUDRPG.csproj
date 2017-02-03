@@ -179,6 +179,8 @@
     <Content Include="JSON\Locations\LocRavensmere.Military District.Arena Floor.json" />
     <Content Include="JSON\Locations\LocRavensmere.Military District.Battle Coordinators Office.json" />
     <Content Include="JSON\Objects\Container.WoodenChest.json" />
+    <Content Include="JSON\Objects\Furniture.Bed.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern Upstairs Rooms.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
