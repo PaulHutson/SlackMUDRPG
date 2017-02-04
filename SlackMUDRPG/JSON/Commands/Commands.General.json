@@ -43,6 +43,20 @@
 	},
 	{
 		"CommandFamily": "General",
+		"CommandBaseName": "who",
+		"CommandName": "who",
+		"CommandDescription": "This will show you a list of all people currently online",
+		"CommandSyntax": "who",
+		"CommandExpression": "who",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Who",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "who",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "General",
 		"CommandBaseName": "move",
 		"CommandName": "move",
 		"CommandDescription": "This will move you to a room defined by the exit.",

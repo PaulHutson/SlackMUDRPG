@@ -269,9 +269,11 @@ namespace SlackMUDRPG.CommandClasses
                             currentRoom.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " walks out."), this, true);
                             currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
 
+							// Expire any awaiting responses from NPCs (to clean the memory / character file up)
+							ExpireResponse(true);
 
-                            // Move the player to the new location
-                            this.RoomID = smr.RoomID;
+							// Move the player to the new location
+							this.RoomID = smr.RoomID;
                             this.SaveToApplication();
                             this.SaveToFile();
                             this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
@@ -533,6 +535,71 @@ namespace SlackMUDRPG.CommandClasses
                 this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("There is no bed in this location so you can not sleep here."));
             }
         }
+
+		/// <summary>
+		/// Enables the character to read a sign
+		/// </summary>
+		/// <param name="itemIdentifier">The item to be read</param>
+		public void Read(string itemIdentifier)
+		{
+			// Get the item
+			SMItem item = this.FindItemInRoom(itemIdentifier);
+
+			// Check the item is readable
+			if (item != null)
+			{
+				if (item.ItemType == "Readable")
+				{
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("The " + item.ItemName + " reads:"));
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(item.ItemExtraDetail));
+				}
+				else
+				{
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("That item can not be read"));
+				}
+			}
+			else
+			{
+				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find item"));
+			}
+		}
+
+		/// <summary>
+		/// Tells the player how many people are currently online
+		/// </summary>
+		public void Who()
+		{
+			// Construct the string
+			string whoOnlineString = OutputFormatterFactory.Get().Bold("People online:");
+
+			// Get the list of all online
+			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+
+			// Loop around the characters and add them to the who online list
+			bool isFirst = true;
+			string whoList = "";
+			foreach (SMCharacter smc in smcs)
+			{
+				if (isFirst)
+				{
+					isFirst = false;
+				}
+				else
+				{
+					whoList += ", ";
+				}
+				whoList += smc.GetFullName();
+			}
+
+			// Add the list to the output string.
+			whoOnlineString += OutputFormatterFactory.Get().General(whoList);
+
+			// Quantify the number of people online presently
+			whoOnlineString += OutputFormatterFactory.Get().Italic(smcs.Count.ToString() + " currently online");
+
+			// Send the message back to the player
+			this.sendMessageToPlayer(whoOnlineString);
+		}
 
 		#endregion
 
@@ -1176,6 +1243,62 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Gives an item identified by itemIdentifier to a charcter identified by playerName.
+		/// </summary>
+		/// <param name="itemIdentifier">Identifier of the item to give.</param>
+		/// <param name="playerName">Name of the character to give the item to.</param>
+		public void GiveItem(string itemIdentifier, string playerName)
+		{
+			// Get item from current players inventory
+			SMItem itemToGive = this.GetOwnedItem(itemIdentifier);
+
+			if (itemToGive == null)
+			{
+				this.sendMessageToPlayer(this.Outputer.Italic($"You must own an item to give it, \"{Utils.SanitiseString(itemIdentifier)}\" was not found in your inventory!"));
+				return;
+			}
+
+			// Get player to give item to
+			SMCharacter playerToGiveTo = this.GetRoom().GetPeople().FirstOrDefault(smc => smc.GetFullName().ToLower() == playerName.ToLower());
+
+			if (playerToGiveTo == null)
+			{
+				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to find a player called, \"{Utils.SanitiseString(playerName)}\" in this room!"));
+				return;
+			}
+
+			// Check player can recieve item (needs an empyt hand available weigth capacity to hold carry the item
+			SMSlot receivingHand = playerToGiveTo.GetEmptyHand();
+
+			if (receivingHand == null)
+			{
+				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to give \"{itemToGive.ItemName}\" to \"{playerToGiveTo.GetFullName()}\", they dont have an emoty hand to take it!"));
+				playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} tried to give you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\" but you dont have an empty had to take it!"));
+				return;
+			}
+
+			if (playerToGiveTo.WeightLimit - playerToGiveTo.GetCurrentWeight() < SMItemHelper.GetItemWeight(itemToGive))
+			{
+				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to give \"{itemToGive.ItemName}\" to \"{playerToGiveTo.GetFullName()}\", they can't carry that much weight!"));
+				playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} tried to give you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\" but your strong enough to carry it!"));
+				return;
+			}
+
+			// Remove item from current player
+			this.RemoveOwnedItem(itemToGive.ItemID);
+
+			// Add item to receiving player
+			receivingHand.EquippedItem = itemToGive;
+
+			// Send responces and save both players
+			this.sendMessageToPlayer(this.Outputer.Italic($"You gave {playerToGiveTo.GetFullName()} {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
+			playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} gave you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
+
+			this.SaveToApplication();
+			playerToGiveTo.SaveToApplication();
+		}
+
+		/// <summary>
 		/// Lists the characters inventory slot by slot. If a slot is specified by name only details of that slot are listed, but it is done recursivly.
 		/// </summary>
 		/// <param name="slotName">Optional name of the slot to list.</param>
@@ -1345,7 +1468,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			foreach (SMSlot slot in this.Slots)
 			{
-				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems != null)
+				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems.Any())
 				{
 					item = SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
 
@@ -1519,6 +1642,47 @@ namespace SlackMUDRPG.CommandClasses
 					}
 				}
 			}
+		}
+
+		/// <summary>
+		/// Removes an owned item by searching all slots and their contents for a given identifier.
+		/// </summary>
+		/// <param name="itemIdentifier"></param>
+		private void RemoveOwnedItem(string itemIdentifier)
+		{
+			// Check in each slot (not recursive)
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+					{
+						slot.EquippedItem = null;
+						this.SaveToApplication();
+						break;
+					}
+				}
+			}
+
+			// Check in any equipped containers (recursive)
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty())
+				{
+					// Look inside the equipped item if it is a container
+					if (slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems.Any())
+					{
+						if (SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier) != null)
+						{
+							SMItemHelper.RemoveItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
+							this.SaveToApplication();
+							break;
+						}
+					}
+				}
+			}
+
+			// TODO check in clothing slots e.g. pockets
 		}
 
 		/// <summary>
@@ -1810,7 +1974,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="NPCID">The id of the NPC awaiting the response</param>
 		/// <param name="timeOut">The timeout for the response (unix time) response</param>
-		public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut)
+		public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut, string roomID = null)
 		{
 			if (this.NPCsWaitingForResponses == null)
 			{
@@ -1821,10 +1985,28 @@ namespace SlackMUDRPG.CommandClasses
 			arfc.NPCID = NPCID;
 			arfc.ShortCutTokens = shortCutTokens;
 			arfc.TimeOut = Utility.Utils.GetUnixTimeOffset(timeOut);
+			arfc.RoomID = roomID;
 
 			this.NPCsWaitingForResponses.Add(arfc);
 			this.SaveToApplication();
 			this.SaveToFile();
+		}
+
+		/// <summary>
+		/// Expire responses that are no longer needed
+		/// </summary>
+		private void ExpireResponse(bool clearRoomResponses = false)
+		{
+			// Get the current unix time
+			int currentUnixTime = Utility.Utils.GetUnixTime();
+
+			// Delete all awaiting responses after time
+			this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.TimeOut < currentUnixTime);
+
+			if (clearRoomResponses)
+			{
+				this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.RoomID == this.RoomID);
+			}
 		}
 
 		/// <summary>
@@ -1835,18 +2017,14 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Responded to player
 			bool respondedToPlayer = false;
-
-			// Get the current unix time
-			int currentUnixTime = Utility.Utils.GetUnixTime();
-
-			// Delete all awaiting responses after time
-			this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.TimeOut < currentUnixTime);
+			
+			ExpireResponse();
 
 			// If there are still characters awaiting responses
 			if (this.NPCsWaitingForResponses.Count() > 0)
 			{
 				// First check if we are awaiting any responses with that shortcut token (and aren't timed out)
-				List<AwaitingResponseFromCharacter> NPCIDs = this.NPCsWaitingForResponses.FindAll(awaitingitems => awaitingitems.ShortCutTokens.Count(sct => sct.ShortCutToken == responseShortcut) > 0);
+				List<AwaitingResponseFromCharacter> NPCIDs = this.NPCsWaitingForResponses.FindAll(awaitingitems => awaitingitems.ShortCutTokens.Count(sct => sct.ShortCutToken.ToLower() == responseShortcut.ToLower()) > 0);
 
 				// If there is something waiting
 				if (NPCIDs.Count > 0)
@@ -1885,6 +2063,7 @@ namespace SlackMUDRPG.CommandClasses
 	{
 		public string NPCID { get; set; }
 		public List<ShortcutToken> ShortCutTokens { get; set; }
+		public string RoomID { get; set; }
 		public int TimeOut { get; set; }
 	}
 

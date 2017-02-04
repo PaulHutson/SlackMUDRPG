@@ -11,7 +11,6 @@ namespace SlackMUDRPG.CommandClasses
 {
 	public class SlackMud
 	{
-
 		#region "Login and Character Methods"
 
 		/// <summary>

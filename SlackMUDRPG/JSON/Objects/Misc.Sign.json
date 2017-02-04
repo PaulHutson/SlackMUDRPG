@@ -1,0 +1,16 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Sign",
+	"PluralPronoun": "some",
+	"PluralName": "Signs",
+	"ItemType": "Readable",
+	"ItemFamily": "Sign",
+	"ItemDescription": "This is a sign",
+	"ItemExtraDetail": "Here be a sign that you can read",
+	"ItemWeight": 0,
+	"ItemSize": 0,
+	"HitPoints": 1000000000,
+	"MaxHitPoints": 1000000000,
+	"BaseDamage": 0.001,
+	"Toughness": 1
+}
