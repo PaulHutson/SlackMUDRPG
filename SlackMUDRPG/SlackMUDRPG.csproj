@@ -61,6 +61,10 @@
       <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.WebSockets, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WebSockets.0.2.3.1\lib\net45\Microsoft.WebSockets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
@@ -107,6 +111,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Game.aspx" />
     <Content Include="GameAccess.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="JSON\Characters\Char123.json" />
@@ -205,7 +210,8 @@
     <Content Include="JSON\Objects\Container.WoodenChest.json" />
     <Content Include="JSON\Objects\Furniture.Bed.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern Upstairs Rooms.json" />
-    <Content Include="Handlers\WebSocketHandler.ashx" />
+    <Content Include="Handlers\GameAccess.ashx" />
+    <Content Include="MasterPage\Site.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -253,6 +259,13 @@
     <Compile Include="CommandClasses\SMRequiredSkill.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
+    <Compile Include="Game.aspx.cs">
+      <DependentUpon>Game.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game.aspx.designer.cs">
+      <DependentUpon>Game.aspx</DependentUpon>
+    </Compile>
     <Compile Include="GameAccess.aspx.cs">
       <DependentUpon>GameAccess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -263,16 +276,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Handlers\TestWebSocketHandler.cs" />
-    <Compile Include="Handlers\WebSocketHandler.ashx.cs">
-      <DependentUpon>WebSocketHandler.ashx</DependentUpon>
+    <Compile Include="Handlers\GameAccess.ashx.cs">
+      <DependentUpon>GameAccess.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\GameAccessWebSocketHandler.cs" />
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestButton.aspx.cs">

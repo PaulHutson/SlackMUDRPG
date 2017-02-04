@@ -26,6 +26,8 @@ namespace SlackMUDRPG.Utility.Formatters
 			{
 				case "slack":
 					return new SlackOutputFormatter();
+				case "ws":
+					return new WSOutputFormatter();
 				default:
 					return new DefaultOutputFormatter();
 			}

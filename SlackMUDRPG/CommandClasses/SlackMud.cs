@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using SlackMUDRPG.Utility;
+using SlackMUDRPG.Utility.Formatters;
 
 namespace SlackMUDRPG.CommandClasses
 {
@@ -18,7 +19,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="userID">Slack UserID</param>
 		/// <returns>A string response</returns>
-		public void Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack")
+		public bool Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack")
 		{
 			// Variables for the return string
 			string returnString = "";
@@ -38,12 +39,14 @@ namespace SlackMUDRPG.CommandClasses
 				returnString += "i.e. /sm CreateCharacter Paul,Hutson,m,34";
 
                 character.sendMessageToPlayer(returnString);
+				return false;
             }
 			else
 			{
 				if ((character != null) && (!newCharacter))
 				{
                     character.sendMessageToPlayer("You're already logged in!");
+					return false;
                 }
 				else
 				{
@@ -58,15 +61,18 @@ namespace SlackMUDRPG.CommandClasses
                     {
                         character.ResponseURL = responseURL;
                     }
+
+					// Set the connection service
+					character.ConnectionService = connectionService;
                     
 					if (!newCharacter)
 					{
-						returnString = "Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")\n";
+						returnString = OutputFormatterFactory.Get().Bold("Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")");
 					}
 					else
 					{
-						returnString = "Welcome to SlackMud!\n";
-						returnString += "We've created your character in the magical world of Arrelvia!\n"; // TODO, use a welcome script!
+						returnString = OutputFormatterFactory.Get().Bold("Welcome to SlackMud!");
+						returnString += OutputFormatterFactory.Get().General("We've created your character in the magical world of Arrelvia!"); // TODO, use a welcome script!
 					}
 					returnString += GetLocationDetails(character.RoomID, character.UserID);
                     
@@ -78,12 +84,15 @@ namespace SlackMUDRPG.CommandClasses
                     if (room != null)
                     {
                         // Announce someone has walked into the room.
-                        room.Announce("_" + character.GetFullName() + " walks in._");
+                        room.Announce(OutputFormatterFactory.Get().Italic(character.GetFullName() + " walks in."));
                         room.ProcessNPCReactions("PlayerCharacter.Enter", character);
                     }
 
+					return true;
                 }
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -129,9 +138,7 @@ namespace SlackMUDRPG.CommandClasses
 		public SMNPC GetNPC(string userID)
 		{
 			// Get the room file if it exists
-			SMNPC charInMem = ((List<SMNPC>)HttpContext.Current.Application["SMNPCs"]).FirstOrDefault(smc => smc.UserID == userID);
-			
-			return charInMem;
+			return ((List<SMNPC>)HttpContext.Current.Application["SMNPCs"]).FirstOrDefault(smc => smc.UserID == userID);
 		}
 
         /// <summary>
@@ -375,7 +382,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (smr == null)
 			{
 				// If they don't exist inform the person as to how to create a new user
-				returnString = "Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com";
+				returnString = OutputFormatterFactory.Get().Italic("Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com");
 			}
 			else
 			{
