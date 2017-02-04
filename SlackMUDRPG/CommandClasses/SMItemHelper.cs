@@ -110,7 +110,6 @@ namespace SlackMUDRPG.CommandClasses
 
 		}
 
-
 		/// <summary>
 		/// Calculates the used capacity of a container.
 		/// </summary>
