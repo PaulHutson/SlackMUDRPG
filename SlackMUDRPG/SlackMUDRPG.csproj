@@ -204,6 +204,8 @@
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern Upstairs Rooms.json" />
     <Content Include="Handlers\GameAccess.ashx" />
     <Content Include="MasterPage\Site.Master" />
+    <Content Include="JSON\Objects\Misc.Book.json" />
+    <Content Include="JSON\Objects\Misc.Sign.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
