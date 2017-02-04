@@ -46,32 +46,34 @@ namespace SlackMUDRPG.CommandClasses
 
 		public static void SendMessage(string serviceType, string nameOfHook, string messageContent, string botName, string channelOrPersonTo, string responseURL = null)
 		{
-			if (serviceType.ToLower() == "slack")
+			if (serviceType != null)
 			{
-				using (WebClient client = new WebClient())
+				if (serviceType.ToLower() == "slack")
 				{
-					SlackClient sclient;
-
-					if ((responseURL != null) && (responseURL != ""))
+					using (WebClient client = new WebClient())
 					{
-						sclient = new SlackClient(responseURL);
-					}
-					else
-					{
-						string urlWithAccessToken = GetAccessToken(serviceType, nameOfHook);
-						sclient = new SlackClient(urlWithAccessToken);
-					}
+						SlackClient sclient;
 
-					sclient.PostMessage(username: botName,
-							   text: messageContent,
-							   channel: channelOrPersonTo);
+						if ((responseURL != null) && (responseURL != ""))
+						{
+							sclient = new SlackClient(responseURL);
+						}
+						else
+						{
+							string urlWithAccessToken = GetAccessToken(serviceType, nameOfHook);
+							sclient = new SlackClient(urlWithAccessToken);
+						}
+
+						sclient.PostMessage(username: botName,
+								   text: messageContent,
+								   channel: channelOrPersonTo);
+					}
+				}
+				else if (serviceType.ToLower() == "ws")
+				{
+					SlackMUDRPG.Global.wsClients.SingleOrDefault(r => ((GameAccessWebSocketHandler)r).userID == channelOrPersonTo).Send(messageContent);
 				}
 			}
-			else if (serviceType.ToLower() == "ws")
-			{
-				SlackMUDRPG.Global.wsClients.SingleOrDefault(r => ((GameAccessWebSocketHandler)r).userID == channelOrPersonTo).Send(messageContent);
-			}
-			
 		}
 
 		public static string GetAccessToken(string serviceType, string nameOfHook)

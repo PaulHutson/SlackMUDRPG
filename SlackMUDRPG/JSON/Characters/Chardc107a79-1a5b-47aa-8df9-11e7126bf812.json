@@ -1,16 +1,16 @@
 {
-  "firstname": "Paulo",
+  "firstname": "Paul",
   "lastname": "Hutsono",
   "description": null,
   "notes": null,
-  "lastinteractiondate": "2017-02-04T15:47:15.7522667+00:00",
-  "lastlogindate": "2017-02-04T15:47:15.7522667+00:00",
+  "lastinteractiondate": "2017-02-04T18:54:03.3759259+00:00",
+  "lastlogindate": "2017-02-04T18:54:03.3759259+00:00",
   "age": 18,
   "sex": "M",
   "PKFlag": false,
-  "UserID": "1d0220ef-1298-4064-a94b-39c1660b0a4d",
-  "Username": "Phut",
-  "Password": "System.Byte[]",
+  "UserID": "dc107a79-1a5b-47aa-8df9-11e7126bf812",
+  "Username": "Phutty",
+  "Password": "EAAAAABanQLov3hlPy09UT8PDym19bE41Oz6JNiGa66/Tyao",
   "RoomID": "Ravensmere.Harbour South.Landing Area",
   "CurrentActivity": null,
   "Attributes": {
@@ -32,7 +32,7 @@
         "any"
       ],
       "EquippedItem": {
-        "ItemID": "93bea81b-91d7-4411-85bf-0bd7ac0e57fa",
+        "ItemID": "7eaab473-198d-451a-ba41-d0adee5e6a43",
         "SingularPronoun": "a",
         "ItemName": "Wooden Sword",
         "PluralName": "Wooden Swords",
@@ -72,7 +72,7 @@
         "Container"
       ],
       "EquippedItem": {
-        "ItemID": "9db5e2b6-3e75-419a-86e7-8784ded41bc0",
+        "ItemID": "f8b0dccd-fe09-4d77-a0d9-e05da538f1ea",
         "SingularPronoun": "a",
         "ItemName": "Small Backpack",
         "PluralName": "Small Backpacks",

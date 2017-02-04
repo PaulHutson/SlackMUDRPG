@@ -19,7 +19,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="userID">Slack UserID</param>
 		/// <returns>A string response</returns>
-		public string Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack")
+		public string Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack", string password = null)
 		{
 			// Variables for the return string
 			string returnString = "";
@@ -51,7 +51,7 @@ namespace SlackMUDRPG.CommandClasses
 				else
 				{
 					// Get the character
-					character = GetCharacter(userID);
+					character = GetCharacter(userID, password);
 
                     // Reset the character activity, just in case!
                     character.CurrentActivity = null;
@@ -98,7 +98,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="userID">The id of the character you want to load</param>
 		/// <returns>A character</returns>
-		public SMCharacter GetCharacter(string userID)
+		public SMCharacter GetCharacter(string userID, string userName = null, string password = null)
 		{
 			// Get the room file if it exists
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
@@ -118,13 +118,25 @@ namespace SlackMUDRPG.CommandClasses
 						string json = r.ReadToEnd();
 						charInMem = JsonConvert.DeserializeObject<SMCharacter>(json);
 
-						// Add the character to the application memory 
-						smcs.Add(charInMem);
-						HttpContext.Current.Application["SMCharacters"] = smcs;
+						bool canLogin = true;
+						if (password != null)
+						{
+							canLogin = (Crypto.DecryptStringAES(charInMem.Password, "ProvinceMUD") == password);
+						}
+						if ((canLogin) && (password != null))
+						{
+							canLogin = (Crypto.DecryptStringAES(charInMem.Password, "ProvinceMUD") == password);
+						}
+
+						if (canLogin)
+						{
+							// Add the character to the application memory 
+							smcs.Add(charInMem);
+							HttpContext.Current.Application["SMCharacters"] = smcs;
+						}
 					}
 				}
 			}
-
 			return charInMem;
 		}
 
@@ -244,8 +256,7 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.Sex = char.Parse(sexIn);
 				SMChar.Age = int.Parse(age);
 				SMChar.Username = userName;
-				var provider = new System.Security.Cryptography.RSACryptoServiceProvider();
-				SMChar.Password = provider.Encrypt(System.Text.Encoding.UTF8.GetBytes(password), true).ToString();
+				SMChar.Password = Utility.Crypto.EncryptStringAES(password,"ProvinceMud");
 
 				// Add default attributes to the character
 				SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);

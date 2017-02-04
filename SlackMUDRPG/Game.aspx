@@ -21,6 +21,10 @@
 					});
 				};
 				ws.onmessage = function (e) {
+					if (e.data.substring(0,27) == "You must create a character") {
+						$("#PlayArea").hide();
+						$("#LoginCreateCharacterForm").show();
+					}
 					$('#OutputWindow').append(e.data + '<br/>');
 				};
 				$('#cmdLeave').click(function () {
