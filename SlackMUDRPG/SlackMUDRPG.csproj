@@ -275,7 +275,6 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties JSON_4Commands_4Commands_1Environment_1json__JSONSchema="http://json.schemastore.org/config" />
     </VisualStudio>
     <MonoDevelop>
       <Properties>
