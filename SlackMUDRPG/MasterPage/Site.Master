@@ -5,14 +5,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title><asp:ContentPlaceHolder ID="ph_Title" runat="server"></asp:ContentPlaceHolder></title>
+	<link href="../Style/Site.css" rel="stylesheet" />
+	<script src="../scripts/JS.Cookie.js"></script>
     <asp:ContentPlaceHolder ID="ph_Header" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
 		<div>
+			I'm the header area
+		</div>
+		<div>
 			<asp:ContentPlaceHolder ID="ph_MainContent" runat="server">
         
 			</asp:ContentPlaceHolder>
+		</div>
+		<div>
+			I'm the footer area
 		</div>
     </form>
 </body>

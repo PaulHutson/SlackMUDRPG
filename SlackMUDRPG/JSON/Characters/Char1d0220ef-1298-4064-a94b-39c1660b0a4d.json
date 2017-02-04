@@ -1,0 +1,132 @@
+{
+  "firstname": "Paulo",
+  "lastname": "Hutsono",
+  "description": null,
+  "notes": null,
+  "lastinteractiondate": "2017-02-04T15:47:15.7522667+00:00",
+  "lastlogindate": "2017-02-04T15:47:15.7522667+00:00",
+  "age": 18,
+  "sex": "M",
+  "PKFlag": false,
+  "UserID": "1d0220ef-1298-4064-a94b-39c1660b0a4d",
+  "Username": "Phut",
+  "Password": "System.Byte[]",
+  "RoomID": "Ravensmere.Harbour South.Landing Area",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "SocialStanding": 8
+  },
+  "Skills": null,
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "93bea81b-91d7-4411-85bf-0bd7ac0e57fa",
+        "SingularPronoun": "a",
+        "ItemName": "Wooden Sword",
+        "PluralName": "Wooden Swords",
+        "PluralPronoun": "some",
+        "ItemType": "Weapon",
+        "ItemFamily": "Sword",
+        "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+        "ItemWeight": 2,
+        "ItemCapacity": 0,
+        "ItemSize": 2,
+        "HitPoints": 25,
+        "MaxHitPoints": 25,
+        "BaseDamage": 2.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": [
+          {
+            "SkillName": "Sword Use",
+            "SkillLevel": "1"
+          }
+        ],
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "Container"
+      ],
+      "EquippedItem": {
+        "ItemID": "9db5e2b6-3e75-419a-86e7-8784ded41bc0",
+        "SingularPronoun": "a",
+        "ItemName": "Small Backpack",
+        "PluralName": "Small Backpacks",
+        "PluralPronoun": "some",
+        "ItemType": "Container",
+        "ItemFamily": "Backpack",
+        "ItemDescription": "Basic small backpack that all players start with.",
+        "ItemWeight": 0,
+        "ItemCapacity": 25,
+        "ItemSize": 25,
+        "HitPoints": 5,
+        "MaxHitPoints": 5,
+        "BaseDamage": 1E-10,
+        "Toughness": 1,
+        "DestroyedOutput": null,
+        "RequiredSkills": null,
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RigthFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "CharacterWeight": 50,
+  "CharacterSize": 160,
+  "ResponseURL": null,
+  "ConnectionService": null,
+  "NPCsWaitingForResponses": null
+}

@@ -19,7 +19,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="userID">Slack UserID</param>
 		/// <returns>A string response</returns>
-		public bool Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack")
+		public string Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack")
 		{
 			// Variables for the return string
 			string returnString = "";
@@ -38,16 +38,16 @@ namespace SlackMUDRPG.CommandClasses
 				returnString = "You must create a character, to do so, use the command /sm CreateCharacter FIRSTNAME,LASTNAME,SEX,AGE\n";
 				returnString += "i.e. /sm CreateCharacter Paul,Hutson,m,34";
 
-                character.sendMessageToPlayer(returnString);
-				return false;
+				// return information [need to return this without a player!]
+				return returnString;
             }
 			else
 			{
 				if ((character != null) && (!newCharacter))
 				{
-                    character.sendMessageToPlayer("You're already logged in!");
-					return false;
-                }
+					returnString += "You're already logged in!";
+					return returnString;
+				}
 				else
 				{
 					// Get the character
@@ -88,11 +88,9 @@ namespace SlackMUDRPG.CommandClasses
                         room.ProcessNPCReactions("PlayerCharacter.Enter", character);
                     }
 
-					return true;
+					return "";
                 }
 			}
-
-			return false;
 		}
 
 		/// <summary>
@@ -227,7 +225,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="sexIn">M or F for the male / Female character</param>
 		/// <param name="characterType">M or F for the male / Female character</param>
 		/// <returns>A string with the character information</returns>
-		public void CreateCharacter(string userID, string firstName, string lastName, string sexIn, string age, string characterType = "BaseCharacter", string responseURL = null)
+		public string CreateCharacter(string userID, string firstName, string lastName, string sexIn, string age, string characterType = "BaseCharacter", string responseURL = null, string userName = null, string password = null)
 		{
 			// Get the path for the character
 			string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
@@ -245,6 +243,9 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.PKFlag = false;
 				SMChar.Sex = char.Parse(sexIn);
 				SMChar.Age = int.Parse(age);
+				SMChar.Username = userName;
+				var provider = new System.Security.Cryptography.RSACryptoServiceProvider();
+				SMChar.Password = provider.Encrypt(System.Text.Encoding.UTF8.GetBytes(password), true).ToString();
 
 				// Add default attributes to the character
 				SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);
@@ -287,21 +288,30 @@ namespace SlackMUDRPG.CommandClasses
 				// Write the character to the stream
 				SMChar.SaveToFile();
 
-                // log the newly created character into the game
-                Login(userID, true, responseURL);
-
+				// Check if there is a response URL
+				if (responseURL != null)
+				{
+					// Log the newly created character into the game if in something like Slack
+					Login(userID, true, responseURL);
+					return "";
+				}
+				else
+				{
+					// Return the userid ready for logging in
+					return userID;
+				}
             }
 			else
 			{
                 // If they already have a character tell them they do and that they need to login.
                 // log the newly created character into the game
-                Login(userID, true, responseURL);
+                // Login(userID, true, responseURL);
 
                 // Get all current characters
                 List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
                 SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
 
-                character.sendMessageToPlayer("You already have a character, you cannot create another.");
+				return "You already have a character, you cannot create another.";
 			}   
         }
 

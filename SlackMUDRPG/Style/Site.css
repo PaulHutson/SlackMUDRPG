@@ -1,0 +1,45 @@
+﻿body {
+}
+
+/* Game Page */
+#OutputWindow
+{
+	width: 80%;
+	height: 500px;
+	min-width: 320px;
+	min-height: 320px;
+	border: 1px solid;
+}
+
+#txtMessage {
+	width: calc(80% - 100px);
+}
+
+#cmdSend {
+	width: 93px;
+}
+
+#PlayArea {
+	display: none;
+}
+
+#LoginForm {
+	display: none;
+}
+
+.FormRow div {
+	display: inline-block;
+}
+
+.FormRomLabel {
+	width: 250px;
+}
+
+.InformationRow {
+	font-style: italic;
+	font-size: small;
+}
+
+.Strong {
+	font-weight: bold;
+}

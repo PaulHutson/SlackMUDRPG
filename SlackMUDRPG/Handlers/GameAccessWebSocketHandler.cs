@@ -15,9 +15,15 @@ namespace SlackMUDRPG.Handlers
 		{
 			this.userID = this.WebSocketContext.QueryString["userID"];
 			SlackMUDRPG.Global.wsClients.Add(this);
-			if (!new SlackMUDRPG.CommandClasses.SlackMud().Login(this.userID, false, null, "WS"))
+			string loginResponse = new SlackMUDRPG.CommandClasses.SlackMud().Login(this.userID, false, null, "WS");
+			if (loginResponse == null)
 			{
 				this.Send("Character not found?");
+			}
+			else if (loginResponse != "") 
+			{
+				this.Send(loginResponse);
+				new SPCommandUtility(this.userID).InitateCommand("look");
 			};
 		}
 
@@ -25,16 +31,15 @@ namespace SlackMUDRPG.Handlers
 		{
 			// Process the character command sent in
 			// SlackMUDRPG.Global.wsClients.Broadcast(string.Format("{0} said: {1}", name, commandText));
-
-			string userID = commandText.Substring(0, commandText.IndexOf("|"));
-			string actualCommandtext = commandText.Substring(commandText.IndexOf("|")+1);
-
-			new SPCommandUtility(userID).InitateCommand(actualCommandtext);
+			this.userID = this.WebSocketContext.QueryString["userID"];
+			new SPCommandUtility(this.userID).InitateCommand(commandText);
 		}
 
 		public override void OnClose()
 		{
+			this.userID = this.WebSocketContext.QueryString["userID"];
 			SlackMUDRPG.Global.wsClients.Remove(this);
+			
 		}
 	}
 }

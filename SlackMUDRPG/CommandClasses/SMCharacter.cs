@@ -41,6 +41,12 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("UserID")]
 		public string UserID { get; set; }
 
+		[JsonProperty("Username")]
+		public string Username { get; set; }
+
+		[JsonProperty("Password")]
+		public string Password { get; set; }
+
 		[JsonProperty("RoomID")]
 		public string RoomID { get; set; }
 
