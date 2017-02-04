@@ -29,6 +29,22 @@
 			"BaseDamage": 0.1,
 			"Toughness": 1,
 			"DestroyedOutput": "Logs,20"
+		},
+		{
+			"SingularPronoun": "a",
+			"ItemName": "Sign",
+			"PluralPronoun": "some",
+			"PluralName": "Signs",
+			"ItemType": "Readable",
+			"ItemFamily": "Sign",
+			"ItemDescription": "A sign welcoming newcomers to Ravensmere",
+			"ItemExtraDetail": "All must be aware that this is the town of Ravensmere; you are subject to the laws of any civilised land here and will be punished for any misdemenor accordingly!  Please proceed to the Arrivals Area to be processed.",
+			"ItemWeight": 10000,
+			"ItemSize": 10000,
+			"HitPoints": 1000000000,
+			"MaxHitPoints": 1000000000,
+			"BaseDamage": 0.001,
+			"Toughness": 1
 		}
 	]
 }
