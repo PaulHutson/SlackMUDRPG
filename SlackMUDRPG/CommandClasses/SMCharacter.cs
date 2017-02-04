@@ -529,6 +529,30 @@ namespace SlackMUDRPG.CommandClasses
             }
         }
 
+		public void Read(string itemIdentifier)
+		{
+			// Get the item
+			SMItem item = this.FindItemInRoom(itemIdentifier);
+
+			// Check the item is readable
+			if (item != null)
+			{
+				if (item.ItemType == "Readable")
+				{
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("The " + item.ItemName + " reads:"));
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(item.ItemExtraDetail));
+				}
+				else
+				{
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("That item can not be read"));
+				}
+			}
+			else
+			{
+				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find item"));
+			}
+		}
+
 		#endregion
 
 		#region "Skill Related Items"

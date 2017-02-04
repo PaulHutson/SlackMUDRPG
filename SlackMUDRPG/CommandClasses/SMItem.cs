@@ -32,6 +32,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("ItemDescription")]
 		public string ItemDescription { get; set; }
 
+		[JsonProperty("ItemExtraDetail")]
+		public string ItemExtraDetail { get; set; }
+
 		[JsonProperty("ItemWeight")]
 		public int ItemWeight { get; set; }
 
