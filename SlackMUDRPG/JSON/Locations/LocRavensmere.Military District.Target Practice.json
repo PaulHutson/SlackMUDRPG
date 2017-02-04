@@ -1,0 +1,16 @@
+{
+	"RoomID": "Ravensmere.Military District.Target Practice",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "Targets riddled with arrows are lined up at one end of this area, ready for you to practice on.",
+	"RoomExits": [
+		{
+			"Shortcut": "TG",
+			"Description": "Training Ground",
+			"RoomID": "Ravensmere.Military District.Training Ground"
+		}
+	],
+	"RoomItems": null
+}

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using SlackMUDRPG.Utility;
 using SlackMUDRPG.Utility.Formatters;
+using System.Threading;
 
 namespace SlackMUDRPG.CommandClasses
 {
@@ -174,6 +175,22 @@ namespace SlackMUDRPG.CommandClasses
             return npcsInLocation;
         }
 
+        public List<SMCharacter> GetAllPeople()
+        {
+            List<SMCharacter> lsmc = this.GetPeople();
+            List<SMNPC> lnpcs = this.GetNPCs();
+
+            if (lnpcs != null)
+            {
+                foreach(SMNPC npc in lnpcs)
+                {
+                    lsmc.Add(npc);
+                }
+            }
+
+            return lsmc;
+        }
+
         /// <summary>
         /// Gets a list of all the people in the room.
         /// </summary>
@@ -318,7 +335,7 @@ namespace SlackMUDRPG.CommandClasses
         public void InspectThing(SMCharacter smc, string thingToInspect)
         {
             // Check if it's a character first
-            SMCharacter targetCharacter = this.GetPeople().FirstOrDefault(checkChar => checkChar.GetFullName() == thingToInspect);
+            SMCharacter targetCharacter = this.GetPeople().FirstOrDefault(checkChar => checkChar.GetFullName().ToLower() == thingToInspect.ToLower());
 
 			if (targetCharacter != null)
             {
@@ -336,7 +353,7 @@ namespace SlackMUDRPG.CommandClasses
             }
             else // If not a character, check if it is an NPC...
             {
-				SMNPC targetNPC = this.GetNPCs().FirstOrDefault(checkChar => checkChar.GetFullName() == thingToInspect);
+				SMNPC targetNPC = this.GetNPCs().FirstOrDefault(checkChar => checkChar.GetFullName().ToLower() == thingToInspect.ToLower());
 
 				if (targetNPC != null)
 				{
@@ -350,7 +367,8 @@ namespace SlackMUDRPG.CommandClasses
 						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("No description set..."));
 					}
 					smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetNPC.GetInventoryList()));
-					targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.ExaminesThem", smc);
+					targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.ExaminesThem", smc, targetNPC.UserID);
+					targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.Examines", smc);
 				}
 				else // If not an NPC, check the objects in the room
 				{
@@ -579,21 +597,44 @@ namespace SlackMUDRPG.CommandClasses
 
         #region "NPC Functions"
 
-        public void ProcessNPCReactions(string actionType, SMCharacter invokingCharacter)
+        public void ProcessNPCReactions(string actionType, SMCharacter invokingCharacter, string extraData = null)
         {
             List<SMNPC> lNPCs = new List<SMNPC>();
-            lNPCs = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+            lNPCs = ((List<SMNPC>)HttpContext.Current.Application["SMNPCs"]).FindAll(npc => ((npc.RoomID == invokingCharacter.RoomID) && (npc.GetFullName() != invokingCharacter.GetFullName())));
 
             // Check if the character already exists or not.
             if (lNPCs != null)
             {
                 // Get the NPCs who have a response of the right type
-                lNPCs = lNPCs.FindAll(npc => npc.NPCResponses.Count(npcr => npcr.ResponseType == actionType) > 0);
+				if (extraData != null)
+				{
+					switch (actionType) {
+						case "PlayerCharacter.ExaminesThem":
+							lNPCs = lNPCs.FindAll(npc => ((npc.NPCResponses.Count(npcr => npcr.ResponseType == actionType) > 0) && (npc.UserID == extraData)));
+							break;
+						default:
+							lNPCs = lNPCs.FindAll(npc => npc.NPCResponses.Count(npcr => npcr.ResponseType == actionType) > 0);
+							break;
+					}
+				}
+				else
+				{
+					lNPCs = lNPCs.FindAll(npc => npc.NPCResponses.Count(npcr => npcr.ResponseType == actionType) > 0);
+				}
+				
                 if (lNPCs != null)
                 {
                     foreach (SMNPC reactingNPC in lNPCs)
                     {
-                        reactingNPC.RespondToAction(actionType, invokingCharacter);
+						HttpContext ctx = HttpContext.Current;
+
+						Thread npcReactionThread = new Thread(new ThreadStart(() =>
+						{
+							HttpContext.Current = ctx;
+							reactingNPC.RespondToAction(actionType, invokingCharacter);
+						}));
+
+						npcReactionThread.Start();
                     }
                 }
             }

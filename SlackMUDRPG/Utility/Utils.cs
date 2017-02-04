@@ -18,7 +18,7 @@ namespace SlackMUDRPG.Utility
 		/// <param name="paramName">Parameter name.</param>
 		public static string GetQueryParam(string paramName)
 		{
-			return HttpContext.Current.Request.Form[paramName] ?? HttpContext.Current.Request.QueryString[paramName];
+			return HttpContext.Current.Request.Form[paramName] ?? HttpContext.Current.Request.QueryString[paramName] ?? "";
 		}
 
 		#endregion
@@ -146,11 +146,11 @@ namespace SlackMUDRPG.Utility
 			return calulatedArgs;
 		}
 
-        #endregion
+		#endregion
 
-        #region "Time Functions"
+		#region "Time Functions"
 
-        public static int GetUnixTime()
+		public static int GetUnixTime()
         {
             return (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         }

@@ -213,12 +213,12 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else
 				{
-					this.sendMessageToPlayer("Character not logged in, please login before trying to move.");
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Character not logged in, please login before trying to move."));
 				}
 			}
 			else
 			{
-				this.sendMessageToPlayer("Character not logged in, please login before trying to move.");
+				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Character not logged in, please login before trying to move."));
 			}
 
 			if (foundCharacter)
@@ -248,7 +248,7 @@ namespace SlackMUDRPG.CommandClasses
                             // Find out if the character has keys for the location
                             if (!this.CheckKey(sme.RoomLockID))
                             {
-                                this.sendMessageToPlayer("_The door is locked and you do not have a key_");
+                                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("The door is locked and you do not have a key"));
                                 initiateMove = false;
                             }
                         }
@@ -259,18 +259,20 @@ namespace SlackMUDRPG.CommandClasses
                             // Walk out of the room code.
                             SMRoom currentRoom = this.GetRoom();
 
-                            currentRoom.Announce("_" + this.GetFullName() + " walks out._", this, true);
+                            currentRoom.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " walks out."), this, true);
                             currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
 
+							// Expire any awaiting responses from NPCs (to clean the memory / character file up)
+							ExpireResponse(true);
 
-                            // Move the player to the new location
-                            this.RoomID = smr.RoomID;
+							// Move the player to the new location
+							this.RoomID = smr.RoomID;
                             this.SaveToApplication();
                             this.SaveToFile();
                             this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
 
                             // Announce arrival to other players in the same place
-                            smr.Announce("_" + this.GetFullName() + " walks in._", this, true);
+                            smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " walks in."), this, true);
                             smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
                         }
                     }
@@ -279,6 +281,53 @@ namespace SlackMUDRPG.CommandClasses
                 {
                     this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Exit name: " + exitShortcut + " not found, please check and try again"));
                 }
+			}
+		}
+
+		/// <summary>
+		/// Flee from a location via a random exit.
+		/// </summary>
+		public void Flee()
+		{
+			// Get the room for the characters location
+			List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+			SMRoom roomInMem = smrs.FirstOrDefault(smrn => smrn.RoomID.ToLower() == this.RoomID.ToLower());
+
+			// Get the specific exit from the location referred to by the shortcut
+			List<SMExit> sme = roomInMem.RoomExits.FindAll(exit => exit.Locked == false);
+
+			// Check that the exit isn't null (i.e. they've entered the right text!)
+			if (sme != null)
+			{
+				if (sme.Count > 1)
+				{
+					sme = sme.OrderBy(item => new Random().Next()).ToList();
+				}
+
+				SMRoom smr = new SlackMud().GetRoom(sme.First().RoomID);
+
+				if (smr != null)
+				{
+					// Walk out of the room code.
+					SMRoom currentRoom = this.GetRoom();
+
+					currentRoom.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " flees."), this, true);
+					currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
+				
+					// Move the player to the new location
+					this.RoomID = smr.RoomID;
+					this.SaveToApplication();
+					this.SaveToFile();
+					this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
+
+					// Announce arrival to other players in the same place
+					smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " arrives in haste."), this, true);
+					smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
+				}
+				else
+				{
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find an exit to flee through."));
+				}
 			}
 		}
 
@@ -302,6 +351,9 @@ namespace SlackMUDRPG.CommandClasses
 			this.SaveToApplication();
 		}
 
+        /// <summary>
+        /// Admin Command - move the player back to the landing area
+        /// </summary>
         public void Flush()
         {
             this.RoomID = new SlackMud().GetStartingLocation();
@@ -451,6 +503,97 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
+        /// <summary>
+        /// Allows a player to go to sleep in a location if an item with the itemfamily "Bed" in a room.
+        /// </summary>
+        public void Sleep()
+        {
+            // Get the room that the character is in.
+            SMRoom smr = this.GetRoom();
+            
+            // Check if there is a bed in the room
+            if (smr.RoomItems.Count(roomitem => roomitem.ItemFamily.ToLower() == "bed") > 0) 
+            {
+                // If there is a bed send them a message to say they're logging out.
+                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("You feel weary and slip into a pleasant sleep (you have been logged out from the game world)."));
+
+                // .. remove them from the world.
+                List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+                smcs.Remove(this);
+                HttpContext.Current.Application["SMCharacters"] = smcs;
+                smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " falls into a deep sleep"));
+            }
+            else // If there isn't a bed tell them that they can't log out here.
+            {
+                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("There is no bed in this location so you can not sleep here."));
+            }
+        }
+
+		/// <summary>
+		/// Enables the character to read a sign
+		/// </summary>
+		/// <param name="itemIdentifier">The item to be read</param>
+		public void Read(string itemIdentifier)
+		{
+			// Get the item
+			SMItem item = this.FindItemInRoom(itemIdentifier);
+
+			// Check the item is readable
+			if (item != null)
+			{
+				if (item.ItemType == "Readable")
+				{
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("The " + item.ItemName + " reads:"));
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(item.ItemExtraDetail));
+				}
+				else
+				{
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("That item can not be read"));
+				}
+			}
+			else
+			{
+				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find item"));
+			}
+		}
+
+		/// <summary>
+		/// Tells the player how many people are currently online
+		/// </summary>
+		public void Who()
+		{
+			// Construct the string
+			string whoOnlineString = OutputFormatterFactory.Get().Bold("People online:");
+
+			// Get the list of all online
+			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+
+			// Loop around the characters and add them to the who online list
+			bool isFirst = true;
+			string whoList = "";
+			foreach (SMCharacter smc in smcs)
+			{
+				if (isFirst)
+				{
+					isFirst = false;
+				}
+				else
+				{
+					whoList += ", ";
+				}
+				whoList += smc.GetFullName();
+			}
+
+			// Add the list to the output string.
+			whoOnlineString += OutputFormatterFactory.Get().General(whoList);
+
+			// Quantify the number of people online presently
+			whoOnlineString += OutputFormatterFactory.Get().Italic(smcs.Count.ToString() + " currently online");
+
+			// Send the message back to the player
+			this.sendMessageToPlayer(whoOnlineString);
+		}
+
 		#endregion
 
 		#region "Skill Related Items"
@@ -487,11 +630,11 @@ namespace SlackMUDRPG.CommandClasses
 					    // .. get the room
 					    SMRoom currentRoom = this.GetRoom();
 
-					    // find any players with that target name first
-					    SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
-
-					    // If it's not null set the target details
-					    if (targetCharacter != null)
+                        // find any players with that target name first
+                        SMCharacter targetCharacter = currentRoom.GetAllPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
+                        
+                        // If it's not null set the target details
+                        if (targetCharacter != null)
 					    {
 						    // Set the target as a character and set the target id
 						    targetType = "Character";
@@ -607,7 +750,7 @@ namespace SlackMUDRPG.CommandClasses
 				SMRoom currentRoom = this.GetRoom();
 
 				// find any players with that target name first
-				SMCharacter targetCharacter = currentRoom.GetPeople().FirstOrDefault(tC => tC.GetFullName() == targetName);
+				SMCharacter targetCharacter = currentRoom.GetAllPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
 
 				// If it's not null set the target details
 				if (targetCharacter != null)
@@ -639,8 +782,8 @@ namespace SlackMUDRPG.CommandClasses
 						}
 						else
 						{
-							// Not found the target with the name.. so send a message...
-							this.sendMessageToPlayer("The target you've specified is not valid");
+                            // Not found the target with the name.. so send a message...
+                            this.sendMessageToPlayer("The target you've specified is not valid");   
 						}
 					}
 				}
@@ -686,9 +829,7 @@ namespace SlackMUDRPG.CommandClasses
             SMRoom currentRoom = this.GetRoom();
 
             currentRoom.AddItem(corpse);
-            currentRoom.Announce("While dying " + this.GetFullName() + "dropped the following items: " + droppedItemsAnnouncement);
-
-
+			
             // Then move the player back to the hospital
             this.RoomID = "Hospital";
             this.Attributes.HitPoints = this.Attributes.MaxHitPoints/2;
@@ -772,7 +913,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		#endregion
 
-		#region "Inventory Functions New"
+		#region "Inventory Functions"
 
 		/// <summary>
 		/// Picks up item from the current room.
@@ -1094,15 +1235,51 @@ namespace SlackMUDRPG.CommandClasses
 			this.SaveToApplication();
 		}
 
-		//public void ListInventory(string slot = null)
-		//{
+		/// <summary>
+		/// Lists the characters inventory slot by slot. If a slot is specified by name only details of that slot are listed, but it is done recursivly.
+		/// </summary>
+		/// <param name="slotName">Optional name of the slot to list.</param>
+		public void ListInventory(string slotName = null)
+		{
+			string inventory = this.Outputer.Bold("Your Inventory:");
 
-		//}
+			// Weight Indicator
+			inventory += this.Outputer.Italic($"Weight: {this.GetCurrentWeight()} / {this.WeightLimit}", 2);
 
-		//public void ListSlot()
-		//{
+			// Append details of the characters actual inventory
+			if (slotName == null)
+			{
+				foreach (SMSlot slot in this.Slots)
+				{
+					inventory += this.ListSlotDetails(slot.Name);
+				}
+			}
+			else
+			{
+				inventory += this.ListSlotDetails(slotName, true);
+			}
 
-		//}
+			// TODO include details of items within clothing
+
+			this.sendMessageToPlayer(inventory);
+		}
+
+		/// <summary>
+		/// Gets a string listsing the contents of each slot, optionally listing containet contents.
+		/// </summary>
+		/// <param name="listContainerContents">Optionally list containet contents.</param>
+		/// <returns></returns>
+		public string GetInventoryList(bool listContainerContents = false)
+		{
+			string inventory = string.Empty;
+
+			foreach (SMSlot slot in this.Slots)
+			{
+				inventory += this.ListSlotDetails(slot.Name, listContainerContents);
+			}
+
+			return inventory;
+		}
 
 		/// <summary>
 		/// Gets an SMSlot by name, case insensitive.
@@ -1120,11 +1297,11 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Gets an equipped item by searching all slots for a given identifier.
+		/// Gets an equipped item by searching all slots for a given identifier. If not identifier is given the item in the first non-empty slot is returned.
 		/// </summary>
 		/// <param name="itemIdentifier"></param>
 		/// <returns>The equipped item or null.</returns>
-		public SMItem GetEquippedItem(string itemIdentifier)
+		public SMItem GetEquippedItem(string itemIdentifier = null)
 		{
 			SMItem item = null;
 
@@ -1132,7 +1309,11 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				if (!slot.isEmpty())
 				{
-					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+					if (itemIdentifier == null)
+					{
+						return slot.EquippedItem;
+					}
+					else if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
 					{
 						item = slot.EquippedItem;
 						break;
@@ -1141,6 +1322,36 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return item;
+		}
+
+		/// <summary>
+		/// Counts the number of items owned by the character that match a given id, name or family.
+		/// </summary>
+		/// <param name="itemIdentifier">Id, name or family to match.</param>
+		/// <returns>Coutn of matching items.</returns>
+		public int CountOwnedItems(string itemIdentifier)
+		{
+			int count = 0;
+
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+					{
+						count++;
+					}
+
+					if (slot.EquippedItem.CanHoldOtherItems())
+					{
+						count += SMItemHelper.CountItemsInContainer(slot.EquippedItem, itemIdentifier);
+					}
+				}
+			}
+
+			// TODO account for slot in clothing e.g. pockets
+
+			return count;
 		}
 
 		/// <summary>
@@ -1261,11 +1472,6 @@ namespace SlackMUDRPG.CommandClasses
 			return item;
 		}
 
-		//private int CountOwnedItems(string itemIdentifier)
-		//{
-
-		//}
-
 		/// <summary>
 		/// Gets an SMSlot representing an empty hand on the character, optionally weighted to the right hand first.
 		/// </summary>
@@ -1316,6 +1522,46 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Lists the contents of a given slot, optionally including container contents.
+		/// </summary>
+		/// <param name="slotName">The name of the slot to list.</param>
+		/// <param name="listContainerContents"></param>
+		/// <returns></returns>
+		private string ListSlotDetails(string slotName, bool listContainerContents = false)
+		{
+			SMSlot slot = this.GetSlotByName(slotName);
+
+			if (slot == null)
+			{
+				return this.Outputer.Italic($"Sorry unable to find a slot called \"{Utils.SanitiseString(slotName)}\"!");
+			}
+
+			string listing = string.Empty;
+
+			listing += this.Outputer.Bold($"{slot.GetReadableName()}:", 0);
+			listing += this.Outputer.General($" {slot.GetEquippedItemName()}");
+
+			// If the item in the slot is a container list its contents if required
+			if (listContainerContents && slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems())
+			{
+				if (slot.EquippedItem.HeldItems.Any())
+				{
+					listing += this.Outputer.Italic($"Capacity: {SMItemHelper.GetItemUsedCapacity(slot.EquippedItem)} / {slot.EquippedItem.ItemCapacity}");
+					listing += this.Outputer.Italic($"This \"{slot.EquippedItem.ItemName}\" contains the following items:");
+					listing += SMItemHelper.GetContainerContents(slot.EquippedItem);
+				}
+				else
+				{
+					listing += this.Outputer.Italic($"This \"{slot.EquippedItem.ItemName}\" is empty.");
+				}
+			}
+
+			listing += this.Outputer.General(string.Empty);
+
+			return listing;
+		}
+
+		/// <summary>
 		/// Removes an equipped item by searching all slots for a given identifier.
 		/// </summary>
 		/// <param name="itemIdentifier"></param>
@@ -1335,179 +1581,16 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
-		#endregion
-
-		#region "Inventory Functions"
-
 		/// <summary>
-		/// Send the character a message listing their inventory. If a slot is specified only items is that
-		/// slot are listed, but containers contents in rescurivly displayed
+		/// Checks if the characters has an item of a given type equipped.
 		/// </summary>
-		/// <param name="slotName">The name of the slot (case and space insensitive).</param>
-		public void ListInventory(string slotName = null)
-		{
-			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
-			string inventory = outputFormatter.Bold("Your Inventory:");
-			//TODO capacity indicator
-			inventory += outputFormatter.Italic($"Weight: {this.GetCurrentWeight()} / {this.WeightLimit}", 2);
-
-			this.sendMessageToPlayer(inventory + GetInventoryList(slotName));
-		}
-
-		/// <summary>
-		/// Gets the players inventory
-		/// </summary>
-		/// <param name="slotName">The name of the slot (case and space insensitive)</param>
-		/// <returns>The inventory list</returns>
-		public string GetInventoryList(string slotName = null)
-		{
-			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
-
-			string inventory = "";
-
-			if (slotName == null)
-			{
-				inventory += this.ListAllSlots();
-			}
-			else
-			{
-				inventory += this.ListSlot(slotName);
-			}
-
-			// TODO list clothing (body parts)
-			return inventory;
-		}
-
-		/// <summary>
-		/// Builds a sting of the equipped items in each character slot. Containers contents is ignored.
-		/// </summary>
-		/// <returns>String detailing all slots inventory.</returns>
-		private string ListAllSlots()
-		{
-			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
-
-			string inventory = "";
-
-			foreach (SMSlot slot in this.Slots)
-			{
-				inventory += outputFormatter.General($"{slot.GetReadableName()}:");
-				inventory += outputFormatter.ListItem(slot.GetEquippedItemName(), 2);
-			}
-
-			return inventory;
-		}
-
-		/// <summary>
-		/// Builds a string of the equipped item and its contents from the specified slot.
-		/// </summary>
-		/// <param name="slotName">The name of the slot to look in.</param>
-		/// <returns>String detailing slot inventory.</returns>
-		private string ListSlot(string slotName)
-		{
-			OutputFormatter outputFormatter = OutputFormatterFactory.Get();
-
-			string inventory = "";
-
-			SMSlot slot = this.GetSlotByName(slotName);
-
-			if (slot != null)
-			{
-				inventory += outputFormatter.Bold($"{slot.GetReadableName()}:", 0);
-				inventory += outputFormatter.General($" {slot.GetEquippedItemName()}");
-
-				// If the equipped item can hold other items get details of these
-				if (slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems() == true)
-				{
-					if (slot.EquippedItem.HeldItems != null && slot.EquippedItem.HeldItems.Count > 0)
-					{
-						inventory += outputFormatter.Italic($"This \"{slot.EquippedItem.ItemName}\" contains the following items:");
-
-						List<ItemCountObject> lines = SMItemUtils.GetItemCountList(slot.EquippedItem.HeldItems);
-
-						foreach (ItemCountObject line in lines)
-						{
-							string itemDetails = $"{line.Count} x ";
-
-							if (line.Count > 1)
-							{
-								itemDetails += line.PluralName;
-							}
-							else
-							{
-								itemDetails += line.SingularName;
-							}
-
-							inventory += outputFormatter.General(itemDetails);
-						}
-					}
-					else
-					{
-						inventory += outputFormatter.Italic($"This \"{slot.EquippedItem.ItemName}\" is empty.");
-					}
-				}
-				inventory += "\n";
-			}
-			else
-			{
-				inventory += outputFormatter.General("Sorry can't find a slot by that name.");
-			}
-
-			return inventory;
-		}
-
-		public string GetOwnedItemIDByName(string name)
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					if (slot.EquippedItem.ItemName == name)
-					{
-						return slot.EquippedItem.ItemID;
-					}
-
-					if (slot.EquippedItem.ItemType == "container")
-					{
-						SMItem item = this.FindItemInContainerByName(name, slot.EquippedItem);
-						if (item != null)
-						{
-							return item.ItemID;
-						}
-					}
-				}
-			}
-
-			return null;
-		}
-
-		/// <summary>
-		/// Has the item equipped.
-		/// </summary>
-		/// <returns><c>true</c>, if item equipped was hased, <c>false</c> otherwise.</returns>
-		/// <param name="id">ItemID.</param>
-		public bool HasItemEquipped(string id)
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty() && slot.EquippedItem.ItemID == id)
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		/// <summary>
-		/// Has an item of a given type equipped.
-		/// </summary>
-		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
+		/// <returns><c>true</c>, if item of given type is equipped, <c>false</c> otherwise.</returns>
 		/// <param name="type">ItemType.</param>
 		public bool HasItemTypeEquipped(string type)
 		{
 			foreach (SMSlot slot in Slots)
 			{
-				if (!slot.isEmpty() && slot.EquippedItem.ItemType == type)
+				if (!slot.isEmpty() && slot.EquippedItem.ItemType.ToLower() == type.ToLower())
 				{
 					return true;
 				}
@@ -1517,63 +1600,21 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Has an item of a given family type equipped.
+		/// Checks in the character has an item equipped matching a given identifier (id, name, family)
 		/// </summary>
-		/// <returns><c>true</c>, if item of given type equipped was hased, <c>false</c> otherwise.</returns>
-		/// <param name="familyType">Item Type Family.</param>
-		public bool HasItemFamilyTypeEquipped(string familyType)
+		/// <returns><c>true</c>, if a matching item is equipped, <c>false</c> otherwise.</returns>
+		/// <param name="familyType">Item identifier.</param>
+		public bool HasItemEquipped(string itemIdentifier)
 		{
 			foreach (SMSlot slot in Slots)
 			{
-				if (!slot.isEmpty() && slot.EquippedItem.ItemFamily == familyType)
+				if (!slot.isEmpty() && SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
 				{
 					return true;
 				}
 			}
 
 			return false;
-		}
-
-
-		/// <summary>
-		/// Counts the number of a named item the character owns.
-		/// </summary>
-		/// <returns>The count.</returns>
-		/// <param name="name">ItemName.</param>
-		public int CountOwnedItemsByName(string name)
-		{
-			int count = 0;
-
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					if (slot.EquippedItem.ItemName.ToLower() == name.ToLower())
-					{
-						count++;
-					}
-					else if (slot.EquippedItem.ItemFamily.ToLower() == name.ToLower())
-					{
-						count++;
-					}
-
-					if (slot.EquippedItem.ItemType.ToLower() == "container")
-					{
-                        if (slot.EquippedItem.HeldItems != null)
-                        {
-                            foreach (SMItem itemInCountainer in slot.EquippedItem.HeldItems)
-                            {
-                                if ((itemInCountainer != null && itemInCountainer.ItemName.ToLower() == name.ToLower()) || (itemInCountainer.ItemFamily.ToLower() == name.ToLower()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-					}
-				}
-			}
-
-			return count;
 		}
 
 		/// <summary>
@@ -1588,154 +1629,11 @@ namespace SlackMUDRPG.CommandClasses
 			return rightHand.isEmpty() && leftHand.isEmpty();
 		}
 
-		/// <summary>
-		/// Check if adding a given item to the characters inventory is allowed
-		/// based on the characters weight restrictions
-		/// </summary>
-		/// <param item="item">The SMItem to be added</param>
-		/// <returns>Bool</returns>
-		private bool CheckWeightWithNewItem(SMItem item)
-		{
-			int currentWeight = this.GetCurrentWeight();
+		#endregion
 
-			if ((currentWeight + item.ItemWeight) <= this.WeightLimit)
-			{
-				return true;
-			}
+		#region "Inventory Functions Old"
 
-			return false;
-		}
-
-		/// <summary>
-		/// Gets the weight of items in a container, this will recursivley call itself to resolve the weights of
-		/// containers inside other containers that hold items.
-		/// </summary>
-		/// <returns>The weight.</returns>
-		private int GetContainerWeight(SMItem container)
-		{
-			int weight = container.ItemWeight;
-
-			if (container.HeldItems != null)
-			{
-				foreach (SMItem item in container.HeldItems)
-				{
-					if (item.ItemType == "container")
-					{
-						weight += this.GetContainerWeight(item);
-					}
-					else
-					{
-						weight += item.ItemWeight;
-					}
-				}
-			}
-
-			return weight;
-		}
-
-		/// <summary>
-		/// Gets the hand (SMSlot) which has the item equipped.
-		/// </summary>
-		/// <returns>The hand (SMSlot) with item equipped, or null.</returns>
-		/// <param name="itemName">The name of the item.</param>
-		private SMSlot GetHandWithItemEquipped(string itemName)
-		{
-			SMSlot rightHand = this.GetSlotByName("RightHand");
-			SMSlot leftHand = this.GetSlotByName("LeftHand");
-
-			if (!rightHand.isEmpty() && rightHand.EquippedItem.ItemName == itemName)
-			{
-				return rightHand;
-			}
-			else if (!leftHand.isEmpty() && leftHand.EquippedItem.ItemName == itemName)
-			{
-				return leftHand;
-			}
-
-			return null;
-		}
-
-		/// <summary>
-		/// Get the first item a player is holding
-		/// </summary>
-		/// <returns>The equipped item</returns>
-		public SMItem GetEquippedItem()
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					return slot.EquippedItem;
-				}
-			}
-
-			return null;
-		}
-
-        /// <summary>
-        /// Finds an item by name in a container by recursivly searching through the container
-        /// and any containers it contains.
-        /// </summary>
-        /// <returns>The item in a container.</returns>
-        /// <param name="name">ItemName.</param>
-        /// <param name="container">Container to look in.</param>
-        private SMItem FindItemInContainerByName(string name, SMItem container)
-        {
-            if (container.HeldItems != null)
-            {
-                foreach (SMItem item in container.HeldItems)
-                {
-                    if (item.ItemName.ToLower() == name.ToLower())
-                    {
-                        return item;
-                    }
-
-                    if (item.ItemType == "container")
-                    {
-                        SMItem smi = this.FindItemInContainerByName(name, item);
-                        if (smi != null)
-                        {
-                            return smi;
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        /// <summary>
-		/// Removes an item by name in a container by recursivly searching through the container
-		/// and any containers it contains.
-		/// </summary>
-		/// <returns>The item in a container.</returns>
-		/// <param name="name">ItemName.</param>
-		/// <param name="container">Container to look in.</param>
-		private SMItem RemoveItemInContainerByName(string name, SMItem container)
-        {
-            //if (container.HeldItems != null)
-            //{
-            //    foreach (SMItem item in container.HeldItems)
-            //    {
-            //        if (item.ItemName.ToLower() == name.ToLower())
-            //        {
-            //            return item;
-            //        }
-
-            //        if (item.ItemType == "container")
-            //        {
-            //            SMItem smi = this.RemoveItemInContainerByName(name, item);
-            //            if (smi != null)
-            //            {
-            //                return smi;
-            //            }
-            //        }
-            //    }
-            //}
-
-            return null;
-        }
-
+		// TODO will refactor when addressing locks and keys on containers
 		/// <summary>
 		/// Finds an item by AdditionalData in a container by recursivly searching through the container
 		/// and any containers it contains.
@@ -1768,121 +1666,7 @@ namespace SlackMUDRPG.CommandClasses
 			return null;
 		}
 
-		/// <summary>
-		/// Finds an item by id in a container by recursivly searching through the container
-		/// and any containers it contains.
-		/// </summary>
-		/// <returns>The item in a container.</returns>
-		/// <param itemID="itemID">ItemID.</param>
-		/// <param name="container">Container to look in.</param>
-		private SMItem FindItemInContainerByID(string itemID, SMItem container)
-		{
-			if (container.HeldItems != null)
-			{
-				foreach (SMItem item in container.HeldItems)
-				{
-					if (item.ItemID == itemID)
-					{
-						return item;
-					}
-
-					if (item.ItemType == "container")
-					{
-						SMItem smi = this.FindItemInContainerByID(itemID, item);
-						if (smi != null)
-						{
-							return smi;
-						}
-					}
-				}
-			}
-
-			return null;
-		}
-
-		/// <summary>
-		/// Finds an item by name (case insensitive) by looking in the characters slots, then its current room.
-		/// </summary>
-		/// <param name="itemName">Name of the item to look for.</param>
-		/// <param name="itemContainer">Output param to hold the container (SMItem) the item is found in, null if not found or in room.</param>
-		/// <returns>SMItem or null</returns>
-		private SMItem FindItem(string itemName, out SMItem itemContainer)
-		{
-			SMItem foundItem = null;
-
-			// check in containers equipped to a slot for the item
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (slot.EquippedItem != null && slot.EquippedItem.ItemType == "container")
-				{
-					foundItem = this.FindItemInContainerByName(itemName, slot.EquippedItem);
-
-					if (foundItem != null)
-					{
-						itemContainer = slot.EquippedItem;
-						return foundItem;
-					}
-				}
-			}
-
-			// TODO check in equipped clothing, e.g. trouser pockets
-
-			// check in the room for the item
-			foundItem = this.GetRoom().GetItemByName(itemName);
-
-			itemContainer = null;
-			return foundItem;
-		}
-
-		/// <summary>
-		/// Looks for a slot on the character to equip a given item.
-		/// </summary>
-		/// <param name="item">The SMItem object to be equipped.</param>
-		/// <returns>The SMSlot that could hold the item or null.</returns>
-		private SMSlot FindSlotToEquipItem(SMItem item)
-		{
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (slot.isEmpty() && slot.canEquipItem(item))
-				{
-
-					return slot;
-				}
-			}
-
-			return null;
-		}
-
-		/// <summary>
-		/// Tests if the character owns a given item by its ItemID
-		/// </summary>
-		/// <param name="itemID">ItemID to test</param>
-		/// <returns>True/False result of ownership test.</returns>
-		private bool OwnsItem(string itemID)
-		{
-			foreach (SMSlot slot in Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					if (slot.EquippedItem.ItemID == itemID)
-					{
-						return true;
-					}
-
-					if (slot.EquippedItem.ItemType == "container")
-					{
-						SMItem item = this.FindItemInContainerByID(itemID, slot.EquippedItem);
-						if (item != null)
-						{
-							return true;
-						}
-					}
-				}
-			}
-
-			return false;
-		}
-
+		// TODO will refactor when addressing locks and keys on containers
 		/// <summary>
 		/// Tests if the character has a key for a location
 		/// </summary>
@@ -1913,6 +1697,7 @@ namespace SlackMUDRPG.CommandClasses
             return false;
         }
 
+        // TODO will refactor when addressing useable items
         /// <summary>
         /// Remove an item by it's name.
         /// </summary>
@@ -2085,7 +1870,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="NPCID">The id of the NPC awaiting the response</param>
 		/// <param name="timeOut">The timeout for the response (unix time) response</param>
-		public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut)
+		public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut, string roomID = null)
 		{
 			if (this.NPCsWaitingForResponses == null)
 			{
@@ -2096,10 +1881,28 @@ namespace SlackMUDRPG.CommandClasses
 			arfc.NPCID = NPCID;
 			arfc.ShortCutTokens = shortCutTokens;
 			arfc.TimeOut = Utility.Utils.GetUnixTimeOffset(timeOut);
+			arfc.RoomID = roomID;
 
 			this.NPCsWaitingForResponses.Add(arfc);
 			this.SaveToApplication();
 			this.SaveToFile();
+		}
+
+		/// <summary>
+		/// Expire responses that are no longer needed
+		/// </summary>
+		private void ExpireResponse(bool clearRoomResponses = false)
+		{
+			// Get the current unix time
+			int currentUnixTime = Utility.Utils.GetUnixTime();
+
+			// Delete all awaiting responses after time
+			this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.TimeOut < currentUnixTime);
+
+			if (clearRoomResponses)
+			{
+				this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.RoomID == this.RoomID);
+			}
 		}
 
 		/// <summary>
@@ -2110,18 +1913,14 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Responded to player
 			bool respondedToPlayer = false;
-
-			// Get the current unix time
-			int currentUnixTime = Utility.Utils.GetUnixTime();
-
-			// Delete all awaiting responses after time
-			this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.TimeOut < currentUnixTime);
+			
+			ExpireResponse();
 
 			// If there are still characters awaiting responses
 			if (this.NPCsWaitingForResponses.Count() > 0)
 			{
 				// First check if we are awaiting any responses with that shortcut token (and aren't timed out)
-				List<AwaitingResponseFromCharacter> NPCIDs = this.NPCsWaitingForResponses.FindAll(awaitingitems => awaitingitems.ShortCutTokens.Count(sct => sct.ShortCutToken == responseShortcut) > 0);
+				List<AwaitingResponseFromCharacter> NPCIDs = this.NPCsWaitingForResponses.FindAll(awaitingitems => awaitingitems.ShortCutTokens.Count(sct => sct.ShortCutToken.ToLower() == responseShortcut.ToLower()) > 0);
 
 				// If there is something waiting
 				if (NPCIDs.Count > 0)
@@ -2154,10 +1953,13 @@ namespace SlackMUDRPG.CommandClasses
 		#endregion
 	}
 
+	#region "Other Class Structures"
+
 	public class AwaitingResponseFromCharacter
 	{
 		public string NPCID { get; set; }
 		public List<ShortcutToken> ShortCutTokens { get; set; }
+		public string RoomID { get; set; }
 		public int TimeOut { get; set; }
 	}
 
@@ -2170,4 +1972,6 @@ namespace SlackMUDRPG.CommandClasses
 	{
 		public string Note;
 	}
+
+	#endregion
 }

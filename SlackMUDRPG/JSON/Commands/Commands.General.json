@@ -43,6 +43,20 @@
 	},
 	{
 		"CommandFamily": "General",
+		"CommandBaseName": "who",
+		"CommandName": "who",
+		"CommandDescription": "This will show you a list of all people currently online",
+		"CommandSyntax": "who",
+		"CommandExpression": "who",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Who",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "who",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "General",
 		"CommandBaseName": "move",
 		"CommandName": "move",
 		"CommandDescription": "This will move you to a room defined by the exit.",
@@ -53,6 +67,20 @@
 		"PassCommandAsFirstArg": false,
 		"PassQueryParamAsFirstArg": null,
 		"ExampleUsage": "move n (would move you north if n was a location exit shortcut)",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "General",
+		"CommandBaseName": "flee",
+		"CommandName": "flee",
+		"CommandDescription": "Using this command will mean you will leave via a random unlocked exit.",
+		"CommandSyntax": "flee <locationshortcut>",
+		"CommandExpression": "flee {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Flee",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "flee",
 		"RequiredSkill": null
 	},
 	{

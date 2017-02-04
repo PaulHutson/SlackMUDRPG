@@ -33,8 +33,8 @@ namespace SlackMUDRPG.CommandClasses
             if (listToChooseFrom != null)
             {
                 // If there is more than one of the item randomise the list
-                if (listToChooseFrom.Count > 1) { 
-                    listToChooseFrom.OrderBy(item => new Random().Next());
+                if (listToChooseFrom.Count > 1) {
+					listToChooseFrom = listToChooseFrom.OrderBy(item => new Random().Next()).ToList();
                 }
 
                 // Loop around until a response is selected
@@ -76,10 +76,21 @@ namespace SlackMUDRPG.CommandClasses
                             ProcessConversation(NPCRS, invokingCharacter);
                             break;
 						case "Attack":
-                            // TODO
+                            this.Attack(invokingCharacter.GetFullName());
                             break;
                         case "UseSkill":
-                            // TODO
+							string[] dataSplit = null;
+							if (NPCRS.ResponseStepData.Contains('.'))
+							{
+								dataSplit = NPCRS.ResponseStepData.Split('.');
+							}
+							else
+							{
+								dataSplit[0] = NPCRS.ResponseStepData;
+								dataSplit[1] = null;
+							}
+							
+							this.UseSkill(dataSplit[0], dataSplit[1]);
                             break;
                     }
                 }
@@ -170,7 +181,7 @@ namespace SlackMUDRPG.CommandClasses
 
         private void ProcessResponseOptions(NPCConversations npcc, NPCConversationStep npccs, SMCharacter invokingCharacter)
         {
-            string responseOptions = OutputFormatterFactory.Get().Bold(this.GetFullName() + " Responses:" + OutputFormatterFactory.Get().NewLine);
+            string responseOptions = OutputFormatterFactory.Get().Bold(this.GetFullName() + " Responses:") + OutputFormatterFactory.Get().NewLine;
 			List<ShortcutToken> stl = new List<ShortcutToken>();
 
 			foreach (NPCConversationStepResponseOptions npcccsro in npccs.ResponseOptions)
@@ -190,9 +201,10 @@ namespace SlackMUDRPG.CommandClasses
 			acr.ConversationID = npcc.ConversationID;
             acr.ConversationStep = npccs.StepID;
             acr.WaitingForCharacter = invokingCharacter;
+			acr.RoomID = this.RoomID;
 
             string nextStepAfterTimeout = null;
-            int timeout = 60;
+            int timeout = 1000;
             if (npccs.NextStep != null)
             {
                 string[] getNextStep = npccs.NextStep.Split('.');
@@ -205,7 +217,7 @@ namespace SlackMUDRPG.CommandClasses
 
             this.AwaitingCharacterResponses.Add(acr);
 
-			invokingCharacter.SetAwaitingResponse(this.UserID, stl, timeout);
+			invokingCharacter.SetAwaitingResponse(this.UserID, stl, timeout, this.RoomID);
 			invokingCharacter.sendMessageToPlayer(responseOptions);
 		}
 
@@ -237,7 +249,7 @@ namespace SlackMUDRPG.CommandClasses
 							
 							if (currentStep != null)
 							{
-								NPCConversationStepResponseOptions nextstep = currentStep.ResponseOptions.FirstOrDefault(ro => ro.ResponseOptionShortcut == responseShortCut);
+								NPCConversationStepResponseOptions nextstep = currentStep.ResponseOptions.FirstOrDefault(ro => ro.ResponseOptionShortcut.ToLower() == responseShortCut.ToLower());
 								
 								if (nextstep != null)
 								{
@@ -277,29 +289,30 @@ namespace SlackMUDRPG.CommandClasses
         }
      }
 
-    #region "NPC Structures"
+	#region "NPC Structures"
 
-    /// <summary>
-    /// Response types can be of the following types:
-    /// - PlayerCharacter.Enter (Faction = FactionName.Threshold, AdditionalData = Player.Known)
-    /// - PlayerCharacter.Leave (Faction = FactionName.Threshold, AdditionalData = Player.Known)
-    /// - PlayerCharacter.Attack
-    /// - PlayerCharacter.SayNPCName (Faction = FactionName.Threshold, AdditionalData = Player.Known)
-    /// - PlayerCharacter.SayKeyWord (Faction = FactionName.Threshold, AdditionalData = Player.Known)
-    /// - PlayerCharacter.UseSkillOnThem (AdditionalData = the skill used)
-    /// - PlayerCharacter.UseSkillNotOnThem (AdditionalData = the skill used)
-    /// - PlayerCharacter.ExaminesThem
-    /// - PlayerCharacter.InRoom (Faction = FactionName.Threshold, frequency should be lower on this)
-    /// - NPC.Enter
-    /// - NPC.Leave
-    /// - NPC.ExaminesThem
-    /// - NPC.Attack
-    /// 
-    /// Frequency is set to how often a character will do something
-    /// this is automatically set to be 100 by default (i.e. they will
-    /// do it 100% of the time).
-    /// </summary>
-    public class NPCResponses
+	/// <summary>
+	/// Response types can be of the following types:
+	/// - PlayerCharacter.Enter (Faction = FactionName.Threshold, AdditionalData = Player.Known)
+	/// - PlayerCharacter.Leave (Faction = FactionName.Threshold, AdditionalData = Player.Known)
+	/// - PlayerCharacter.Attack
+	/// - PlayerCharacter.AttacksThem
+	/// - PlayerCharacter.SayNPCName (Faction = FactionName.Threshold, AdditionalData = Player.Known)
+	/// - PlayerCharacter.SayKeyWord (Faction = FactionName.Threshold, AdditionalData = Player.Known)
+	/// - PlayerCharacter.UseSkillOnThem (AdditionalData = the skill used)
+	/// - PlayerCharacter.UseSkillNotOnThem (AdditionalData = the skill used)
+	/// - PlayerCharacter.ExaminesThem
+	/// - PlayerCharacter.InRoom (Faction = FactionName.Threshold, frequency should be lower on this)
+	/// - NPC.Enter
+	/// - NPC.Leave
+	/// - NPC.ExaminesThem
+	/// - NPC.Attack
+	/// 
+	/// Frequency is set to how often a character will do something
+	/// this is automatically set to be 100 by default (i.e. they will
+	/// do it 100% of the time).
+	/// </summary>
+	public class NPCResponses
     {
         [JsonProperty("ResponseType")]
         public string ResponseType { get; set; }
@@ -428,6 +441,7 @@ namespace SlackMUDRPG.CommandClasses
     public class SMNPCAwaitingCharacterResponse
     {
         public SMCharacter WaitingForCharacter { get; set; }
+		public string RoomID { get; set; }
 		public string ConversationID { get; set; }
 		public string ConversationStep { get; set; }
         public int UnixTimeStampTimeout { get; set; }

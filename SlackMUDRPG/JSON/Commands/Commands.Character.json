@@ -124,5 +124,47 @@
 		"PassQueryParamAsFirstArg": null,
 		"ExampleUsage": "GetNotes",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Character",
+		"CommandBaseName": "sleep",
+		"CommandName": "sleep",
+		"CommandDescription": "Allows the character to go to sleep (logout) if there is a bed in the area.",
+		"CommandSyntax": "sleep",
+		"CommandExpression": "sleep",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Sleep",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "sleep",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Character",
+		"CommandBaseName": "read",
+		"CommandName": "read",
+		"CommandDescription": "Allows the character to go to read something.",
+		"CommandSyntax": "read <thing-to-read>",
+		"CommandExpression": "read {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Read",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "read sign",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Character",
+		"CommandBaseName": "logout",
+		"CommandName": "logout",
+		"CommandDescription": "Allows the character to go to sleep (logout) if there is a bed in the area.",
+		"CommandSyntax": "logout",
+		"CommandExpression": "logout",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Sleep",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "logout",
+		"RequiredSkill": null
 	}
 ]

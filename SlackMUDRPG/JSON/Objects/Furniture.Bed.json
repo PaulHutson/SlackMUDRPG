@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Bed",
+	"PluralPronoun": "some",
+	"PluralName": "Beds",
+	"ItemType": "Furniture",
+	"ItemFamily": "Bed",
+	"ItemDescription": "This bed looks like a comfortable place to spend a night asleep.",
+	"ItemWeight": 20,
+	"ItemSize": 20,
+	"HitPoints": 1000000000,
+	"MaxHitPoints": 1000000000,
+	"BaseDamage": 0.1,
+	"Toughness": 5
+}

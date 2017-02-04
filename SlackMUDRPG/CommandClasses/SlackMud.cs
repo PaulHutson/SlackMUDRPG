@@ -10,7 +10,6 @@ namespace SlackMUDRPG.CommandClasses
 {
 	public class SlackMud
 	{
-
 		#region "Login and Character Methods"
 
 		/// <summary>
@@ -122,12 +121,44 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Gets a character object, and loads it into memory.
+		/// Gets a character and also loads the character to memory if it isn't already there.
 		/// </summary>
-		/// <param name="userID">userID is based on the id from the slack channel</param>
-		/// <param name="newCharacter">newCharacter to change the output of the text based on whether the character is new or not</param>
-		/// <returns>String message for usage</returns>
-		public string GetCharacterOLD(string userID, bool newCharacter = false)
+		/// <param name="userID">The id of the character you want to load</param>
+		/// <returns>A character</returns>
+		public SMNPC GetNPC(string userID)
+		{
+			// Get the room file if it exists
+			SMNPC charInMem = ((List<SMNPC>)HttpContext.Current.Application["SMNPCs"]).FirstOrDefault(smc => smc.UserID == userID);
+			
+			return charInMem;
+		}
+
+        /// <summary>
+        /// Gets any type of character and also loads the character to memory if it isn't already there.
+        /// Note: This returns NPCs as well as Player Characters
+        /// </summary>
+        /// <param name="userID">The id of the character you want to load</param>
+        /// <returns>A character</returns>
+        public SMCharacter GetAllCharacters(string userID)
+        {
+            // Get the room file if it exists
+            SMCharacter returnCharacter = ((List<SMNPC>)HttpContext.Current.Application["SMNPCs"]).FirstOrDefault(smc => smc.UserID == userID);
+
+            if (returnCharacter == null)
+            {
+                returnCharacter = GetCharacter(userID);
+            }
+
+            return returnCharacter;
+        }
+
+        /// <summary>
+        /// Gets a character object, and loads it into memory.
+        /// </summary>
+        /// <param name="userID">userID is based on the id from the slack channel</param>
+        /// <param name="newCharacter">newCharacter to change the output of the text based on whether the character is new or not</param>
+        /// <returns>String message for usage</returns>
+        public string GetCharacterOLD(string userID, bool newCharacter = false)
 		{
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);

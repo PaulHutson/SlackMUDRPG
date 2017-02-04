@@ -19,7 +19,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Ravensmere.Harbour South.Arrivals Area",
+  "RoomID": "Ravensmere.Harbour South.Landing Area",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -28,8 +28,8 @@
     "dex": 10,
     "wp": 10,
     "ft": 10,
-    "hp": 10,
-    "maxhp": 10,
+    "hp": 20,
+    "maxhp": 20,
     "SocialStanding": 8
   },
   "Skills": [
@@ -73,20 +73,20 @@
         "any"
       ],
       "EquippedItem": {
-        "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453",
-        "SingularPronoun": "an",
+        "ItemID": "2de61885-2a88-42c5-b5ee-961a7528f4ce",
+        "SingularPronoun": "a",
         "ItemName": "Iron Sword",
         "PluralName": "Iron Swords",
         "PluralPronoun": "some",
         "ItemType": "Weapon",
         "ItemFamily": "Sword",
-        "ItemDescription": "This Iron sword is good for keeping the masses down.",
+        "ItemDescription": "This Iron sword ain't too bad",
         "ItemWeight": 2,
         "ItemCapacity": 0,
         "ItemSize": 2,
         "HitPoints": 25,
         "MaxHitPoints": 25,
-        "BaseDamage": 6.0,
+        "BaseDamage": 8.0,
         "Toughness": 3,
         "DestroyedOutput": null,
         "RequiredSkills": [
@@ -249,7 +249,8 @@
           "ShortCutToken": "I"
         }
       ],
-      "TimeOut": 1485700760
+      "RoomID": "Ravensmere.Harbour South.Landing Area",
+      "TimeOut": 1486204057
     },
     {
       "NPCID": "WearyTraveller1",
@@ -264,43 +265,56 @@
           "ShortCutToken": "I"
         }
       ],
-      "TimeOut": 1485700932
+      "RoomID": "Ravensmere.Harbour South.Landing Area",
+      "TimeOut": 1486204254
     },
     {
-      "NPCID": "PodgyClerk",
+      "NPCID": "WearyTraveller1",
       "ShortCutTokens": [
         {
           "ShortCutToken": "Y"
         },
         {
           "ShortCutToken": "N"
+        },
+        {
+          "ShortCutToken": "I"
         }
       ],
-      "TimeOut": 1485726803
+      "RoomID": "Ravensmere.Harbour South.Landing Area",
+      "TimeOut": 1486204618
     },
     {
-      "NPCID": "PodgyClerk",
+      "NPCID": "WearyTraveller1",
       "ShortCutTokens": [
         {
           "ShortCutToken": "Y"
         },
         {
           "ShortCutToken": "N"
+        },
+        {
+          "ShortCutToken": "I"
         }
       ],
-      "TimeOut": 1485726927
+      "RoomID": "Ravensmere.Harbour South.Landing Area",
+      "TimeOut": 1486204878
     },
     {
-      "NPCID": "PodgyClerk",
+      "NPCID": "WearyTraveller1",
       "ShortCutTokens": [
         {
           "ShortCutToken": "Y"
         },
         {
           "ShortCutToken": "N"
+        },
+        {
+          "ShortCutToken": "I"
         }
       ],
-      "TimeOut": 1485727012
+      "RoomID": "Ravensmere.Harbour South.Landing Area",
+      "TimeOut": 1486204963
     }
   ]
 }
