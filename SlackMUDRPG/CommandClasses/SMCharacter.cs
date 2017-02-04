@@ -2001,11 +2001,14 @@ namespace SlackMUDRPG.CommandClasses
 			int currentUnixTime = Utility.Utils.GetUnixTime();
 
 			// Delete all awaiting responses after time
-			this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.TimeOut < currentUnixTime);
-
-			if (clearRoomResponses)
+			if (this.NPCsWaitingForResponses != null)
 			{
-				this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.RoomID == this.RoomID);
+				this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.TimeOut < currentUnixTime);
+
+				if (clearRoomResponses)
+				{
+					this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.RoomID == this.RoomID);
+				}
 			}
 		}
 
