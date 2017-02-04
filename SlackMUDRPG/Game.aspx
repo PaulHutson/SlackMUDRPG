@@ -11,8 +11,9 @@
 				console.log("Cookie:" + Cookies.get('ProvinceUserID'));
 				$("#PlayArea").show();
 				$("#LoginCreateCharacterForm").hide();
-
-				var url = 'ws://localhost:57980/Handlers/GameAccess.ashx?userID=' + Cookies.get('ProvinceUserID');
+				var baseurl = window.location.href;
+				var arr = baseurl.split("/");
+				var url = 'ws://' + arr[2] + '/Handlers/GameAccess.ashx?userID=' + Cookies.get('ProvinceUserID');
 				ws = new WebSocket(url);
 				ws.onopen = function () {
 					$('#messages').prepend('Connected <br/>');
