@@ -262,9 +262,11 @@ namespace SlackMUDRPG.CommandClasses
                             currentRoom.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " walks out."), this, true);
                             currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
 
+							// Expire any awaiting responses from NPCs (to clean the memory / character file up)
+							ExpireResponse(true);
 
-                            // Move the player to the new location
-                            this.RoomID = smr.RoomID;
+							// Move the player to the new location
+							this.RoomID = smr.RoomID;
                             this.SaveToApplication();
                             this.SaveToFile();
                             this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
@@ -1803,7 +1805,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="NPCID">The id of the NPC awaiting the response</param>
 		/// <param name="timeOut">The timeout for the response (unix time) response</param>
-		public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut)
+		public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut, string roomID = null)
 		{
 			if (this.NPCsWaitingForResponses == null)
 			{
@@ -1814,10 +1816,28 @@ namespace SlackMUDRPG.CommandClasses
 			arfc.NPCID = NPCID;
 			arfc.ShortCutTokens = shortCutTokens;
 			arfc.TimeOut = Utility.Utils.GetUnixTimeOffset(timeOut);
+			arfc.RoomID = roomID;
 
 			this.NPCsWaitingForResponses.Add(arfc);
 			this.SaveToApplication();
 			this.SaveToFile();
+		}
+
+		/// <summary>
+		/// Expire responses that are no longer needed
+		/// </summary>
+		private void ExpireResponse(bool clearRoomResponses = false)
+		{
+			// Get the current unix time
+			int currentUnixTime = Utility.Utils.GetUnixTime();
+
+			// Delete all awaiting responses after time
+			this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.TimeOut < currentUnixTime);
+
+			if (clearRoomResponses)
+			{
+				this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.RoomID == this.RoomID);
+			}
 		}
 
 		/// <summary>
@@ -1828,18 +1848,14 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Responded to player
 			bool respondedToPlayer = false;
-
-			// Get the current unix time
-			int currentUnixTime = Utility.Utils.GetUnixTime();
-
-			// Delete all awaiting responses after time
-			this.NPCsWaitingForResponses.RemoveAll(awaitingitems => awaitingitems.TimeOut < currentUnixTime);
+			
+			ExpireResponse();
 
 			// If there are still characters awaiting responses
 			if (this.NPCsWaitingForResponses.Count() > 0)
 			{
 				// First check if we are awaiting any responses with that shortcut token (and aren't timed out)
-				List<AwaitingResponseFromCharacter> NPCIDs = this.NPCsWaitingForResponses.FindAll(awaitingitems => awaitingitems.ShortCutTokens.Count(sct => sct.ShortCutToken == responseShortcut) > 0);
+				List<AwaitingResponseFromCharacter> NPCIDs = this.NPCsWaitingForResponses.FindAll(awaitingitems => awaitingitems.ShortCutTokens.Count(sct => sct.ShortCutToken.ToLower() == responseShortcut.ToLower()) > 0);
 
 				// If there is something waiting
 				if (NPCIDs.Count > 0)
@@ -1878,6 +1894,7 @@ namespace SlackMUDRPG.CommandClasses
 	{
 		public string NPCID { get; set; }
 		public List<ShortcutToken> ShortCutTokens { get; set; }
+		public string RoomID { get; set; }
 		public int TimeOut { get; set; }
 	}
 

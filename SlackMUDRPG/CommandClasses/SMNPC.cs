@@ -181,7 +181,7 @@ namespace SlackMUDRPG.CommandClasses
 
         private void ProcessResponseOptions(NPCConversations npcc, NPCConversationStep npccs, SMCharacter invokingCharacter)
         {
-            string responseOptions = OutputFormatterFactory.Get().Bold(this.GetFullName() + " Responses:" + OutputFormatterFactory.Get().NewLine);
+            string responseOptions = OutputFormatterFactory.Get().Bold(this.GetFullName() + " Responses:") + OutputFormatterFactory.Get().NewLine;
 			List<ShortcutToken> stl = new List<ShortcutToken>();
 
 			foreach (NPCConversationStepResponseOptions npcccsro in npccs.ResponseOptions)
@@ -201,9 +201,10 @@ namespace SlackMUDRPG.CommandClasses
 			acr.ConversationID = npcc.ConversationID;
             acr.ConversationStep = npccs.StepID;
             acr.WaitingForCharacter = invokingCharacter;
+			acr.RoomID = this.RoomID;
 
             string nextStepAfterTimeout = null;
-            int timeout = 60;
+            int timeout = 1000;
             if (npccs.NextStep != null)
             {
                 string[] getNextStep = npccs.NextStep.Split('.');
@@ -216,7 +217,7 @@ namespace SlackMUDRPG.CommandClasses
 
             this.AwaitingCharacterResponses.Add(acr);
 
-			invokingCharacter.SetAwaitingResponse(this.UserID, stl, timeout);
+			invokingCharacter.SetAwaitingResponse(this.UserID, stl, timeout, this.RoomID);
 			invokingCharacter.sendMessageToPlayer(responseOptions);
 		}
 
@@ -248,7 +249,7 @@ namespace SlackMUDRPG.CommandClasses
 							
 							if (currentStep != null)
 							{
-								NPCConversationStepResponseOptions nextstep = currentStep.ResponseOptions.FirstOrDefault(ro => ro.ResponseOptionShortcut == responseShortCut);
+								NPCConversationStepResponseOptions nextstep = currentStep.ResponseOptions.FirstOrDefault(ro => ro.ResponseOptionShortcut.ToLower() == responseShortCut.ToLower());
 								
 								if (nextstep != null)
 								{
@@ -440,6 +441,7 @@ namespace SlackMUDRPG.CommandClasses
     public class SMNPCAwaitingCharacterResponse
     {
         public SMCharacter WaitingForCharacter { get; set; }
+		public string RoomID { get; set; }
 		public string ConversationID { get; set; }
 		public string ConversationStep { get; set; }
         public int UnixTimeStampTimeout { get; set; }
