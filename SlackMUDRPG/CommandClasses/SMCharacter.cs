@@ -1236,6 +1236,62 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Gives an item identified by itemIdentifier to a charcter identified by playerName.
+		/// </summary>
+		/// <param name="itemIdentifier">Identifier of the item to give.</param>
+		/// <param name="playerName">Name of the character to give the item to.</param>
+		public void GiveItem(string itemIdentifier, string playerName)
+		{
+			// Get item from current players inventory
+			SMItem itemToGive = this.GetOwnedItem(itemIdentifier);
+
+			if (itemToGive == null)
+			{
+				this.sendMessageToPlayer(this.Outputer.Italic($"You must own an item to give it, \"{Utils.SanitiseString(itemIdentifier)}\" was not found in your inventory!"));
+				return;
+			}
+
+			// Get player to give item to
+			SMCharacter playerToGiveTo = this.GetRoom().GetPeople().FirstOrDefault(smc => smc.GetFullName().ToLower() == playerName.ToLower());
+
+			if (playerToGiveTo == null)
+			{
+				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to find a player called, \"{Utils.SanitiseString(playerName)}\" in this room!"));
+				return;
+			}
+
+			// Check player can recieve item (needs an empyt hand available weigth capacity to hold carry the item
+			SMSlot receivingHand = playerToGiveTo.GetEmptyHand();
+
+			if (receivingHand == null)
+			{
+				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to give \"{itemToGive.ItemName}\" to \"{playerToGiveTo.GetFullName()}\", they dont have an emoty hand to take it!"));
+				playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} tried to give you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\" but you dont have an empty had to take it!"));
+				return;
+			}
+
+			if (playerToGiveTo.WeightLimit - playerToGiveTo.GetCurrentWeight() < SMItemHelper.GetItemWeight(itemToGive))
+			{
+				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to give \"{itemToGive.ItemName}\" to \"{playerToGiveTo.GetFullName()}\", they can't carry that much weight!"));
+				playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} tried to give you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\" but your strong enough to carry it!"));
+				return;
+			}
+
+			// Remove item from current player
+			this.RemoveOwnedItem(itemToGive.ItemID);
+
+			// Add item to receiving player
+			receivingHand.EquippedItem = itemToGive;
+
+			// Send responces and save both players
+			this.sendMessageToPlayer(this.Outputer.Italic($"You gave {playerToGiveTo.GetFullName()} {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
+			playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} gave you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
+
+			this.SaveToApplication();
+			playerToGiveTo.SaveToApplication();
+		}
+
+		/// <summary>
 		/// Lists the characters inventory slot by slot. If a slot is specified by name only details of that slot are listed, but it is done recursivly.
 		/// </summary>
 		/// <param name="slotName">Optional name of the slot to list.</param>
@@ -1405,7 +1461,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			foreach (SMSlot slot in this.Slots)
 			{
-				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems != null)
+				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems.Any())
 				{
 					item = SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
 
@@ -1579,6 +1635,47 @@ namespace SlackMUDRPG.CommandClasses
 					}
 				}
 			}
+		}
+
+		/// <summary>
+		/// Removes an owned item by searching all slots and their contents for a given identifier.
+		/// </summary>
+		/// <param name="itemIdentifier"></param>
+		private void RemoveOwnedItem(string itemIdentifier)
+		{
+			// Check in each slot (not recursive)
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+					{
+						slot.EquippedItem = null;
+						this.SaveToApplication();
+						break;
+					}
+				}
+			}
+
+			// Check in any equipped containers (recursive)
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty())
+				{
+					// Look inside the equipped item if it is a container
+					if (slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems.Any())
+					{
+						if (SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier) != null)
+						{
+							SMItemHelper.RemoveItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
+							this.SaveToApplication();
+							break;
+						}
+					}
+				}
+			}
+
+			// TODO check in clothing slots e.g. pockets
 		}
 
 		/// <summary>

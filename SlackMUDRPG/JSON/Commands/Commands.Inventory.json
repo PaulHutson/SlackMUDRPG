@@ -68,5 +68,19 @@
 		"PassQueryParamAsFirstArg": null,
 		"ExampleUsage": "put Wooden Sword in Small Backpack",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Inventory",
+		"CommandBaseName": "give",
+		"CommandName": "give",
+		"CommandDescription": "Gives and item you own to another player.",
+		"CommandSyntax": "give <item identifier> to <playername>",
+		"CommandExpression": "give {.+} to {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "GiveItem",
+		"PassCommandAsFirstArg": false,
+		"PassQueryParamAsFirstArg": null,
+		"ExampleUsage": "give Wooden Sword to Duelist Tupp",
+		"RequiredSkill": null
 	}
 ]
