@@ -71,6 +71,7 @@
                 <asp:Button runat="server" ID="btn_AttackPaul" Text="Attack Paul Hutson" OnClientClick="scrollBoxToBottom();" OnClick="btn_AttackPaul_Click"/>
 				<asp:Button runat="server" ID="btn_AttackPell" Text="Attack Pell" OnClientClick="scrollBoxToBottom();" OnClick="btn_AttackPell_Click" />
 		</div>
+		<asp:TextBox runat="server" ID="st" Text="slack" Visible="false"></asp:TextBox>
     </form>
 </body>
 </html>

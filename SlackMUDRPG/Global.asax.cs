@@ -8,11 +8,13 @@ using System.Web.Security;
 using System.Web.SessionState;
 using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
+using Microsoft.Web.WebSockets;
 
 namespace SlackMUDRPG
 {
 	public class Global : System.Web.HttpApplication
 	{
+		public static WebSocketCollection wsClients = new WebSocketCollection();
 
 		protected void Application_Start(object sender, EventArgs e)
 		{

@@ -41,6 +41,12 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("UserID")]
 		public string UserID { get; set; }
 
+		[JsonProperty("Username")]
+		public string Username { get; set; }
+
+		[JsonProperty("Password")]
+		public string Password { get; set; }
+
 		[JsonProperty("RoomID")]
 		public string RoomID { get; set; }
 
@@ -82,6 +88,7 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		public string ResponseURL { get; set; }
+		public string ConnectionService { get; set; }
 
 		public List<AwaitingResponseFromCharacter> NPCsWaitingForResponses { get; set; }
 
@@ -1931,7 +1938,7 @@ namespace SlackMUDRPG.CommandClasses
 		public void sendMessageToPlayer(string message)
 		{
 			// TODO Change the name of the service based on the one used to send the information!
-			Commands.SendMessage("", "SlackMud", message, "SlackMud", this.UserID, this.ResponseURL);
+			Commands.SendMessage(this.ConnectionService, "SlackMud", message, "SlackMud", this.UserID, this.ResponseURL);
 		}
 
     /// <summary>
