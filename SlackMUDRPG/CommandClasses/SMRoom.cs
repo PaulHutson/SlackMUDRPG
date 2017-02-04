@@ -350,51 +350,55 @@ namespace SlackMUDRPG.CommandClasses
                 }
                 smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetCharacter.GetInventoryList()));
 				targetCharacter.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(smc.GetFullName() + " looks at you"));
+				return;
             }
-            else // If not a character, check if it is an NPC...
-            {
-				SMNPC targetNPC = this.GetNPCs().FirstOrDefault(checkChar => checkChar.GetFullName().ToLower() == thingToInspect.ToLower());
 
-				if (targetNPC != null)
+			// If not a character, check if it is an NPC...
+			SMNPC targetNPC = this.GetNPCs().FirstOrDefault(checkChar => checkChar.GetFullName().ToLower() == thingToInspect.ToLower());
+
+			if (targetNPC != null)
+			{
+				smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of " + targetNPC.GetFullName() + " (Level " + targetNPC.CalculateLevel() + "):"));
+				if ((targetNPC.Description != null) || (targetNPC.Description != ""))
 				{
-					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of " + targetNPC.GetFullName() + " (Level " + targetNPC.CalculateLevel() + "):"));
-					if ((targetNPC.Description != null) || (targetNPC.Description != ""))
-					{
-						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(targetNPC.Description));
-					}
-					else
-					{
-						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("No description set..."));
-					}
-					smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetNPC.GetInventoryList()));
-					targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.ExaminesThem", smc, targetNPC.UserID);
-					targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.Examines", smc);
+					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(targetNPC.Description));
 				}
-				else // If not an NPC, check the objects in the room
+				else
 				{
-
-					SMItem smi = SMItemHelper.GetItemFromList(this.RoomItems, thingToInspect);
-
-					if (smi != null)
-					{
-						string itemDeatils = OutputFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":");
-						itemDeatils += OutputFormatterFactory.Get().ListItem(smi.ItemDescription);
-
-						if (smi.CanHoldOtherItems())
-						{
-							itemDeatils += OutputFormatterFactory.Get().Italic($"This \"{smi.ItemName}\" contains the following items:");
-							itemDeatils += SMItemHelper.GetContainerContents(smi);
-						}
-
-						smc.sendMessageToPlayer(itemDeatils);
-	                }
-	                else
-	                {
-	                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not inspect that item."));
-	                }
+					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("No description set..."));
 				}
-            }
-        }
+				smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetNPC.GetInventoryList()));
+				targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.ExaminesThem", smc, targetNPC.UserID);
+				targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.Examines", smc);
+				return;
+			}
+
+			// If not an NPC, check the players equipped items and the items in the room...
+			SMItem smi = smc.GetEquippedItem(thingToInspect);
+
+			if (smi == null)
+			{
+				smi = SMItemHelper.GetItemFromList(this.RoomItems, thingToInspect);
+			}
+
+			if (smi != null)
+			{
+				string itemDeatils = OutputFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":");
+				itemDeatils += OutputFormatterFactory.Get().ListItem(smi.ItemDescription);
+
+				if (smi.CanHoldOtherItems())
+				{
+					itemDeatils += OutputFormatterFactory.Get().Italic($"This \"{smi.ItemName}\" contains the following items:");
+					itemDeatils += SMItemHelper.GetContainerContents(smi);
+				}
+
+				smc.sendMessageToPlayer(itemDeatils);
+				return;
+			}
+
+			// Otherwise nothing found
+			smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not inspect that item."));
+		}
 
 		#endregion
 
