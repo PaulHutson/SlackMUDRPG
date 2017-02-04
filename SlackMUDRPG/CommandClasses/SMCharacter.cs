@@ -529,6 +529,10 @@ namespace SlackMUDRPG.CommandClasses
             }
         }
 
+		/// <summary>
+		/// Enables the character to read a sign
+		/// </summary>
+		/// <param name="itemIdentifier">The item to be read</param>
 		public void Read(string itemIdentifier)
 		{
 			// Get the item
@@ -551,6 +555,43 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find item"));
 			}
+		}
+
+		/// <summary>
+		/// Tells the player how many people are currently online
+		/// </summary>
+		public void Who()
+		{
+			// Construct the string
+			string whoOnlineString = OutputFormatterFactory.Get().Bold("People online:");
+
+			// Get the list of all online
+			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+
+			// Loop around the characters and add them to the who online list
+			bool isFirst = true;
+			string whoList = "";
+			foreach (SMCharacter smc in smcs)
+			{
+				if (isFirst)
+				{
+					isFirst = false;
+				}
+				else
+				{
+					whoList += ", ";
+				}
+				whoList += smc.GetFullName();
+			}
+
+			// Add the list to the output string.
+			whoOnlineString += OutputFormatterFactory.Get().General(whoList);
+
+			// Quantify the number of people online presently
+			whoOnlineString += OutputFormatterFactory.Get().Italic(smcs.Count.ToString() + " currently online");
+
+			// Send the message back to the player
+			this.sendMessageToPlayer(whoOnlineString);
 		}
 
 		#endregion
