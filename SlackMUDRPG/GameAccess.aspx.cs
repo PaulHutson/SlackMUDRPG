@@ -21,7 +21,7 @@ namespace SlackMUDRPG
 			string commandText = Utils.GetQueryParam("text");
 
 			// Initiate the command processing.
-			new SPCommandUtility(Utils.GetQueryParam("user_id")).InitateCommand(commandText);
+			new SMCommandUtility(Utils.GetQueryParam("user_id")).InitateCommand(commandText);
 		}
 	}
 }
