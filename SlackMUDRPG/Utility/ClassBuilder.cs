@@ -90,7 +90,7 @@ namespace SlackMUDRPG.Utility
 		/// <summary>
 		/// The UserID if the character using the class builder.
 		/// </summary>
-		private string UserID { get; set; }
+		public string UserID { get; set; }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:SlackMUDRPG.Utility.ClassBuilder"/> class.
@@ -170,7 +170,7 @@ namespace SlackMUDRPG.Utility
 		{
 			if (arg.ArgSource == "ClassBuilderProperty")
 			{
-				return this.GetType().GetProperty(arg.ArgName).GetValue(this);
+				return this.GetType().GetProperty(arg.ArgName).GetValue(this, null);
 			}
 
 			return null;
