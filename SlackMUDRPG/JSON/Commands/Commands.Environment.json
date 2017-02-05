@@ -9,6 +9,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "UseSkill",
 		"PassCommandAsFirstArg": true,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "chop tree1",
 		"RequiredSkill": "Skill.Chop"
 	},
@@ -22,6 +23,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "UseSkill",
 		"PassCommandAsFirstArg": true,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "mine Gold",
 		"RequiredSkill": "Skill.Mine"
 	}

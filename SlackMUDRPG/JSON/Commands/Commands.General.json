@@ -9,6 +9,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMHelp",
 		"CommandMethod": "Help",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "help or help equip",
 		"RequiredSkill": null
 	},
@@ -22,6 +23,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SlackMud",
 		"CommandMethod": "Login",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": true,
 		"ExampleUsage": "login",
 		"RequiredSkill": null
 	},
@@ -35,6 +37,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SlackMud",
 		"CommandMethod": "CreateCharacter",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": true,
 		"ExampleUsage": "createcharacter Paul,Hutson,m,36",
 		"RequiredSkill": null
 	},
@@ -48,6 +51,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Who",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "who",
 		"RequiredSkill": null
 	},
@@ -61,6 +65,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Move",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "move n (would move you north if n was a location exit shortcut)",
 		"RequiredSkill": null
 	},
@@ -74,6 +79,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Flee",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "flee",
 		"RequiredSkill": null
 	},
@@ -87,6 +93,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "StopActivity",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "stop",
 		"RequiredSkill": null
 	},
@@ -100,6 +107,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Flush",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "flush",
 		"RequiredSkill": null
 	}

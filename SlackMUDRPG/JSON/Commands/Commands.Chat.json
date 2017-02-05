@@ -9,6 +9,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Say",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "say Hello!",
 		"RequiredSkill": null
 	},
@@ -22,6 +23,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Shout",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "shout HELLO!",
 		"RequiredSkill": null
 	},
@@ -35,6 +37,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Whisper",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "whisper \"Paul Almighty\" Hellloooo",
 		"RequiredSkill": null
 	},
@@ -48,6 +51,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Emote",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "me looks around the room inquisitively",
 		"RequiredSkill": null
 	},
@@ -61,6 +65,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "SendOOC",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "ooc I need help!",
 		"RequiredSkill": null
 	},
@@ -74,6 +79,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "ProcessResponse",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "resp Y  (would be responding Y to a question from an NPC).",
 		"RequiredSkill": null
 	},
@@ -87,6 +93,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "ProcessResponse",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "respond Y  (would be responding Y to a question from an NPC).",
 		"RequiredSkill": null
 	},
@@ -100,6 +107,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "ProcessResponse",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "answer Y  (would be answering Y to a question from an NPC).",
 		"RequiredSkill": null
 	}

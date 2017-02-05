@@ -141,6 +141,12 @@ namespace SlackMUDRPG.CommandClasses
 				parameters.Add(this.cmdName);
 			}
 
+			// Handle passing the UserID as the first arg if set in the SMCommand object
+			if (this.cmd.PassUserIDAsFirstArg)
+			{
+				parameters.Add(this.UserID);
+			}
+
 			// Get the Regex form the Command object to extract params from the user command string
 			string extractPattern = this.cmd.ParseExpression();
 

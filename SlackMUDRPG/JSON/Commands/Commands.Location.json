@@ -9,6 +9,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetRoomExits",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "exits",
 		"RequiredSkill": null
 	},
@@ -22,6 +23,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetRoomDetails",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "look",
 		"RequiredSkill": null
 	}

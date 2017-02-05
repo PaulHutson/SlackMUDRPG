@@ -9,6 +9,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "SetDescription",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "setdescription A suave looking young chap with black hair and a big nose.",
 		"RequiredSkill": null
 	},
@@ -22,6 +23,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "InspectObject",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "inspect Paul Hutson or inspect Wooden Pell",
 		"RequiredSkill": null
 	},
@@ -35,6 +37,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "InspectObject",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "examine Paul Hutson or examine Wooden Pell",
 		"RequiredSkill": null
 
@@ -49,6 +52,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetSkills",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "skills",
 		"RequiredSkill": null
 	},
@@ -62,6 +66,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetStats",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "stats",
 		"RequiredSkill": null
 	},
@@ -75,6 +80,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetLevel",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "level",
 		"RequiredSkill": null
 	},
@@ -88,6 +94,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "AddToNotes",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "addnote This is a new note",
 		"RequiredSkill": null
 	},
@@ -101,6 +108,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "RemoveFromNotes",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "removenote 1",
 		"RequiredSkill": null
 	},
@@ -114,6 +122,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetNotes",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "GetNotes",
 		"RequiredSkill": null
 	},
@@ -127,6 +136,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Sleep",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "sleep",
 		"RequiredSkill": null
 	},
@@ -140,6 +150,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Read",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "read sign",
 		"RequiredSkill": null
 	},
@@ -153,6 +164,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Sleep",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "logout",
 		"RequiredSkill": null
 	}

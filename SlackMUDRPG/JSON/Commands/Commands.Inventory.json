@@ -9,6 +9,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "PickUpItem",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "pickup wooden stick",
 		"RequiredSkill": null
 	},
@@ -22,6 +23,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "DropItem",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "drop wooden stick",
 		"RequiredSkill": null
 	},
@@ -35,6 +37,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "ListInventory",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "inventory or inventory Right Hand",
 		"RequiredSkill": null
 	},
@@ -48,6 +51,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "EquipItem",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "equip Wooden Sword or equip Wooden Sword to Right Hand",
 		"RequiredSkill": null
 	},
@@ -61,6 +65,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "PutItem",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "put Wooden Sword in Small Backpack",
 		"RequiredSkill": null
 	},
@@ -74,6 +79,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GiveItem",
 		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "give Wooden Sword to Duelist Tupp",
 		"RequiredSkill": null
 	}

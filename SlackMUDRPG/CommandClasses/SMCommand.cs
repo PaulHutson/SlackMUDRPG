@@ -36,6 +36,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("PassCommandAsFirstArg")]
 		public bool PassCommandAsFirstArg { get; set; }
 
+		[JsonProperty("PassUserIDAsFirstArg")]
+		public bool PassUserIDAsFirstArg { get; set; }
+
 		[JsonProperty("ExampleUsage")]
 		public string ExampleUsage { get; set; }
 
