@@ -5,11 +5,10 @@
 		"CommandName": "attack",
 		"CommandDescription": "Attacks a character, creature or object with whatever you're holding (or your bare hands).",
 		"CommandSyntax": "attack <thing>",
-		"CommandExpression": "attack {.+}",
+		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Attack",
 		"PassCommandAsFirstArg": false,
-		"PassQueryParamAsFirstArg": null,
 		"ExampleUsage": "Attack Big Bob",
 		"RequiredSkill": null
 	},
@@ -19,11 +18,10 @@
 		"CommandName": "hit",
 		"CommandDescription": "Hits a character, creature or object with whatever you're holding (or your bare hands).",
 		"CommandSyntax": "hit <thing>",
-		"CommandExpression": "hit {.+}",
+		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Attack",
 		"PassCommandAsFirstArg": false,
-		"PassQueryParamAsFirstArg": null,
 		"ExampleUsage": "Hit Wooden Pell",
 		"RequiredSkill": null
 	}

@@ -5,11 +5,10 @@
 		"CommandName": "craft",
 		"CommandDescription": "Enables the player to craft something.",
 		"CommandSyntax": "craft <Name Of item>",
-		"CommandExpression": "craft {.+}",
+		"CommandExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "CraftItem",
 		"PassCommandAsFirstArg": false,
-		"PassQueryParamAsFirstArg": null,
 		"ExampleUsage": "craft Wooden Sword",
 		"RequiredSkill": null
 	},
@@ -19,11 +18,10 @@
 		"CommandName": "make",
 		"CommandDescription": "Enables the player to make something.",
 		"CommandSyntax": "make <Name Of item>",
-		"CommandExpression": "make {.+}",
+		"CommandExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "CraftItem",
 		"PassCommandAsFirstArg": false,
-		"PassQueryParamAsFirstArg": null,
 		"ExampleUsage": "make Wooden Sword",
 		"RequiredSkill": null
 	},
@@ -33,11 +31,10 @@
 		"CommandName": "build",
 		"CommandDescription": "Enables the player to build something.",
 		"CommandSyntax": "build <Name Of item>",
-		"CommandExpression": "build {.+}",
+		"CommandExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "CraftItem",
 		"PassCommandAsFirstArg": false,
-		"PassQueryParamAsFirstArg": null,
 		"ExampleUsage": "build Wooden Hut",
 		"RequiredSkill": null
 	}
