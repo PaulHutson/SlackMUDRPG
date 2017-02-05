@@ -10,6 +10,11 @@ namespace SlackMUDRPG.CommandClasses
 	public class SMCommandHelper
 	{
 		/// <summary>
+		/// Stores the instantiating characters UserId
+		/// </summary>
+		private string UserID;
+
+		/// <summary>
 		/// Stores the trimmed user emter command string.
 		/// </summary>
 		private string userCmd;
@@ -28,8 +33,10 @@ namespace SlackMUDRPG.CommandClasses
 		/// Class constructor.
 		/// </summary>
 		/// <param name="userCmd">User entered command string.</param>
-		public SMCommandHelper(string userCmd)
+		public SMCommandHelper(string UserID, string userCmd)
 		{
+			this.UserID = UserID;
+
 			// trims whitespace or leading /
 			char[] trimFromStart = { '/' };
 			this.userCmd = Utils.CleanString(userCmd, trimFromStart);

@@ -36,7 +36,7 @@ namespace SlackMUDRPG.CommandClasses
 		public string InitateCommand(string commandText)
 		{
 			// Instantiate a new command helper.
-			this.CmdHelper = new SMCommandHelper(commandText);
+			this.CmdHelper = new SMCommandHelper(this.UserID, commandText);
 
 			// Validate command exists and the character has the appropriate access level to execute it before threading.
 			if (this.CmdHelper.CommandExists() && this.CmdHelper.CharacterCanExecuteCommand())
