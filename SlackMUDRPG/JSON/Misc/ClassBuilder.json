@@ -6,8 +6,8 @@
 			"BuildMethodName": "GetCharacter",
 			"BuildArgs": [
 				{
-					"ArgName": "user_id",
-					"ArgSource": "query_param"
+					"ArgName": "UserID",
+					"ArgSource": "ClassBuilderProperty"
 				}
 			]
 		}

@@ -23,7 +23,7 @@ namespace SlackMUDRPG.Handlers
 			else if (loginResponse != "") 
 			{
 				this.Send(loginResponse);
-				new SPCommandUtility(this.userID).InitateCommand("look");
+				new SMCommandUtility(this.userID).InitateCommand("look");
 			};
 		}
 
@@ -32,7 +32,7 @@ namespace SlackMUDRPG.Handlers
 			// Process the character command sent in
 			// SlackMUDRPG.Global.wsClients.Broadcast(string.Format("{0} said: {1}", name, commandText));
 			this.userID = this.WebSocketContext.QueryString["userID"];
-			new SPCommandUtility(this.userID).InitateCommand(commandText);
+			new SMCommandUtility(this.userID).InitateCommand(commandText);
 		}
 
 		public override void OnClose()

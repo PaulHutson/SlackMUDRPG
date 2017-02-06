@@ -244,6 +244,8 @@
     <Compile Include="CommandClasses\SMCharacterSlot.cs" />
     <Compile Include="CommandClasses\SMCombat.cs" />
     <Compile Include="CommandClasses\SMCommand.cs" />
+    <Compile Include="CommandClasses\SMCommandHelper.cs" />
+    <Compile Include="CommandClasses\SMCommandUtility.cs" />
     <Compile Include="CommandClasses\SMCreature.cs" />
     <Compile Include="CommandClasses\SMHelp.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />

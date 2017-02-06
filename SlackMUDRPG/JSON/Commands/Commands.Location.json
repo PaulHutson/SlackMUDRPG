@@ -5,11 +5,11 @@
 		"CommandName": "exits",
 		"CommandDescription": "Get the available location exits.",
 		"CommandSyntax": "exits",
-		"CommandExpression": "exits",
+		"ParamsExpression": null,
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetRoomExits",
 		"PassCommandAsFirstArg": false,
-		"PassQueryParamAsFirstArg": null,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "exits",
 		"RequiredSkill": null
 	},
@@ -19,11 +19,11 @@
 		"CommandName": "look",
 		"CommandDescription": "This will move you to a room defined by the exit.",
 		"CommandSyntax": "look",
-		"CommandExpression": "look",
+		"ParamsExpression": null,
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetRoomDetails",
 		"PassCommandAsFirstArg": false,
-		"PassQueryParamAsFirstArg": null,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "look",
 		"RequiredSkill": null
 	}

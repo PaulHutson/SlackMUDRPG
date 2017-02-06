@@ -5,11 +5,11 @@
 		"CommandName": "chop",
 		"CommandDescription": "Enables the player to chop something.",
 		"CommandSyntax": "chop <TargetName>",
-		"CommandExpression": "chop {.+}",
+		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "UseSkill",
 		"PassCommandAsFirstArg": true,
-		"PassQueryParamAsFirstArg": null,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "chop tree1",
 		"RequiredSkill": "Skill.Chop"
 	},
@@ -19,11 +19,11 @@
 		"CommandName": "mine",
 		"CommandDescription": "Enables the player to mine something.",
 		"CommandSyntax": "mine <TargetName>",
-		"CommandExpression": "mine {.+}",
+		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "UseSkill",
 		"PassCommandAsFirstArg": true,
-		"PassQueryParamAsFirstArg": null,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "mine Gold",
 		"RequiredSkill": "Skill.Mine"
 	}

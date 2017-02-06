@@ -86,7 +86,11 @@ namespace SlackMUDRPG.Utility
 		/// The ClassBuilderSpec object for the instance.
 		/// </summary>
 		private ClassBuilderSpec Spec;
-		private string UserID { get; set; }
+
+		/// <summary>
+		/// The UserID if the character using the class builder.
+		/// </summary>
+		public string UserID { get; set; }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:SlackMUDRPG.Utility.ClassBuilder"/> class.
@@ -164,13 +168,9 @@ namespace SlackMUDRPG.Utility
 		/// <param name="arg">BuildArg.</param>
 		private object GetBuildArgValue(BuildArg arg)
 		{
-			if ((arg.ArgSource == "query_param") && (arg.ArgName == "user_id"))
+			if (arg.ArgSource == "ClassBuilderProperty")
 			{
-				return this.UserID;
-			}
-			else if (arg.ArgSource == "query_param")
-			{
-				return Utils.GetQueryParam(arg.ArgName);
+				return this.GetType().GetProperty(arg.ArgName).GetValue(this, null);
 			}
 
 			return null;
