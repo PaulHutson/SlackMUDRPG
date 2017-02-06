@@ -200,6 +200,10 @@
     <Content Include="JSON\Locations\LocRavensmere.Military District.Arena Floor.json" />
     <Content Include="JSON\Locations\LocRavensmere.Military District.Battle Coordinators Office.json" />
     <Content Include="JSON\Objects\Container.WoodenChest.json" />
+    <Content Include="JSON\Pulse\Months.json" />
+    <Content Include="JSON\Pulse\Day.json" />
+    <Content Include="JSON\Pulse\Weather.json" />
+    <Content Include="JSON\Pulse\Notices.json" />
     <Content Include="JSON\Objects\Furniture.Bed.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern Upstairs Rooms.json" />
     <Content Include="Handlers\GameAccess.ashx" />
@@ -253,6 +257,7 @@
     <Compile Include="CommandClasses\SMItemUtils.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMNPC.cs" />
+    <Compile Include="CommandClasses\SMPulse.cs" />
     <Compile Include="CommandClasses\SMReceipe.cs" />
     <Compile Include="CommandClasses\SMRequiredSkill.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />

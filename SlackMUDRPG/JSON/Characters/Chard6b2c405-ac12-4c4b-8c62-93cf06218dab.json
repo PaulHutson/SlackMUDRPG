@@ -1,0 +1,148 @@
+{
+  "firstname": "a",
+  "lastname": "a",
+  "description": null,
+  "notes": null,
+  "lastinteractiondate": "2017-02-06T18:18:46.0635638+00:00",
+  "lastlogindate": "2017-02-06T18:18:46.0635638+00:00",
+  "age": 18,
+  "sex": "M",
+  "PKFlag": false,
+  "UserID": "d6b2c405-ac12-4c4b-8c62-93cf06218dab",
+  "Username": "a",
+  "Password": "EAAAAGK5GTa5DmEwhDgeFMPS+TGRa7TQnTpx4ttEYGOtUCPK",
+  "RoomID": "Ravensmere.Harbour South.Arrivals Area",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "SocialStanding": 8
+  },
+  "Skills": null,
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "616bcf33-b77b-4eba-9441-95ee508a532f",
+        "SingularPronoun": "a",
+        "ItemName": "Wooden Sword",
+        "PluralName": "Wooden Swords",
+        "PluralPronoun": "some",
+        "ItemType": "Weapon",
+        "ItemFamily": "Sword",
+        "ItemDescription": "This wooden sword won't do much damage, but it's a start.",
+        "ItemExtraDetail": null,
+        "ItemWeight": 2,
+        "ItemCapacity": 0,
+        "ItemSize": 2,
+        "HitPoints": 25,
+        "MaxHitPoints": 25,
+        "BaseDamage": 2.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": [
+          {
+            "SkillName": "Sword Use",
+            "SkillLevel": "1"
+          }
+        ],
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "Container"
+      ],
+      "EquippedItem": {
+        "ItemID": "d4d43ed4-7176-4ddc-804c-fcb72032205e",
+        "SingularPronoun": "a",
+        "ItemName": "Small Backpack",
+        "PluralName": "Small Backpacks",
+        "PluralPronoun": "some",
+        "ItemType": "Container",
+        "ItemFamily": "Backpack",
+        "ItemDescription": "Basic small backpack that all players start with.",
+        "ItemExtraDetail": null,
+        "ItemWeight": 0,
+        "ItemCapacity": 25,
+        "ItemSize": 25,
+        "HitPoints": 5,
+        "MaxHitPoints": 5,
+        "BaseDamage": 1E-10,
+        "Toughness": 1,
+        "DestroyedOutput": null,
+        "RequiredSkills": null,
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RigthFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "CharacterWeight": 50,
+  "CharacterSize": 160,
+  "ResponseURL": null,
+  "ConnectionService": "WS",
+  "NPCsWaitingForResponses": [
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "RoomID": "Ravensmere.Harbour South.Arrivals Area",
+      "TimeOut": 1486406132
+    }
+  ]
+}

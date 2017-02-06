@@ -1,0 +1,150 @@
+﻿[
+	{
+		"Season": "Spring",
+		"WeatherTypes": [
+			{
+				"WeatherType": "Rain",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Raining",
+				"Effect": "Hunger|1.5",
+				"WeatherEffectStart": "It begins to rain.",
+				"WeatherEffectStop": "The rain stops."
+			},
+			{
+				"WeatherType": "Wintery Shower",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Snowing",
+				"Effect": "Hunger|1.5",
+				"WeatherEffectStart": "A flurry of very wet snow swirls around.",
+				"WeatherEffectStop": "The snow eases off."
+			},
+			{
+				"WeatherType": "ColdSunshine",
+				"AllowedTimes": "Day",
+				"EffectVerb": "Sunny",
+				"Effect": "Hunger|1.2",
+				"WeatherEffectStart": "A cold sun shines down.",
+				"WeatherEffectStop": "The sun gets obscured by a cloud."
+			},
+			{
+				"WeatherType": "Cloudy",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Cloudy",
+				"Effect": "Thirst|1.0",
+				"WeatherEffectStart": "The sky clouds over.",
+				"WeatherEffectStop": "The clouds clear up a little."
+			}
+		]
+	},
+	{
+		"Season": "Summer",
+		"WeatherTypes": [
+			{
+				"WeatherType": "RainShower",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Raining lightly",
+				"Effect": "Hunger|1.1",
+				"WeatherEffectStart": "It begins to rain lightly.",
+				"WeatherEffectStop": "The rain stops."
+			},
+			{
+				"WeatherType": "HotSunshine",
+				"AllowedTimes": "Day",
+				"EffectVerb": "Sunny",
+				"Effect": "Thirst|1.3",
+				"WeatherEffectStart": "The sun beams down with an intensity.",
+				"WeatherEffectStop": "The sun gets obscured by a cloud."
+			},
+			{
+				"WeatherType": "Sunshine",
+				"AllowedTimes": "Day",
+				"EffectVerb": "Sunny",
+				"Effect": "Thirst|1.1",
+				"WeatherEffectStart": "The sun beams down.",
+				"WeatherEffectStop": "The sun gets obscured by a cloud."
+			},
+			{
+				"WeatherType": "Sunshine",
+				"AllowedTimes": "Day",
+				"EffectVerb": "Sunny",
+				"Effect": "Thirst|1.1",
+				"WeatherEffectStart": "The sun beams down.",
+				"WeatherEffectStop": "The sun gets obscured by a cloud."
+			}
+		]
+	},
+	{
+		"Season": "Autumn",
+		"WeatherTypes": [
+			{
+				"WeatherType": "AutumnShower",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Raining lightly",
+				"Effect": "Hunger|1.1",
+				"WeatherEffectStart": "It begins to rain lightly.",
+				"WeatherEffectStop": "The rain stops."
+			},
+			{
+				"WeatherType": "Sunshine",
+				"AllowedTimes": "Day",
+				"EffectVerb": "Sunny",
+				"Effect": "Thirst|1.1",
+				"WeatherEffectStart": "The sun beams down.",
+				"WeatherEffectStop": "The sun gets obscured by a cloud."
+			},
+			{
+				"WeatherType": "Cloudy",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Cloudy",
+				"Effect": "Thirst|1.0",
+				"WeatherEffectStart": "The sky clouds over.",
+				"WeatherEffectStop": "The clouds clear up a little."
+			},
+			{
+				"WeatherType": "Cloudy",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Cloudy",
+				"Effect": "Thirst|1.0",
+				"WeatherEffectStart": "The sky clouds over.",
+				"WeatherEffectStop": "The clouds clear up a little."
+			},
+			{
+				"WeatherType": "Cloudy",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Cloudy",
+				"Effect": "Thirst|1.0",
+				"WeatherEffectStart": "The sky clouds over.",
+				"WeatherEffectStop": "The clouds clear up a little."
+			}
+		]
+	},
+	{
+		"Season": "Winter",
+		"WeatherTypes": [
+			{
+				"WeatherType": "Snow",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Snowing",
+				"Effect": "Hunger|1.2",
+				"WeatherEffectStart": "It begins to snow.",
+				"WeatherEffectStop": "The snow stops."
+			},
+			{
+				"WeatherType": "HeavySnow",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Snowing Heavily",
+				"Effect": "Hunger|1.3",
+				"WeatherEffectStart": "It begins to snow heavily.",
+				"WeatherEffectStop": "The snow stops."
+			},
+			{
+				"WeatherType": "Cloudy",
+				"AllowedTimes": "Day,Night",
+				"EffectVerb": "Cloudy",
+				"Effect": "Thirst|1.0",
+				"WeatherEffectStart": "The sky clouds over.",
+				"WeatherEffectStop": "The clouds clear up a little."
+			}
+		]
+	}
+]

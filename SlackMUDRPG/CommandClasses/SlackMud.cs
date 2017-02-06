@@ -491,13 +491,18 @@ namespace SlackMUDRPG.CommandClasses
 
 		public void GlobalAnnounce(string msg)
 		{
+			BroadcastMessage("*GLOBAL MESSAGE: " + msg + "*");
+		}
+
+		public void BroadcastMessage(string msg)
+		{
 			// Get all the characters currently logged in
 			List<SMCharacter> smcl = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
 			// Send a message to each of them.
 			foreach (SMCharacter smc in smcl)
 			{
-				smc.Announce("*GLOBAL MESSAGE: " + msg + "*");
+				smc.Announce(msg);
 			}
 		}
 

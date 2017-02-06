@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
+using System.Threading;
 using Microsoft.Web.WebSockets;
 
 namespace SlackMUDRPG
@@ -141,7 +142,25 @@ namespace SlackMUDRPG
             }
 
             Application["SMNPCs"] = lnpcs;
-        }
+
+			#region "The Pulse"
+
+			// Set the current context to pass into the thread
+			HttpContext ctx = HttpContext.Current;
+
+			// Create a new thread
+			Thread pulse = new Thread(new ThreadStart(() =>
+			{
+				HttpContext.Current = ctx;
+				new SMPulse().Initiate(); // this is the item that is going to initiate
+			}));
+
+			// Start the thread
+			pulse.Start();
+
+			#endregion
+
+		}
 
 		protected void Session_Start(object sender, EventArgs e)
 		{
