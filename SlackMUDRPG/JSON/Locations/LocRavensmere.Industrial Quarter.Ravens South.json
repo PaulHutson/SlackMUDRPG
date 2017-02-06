@@ -1,0 +1,21 @@
+{
+	"RoomID": "Ravensmere.Industrial Quarter.Ravens South",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "Tall chimney stacks stand tall, pouring black smoke into the air. The sounds of work and toil come from all directions.",
+	"RoomExits": [
+    {
+      "Shortcut": "RP",
+      "Description": "Ramparts Parade (Road)",
+      "RoomID": "Ravensmere.Military District.Ramparts Parade"
+    },
+    {
+			"Shortcut": "RGS",
+			"Description": "Ravensgate South",
+			"RoomID": "Ravensmere.Industrial Quarter.Ravensgate South"
+		}
+	],
+	"RoomItems": null
+}

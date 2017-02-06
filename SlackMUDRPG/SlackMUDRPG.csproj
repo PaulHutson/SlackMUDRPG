@@ -210,6 +210,10 @@
     <Content Include="MasterPage\Site.Master" />
     <Content Include="JSON\Objects\Misc.Book.json" />
     <Content Include="JSON\Objects\Misc.Sign.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Industrial Quarter.Ravens South.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Industrial Quarter.Ravensgate South.json" />
+    <Content Include="JSON\Locations\LocRavensmere Boundary.Oldwood.Oldwood Road.json" />
+    <Content Include="JSON\Locations\LocRavensmere Boundary.Oldwood.Oldwood Plains.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

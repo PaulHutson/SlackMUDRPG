@@ -1,0 +1,21 @@
+{
+	"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "The name seems ironic as this wood stretching out from this road seems far from new. Massive stumps protrude from the ground flanked by recently planted saplings.",
+	"RoomExits": [
+    {
+      "Shortcut": "RGS",
+      "Description": "Ravensgate South (road)",
+      "RoomID": "Ravensmere.Industrial Quarter.Ravens South"
+    },
+    {
+			"Shortcut": "OP",
+			"Description": "Oldwood Plains",
+			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains"
+		}
+	],
+	"RoomItems": null
+}

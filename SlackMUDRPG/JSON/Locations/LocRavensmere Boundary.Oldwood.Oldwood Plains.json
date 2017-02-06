@@ -1,0 +1,16 @@
+{
+	"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "This wooded area bears the scars of intensive deforestation. Seemingly this would have provided the towns first source of fuel and building materials when it was established. Steps have been taken to revive the wood as many new trees have been planted and are at different stages of growth.",
+	"RoomExits": [
+    {
+			"Shortcut": "OWR",
+			"Description": "Oldwood Road",
+			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road"
+		}
+	],
+	"RoomItems": null
+}

@@ -25,6 +25,11 @@
 			"Shortcut": "GA",
 			"Description": "Grand Arena",
 			"RoomID": "Ravensmere.Military District.Grand Arena"
+		},
+		{
+			"Shortcut": "RS",
+			"Description": "Ravens South (Road)",
+			"RoomID": "Ravensmere.Industrial Quarter.Ravens South"
 		}
 	],
 	"RoomItems": null
