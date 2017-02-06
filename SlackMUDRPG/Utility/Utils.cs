@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace SlackMUDRPG.Utility
 {
@@ -160,6 +161,36 @@ namespace SlackMUDRPG.Utility
             return GetUnixTime() + additionalSeconds;
         }
 
-        #endregion
-    }
+		public static int GetDifferenceBetweenUnixTimestamps(int initialTimeStamp, int secondaryTimeStamp)
+		{
+			return secondaryTimeStamp - initialTimeStamp;
+		}
+
+		public static int GetDifferenceBetweenUnixTimestampsInMinutes(int initialTimeStamp, int secondaryTimeStamp)
+		{
+			return (GetDifferenceBetweenUnixTimestamps(initialTimeStamp, secondaryTimeStamp) / 60);
+		}
+
+		#endregion
+
+		#region "Load File"
+
+		public static string GetFileJSON(string filePath, string fileName)
+		{
+			string specsPath = FilePathSystem.GetFilePath(filePath, fileName);
+			string json = null;
+
+			if (File.Exists(specsPath))
+			{
+				using (StreamReader r = new StreamReader(specsPath))
+				{
+					json = r.ReadToEnd();
+				}
+			}
+
+			return json;
+		}
+
+		#endregion
+	}
 }

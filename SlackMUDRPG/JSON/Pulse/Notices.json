@@ -5,7 +5,7 @@
 	},
 	{
 		"NoticeType": "DayStart",
-		"Notice": "Daylight surrounds you"
+		"Notice": "A new day begins..."
 	},
 	{
 		"NoticeType": "Sunset",
@@ -13,6 +13,6 @@
 	},
 	{
 		"NoticeType": "NightStart",
-		"Notice": "Night falls"
+		"Notice": "Night falls..."
 	}
 ]
