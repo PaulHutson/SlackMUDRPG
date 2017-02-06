@@ -98,12 +98,41 @@ namespace SlackMUDRPG.CommandClasses
 
 			int used = 0;
 
-			foreach (SMItem smi in item.HeldItems)
+			if (item.HeldItems.Any())
 			{
-				used += GetItemWeight(smi);
+				foreach (SMItem smi in item.HeldItems)
+				{
+					used += GetItemWeight(smi);
+				}
 			}
 
 			return item.ItemCapacity - used;
+
+		}
+
+		/// <summary>
+		/// Calculates the used capacity of a container.
+		/// </summary>
+		/// <param name="item">The container to look at.</param>
+		/// <returns>The containers used capacity.</returns>
+		public static int GetItemUsedCapacity(SMItem item)
+		{
+			if (!item.CanHoldOtherItems())
+			{
+				return 0;
+			}
+
+			int used = 0;
+
+			if (item.HeldItems.Any())
+			{
+				foreach (SMItem smi in item.HeldItems)
+				{
+					used += GetItemWeight(smi);
+				}
+			}
+
+			return used;
 
 		}
 
@@ -182,6 +211,30 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			container.HeldItems.Add(item);
+		}
+
+		/// <summary>
+		/// Counts the number of items in a given container that match a given id, name or family.
+		/// </summary>
+		/// <param name="container">The countainer to look in.</param>
+		/// <param name="itemIdentiifier">The id, name or family to match.</param>
+		/// <returns>The count of matching items.</returns>
+		public static int CountItemsInContainer(SMItem container, string itemIdentiifier)
+		{
+			int count = 0;
+
+			if (container.HeldItems != null && container.HeldItems.Any())
+			{
+				foreach (SMItem item in container.HeldItems)
+				{
+					if (ItemMatches(item, itemIdentiifier))
+					{
+						count++;
+					}
+				}
+			}
+
+			return count;
 		}
 
 		/// <summary>

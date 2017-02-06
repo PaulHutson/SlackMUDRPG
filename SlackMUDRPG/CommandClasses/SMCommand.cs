@@ -24,8 +24,8 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("CommandSyntax")]
 		public string CommandSyntax { get; set; }
 
-		[JsonProperty("CommandExpression")]
-		public string CommandExpression { get; set; }
+		[JsonProperty("ParamsExpression")]
+		public string ParamsExpression { get; set; }
 
 		[JsonProperty("CommandClass")]
 		public string CommandClass { get; set; }
@@ -36,8 +36,8 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("PassCommandAsFirstArg")]
 		public bool PassCommandAsFirstArg { get; set; }
 
-		[JsonProperty("PassQueryParamAsFirstArg")]
-		public string PassQueryParamAsFirstArg { get; set; }
+		[JsonProperty("PassUserIDAsFirstArg")]
+		public bool PassUserIDAsFirstArg { get; set; }
 
 		[JsonProperty("ExampleUsage")]
 		public string ExampleUsage { get; set; }
@@ -46,24 +46,27 @@ namespace SlackMUDRPG.CommandClasses
 		public string RequiredSkill { get; set; }
 
 		/// <summary>
-		/// Parses the CommandExpression into a Regex pattern to extra params from the users command, e.g.
-		/// equip {.+} from {.+}? becomes ^equip (?:equip (.+?)(?: from |$)(.+)?)$
+		/// Parses the ParamsExpression into a Regex pattern to extra params from the users command accounting for aliases, e.g.
+		/// Command Name = equip; "{.+} from {.+}?" becomes "^(?:equip )(?:(.+?)(?: from |$)(.+)?)$"
+		/// Command Name = attack; "{.+}" becomes "^(?:attack |hit )(?:(.+?))$"
 		/// </summary>
 		/// <returns>The parsed regex patthern string</returns>
 		public string ParseExpression()
 		{
 			string pattern = @"(?:\{([^}]+)\}(\?)?)(?:$|)";
 
-			MatchCollection matches = Regex.Matches(this.CommandExpression, pattern);
+			string commandExpression = $"{this.CommandName.Split(',')[0]} {this.ParamsExpression}";
+
+			MatchCollection matches = Regex.Matches(commandExpression, pattern);
 
 			string ret = @"";
 
 			for (int i = 0; i < matches.Count; i++)
 			{
-				// handles adding the line start, command and opens a non-capturing group
+				// handles adding the line start, command (inc aliases) and opens a non-capturing group
 				if (i == 0)
 				{
-					ret += "^" + this.CommandExpression.Substring(0, matches[i].Index);
+					ret += "^(?:" + String.Join(" |", this.CommandName.Split(',').Select(s => s.Trim())) + " )";
 					ret += "(?:";
 				}
 
@@ -102,7 +105,7 @@ namespace SlackMUDRPG.CommandClasses
 
 					int start = current.Index + current.Length;
 					int length = next.Index - (current.Index + current.Length);
-					ret += "(?:" + this.CommandExpression.Substring(start, length);
+					ret += "(?:" + commandExpression.Substring(start, length);
 
 					// if next group is optional
 					if (next.Groups[2].Value == "?")

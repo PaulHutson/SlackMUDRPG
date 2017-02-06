@@ -33,11 +33,11 @@
 				- If nothing is in the slot use the item
 					- use item effects based on the item parameters. (i.e. a torch will light things up)
 						- may need a new item effect element.
-		- Weights/Capacity
+		DONE- Weights/Capacity
 			DONE- Add weight restrictions
-		- Containers
+		DONE- Containers
 			DONE- Add containers - like backpacks.
-			- Add Capacity restrictions for containers
+			DONE- Add Capacity restrictions for containers
 		- Wear and Tear
 			- Implement a wear and tear function, with a reduction in the HP of an object
 			- If the object gets to 0 it becomes broken
@@ -55,8 +55,8 @@
 4) Implement Chat System PAUL WORKING ON THIS
 	DONE- Implement Say command which will talk to all people in a location ("SAY Hello")
 	DONE- Implement Whisper command to whisper to a specific person ("WHISPER PlayerName Hello")
-	- Implement Shout command which will talk to all people across all locations around the current location ("SHOUT Hello")
-		- Note, when this command is used and someone hears it from another location it will say where the sound is coming from (i.e. "You hear someone shouting to the north" where north is an exit)
+	DONE- Implement Shout command which will talk to all people across all locations around the current location ("SHOUT Hello")
+		DONE- Note, when this command is used and someone hears it from another location it will say where the sound is coming from (i.e. "You hear someone shouting to the north" where north is an exit)
 	DONE- Implement announce function for when someone arrives in a room.
 	DONE- Implement general message to player function
 	DONE- Implement global announce function.
@@ -159,7 +159,7 @@ V0.2 Items
 	- Generate the JSON for the image (each pixel is a location)
 
 2) More Stuff
-	- Characters (basic, stay in locations, can talk back / say set phrases)
+	DONE- Characters (basic, stay in locations, can talk back / say set phrases)
 	- Character Jobs (basic, can get jobs / tasks from a character)
 	- Characters (advanced, can move around routes, change their persona based on location (i.e. bob goes to the pub at night and gets drunk so speaks differently)
 	- Character Jobs (advanced, can get jobs from characters but they react to what has already been done (i.e. the jobs are generated on a frequency - Mrs Miggens doesn't always need flour if she has already had loads delivered already).

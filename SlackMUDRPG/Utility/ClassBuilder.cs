@@ -88,12 +88,18 @@ namespace SlackMUDRPG.Utility
 		private ClassBuilderSpec Spec;
 
 		/// <summary>
+		/// The UserID if the character using the class builder.
+		/// </summary>
+		public string UserID { get; set; }
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="T:SlackMUDRPG.Utility.ClassBuilder"/> class.
 		/// </summary>
 		/// <param name="CommandClassName">The name of the CommandClass the being built.</param>
-		public ClassBuilder(string CommandClassName)
+		public ClassBuilder(string commandClassName, string userID)
 		{
-			this.Spec = this.GetSpecFromCommandClassName(CommandClassName);
+			this.Spec = this.GetSpecFromCommandClassName(commandClassName);
+			this.UserID = userID;
 		}
 
 		/// <summary>
@@ -162,9 +168,9 @@ namespace SlackMUDRPG.Utility
 		/// <param name="arg">BuildArg.</param>
 		private object GetBuildArgValue(BuildArg arg)
 		{
-			if (arg.ArgSource == "query_param")
+			if (arg.ArgSource == "ClassBuilderProperty")
 			{
-				return Utils.GetQueryParam(arg.ArgName);
+				return this.GetType().GetProperty(arg.ArgName).GetValue(this, null);
 			}
 
 			return null;

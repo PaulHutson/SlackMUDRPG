@@ -5,12 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using SlackMUDRPG.Utility;
+using SlackMUDRPG.Utility.Formatters;
 
 namespace SlackMUDRPG.CommandClasses
 {
 	public class SlackMud
 	{
-
 		#region "Login and Character Methods"
 
 		/// <summary>
@@ -18,7 +18,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="userID">Slack UserID</param>
 		/// <returns>A string response</returns>
-		public void Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack")
+		public string Login(string userID, bool newCharacter = false, string responseURL = null, string connectionService = "slack", string password = null)
 		{
 			// Variables for the return string
 			string returnString = "";
@@ -37,18 +37,20 @@ namespace SlackMUDRPG.CommandClasses
 				returnString = "You must create a character, to do so, use the command /sm CreateCharacter FIRSTNAME,LASTNAME,SEX,AGE\n";
 				returnString += "i.e. /sm CreateCharacter Paul,Hutson,m,34";
 
-                character.sendMessageToPlayer(returnString);
+				// return information [need to return this without a player!]
+				return returnString;
             }
 			else
 			{
 				if ((character != null) && (!newCharacter))
 				{
-                    character.sendMessageToPlayer("You're already logged in!");
-                }
+					returnString += "You're already logged in!";
+					return returnString;
+				}
 				else
 				{
 					// Get the character
-					character = GetCharacter(userID);
+					character = GetCharacter(userID, password);
 
                     // Reset the character activity, just in case!
                     character.CurrentActivity = null;
@@ -58,15 +60,18 @@ namespace SlackMUDRPG.CommandClasses
                     {
                         character.ResponseURL = responseURL;
                     }
+
+					// Set the connection service
+					character.ConnectionService = connectionService;
                     
 					if (!newCharacter)
 					{
-						returnString = "Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")\n";
+						returnString = OutputFormatterFactory.Get().Bold("Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")");
 					}
 					else
 					{
-						returnString = "Welcome to SlackMud!\n";
-						returnString += "We've created your character in the magical world of Arrelvia!\n"; // TODO, use a welcome script!
+						returnString = OutputFormatterFactory.Get().Bold("Welcome to SlackMud!");
+						returnString += OutputFormatterFactory.Get().General("We've created your character in the magical world of Arrelvia!"); // TODO, use a welcome script!
 					}
 					returnString += GetLocationDetails(character.RoomID, character.UserID);
                     
@@ -78,10 +83,11 @@ namespace SlackMUDRPG.CommandClasses
                     if (room != null)
                     {
                         // Announce someone has walked into the room.
-                        room.Announce("_" + character.GetFullName() + " walks in._");
+                        room.Announce(OutputFormatterFactory.Get().Italic(character.GetFullName() + " walks in."));
                         room.ProcessNPCReactions("PlayerCharacter.Enter", character);
                     }
 
+					return "";
                 }
 			}
 		}
@@ -91,7 +97,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="userID">The id of the character you want to load</param>
 		/// <returns>A character</returns>
-		public SMCharacter GetCharacter(string userID)
+		public SMCharacter GetCharacter(string userID, string userName = null, string password = null)
 		{
 			// Get the room file if it exists
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
@@ -111,13 +117,25 @@ namespace SlackMUDRPG.CommandClasses
 						string json = r.ReadToEnd();
 						charInMem = JsonConvert.DeserializeObject<SMCharacter>(json);
 
-						// Add the character to the application memory 
-						smcs.Add(charInMem);
-						HttpContext.Current.Application["SMCharacters"] = smcs;
+						bool canLogin = true;
+						if (password != null)
+						{
+							canLogin = (Crypto.DecryptStringAES(charInMem.Password, "ProvinceMUD") == password);
+						}
+						if ((canLogin) && (password != null))
+						{
+							canLogin = (Crypto.DecryptStringAES(charInMem.Password, "ProvinceMUD") == password);
+						}
+
+						if (canLogin)
+						{
+							// Add the character to the application memory 
+							smcs.Add(charInMem);
+							HttpContext.Current.Application["SMCharacters"] = smcs;
+						}
 					}
 				}
 			}
-
 			return charInMem;
 		}
 
@@ -129,9 +147,7 @@ namespace SlackMUDRPG.CommandClasses
 		public SMNPC GetNPC(string userID)
 		{
 			// Get the room file if it exists
-			SMNPC charInMem = ((List<SMNPC>)HttpContext.Current.Application["SMNPCs"]).FirstOrDefault(smc => smc.UserID == userID);
-			
-			return charInMem;
+			return ((List<SMNPC>)HttpContext.Current.Application["SMNPCs"]).FirstOrDefault(smc => smc.UserID == userID);
 		}
 
         /// <summary>
@@ -220,7 +236,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="sexIn">M or F for the male / Female character</param>
 		/// <param name="characterType">M or F for the male / Female character</param>
 		/// <returns>A string with the character information</returns>
-		public void CreateCharacter(string userID, string firstName, string lastName, string sexIn, string age, string characterType = "BaseCharacter", string responseURL = null)
+		public string CreateCharacter(string userID, string firstName, string lastName, string sexIn, string age, string characterType = "BaseCharacter", string responseURL = null, string userName = null, string password = null)
 		{
 			// Get the path for the character
 			string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
@@ -238,6 +254,8 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.PKFlag = false;
 				SMChar.Sex = char.Parse(sexIn);
 				SMChar.Age = int.Parse(age);
+				SMChar.Username = userName;
+				SMChar.Password = Utility.Crypto.EncryptStringAES(password,"ProvinceMud");
 
 				// Add default attributes to the character
 				SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);
@@ -280,21 +298,30 @@ namespace SlackMUDRPG.CommandClasses
 				// Write the character to the stream
 				SMChar.SaveToFile();
 
-                // log the newly created character into the game
-                Login(userID, true, responseURL);
-
+				// Check if there is a response URL
+				if (responseURL != null)
+				{
+					// Log the newly created character into the game if in something like Slack
+					Login(userID, true, responseURL);
+					return "";
+				}
+				else
+				{
+					// Return the userid ready for logging in
+					return userID;
+				}
             }
 			else
 			{
                 // If they already have a character tell them they do and that they need to login.
                 // log the newly created character into the game
-                Login(userID, true, responseURL);
+                // Login(userID, true, responseURL);
 
                 // Get all current characters
                 List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
                 SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
 
-                character.sendMessageToPlayer("You already have a character, you cannot create another.");
+				return "You already have a character, you cannot create another.";
 			}   
         }
 
@@ -375,7 +402,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (smr == null)
 			{
 				// If they don't exist inform the person as to how to create a new user
-				returnString = "Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com";
+				returnString = OutputFormatterFactory.Get().Italic("Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com");
 			}
 			else
 			{
