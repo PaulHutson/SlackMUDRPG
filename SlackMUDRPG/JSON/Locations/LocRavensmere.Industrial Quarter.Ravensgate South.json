@@ -1,0 +1,21 @@
+{
+	"RoomID": "Ravensmere.Industrial Quarter.Ravensgate South",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "This large wooden gate and draw bridge is flanked by large stone walls which embed themselves into the hard rock of the southern cliffs at one end, and extend as fas as you can see around the city boundarys at the other.",
+	"RoomExits": [
+    {
+      "Shortcut": "RS",
+      "Description": "Ravens South (road)",
+      "RoomID": "Ravensmere.Industrial Quarter.Ravens South"
+    },
+    {
+			"Shortcut": "OWR",
+			"Description": "Oldwood Road",
+			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road"
+		}
+	],
+	"RoomItems": null
+}
