@@ -1,7 +1,6 @@
 [
 	{
 		"CommandFamily": "Combat",
-		"CommandBaseName": "attack",
 		"CommandName": "attack",
 		"CommandDescription": "Attacks a character, creature or object with whatever you're holding (or your bare hands).",
 		"CommandSyntax": "attack <thing>",
@@ -15,7 +14,6 @@
 	},
 	{
 		"CommandFamily": "Combat",
-		"CommandBaseName": "hit",
 		"CommandName": "hit",
 		"CommandDescription": "Hits a character, creature or object with whatever you're holding (or your bare hands).",
 		"CommandSyntax": "hit <thing>",

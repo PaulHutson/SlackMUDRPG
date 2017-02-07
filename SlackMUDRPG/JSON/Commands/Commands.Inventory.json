@@ -1,7 +1,6 @@
 [
 	{
 		"CommandFamily": "Inventory",
-		"CommandBaseName": "pickup",
 		"CommandName": "pickup",
 		"CommandDescription": "Attempts to pick up the item from your current room.",
 		"CommandSyntax": "pickup <item_name>",
@@ -15,7 +14,6 @@
 	},
 	{
 		"CommandFamily": "Inventory",
-		"CommandBaseName": "drop",
 		"CommandName": "drop",
 		"CommandDescription": "Drops a currently held item into your current room.",
 		"CommandSyntax": "drop <item_name>",
@@ -29,7 +27,6 @@
 	},
 	{
 		"CommandFamily": "Inventory",
-		"CommandBaseName": "inventory",
 		"CommandName": "inventory",
 		"CommandDescription": "Shows a list of the items you have equipped or those in a specific slot.",
 		"CommandSyntax": "inventory [slot name]",
@@ -43,7 +40,6 @@
 	},
 	{
 		"CommandFamily": "Inventory",
-		"CommandBaseName": "equip",
 		"CommandName": "equip",
 		"CommandDescription": "Trys to equip an item by name, optionally to a specific slot.",
 		"CommandSyntax": "equip <item name> to [slot name]",
@@ -57,7 +53,6 @@
 	},
 	{
 		"CommandFamily": "Inventory",
-		"CommandBaseName": "put",
 		"CommandName": "put",
 		"CommandDescription": "Trys to put an item in a container..",
 		"CommandSyntax": "equip <item identifier> in <container identifier>",
@@ -71,7 +66,6 @@
 	},
 	{
 		"CommandFamily": "Inventory",
-		"CommandBaseName": "give",
 		"CommandName": "give",
 		"CommandDescription": "Gives and item you own to another player.",
 		"CommandSyntax": "give <item identifier> to <playername>",

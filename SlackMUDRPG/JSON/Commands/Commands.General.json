@@ -1,7 +1,6 @@
 [
 	{
 		"CommandFamily": "General",
-		"CommandBaseName": "help",
 		"CommandName": "help",
 		"CommandDescription": "Get general help or help with a specific command.",
 		"CommandSyntax": "help [command family or command]",
@@ -15,7 +14,6 @@
 	},
 	{
 		"CommandFamily": "General",
-		"CommandBaseName": "login",
 		"CommandName": "login",
 		"CommandDescription": "Logs you into the game.",
 		"CommandSyntax": "login",
@@ -29,7 +27,6 @@
 	},
 	{
 		"CommandFamily": "General",
-		"CommandBaseName": "createcharacter",
 		"CommandName": "createcharacter",
 		"CommandDescription": "Creates a new character.",
 		"CommandSyntax": "createcharacter [First Name],[Last Name],[Sex m / f],[Age of character]",
@@ -43,7 +40,6 @@
 	},
 	{
 		"CommandFamily": "General",
-		"CommandBaseName": "who",
 		"CommandName": "who",
 		"CommandDescription": "This will show you a list of all people currently online",
 		"CommandSyntax": "who",
@@ -57,7 +53,6 @@
 	},
 	{
 		"CommandFamily": "General",
-		"CommandBaseName": "move",
 		"CommandName": "move",
 		"CommandDescription": "This will move you to a room defined by the exit.",
 		"CommandSyntax": "move <locationshortcut>",
@@ -71,7 +66,6 @@
 	},
 	{
 		"CommandFamily": "General",
-		"CommandBaseName": "flee",
 		"CommandName": "flee",
 		"CommandDescription": "Using this command will mean you will leave via a random unlocked exit.",
 		"CommandSyntax": "flee <locationshortcut>",
@@ -85,7 +79,6 @@
 	},
 	{
 		"CommandFamily": "General",
-		"CommandBaseName": "stop",
 		"CommandName": "stop",
 		"CommandDescription": "Stops the activity that the character is currently doing.",
 		"CommandSyntax": "stop",
@@ -99,7 +92,6 @@
 	},
 	{
 		"CommandFamily": "General",
-		"CommandBaseName": "flush",
 		"CommandName": "flush",
 		"CommandDescription": "Flush the character from menu and set them at the start location.",
 		"CommandSyntax": "flush",

@@ -12,9 +12,6 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("CommandFamily")]
 		public string CommandFamily { get; set; }
 
-		[JsonProperty("CommandBaseName")]
-		public string CommandBaseName { get; set; }
-
 		[JsonProperty("CommandName")]
 		public string CommandName { get; set; }
 

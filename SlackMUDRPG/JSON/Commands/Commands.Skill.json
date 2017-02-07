@@ -1,7 +1,6 @@
 [
 	{
 		"CommandFamily": "Skill",
-		"CommandBaseName": "craft",
 		"CommandName": "craft",
 		"CommandDescription": "Enables the player to craft something.",
 		"CommandSyntax": "craft <Name Of item>",
@@ -15,7 +14,6 @@
 	},
 	{
 		"CommandFamily": "Skill",
-		"CommandBaseName": "make",
 		"CommandName": "make",
 		"CommandDescription": "Enables the player to make something.",
 		"CommandSyntax": "make <Name Of item>",
@@ -29,7 +27,6 @@
 	},
 	{
 		"CommandFamily": "Skill",
-		"CommandBaseName": "build",
 		"CommandName": "build",
 		"CommandDescription": "Enables the player to build something.",
 		"CommandSyntax": "build <Name Of item>",

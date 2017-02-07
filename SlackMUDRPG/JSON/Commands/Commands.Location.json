@@ -1,7 +1,6 @@
 [
 	{
 		"CommandFamily": "Location",
-		"CommandBaseName": "exits",
 		"CommandName": "exits",
 		"CommandDescription": "Get the available location exits.",
 		"CommandSyntax": "exits",
@@ -15,7 +14,6 @@
 	},
 	{
 		"CommandFamily": "Location",
-		"CommandBaseName": "look",
 		"CommandName": "look",
 		"CommandDescription": "This will move you to a room defined by the exit.",
 		"CommandSyntax": "look",
