@@ -1,7 +1,6 @@
 [
 	{
 		"CommandFamily": "Environment",
-		"CommandBaseName": "chop",
 		"CommandName": "chop",
 		"CommandDescription": "Enables the player to chop something.",
 		"CommandSyntax": "chop <TargetName>",
@@ -15,7 +14,6 @@
 	},
 	{
 		"CommandFamily": "Environment",
-		"CommandBaseName": "mine",
 		"CommandName": "mine",
 		"CommandDescription": "Enables the player to mine something.",
 		"CommandSyntax": "mine <TargetName>",
