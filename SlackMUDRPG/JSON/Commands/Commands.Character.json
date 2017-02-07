@@ -14,30 +14,16 @@
 	},
 	{
 		"CommandFamily": "Character",
-		"CommandName": "inspect",
-		"CommandDescription": "Inspect a chatracter or an object within a location.",
-		"CommandSyntax": "inspect <thing to inspect>",
+		"CommandName": "inspect, examine",
+		"CommandDescription": "{name|tilte} a chatracter or an object within a location.",
+		"CommandSyntax": "{name|lower} <thing to inspect>",
 		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "InspectObject",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "inspect Paul Hutson or inspect Wooden Pell",
+		"ExampleUsage": "{name|lower} Paul Hutson or {name|lower} Wooden Pell",
 		"RequiredSkill": null
-	},
-	{
-		"CommandFamily": "Character",
-		"CommandName": "examine",
-		"CommandDescription": "Examine a chatracter or an object within a location.",
-		"CommandSyntax": "examine <thing to examine>",
-		"ParamsExpression": "{.+}",
-		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
-		"CommandMethod": "InspectObject",
-		"PassCommandAsFirstArg": false,
-		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "examine Paul Hutson or examine Wooden Pell",
-		"RequiredSkill": null
-
 	},
 	{
 		"CommandFamily": "Character",
@@ -119,15 +105,15 @@
 	},
 	{
 		"CommandFamily": "Character",
-		"CommandName": "sleep",
-		"CommandDescription": "Allows the character to go to sleep (logout) if there is a bed in the area.",
-		"CommandSyntax": "sleep",
+		"CommandName": "sleep, logout",
+		"CommandDescription": "Allows the character to go to {name|lower} (logout) if there is a bed in the area.",
+		"CommandSyntax": "{name|lower}",
 		"ParamsExpression": null,
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Sleep",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "sleep",
+		"ExampleUsage": "{name|lower}",
 		"RequiredSkill": null
 	},
 	{
@@ -141,19 +127,6 @@
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "read sign",
-		"RequiredSkill": null
-	},
-	{
-		"CommandFamily": "Character",
-		"CommandName": "logout",
-		"CommandDescription": "Allows the character to go to sleep (logout) if there is a bed in the area.",
-		"CommandSyntax": "logout",
-		"ParamsExpression": null,
-		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
-		"CommandMethod": "Sleep",
-		"PassCommandAsFirstArg": false,
-		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "logout",
 		"RequiredSkill": null
 	}
 ]

@@ -1,28 +1,15 @@
 [
 	{
 		"CommandFamily": "Combat",
-		"CommandName": "attack",
-		"CommandDescription": "Attacks a character, creature or object with whatever you're holding (or your bare hands).",
-		"CommandSyntax": "attack <thing>",
+		"CommandName": "attack, hit",
+		"CommandDescription": "{name|tilte}s a character, creature or object with whatever you're holding (or your bare hands).",
+		"CommandSyntax": "{name|lower} <thing>",
 		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Attack",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "Attack Big Bob",
-		"RequiredSkill": null
-	},
-	{
-		"CommandFamily": "Combat",
-		"CommandName": "hit",
-		"CommandDescription": "Hits a character, creature or object with whatever you're holding (or your bare hands).",
-		"CommandSyntax": "hit <thing>",
-		"ParamsExpression": "{.+}",
-		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
-		"CommandMethod": "Attack",
-		"PassCommandAsFirstArg": false,
-		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "Hit Wooden Pell",
+		"ExampleUsage": "{name|tilte} Big Bob",
 		"RequiredSkill": null
 	}
 ]
