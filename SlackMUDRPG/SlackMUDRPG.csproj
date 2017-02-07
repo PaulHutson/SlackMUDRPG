@@ -312,6 +312,7 @@
     <Compile Include="Utility\Formatters\OutputFormatter.cs" />
     <Compile Include="Utility\Path.cs" />
     <Compile Include="Utility\SlackWebHooks.cs" />
+    <Compile Include="Utility\TagReplacer.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />
     <Compile Include="CommandClasses\SMSlot.cs" />
     <Compile Include="Utility\Utils.cs" />
