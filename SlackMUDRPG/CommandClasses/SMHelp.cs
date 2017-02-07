@@ -70,7 +70,8 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns>True if string is a command name, otherwise false.</returns>
 		private bool IsCommand(string command)
 		{
-			if (this.commandList.FirstOrDefault(cmd => cmd.CommandName.ToLower() == command) != null)
+			if (this.commandList.FirstOrDefault(cmd =>
+				cmd.CommandName.Split(',').Select(s => s.Trim().ToLower()).Contains(command.ToLower())) != null)
 			{
 				return true;
 			}
@@ -123,10 +124,28 @@ namespace SlackMUDRPG.CommandClasses
 
 			foreach (SMCommand cmd in commands)
 			{
-				output += this.outputFormatter.ListItem(cmd.CommandSyntax);
+				List<string> aliases = this.GetCmdAliasList(cmd);
+
+				foreach (string alias in aliases)
+				{
+					Dictionary<string, string> data = new Dictionary<string, string>();
+					data.Add("name", alias);
+
+					output += this.outputFormatter.ListItem(new TagReplacer(cmd.CommandSyntax).Replace(data));
+				}
 			}
 
 			this.OutputHelp(output);
+		}
+
+		/// <summary>
+		/// Gets a list of aliases for a given SMCommand.
+		/// </summary>
+		/// <param name="cmd">The SMCommand.</param>
+		/// <returns>The list of alias names.</returns>
+		private List<string> GetCmdAliasList(SMCommand cmd)
+		{
+			return cmd.CommandName.Split(',').Select(name => name.Trim()).ToList();
 		}
 
 		/// <summary>
@@ -145,7 +164,7 @@ namespace SlackMUDRPG.CommandClasses
 				return;
 			}
 
-			output += this.GetHelpStringForCommand(cmd);
+			output += this.GetHelpStringForCommand(cmd, command);
 
 			this.OutputHelp(output);
 		}
@@ -188,7 +207,9 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns>SMCommand or null.</returns>
 		private SMCommand GetCommand(string commandName)
 		{
-			return this.commandList.FirstOrDefault(cmd => cmd.CommandName.ToLower() == commandName.ToLower());
+			return this.commandList.FirstOrDefault(cmd =>
+				cmd.CommandName.Split(',').Select(s => s.Trim().ToLower()).Contains(commandName.ToLower())
+			);
 		}
 
 		/// <summary>
@@ -196,31 +217,42 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="command">SMCOmmand to get help string for.</param>
 		/// <returns>The help string to display to the user.</returns>
-		private string GetHelpStringForCommand(SMCommand command)
+		private string GetHelpStringForCommand(SMCommand command, string commandName)
 		{
 			string helpString = "";
 
-			helpString += this.outputFormatter.Bold(command.CommandName, 0);
-			helpString += this.outputFormatter.General($": {command.CommandDescription}");
+			List<string> aliases = this.GetCmdAliasList(command);
 
-			helpString += this.outputFormatter.General("");
-
-			helpString += this.outputFormatter.ListItem(
-				this.outputFormatter.General("Command Syntax: ", 0) +
-				this.outputFormatter.Italic(command.CommandSyntax, 0)
-			);
-
-			helpString += this.outputFormatter.ListItem(
-				this.outputFormatter.General("Example: ", 0) +
-				this.outputFormatter.Italic(command.ExampleUsage, 0)
-			);
-
-			if (command.RequiredSkill != null)
+			foreach (string alias in aliases)
 			{
-				helpString += this.outputFormatter.ListItem(
-					this.outputFormatter.General("Required Skill: ", 0) +
-					this.outputFormatter.Italic(command.RequiredSkill.Replace("Skill.", ""), 0)
-				);
+				if (alias.ToLower() == commandName.ToLower())
+				{
+					Dictionary<string, string> data = new Dictionary<string, string>();
+					data.Add("name", alias);
+
+					helpString += this.outputFormatter.Bold(alias, 0);
+					helpString += this.outputFormatter.General($": {new TagReplacer(command.CommandDescription).Replace(data)}");
+
+					helpString += this.outputFormatter.General("");
+
+					helpString += this.outputFormatter.ListItem(
+						this.outputFormatter.General("Command Syntax: ", 0) +
+						this.outputFormatter.Italic(new TagReplacer(command.CommandSyntax).Replace(data), 0)
+					);
+
+					helpString += this.outputFormatter.ListItem(
+						this.outputFormatter.General("Example: ", 0) +
+						this.outputFormatter.Italic(new TagReplacer(command.ExampleUsage).Replace(data), 0)
+					);
+
+					if (command.RequiredSkill != null)
+					{
+						helpString += this.outputFormatter.ListItem(
+							this.outputFormatter.General("Required Skill: ", 0) +
+							this.outputFormatter.Italic(command.RequiredSkill.Replace("Skill.", ""), 0)
+						);
+					}
+				}
 			}
 
 			return helpString;
