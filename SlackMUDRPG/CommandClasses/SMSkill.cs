@@ -99,7 +99,11 @@ namespace SlackMUDRPG.CommandClasses
 								case "Target":
 									if ((!StepRequiredTarget(smc, smss, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID)) && (!isPassive))
 									{
-										smc.sendMessageToPlayer(smss.FailureOutput);
+										string getTargetName = GetTargetName(smc, targetType, targetID);
+										if (getTargetName != null)
+										{
+											smc.sendMessageToPlayer(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null));
+										}
 										continueCycle = false;
 										smc.StopActivity();
 									}
@@ -109,7 +113,11 @@ namespace SlackMUDRPG.CommandClasses
 									{
 										if (!isPassive)
 										{
-											smc.sendMessageToPlayer(smss.FailureOutput);
+											string getTargetName = GetTargetName(smc, targetType, targetID);
+											if (getTargetName != null)
+											{
+												smc.sendMessageToPlayer(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null));
+											}
 										}
 										SkillIncrease(smc, false);
 									}
@@ -123,7 +131,11 @@ namespace SlackMUDRPG.CommandClasses
 									{
 										if (!isPassive)
 										{
-											smc.sendMessageToPlayer(smss.FailureOutput);
+											string getTargetName = GetTargetName(smc, targetType, targetID);
+											if (getTargetName != null)
+											{
+												smc.sendMessageToPlayer(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null));
+											}
 										}
 										SkillIncrease(smc, false);
 									}
@@ -177,6 +189,30 @@ namespace SlackMUDRPG.CommandClasses
                 smc.StopActivity();
             }
         }
+
+		private string GetTargetName(SMCharacter smc, string targetType, string targetID)
+		{
+			if (targetType == "Character")
+			{
+				// Get the character
+				SMCharacter targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+				if (targetChar != null)
+				{
+					return targetChar.GetFullName();
+				}
+			}
+			else
+			{
+				// Get the target item
+				SMItem targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+				if (targetItem != null)
+				{
+					return targetItem.SingularPronoun + " " + targetItem.ItemName;
+				}
+			}
+
+			return null;
+		}
 
 		#region "Skill Step Methods"
 
@@ -537,7 +573,12 @@ namespace SlackMUDRPG.CommandClasses
 			}
             else // lets just use whatever is equipped in their hands.
             {
-                charItembaseDamage = smc.GetEquippedItem().BaseDamage * (float)0.1;
+				SMItem smid = smc.GetEquippedItem();
+
+				if (smid != null)
+				{
+					charItembaseDamage = smc.GetEquippedItem().BaseDamage * (float)0.1;
+				}
             }
 
 			// Get the base attribute from the character

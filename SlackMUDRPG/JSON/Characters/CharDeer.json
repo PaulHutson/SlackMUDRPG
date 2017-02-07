@@ -1,34 +1,4 @@
-﻿{
-  "firstname": "Young",
-  "lastname": "Deer",
-  "description": "A young looking deer",
-  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
-  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
-  "age": 2,
-  "sex": "m",
-  "PKFlag": false,
-  "UserID": "Deer",
-  "RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains",
-  "CurrentActivity": null,
-  "Attributes": {
-    "str": 10,
-    "int": 10,
-    "chr": 10,
-    "dex": 100,
-    "wp": 10,
-    "ft": 10,
-    "hp": 15,
-    "maxhp": 15,
-    "SocialStanding": 1
-  },
-  "Skills": null,
-  "Slots": null,
-  "BodyParts": [
-    {
-      "Name": "Body"
-    }
-  ],
-  "ResponseURL": null,
+{
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",
@@ -137,5 +107,48 @@
     }
   ],
   "NPCMovementAlgorithms": null,
-  "NPCMovementTarget": null
+  "NPCMovementTarget": null,
+  "AwaitingCharacterResponses": null,
+  "firstname": "Young",
+  "lastname": "Deer",
+  "description": "A young looking deer",
+  "notes": null,
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 2,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "Deer",
+  "Username": null,
+  "Password": null,
+  "RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 100,
+    "wp": 10,
+    "ft": 10,
+    "hp": 15,
+    "maxhp": 15,
+    "SocialStanding": 1
+  },
+  "Skills": [
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 1
+    }
+  ],
+  "Slots": null,
+  "BodyParts": [
+    {
+      "Name": "Body"
+    }
+  ],
+  "CharacterWeight": 50,
+  "CharacterSize": 160,
+  "ResponseURL": null,
+  "ConnectionService": null,
+  "NPCsWaitingForResponses": null
 }

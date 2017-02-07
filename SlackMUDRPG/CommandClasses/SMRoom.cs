@@ -191,6 +191,41 @@ namespace SlackMUDRPG.CommandClasses
             return lsmc;
         }
 
+		/// <summary>
+		/// Randomly select a single character from within a scope
+		/// </summary>
+		/// <param name="scope">PlayerCharacters, NPCs or AllPeople</param>
+		/// <returns></returns>
+		public SMCharacter GetRandomCharacter(SMCharacter ignoreChar, string scope = null)
+		{
+			switch (scope)
+			{
+				case "PlayerCharacters":
+					List<SMCharacter> pc = this.GetPeople();
+					pc.Remove(ignoreChar);
+					pc.Shuffle();
+					return pc.FirstOrDefault();
+				case "NPCs":
+					List<SMCharacter> npcs = new List<SMCharacter>();
+					List<SMNPC> npcl = this.GetNPCs();
+					if (npcl != null)
+					{
+						foreach (SMNPC npc in npcl)
+						{
+							npcs.Add(npc);
+						}
+					}
+					npcs.Remove(ignoreChar);
+					npcs.Shuffle();
+					return npcs.FirstOrDefault();
+				default:
+					List<SMCharacter> ap = GetAllPeople();
+					ap.Remove(ignoreChar);
+					ap.Shuffle();
+					return ap.FirstOrDefault();
+			}
+		}
+
         /// <summary>
         /// Gets a list of all the people in the room.
         /// </summary>

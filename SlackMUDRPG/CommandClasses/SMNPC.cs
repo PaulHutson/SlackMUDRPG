@@ -48,11 +48,22 @@ namespace SlackMUDRPG.CommandClasses
                         int rndChance = new Random().Next(1, 100);
                         if (rndChance <= npr.Frequency)
                         {
-                            // Process the response
-                            ProcessResponse(npr, invokingCharacter);
+							// If the invoking character is null
+							if (invokingCharacter == null)
+							{
+								// Get a random player (in line with the scope of the additional data)
+								invokingCharacter = this.GetRoom().GetRandomCharacter(this, npr.AdditionalData);
+							}
 
-                            // Set that a response has been selected so we can drop out of the loop
-                            responseSelected = true;
+							// If the invoking character is not null
+							if (invokingCharacter != null)
+							{
+								// Process the response
+								ProcessResponse(npr, invokingCharacter);
+							}
+
+							// Set that a response has been selected so we can drop out of the loop
+							responseSelected = true;
                         }
                     }
                 }
@@ -147,14 +158,18 @@ namespace SlackMUDRPG.CommandClasses
                         // Send the message
                         invokingCharacter.sendMessageToPlayer(sayToPlayerMessage);
                         break;
-                    case "emotetoplayer":
-                        // Construct the message
-                        string emoteToPlayerMessage = OutputFormatterFactory.Get().Italic(this.GetFullName() + " " + ProcessResponseString(npccs.AdditionalData, invokingCharacter));
+					case "emotetoplayer":
+						// Construct the message
+						string emoteToPlayerMessage = OutputFormatterFactory.Get().Italic(this.GetFullName() + " " + ProcessResponseString(npccs.AdditionalData, invokingCharacter));
 
-                        // Send the message
-                        invokingCharacter.sendMessageToPlayer(emoteToPlayerMessage);
-                        break;
-                    case "wait":
+						// Send the message
+						invokingCharacter.sendMessageToPlayer(emoteToPlayerMessage);
+						break;
+					case "attack":
+						// Simply attack a target player
+						this.Attack(invokingCharacter.GetFullName());
+						break;
+					case "wait":
                         System.Threading.Thread.Sleep(int.Parse(npccs.AdditionalData) * 1000);
                         break;
                 }
@@ -300,13 +315,15 @@ namespace SlackMUDRPG.CommandClasses
 	/// - PlayerCharacter.SayNPCName (Faction = FactionName.Threshold, AdditionalData = Player.Known)
 	/// - PlayerCharacter.SayKeyWord (Faction = FactionName.Threshold, AdditionalData = Player.Known)
 	/// - PlayerCharacter.UseSkillOnThem (AdditionalData = the skill used)
-	/// - PlayerCharacter.UseSkillNotOnThem (AdditionalData = the skill used)
+	/// - PlayerCharacter.UseSkillOnAnotherCharacter (AdditionalData = the skill used)
+	/// - PlayerCharacter.UseSkill (AdditionalData = the skill used)
 	/// - PlayerCharacter.ExaminesThem
 	/// - PlayerCharacter.InRoom (Faction = FactionName.Threshold, frequency should be lower on this)
 	/// - NPC.Enter
 	/// - NPC.Leave
 	/// - NPC.ExaminesThem
 	/// - NPC.Attack
+	/// - Pulse (Faction = FactionName.Threshold, AdditionalData = Player.Known)
 	/// 
 	/// Frequency is set to how often a character will do something
 	/// this is automatically set to be 100 by default (i.e. they will

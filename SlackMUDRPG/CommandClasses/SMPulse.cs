@@ -111,9 +111,25 @@ namespace SlackMUDRPG.CommandClasses
 			this.LastUpdate = currentUnixTime;
 			this.TimeOfDay = newTime;
 
-			// TODO Randonly decide whether the weather effect will change.
-			// TODO NPC Cycles in the game world
+			// NPC Cycles in the game world
+			List<SMNPC> smnpcl = new List<SMNPC>();
+			smnpcl = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+
+			if (smnpcl != null)
+			{
+				smnpcl = smnpcl.FindAll(npc => npc.NPCResponses.Count(response => response.ResponseType == "Pulse") > 0);
+				if (smnpcl != null)
+				{
+					foreach (SMNPC npc in smnpcl)
+					{
+						npc.RespondToAction("Pulse", null);
+					}
+				}
+			}
 			
+			// TODO Randonly decide whether the weather effect will change.
+
+
 			// Work out the end time
 			// If less than two minutes
 			// Let the thread sleep for the remainder of the time
@@ -123,7 +139,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (timeToWait < (120 * 1000))
 			{
 				// ... send the thread to sleep
-				Thread.Sleep((120 * 1000) - timeToWait);
+				Thread.Sleep((10 * 1000) - timeToWait);
 			}
 			
 			// Recall the pulse.
