@@ -8,7 +8,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "Deer",
-  "RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains",
+  "RoomID": "IsSpawned",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -28,7 +28,8 @@
       "Name": "Body"
     }
   ],
-  "ResponseURL": null,
+	"ResponseURL": null,
+	"NPCType": "YoungDeer",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",

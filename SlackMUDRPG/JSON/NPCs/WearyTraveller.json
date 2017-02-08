@@ -75,6 +75,7 @@
     }
   ],
   "ResponseURL": null,
+	"NPCType": "WearyTraveller",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",

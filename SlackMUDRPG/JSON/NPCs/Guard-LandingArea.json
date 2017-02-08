@@ -114,6 +114,7 @@
     }
   ],
   "ResponseURL": null,
+	"NPCType": "GuardSergeant",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",

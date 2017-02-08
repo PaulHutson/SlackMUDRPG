@@ -36,6 +36,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("RoomItems")]
 		public List<SMItem> RoomItems { get; set; }
 
+		[JsonProperty("NPCSpawns")]
+		public List<SMSpawn> NPCSpawns { get; set; }
+
 		#region "General Room Function"
 
 		/// <summary>
@@ -679,6 +682,62 @@ namespace SlackMUDRPG.CommandClasses
             }
         }
 
+		public void Spawn()
+		{
+			// Only one thing at a time can spawn at the moment.
+			bool spawnedThisRound = false;
+			List<SMNPC> smnpcl = new List<SMNPC>();
+
+			// loop around the spawns
+			foreach (SMSpawn sms in this.NPCSpawns)
+			{
+				// random number between 1 and 100
+				int randomChance = (new Random().Next(1, 100));
+
+				if (!spawnedThisRound)
+				{
+					// Check if we should try spawning
+					if (randomChance < sms.SpawnFrequency)
+					{
+						// Check if it's a unique person
+						if (sms.Unique)
+						{
+							// Check if the unique NPC is already somewhere in the world...
+							smnpcl = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+							if (smnpcl.Count(npc => (npc.FirstName + npc.LastName) == sms.TypeOfNPC) == 0)
+							{
+								// ... if they're not, spawn them into the room.
+								SMNPC newNPC = NPCHelper.GetNewNPC(sms.TypeOfNPC, true);
+								newNPC.RoomID = this.RoomID;
+								smnpcl.Add(newNPC);
+								HttpContext.Current.Application["SMNPCs"] = smnpcl;
+
+								this.Announce(OutputFormatterFactory.Get().Italic(newNPC.GetFullName() + " walks in"));
+							}
+						}
+
+						if (!spawnedThisRound)
+						{
+							// Check how many there are of this type in the room already
+							int numberOfNPCsOfType = this.GetNPCs().Count(npc => npc.NPCType == sms.TypeOfNPC);
+
+							// If there are less NPCs than the max number of the type...
+							if (numberOfNPCsOfType < sms.MaxNumber)
+							{
+								// .. add one
+								SMNPC newNPC = NPCHelper.GetNewNPC(sms.TypeOfNPC);
+								newNPC.RoomID = this.RoomID;
+								smnpcl.Add(newNPC);
+								HttpContext.Current.Application["SMNPCs"] = smnpcl;
+
+								this.Announce(OutputFormatterFactory.Get().Italic("A " + newNPC.GetFullName() + " walks in"));
+							}
+						}
+					}
+				}
+			}
+		}
+
         #endregion
     }
 
@@ -702,4 +761,19 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("Locked")]
         public bool Locked { get; set; }
     }
+
+	public class SMSpawn
+	{
+		[JsonProperty("TypeOfNPC")]
+		public string TypeOfNPC { get; set; }
+
+		[JsonProperty("MaxNumber")]
+		public int MaxNumber { get; set; }
+
+		[JsonProperty("SpawnFrequency")]
+		public int SpawnFrequency { get; set; }
+
+		[JsonProperty("Unique")]
+		public bool Unique { get; set; }
+	}
 }

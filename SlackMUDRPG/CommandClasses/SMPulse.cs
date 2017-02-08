@@ -126,6 +126,27 @@ namespace SlackMUDRPG.CommandClasses
 					}
 				}
 			}
+
+			// Spawns
+			// Find all rooms that are in memory that could have a spawn
+			List<SMRoom> smrl = new List<SMRoom>();
+			smrl = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+
+			// If there are any rooms in memory...
+			if (smrl != null)
+			{
+				// ... find the rooms that have any possible spawns.
+				smrl = smrl.FindAll(room => room.NPCSpawns != null);
+				if (smrl != null)
+				{
+					// loop around the rooms
+					foreach (SMRoom smr in smrl)
+					{
+						// Check whether there are any spawns.
+						smr.Spawn();
+					}
+				}
+			}
 			
 			// TODO Randonly decide whether the weather effect will change.
 
@@ -139,14 +160,14 @@ namespace SlackMUDRPG.CommandClasses
 			if (timeToWait < (120 * 1000))
 			{
 				// ... send the thread to sleep
-				Thread.Sleep((10 * 1000) - timeToWait);
+				Thread.Sleep((20 * 1000) - timeToWait);
 			}
 			
 			// Recall the pulse.
 			Pulse();
 		}
 	}
-
+	
 	/// <summary>
 	/// Notice types (many different notices can be held here).
 	/// </summary>

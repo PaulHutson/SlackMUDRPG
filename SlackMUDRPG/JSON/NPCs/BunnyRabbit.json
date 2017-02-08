@@ -1,0 +1,98 @@
+﻿{
+  "firstname": "Bunny",
+  "lastname": "Rabbit",
+  "description": "A grey rabbit",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 1,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "BunnyRabbit",
+  "RoomID": "IsSpawned",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 40,
+    "wp": 10,
+    "ft": 10,
+    "hp": 5,
+    "maxhp": 5,
+    "SocialStanding": 1
+  },
+  "Skills": null,
+  "Slots": null,
+  "BodyParts": [
+    {
+      "Name": "Body"
+    }
+  ],
+	"ResponseURL": null,
+	"NPCType": "BunnyRabbit",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 10,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "GeneralChitChat.Choice"
+        }
+      ]
+    },
+    {
+      "ResponseType": "Pulse",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "AllPeople",
+      "Faction": null,
+      "Frequency": 10,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "GeneralChitChat.Choice"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "GeneralChitChat",
+      "ConversationStep": [
+        {
+          "StepID": "Choice",
+          "Scope": "choice",
+          "AdditionalData": "random1,random2,random3",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random1",
+          "Scope": "emote",
+          "AdditionalData": "nibbles some grass.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random2",
+          "Scope": "emote",
+          "AdditionalData": "lazily scratches behind it's ear",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random3",
+          "Scope": "emote",
+          "AdditionalData": "pricks it's ears up and looks around",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

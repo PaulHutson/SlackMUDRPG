@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using SlackMUDRPG.Utility;
 using SlackMUDRPG.Utility.Formatters;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +11,10 @@ namespace SlackMUDRPG.CommandClasses
 {
     public class SMNPC : SMCharacter
     {
-        [JsonProperty("NPCResponses")]
+		[JsonProperty("NPCType")]
+		public string NPCType { get; set; }
+
+		[JsonProperty("NPCResponses")]
         public List<NPCResponses> NPCResponses { get; set; }
 
         [JsonProperty("NPCConversationStructures")]
@@ -49,7 +54,7 @@ namespace SlackMUDRPG.CommandClasses
                         if (rndChance <= npr.Frequency)
                         {
 							// If the invoking character is null
-							if (invokingCharacter == null)
+							if ((invokingCharacter == null) && (this.RoomID != "IsSpawned"))
 							{
 								// Get a random player (in line with the scope of the additional data)
 								invokingCharacter = this.GetRoom().GetRandomCharacter(this, npr.AdditionalData);
@@ -488,6 +493,38 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("LastMoveUnixTime")]
         public int LastMoveUnixTime { get; set; }
     }
+
+	public static class NPCHelper
+	{
+		public static SMNPC GetNewNPC(string NPCType, bool unique = false)
+		{
+			SMNPC newNPC = new SMNPC();
+
+			// ... if they're not, spawn them into the room.
+			string newNPCPath = FilePathSystem.GetFilePath("NPCs", NPCType);
+
+			// If that NPC Exits
+			if (File.Exists(newNPCPath))
+			{
+				// Read the data in
+				using (StreamReader r = new StreamReader(newNPCPath))
+				{
+					// Read the data in 
+					string json = r.ReadToEnd();
+
+					// Deserialise the JSON to an object and add it to the list of NPCS in memory
+					newNPC = JsonConvert.DeserializeObject<SMNPC>(json);
+
+					if (!unique)
+					{
+						newNPC.UserID = Guid.NewGuid().ToString();
+					}
+				}
+			}
+
+			return newNPC;
+		}
+	}
 
     #endregion
 }

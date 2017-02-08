@@ -21,8 +21,8 @@
   "UserID": "U3KLW47QC",
   "Username": null,
   "Password": null,
-  "RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains",
-  "CurrentActivity": "Attacking",
+  "RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road",
+  "CurrentActivity": null,
   "Attributes": {
     "str": 10,
     "int": 10,
@@ -243,86 +243,5 @@
   "CharacterSize": 160,
   "ResponseURL": null,
   "ConnectionService": "slack",
-  "NPCsWaitingForResponses": [
-    {
-      "NPCID": "WearyTraveller1",
-      "ShortCutTokens": [
-        {
-          "ShortCutToken": "Y"
-        },
-        {
-          "ShortCutToken": "N"
-        },
-        {
-          "ShortCutToken": "I"
-        }
-      ],
-      "RoomID": "Ravensmere.Harbour South.Landing Area",
-      "TimeOut": 1486204057
-    },
-    {
-      "NPCID": "WearyTraveller1",
-      "ShortCutTokens": [
-        {
-          "ShortCutToken": "Y"
-        },
-        {
-          "ShortCutToken": "N"
-        },
-        {
-          "ShortCutToken": "I"
-        }
-      ],
-      "RoomID": "Ravensmere.Harbour South.Landing Area",
-      "TimeOut": 1486204254
-    },
-    {
-      "NPCID": "WearyTraveller1",
-      "ShortCutTokens": [
-        {
-          "ShortCutToken": "Y"
-        },
-        {
-          "ShortCutToken": "N"
-        },
-        {
-          "ShortCutToken": "I"
-        }
-      ],
-      "RoomID": "Ravensmere.Harbour South.Landing Area",
-      "TimeOut": 1486204618
-    },
-    {
-      "NPCID": "WearyTraveller1",
-      "ShortCutTokens": [
-        {
-          "ShortCutToken": "Y"
-        },
-        {
-          "ShortCutToken": "N"
-        },
-        {
-          "ShortCutToken": "I"
-        }
-      ],
-      "RoomID": "Ravensmere.Harbour South.Landing Area",
-      "TimeOut": 1486204878
-    },
-    {
-      "NPCID": "WearyTraveller1",
-      "ShortCutTokens": [
-        {
-          "ShortCutToken": "Y"
-        },
-        {
-          "ShortCutToken": "N"
-        },
-        {
-          "ShortCutToken": "I"
-        }
-      ],
-      "RoomID": "Ravensmere.Harbour South.Landing Area",
-      "TimeOut": 1486204963
-    }
-  ]
+  "NPCsWaitingForResponses": []
 }
