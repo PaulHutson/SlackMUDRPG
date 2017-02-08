@@ -101,6 +101,7 @@
     }
   ],
   "ResponseURL": null,
+	"NPCType": "PodgyClerk",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",

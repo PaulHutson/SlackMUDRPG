@@ -383,6 +383,9 @@ namespace SlackMUDRPG.CommandClasses
 						// Add the room to the application memory 
 						smrs.Add(roomInMem);
 						HttpContext.Current.Application["SMRooms"] = smrs;
+
+						// Try to spawn some creatures into the room on first load
+						roomInMem.Spawn();
 					}
 				}
 			}

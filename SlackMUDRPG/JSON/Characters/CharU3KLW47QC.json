@@ -19,7 +19,9 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "U3KLW47QC",
-  "RoomID": "Ravensmere.Harbour South.Landing Area",
+  "Username": null,
+  "Password": null,
+  "RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road",
   "CurrentActivity": null,
   "Attributes": {
     "str": 10,
@@ -81,6 +83,7 @@
         "ItemType": "Weapon",
         "ItemFamily": "Sword",
         "ItemDescription": "This Iron sword ain't too bad",
+        "ItemExtraDetail": null,
         "ItemWeight": 2,
         "ItemCapacity": 0,
         "ItemSize": 2,
@@ -121,6 +124,7 @@
         "ItemType": "Container",
         "ItemFamily": "Backpack",
         "ItemDescription": "Basic small backpack that all players start with.",
+        "ItemExtraDetail": null,
         "ItemWeight": 0,
         "ItemCapacity": 25,
         "ItemSize": 25,
@@ -142,6 +146,7 @@
             "ItemType": "Key",
             "ItemFamily": "Key",
             "ItemDescription": "This is a key",
+            "ItemExtraDetail": null,
             "ItemWeight": 0,
             "ItemCapacity": 0,
             "ItemSize": 0,
@@ -164,6 +169,7 @@
             "ItemType": "weapons",
             "ItemFamily": "Hammer",
             "ItemDescription": "This hammer is made for use in carpentry.",
+            "ItemExtraDetail": null,
             "ItemWeight": 1,
             "ItemCapacity": 0,
             "ItemSize": 1,
@@ -186,6 +192,7 @@
             "ItemType": "tools",
             "ItemFamily": "Chisel",
             "ItemDescription": "This shoddy chisel is used for things like Carpentry.",
+            "ItemExtraDetail": null,
             "ItemWeight": 1,
             "ItemCapacity": 0,
             "ItemSize": 1,
@@ -235,86 +242,6 @@
   "CharacterWeight": 50,
   "CharacterSize": 160,
   "ResponseURL": null,
-  "NPCsWaitingForResponses": [
-    {
-      "NPCID": "WearyTraveller1",
-      "ShortCutTokens": [
-        {
-          "ShortCutToken": "Y"
-        },
-        {
-          "ShortCutToken": "N"
-        },
-        {
-          "ShortCutToken": "I"
-        }
-      ],
-      "RoomID": "Ravensmere.Harbour South.Landing Area",
-      "TimeOut": 1486204057
-    },
-    {
-      "NPCID": "WearyTraveller1",
-      "ShortCutTokens": [
-        {
-          "ShortCutToken": "Y"
-        },
-        {
-          "ShortCutToken": "N"
-        },
-        {
-          "ShortCutToken": "I"
-        }
-      ],
-      "RoomID": "Ravensmere.Harbour South.Landing Area",
-      "TimeOut": 1486204254
-    },
-    {
-      "NPCID": "WearyTraveller1",
-      "ShortCutTokens": [
-        {
-          "ShortCutToken": "Y"
-        },
-        {
-          "ShortCutToken": "N"
-        },
-        {
-          "ShortCutToken": "I"
-        }
-      ],
-      "RoomID": "Ravensmere.Harbour South.Landing Area",
-      "TimeOut": 1486204618
-    },
-    {
-      "NPCID": "WearyTraveller1",
-      "ShortCutTokens": [
-        {
-          "ShortCutToken": "Y"
-        },
-        {
-          "ShortCutToken": "N"
-        },
-        {
-          "ShortCutToken": "I"
-        }
-      ],
-      "RoomID": "Ravensmere.Harbour South.Landing Area",
-      "TimeOut": 1486204878
-    },
-    {
-      "NPCID": "WearyTraveller1",
-      "ShortCutTokens": [
-        {
-          "ShortCutToken": "Y"
-        },
-        {
-          "ShortCutToken": "N"
-        },
-        {
-          "ShortCutToken": "I"
-        }
-      ],
-      "RoomID": "Ravensmere.Harbour South.Landing Area",
-      "TimeOut": 1486204963
-    }
-  ]
+  "ConnectionService": "slack",
+  "NPCsWaitingForResponses": []
 }

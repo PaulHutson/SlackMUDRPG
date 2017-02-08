@@ -866,54 +866,64 @@ namespace SlackMUDRPG.CommandClasses
         public bool CheckDodgeParry()
         {
             // Ensure that the character has skills...
-            if (this.Skills != null) {
-                // Check Dodge
-                // Does the character have the dodge skill?
-                SMSkillHeld smsh = this.Skills.FirstOrDefault(skill => skill.SkillName == "Dodge");
-                int rndChance = new Random().Next(1, 100);
-                if (smsh != null)
-                {
-                    int dodgeChance = (int)(smsh.SkillLevel * 2);
-                    if (rndChance <= dodgeChance)
-                    {
-                        // Send the message to the player that they've dodged...
-                        this.sendMessageToPlayer("_You have dodged an attack..._");
+           
+            // Check Dodge
+            int rndChance = new Random().Next(1, 100);
 
-                        // Check whether the player should get better at the skill
-                        SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName.ToLower() == "Dodge".ToLower());
-                        smc.SkillIncrease(this);
+			// Set the base dodge as the dexterity of the character
+			int dodgeChance = this.Attributes.Dexterity;
 
-                        return true;
-                    }
-                }
+			if (this.Skills != null)
+			{
+				// Does the character have the dodge skill?
+				SMSkillHeld smsh = this.Skills.FirstOrDefault(skill => skill.SkillName == "Dodge");
+				if (smsh != null)
+				{
+					dodgeChance += (int)(smsh.SkillLevel * 2);
+				}
+			}
 
-                // Does the character have the parry skill and something equipped?
-                smsh = this.Skills.FirstOrDefault(skill => skill.SkillName == "Parry");
-                if ((!this.AreHandsEmpty()) && (smsh != null) && (this.HasItemTypeEquipped("Weapon")))
-                {
-                    // Weapon check
-                    SMItem weapon = this.GetEquippedItem();
-                    int bonusValue = 0;
-                    if (this.Skills != null)
-                    {
-                        SMSkillHeld playerWeaponSkill = this.Skills.FirstOrDefault(sms => sms.SkillName.Contains(weapon.ItemFamily));
-                        bonusValue = playerWeaponSkill.SkillLevel;
-                    }
+			if (rndChance <= dodgeChance)
+			{
+				// Send the message to the player that they've dodged...
+				this.sendMessageToPlayer("_You have dodged an attack..._");
 
-                    int parryChance = (int)(smsh.SkillLevel * 2) + bonusValue;
-                    if (rndChance <= parryChance)
-                    {
-                        // Send the message to the player that they've parried
-                        this.sendMessageToPlayer("_You have parried an attack..._");
+				// Check whether the player should get better at the skill
+				SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName.ToLower() == "Dodge".ToLower());
+				smc.SkillIncrease(this);
 
-                        // Check whether the player should get better at the skill
-                        SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName.ToLower() == "Parry".ToLower());
-                        smc.SkillIncrease(this);
+				return true;
+			}
 
-                        return true;
-                    }
-                }
-            }
+			// Does the character have the parry skill and something equipped?
+			if (this.Skills != null)
+			{
+				SMSkillHeld smsh = this.Skills.FirstOrDefault(skill => skill.SkillName == "Parry");
+				if ((!this.AreHandsEmpty()) && (smsh != null) && (this.HasItemTypeEquipped("Weapon")))
+				{
+					// Weapon check
+					SMItem weapon = this.GetEquippedItem();
+					int bonusValue = 0;
+					if (this.Skills != null)
+					{
+						SMSkillHeld playerWeaponSkill = this.Skills.FirstOrDefault(sms => sms.SkillName.Contains(weapon.ItemFamily));
+						bonusValue = playerWeaponSkill.SkillLevel;
+					}
+
+					int parryChance = (int)(smsh.SkillLevel * 2) + bonusValue;
+					if (rndChance <= parryChance)
+					{
+						// Send the message to the player that they've parried
+						this.sendMessageToPlayer("_You have parried an attack..._");
+
+						// Check whether the player should get better at the skill
+						SMSkill smc = ((List<SMSkill>)HttpContext.Current.Application["SMSkills"]).FirstOrDefault(sms => sms.SkillName.ToLower() == "Parry".ToLower());
+						smc.SkillIncrease(this);
+
+						return true;
+					}
+				}
+			}
 
             return false;
         }
@@ -1368,18 +1378,21 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			SMItem item = null;
 
-			foreach (SMSlot slot in this.Slots)
+			if (this.Slots != null)
 			{
-				if (!slot.isEmpty())
+				foreach (SMSlot slot in this.Slots)
 				{
-					if (itemIdentifier == null)
+					if (!slot.isEmpty())
 					{
-						return slot.EquippedItem;
-					}
-					else if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
-					{
-						item = slot.EquippedItem;
-						break;
+						if (itemIdentifier == null)
+						{
+							return slot.EquippedItem;
+						}
+						else if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+						{
+							item = slot.EquippedItem;
+							break;
+						}
 					}
 				}
 			}
@@ -1729,6 +1742,11 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			SMSlot rightHand = this.GetSlotByName("RightHand");
 			SMSlot leftHand = this.GetSlotByName("LeftHand");
+
+			if ((rightHand == null) && (leftHand == null))
+			{
+				return false;
+			}
 
 			return rightHand.isEmpty() && leftHand.isEmpty();
 		}

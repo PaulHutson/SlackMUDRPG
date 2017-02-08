@@ -12,5 +12,19 @@
 			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road"
 		}
 	],
-	"RoomItems": null
+	"RoomItems": null,
+	"NPCSpawns": [
+		{
+			"TypeOfNPC": "YoungDeer",
+			"MaxNumber": 2,
+			"SpawnFrequency": 5,
+			"Unique": false
+		},
+		{
+			"TypeOfNPC": "BunnyRabbit",
+			"MaxNumber": 2,
+			"SpawnFrequency": 10,
+			"Unique": false
+		}
+	]
 }

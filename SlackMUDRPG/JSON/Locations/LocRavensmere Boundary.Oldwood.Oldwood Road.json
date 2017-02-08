@@ -17,5 +17,13 @@
 			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains"
 		}
 	],
-	"RoomItems": null
+	"RoomItems": null,
+	"NPCSpawns": [
+		{
+			"TypeOfNPC": "BunnyRabbit",
+			"MaxNumber": 1,
+			"SpawnFrequency": 10,
+			"Unique": false
+		}
+	]
 }
