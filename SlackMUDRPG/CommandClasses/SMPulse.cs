@@ -160,7 +160,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (timeToWait < (120 * 1000))
 			{
 				// ... send the thread to sleep
-				Thread.Sleep((20 * 1000) - timeToWait);
+				Thread.Sleep((120 * 1000) - timeToWait);
 			}
 			
 			// Recall the pulse.
