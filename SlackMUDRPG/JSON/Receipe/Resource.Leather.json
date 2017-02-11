@@ -1,5 +1,5 @@
 ﻿{
-	"Name": "Leather Strip",
+	"Name": "Leather",
 	"Description": "The knowledge of how to tan a hide into a leather strip.",
 	"Produces": "Resource.LeatherStrip",
 	"PauseTime": 15,
@@ -21,22 +21,42 @@
     {
       "ThresholdName": "Shoddy",
       "ThresholdLevel": "0",
-      "ThresholdBonus": null
+			"ThresholdBonus": [
+				{
+          "ThresholdBonusName": "Toughness",
+          "ThresholdBonusValue": -1
+        }
+			]
     },
     {
       "ThresholdName": "",
       "ThresholdLevel": "50",
-      "ThresholdBonus": null
+      "ThresholdBonus": [
+				{
+          "ThresholdBonusName": "Toughness",
+          "ThresholdBonusValue": 0
+        }
+			]
     },
     {
 			"ThresholdName": "Good Quality",
 			"ThresholdLevel": "80",
-			"ThresholdBonus": null
+			"ThresholdBonus": [
+				{
+          "ThresholdBonusName": "Toughness",
+          "ThresholdBonusValue": 1
+        }
+			]
 		},
     {
 			"ThresholdName": "Best Quality",
 			"ThresholdLevel": "95",
-			"ThresholdBonus": null
+			"ThresholdBonus": [
+				{
+          "ThresholdBonusName": "Toughness",
+          "ThresholdBonusValue": 2
+        }
+			]
 		}
 	],
 	"SkillSteps": [

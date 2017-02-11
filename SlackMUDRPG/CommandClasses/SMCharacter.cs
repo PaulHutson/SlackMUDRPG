@@ -723,7 +723,7 @@ namespace SlackMUDRPG.CommandClasses
         public void CraftItem(string nameOfReceipe)
         {
             List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
-            SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == nameOfReceipe);
+            SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name.ToLower() == nameOfReceipe.ToLower());
 
             if (smr != null)
             {

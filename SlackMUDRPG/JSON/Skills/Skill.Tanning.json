@@ -26,7 +26,7 @@
   ],
   "SkillSteps": [
     {
-      "StepType": "EquippedObject",
+      "StepType": "OwnedObject",
       "StepRequiredObject": "Family.Skin",
       "RequiredObjectAmount": 1,
       "FailureOutput": "You don't have any skin hides",

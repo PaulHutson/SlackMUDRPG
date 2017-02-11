@@ -196,7 +196,7 @@ namespace SlackMUDRPG.CommandClasses
 									};
 									break;
 								case "CheckObjectInLocation":
-									if (!CreateDestroyedObject(smss, smc, targetID))
+									if (!CheckObjectinLocation(smss, smc))
 									{
 										smc.sendMessageToPlayer(smss.FailureOutput);
 									};
@@ -1014,7 +1014,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
 			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
-			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == nameOfReceipe);
+			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name.ToLower() == nameOfReceipe.ToLower());
 			if (smr != null)
 			{
 				if (smr.NeedToLearn)
@@ -1045,7 +1045,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
 			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
-			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == nameOfReceipe);
+			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name.ToLower() == nameOfReceipe.ToLower());
 			if (smr != null)
 			{
 				var continueCycle = true;
@@ -1152,25 +1152,28 @@ namespace SlackMUDRPG.CommandClasses
                                         {
                                             smi.ItemName = smrst.ThresholdName + " " + originalItemName;
 
-											foreach (SMReceipeStepThresholdBonus smrstb in smrst.ThresholdBonus)
+											if (smrst.ThresholdBonus!= null)
 											{
-												switch (smrstb.ThresholdBonusName)
+												foreach (SMReceipeStepThresholdBonus smrstb in smrst.ThresholdBonus)
 												{
-													case "BaseDamage":
-														smi.BaseDamage = baseDamage + smrstb.ThresholdBonusValue;
-														break;
-													case "Toughness":
-														smi.Toughness = baseToughness + smrstb.ThresholdBonusValue;
-														break;
-													case "HitPoints":
-														smi.HitPoints = baseHitPoints + smrstb.ThresholdBonusValue;
-														break;
-													case "ItemSize":
-														smi.ItemSize = baseItemSize + smrstb.ThresholdBonusValue;
-														break;
-													case "ItemWeight":
-														smi.ItemWeight = baseItemWeight + smrstb.ThresholdBonusValue;
-														break;
+													switch (smrstb.ThresholdBonusName)
+													{
+														case "BaseDamage":
+															smi.BaseDamage = baseDamage + smrstb.ThresholdBonusValue;
+															break;
+														case "Toughness":
+															smi.Toughness = baseToughness + smrstb.ThresholdBonusValue;
+															break;
+														case "HitPoints":
+															smi.HitPoints = baseHitPoints + smrstb.ThresholdBonusValue;
+															break;
+														case "ItemSize":
+															smi.ItemSize = baseItemSize + smrstb.ThresholdBonusValue;
+															break;
+														case "ItemWeight":
+															smi.ItemWeight = baseItemWeight + smrstb.ThresholdBonusValue;
+															break;
+													}
 												}
 											}
 										}
