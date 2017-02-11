@@ -43,7 +43,7 @@
 		"CommandName": "who",
 		"CommandDescription": "This will show you a list of all people currently online",
 		"CommandSyntax": "who",
-		"CommandExpression": "who",
+		"ParamsExpression": "who",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Who",
 		"PassCommandAsFirstArg": false,
