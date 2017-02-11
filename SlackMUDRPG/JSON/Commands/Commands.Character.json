@@ -121,7 +121,7 @@
 		"CommandName": "read",
 		"CommandDescription": "Allows the character to go to read something.",
 		"CommandSyntax": "read <thing-to-read>",
-		"CommandExpression": "read {.+}",
+		"ParamsExpression": "read {.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Read",
 		"PassCommandAsFirstArg": false,

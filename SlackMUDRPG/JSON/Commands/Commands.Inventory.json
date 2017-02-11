@@ -69,7 +69,7 @@
 		"CommandName": "give",
 		"CommandDescription": "Gives and item you own to another player.",
 		"CommandSyntax": "give <item identifier> to <playername>",
-		"CommandExpression": "give {.+} to {.+}",
+		"ParamsExpression": "give {.+} to {.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GiveItem",
 		"PassCommandAsFirstArg": false,
