@@ -1,28 +1,28 @@
 [
 	{
 		"CommandFamily": "Location",
-		"CommandName": "exits",
+		"CommandName": "exits, ex",
 		"CommandDescription": "Get the available location exits.",
-		"CommandSyntax": "exits",
+		"CommandSyntax": "{name|lower}",
 		"ParamsExpression": null,
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetRoomExits",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "exits",
+		"ExampleUsage": "{name|lower}",
 		"RequiredSkill": null
 	},
 	{
 		"CommandFamily": "Location",
-		"CommandName": "look",
-		"CommandDescription": "This will move you to a room defined by the exit.",
-		"CommandSyntax": "look",
+		"CommandName": "look, l",
+		"CommandDescription": "This will look at the current location returning you a full location description.",
+		"CommandSyntax": "{name|lower}",
 		"ParamsExpression": null,
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetRoomDetails",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "look",
+		"ExampleUsage": "{name|lower}",
 		"RequiredSkill": null
 	}
 ]
