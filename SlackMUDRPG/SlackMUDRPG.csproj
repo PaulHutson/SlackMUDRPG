@@ -218,6 +218,14 @@
     <Content Include="JSON\NPCs\BunnyRabbit.json" />
     <Content Include="JSON\Objects\RangedWeapon.SimpleBow.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
+    <Content Include="JSON\Skills\Skill.Skin.json" />
+    <Content Include="JSON\Objects\Weapon.ShoddyKnife.json" />
+    <Content Include="JSON\Objects\Resource.Meat.json" />
+    <Content Include="JSON\Objects\Resource.Skin.json" />
+    <Content Include="JSON\Objects\Resource.Bones.json" />
+    <Content Include="JSON\Objects\Container.Bucket.json" />
+    <Content Include="JSON\Objects\Resource.Water.json" />
+    <Content Include="JSON\Objects\Resource.Urine.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

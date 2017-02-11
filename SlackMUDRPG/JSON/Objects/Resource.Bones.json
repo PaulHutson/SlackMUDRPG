@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "some",
+	"ItemName": "{Family} Bones",
+	"PluralPronoun": "some",
+	"PluralName": "{Family} Bones",
+	"ItemType": "Resource",
+	"ItemFamily": "Bones",
+	"ItemDescription": "Some {Family} Bones",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.001,
+	"Toughness": 1
+}

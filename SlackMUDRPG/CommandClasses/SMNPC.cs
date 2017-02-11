@@ -10,18 +10,27 @@ using System.Web;
 namespace SlackMUDRPG.CommandClasses
 {
     public class SMNPC : SMCharacter
-    {
+	{
 		[JsonProperty("NPCType")]
 		public string NPCType { get; set; }
 
+		[JsonProperty("IsGeneric")]
+		public bool IsGeneric { get; set; }
+
 		[JsonProperty("WalkingType")]
 		public string WalkingType { get; set; }
+
+		[JsonProperty("FamilyType")]
+		public string FamilyType { get; set; }
 
 		[JsonProperty("PronounSingular")]
 		public string PronounSingular { get; set; }
 
 		[JsonProperty("PronounMultiple")]
 		public string PronounMultiple { get; set; }
+
+		[JsonProperty("DestroyedOutput")]
+		public string DestroyedOutput { get; set; }
 
 		[JsonProperty("NPCResponses")]
         public List<NPCResponses> NPCResponses { get; set; }
@@ -163,7 +172,7 @@ namespace SlackMUDRPG.CommandClasses
                         this.Whisper(ProcessResponseString(npccs.AdditionalData, invokingCharacter), invokingCharacter.GetFullName());
                         break;
                     case "emote":
-                        this.Emote(ProcessResponseString(npccs.AdditionalData, invokingCharacter));
+                        this.GetRoom().ChatEmote(ProcessResponseString(npccs.AdditionalData, invokingCharacter), this, this);
                         break;
                     case "saytoplayer":
                         // Construct the message
@@ -315,7 +324,7 @@ namespace SlackMUDRPG.CommandClasses
             responseString = responseString.Replace("{playercharacter}", invokingCharacter.GetFullName());
 
             return responseString;
-        }
+		}
 
 		/// <summary>
 		/// Saves the character to application memory.
@@ -333,6 +342,43 @@ namespace SlackMUDRPG.CommandClasses
 
 			smcs.Add(this);
 			HttpContext.Current.Application["SMNPCs"] = smcs;
+		}
+
+		/// <summary>
+		/// Saves the character to application memory.
+		/// </summary>
+		public override SMItem ProduceCorpse()
+		{
+			// Create the corpse
+			SMItem corpse = SMItemFactory.Get("Misc", "Corpse");
+			corpse.ItemName = this.GetFullName() + " Corpse";
+
+			// If it's an animal or some such, create the destroyed output elements.
+			if (this.DestroyedOutput != null)
+			{
+				corpse.DestroyedOutput = this.DestroyedOutput;
+			}
+
+			// Previous item family type
+			corpse.PreviousItemFamily = this.FamilyType;
+
+			// Create the "held items" list ready for transferring items to the corpse.
+			corpse.HeldItems = new List<SMItem>();
+			
+			if (this.Slots != null)
+			{
+				foreach (SMSlot sms in this.Slots)
+				{
+					if (!sms.isEmpty())
+					{
+						corpse.HeldItems.Add(sms.EquippedItem);
+					}
+				}
+			}
+			
+			// TODO Add clothing / armour items to the held items list ready for looting.
+
+			return corpse;
 		}
 	}
 

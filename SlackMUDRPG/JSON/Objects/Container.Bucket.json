@@ -1,0 +1,17 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Wooden Bucket",
+	"PluralPronoun": "some",
+	"PluralName": "Wooden Bucket",
+	"ItemType": "Container",
+	"ItemFamily": "Bucket",
+	"ItemDescription": "A simple wooden bucket.",
+	"ItemWeight": 20,
+	"ItemCapacity": 10,
+	"ItemSize": 20,
+	"HitPoints": 1000000000,
+	"MaxHitPoints": 1000000000,
+	"BaseDamage": 0.1,
+	"Toughness": 5,
+	"HeldItems": null
+}

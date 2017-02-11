@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "some",
+	"ItemName": "{Family} Meat",
+	"PluralPronoun": "some",
+	"PluralName": "{Family} Meat",
+	"ItemType": "Resource",
+	"ItemFamily": "Meat",
+	"ItemDescription": "Some {Family} meat",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.001,
+	"Toughness": 1
+}

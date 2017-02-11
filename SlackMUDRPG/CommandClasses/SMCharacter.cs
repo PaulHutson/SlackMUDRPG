@@ -829,14 +829,8 @@ namespace SlackMUDRPG.CommandClasses
 				}
 			}
 
-            // Create the corpse
-            SMItem corpse = SMItemFactory.Get("Misc", "Corpse");
-			corpse.ItemName = "Corpse of " + this.GetFullName();
-            corpse.HeldItems = new List<SMItem>();
-
-            // TODO Add clothing / armour items to the held items list ready for looting.
-
-            SMRoom currentRoom = this.GetRoom();
+			SMItem corpse = ProduceCorpse();
+			SMRoom currentRoom = this.GetRoom();
 
             currentRoom.AddItem(corpse);
 			
@@ -870,11 +864,36 @@ namespace SlackMUDRPG.CommandClasses
 			}			
         }
 
-        /// <summary>
-        /// Check if the player dodges or parry's the attack.
-        /// </summary>
-        /// <returns></returns>
-        public bool CheckDodgeParry()
+		public virtual SMItem ProduceCorpse()
+		{
+			// Create the corpse
+			SMItem corpse = SMItemFactory.Get("Misc", "Corpse");
+			corpse.ItemName = "Corpse of " + this.GetFullName();
+			
+			// Create the "held items" list ready for transferring items to the corpse.
+			corpse.HeldItems = new List<SMItem>();
+
+			if (this.Slots != null)
+			{
+				foreach (SMSlot sms in this.Slots)
+				{
+					if (!sms.isEmpty())
+					{
+						corpse.HeldItems.Add(sms.EquippedItem);
+					}
+				}
+			}
+
+			// TODO Add clothing / armour items to the held items list ready for looting.
+
+			return corpse;
+		}
+
+		/// <summary>
+		/// Check if the player dodges or parry's the attack.
+		/// </summary>
+		/// <returns></returns>
+		public bool CheckDodgeParry()
         {
             // Ensure that the character has skills...
            
@@ -987,7 +1006,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			// Add the item to the characters hand
 			hand.EquippedItem = item;
-			this.sendMessageToPlayer(this.Outputer.Italic($"Congratulations you picked up {item.SingularPronoun} \"{item.ItemName}\"!"));
+			this.sendMessageToPlayer(this.Outputer.Italic($"You picked up {item.SingularPronoun} \"{item.ItemName}\"!"));
 
 			this.SaveToApplication();
 		}
@@ -1151,7 +1170,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			// Equip the item to the target slot and inform the palyer
 			targetSlot.EquippedItem = itemToEquip;
-			this.sendMessageToPlayer(this.Outputer.Italic($"Congratulations you equipped {itemToEquip.SingularPronoun} \"{itemToEquip.ItemName}\"!"));
+			this.sendMessageToPlayer(this.Outputer.Italic($"You equipped {itemToEquip.SingularPronoun} \"{itemToEquip.ItemName}\"!"));
 			this.SaveToApplication();
 		}
 
@@ -1446,7 +1465,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <returns>The item in room.</returns>
 		/// <param name="itemIdentifier">Items identifier (id, name, or family).</param>
-		private SMItem FindItemInRoom(string itemIdentifier)
+		public SMItem FindItemInRoom(string itemIdentifier)
 		{
 			return SMItemHelper.GetItemFromList(this.GetRoom().RoomItems, itemIdentifier);
 		}
@@ -1473,7 +1492,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <returns>The owned item.</returns>
 		/// <param name="itemIdentifier">Item identifier.</param>
-		private SMItem GetOwnedItem(string itemIdentifier)
+		public SMItem GetOwnedItem(string itemIdentifier)
 		{
 			// Check in each slot (not recursive)
 			foreach (SMSlot slot in this.Slots)

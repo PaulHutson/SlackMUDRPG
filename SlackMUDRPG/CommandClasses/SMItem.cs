@@ -29,6 +29,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("ItemFamily")]
 		public string ItemFamily { get; set; }
 
+		[JsonProperty("PreviousItemFamily")]
+		public string PreviousItemFamily { get; set; }
+
 		[JsonProperty("ItemDescription")]
 		public string ItemDescription { get; set; }
 
@@ -106,6 +109,41 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return null;
+		}
+
+		/// <summary>
+		/// Gets a new instance of the items DestroyedOutput.
+		/// </summary>
+		/// <returns>New items list or null.</returns>
+		public List<SMItem> GetDestroyedItems()
+		{
+			// Create the return list.
+			List<SMItem> smil = new List<SMItem>();
+
+			if (this.DestroyedOutput != null)
+			{
+				string[] splitDestroyedObjects = this.DestroyedOutput.Split('|');
+
+				foreach (string destroyedObject in splitDestroyedObjects)
+				{
+					// get "xxx.yyy.zzz" from "xxx.yyy.zzz,n"
+					string item = destroyedObject.Split(',')[0];
+
+					// get list of parts x, y, z from x.y.z
+					List<string> parts = item.Split('.').ToList();
+
+					// get and remove x from the list
+					string category = parts[0];
+					parts.RemoveAt(0);
+
+					// get y.z by joining the remaining elements
+					string name = string.Join(".", parts);
+
+					smil.Add(SMItemFactory.Get(category, name));
+				}
+			}
+
+			return smil;
 		}
 	}
 }

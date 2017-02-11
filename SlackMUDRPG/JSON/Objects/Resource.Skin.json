@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "A",
+	"ItemName": "{Family} Skin",
+	"PluralPronoun": "some",
+	"PluralName": "{Family} Skins",
+	"ItemType": "Resource",
+	"ItemFamily": "Skin",
+	"ItemDescription": "A {Family} Skin",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.001,
+	"Toughness": 1
+}

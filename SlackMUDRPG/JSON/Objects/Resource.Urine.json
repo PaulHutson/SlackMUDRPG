@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "some",
+	"ItemName": "urine",
+	"PluralPronoun": "some",
+	"PluralName": "urine",
+	"ItemType": "liquid",
+	"ItemFamily": "urine",
+	"ItemDescription": "A deep golden liquid with a pungent smell",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 0,
+	"MaxHitPoints": 0,
+	"BaseDamage": 0.00000001,
+	"Toughness": 0
+}

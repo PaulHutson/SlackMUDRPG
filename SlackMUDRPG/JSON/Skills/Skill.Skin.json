@@ -3,7 +3,7 @@
     "SkillTypeName": "Environment",
     "SkillTypeDescription": "Skills related to manipulating the environment"
   },
-  "SkillName": "Skinning",
+  "SkillName": "Skin",
   "SkillDescription": "The ability to skin an animal",
   "SkillLearnText": "You've learnt how to skin an animal",
   "LevelIncreaseText":  "You feel you've gotten better skinning animals",
@@ -34,7 +34,7 @@
     },
     {
       "StepType": "Target",
-      "StepRequiredObject": null,
+      "StepRequiredObject": "Corpse",
       "RequiredObjectAmount": 1,
       "FailureOutput": "You must choose something to skin",
       "SuccessOutput": null
@@ -86,20 +86,13 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} is nearly finishd skinning {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} has nearly finished skinning {TARGETNAME}"
     },
     {
       "StepType": "Pause",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 5,
       "FailureOutput": null,
-      "SuccessOutput": null
-    },
-    {
-      "StepType": "ConsumeItems",
-      "StepRequiredObject": null,
-      "RequiredObjectAmount": 0,
-      "FailureOutput": "You do not have enough {ITEMNAME} to complete the task.",
       "SuccessOutput": null
     },
     {
@@ -115,6 +108,13 @@
       "RequiredObjectAmount": 1,
       "FailureOutput": null,
       "SuccessOutput": "Produced {ITEMNAMES} (located in the same place as you)."
+    },
+    {
+      "StepType": "ConsumeObject",
+      "StepRequiredObject": "{TARGET}",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Can not find the {TARGETNAME}",
+      "SuccessOutput": null
     }
   ]
 }

@@ -182,12 +182,18 @@ namespace SlackMUDRPG.CommandClasses
 									}
 									break;
 								case "ConsumeObject":
-									if (!ConsumeItem(smss, smc))
+									if (!ConsumeItem(smss, smc, targetType, targetID))
 									{
 										smc.sendMessageToPlayer(smss.FailureOutput);
 										continueCycle = false;
 										smc.StopActivity();
 									}
+									break;
+								case "CreateDestroyedObject":
+									if (!CreateDestroyedObject(smss, smc, targetID))
+									{
+										smc.sendMessageToPlayer(smss.FailureOutput);
+									};
 									break;
 								case "Pause":
 									System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
@@ -863,31 +869,94 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="smss">The skill step</param>
 		/// <param name="smc">The character</param>
 		/// <returns>A true or false to say if they had the item or not</returns>
-		private bool ConsumeItem(SMSkillStep smss, SMCharacter smc)
+		private bool ConsumeItem(SMSkillStep smss, SMCharacter smc, string targetType, string targetID)
 		{
 			// Check the player has the item and enough of it...
-			string[] itemTypeSplit = smss.StepRequiredObject.Split('.');
-			if (smc.CountOwnedItems(itemTypeSplit[1]) > smss.RequiredObjectAmount)
+			if (smss.StepRequiredObject != "{TARGET}")
 			{
-				// if they have enough remove them (i.e. consume them)
-				int numberToConsume = smss.RequiredObjectAmount;
-
-				// Loop around the number
-				while (numberToConsume > 0)
+				string[] itemTypeSplit = smss.StepRequiredObject.Split('.');
+				if (smc.CountOwnedItems(itemTypeSplit[1]) > smss.RequiredObjectAmount)
 				{
-					// reduce the number
-					numberToConsume--;
+					// if they have enough remove them (i.e. consume them)
+					int numberToConsume = smss.RequiredObjectAmount;
 
-					// consume an item
-					smc.RemoveOwnedItem(itemTypeSplit[1]);
+					// Loop around the number
+					while (numberToConsume > 0)
+					{
+						// reduce the number
+						numberToConsume--;
+
+						// consume an item
+						smc.RemoveOwnedItem(itemTypeSplit[1]);
+					}
+
+					// Now return true
+					return true;
+				};
+			}
+			else
+			{
+				// See if the item is in the room
+				SMItem itemToRemove = smc.FindItemInRoom(targetID);
+				if (itemToRemove != null)
+				{
+					// Remove the item from the room
+					smc.GetRoom().RemoveItem(itemToRemove);
+					return true;
 				}
-
-				// Now return true
-				return true;
-			};
-
+				else
+				{
+					// is the player holding it or has it in their bag?
+					itemToRemove = smc.GetOwnedItem(targetID);
+					if (itemToRemove != null)
+					{
+						smc.RemoveOwnedItem(targetID);
+						return true;
+					}
+				}
+			}
+			
 			// else return false because they don't have enough of the item!
 			return false;
+		}
+
+		private bool CreateDestroyedObject(SMSkillStep smss, SMCharacter smc, string targetID)
+		{
+			// Get the target item, so we can find what is going to be destroyed
+			SMItem targetItem = smc.FindItemInRoom(targetID);
+			if (targetItem == null)
+			{
+				targetItem = smc.FindItemInRoom(targetID);
+			}
+			
+			if (targetItem != null)
+			{
+				List<SMItem> smil = targetItem.GetDestroyedItems();
+
+				SMRoom smr = smc.GetRoom();
+				foreach (SMItem smi in smil)
+				{
+					smi.ItemName = ReplaceTags(smi.ItemName, targetItem);
+					smr.AddItem(smi);
+					smr.Announce(smc.GetFullName() + " creates " + smi.SingularPronoun + " " + smi.ItemName);
+				}
+
+				return true;
+			}
+
+			return false;
+		}
+
+		private string ReplaceTags(string inString, SMItem targetItem)
+		{
+			string returnString = inString;
+
+			if (targetItem.PreviousItemFamily != null)
+			{
+				returnString = returnString.Replace("{Family}", targetItem.PreviousItemFamily);
+			}
+
+			return returnString;
 		}
 
 		private bool CheckReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string nameOfReceipe, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)

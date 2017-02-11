@@ -30,9 +30,12 @@
   ],
 	"ResponseURL": null,
 	"NPCType": "YoungDeer",
+	"IsGeneric": true,
 	"WalkingType": "walk",
+	"FamilyType": "Deer",
 	"PronounSingular": "a",
 	"PronounMultiple": "some",
+	"DestroyedOutput": "Resource.Skin,1|Resource.Meat,1|Resource.Bones,1",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",
