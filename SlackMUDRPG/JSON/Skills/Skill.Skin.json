@@ -1,0 +1,120 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Environment",
+    "SkillTypeDescription": "Skills related to manipulating the environment"
+  },
+  "SkillName": "Skinning",
+  "SkillDescription": "The ability to skin an animal",
+  "SkillLearnText": "You've learnt how to skin an animal",
+  "LevelIncreaseText":  "You feel you've gotten better skinning animals",
+	"ActivityType": "Skinning",
+	"CanUseWithoutLearning":  true,
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+	"ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 10
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "INT",
+      "PreReqLevel": 5
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Knife",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have a knife equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Target",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You must choose something to skin",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} starts to skin {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} continues to skin {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} continues to skin {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} is nearly finishd skinning {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "ConsumeItems",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": "You do not have enough {ITEMNAME} to complete the task.",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} uses his knife to skin {TARGETNAME}"
+    },
+    {
+      "StepType": "CreateDestroyedObject",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": null,
+      "SuccessOutput": "Produced {ITEMNAMES} (located in the same place as you)."
+    }
+  ]
+}

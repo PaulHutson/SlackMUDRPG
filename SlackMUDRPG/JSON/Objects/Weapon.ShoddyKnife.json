@@ -1,0 +1,15 @@
+﻿{
+	"ItemName": "Shoddy Knife",
+	"SingularPronoun": "a",
+	"PluralName": "Shoddy Knives",
+	"PluralPronoun": "some",
+	"ItemType": "Weapon",
+	"ItemFamily": "Knife",
+	"ItemDescription": "This knife looks to be of poor quality",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 50,
+	"MaxHitPoints": 50,
+	"BaseDamage": 3,
+	"Toughness": 3
+}
