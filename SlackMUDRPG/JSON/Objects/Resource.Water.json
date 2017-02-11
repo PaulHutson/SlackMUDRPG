@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "some",
+	"ItemName": "water",
+	"PluralPronoun": "some",
+	"PluralName": "water",
+	"ItemType": "liquid",
+	"ItemFamily": "water",
+	"ItemDescription": "Some clear water",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 0,
+	"MaxHitPoints": 0,
+	"BaseDamage": 0.00000001,
+	"Toughness": 0
+}

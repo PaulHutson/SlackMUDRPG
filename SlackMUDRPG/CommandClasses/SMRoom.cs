@@ -469,7 +469,7 @@ namespace SlackMUDRPG.CommandClasses
 				return null;
 			}
 
-			return this.RoomItems.FirstOrDefault(smi => smi.ItemFamily == familyName);
+			return this.RoomItems.FirstOrDefault(smi => smi.ItemFamily.ToLower() == familyName.ToLower());
 		}
 
 		/// <summary>
@@ -599,10 +599,18 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="emoting">What the character is "Emoting"</param>
 		/// <param name="charSpeaking">The character who is emoting</param>
-		public void ChatEmote(string speech, SMCharacter charSpeaking)
+		public void ChatEmote(string speech, SMCharacter charSpeaking, SMNPC charNPCSpeak = null)
 		{
 			// Construct the message
-			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " " + speech);
+			// Precursor items for generic NPCs
+			string precursor = "";
+			if ((charNPCSpeak != null) && (charNPCSpeak.IsGeneric))
+			{
+				precursor = charNPCSpeak.PronounSingular + " ";
+			}
+
+			// Output the message
+			string message = OutputFormatterFactory.Get().Italic(precursor + charSpeaking.GetFullName() + " " + speech);
 
 			// Send the message to all people connected to the room
 			foreach (SMCharacter smc in this.GetPeople())

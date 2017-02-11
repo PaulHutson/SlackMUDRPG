@@ -17,5 +17,41 @@
 			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
 		}
 	],
-	"RoomItems": null
+	"RoomItems": [
+		{
+			"ItemID": "FelhirstsBucket",
+			"SingularPronoun": "a",
+			"ItemName": "Wooden Bucket full of Urine",
+			"PluralPronoun": "some",
+			"PluralName": "Wooden Bucket",
+			"ItemType": "Container",
+			"ItemFamily": "Bucket",
+			"ItemDescription": "A simple wooden bucket.",
+			"ItemWeight": 2000,
+			"ItemCapacity": 10,
+			"ItemSize": 20,
+			"HitPoints": 1000000000,
+			"MaxHitPoints": 1000000000,
+			"BaseDamage": 0.1,
+			"Toughness": 5,
+			"HeldItems": [
+				{
+					"ItemID": "Piss1",
+					"SingularPronoun": "some",
+					"ItemName": "urine",
+					"PluralPronoun": "some",
+					"PluralName": "urine",
+					"ItemType": "liquid",
+					"ItemFamily": "urine",
+					"ItemDescription": "A deep golden liquid with a pungent smell",
+					"ItemWeight": 2000,
+					"ItemSize": 1,
+					"HitPoints": 0,
+					"MaxHitPoints": 0,
+					"BaseDamage": 0.00000001,
+					"Toughness": 0
+				}
+			]
+		}
+	]
 }
