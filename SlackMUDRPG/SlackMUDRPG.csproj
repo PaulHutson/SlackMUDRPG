@@ -274,6 +274,7 @@
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMNPC.cs" />
     <Compile Include="CommandClasses\SMPulse.cs" />
+    <Compile Include="CommandClasses\SMQuest.cs" />
     <Compile Include="CommandClasses\SMReceipe.cs" />
     <Compile Include="CommandClasses\SMRequiredSkill.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
