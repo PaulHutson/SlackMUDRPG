@@ -1240,9 +1240,8 @@ namespace SlackMUDRPG.CommandClasses
                 }
 
                 // Random chance to see if someone achieves the skill increase change
-                Random r = new Random();
-                double rDouble = r.NextDouble();
-                if ((rDouble * 100) < chanceOfSkillIncrease)
+				int randomChance = (new Random().Next(1, 100));
+				if (randomChance <= chanceOfSkillIncrease)
                 {
                     // Increase the skill lebel by one.
                     if (smc.Skills != null)
