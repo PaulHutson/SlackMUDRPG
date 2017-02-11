@@ -14,6 +14,22 @@
 	],
 	"RoomItems": [
 		{
+			"ItemID": "PracticeTarget",
+			"SingularPronoun": "a",
+			"ItemName": "Practice Target",
+			"PluralPronoun": "some",
+			"PluralName": "Practice Targets",
+			"ItemType": "Misc",
+			"ItemFamily": "Target",
+			"ItemDescription": "A Practice Target used to practice shooting at.",
+			"ItemWeight": 2000,
+			"ItemSize": 20,
+			"HitPoints": 10000000000000,
+			"MaxHitPoints": 10000000000000,
+			"BaseDamage": 0.1,
+			"Toughness": 5
+		},
+		{
 			"ItemID": "WoodenBarrel1",
 			"SingularPronoun": "a",
 			"ItemName": "Wooden Barrel containing Simple Bows for practice",

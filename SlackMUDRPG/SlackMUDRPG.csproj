@@ -231,6 +231,7 @@
     <Content Include="JSON\Objects\Container.Barrel.json" />
     <Content Include="JSON\Objects\Container.Quiver.json" />
     <Content Include="JSON\Objects\Container.WeaponRack.json" />
+    <Content Include="JSON\Objects\Misc.PracticeTarget.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
