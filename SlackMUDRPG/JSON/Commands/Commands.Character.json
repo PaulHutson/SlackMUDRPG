@@ -14,7 +14,7 @@
 	},
 	{
 		"CommandFamily": "Character",
-		"CommandName": "inspect, examine",
+		"CommandName": "inspect, examine, e",
 		"CommandDescription": "{name|tilte} a chatracter or an object within a location.",
 		"CommandSyntax": "{name|lower} <thing to inspect>",
 		"ParamsExpression": "{.+}",
