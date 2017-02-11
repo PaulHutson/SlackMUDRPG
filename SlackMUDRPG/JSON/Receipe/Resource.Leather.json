@@ -1,0 +1,121 @@
+﻿{
+	"Name": "Leather Strip",
+	"Description": "The knowledge of how to tan a hide into a leather strip.",
+	"Produces": "Resource.LeatherStrip",
+	"PauseTime": 15,
+	"NeedToLearn": false,
+	"ProductionTrait": "Trait.Tanning",
+	"Materials": [
+		{
+			"MaterialType": "Family.Skin",
+			"MaterialQuantity": 1
+		}
+	],
+	"RequiredSkills": [
+		{
+			"SkillName": "Tanning",
+			"SkillLevel": "1"
+		}
+	],
+	"StepThresholds": [
+    {
+      "ThresholdName": "Shoddy",
+      "ThresholdLevel": "0",
+      "ThresholdBonus": null
+    },
+    {
+      "ThresholdName": "",
+      "ThresholdLevel": "50",
+      "ThresholdBonus": null
+    },
+    {
+			"ThresholdName": "Good Quality",
+			"ThresholdLevel": "80",
+			"ThresholdBonus": null
+		},
+    {
+			"ThresholdName": "Best Quality",
+			"ThresholdLevel": "95",
+			"ThresholdBonus": null
+		}
+	],
+	"SkillSteps": [
+		{
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} begins to tan {TARGETNAME}"
+    },
+    {
+      "StepType": "CheckConsumeItems",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": "You do not have enough hides to complete the task.",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 15,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} continues to tan {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 15,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} continues to tan {TARGETNAME}"
+    },
+    {
+      "StepType": "ConsumeItems",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": "You do not have enough {ITEMNAME} to complete the task.",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 15,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} rinses off the skin..."
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 15,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "CreateObject",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to create {ITEMNAME}",
+      "SuccessOutput": "Created {ITEMNAME} (it is located in the same place as you)."
+    }
+	]
+}

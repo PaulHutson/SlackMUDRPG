@@ -1,0 +1,60 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Production",
+    "SkillTypeDescription": "Skills related to the production of items"
+  },
+  "SkillName": "Tanning",
+	"CanUseWithoutLearning":  true,
+  "SkillDescription": "The ability to tan hides (producing leather hides).",
+  "SkillLearnText": "You've learnt how to tan hides.",
+  "LevelIncreaseText": "You feel you've gotten better at tanning.",
+  "ActivityType":  "Tanning",
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 6
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "INT",
+      "PreReqLevel": 5
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Skin",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have any skin hides",
+      "SuccessOutput": null
+    },
+		{
+			"StepType": "CheckReceipe",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": "Trait.Tanning",
+			"FailureOutput": "The item you're trying to make is not something you use tanning for.",
+			"SuccessOutput": null
+		},
+		{
+      "StepType": "CheckObjectInLocation",
+      "StepRequiredObject": "ObjectType.Container",
+			"RequiredObjectAmount": 1,
+			"ExtraData": "Resource.Urine",
+      "FailureOutput": "There is no container with Urine in here",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "UseReceipe",
+      "StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+      "FailureOutput": "Failed to tan the skin.",
+      "SuccessOutput": null
+    }      
+  ]
+}

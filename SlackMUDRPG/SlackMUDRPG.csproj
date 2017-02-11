@@ -226,6 +226,8 @@
     <Content Include="JSON\Objects\Container.Bucket.json" />
     <Content Include="JSON\Objects\Resource.Water.json" />
     <Content Include="JSON\Objects\Resource.Urine.json" />
+    <Content Include="JSON\Skills\Skill.Tanning.json" />
+    <Content Include="JSON\Receipe\Resource.Leather.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
