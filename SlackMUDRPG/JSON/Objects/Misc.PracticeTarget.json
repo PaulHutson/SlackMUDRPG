@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Practice Target",
+	"PluralPronoun": "some",
+	"PluralName": "Practice Targets",
+	"ItemType": "Misc",
+	"ItemFamily": "Target",
+	"ItemDescription": "A Practice Target used to practice shooting at.",
+	"ItemWeight": 20,
+	"ItemSize": 20,
+	"HitPoints": 1000000000,
+	"MaxHitPoints": 1000000000,
+	"BaseDamage": 0.1,
+	"Toughness": 5
+}
