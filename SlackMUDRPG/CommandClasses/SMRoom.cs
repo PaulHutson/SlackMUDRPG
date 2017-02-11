@@ -729,10 +729,11 @@ namespace SlackMUDRPG.CommandClasses
                                     // .. add one
                                     SMNPC newNPC = NPCHelper.GetNewNPC(sms.TypeOfNPC);
                                     newNPC.RoomID = this.RoomID;
-                                    smnpcl.Add(newNPC);
+									smnpcl = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+									smnpcl.Add(newNPC);
                                     HttpContext.Current.Application["SMNPCs"] = smnpcl;
 
-                                    this.Announce(OutputFormatterFactory.Get().Italic("A " + newNPC.GetFullName() + " walks in"));
+                                    this.Announce(OutputFormatterFactory.Get().Italic(newNPC.PronounSingular.ToUpper() + " " + newNPC.GetFullName() + " " + newNPC.WalkingType + "s in"));
                                 }
                             }
                         }

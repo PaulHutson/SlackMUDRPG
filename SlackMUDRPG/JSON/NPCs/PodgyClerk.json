@@ -102,6 +102,9 @@
   ],
   "ResponseURL": null,
 	"NPCType": "PodgyClerk",
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",

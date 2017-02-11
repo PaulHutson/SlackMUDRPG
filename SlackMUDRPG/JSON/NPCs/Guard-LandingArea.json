@@ -115,6 +115,9 @@
   ],
   "ResponseURL": null,
 	"NPCType": "GuardSergeant",
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",

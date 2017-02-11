@@ -8,7 +8,7 @@
   "SkillDescription": "The ability to competently use a bow",
   "SkillLearnText": "You've learnt how to use a bow",
   "LevelIncreaseText":  "You feel you've gotten better at shooting bows",
-  "ActivityType":  "Bow.Attacking",
+  "ActivityType":  "Shooting",
   "BaseStat": "DEX",
   "LevelMultiplier": 10,
   "ImprovementSpeed": 10,
@@ -25,11 +25,18 @@
     }
   ],
   "SkillSteps": [
-    {
-      "StepType": "EquippedObject",
-      "StepRequiredObject": "Family.Bow",
+		{
+			"StepType": "EquippedObject",
+			"StepRequiredObject": "Family.Bow",
+			"RequiredObjectAmount": 1,
+			"FailureOutput": "You don't have a bow equipped",
+			"SuccessOutput": null
+		},
+		{
+      "StepType": "OwnedObject",
+      "StepRequiredObject": "Family.Arrow",
       "RequiredObjectAmount": 1,
-      "FailureOutput": "You don't have a bow equipped",
+      "FailureOutput": "You don't have an arrow",
       "SuccessOutput": null
     },
     {
@@ -45,6 +52,13 @@
       "RequiredObjectAmount": 1,
       "FailureOutput": "Failed to hit {TARGETNAME}",
       "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
+    },
+		{
+      "StepType": "ConsumeObject",
+      "StepRequiredObject": "Family.Arrow",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have an arrow",
+      "SuccessOutput": null
     },
     {
       "StepType": "Information",
@@ -67,5 +81,5 @@
       "FailureOutput": null,
       "SuccessOutput": null
     }
-  ]
-  }
+  ]	
+}
