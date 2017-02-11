@@ -76,6 +76,9 @@
   ],
   "ResponseURL": null,
 	"NPCType": "WearyTraveller",
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",

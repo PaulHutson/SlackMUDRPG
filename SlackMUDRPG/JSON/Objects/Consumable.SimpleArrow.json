@@ -1,0 +1,16 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Simple Arrow",
+	"PluralPronoun": "some",
+	"PluralName": "Simple Arrows",
+	"ItemType": "Consumable",
+	"ItemFamily": "Arrow",
+	"ItemDescription": "This simple arrow will fly straight, but won't necessarily cause much damage",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 3,
+	"Toughness": 1,
+	"DestroyedOutput": null
+}

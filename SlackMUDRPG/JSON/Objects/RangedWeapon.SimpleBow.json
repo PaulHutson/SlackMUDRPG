@@ -1,0 +1,21 @@
+﻿{
+	"ItemName": "Simple Bow",
+	"SingularPronoun": "a",
+	"PluralName": "Simple Bows",
+	"PluralPronoun": "some",
+	"ItemType": "RangedWeapon",
+	"ItemFamily": "Bow",
+	"ItemDescription": "This is a simple bow like that which someone would use to catch simple fare.",
+	"ItemWeight": 2,
+	"ItemSize": 2,
+	"HitPoints": 50,
+	"MaxHitPoints": 50,
+	"BaseDamage": 5,
+	"Toughness": 3,
+	"RequiredSkills": [
+		{
+			"SkillName": "Bow Use",
+			"SkillLevel":  "1"
+		}
+	]
+}

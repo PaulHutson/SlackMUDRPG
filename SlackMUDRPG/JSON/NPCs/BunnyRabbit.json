@@ -30,6 +30,9 @@
   ],
 	"ResponseURL": null,
 	"NPCType": "BunnyRabbit",
+	"WalkingType": "hop",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",

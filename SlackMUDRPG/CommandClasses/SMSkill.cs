@@ -173,6 +173,22 @@ namespace SlackMUDRPG.CommandClasses
 										smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetItem.SingularPronoun + " " + targetItem.ItemName, ""));
 									}
 									break;
+								case "OwnedObject":
+									if (!CheckHasItem(smss, smc))
+									{
+										smc.sendMessageToPlayer(smss.FailureOutput);
+										continueCycle = false;
+										smc.StopActivity();
+									}
+									break;
+								case "ConsumeObject":
+									if (!ConsumeItem(smss, smc))
+									{
+										smc.sendMessageToPlayer(smss.FailureOutput);
+										continueCycle = false;
+										smc.StopActivity();
+									}
+									break;
 								case "Pause":
 									System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
 									break;
@@ -544,6 +560,7 @@ namespace SlackMUDRPG.CommandClasses
 			// Get the object to hit the target with.
 			string itemName = smss.StepRequiredObject;
 			float charItembaseDamage = smc.Attributes.Strength / 10;
+			bool isRanged = false;
 			if (itemName != null)
 			{
 				string[] splitItemName = itemName.Split('.');
@@ -564,6 +581,16 @@ namespace SlackMUDRPG.CommandClasses
 					if (!hasAllRequiredSkills)
 					{
 						charItembaseDamage = charItembaseDamage * (float)0.1;
+						if (charItembaseDamage < 1)
+						{
+							charItembaseDamage = 1;
+						}
+					}
+
+					// Set whether the item is ranged or not.
+					if (charItemToUse.ItemType == "RangedWeapon")
+					{
+						isRanged = true;
 					}
 				}
 				else
@@ -624,7 +651,10 @@ namespace SlackMUDRPG.CommandClasses
 					destroyedObjectType = "the corpse of " + targetName;
 
 					// See if they dodge or parry the hit.
-					objectAvoidedHit = targetChar.CheckDodgeParry();
+					if (!isRanged)
+					{
+						objectAvoidedHit = targetChar.CheckDodgeParry();
+					}
 				}
 				else
 				{
@@ -805,6 +835,59 @@ namespace SlackMUDRPG.CommandClasses
 			//      Stop any repeat actions against the character happening.
 
 			return true;
+		}
+
+		/// <summary>
+		/// Check the player has an item (i.e. an arrow) and enough of them for the task.
+		/// </summary>
+		/// <param name="smss">The skill step</param>
+		/// <param name="smc">The character</param>
+		/// <returns>A true or false to say if they have the item or not</returns>
+		private bool CheckHasItem(SMSkillStep smss, SMCharacter smc)
+		{
+			// Get the item and check that there is enough of it...
+			string[] itemTypeSplit = smss.StepRequiredObject.Split('.');
+			if (smc.CountOwnedItems(itemTypeSplit[1]) > smss.RequiredObjectAmount)
+			{
+				// Return true if they have enough of it.
+				return true;
+			};
+
+			// .. or return false if they don't.
+			return false;
+		}
+
+		/// <summary>
+		/// Check the player has an item (i.e. an arrow), enough of them for the task and then consume it.
+		/// </summary>
+		/// <param name="smss">The skill step</param>
+		/// <param name="smc">The character</param>
+		/// <returns>A true or false to say if they had the item or not</returns>
+		private bool ConsumeItem(SMSkillStep smss, SMCharacter smc)
+		{
+			// Check the player has the item and enough of it...
+			string[] itemTypeSplit = smss.StepRequiredObject.Split('.');
+			if (smc.CountOwnedItems(itemTypeSplit[1]) > smss.RequiredObjectAmount)
+			{
+				// if they have enough remove them (i.e. consume them)
+				int numberToConsume = smss.RequiredObjectAmount;
+
+				// Loop around the number
+				while (numberToConsume > 0)
+				{
+					// reduce the number
+					numberToConsume--;
+
+					// consume an item
+					smc.RemoveOwnedItem(itemTypeSplit[1]);
+				}
+
+				// Now return true
+				return true;
+			};
+
+			// else return false because they don't have enough of the item!
+			return false;
 		}
 
 		private bool CheckReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string nameOfReceipe, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
