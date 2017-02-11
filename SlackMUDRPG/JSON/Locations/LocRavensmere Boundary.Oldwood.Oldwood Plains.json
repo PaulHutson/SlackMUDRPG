@@ -23,7 +23,7 @@
 		{
 			"TypeOfNPC": "BunnyRabbit",
 			"MaxNumber": 2,
-			"SpawnFrequency": 10,
+			"SpawnFrequency": 100,
 			"Unique": false
 		}
 	]

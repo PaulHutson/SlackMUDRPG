@@ -14,6 +14,15 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("NPCType")]
 		public string NPCType { get; set; }
 
+		[JsonProperty("WalkingType")]
+		public string WalkingType { get; set; }
+
+		[JsonProperty("PronounSingular")]
+		public string PronounSingular { get; set; }
+
+		[JsonProperty("PronounMultiple")]
+		public string PronounMultiple { get; set; }
+
 		[JsonProperty("NPCResponses")]
         public List<NPCResponses> NPCResponses { get; set; }
 
@@ -307,7 +316,25 @@ namespace SlackMUDRPG.CommandClasses
 
             return responseString;
         }
-     }
+
+		/// <summary>
+		/// Saves the character to application memory.
+		/// </summary>
+		public override void SaveToApplication()
+		{
+			List<SMNPC> smcs = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+
+			SMNPC characterInMem = smcs.FirstOrDefault(smc => smc.UserID == this.UserID);
+
+			if (characterInMem != null)
+			{
+				smcs.Remove(characterInMem);
+			}
+
+			smcs.Add(this);
+			HttpContext.Current.Application["SMNPCs"] = smcs;
+		}
+	}
 
 	#region "NPC Structures"
 

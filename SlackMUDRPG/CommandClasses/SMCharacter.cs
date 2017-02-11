@@ -156,7 +156,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <summary>
 		/// Saves the character to application memory.
 		/// </summary>
-		public void SaveToApplication()
+		public virtual void SaveToApplication()
 		{
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
@@ -807,24 +807,27 @@ namespace SlackMUDRPG.CommandClasses
             // Drop all the items the character is holding
             string droppedItemsAnnouncement = "";
             bool isFirstDroppedItem = true;
-            foreach (SMSlot smcs in this.Slots)
-            {
-                if (((smcs.Name == "RightHand")||(smcs.Name == "LeftHand")) && (!smcs.isEmpty()))
-                {
-                    SMItem droppedItem = smcs.EquippedItem;
-                    this.GetRoom().AddItem(droppedItem);
-                    if (!isFirstDroppedItem)
-                    {
-                        droppedItemsAnnouncement += ", ";
-                    }
-                    else
-                    {
-                        isFirstDroppedItem = false;
-                    }
-                    droppedItemsAnnouncement += droppedItem.SingularPronoun + " " + droppedItem.ItemName;
-                    smcs.EquippedItem = null;
-                }
-            }
+			if (this.Slots != null)
+			{
+				foreach (SMSlot smcs in this.Slots)
+				{
+					if (((smcs.Name == "RightHand") || (smcs.Name == "LeftHand")) && (!smcs.isEmpty()))
+					{
+						SMItem droppedItem = smcs.EquippedItem;
+						this.GetRoom().AddItem(droppedItem);
+						if (!isFirstDroppedItem)
+						{
+							droppedItemsAnnouncement += ", ";
+						}
+						else
+						{
+							isFirstDroppedItem = false;
+						}
+						droppedItemsAnnouncement += droppedItem.SingularPronoun + " " + droppedItem.ItemName;
+						smcs.EquippedItem = null;
+					}
+				}
+			}
 
             // Create the corpse
             SMItem corpse = SMItemFactory.Get("Misc", "Corpse");
@@ -837,26 +840,34 @@ namespace SlackMUDRPG.CommandClasses
 
             currentRoom.AddItem(corpse);
 			
-            // Then move the player back to the hospital
-            this.RoomID = "Hospital";
-            this.Attributes.HitPoints = this.Attributes.MaxHitPoints/2;
+			// Check whether it's an NPC
+			if (this.GetType().Name != "SMNPC")
+			{
+				// Then move the player back to the hospital
+				this.RoomID = "Hospital";
+				this.Attributes.HitPoints = this.Attributes.MaxHitPoints / 2;
 
-            // Tell the player they've died and announce their new location
-            this.sendMessageToPlayer("You have died and have awoken feeling groggy - you won't be at full health yet, you'll need to recharge yourself!");
-            this.GetRoomDetails();
+				// Tell the player they've died and announce their new location
+				this.sendMessageToPlayer("You have died and have awoken feeling groggy - you won't be at full health yet, you'll need to recharge yourself!");
+				this.GetRoomDetails();
 
-            // TODO reduce the number of rerolls they have
-            // If they get to 0 rerolls the character is permenant dead.
+				// TODO reduce the number of rerolls they have
+				// If they get to 0 rerolls the character is permenant dead.
 
-            // Announce the items the player dropped.
-            currentRoom.Announce("While dying " + this.GetFullName() + " dropped the following items: " + droppedItemsAnnouncement);
+				// Announce the items the player dropped.
+				currentRoom.Announce("While dying " + this.GetFullName() + " dropped the following items: " + droppedItemsAnnouncement);
 
-            // Reset the character activity
-            this.CurrentActivity = null;
+				// Reset the character activity
+				this.CurrentActivity = null;
 
-            // Save the player
-            this.SaveToApplication();
-            this.SaveToFile();
+				// Save the player
+				this.SaveToApplication();
+				this.SaveToFile();
+			}
+			else
+			{
+				new SlackMud().RemoveNPCFromMemory(this.UserID);
+			}			
         }
 
         /// <summary>
@@ -1661,7 +1672,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// Removes an owned item by searching all slots and their contents for a given identifier.
 		/// </summary>
 		/// <param name="itemIdentifier"></param>
-		private void RemoveOwnedItem(string itemIdentifier)
+		public void RemoveOwnedItem(string itemIdentifier)
 		{
 			// Check in each slot (not recursive)
 			foreach (SMSlot slot in this.Slots)

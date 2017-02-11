@@ -169,6 +169,18 @@ namespace SlackMUDRPG.CommandClasses
             return returnCharacter;
         }
 
+		/// <summary>
+		/// Remove an NPC from the memory
+		/// </summary>
+		/// <param name="charToRemoveID">The id of the NPC to remove</param>
+		public void RemoveNPCFromMemory(string charToRemoveID)
+		{
+			SMNPC npcchar = new SlackMud().GetNPC(charToRemoveID);
+			List<SMNPC> npcl = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+			npcl.Remove(npcchar);
+			HttpContext.Current.Application["SMNPCs"] = npcl;
+		}
+
         /// <summary>
         /// Gets a character object, and loads it into memory.
         /// </summary>
