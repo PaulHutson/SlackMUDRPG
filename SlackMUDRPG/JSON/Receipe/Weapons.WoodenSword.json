@@ -139,7 +139,7 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 1,
       "FailureOutput": "Failed to create {ITEMNAME}",
-      "SuccessOutput": "Created {ITEMNAME} (it is located in the same room as you)."
+      "SuccessOutput": "Created {ITEMNAME} (it is located in the same place as you)."
     }
 	]
 }
