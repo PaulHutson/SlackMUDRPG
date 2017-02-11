@@ -228,6 +228,9 @@
     <Content Include="JSON\Objects\Resource.Urine.json" />
     <Content Include="JSON\Skills\Skill.Tanning.json" />
     <Content Include="JSON\Receipe\Resource.Leather.json" />
+    <Content Include="JSON\Objects\Container.Barrel.json" />
+    <Content Include="JSON\Objects\Container.Quiver.json" />
+    <Content Include="JSON\Objects\Container.WeaponRack.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

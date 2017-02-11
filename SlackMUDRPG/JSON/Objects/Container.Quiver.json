@@ -1,0 +1,17 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Quiver",
+	"PluralPronoun": "some",
+	"PluralName": "Quivers",
+	"ItemType": "Container",
+	"ItemFamily": "Quiver",
+	"ItemDescription": "A simple Quiver to hold ten arrows.",
+	"ItemWeight": 1,
+	"ItemCapacity": 10,
+	"ItemSize": 2,
+	"HitPoints": 10,
+	"MaxHitPoints": 10,
+	"BaseDamage": 0.1,
+	"Toughness": 5,
+	"HeldItems": null
+}
