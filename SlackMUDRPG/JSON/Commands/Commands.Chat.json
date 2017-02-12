@@ -14,15 +14,15 @@
 	},
 	{
 		"CommandFamily": "Chat",
-		"CommandName": "shout",
-		"CommandDescription": "Enables the player to shout something which will be heard in the current location and locations all around.",
-		"CommandSyntax": "shout <whatever-you-want>",
+		"CommandName": "shout, yell",
+		"CommandDescription": "Enables the player to shout/yell something which will be heard in the current location and locations all around.",
+		"CommandSyntax": "{name|lower} <whatever-you-want>",
 		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "Shout",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "shout HELLO!",
+		"ExampleUsage": "{name|lower} HELLO!",
 		"RequiredSkill": null
 	},
 	{
