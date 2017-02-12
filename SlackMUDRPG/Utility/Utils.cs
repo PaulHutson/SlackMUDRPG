@@ -115,6 +115,29 @@ namespace SlackMUDRPG.Utility
 		}
 
 		/// <summary>
+		/// Returns an new instanace of a give className by calling its constructor with the supplied args.
+		/// </summary>
+		/// <param name="className">Name of the class (fully qualified) to instantiate.</param>
+		/// <param name="args">Object array of args required for instantiation.</param>
+		/// <returns></returns>
+		public static object ConstructWithArgs(string className, params object[] args)
+		{
+			// Build at array of constructor arg types for GetContructorCall.
+			List<Type> types = new List<Type>();
+
+			foreach (var type in args)
+			{
+				Type t = type.GetType();
+				types.Add(t);
+			}
+
+			Type[] typesArray = types.ToArray();
+
+			// Instantiate and return new object
+			return Type.GetType(className).GetConstructor(typesArray).Invoke(args);
+		}
+
+		/// <summary>
 		/// Builds an array of parametes for a method based on the supplied args the methods defaults
 		/// </summary>
 		/// <returns>The parameters array for method.</returns>
