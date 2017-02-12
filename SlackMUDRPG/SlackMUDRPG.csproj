@@ -103,9 +103,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Game.aspx" />
     <Content Include="GameAccess.aspx" />
     <Content Include="Index.aspx" />
+    <Content Include="JsonBuilder\JsonBuilder.aspx" />
     <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Commands\Commands.General.json" />
@@ -217,6 +223,15 @@
     <Content Include="JSON\NPCs\YoungDeer.json" />
     <Content Include="JSON\NPCs\BunnyRabbit.json" />
     <Content Include="JSON\Objects\RangedWeapon.SimpleBow.json" />
+    <Content Include="JSON\JsonBuilder\SMItem.json" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.ShoddyKnife.json" />
@@ -228,6 +243,12 @@
     <Content Include="JSON\Objects\Resource.Urine.json" />
     <Content Include="JSON\Skills\Skill.Tanning.json" />
     <Content Include="JSON\Receipe\Resource.Leather.json" />
+    <None Include="scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\jquery-1.9.1.js" />
+    <Content Include="scripts\jquery-1.9.1.min.js" />
+    <Content Include="scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -245,9 +266,6 @@
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.1.0.4-build00190.js" />
     <Content Include="scripts\ai.1.0.4-build00190.min.js" />
-    <None Include="scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="scripts\jquery-1.6.4.js" />
-    <Content Include="scripts\jquery-1.6.4.min.js" />
     <Content Include="scripts\jquery.signalR-2.2.1.js" />
     <Content Include="scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="scripts\JS.Cookie.js" />
@@ -307,6 +325,13 @@
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JsonBuilder\JsonBuilder.aspx.cs">
+      <DependentUpon>JsonBuilder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JsonBuilder\JsonBuilder.aspx.designer.cs">
+      <DependentUpon>JsonBuilder.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterPage\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
