@@ -11,5 +11,6 @@
 	"HitPoints": 2,
 	"MaxHitPoints": 2,
 	"BaseDamage": 0.001,
-	"Toughness": 3
+	"Toughness": 3,
+	"DestroyedOutput": "Resource.Stick,10"
 }
