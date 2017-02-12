@@ -1692,7 +1692,7 @@ namespace SlackMUDRPG.CommandClasses
 			// If the item in the slot is a container list its contents if required
 			if (listContainerContents && slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems())
 			{
-				if (slot.EquippedItem.HeldItems.Any())
+				if (slot.EquippedItem.HeldItems != null && slot.EquippedItem.HeldItems.Any())
 				{
 					listing += this.Outputer.Italic($"Capacity: {SMItemHelper.GetItemUsedCapacity(slot.EquippedItem)} / {slot.EquippedItem.ItemCapacity}");
 					listing += this.Outputer.Italic($"This \"{slot.EquippedItem.ItemName}\" contains the following items:");
