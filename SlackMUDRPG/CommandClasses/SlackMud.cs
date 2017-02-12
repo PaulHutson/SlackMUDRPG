@@ -63,6 +63,9 @@ namespace SlackMUDRPG.CommandClasses
 
 					// Set the connection service
 					character.ConnectionService = connectionService;
+
+					// Set the last login datetime
+					character.LastLogindate = DateTime.Now;
                     
 					if (!newCharacter)
 					{
