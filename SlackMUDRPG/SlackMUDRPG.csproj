@@ -103,9 +103,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Commands.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="Game.aspx" />
     <Content Include="GameAccess.aspx" />
-    <Content Include="Index.aspx" />
+    <Content Include="HTMLTemplates\CommandTemplate.html" />
+    <Content Include="HTMLTemplates\ReceipeTemplate.html" />
     <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Commands\Commands.General.json" />
@@ -270,6 +273,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Receipes.aspx" />
     <Content Include="scripts\ai.1.0.4-build00190.js" />
     <Content Include="scripts\ai.1.0.4-build00190.min.js" />
     <None Include="scripts\jquery-1.6.4-vsdoc.js" />
@@ -307,6 +311,20 @@
     <Compile Include="CommandClasses\SMRequiredSkill.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
+    <Compile Include="Commands.aspx.cs">
+      <DependentUpon>Commands.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Commands.aspx.designer.cs">
+      <DependentUpon>Commands.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Game.aspx.cs">
       <DependentUpon>Game.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -328,13 +346,6 @@
       <DependentUpon>GameAccess.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handlers\GameAccessWebSocketHandler.cs" />
-    <Compile Include="Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="MasterPage\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -343,6 +354,13 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Receipes.aspx.cs">
+      <DependentUpon>Receipes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Receipes.aspx.designer.cs">
+      <DependentUpon>Receipes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TestButton.aspx.cs">
       <DependentUpon>TestButton.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

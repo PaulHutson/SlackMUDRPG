@@ -44,3 +44,32 @@
 .Strong {
 	font-weight: bold;
 }
+
+/* Receipe items */
+
+.ReceipeItem {
+	margin: 10px;
+	padding: 2px;
+	border: 1px solid #808080
+}
+
+.SectionTitle {
+	background-color: #e4e1e1;
+	font-weight: bold;
+}
+
+.SectionDescription {
+	border-bottom: 1px solid #808080;
+}
+
+.Information {
+	font-size: small;
+}
+
+.InformationIntro {
+	font-weight: bold;
+}
+
+.InformationOutput {
+	padding-left: 4px;
+}
