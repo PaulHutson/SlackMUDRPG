@@ -606,7 +606,7 @@ namespace SlackMUDRPG.CommandClasses
 			string precursor = "";
 			if ((charNPCSpeak != null) && (charNPCSpeak.IsGeneric))
 			{
-				precursor = charNPCSpeak.PronounSingular + " ";
+				precursor = charNPCSpeak.PronounSingular.ToUpper() + " ";
 			}
 
 			// Output the message
