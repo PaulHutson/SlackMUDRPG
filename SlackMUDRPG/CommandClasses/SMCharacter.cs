@@ -1415,9 +1415,12 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			string inventory = string.Empty;
 
-			foreach (SMSlot slot in this.Slots)
+			if (this.Slots != null && this.Slots.Any())
 			{
-				inventory += this.ListSlotDetails(slot.Name, listContainerContents);
+				foreach (SMSlot slot in this.Slots)
+				{
+					inventory += this.ListSlotDetails(slot.Name, listContainerContents);
+				}
 			}
 
 			return inventory;
