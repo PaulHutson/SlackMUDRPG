@@ -384,7 +384,12 @@ namespace SlackMUDRPG.CommandClasses
             this.GetRoomDetails();
             this.SaveToApplication();
             this.SaveToFile();
-        }
+
+			// Remove the character from memory in case the in mem version is invalid
+			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			smcs.Remove(this);
+			HttpContext.Current.Application["SMCharacters"] = smcs;
+		}
 
 		#endregion
 
