@@ -9,6 +9,7 @@
 	min-width: 320px;
 	min-height: 320px;
 	border: 1px solid;
+	overflow-y: auto;
 }
 
 #txtMessage {
