@@ -4,7 +4,7 @@
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
   "Outside": true,
-	"RoomDescription": "The name seems ironic as this wood stretching out from this road seems far from new. Massive stumps protrude from the ground flanked by recently planted saplings.",
+	"RoomDescription": "The name seems ironic as this wood stretching out from this road seems far from old. Massive stumps protrude from the ground flanked by recently planted saplings.",
 	"RoomExits": [
     {
       "Shortcut": "RGS",
