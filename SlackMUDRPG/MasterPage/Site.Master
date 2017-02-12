@@ -10,19 +10,21 @@
     <asp:ContentPlaceHolder ID="ph_Header" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server" class="form-horizontal">
-		<div>
-			I'm the header area
-		</div>
-		<div>
-			<asp:ContentPlaceHolder ID="ph_MainContent" runat="server">
+	<div class="container">
+		<form id="form1" runat="server" class="form-horizontal">
+			<div>
+				I'm the header area
+			</div>
+			<div>
+				<asp:ContentPlaceHolder ID="ph_MainContent" runat="server">
         
-			</asp:ContentPlaceHolder>
-		</div>
-		<div>
-			I'm the footer area
-		</div>
-    </form>
+				</asp:ContentPlaceHolder>
+			</div>
+			<div>
+				I'm the footer area
+			</div>
+		</form>
+	</div>
 	<script src="../scripts/JS.Cookie.js"></script>
 	<script src="../scripts/jquery-1.9.1.min.js"></script>
 	<script src="../scripts/bootstrap.min.js"></script>
