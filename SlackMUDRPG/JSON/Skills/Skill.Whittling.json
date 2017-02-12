@@ -24,14 +24,21 @@
       "PreReqLevel": 8
     }
   ],
-  "SkillSteps": [
-    {
-      "StepType": "OwnedObject",
-      "StepRequiredObject": "Family.Log",
-      "RequiredObjectAmount": 1,
-      "FailureOutput": "You don't have any logs",
-      "SuccessOutput": null
-    },
+	"SkillSteps": [
+		{
+			"StepType": "EquippedObject",
+			"StepRequiredObject": "Family.Knife",
+			"RequiredObjectAmount": 1,
+			"FailureOutput": "You don't have a knife equipped",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "OwnedObject",
+			"StepRequiredObject": "Family.Log",
+			"RequiredObjectAmount": 1,
+			"FailureOutput": "You don't have any logs",
+			"SuccessOutput": null
+		},
 		{
 			"StepType": "CheckReceipe",
 			"StepRequiredObject": null,
@@ -40,13 +47,13 @@
 			"FailureOutput": "The item you're trying to make is not something you use tanning for.",
 			"SuccessOutput": null
 		},
-    {
-      "StepType": "UseReceipe",
-      "StepRequiredObject": null,
+		{
+			"StepType": "UseReceipe",
+			"StepRequiredObject": null,
 			"RequiredObjectAmount": 1,
 			"ExtraData": null,
-      "FailureOutput": "Failed to whittle the log.",
-      "SuccessOutput": null
-    }      
-  ]
+			"FailureOutput": "Failed to whittle the log.",
+			"SuccessOutput": null
+		}
+	]
 }
