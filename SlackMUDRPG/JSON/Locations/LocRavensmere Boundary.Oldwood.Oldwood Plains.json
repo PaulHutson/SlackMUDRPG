@@ -10,6 +10,11 @@
 			"Shortcut": "OWR",
 			"Description": "Oldwood Road",
 			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road"
+		},
+		{
+			"Shortcut": "SS",
+			"Description": "Small Stream",
+			"RoomID": "Ravensmere Boundary.Oldwood.Small Stream"
 		}
 	],
 	"RoomItems": null,

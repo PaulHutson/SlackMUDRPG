@@ -1,0 +1,29 @@
+{
+	"RoomID": "Ravensmere Boundary.Oldwood.Small Stream",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "A gentle stream trickles through the center of wide dry river bed, most likely dammed further up stream. Grassy banks crumble creating shallow gradients for animals to gather and drink water.",
+	"RoomExits": [
+		{
+			"Shortcut": "OWR",
+			"Description": "Oldwood Road",
+			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road"
+		},
+		{
+			"Shortcut": "OP",
+			"Description": "Oldwood Plains",
+			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains"
+		}
+	],
+	"RoomItems": null,
+	"NPCSpawns": [
+		{
+			"TypeOfNPC": "Goose",
+			"MaxNumber": 2,
+			"SpawnFrequency": 90,
+			"Unique": false
+		}
+	]
+}

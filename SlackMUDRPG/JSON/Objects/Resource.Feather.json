@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "some",
+	"ItemName": "{Family} Feather",
+	"PluralPronoun": "some",
+	"PluralName": "{Family} Feathers",
+	"ItemType": "Resource",
+	"ItemFamily": "Feather",
+	"ItemDescription": "A {Family} feather",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.001,
+	"Toughness": 1
+}
