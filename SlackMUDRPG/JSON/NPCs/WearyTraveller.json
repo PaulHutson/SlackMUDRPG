@@ -76,6 +76,7 @@
   ],
   "ResponseURL": null,
 	"NPCType": "WearyTraveller",
+	"FamilyType": "Traveller",
 	"IsGeneric": true,
 	"WalkingType": "walk",
 	"PronounSingular": "a",

@@ -115,6 +115,7 @@
   ],
   "ResponseURL": null,
 	"NPCType": "GuardSergeant",
+	"FamilyType": "Guard",
 	"IsGeneric": true,
 	"WalkingType": "walk",
 	"PronounSingular": "a",
