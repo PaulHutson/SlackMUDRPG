@@ -319,6 +319,14 @@ namespace SlackMUDRPG.CommandClasses
 				}
 			}
 
+			if (smss.ExtraData != null)
+			{
+				if ((targetType == "Character") && (smss.ExtraData.ToLower() == "object"))
+				{
+					return false;
+				}
+			}
+
 			return true;
 		}
 

@@ -258,6 +258,7 @@
     <Content Include="JSON\Receipe\Consumable.HuntingArrow.json" />
     <Content Include="JSON\Receipe\RangedWeapons.HuntingBow.json" />
     <Content Include="JSON\Objects\RangedWeapon.HuntingBow.json" />
+    <Content Include="JSON\Skills\Skill.Knife.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

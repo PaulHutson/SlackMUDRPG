@@ -36,7 +36,8 @@
       "StepType": "Target",
       "StepRequiredObject": "Corpse",
       "RequiredObjectAmount": 1,
-      "FailureOutput": "You must choose something to skin",
+			"FailureOutput": "You must choose something to skin",
+			"ExtraData": "Object",
       "SuccessOutput": null
     },
     {
