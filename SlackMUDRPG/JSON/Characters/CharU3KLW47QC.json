@@ -21,8 +21,8 @@
   "UserID": "U3KLW47QC",
   "Username": null,
   "Password": null,
-  "RoomID": "Ravensmere Boundary.Oldwood.Small Stream",
-  "CurrentActivity": null,
+  "RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road",
+  "CurrentActivity": "Fletching",
   "Attributes": {
     "str": 10,
     "int": 10,
@@ -78,35 +78,7 @@
       "AllowedTypes": [
         "any"
       ],
-      "EquippedItem": {
-        "ItemID": "2de61885-2a88-42c5-b5ee-961a7528f4ce",
-        "SingularPronoun": "a",
-        "ItemName": "Simple Bow",
-        "PluralName": "Simple Bows",
-        "PluralPronoun": "some",
-        "ItemType": "RangedWeapon",
-        "ItemFamily": "Bow",
-        "PreviousItemFamily": null,
-        "ItemDescription": "This is a simple bow like that which someone would use to catch simple fare.",
-        "ItemExtraDetail": null,
-        "ItemWeight": 2,
-        "ItemCapacity": 0,
-        "ItemSize": 2,
-        "HitPoints": 50,
-        "MaxHitPoints": 50,
-        "BaseDamage": 5.0,
-        "Toughness": 3,
-        "DestroyedOutput": null,
-        "RequiredSkills": [
-          {
-            "SkillName": "Bow Use",
-            "SkillLevel": "1"
-          }
-        ],
-        "AdditionalData": null,
-        "ObjectTrait": null,
-        "HeldItems": null
-      }
+      "EquippedItem": null
     },
     {
       "Name": "LeftHand",
@@ -652,6 +624,35 @@
             "Toughness": 1,
             "DestroyedOutput": null,
             "RequiredSkills": null,
+            "AdditionalData": null,
+            "ObjectTrait": null,
+            "HeldItems": null
+          },
+          {
+            "ItemID": "2de61885-2a88-42c5-b5ee-961a7528f4ce",
+            "SingularPronoun": "a",
+            "ItemName": "Shoddy Knife",
+            "PluralName": "Shoddy Knives",
+            "PluralPronoun": "some",
+            "ItemType": "Weapon",
+            "ItemFamily": "Knife",
+            "PreviousItemFamily": null,
+            "ItemDescription": "This knife looks to be of poor quality",
+            "ItemExtraDetail": null,
+            "ItemWeight": 1,
+            "ItemCapacity": 0,
+            "ItemSize": 1,
+            "HitPoints": 50,
+            "MaxHitPoints": 50,
+            "BaseDamage": 3.0,
+            "Toughness": 3,
+            "DestroyedOutput": null,
+            "RequiredSkills": [
+              {
+                "SkillName": "Knife Use",
+                "SkillLevel": "1"
+              }
+            ],
             "AdditionalData": null,
             "ObjectTrait": null,
             "HeldItems": null
