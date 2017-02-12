@@ -10,6 +10,17 @@
 					"ArgSource": "ClassBuilderProperty"
 				}
 			]
+		},
+		{
+			"CommandClassName": "SMHelp",
+			"BuildClassName": "SlackMUDRPG.CommandClasses.SMHelp",
+			"BuildMethodName": "SMHelp",
+			"BuildArgs": [
+				{
+					"ArgName": "UserID",
+					"ArgSource": "ClassBuilderProperty"
+				}
+			]
 		}
 	]
 }

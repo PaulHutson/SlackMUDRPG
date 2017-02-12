@@ -117,6 +117,11 @@ namespace SlackMUDRPG.Utility
 			// Get the args array for the BuildMethod
 			object[] parameters = this.GetArgs();
 
+			if (this.Spec.CommandClassName == this.Spec.BuildMethodName)
+			{
+				return Utils.ConstructWithArgs(this.Spec.BuildClassName, parameters);
+			}
+
 			// Call the BuildMethod and return the new class instance
 			object CommandClass = Utils.CallUserFuncArray(
 				this.Spec.BuildClassName,
