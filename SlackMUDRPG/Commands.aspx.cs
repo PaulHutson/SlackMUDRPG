@@ -39,12 +39,30 @@ namespace SlackMUDRPG
 			// Scroll around those
 			foreach (SMCommand command in smrl)
 			{
+
+				string baseCommandName = command.CommandName;
+				if (baseCommandName.Contains(','))
+				{
+					string[] splitCommandName = baseCommandName.Split(',');
+					baseCommandName = splitCommandName[0];
+				}
+
 				string commandItem = template;
+				// replace all {name|lower} items with the base name
+				commandItem = commandItem.Replace("{name|lower}", "<i>" + baseCommandName + "</i>");
+
 				// Get each item and build it into the relevant string
 				commandItem = commandItem.Replace("{Family}", command.CommandFamily);
 				commandItem = commandItem.Replace("{Title}", command.CommandName);
 				commandItem = commandItem.Replace("{Description}", command.CommandDescription);
-				commandItem = commandItem.Replace("{RequiredSkills}", command.RequiredSkill);
+				if (command.RequiredSkill != null)
+				{
+					commandItem = commandItem.Replace("{RequiredSkills}", command.RequiredSkill);
+				}
+				else
+				{
+					commandItem = commandItem.Replace("{RequiredSkills}", "None");
+				}
 				commandItem = commandItem.Replace("{ExampleUsage}", command.ExampleUsage);
 				commandItem = commandItem.Replace("{CommandSyntax}", command.CommandSyntax);
 

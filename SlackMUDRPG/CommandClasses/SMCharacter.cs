@@ -400,11 +400,14 @@ namespace SlackMUDRPG.CommandClasses
 			string actualSkills = "";
 
 			// Craft all of the output elements.
-			foreach (SMSkillHeld smsh in this.Skills)
+			if (this.Skills != null)
 			{
-				actualSkills += OutputFormatterFactory.Get().ListItem(smsh.SkillName + " level " + smsh.SkillLevel);
+				foreach (SMSkillHeld smsh in this.Skills)
+				{
+					actualSkills += OutputFormatterFactory.Get().ListItem(smsh.SkillName + " level " + smsh.SkillLevel);
+				}
 			}
-
+			
 			// Check if they actually had any skills...
 			if (actualSkills == "")
 			{
