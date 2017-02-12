@@ -1,0 +1,71 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Weapon",
+    "SkillTypeDescription": "Related to use of weapons"
+  },
+  "SkillName": "Knife Use",
+  "SkillDescription": "The ability to competently use a knife as a weapon",
+  "SkillLearnText": "You've learnt how to use a knife as a weapon",
+  "LevelIncreaseText":  "You feel you've gotten better using knives as weapons",
+	"ActivityType": "Attacking",
+	"CanUseWithoutLearning":  true,
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+	"ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 10
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 5
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Knife",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have a knife equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Target",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You must choose something to attack",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Hit",
+      "StepRequiredObject": "Family.Knife",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to hit {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} uses his knife to attack {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Repeat",
+      "StepRequiredObject": "Activity.Attacking",
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    }
+  ]
+}
