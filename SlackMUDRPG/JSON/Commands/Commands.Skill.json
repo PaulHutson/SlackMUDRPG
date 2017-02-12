@@ -1,7 +1,7 @@
 [
 	{
 		"CommandFamily": "Skill",
-		"CommandName": "craft, make, tan, whittle, fletch",
+		"CommandName": "craft, make, tan, whittle, fletch, smith",
 		"CommandDescription": "Enables the player to {name|lower} something.",
 		"CommandSyntax": "{name|lower} <Name Of item>",
 		"ParamsExpression": "{.+}",

@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "an",
+	"ItemName": "Arrowhead",
+	"PluralPronoun": "some",
+	"PluralName": "Arrowheads",
+	"ItemType": "Resource",
+	"ItemFamily": "Arrowhead",
+	"ItemDescription": "An Arrowhead used for constructing arrows",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.05,
+	"Toughness": 2
+}

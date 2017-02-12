@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Anvil",
+	"SingularPronoun": "an",
+	"PluralName": "Anvils",
+	"PluralPronoun": "some",
+  "ItemType": "tools",
+  "ItemFamily": "Anvil",
+	"ItemDescription": "A metal anvil",
+	"ItemWeight": 50,
+  "ItemSize": 50,
+  "HitPoints": 100000,
+  "MaxHitPoints": 100000,
+  "BaseDamage": 20,
+  "Toughness": 25,
+	"CanHoldOtherItems": false
+}

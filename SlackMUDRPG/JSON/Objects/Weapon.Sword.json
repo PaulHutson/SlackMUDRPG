@@ -1,0 +1,21 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Sword",
+	"PluralPronoun": "some",
+	"PluralName": "Swords",
+	"ItemType": "Weapon",
+	"ItemFamily": "Sword",
+	"ItemDescription": "A sword",
+	"ItemWeight": 4,
+	"ItemSize": 2,
+	"HitPoints": 100,
+	"MaxHitPoints": 100,
+	"BaseDamage": 5.0,
+	"Toughness": 3,
+	"RequiredSkills": [
+		{
+			"SkillName": "Sword Use",
+			"SkillLevel":  "1"
+		}
+	]
+}

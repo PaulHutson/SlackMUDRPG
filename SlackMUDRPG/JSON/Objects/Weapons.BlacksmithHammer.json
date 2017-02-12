@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Blacksmith Hammer",
+	"SingularPronoun": "a",
+	"PluralName": "Blacksmith Hammers",
+	"PluralPronoun": "some",
+  "ItemType": "weapons",
+  "ItemFamily": "Hammer",
+	"ItemDescription": "This Blacksmithing Hammer is made for use when blacksmithing.",
+	"ItemWeight": 3,
+  "ItemSize": 2,
+  "HitPoints": 500,
+  "MaxHitPoints": 500,
+  "BaseDamage": 6,
+  "Toughness": 6,
+	"CanHoldOtherItems": false
+}

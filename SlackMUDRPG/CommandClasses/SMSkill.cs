@@ -157,8 +157,8 @@ namespace SlackMUDRPG.CommandClasses
 									{
 										smc.sendMessageToPlayer(smss.FailureOutput);
 										continueCycle = false;
-										smc.StopActivity();
 									}
+									smc.StopActivity();
 									break;
 								case "Information":
 									if (targetType == "Character")

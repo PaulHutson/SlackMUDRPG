@@ -3,12 +3,12 @@
     "SkillTypeName": "Production",
     "SkillTypeDescription": "Skills related to the production of items"
   },
-  "SkillName": "Carpentry",
+  "SkillName": "Blacksmithing",
 	"CanUseWithoutLearning":  true,
-  "SkillDescription": "The ability to craft things made of wood.",
-  "SkillLearnText": "You've learnt how to craft things from wood.",
-  "LevelIncreaseText":  "You feel you've gotten better at carpentry.",
-  "ActivityType":  "Carpentry",
+  "SkillDescription": "The ability to craft things made of metal.",
+  "SkillLearnText": "You've learnt how to craft things from metal.",
+  "LevelIncreaseText":  "You feel you've gotten better metalwork.",
+  "ActivityType":  "Forging",
   "BaseStat": "DEX",
   "LevelMultiplier": 10,
   "ImprovementSpeed": 10,
@@ -16,7 +16,12 @@
     {
       "IsSkill": false,
       "SkillStatName": "DEX",
-      "PreReqLevel": 6
+      "PreReqLevel": 8
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 10
     },
     {
       "IsSkill": false,
@@ -34,17 +39,25 @@
     },
     {
       "StepType": "EquippedObject",
-      "StepRequiredObject": "Family.Chisel",
+      "StepRequiredObject": "Family.Tongs",
       "RequiredObjectAmount": 1,
-      "FailureOutput": "You don't have a chisel equipped",
+      "FailureOutput": "You don't have any tongs equipped",
+      "SuccessOutput": null
+    },
+		{
+      "StepType": "CheckObjectInLocation",
+      "StepRequiredObject": "Family.Anvil",
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+      "FailureOutput": "There is no anvil here",
       "SuccessOutput": null
     },
     {
       "StepType": "CheckReceipe",
       "StepRequiredObject": null,
 			"RequiredObjectAmount": 1,
-			"ExtraData": "Trait.Carpentry",
-      "FailureOutput": "The item you're trying to make is not something you use carpentry for.",
+			"ExtraData": "Trait.BlackSmithing",
+      "FailureOutput": "The item you're trying to make is not something you use blacksmithing for.",
       "SuccessOutput": null
     },
     {

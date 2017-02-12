@@ -131,7 +131,7 @@
     <Content Include="JSON\Skills\Skill.Dodge.json" />
     <Content Include="JSON\Skills\Skill.Parry.json" />
     <Content Include="JSON\Skills\Skill.Chop.json" />
-    <Content Include="JSON\Objects\Weapon.ShoddyAxe.json" />
+    <Content Include="JSON\Objects\Weapon.Axe.json" />
     <Content Include="JSON\Objects\Environment.YoungTree.json" />
     <Content Include="JSON\Objects\Resource.TreeTrunk.json" />
     <Content Include="JSON\Objects\Resource.Log.json" />
@@ -221,7 +221,7 @@
     <Content Include="JSON\Locations\LocRavensmere Boundary.Oldwood.Small Stream.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
-    <Content Include="JSON\Objects\Weapon.ShoddyKnife.json" />
+    <Content Include="JSON\Objects\Weapon.Knife.json" />
     <Content Include="JSON\Objects\Resource.Meat.json" />
     <Content Include="JSON\Objects\Resource.Skin.json" />
     <Content Include="JSON\Objects\Resource.Bones.json" />
@@ -240,6 +240,17 @@
     <Content Include="JSON\Receipe\Consumable.Arrow.json" />
     <Content Include="JSON\Skills\Skill.Whittling.json" />
     <Content Include="JSON\Receipe\Resource.Stick.json" />
+    <Content Include="JSON\Skills\Skill.BlackSmithing.json" />
+    <Content Include="JSON\Receipe\Weapons.Sword.json" />
+    <Content Include="JSON\Objects\Weapon.Sword.json" />
+    <Content Include="JSON\Objects\Weapons.BlacksmithHammer.json" />
+    <Content Include="JSON\Objects\Tools.Tongs.json" />
+    <Content Include="JSON\Objects\Tools.Anvil.json" />
+    <Content Include="JSON\Receipe\Weapons.Knife.json" />
+    <Content Include="JSON\Receipe\Tools.Tongs.json" />
+    <Content Include="JSON\Receipe\Weapons.BlacksmithHammer.json" />
+    <Content Include="JSON\Receipe\Resource.ArrowHead.json" />
+    <Content Include="JSON\Objects\Resource.ArrowHead.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
