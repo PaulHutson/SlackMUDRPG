@@ -21,14 +21,14 @@
 	"NPCSpawns": [
 		{
 			"TypeOfNPC": "YoungDeer",
-			"MaxNumber": 2,
+			"MaxNumber": 1,
 			"SpawnFrequency": 5,
 			"Unique": false
 		},
 		{
 			"TypeOfNPC": "BunnyRabbit",
 			"MaxNumber": 2,
-			"SpawnFrequency": 100,
+			"SpawnFrequency": 90,
 			"Unique": false
 		}
 	]
