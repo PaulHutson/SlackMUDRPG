@@ -89,7 +89,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		public string ResponseURL { get; set; }
 		public string ConnectionService { get; set; }
-
+		public string LastUsedCommand { get; set; }
 		public List<AwaitingResponseFromCharacter> NPCsWaitingForResponses { get; set; }
 
 		/// <summary>
@@ -169,6 +169,23 @@ namespace SlackMUDRPG.CommandClasses
 
 			smcs.Add(this);
 			HttpContext.Current.Application["SMCharacters"] = smcs;
+		}
+
+		/// <summary>
+		/// Gets the last command the character used (excludes login).
+		/// </summary>
+		/// <returns>Command string last used.</returns>
+		public string GetLastUsedCommand()
+		{
+			if (this.LastUsedCommand != null)
+			{
+				if (!this.LastUsedCommand.ToLower().Contains("login"))
+				{
+					return this.LastUsedCommand;
+				}
+			}
+
+			return null;
 		}
 
 		/// <summary>
