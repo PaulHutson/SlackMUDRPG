@@ -6,11 +6,11 @@
 <head runat="server">
     <title><asp:ContentPlaceHolder ID="ph_Title" runat="server"></asp:ContentPlaceHolder></title>
 	<link href="../Style/Site.css" rel="stylesheet" />
-	<script src="../scripts/JS.Cookie.js"></script>
+	<link href="../Content/bootstrap.min.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="ph_Header" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" class="form-horizontal">
 		<div>
 			I'm the header area
 		</div>
@@ -23,5 +23,8 @@
 			I'm the footer area
 		</div>
     </form>
+	<script src="../scripts/JS.Cookie.js"></script>
+	<script src="../scripts/jquery-1.9.1.min.js"></script>
+	<script src="../scripts/bootstrap.min.js"></script>
 </body>
 </html>
