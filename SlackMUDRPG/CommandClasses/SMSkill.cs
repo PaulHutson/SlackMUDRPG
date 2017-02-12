@@ -859,7 +859,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Get the item and check that there is enough of it...
 			string[] itemTypeSplit = smss.StepRequiredObject.Split('.');
-			if (smc.CountOwnedItems(itemTypeSplit[1]) > smss.RequiredObjectAmount)
+			if (smc.CountOwnedItems(itemTypeSplit[1]) >= smss.RequiredObjectAmount)
 			{
 				// Return true if they have enough of it.
 				return true;

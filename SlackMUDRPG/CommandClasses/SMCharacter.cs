@@ -759,6 +759,12 @@ namespace SlackMUDRPG.CommandClasses
 				// find any players with that target name first
 				SMCharacter targetCharacter = currentRoom.GetAllPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
 
+				// Check if it's an NPC they're targeting by "family" type name i.e. Goose for a Larger Goose.
+				if (targetCharacter == null)
+				{
+					targetCharacter = currentRoom.GetNPCs().FirstOrDefault(tc => tc.FamilyType.ToLower() == targetName.ToLower());
+				}
+
 				// If it's not null set the target details
 				if (targetCharacter != null)
 				{
