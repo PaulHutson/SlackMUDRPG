@@ -24,8 +24,8 @@
 			"ItemDescription": "A Practice Target used to practice shooting at.",
 			"ItemWeight": 2000,
 			"ItemSize": 20,
-			"HitPoints": 10000000000000,
-			"MaxHitPoints": 10000000000000,
+			"HitPoints": 1000000000,
+			"MaxHitPoints": 1000000000,
 			"BaseDamage": 0.1,
 			"Toughness": 5
 		},
