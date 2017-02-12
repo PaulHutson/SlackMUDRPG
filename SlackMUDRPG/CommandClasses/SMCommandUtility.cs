@@ -132,7 +132,7 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Updates the character running to the command with the details of the command run.
+		/// Updates the character running to the command with the details of the command run and when.
 		/// </summary>
 		private void UpdateLastRunCommand()
 		{
@@ -144,6 +144,7 @@ namespace SlackMUDRPG.CommandClasses
 				if (smc != null)
 				{
 					smc.LastUsedCommand = this.CmdHelper.userCmd;
+					smc.LastInteractionDate = DateTime.Now;
 					smc.SaveToApplication();
 				}
 			}
