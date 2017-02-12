@@ -6,19 +6,24 @@
 	<script type="text/javascript">
 		var ws;
 		var userid;
+		var protocol = "";
 		$(document).ready(function () {
+			if (location.protocol === 'https:') {
+				protocol = "s";
+			}
 			if (Cookies.get('ProvinceUserID') != null) {
 				console.log("Cookie:" + Cookies.get('ProvinceUserID'));
 				$("#PlayArea").show();
 				$("#LoginCreateCharacterForm").hide();
 				var baseurl = window.location.href;
 				var arr = baseurl.split("/");
-				var url = 'ws://' + arr[2] + '/Handlers/GameAccess.ashx?userID=' + Cookies.get('ProvinceUserID');
+				var url = 'ws' + protocol + '://' + arr[2] + '/Handlers/GameAccess.ashx?userID=' + Cookies.get('ProvinceUserID');
 				ws = new WebSocket(url);
 				ws.onopen = function () {
 					$('#messages').prepend('Connected <br/>');
 					$('#cmdSend').click(function () {
 						SendMessage();
+						ScrollToBottom();
 					});
 				};
 				ws.onmessage = function (e) {
@@ -27,15 +32,19 @@
 						$("#LoginCreateCharacterForm").show();
 					}
 					$('#OutputWindow').append(e.data + '<br/>');
+					ScrollToBottom();
 				};
 				$('#cmdLeave').click(function () {
 					ws.close();
+					ScrollToBottom();
 				});
 				ws.onclose = function () {
 					$('#OutputWindow').append('Closed <br/>');
+					ScrollToBottom();
 				};
 				ws.onerror = function (e) {
 					$('#OutputWindow').append('Oops something went wront <br/>');
+					ScrollToBottom();
 				};
 			} else {
 				// Show the login / char creation form
@@ -55,6 +64,11 @@
 				return false;
 			};
 		});
+
+		function ScrollToBottom() {
+			var ta = document.getElementById('OutputWindow');
+			ta.scrollTop = ta.scrollHeight;
+		};
 	</script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ph_MainContent" runat="server">

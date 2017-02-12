@@ -131,6 +131,23 @@
   "CharacterWeight": 50,
   "CharacterSize": 160,
   "ResponseURL": null,
-  "ConnectionService": null,
-  "NPCsWaitingForResponses": null
+  "ConnectionService": "WS",
+  "NPCsWaitingForResponses": [
+    {
+      "NPCID": "WearyTraveller1",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        },
+        {
+          "ShortCutToken": "I"
+        }
+      ],
+      "RoomID": "Ravensmere.Harbour South.Landing Area",
+      "TimeOut": 1486919057
+    }
+  ]
 }
