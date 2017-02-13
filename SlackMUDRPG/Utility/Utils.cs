@@ -20,7 +20,20 @@ namespace SlackMUDRPG.Utility
 		/// <param name="paramName">Parameter name.</param>
 		public static string GetQueryParam(string paramName)
 		{
-			return HttpContext.Current.Request.Form[paramName] ?? HttpContext.Current.Request.QueryString[paramName] ?? "";
+			string formParam = null;
+			if (HttpContext.Current.Request.Form[paramName] != null)
+			{
+				formParam = HttpContext.Current.Request.Form[paramName];
+			}
+
+			string queryParam = null;
+			if (HttpContext.Current.Request.QueryString[paramName] != null)
+			{
+				queryParam = HttpContext.Current.Request.QueryString[paramName];
+			}
+
+
+			return formParam ?? queryParam ?? "";
 		}
 
 		#endregion
