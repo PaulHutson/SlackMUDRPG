@@ -2155,11 +2155,14 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			string roomId = this.GetRoom().RoomID;
 
-			List<AwaitingResponseFromCharacter> awaitingResponses = this.NPCsWaitingForResponses.FindAll(resp => resp.RoomID == roomId);
-
-			if (awaitingResponses != null && awaitingResponses.Any())
+			if (this.NPCsWaitingForResponses != null)
 			{
-				return awaitingResponses;
+				List<AwaitingResponseFromCharacter> awaitingResponses = this.NPCsWaitingForResponses.FindAll(resp => resp.RoomID == roomId);
+
+				if (awaitingResponses != null && awaitingResponses.Any())
+				{
+					return awaitingResponses;
+				}
 			}
 
 			return null;
