@@ -1,0 +1,176 @@
+{
+  "firstname": "Rob",
+  "lastname": "Curran2",
+  "description": null,
+  "notes": null,
+  "lastinteractiondate": "2016-12-31T15:49:35.3550031+00:00",
+  "lastlogindate": "2016-12-31T15:49:35.3550031+00:00",
+  "age": 10,
+  "sex": "f",
+  "PKFlag": false,
+  "UserID": "default-user",
+  "RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Upstairs Rooms",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 10,
+    "hp": 55,
+    "maxhp": 10,
+    "SocialStanding": 8
+  },
+  "Skills": [
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 20
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 20
+    }
+  ],
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "Container"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RigthFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "CharacterWeight": 50,
+  "CharacterSize": 160,
+  "ResponseURL": null,
+  "NPCsWaitingForResponses": [
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1485889399
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1485889429
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1485889576
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1485889593
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1485890090
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1485890108
+    },
+    {
+      "NPCID": "PodgyClerk",
+      "ShortCutTokens": [
+        {
+          "ShortCutToken": "Y"
+        },
+        {
+          "ShortCutToken": "N"
+        }
+      ],
+      "TimeOut": 1485978227
+    }
+  ]
+}

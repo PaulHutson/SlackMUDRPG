@@ -1,3 +1,4 @@
+using SlackMUDRPG.BotFramework;
 using SlackMUDRPG.Handlers;
 using System;
 using System.Collections.Generic;
@@ -72,6 +73,14 @@ namespace SlackMUDRPG.CommandClasses
 				else if (serviceType.ToLower() == "ws")
 				{
 					SlackMUDRPG.Global.wsClients.SingleOrDefault(r => ((GameAccessWebSocketHandler)r).userID == channelOrPersonTo).Send(messageContent);
+				}
+				else if (serviceType.ToLower() == "bc")
+				{
+					BotClient bc = Global.botClients.FirstOrDefault(bot => bot.UserID == channelOrPersonTo);
+					if (bc != null)
+					{
+						BotClientUtility.SendMessage(bc, messageContent);
+					}
 				}
 			}
 		}

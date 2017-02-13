@@ -10,12 +10,16 @@ using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
 using System.Threading;
 using Microsoft.Web.WebSockets;
+using SlackMUDRPG.BotFramework;
+using System.Web.Http;
+using Microsoft.Bot.Connector;
 
 namespace SlackMUDRPG
 {
 	public class Global : System.Web.HttpApplication
 	{
 		public static WebSocketCollection wsClients = new WebSocketCollection();
+		public static List<BotClient> botClients = new List<BotClient>();
 
 		protected void Application_Start(object sender, EventArgs e)
 		{
@@ -160,6 +164,8 @@ namespace SlackMUDRPG
 
 			#endregion
 
+			// Register the global configuration items for the bot helper
+			GlobalConfiguration.Configure(WebAPIConfig.Register);
 		}
 
 		protected void Session_Start(object sender, EventArgs e)
