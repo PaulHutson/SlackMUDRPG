@@ -35,21 +35,16 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns>Empyt string if the command was passed off to a new thread, otherwise an error meesage.</returns>
 		public string InitateCommand(string commandText)
 		{
-			// Replay the last used command if the command text is a !
-			if (commandText == "!")
+			if (commandText.ToLower() != "login")
 			{
-				SMCharacter smc = new SlackMud().GetCharacter(this.UserID);
-
-				if (smc != null)
+				// Replay the last used command if the command text is a !
+				if (commandText == "!")
 				{
-					string previousCommand = smc.GetLastUsedCommand();
-					if (previousCommand != null)
-					{
-						return new SMCommandUtility(this.UserID).InitateCommand(previousCommand);
-					}
-
-					return this.GetCommandNotFoundMsg(commandText);
+					return this.HandleRepeats();
 				}
+
+				// Process the commandText to check short codes for NPC responses or movement
+				commandText = this.ProcessShortCodes(commandText);
 			}
 
 			// Instantiate a new command helper.
@@ -84,7 +79,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			if (command == "!")
 			{
-				return "Unable to replay the last command, no command history found!";
+				return "Unable to replay the last command, yout command history is empty!";
 			}
 
 			if (command != null)
@@ -148,6 +143,130 @@ namespace SlackMUDRPG.CommandClasses
 					smc.SaveToApplication();
 				}
 			}
+		}
+
+		/// <summary>
+		/// Repeats to last command used or returns an error message.
+		/// </summary>
+		/// <returns>Empty string if the previous command is successfully handed of to a new thread otherwise an error message.</returns>
+		private string HandleRepeats()
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(this.UserID);
+
+			if (smc != null)
+			{
+				string previousCommand = smc.GetLastUsedCommand();
+				if (previousCommand != null)
+				{
+					return new SMCommandUtility(this.UserID).InitateCommand(previousCommand);
+				}
+			}
+
+			return this.GetCommandNotFoundMsg("!");
+		}
+
+		/// <summary>
+		/// Processes the commandText checking if a short code has been given and either returning the original or the formated shortcode for processing.
+		/// </summary>
+		/// <param name="commandText">User enteted command text.</param>
+		/// <returns>A string representing to command for standard command processing.</returns>
+		private string ProcessShortCodes(string commandText)
+		{
+			string command;
+
+			// First check if the command is an NPC Response
+			command = this.CheckNPCResponses(commandText);
+
+			if (command != null)
+			{
+				return command;
+			}
+
+			// Second check in the command is an exit shortcut
+			command = this.CheckRoomExitCodes(commandText);
+
+			if (command != null)
+			{
+				return command;
+			}
+
+			// Otherwise return orignal command for standard processing
+			return commandText;
+		}
+
+		/// <summary>
+		/// Checks if the given commandText matched a NPC interaction awaiting response.
+		/// If there is a match the correctly formatted command is returned, else null is.
+		/// </summary>
+		/// <param name="commandText">User entered command.</param>
+		/// <returns>Formatted command for procesing or null.</returns>
+		private string CheckNPCResponses(string commandText)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(this.UserID);
+
+			if (smc == null)
+			{
+				return null;
+			}
+
+			// Get a list of awaiting responses for the characters current room
+			List<AwaitingResponseFromCharacter> npcResponses = smc.GetAwaitingResponsesForRoom();
+
+			if (npcResponses != null)
+			{
+				foreach (AwaitingResponseFromCharacter response in npcResponses)
+				{
+					// Check the resonse has not expored
+					if (Utils.GetUnixTime() <= response.TimeOut)
+					{
+						// Loop around the shortcut tokens looking for a match
+						foreach (ShortcutToken token in response.ShortCutTokens)
+						{
+							if (token.ShortCutToken.ToLower() == commandText.ToLower())
+							{
+								return $"resp {token.ShortCutToken}";
+							}
+						}
+					}
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Checks if the given commandText matched an exit in the current room.
+		/// If there is a match the correctly formatted command is returned, else null is.
+		/// </summary>
+		/// <param name="commandText">User entered command.</param>
+		/// <returns>Formatted command for procesing or null.</returns>
+		private string CheckRoomExitCodes(string commandText)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(this.UserID);
+
+			if (smc == null)
+			{
+				return null;
+			}
+
+			// Get a list of all exits.
+			List<SMExit> exits = smc.GetRoom().RoomExits;
+
+			if (exits == null || !exits.Any())
+			{
+				return null;
+			}
+
+			// Loop through the exits comparing the commandText to the shortcut.
+			foreach (SMExit exit in exits)
+			{
+				if (exit.Shortcut.ToLower() == commandText.ToLower())
+				{
+					return $"move {exit.Shortcut}";
+				}
+			}
+
+			return null;
 		}
 	}
 }
