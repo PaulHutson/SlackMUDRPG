@@ -42,6 +42,9 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					return this.HandleRepeats();
 				}
+
+				// Process the commandText to check short codes for NPC responses or movement
+				commandText = this.ProcessShortCodes(commandText);
 			}
 
 			// Instantiate a new command helper.
@@ -160,6 +163,67 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return this.GetCommandNotFoundMsg("!");
+		}
+
+		/// <summary>
+		/// Processes the commandText checking if a short code has been given and either returning the original or the formated shortcode for processing.
+		/// </summary>
+		/// <param name="commandText">User enteted command text.</param>
+		/// <returns>A string representing to command for standard command processing.</returns>
+		private string ProcessShortCodes(string commandText)
+		{
+			string command;
+
+			// First check if the command is an NPC Response
+			command = this.CheckNPCResponses(commandText);
+
+			if (command != null)
+			{
+				return command;
+			}
+
+			// Otherwise return orignal command for standard processing
+			return commandText;
+		}
+
+		/// <summary>
+		/// Checks if the given commandText matched a NPC interaction awaiting response.
+		/// If there is a match the correctly formatted command is returned, else the original command is.
+		/// </summary>
+		/// <param name="commandText">User entered command.</param>
+		/// <returns>Formatted command for procesing.</returns>
+		private string CheckNPCResponses(string commandText)
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(this.UserID);
+
+			if (smc == null)
+			{
+				return null;
+			}
+
+			// Get a list of awaiting responses for the characters current room
+			List<AwaitingResponseFromCharacter> npcResponses = smc.GetAwaitingResponsesForRoom();
+
+			if (npcResponses != null)
+			{
+				foreach (AwaitingResponseFromCharacter response in npcResponses)
+				{
+					// Check the resonse has not expored
+					if (Utils.GetUnixTime() <= response.TimeOut)
+					{
+						// Loop around the shortcut tokens looking for a match
+						foreach (ShortcutToken token in response.ShortCutTokens)
+						{
+							if (token.ShortCutToken.ToLower() == commandText.ToLower())
+							{
+								return $"resp {token.ShortCutToken}";
+							}
+						}
+					}
+				}
+			}
+
+			return commandText;
 		}
 	}
 }
