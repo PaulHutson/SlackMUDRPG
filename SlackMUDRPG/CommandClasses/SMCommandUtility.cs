@@ -35,20 +35,12 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns>Empyt string if the command was passed off to a new thread, otherwise an error meesage.</returns>
 		public string InitateCommand(string commandText)
 		{
-			// Replay the last used command if the command text is a !
-			if (commandText == "!")
+			if (commandText.ToLower() != "login")
 			{
-				SMCharacter smc = new SlackMud().GetCharacter(this.UserID);
-
-				if (smc != null)
+				// Replay the last used command if the command text is a !
+				if (commandText == "!")
 				{
-					string previousCommand = smc.GetLastUsedCommand();
-					if (previousCommand != null)
-					{
-						return new SMCommandUtility(this.UserID).InitateCommand(previousCommand);
-					}
-
-					return this.GetCommandNotFoundMsg(commandText);
+					return this.HandleRepeats();
 				}
 			}
 
@@ -84,7 +76,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			if (command == "!")
 			{
-				return "Unable to replay the last command, no command history found!";
+				return "Unable to replay the last command, yout command history is empty!";
 			}
 
 			if (command != null)
@@ -148,6 +140,26 @@ namespace SlackMUDRPG.CommandClasses
 					smc.SaveToApplication();
 				}
 			}
+		}
+
+		/// <summary>
+		/// Repeats to last command used or returns an error message.
+		/// </summary>
+		/// <returns>Empty string if the previous command is successfully handed of to a new thread otherwise an error message.</returns>
+		private string HandleRepeats()
+		{
+			SMCharacter smc = new SlackMud().GetCharacter(this.UserID);
+
+			if (smc != null)
+			{
+				string previousCommand = smc.GetLastUsedCommand();
+				if (previousCommand != null)
+				{
+					return new SMCommandUtility(this.UserID).InitateCommand(previousCommand);
+				}
+			}
+
+			return this.GetCommandNotFoundMsg("!");
 		}
 	}
 }
