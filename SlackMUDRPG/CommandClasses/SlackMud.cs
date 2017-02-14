@@ -269,9 +269,15 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.PKFlag = false;
 				SMChar.Sex = char.Parse(sexIn);
 				SMChar.Age = int.Parse(age);
-				SMChar.Username = userName;
-				SMChar.Password = Utility.Crypto.EncryptStringAES(password,"ProvinceMud");
-
+				if (userName != null)
+				{
+					SMChar.Username = userName;
+				}
+				if (password != null)
+				{
+					SMChar.Password = Utility.Crypto.EncryptStringAES(password, "ProvinceMud");
+				}
+				
 				// Add default attributes to the character
 				SMChar.Attributes = CreateBaseAttributesFromJson("Attribute." + characterType);
 
@@ -279,9 +285,6 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.Slots = CreateSlotsFromJSON("Slots." + characterType);
 
 				// Add default items to the character
-				SMSlot rightHand = SMChar.GetSlotByName("RightHand");
-				rightHand.EquippedItem = SMItemFactory.Get("Weapon", "WoodenSword");
-
 				SMSlot back = SMChar.GetSlotByName("Back");
 				back.EquippedItem = SMItemFactory.Get("Container", "SmallBackpack");
 

@@ -44,8 +44,22 @@ namespace SlackMUDRPG.BotFramework
 					}
 					else if (loginResponse != "")
 					{
-						BotClientUtility.SendMessage(connectingClient, loginResponse);
-						new SMCommandUtility(this.userID).InitateCommand("look");
+						if (loginResponse.Substring(0, 27) == "You must create a character")
+						{
+							// Create the new character
+							new SlackMUDRPG.CommandClasses.SlackMud().CreateCharacter(this.userID, "New", "Arrival", "m", "20");
+
+							// Now log them in
+							new SlackMUDRPG.CommandClasses.SlackMud().Login(this.userID, false, null, "BC");
+
+							// Issue the look command
+							new SMCommandUtility(this.userID).InitateCommand("look");
+						}
+						else
+						{
+							BotClientUtility.SendMessage(connectingClient, loginResponse);
+							new SMCommandUtility(this.userID).InitateCommand("look");
+						}
 					};
 				}
 				else
