@@ -34,7 +34,7 @@
 		"CommandClass": "SlackMUDRPG.CommandClasses.SlackMud",
 		"CommandMethod": "CreateCharacter",
 		"PassCommandAsFirstArg": false,
-		"PassUserIDAsFirstArg": true,
+		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "createcharacter Paul,Hutson,m,36",
 		"RequiredSkill": null
 	},
