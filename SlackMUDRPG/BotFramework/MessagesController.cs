@@ -25,13 +25,15 @@ namespace SlackMUDRPG.BotFramework
 		{
 			if (activity.Type == ActivityTypes.Message)
 			{
-				BotClient connectingClient = Global.botClients.FirstOrDefault(bc => ((bc.BotURL == activity.ServiceUrl) && (bc.UserID == activity.From.Id)));
-				this.userID = activity.From.Id;
+                this.userID = activity.From.Id;
 
-				if (this.userID.Contains(':'))
-				{
-					this.userID = this.userID.Replace(':', '-');
-				}
+                if (this.userID.Contains(':'))
+                {
+                    this.userID = this.userID.Replace(':', '-');
+                }
+
+                BotClient connectingClient = Global.botClients.FirstOrDefault(bc => ((bc.BotURL == activity.ServiceUrl) && (bc.UserID == this.userID)));
+				
 
 				if (connectingClient == null)
 				{
