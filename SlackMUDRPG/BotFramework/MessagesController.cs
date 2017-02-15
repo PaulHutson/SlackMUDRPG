@@ -36,7 +36,7 @@ namespace SlackMUDRPG.BotFramework
 				if (connectingClient == null)
 				{
 					connectingClient = new BotClient();
-					connectingClient.UserID = activity.From.Id;
+					connectingClient.UserID = this.userID;
 					connectingClient.UserName = activity.From.Name;
 					connectingClient.BotURL = activity.ServiceUrl;
 					connectingClient.ConversationAccount = activity.Conversation;
