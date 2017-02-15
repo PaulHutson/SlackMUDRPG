@@ -281,7 +281,6 @@
     <Content Include="JSON\NPCs\Goose.json" />
     <Content Include="JSON\Locations\LocRavensmere Boundary.Oldwood.Small Stream.json" />
     <Content Include="JSON\Objects\Consumable.HuntingArrow.json" />
-    <Content Include="JSON\Characters\Chardefault-user.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />

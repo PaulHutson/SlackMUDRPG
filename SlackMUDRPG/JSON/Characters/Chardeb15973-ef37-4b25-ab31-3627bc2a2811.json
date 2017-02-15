@@ -1,0 +1,115 @@
+{
+  "firstname": "a",
+  "lastname": "a",
+  "lastinteractiondate": "2017-02-13T18:13:16.4865424+00:00",
+  "lastlogindate": "2017-02-13T18:13:16.4865424+00:00",
+  "age": 18,
+  "sex": "M",
+  "pkFlag": false,
+  "userID": "deb15973-ef37-4b25-ab31-3627bc2a2811",
+  "username": "a",
+  "password": "EAAAAM6IohdoOX5h5mIxx9jbZfVcybXcV5TVLQ45pWrNOI/5",
+  "roomID": "Ravensmere.Harbour South.Landing Area",
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ],
+      "equippedItem": {
+        "itemID": "29da9cdd-091c-4253-b1cc-4fa0658c281a",
+        "singularPronoun": "a",
+        "itemName": "Wooden Sword",
+        "pluralName": "Wooden Swords",
+        "pluralPronoun": "some",
+        "itemType": "Weapon",
+        "itemFamily": "Sword",
+        "itemDescription": "This wooden sword won't do much damage, but it's a start.",
+        "itemWeight": 2,
+        "itemCapacity": 0,
+        "itemSize": 2,
+        "hitPoints": 25,
+        "maxHitPoints": 25,
+        "baseDamage": 2.0,
+        "toughness": 3,
+        "requiredSkills": [
+          {
+            "skillName": "Sword Use",
+            "skillLevel": "1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "f08b3a0c-fde7-4900-8a8f-296a3bc37fa4",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RigthFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "characterWeight": 50,
+  "characterSize": 160
+}
