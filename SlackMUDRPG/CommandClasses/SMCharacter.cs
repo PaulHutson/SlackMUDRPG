@@ -2371,10 +2371,50 @@ namespace SlackMUDRPG.CommandClasses
 			int currentTime = Utility.Utils.GetUnixTime();
 			if (this.QuestLog != null)
 			{
-				this.QuestLog.RemoveAll(quest => quest.Expires < currentTime);
+				this.QuestLog.RemoveAll(quest => (quest.Expires < currentTime) && (quest.Expires != 0));
 				this.SaveToApplication();
 				this.SaveToFile();
 			}
+		}
+
+		public void GetQuestLog(bool getCompleted = false)
+		{
+			// Prepare the quest log string:
+			string questLogResponse = "";
+
+			if (this.QuestLog != null)
+			{
+				questLogResponse = OutputFormatterFactory.Get().Bold("Quest log:");
+
+				List<SMQuestStatus> questStatusList = this.QuestLog;
+				IOrderedEnumerable<SMQuestStatus> statusList = questStatusList.OrderBy(qs => qs.Completed);
+				
+				foreach (SMQuestStatus smq in statusList)
+				{
+					if ((smq.Completed != true) || (getCompleted))
+					{
+						questLogResponse += OutputFormatterFactory.Get().ListItem(OutputFormatterFactory.Get().Italic($"{smq.QuestName} - {smq.QuestStep}"), 0);
+					}
+				}
+			}
+			else
+			{
+				if (!getCompleted)
+				{
+					questLogResponse = OutputFormatterFactory.Get().Italic("You do not have any quests in progress.");
+				}
+				else
+				{
+					questLogResponse = OutputFormatterFactory.Get().Italic("You have not completed any quests yet.");
+				}
+			}
+
+			this.sendMessageToPlayer(questLogResponse);
+		}
+
+		public void GetQuestLogHistory()
+		{
+			GetQuestLog(true);
 		}
 
 		#endregion

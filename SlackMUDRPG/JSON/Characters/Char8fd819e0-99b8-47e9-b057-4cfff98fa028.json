@@ -1,8 +1,8 @@
 {
   "firstname": "a",
   "lastname": "a",
-  "lastinteractiondate": "2017-02-18T15:12:21.8395045+00:00",
-  "lastlogindate": "2017-02-18T15:12:14.2370694+00:00",
+  "lastinteractiondate": "2017-02-18T15:41:10.8529538+00:00",
+  "lastlogindate": "2017-02-18T15:46:47.6240152+00:00",
   "age": 18,
   "sex": "M",
   "pkFlag": false,
@@ -10,7 +10,29 @@
   "username": "aa",
   "password": "EAAAAOKOe6LND7SgbFe+MTFljDS0GPvR2KLpmDlMa1qq6yD/",
   "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
-  "questLog": [],
+  "questLog": [
+    {
+      "questName": "The Art Of Tanningaadadad",
+      "questStep": "Take a skin to Felhirst",
+      "lastDateUpdated": 1487432486,
+      "expires": 0,
+      "completed": false
+    },
+    {
+      "questName": "The Art Of Tanning",
+      "questStep": "Take a skin to Felhirst",
+      "lastDateUpdated": 1487432486,
+      "expires": 0,
+      "completed": false
+    },
+    {
+      "questName": "An odd encounter",
+      "questStep": "Bring the queen a cup of tea",
+      "lastDateUpdated": 1487432486,
+      "expires": 0,
+      "completed": true
+    }
+  ],
   "attributes": {
     "str": 10,
     "int": 10,
@@ -147,6 +169,40 @@
             "maxHitPoints": 50,
             "baseDamage": 1.0,
             "toughness": 3
+          },
+          {
+            "itemID": "bd541f07-c9e5-4a7a-b556-fc74d0f2adf7",
+            "singularPronoun": "a",
+            "itemName": "Skinning Knife",
+            "pluralName": "Skinning Knives",
+            "pluralPronoun": "some",
+            "itemType": "Weapon",
+            "itemFamily": "Skinning Knife",
+            "itemDescription": "A skinning knife",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 50,
+            "maxHitPoints": 50,
+            "baseDamage": 1.0,
+            "toughness": 3
+          },
+          {
+            "itemID": "ee769157-926a-4537-a427-f312bc1840e9",
+            "singularPronoun": "a",
+            "itemName": "Skinning Knife",
+            "pluralName": "Skinning Knives",
+            "pluralPronoun": "some",
+            "itemType": "Weapon",
+            "itemFamily": "Skinning Knife",
+            "itemDescription": "A skinning knife",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 50,
+            "maxHitPoints": 50,
+            "baseDamage": 1.0,
+            "toughness": 3
           }
         ]
       }
@@ -184,7 +240,7 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move FT",
+  "lastUsedCommand": "resp LTT",
   "npCsWaitingForResponses": [
     {
       "npcid": "DerickFelhirst",
@@ -197,7 +253,98 @@
         }
       ],
       "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
-      "timeOut": 1487431742
+      "timeOut": 1487433177
+    },
+    {
+      "npcid": "DerickFelhirst",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "LTT"
+        },
+        {
+          "shortCutToken": "BL"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+      "timeOut": 1487433349
+    },
+    {
+      "npcid": "DerickFelhirst",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "LTT"
+        },
+        {
+          "shortCutToken": "BL"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+      "timeOut": 1487433383
+    },
+    {
+      "npcid": "DerickFelhirst",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "LTT"
+        },
+        {
+          "shortCutToken": "BL"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+      "timeOut": 1487433469
+    },
+    {
+      "npcid": "DerickFelhirst",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Sk"
+        },
+        {
+          "shortCutToken": "BL"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+      "timeOut": 1487433501
+    },
+    {
+      "npcid": "DerickFelhirst",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Sk"
+        },
+        {
+          "shortCutToken": "BL"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+      "timeOut": 1487433607
+    },
+    {
+      "npcid": "DerickFelhirst",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Sk"
+        },
+        {
+          "shortCutToken": "BL"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+      "timeOut": 1487433715
+    },
+    {
+      "npcid": "DerickFelhirst",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Sk"
+        },
+        {
+          "shortCutToken": "BL"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+      "timeOut": 1487433808
     }
   ]
 }
