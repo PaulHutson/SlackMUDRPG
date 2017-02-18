@@ -128,5 +128,31 @@
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "read sign",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Character",
+		"CommandName": "questlog, qlog",
+		"CommandDescription": "Returns a list of all quests in progress.",
+		"CommandSyntax": "{name|lower}",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "GetQuestLog",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Character",
+		"CommandName": "questlogall, qlogall",
+		"CommandDescription": "Returns a list of all quests in progress or completed.",
+		"CommandSyntax": "{name|lower}",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "GetQuestLogHistory",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
 	}
 ]

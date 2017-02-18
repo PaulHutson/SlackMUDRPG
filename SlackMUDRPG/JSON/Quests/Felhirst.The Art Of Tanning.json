@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "The Art Of Tanning",
+	"Prerequisites": null,
+	"Daily": false,
+	"QuestSteps": [
+		{
+			"Name": "Take a skin to Felhirst",
+			"Type": "Get",
+			"CharacterName": "Derick Felhirst",
+			"LocationID": "Ravensmere.Harbour South.Felhirsts Tannery",
+			"AdditionalData": "Family.Skin,1",
+			"Instructions": "Get a skin and return it to Felhirst"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Item",
+			"AdditionalData": "Resource.LeatherStrip,1"
+		}
+	]
+}

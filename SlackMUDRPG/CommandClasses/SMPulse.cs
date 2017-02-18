@@ -147,10 +147,10 @@ namespace SlackMUDRPG.CommandClasses
 					}
 				}
 			}
-			
+
 			// TODO Randonly decide whether the weather effect will change.
-
-
+			
+									
 			// Work out the end time
 			// If less than two minutes
 			// Let the thread sleep for the remainder of the time

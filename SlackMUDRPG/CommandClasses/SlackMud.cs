@@ -77,10 +77,14 @@ namespace SlackMUDRPG.CommandClasses
 						returnString += OutputFormatterFactory.Get().General("We've created your character in the magical world of Arrelvia!"); // TODO, use a welcome script!
 					}
 					returnString += GetLocationDetails(character.RoomID, character.UserID);
-                    
-                    // Return the text output
-                    character.sendMessageToPlayer(returnString);
 
+					// Clear old responses an quests from the character
+					character.ClearQuests();
+					character.ClearResponses();
+
+					// Return the text output
+					character.sendMessageToPlayer(returnString);
+					
                     // Walk the character in
                     SMRoom room = character.GetRoom();
                     if (room != null)

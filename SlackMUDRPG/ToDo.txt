@@ -108,11 +108,11 @@
 7) More Stuff
 	DONE- NPCs - basic talk system.
 	DONE- NPCs - more advanced action system.
-	- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)
+	DONE- Creatures (basic, they attack on enter or only attack when attacked, might flee from an area as well)
 	NPCs - Move by themselves
-	NPCs - Spawn 
-		- Random spawns
-		- Key character check
+	DONENPCs - Spawn 
+		DONE- Random spawns
+		DONE- Key character check
 		- Despawn by day time
 
 8) DONE- I wonder how to do a "pulse" type system to ensure that all the automated things happen.
@@ -124,6 +124,8 @@
 		- AI Creatures (movement)
 
 9) Implement Story element
+	- Get jobs from NPCS
+		- Quests implementation, allowing an NPC to give a player a job.
 	- Jobs system (get jobs from a notice board)
 		- Means we need a new notice board system, with a "LOOK AT" and/or "EXAMINE" command.
 	- Implement story arcs (locations you need to go to, get clues, clues generate if someone is on a quest on entry to the location / they can only see them themselves)

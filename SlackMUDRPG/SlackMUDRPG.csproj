@@ -279,6 +279,7 @@
     <Content Include="JSON\NPCs\Goose.json" />
     <Content Include="JSON\Locations\LocRavensmere Boundary.Oldwood.Small Stream.json" />
     <Content Include="JSON\Objects\Consumable.HuntingArrow.json" />
+    <Content Include="JSON\NPCs\Derick Felhirst.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -315,6 +316,8 @@
     <Content Include="JSON\Receipe\RangedWeapons.HuntingBow.json" />
     <Content Include="JSON\Objects\RangedWeapon.HuntingBow.json" />
     <Content Include="JSON\Skills\Skill.Knife.json" />
+    <Content Include="JSON\Quests\Felhirst.The Art Of Tanning.json" />
+    <Content Include="JSON\Objects\Weapon.SkinningKnife.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
     <Content Include="scripts\ai.1.0.7-build00691.min.js" />
@@ -370,6 +373,7 @@
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMNPC.cs" />
     <Compile Include="CommandClasses\SMPulse.cs" />
+    <Compile Include="CommandClasses\SMQuest.cs" />
     <Compile Include="CommandClasses\SMReceipe.cs" />
     <Compile Include="CommandClasses\SMRequiredSkill.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
