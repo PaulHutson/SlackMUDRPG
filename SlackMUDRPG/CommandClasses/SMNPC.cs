@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace SlackMUDRPG.CommandClasses
@@ -47,7 +48,7 @@ namespace SlackMUDRPG.CommandClasses
         // Used for in memory storing of responses requested from a character
         public List<SMNPCAwaitingCharacterResponse> AwaitingCharacterResponses { get; set; }
 
-        public void RespondToAction(string actionType, SMCharacter invokingCharacter)
+        public void RespondToAction(string actionType, SMCharacter invokingCharacter, SMItem itemIn = null)
         {
             // Get a list of characters that respond to this action type in the room
             List<NPCResponses> listToChooseFrom = NPCResponses.FindAll(npcr => npcr.ResponseType == actionType);
@@ -82,7 +83,7 @@ namespace SlackMUDRPG.CommandClasses
 							if (invokingCharacter != null)
 							{
 								// Process the response
-								ProcessResponse(npr, invokingCharacter);
+								ProcessResponse(npr, invokingCharacter, itemIn);
 							}
 
 							// Set that a response has been selected so we can drop out of the loop
@@ -93,7 +94,7 @@ namespace SlackMUDRPG.CommandClasses
             }
         }
 
-        private void ProcessResponse(NPCResponses npr, SMCharacter invokingCharacter)
+        private void ProcessResponse(NPCResponses npr, SMCharacter invokingCharacter, SMItem itemIn)
         {
             // Process each of the response steps
             foreach (NPCResponseStep NPCRS in npr.ResponseSteps)
@@ -126,7 +127,26 @@ namespace SlackMUDRPG.CommandClasses
 							
 							this.UseSkill(dataSplit[0], dataSplit[1]);
                             break;
-                    }
+						case "ItemCheck":
+							// Get the additional data
+							string[] itemType = npr.AdditionalData.Split('.');
+
+							if (itemType[0] == "Family")
+							{
+								if (itemIn.ItemFamily != itemType[1])
+								{
+									// Drop the item
+									this.GetRoom().AddItem(itemIn);
+									this.GetRoom().Announce(OutputFormatterFactory.Get().Italic($"\"{this.GetFullName()}\" dropped {itemIn.SingularPronoun} {itemIn.ItemName}."));
+								}
+								else
+								{
+									ProcessConversation(NPCRS, invokingCharacter);
+								}
+							}
+
+							break;
+					}
                 }
             }
         }
@@ -149,9 +169,10 @@ namespace SlackMUDRPG.CommandClasses
         private void ProcessConversationStep(NPCConversations npcc, string stepID, SMCharacter invokingCharacter)
         {
             NPCConversationStep npccs = npcc.ConversationSteps.FirstOrDefault(cs => cs.StepID == stepID);
+			bool continueToNextStep = true;
             if (npccs != null)
             {
-                switch (npccs.Scope) {
+                switch (npccs.Scope.ToLower()) {
                     case "choice":
                         string[] choices = npccs.AdditionalData.Split(',');
                         int choicesNumber = choices.Count();
@@ -192,71 +213,221 @@ namespace SlackMUDRPG.CommandClasses
 						// Simply attack a target player
 						this.Attack(invokingCharacter.GetFullName());
 						break;
+					case "giveitem":
+						// give an item to the player
+						string[] additionalDataSplit = npccs.AdditionalData.Split(',');
+						string[] itemParts = additionalDataSplit[0].Split('.');
+
+						// Create the item..
+						if (itemParts.Count() == 2)
+						{
+							int numberToCreate = int.Parse(additionalDataSplit[1]);
+
+							// Create the right number of the items.
+							while (numberToCreate > 0)
+							{
+								// Get the item (with a new GUID)
+								SMItem itemBeingGiven = SMItemFactory.Get(itemParts[0], itemParts[1]);
+
+								// Pass it to the player
+								invokingCharacter.PickUpItem("", itemBeingGiven, true);
+
+								// Reduce the number to create
+								numberToCreate--;
+							}
+						}
+						break;
+					case "addquest":
+						// Load the quest
+						SMQuest smq = SMQuestFactory.Get(npccs.AdditionalData);
+						if (smq != null)
+						{
+							invokingCharacter.AddQuest(smq);
+						}
+						break;
+					case "updatequest":
+						// Load the quest
+						SMQuest qtu = SMQuestFactory.Get(npccs.AdditionalData);
+						if (qtu != null)
+						{
+							invokingCharacter.UpdateQuest(qtu);
+						}
+						break;
+					case "checkquestinprogress":
+						// Check the quest log isn't null
+						if (invokingCharacter.QuestLog != null)
+						{
+							if (invokingCharacter.QuestLog.Count(questcheck => (questcheck.QuestName.ToLower() == npccs.AdditionalData.ToLower()) && (questcheck.Completed)) > 0)
+							{
+								continueToNextStep = false;
+							}
+						}
+						break;
+					case "teachskill":
+						// Check if the player already has the skill
+						if (invokingCharacter.Skills == null)
+						{
+							invokingCharacter.Skills = new List<SMSkillHeld>();
+						}
+
+						// Get the skill and level to teach to
+						string[] skillToTeach = npccs.AdditionalData.Split('.');
+
+						// Check if the character already has the skill
+						if (invokingCharacter.Skills.Count(skill => skill.SkillName == skillToTeach[0]) == 0)
+						{
+							// Create a new skill help object
+							SMSkillHeld smsh = new SMSkillHeld();
+							smsh.SkillName = skillToTeach[0];
+							smsh.SkillLevel = int.Parse(skillToTeach[1]);
+
+							// Finally add it to the player
+							invokingCharacter.Skills.Add(smsh);
+
+							// Save the player
+							invokingCharacter.SaveToApplication();
+							invokingCharacter.SaveToFile();
+
+							// Inform the player they have learnt a new skill
+							invokingCharacter.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"You learn a new skill: {smsh.SkillName}({smsh.SkillLevel})."));
+						}
+						
+						break;
 					case "wait":
                         System.Threading.Thread.Sleep(int.Parse(npccs.AdditionalData) * 1000);
                         break;
                 }
 
-				if (npccs.ResponseOptions != null)
+				if (continueToNextStep)
 				{
-					if (npccs.ResponseOptions.Count > 0)
+					if (npccs.ResponseOptions != null)
 					{
-						ProcessResponseOptions(npcc, npccs, invokingCharacter);
+						if (npccs.ResponseOptions.Count > 0)
+						{
+							ProcessResponseOptions(npcc, npccs, invokingCharacter);
+						}
 					}
-				}
 
-				if (npccs.NextStep != null)
-				{
-					string[] splitNextStep = npccs.NextStep.Split('.');
-					if (splitNextStep[1] != "0")
+					if (npccs.NextStep != null)
 					{
-						System.Threading.Thread.Sleep(int.Parse(splitNextStep[1]) * 1000);
+						string[] splitNextStep = npccs.NextStep.Split('.');
+						if (splitNextStep[1] != "0")
+						{
+							System.Threading.Thread.Sleep(int.Parse(splitNextStep[1]) * 1000);
+						}
+						ProcessConversationStep(npcc, splitNextStep[0], invokingCharacter);
 					}
-					ProcessConversationStep(npcc, splitNextStep[0], invokingCharacter);
 				}
             }
         }
 
+		/// <summary>
+		/// Process the response options for an action.
+		/// </summary>
+		/// <param name="npcc">The conversation that is taking place</param>
+		/// <param name="npccs">The step in the conversation</param>
+		/// <param name="invokingCharacter">The invoking character</param>
         private void ProcessResponseOptions(NPCConversations npcc, NPCConversationStep npccs, SMCharacter invokingCharacter)
         {
+			// Set the response option variables up
             string responseOptions = OutputFormatterFactory.Get().Bold(this.GetFullName() + " Responses:") + OutputFormatterFactory.Get().NewLine;
+			bool thereIsAnOption = false;
 			List<ShortcutToken> stl = new List<ShortcutToken>();
 
+			// Loop around the options building up the various parts
 			foreach (NPCConversationStepResponseOptions npcccsro in npccs.ResponseOptions)
             {
-                responseOptions += OutputFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " (" + npcccsro.ResponseOptionShortcut + ")");
-				ShortcutToken st = new ShortcutToken();
-				st.ShortCutToken = npcccsro.ResponseOptionShortcut;
-				stl.Add(st);
+				// Variable to hold whether the response can be added - it may not be allowed due to some prereqs..
+				bool canAddResponse = true;
+
+				// Check if there is a prereq...
+				if (npcccsro.PreRequisites != null)
+				{
+					// get the quests for use later
+					List<SMQuestStatus> smqs = new List<SMQuestStatus>();
+					if (invokingCharacter.QuestLog != null)
+					{
+						smqs = invokingCharacter.QuestLog;
+					}
+
+					// .. if there is, loop around them.
+					foreach (NPCConversationStepResponseOptionsPreRequisites prereq in npcccsro.PreRequisites)
+					{
+						switch (prereq.Type) {
+							case "HasDoneQuest":
+								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (quest.Completed)) == 0)
+								{
+									canAddResponse = false;
+								}
+								break;
+							case "InProgressQuest":
+								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (!quest.Completed)) == 0)
+								{
+									canAddResponse = false;
+								}
+								break;
+							case "HasNotDoneQuest":
+								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData)) != 0)
+								{
+									canAddResponse = false;
+								}
+								break;
+							case "IsNotInProgressQuest":
+								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (!quest.Completed)) != 0)
+								{
+									canAddResponse = false;
+								}
+								break;
+						}
+					}
+				}
+
+				// Check that the response can be added
+				if (canAddResponse)
+				{
+					responseOptions += OutputFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " (" + npcccsro.ResponseOptionShortcut + ")");
+					ShortcutToken st = new ShortcutToken();
+					st.ShortCutToken = npcccsro.ResponseOptionShortcut;
+					stl.Add(st);
+					thereIsAnOption = true;
+				}
 			}
 
-            if (this.AwaitingCharacterResponses == null)
-            {
-                this.AwaitingCharacterResponses = new List<SMNPCAwaitingCharacterResponse>();
-            }
+			// If an option has been set..
+			if (thereIsAnOption)
+			{
+				// Set up a list to hold them in the character (if there isn't one already)
+				if (this.AwaitingCharacterResponses == null)
+				{
+					this.AwaitingCharacterResponses = new List<SMNPCAwaitingCharacterResponse>();
+				}
 			
-            SMNPCAwaitingCharacterResponse acr = new SMNPCAwaitingCharacterResponse();
-			acr.ConversationID = npcc.ConversationID;
-            acr.ConversationStep = npccs.StepID;
-            acr.WaitingForCharacter = invokingCharacter;
-			acr.RoomID = this.RoomID;
+				// Create the awaiting response token.
+				SMNPCAwaitingCharacterResponse acr = new SMNPCAwaitingCharacterResponse();
+				acr.ConversationID = npcc.ConversationID;
+				acr.ConversationStep = npccs.StepID;
+				acr.WaitingForCharacter = invokingCharacter;
+				acr.RoomID = this.RoomID;
 
-            string nextStepAfterTimeout = null;
-            int timeout = 1000;
-            if (npccs.NextStep != null)
-            {
-                string[] getNextStep = npccs.NextStep.Split('.');
-                nextStepAfterTimeout = getNextStep[0];
-                timeout = int.Parse(getNextStep[1]);
-            }
+				// Work out the timeout conversation if there is one.
+				string nextStepAfterTimeout = null;
+				int timeout = 1000;
+				if (npccs.NextStep != null)
+				{
+					string[] getNextStep = npccs.NextStep.Split('.');
+					nextStepAfterTimeout = getNextStep[0];
+					timeout = int.Parse(getNextStep[1]);
+				}
             
-            acr.ConversationStepAfterTimeout = nextStepAfterTimeout;
-            acr.UnixTimeStampTimeout = Utility.Utils.GetUnixTimeOffset(timeout);
+				// Set the conversation timeout
+				acr.ConversationStepAfterTimeout = nextStepAfterTimeout;
+				acr.UnixTimeStampTimeout = Utility.Utils.GetUnixTimeOffset(timeout);
 
-            this.AwaitingCharacterResponses.Add(acr);
-
-			invokingCharacter.SetAwaitingResponse(this.UserID, stl, timeout, this.RoomID);
-			invokingCharacter.sendMessageToPlayer(responseOptions);
+				// Add the item to the character, and send a message to the player regarding the available responses.
+				this.AwaitingCharacterResponses.Add(acr);
+				invokingCharacter.SetAwaitingResponse(this.UserID, stl, timeout, this.RoomID);
+				invokingCharacter.sendMessageToPlayer(responseOptions);
+			}
 		}
 
 		public void ProcessCharacterResponse(string responseShortCut, SMCharacter invokingCharacter)
@@ -397,6 +568,7 @@ namespace SlackMUDRPG.CommandClasses
 	/// - PlayerCharacter.UseSkill (AdditionalData = the skill used)
 	/// - PlayerCharacter.ExaminesThem
 	/// - PlayerCharacter.InRoom (Faction = FactionName.Threshold, frequency should be lower on this)
+	/// - PlayerCharacter.GivesItemToThem
 	/// - NPC.Enter
 	/// - NPC.Leave
 	/// - NPC.ExaminesThem
@@ -492,36 +664,61 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("ResponseOptionShortcut")]
         public string ResponseOptionShortcut { get; set; }
 
-        [JsonProperty("ResponseOptionText")]
-        public string ResponseOptionText { get; set; }
+		[JsonProperty("ResponseOptionText")]
+		public string ResponseOptionText { get; set; }
 
-        [JsonProperty("ResponseOptionActionSteps")]
+		[JsonProperty("PreRequisites")]
+		public List<NPCConversationStepResponseOptionsPreRequisites> PreRequisites { get; set; }
+
+		[JsonProperty("ResponseOptionActionSteps")]
         public List<NPCResponseOptionAction> ResponseOptionActionSteps { get; set; }
     }
 
-    /// <summary>
-    /// Response action steps govern what happen when a certain response is 
-    /// made by a character.
-    /// 
-    /// Response Option Types include:
-    /// - Conversation
-    ///     AdditionalData: The conversation ID and step ID
-    /// - Emote
-    ///     AdditionalData: The thing they emote
-    /// - GiveItem
-    ///     AdditionalData: ItemType.Amount
-    /// - DropItem
-    ///     AdditionalData: ItemType.Amount
-    /// - AddPlayerQuest
-    ///     AdditionalData: QuestID
-    /// - PlayerQuestUpdate
-    ///     AdditionalData: QuestIDStep
-    /// - UseSkill
-    ///     AdditionalData: SkillToUse
-    /// - TakeItem
-    ///     AdditionalData: ItemType.Number.Target
-    /// </summary>
-    public class NPCResponseOptionAction
+	/// <summary>
+	/// Prerequisites for conversations, sometimes you may not want a response to show up.
+	/// 
+	/// Types include:
+	/// - HasDoneQuest, additionaldata = quest name
+	/// - InProgressQuest, additionaldata = quest name
+	/// - HasNotDoneQuest, additionaldata = quest name
+	/// - IsNotInProgressQuest, additionaldata = quest name
+	/// </summary>
+	public class NPCConversationStepResponseOptionsPreRequisites
+	{
+		[JsonProperty("Type")]
+		public string Type { get; set; }
+
+		[JsonProperty("AdditionalData")]
+		public string AdditionalData { get; set; }
+	}
+
+	/// <summary>
+	/// Response action steps govern what happen when a certain response is 
+	/// made by a character.
+	/// 
+	/// Response Option Types include:
+	/// - Conversation
+	///     AdditionalData: The conversation ID and step ID
+	/// - Emote
+	///     AdditionalData: The thing they emote
+	/// - GiveItem
+	///     AdditionalData: ItemType.Amount
+	/// - DropItem
+	///     AdditionalData: ItemType.Amount
+	/// - AddPlayerQuest
+	///     AdditionalData: QuestID
+	/// - PlayerQuestUpdate
+	///     AdditionalData: QuestIDStep
+	/// - UseSkill
+	///     AdditionalData: SkillToUse
+	/// - TakeItem
+	///     AdditionalData: ItemType.Number.Target
+	/// - CheckItem
+	///     AdditionalData: Item.Type,Number
+	/// - TeachSkill
+	///		AdditionalData: SkillName.Level
+	/// </summary>
+	public class NPCResponseOptionAction
     {
         [JsonProperty("NPCResponseOptionActionType")]
         public string NPCResponseOptionActionType { get; set; }
@@ -596,6 +793,19 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return newNPC;
+		}
+
+		public static void StartAnNPCReactionCheck(SMNPC npc, string actionType, SMCharacter invokingCharacter, SMItem itemIn = null)
+		{
+			HttpContext ctx = HttpContext.Current;
+
+			Thread npcReactionThread = new Thread(new ThreadStart(() =>
+			{
+				HttpContext.Current = ctx;
+				npc.RespondToAction("PlayerCharacter.GivesItemToThem", invokingCharacter, itemIn);
+			}));
+
+			npcReactionThread.Start();
 		}
 	}
 

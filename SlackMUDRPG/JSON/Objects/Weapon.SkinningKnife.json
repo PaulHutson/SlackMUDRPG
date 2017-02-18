@@ -1,0 +1,15 @@
+﻿{
+	"ItemName": "Skinning Knife",
+	"SingularPronoun": "a",
+	"PluralName": "Skinning Knives",
+	"PluralPronoun": "some",
+	"ItemType": "Weapon",
+	"ItemFamily": "Skinning Knife",
+	"ItemDescription": "A skinning knife",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 50,
+	"MaxHitPoints": 50,
+	"BaseDamage": 1,
+	"Toughness": 3
+}

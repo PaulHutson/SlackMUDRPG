@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using SlackMUDRPG.Utility;
 using SlackMUDRPG.Utility.Formatters;
+using System.Threading;
 
 namespace SlackMUDRPG.CommandClasses
 {
@@ -52,6 +53,9 @@ namespace SlackMUDRPG.CommandClasses
 
 		[JsonProperty("CurrentActivity")]
 		public string CurrentActivity { get; set; }
+
+		[JsonProperty("QuestLog")]
+		public List<SMQuestStatus> QuestLog { get; set; }
 
 		[JsonProperty("Attributes")]
 		public SMAttributes Attributes { get; set; }
@@ -1005,48 +1009,97 @@ namespace SlackMUDRPG.CommandClasses
 		/// Picks up item from the current room.
 		/// </summary>
 		/// <param name="itemIdentifier">Items identifier (id, name or family).</param>
-		public void PickUpItem(string itemIdentifier)
+		public void PickUpItem(string itemIdentifier, SMItem itemBeingGiven = null, bool ignoreWeight = false)
 		{
-			// Find the item in the characters room
-			SMItem item = this.FindItemInRoom(itemIdentifier);
+			// Set the variables for use later.
+			SMItem item;
+			string action = "pick up";
+			string actioned = "picked up";
 
+			// if the item is being give to someone...
+			if (itemBeingGiven != null)
+			{
+				// .. set the item as the given item
+				item = itemBeingGiven;
+				action = "receive";
+				actioned = "received";
+			}
+			else
+			{
+				// Find the item in the characters room
+				item = this.FindItemInRoom(itemIdentifier);
+			}
+
+			// If there is not an item
 			if (item == null)
 			{
+				// ... inform the player
 				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to pick up!"));
 				return;
 			}
 
 			// Get an empty hand to pick up the item with
 			SMSlot hand = this.GetEmptyHand();
-
-			if (hand == null)
+			
+			// If the item is larger than size 1 then it needs to be picked up with an empty hand.
+			if ((hand == null) && (item.ItemSize > 1))
 			{
-				this.sendMessageToPlayer(this.Outputer.Italic("You need an empty hand to pick up items!"));
+				this.sendMessageToPlayer(this.Outputer.Italic($"You need an empty hand to {action} that item."));
 				return;
 			}
 
 			// Check the item can be picked up based on its weight
-			if (this.WeightLimit < this.GetCurrentWeight() + item.ItemWeight)
+			if ((this.WeightLimit < this.GetCurrentWeight() + item.ItemWeight) && (!ignoreWeight))
 			{
-				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to pick up \"{item.ItemName}\", this would exceed your weight limit of \"{this.WeightLimit}\"!"));
+				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to {action} {item.ItemName}, this would exceed your weight limit of \"{this.WeightLimit}\"."));
 				return;
 			}
 
-			// Check the slot can equip the item
-			if (!hand.canEquipItem(item))
+			if (hand != null)
 			{
-				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to pick up \"{item.ItemName}\", {hand.GetReadableName()} cannot epuip items of type \"{item.ItemType}\"!"));
-				return;
+				// Check the slot can equip the item
+				if (!hand.canEquipItem(item))
+				{
+					this.sendMessageToPlayer(this.Outputer.Italic($"Unable to {action} {item.ItemName}, {hand.GetReadableName()} cannot epuip items of type \"{item.ItemType}\"."));
+					return;
+				}
+				else
+				{
+					// Add the item to the characters hand
+					hand.EquippedItem = item;
+				}
 			}
+			else
+			{
+				// Try to store it elsewhere on the character (perhaps in a bag).
+				foreach (SMSlot slot in this.Slots)
+				{
+					if (!slot.isEmpty())
+					{
+						// Look inside the equipped item if it is a container
+						if (slot.EquippedItem.CanHoldOtherItems())
+						{
+							// Add item to container
+							string	output = $"You put {item.SingularPronoun} {item.ItemName} ";
+									output += $"in {slot.EquippedItem.SingularPronoun} {slot.EquippedItem.ItemName}.";
 
+							SMItemHelper.PutItemInContainer(item, slot.EquippedItem);
+							this.sendMessageToPlayer(this.Outputer.Italic(output));
+							
+							break;
+						}
+					}
+				}
+			}
+			
 			// Remove the item from the room
-			this.GetRoom().RemoveItem(item);
-			this.GetRoom().Announce(this.Outputer.Italic($"\"{this.GetFullName()}\" picked up {item.SingularPronoun} \"{item.ItemName}\"!"));
-
-			// Add the item to the characters hand
-			hand.EquippedItem = item;
-			this.sendMessageToPlayer(this.Outputer.Italic($"You picked up {item.SingularPronoun} \"{item.ItemName}\"!"));
-
+			if (itemBeingGiven == null)
+			{
+				this.GetRoom().RemoveItem(item);
+				this.GetRoom().Announce(this.Outputer.Italic($"{this.GetFullName()} {actioned} {item.SingularPronoun} {item.ItemName}."));
+			}
+			
+			this.sendMessageToPlayer(this.Outputer.Italic($"You {actioned} {item.SingularPronoun} {item.ItemName}."));
 			this.SaveToApplication();
 		}
 
@@ -1087,16 +1140,19 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				foreach (SMSlot slot in this.Slots)
 				{
-					if (slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems != null)
+					if (slot != null)
 					{
-						itemToDrop = SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
-
-						// If the target item is found in the container remove it
-						if (itemToDrop != null)
+						if (slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems != null)
 						{
-							SMItemHelper.RemoveItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
+							itemToDrop = SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
 
-							this.SaveToApplication();
+							// If the target item is found in the container remove it
+							if (itemToDrop != null)
+							{
+								SMItemHelper.RemoveItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
+
+								this.SaveToApplication();
+							}
 						}
 					}
 				}
@@ -1106,7 +1162,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (itemToDrop != null)
 			{
 				this.GetRoom().AddItem(itemToDrop);
-				this.GetRoom().Announce(Outputer.Italic($"\"{this.GetFullName()}\" dropped {itemToDrop.SingularPronoun} \"{itemToDrop.ItemName}\"!"));
+				this.GetRoom().Announce(Outputer.Italic($"\"{this.GetFullName()}\" dropped {itemToDrop.SingularPronoun} {itemToDrop.ItemName}."));
 				return;
 			}
 
@@ -1311,8 +1367,8 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Add item to container
-			output = $"Congratulations you put {itemToPut.SingularPronoun} \"{itemToPut.ItemName}\" ";
-			output += $"in {targetContainer.SingularPronoun} {targetContainer.ItemName}!";
+			output = $"You put {itemToPut.SingularPronoun} \"{itemToPut.ItemName}\" ";
+			output += $"in {targetContainer.SingularPronoun} {targetContainer.ItemName}.";
 
 			SMItemHelper.PutItemInContainer(itemToPut, targetContainer);
 			this.sendMessageToPlayer(this.Outputer.Italic(output));
@@ -1338,7 +1394,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Get player to give item to
-			SMCharacter playerToGiveTo = this.GetRoom().GetPeople().FirstOrDefault(smc => smc.GetFullName().ToLower() == playerName.ToLower());
+			SMCharacter playerToGiveTo = this.GetRoom().GetAllPeople().FirstOrDefault(smc => smc.GetFullName().ToLower() == playerName.ToLower());
 
 			if (playerToGiveTo == null)
 			{
@@ -1346,35 +1402,58 @@ namespace SlackMUDRPG.CommandClasses
 				return;
 			}
 
-			// Check player can recieve item (needs an empyt hand available weigth capacity to hold carry the item
-			SMSlot receivingHand = playerToGiveTo.GetEmptyHand();
-
-			if (receivingHand == null)
+			if (playerToGiveTo.GetType().Name != "SMNPC")
 			{
-				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to give \"{itemToGive.ItemName}\" to \"{playerToGiveTo.GetFullName()}\", they dont have an emoty hand to take it!"));
-				playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} tried to give you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\" but you dont have an empty had to take it!"));
-				return;
-			}
+				// Check player can recieve item (needs an empyt hand available weigth capacity to hold carry the item
+				SMSlot receivingHand = playerToGiveTo.GetEmptyHand();
 
-			if (playerToGiveTo.WeightLimit - playerToGiveTo.GetCurrentWeight() < SMItemHelper.GetItemWeight(itemToGive))
+				if (receivingHand == null)
+				{
+					this.sendMessageToPlayer(this.Outputer.Italic($"Unable to give \"{itemToGive.ItemName}\" to \"{playerToGiveTo.GetFullName()}\", they dont have an emoty hand to take it!"));
+					playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} tried to give you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\" but you dont have an empty had to take it!"));
+					return;
+				}
+
+				if (playerToGiveTo.WeightLimit - playerToGiveTo.GetCurrentWeight() < SMItemHelper.GetItemWeight(itemToGive))
+				{
+					this.sendMessageToPlayer(this.Outputer.Italic($"Unable to give \"{itemToGive.ItemName}\" to \"{playerToGiveTo.GetFullName()}\", they can't carry that much weight!"));
+					playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} tried to give you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\" but your strong enough to carry it!"));
+					return;
+				}
+
+				// Remove item from current player
+				this.RemoveOwnedItem(itemToGive.ItemID);
+
+				// Add item to receiving player
+				receivingHand.EquippedItem = itemToGive;
+
+				// Send responces and save both players
+				this.sendMessageToPlayer(this.Outputer.Italic($"You gave {playerToGiveTo.GetFullName()} {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
+				playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} gave you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
+
+				// Make sure the player now knows what he has.
+				this.SaveToApplication();
+				playerToGiveTo.SaveToApplication();
+			}
+			else
 			{
-				this.sendMessageToPlayer(this.Outputer.Italic($"Unable to give \"{itemToGive.ItemName}\" to \"{playerToGiveTo.GetFullName()}\", they can't carry that much weight!"));
-				playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} tried to give you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\" but your strong enough to carry it!"));
-				return;
+				// Tell the player he passed the item over
+				this.sendMessageToPlayer(this.Outputer.Italic($"You gave {playerToGiveTo.GetFullName()} {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
+
+				// Remove item from current player
+				this.RemoveOwnedItem(itemToGive.ItemID);
+
+				// Make sure the player now knows what he has.
+				this.SaveToApplication();
+				playerToGiveTo.SaveToApplication();
+
+				// Respond to the action
+				SMNPC smn = this.GetRoom().GetNPCs().FirstOrDefault(smc => smc.GetFullName().ToLower() == playerName.ToLower());
+				if (smn != null)
+				{
+					NPCHelper.StartAnNPCReactionCheck(smn, "PlayerCharacter.GivesItemToThem", this, itemToGive);
+				}
 			}
-
-			// Remove item from current player
-			this.RemoveOwnedItem(itemToGive.ItemID);
-
-			// Add item to receiving player
-			receivingHand.EquippedItem = itemToGive;
-
-			// Send responces and save both players
-			this.sendMessageToPlayer(this.Outputer.Italic($"You gave {playerToGiveTo.GetFullName()} {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
-			playerToGiveTo.sendMessageToPlayer(this.Outputer.Italic($"{this.GetFullName()} gave you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
-
-			this.SaveToApplication();
-			playerToGiveTo.SaveToApplication();
 		}
 
 		/// <summary>
@@ -2079,6 +2158,10 @@ namespace SlackMUDRPG.CommandClasses
 			arfc.TimeOut = Utility.Utils.GetUnixTimeOffset(timeOut);
 			arfc.RoomID = roomID;
 
+			// Remove any responses that are waiting from the character with these options already
+			this.NPCsWaitingForResponses.RemoveAll(responseToCheck => ((responseToCheck.NPCID == NPCID) && (responseToCheck.ShortCutTokens == shortCutTokens)));
+
+			// Add the new set in.
 			this.NPCsWaitingForResponses.Add(arfc);
 			this.SaveToApplication();
 			this.SaveToFile();
@@ -2168,6 +2251,130 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return null;
+		}
+
+		public void ClearResponses()
+		{
+			int currentTime = Utility.Utils.GetUnixTime();
+			if (NPCsWaitingForResponses != null)
+			{
+				this.NPCsWaitingForResponses.RemoveAll(r => r.TimeOut < currentTime);
+				this.SaveToApplication();
+				this.SaveToFile();
+			}
+		}
+
+		#endregion
+
+		#region "Quests"
+
+		public void AddQuest(SMQuest smq)
+		{
+			// Construct a new status based on the quest
+			SMQuestStatus smqs = new SMQuestStatus();
+			smqs.Completed = false;
+			smqs.Expires = 0;
+			smqs.LastDateUpdated = Utility.Utils.GetUnixTime();
+			smqs.QuestName = smq.QuestName;
+			smqs.QuestStep = smq.QuestSteps.First().Name;
+
+			// Add the item to the quest log
+			if (this.QuestLog == null)
+			{
+				this.QuestLog = new List<SMQuestStatus>();
+			}
+			this.QuestLog.Add(smqs);
+
+			// Tell the player the new quest has been added
+			this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"Quest \"{smqs.QuestName}\" added to quest log."));
+
+			this.SaveToApplication();
+			this.SaveToFile();
+		}
+
+		public void UpdateQuest(SMQuest smq)
+		{
+			// Get the quest status from the log
+			if (this.QuestLog == null)
+			{
+				this.QuestLog = new List<SMQuestStatus>();
+			}
+			SMQuestStatus smqs = this.QuestLog.FirstOrDefault(quest => quest.QuestName == smq.QuestName);
+
+			if (!smqs.Completed)
+			{
+				// Move the quest steps along by one.
+				SMQuestStep currentStep = null;
+				SMQuestStep nextStep = null;
+				foreach (SMQuestStep step in smq.QuestSteps)
+				{
+					if (currentStep != null)
+					{
+						nextStep = step;
+						break;
+					}
+
+					if (step.Name == smqs.QuestStep)
+					{
+						currentStep = step;
+					}
+				}
+
+				// Move the step along to the next one if there is a new one..
+				if (nextStep != null)
+				{
+					smqs.QuestStep = nextStep.Name;
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"Quest \"{smq.QuestName}\" updated."));
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"Next step \"{nextStep.Instructions}\"."));
+				}
+				else // Finish the quest!
+				{
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"Quest \"{smq.QuestName}\" completed!"));
+					smqs.Completed = true;
+
+					// Get the rewards
+					if (smq.Rewards != null)
+					{
+						foreach (SMQuestReward reward in smq.Rewards)
+						{
+							switch (reward.Type.ToLower())
+							{
+								case "item":
+									string[] itemInfo = reward.AdditionalData.Split(',');
+									int numberToGive = int.Parse(itemInfo[1]);
+									string[] itemParts = itemInfo[0].Split('.');
+
+									while (numberToGive > 0)
+									{
+										// Get the item (with a new GUID)
+										SMItem itemBeingGiven = SMItemFactory.Get(itemParts[0], itemParts[1]);
+
+										// Pass it to the player
+										this.PickUpItem("", itemBeingGiven, true);
+
+										numberToGive--;
+									}
+									
+									break;
+							}
+						}
+					}
+				}
+			}
+			
+			this.SaveToApplication();
+			this.SaveToFile();
+		}
+
+		public void ClearQuests()
+		{
+			int currentTime = Utility.Utils.GetUnixTime();
+			if (this.QuestLog != null)
+			{
+				this.QuestLog.RemoveAll(quest => quest.Expires < currentTime);
+				this.SaveToApplication();
+				this.SaveToFile();
+			}
 		}
 
 		#endregion

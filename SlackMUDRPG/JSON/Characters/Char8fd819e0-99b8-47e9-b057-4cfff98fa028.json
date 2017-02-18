@@ -1,0 +1,203 @@
+{
+  "firstname": "a",
+  "lastname": "a",
+  "lastinteractiondate": "2017-02-18T15:12:21.8395045+00:00",
+  "lastlogindate": "2017-02-18T15:12:14.2370694+00:00",
+  "age": 18,
+  "sex": "M",
+  "pkFlag": false,
+  "userID": "8fd819e0-99b8-47e9-b057-4cfff98fa028",
+  "username": "aa",
+  "password": "EAAAAOKOe6LND7SgbFe+MTFljDS0GPvR2KLpmDlMa1qq6yD/",
+  "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+  "questLog": [],
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "skills": [
+    {
+      "skillName": "Tanning",
+      "skillLevel": 1
+    }
+  ],
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ],
+      "equippedItem": {
+        "itemID": "2b798977-9b53-462c-a4cd-f15dd6755348",
+        "singularPronoun": "a",
+        "itemName": "Skinning Knife",
+        "pluralName": "Skinning Knives",
+        "pluralPronoun": "some",
+        "itemType": "Weapon",
+        "itemFamily": "Skinning Knife",
+        "itemDescription": "A skinning knife",
+        "itemWeight": 1,
+        "itemCapacity": 0,
+        "itemSize": 1,
+        "hitPoints": 50,
+        "maxHitPoints": 50,
+        "baseDamage": 1.0,
+        "toughness": 3
+      }
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ],
+      "equippedItem": {
+        "itemID": "e556b200-84a5-4bc0-ab97-454221e9d34b",
+        "singularPronoun": "a",
+        "itemName": "Skinning Knife",
+        "pluralName": "Skinning Knives",
+        "pluralPronoun": "some",
+        "itemType": "Weapon",
+        "itemFamily": "Skinning Knife",
+        "itemDescription": "A skinning knife",
+        "itemWeight": 1,
+        "itemCapacity": 0,
+        "itemSize": 1,
+        "hitPoints": 50,
+        "maxHitPoints": 50,
+        "baseDamage": 1.0,
+        "toughness": 3
+      }
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "1aacef90-a332-4822-a919-ea7395a63539",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1,
+        "heldItems": [
+          {
+            "itemID": "efcf9aa5-fd2f-46a2-901b-65e4f8e7d8c7",
+            "singularPronoun": "a",
+            "itemName": "Leather Strip",
+            "pluralName": "Leather Strips",
+            "pluralPronoun": "some",
+            "itemType": "resource",
+            "itemFamily": "Leather",
+            "itemDescription": "A strip of leather ready for use",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 2,
+            "maxHitPoints": 2,
+            "baseDamage": 0.001,
+            "toughness": 3
+          },
+          {
+            "itemID": "9448492d-4c6b-47ae-bfde-8f2c91ec4af8",
+            "singularPronoun": "a",
+            "itemName": "Skinning Knife",
+            "pluralName": "Skinning Knives",
+            "pluralPronoun": "some",
+            "itemType": "Weapon",
+            "itemFamily": "Skinning Knife",
+            "itemDescription": "A skinning knife",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 50,
+            "maxHitPoints": 50,
+            "baseDamage": 1.0,
+            "toughness": 3
+          },
+          {
+            "itemID": "f5a0b237-3362-4dc1-b1db-c1df9cdb02af",
+            "singularPronoun": "a",
+            "itemName": "Skinning Knife",
+            "pluralName": "Skinning Knives",
+            "pluralPronoun": "some",
+            "itemType": "Weapon",
+            "itemFamily": "Skinning Knife",
+            "itemDescription": "A skinning knife",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 50,
+            "maxHitPoints": 50,
+            "baseDamage": 1.0,
+            "toughness": 3
+          }
+        ]
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RightFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "characterWeight": 50,
+  "characterSize": 160,
+  "connectionService": "WS",
+  "lastUsedCommand": "move FT",
+  "npCsWaitingForResponses": [
+    {
+      "npcid": "DerickFelhirst",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "LTT"
+        },
+        {
+          "shortCutToken": "BL"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+      "timeOut": 1487431742
+    }
+  ]
+}
