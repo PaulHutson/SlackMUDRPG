@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "Welcome to Ravensmere",
+	"Prerequisites": null,
+	"Daily": false,
+	"QuestSteps": [
+		{
+			"Name": "Visit the Clerk in the arrivals hall",
+			"Type": "Talk",
+			"CharacterName": "Podgy Clerk",
+			"LocationID": "Ravensmere.Harbour South.Arrivals Area",
+			"AdditionalData": null,
+			"Instructions": "Go and speak to the Podgy Clerk in the arrivals area"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Key",
+			"AdditionalData": "RavensmereAAEtoDWS"
+		}
+	]
+}

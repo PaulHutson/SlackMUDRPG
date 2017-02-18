@@ -318,6 +318,7 @@
     <Content Include="JSON\Skills\Skill.Knife.json" />
     <Content Include="JSON\Quests\Felhirst.The Art Of Tanning.json" />
     <Content Include="JSON\Objects\Weapon.SkinningKnife.json" />
+    <Content Include="JSON\Quests\PodgyClerk.Welcome to Ravensmere.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
     <Content Include="scripts\ai.1.0.7-build00691.min.js" />
