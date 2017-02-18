@@ -1,0 +1,59 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Production",
+    "SkillTypeDescription": "Skills related to the production of items"
+  },
+  "SkillName": "Whittling",
+	"CanUseWithoutLearning":  true,
+  "SkillDescription": "The ability to whittle logs into thing.",
+  "SkillLearnText": "You've learnt how to whittle.",
+  "LevelIncreaseText": "You feel you've gotten better at whittling.",
+  "ActivityType":  "Whittling",
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 8
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "INT",
+      "PreReqLevel": 8
+    }
+  ],
+	"SkillSteps": [
+		{
+			"StepType": "EquippedObject",
+			"StepRequiredObject": "Family.Knife",
+			"RequiredObjectAmount": 1,
+			"FailureOutput": "You don't have a knife equipped",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "OwnedObject",
+			"StepRequiredObject": "Family.Log",
+			"RequiredObjectAmount": 1,
+			"FailureOutput": "You don't have any logs",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "CheckReceipe",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": "Trait.Whittling",
+			"FailureOutput": "The item you're trying to make is not something you use tanning for.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "UseReceipe",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+			"FailureOutput": "Failed to whittle the log.",
+			"SuccessOutput": null
+		}
+	]
+}

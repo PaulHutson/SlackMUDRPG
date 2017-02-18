@@ -11,15 +11,15 @@
 </head>
 <body>
     <form id="form1" runat="server">
-		<div>
-			I'm the header area
+		<div id="Header">
+			Province - Menu: <a href="Game.aspx">Game</a> | <a href="Commands.aspx">Commands</a> | <a href="Receipes.aspx">Receipes</a>
 		</div>
 		<div>
 			<asp:ContentPlaceHolder ID="ph_MainContent" runat="server">
         
 			</asp:ContentPlaceHolder>
 		</div>
-		<div>
+		<div id="Footer">
 			I'm the footer area
 		</div>
     </form>

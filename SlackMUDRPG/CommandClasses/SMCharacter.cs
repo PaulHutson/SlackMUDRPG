@@ -89,7 +89,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		public string ResponseURL { get; set; }
 		public string ConnectionService { get; set; }
-
+		public string LastUsedCommand { get; set; }
 		public List<AwaitingResponseFromCharacter> NPCsWaitingForResponses { get; set; }
 
 		/// <summary>
@@ -169,6 +169,23 @@ namespace SlackMUDRPG.CommandClasses
 
 			smcs.Add(this);
 			HttpContext.Current.Application["SMCharacters"] = smcs;
+		}
+
+		/// <summary>
+		/// Gets the last command the character used (excludes login).
+		/// </summary>
+		/// <returns>Command string last used.</returns>
+		public string GetLastUsedCommand()
+		{
+			if (this.LastUsedCommand != null)
+			{
+				if (!this.LastUsedCommand.ToLower().Contains("login"))
+				{
+					return this.LastUsedCommand;
+				}
+			}
+
+			return null;
 		}
 
 		/// <summary>
@@ -367,7 +384,12 @@ namespace SlackMUDRPG.CommandClasses
             this.GetRoomDetails();
             this.SaveToApplication();
             this.SaveToFile();
-        }
+
+			// Remove the character from memory in case the in mem version is invalid
+			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			smcs.Remove(this);
+			HttpContext.Current.Application["SMCharacters"] = smcs;
+		}
 
 		#endregion
 
@@ -383,11 +405,14 @@ namespace SlackMUDRPG.CommandClasses
 			string actualSkills = "";
 
 			// Craft all of the output elements.
-			foreach (SMSkillHeld smsh in this.Skills)
+			if (this.Skills != null)
 			{
-				actualSkills += OutputFormatterFactory.Get().ListItem(smsh.SkillName + " level " + smsh.SkillLevel);
+				foreach (SMSkillHeld smsh in this.Skills)
+				{
+					actualSkills += OutputFormatterFactory.Get().ListItem(smsh.SkillName + " level " + smsh.SkillLevel);
+				}
 			}
-
+			
 			// Check if they actually had any skills...
 			if (actualSkills == "")
 			{
@@ -723,7 +748,7 @@ namespace SlackMUDRPG.CommandClasses
         public void CraftItem(string nameOfReceipe)
         {
             List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
-            SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == nameOfReceipe);
+            SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name.ToLower() == nameOfReceipe.ToLower());
 
             if (smr != null)
             {
@@ -757,7 +782,21 @@ namespace SlackMUDRPG.CommandClasses
 				SMRoom currentRoom = this.GetRoom();
 
 				// find any players with that target name first
-				SMCharacter targetCharacter = currentRoom.GetAllPeople().FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
+				List<SMCharacter> characterlist = currentRoom.GetAllPeople();
+
+				SMCharacter targetCharacter = characterlist.FirstOrDefault(tC => tC.GetFullName().ToLower() == targetName.ToLower());
+
+				// First check if they're just using a firstname or surname.
+				if (targetCharacter == null)
+				{
+					targetCharacter = characterlist.FirstOrDefault(tC => (tC.FirstName.ToLower() == targetName.ToLower()) || (tC.LastName.ToLower() == targetName.ToLower()));
+				}
+
+				// Check if it's an NPC they're targeting by "family" type name i.e. Goose for a Larger Goose.
+				if (targetCharacter == null)
+				{
+					targetCharacter = currentRoom.GetNPCs().FirstOrDefault(tc => tc.FamilyType.ToLower() == targetName.ToLower());
+				}
 
 				// If it's not null set the target details
 				if (targetCharacter != null)
@@ -1376,9 +1415,12 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			string inventory = string.Empty;
 
-			foreach (SMSlot slot in this.Slots)
+			if (this.Slots != null && this.Slots.Any())
 			{
-				inventory += this.ListSlotDetails(slot.Name, listContainerContents);
+				foreach (SMSlot slot in this.Slots)
+				{
+					inventory += this.ListSlotDetails(slot.Name, listContainerContents);
+				}
 			}
 
 			return inventory;
@@ -1650,7 +1692,7 @@ namespace SlackMUDRPG.CommandClasses
 			// If the item in the slot is a container list its contents if required
 			if (listContainerContents && slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems())
 			{
-				if (slot.EquippedItem.HeldItems.Any())
+				if (slot.EquippedItem.HeldItems != null && slot.EquippedItem.HeldItems.Any())
 				{
 					listing += this.Outputer.Italic($"Capacity: {SMItemHelper.GetItemUsedCapacity(slot.EquippedItem)} / {slot.EquippedItem.ItemCapacity}");
 					listing += this.Outputer.Italic($"This \"{slot.EquippedItem.ItemName}\" contains the following items:");
@@ -1986,7 +2028,9 @@ namespace SlackMUDRPG.CommandClasses
 		public void sendMessageToPlayer(string message)
 		{
 			// TODO Change the name of the service based on the one used to send the information!
-			Commands.SendMessage(this.ConnectionService, "SlackMud", message, "SlackMud", this.UserID, this.ResponseURL);
+			string userIDToSendTo = this.UserID;
+
+			Commands.SendMessage(this.ConnectionService, "SlackMud", message, "SlackMud", userIDToSendTo, this.ResponseURL);
 		}
 
     /// <summary>
@@ -2103,6 +2147,27 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find a waiting response with that shortcut... did you wait too long to respond?"));
 			}
+		}
+
+		/// <summary>
+		/// Gets a list of NPC awaiting responses relavent to the characters current room
+		/// </summary>
+		/// <returns></returns>
+		public List<AwaitingResponseFromCharacter> GetAwaitingResponsesForRoom()
+		{
+			string roomId = this.GetRoom().RoomID;
+
+			if (this.NPCsWaitingForResponses != null)
+			{
+				List<AwaitingResponseFromCharacter> awaitingResponses = this.NPCsWaitingForResponses.FindAll(resp => resp.RoomID == roomId);
+
+				if (awaitingResponses != null && awaitingResponses.Any())
+				{
+					return awaitingResponses;
+				}
+			}
+
+			return null;
 		}
 
 		#endregion

@@ -11,7 +11,16 @@ namespace SlackMUDRPG.MasterPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			// force https
+			string host = Request.Url.Host;
+			if (host != "localhost")
+			{
+				if (!Request.IsSecureConnection)
+				{
+					Response.Redirect(Request.Url.AbsoluteUri.Replace("http://", "https://"));
+				}
 
+			}
 		}
 	}
 }

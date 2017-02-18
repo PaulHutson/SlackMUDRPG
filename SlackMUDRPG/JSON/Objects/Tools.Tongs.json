@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Tongs",
+	"SingularPronoun": "a pair of",
+	"PluralName": "Tongs",
+	"PluralPronoun": "some",
+  "ItemType": "tools",
+  "ItemFamily": "Chisel",
+	"ItemDescription": "Metal tongs",
+	"ItemWeight": 3,
+  "ItemSize": 1,
+  "HitPoints": 500,
+  "MaxHitPoints": 500,
+  "BaseDamage": 1,
+  "Toughness": 3,
+	"CanHoldOtherItems": false
+}

@@ -157,8 +157,8 @@ namespace SlackMUDRPG.CommandClasses
 									{
 										smc.sendMessageToPlayer(smss.FailureOutput);
 										continueCycle = false;
-										smc.StopActivity();
 									}
+									smc.StopActivity();
 									break;
 								case "Information":
 									if (targetType == "Character")
@@ -191,6 +191,12 @@ namespace SlackMUDRPG.CommandClasses
 									break;
 								case "CreateDestroyedObject":
 									if (!CreateDestroyedObject(smss, smc, targetID))
+									{
+										smc.sendMessageToPlayer(smss.FailureOutput);
+									};
+									break;
+								case "CheckObjectInLocation":
+									if (!CheckObjectinLocation(smss, smc))
 									{
 										smc.sendMessageToPlayer(smss.FailureOutput);
 									};
@@ -308,6 +314,14 @@ namespace SlackMUDRPG.CommandClasses
 					}
 				}
 				else
+				{
+					return false;
+				}
+			}
+
+			if (smss.ExtraData != null)
+			{
+				if ((targetType == "Character") && (smss.ExtraData.ToLower() == "object"))
 				{
 					return false;
 				}
@@ -853,7 +867,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Get the item and check that there is enough of it...
 			string[] itemTypeSplit = smss.StepRequiredObject.Split('.');
-			if (smc.CountOwnedItems(itemTypeSplit[1]) > smss.RequiredObjectAmount)
+			if (smc.CountOwnedItems(itemTypeSplit[1]) >= smss.RequiredObjectAmount)
 			{
 				// Return true if they have enough of it.
 				return true;
@@ -920,6 +934,9 @@ namespace SlackMUDRPG.CommandClasses
 			return false;
 		}
 
+		/// <summary>
+		/// Create a destroyed object
+		/// </summary>
 		private bool CreateDestroyedObject(SMSkillStep smss, SMCharacter smc, string targetID)
 		{
 			// Get the target item, so we can find what is going to be destroyed
@@ -947,6 +964,12 @@ namespace SlackMUDRPG.CommandClasses
 			return false;
 		}
 
+		/// <summary>
+		/// Replace tag in the string
+		/// </summary>
+		/// <param name="inString">The string to replace things within.</param>
+		/// <param name="targetItem">The item to be used for replacements.</param>
+		/// <returns>A string with the tags replaced</returns>
 		private string ReplaceTags(string inString, SMItem targetItem)
 		{
 			string returnString = inString;
@@ -959,11 +982,47 @@ namespace SlackMUDRPG.CommandClasses
 			return returnString;
 		}
 
+		/// <summary>
+		/// Checks that there is an object of a type / family in a location
+		/// </summary>
+		/// <returns></returns>
+		private bool CheckObjectinLocation(SMSkillStep smss, SMCharacter smc)
+		{
+			// Check if the character has it equipped.
+			if (CheckHasItem(smss, smc))
+			{
+				return true;
+			}
+
+			// If not check whether the item is in the location
+			string[] splitObjectType = smss.StepRequiredObject.Split('.');
+			SMItem smi = smc.FindItemInRoom(splitObjectType[1]);
+			if (smi != null)
+			{
+				if (smss.ExtraData != null)
+				{
+					splitObjectType = smss.ExtraData.Split('.');
+					if (SMItemHelper.CountItemsInContainer(smi, splitObjectType[1].ToLower()) > 0)
+					{
+						return true;
+					}
+				}
+
+				return true;
+			}
+
+			return false;
+		}
+
+
+		/// <summary>
+		/// Checks the receipe the character is trying to use.
+		/// </summary>
 		private bool CheckReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string nameOfReceipe, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
 		{
 			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
 			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
-			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == nameOfReceipe);
+			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name.ToLower() == nameOfReceipe.ToLower());
 			if (smr != null)
 			{
 				if (smr.NeedToLearn)
@@ -994,7 +1053,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
 			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
-			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name == nameOfReceipe);
+			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name.ToLower() == nameOfReceipe.ToLower());
 			if (smr != null)
 			{
 				var continueCycle = true;
@@ -1101,25 +1160,28 @@ namespace SlackMUDRPG.CommandClasses
                                         {
                                             smi.ItemName = smrst.ThresholdName + " " + originalItemName;
 
-											foreach (SMReceipeStepThresholdBonus smrstb in smrst.ThresholdBonus)
+											if (smrst.ThresholdBonus!= null)
 											{
-												switch (smrstb.ThresholdBonusName)
+												foreach (SMReceipeStepThresholdBonus smrstb in smrst.ThresholdBonus)
 												{
-													case "BaseDamage":
-														smi.BaseDamage = baseDamage + smrstb.ThresholdBonusValue;
-														break;
-													case "Toughness":
-														smi.Toughness = baseToughness + smrstb.ThresholdBonusValue;
-														break;
-													case "HitPoints":
-														smi.HitPoints = baseHitPoints + smrstb.ThresholdBonusValue;
-														break;
-													case "ItemSize":
-														smi.ItemSize = baseItemSize + smrstb.ThresholdBonusValue;
-														break;
-													case "ItemWeight":
-														smi.ItemWeight = baseItemWeight + smrstb.ThresholdBonusValue;
-														break;
+													switch (smrstb.ThresholdBonusName)
+													{
+														case "BaseDamage":
+															smi.BaseDamage = baseDamage + smrstb.ThresholdBonusValue;
+															break;
+														case "Toughness":
+															smi.Toughness = baseToughness + smrstb.ThresholdBonusValue;
+															break;
+														case "HitPoints":
+															smi.HitPoints = baseHitPoints + smrstb.ThresholdBonusValue;
+															break;
+														case "ItemSize":
+															smi.ItemSize = baseItemSize + smrstb.ThresholdBonusValue;
+															break;
+														case "ItemWeight":
+															smi.ItemWeight = baseItemWeight + smrstb.ThresholdBonusValue;
+															break;
+													}
 												}
 											}
 										}
@@ -1186,9 +1248,8 @@ namespace SlackMUDRPG.CommandClasses
                 }
 
                 // Random chance to see if someone achieves the skill increase change
-                Random r = new Random();
-                double rDouble = r.NextDouble();
-                if ((rDouble * 100) < chanceOfSkillIncrease)
+				int randomChance = (new Random().Next(1, 100));
+				if (randomChance <= chanceOfSkillIncrease)
                 {
                     // Increase the skill lebel by one.
                     if (smc.Skills != null)

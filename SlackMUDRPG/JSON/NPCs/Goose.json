@@ -1,0 +1,104 @@
+﻿{
+  "firstname": "Large",
+  "lastname": "Goose",
+  "description": "A large white bird with a long neck",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 1,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "LargeGoose",
+  "RoomID": "IsSpawned",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 15,
+    "wp": 10,
+    "ft": 4,
+    "hp": 5,
+    "maxhp": 5,
+    "SocialStanding": 1
+  },
+  "Skills": null,
+  "Slots": null,
+  "BodyParts": [
+    {
+      "Name": "Body"
+    }
+  ],
+	"ResponseURL": null,
+	"NPCType": "Goose",
+	"IsGeneric": true,
+	"WalkingType": "waddle",
+	"FamilyType": "Goose",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+	"DestroyedOutput": "Resource.Feather,5|Resource.Meat,1",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 10,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "GeneralChitChat.Choice"
+        }
+      ]
+    },
+    {
+      "ResponseType": "Pulse",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "AllPeople",
+      "Faction": null,
+      "Frequency": 10,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "GeneralChitChat.Choice"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "GeneralChitChat",
+      "ConversationStep": [
+        {
+          "StepID": "Choice",
+          "Scope": "choice",
+          "AdditionalData": "random1,random2,random3",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random1",
+          "Scope": "emote",
+          "AdditionalData": "waddles around aimlessly.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random2",
+          "Scope": "emote",
+          "AdditionalData": "pecks at the dirt",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random3",
+          "Scope": "emote",
+          "AdditionalData": "waddles away from some imagined noise",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

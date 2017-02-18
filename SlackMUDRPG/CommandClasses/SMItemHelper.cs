@@ -146,7 +146,8 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			if (item.ItemID == identifier ||
 				item.ItemName.ToLower() == identifier.ToLower() ||
-				item.ItemFamily.ToLower() == identifier.ToLower())
+				item.ItemFamily.ToLower() == identifier.ToLower() ||
+				item.ItemType.ToLower() == identifier.ToLower())
 			{
 				return true;
 			}
@@ -287,6 +288,11 @@ namespace SlackMUDRPG.CommandClasses
 			if (foundItem == null)
 			{
 				foundItem = list.FirstOrDefault((SMItem item) => item.ItemFamily.ToLower() == itemIdentifier.ToLower());
+			}
+
+			if (foundItem == null)
+			{
+				foundItem = list.FirstOrDefault((SMItem item) => item.ItemType.ToLower() == itemIdentifier.ToLower());
 			}
 
 			return foundItem;

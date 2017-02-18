@@ -1,7 +1,7 @@
 {
   "SkillType": {
-    "SkillTypeName": "Environment",
-    "SkillTypeDescription": "Skills related to manipulating the environment"
+    "SkillTypeName": "Production",
+    "SkillTypeDescription": "Skills related to the production of items"
   },
   "SkillName": "Carpentry",
 	"CanUseWithoutLearning":  true,

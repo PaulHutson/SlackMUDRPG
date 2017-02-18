@@ -41,6 +41,7 @@
       "StepType": "Target",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 1,
+			"ExtraData": "Object",
       "FailureOutput": "You must choose something to chop",
       "SuccessOutput": null
     },

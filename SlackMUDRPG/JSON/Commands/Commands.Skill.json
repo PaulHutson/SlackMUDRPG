@@ -1,10 +1,10 @@
 [
 	{
 		"CommandFamily": "Skill",
-		"CommandName": "craft, make",
+		"CommandName": "craft, make, tan, whittle, fletch, smith",
 		"CommandDescription": "Enables the player to {name|lower} something.",
 		"CommandSyntax": "{name|lower} <Name Of item>",
-		"CommandExpression": "{.+}",
+		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "CraftItem",
 		"PassCommandAsFirstArg": false,
@@ -17,7 +17,7 @@
 		"CommandName": "build",
 		"CommandDescription": "Enables the player to build something.",
 		"CommandSyntax": "build <Name Of item>",
-		"CommandExpression": "{.+}",
+		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "CraftItem",
 		"PassCommandAsFirstArg": false,

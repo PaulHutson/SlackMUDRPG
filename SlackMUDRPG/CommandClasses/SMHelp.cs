@@ -30,11 +30,11 @@ namespace SlackMUDRPG.CommandClasses
 		/// <summary>
 		/// SMHelp class constructor, populate commandsList
 		/// </summary>
-		public SMHelp()
+		public SMHelp(string UserId)
 		{
 			this.commandList = this.GetCommandsList();
 
-			this.character = new SlackMud().GetCharacter(Utils.GetQueryParam("user_id"));
+			this.character = new SlackMud().GetCharacter(UserId);
 
 			this.outputFormatter = OutputFormatterFactory.Get();
 		}

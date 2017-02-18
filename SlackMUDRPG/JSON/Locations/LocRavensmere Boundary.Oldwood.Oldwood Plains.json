@@ -10,20 +10,25 @@
 			"Shortcut": "OWR",
 			"Description": "Oldwood Road",
 			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road"
+		},
+		{
+			"Shortcut": "SS",
+			"Description": "Small Stream",
+			"RoomID": "Ravensmere Boundary.Oldwood.Small Stream"
 		}
 	],
 	"RoomItems": null,
 	"NPCSpawns": [
 		{
 			"TypeOfNPC": "YoungDeer",
-			"MaxNumber": 2,
+			"MaxNumber": 1,
 			"SpawnFrequency": 5,
 			"Unique": false
 		},
 		{
 			"TypeOfNPC": "BunnyRabbit",
 			"MaxNumber": 2,
-			"SpawnFrequency": 100,
+			"SpawnFrequency": 90,
 			"Unique": false
 		}
 	]

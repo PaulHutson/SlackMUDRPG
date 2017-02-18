@@ -1,0 +1,17 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Wooden Barrel",
+	"PluralPronoun": "some",
+	"PluralName": "Wooden Barrel",
+	"ItemType": "Container",
+	"ItemFamily": "Barrel",
+	"ItemDescription": "A simple wooden Barrel.",
+	"ItemWeight": 20,
+	"ItemCapacity": 10,
+	"ItemSize": 20,
+	"HitPoints": 1000000000,
+	"MaxHitPoints": 1000000000,
+	"BaseDamage": 0.1,
+	"Toughness": 5,
+	"HeldItems": null
+}

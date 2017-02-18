@@ -1,15 +1,15 @@
 [
 	{
 		"CommandFamily": "Inventory",
-		"CommandName": "pickup",
+		"CommandName": "pickup, take",
 		"CommandDescription": "Attempts to pick up the item from your current room.",
-		"CommandSyntax": "pickup <item_name>",
+		"CommandSyntax": "{name|lower} <item_name>",
 		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "PickUpItem",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "pickup wooden stick",
+		"ExampleUsage": "{name|lower} wooden stick or {name|lower} stick",
 		"RequiredSkill": null
 	},
 	{
@@ -27,28 +27,28 @@
 	},
 	{
 		"CommandFamily": "Inventory",
-		"CommandName": "inventory",
+		"CommandName": "inventory, i",
 		"CommandDescription": "Shows a list of the items you have equipped or those in a specific slot.",
-		"CommandSyntax": "inventory [slot name]",
+		"CommandSyntax": "{name|lower} [slot name]",
 		"ParamsExpression": "{.+}?",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "ListInventory",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "inventory or inventory Right Hand",
+		"ExampleUsage": "{name|lower} or {name|lower} Right Hand",
 		"RequiredSkill": null
 	},
 	{
 		"CommandFamily": "Inventory",
-		"CommandName": "equip",
+		"CommandName": "equip, eq",
 		"CommandDescription": "Trys to equip an item by name, optionally to a specific slot.",
-		"CommandSyntax": "equip <item name> to [slot name]",
+		"CommandSyntax": "{name|lower} <item name> to [slot name]",
 		"ParamsExpression": "{.+} to {.+}?",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "EquipItem",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "equip Wooden Sword or equip Wooden Sword to Right Hand",
+		"ExampleUsage": "{name|lower} Wooden Sword or {name|lower} Wooden Sword to Right Hand",
 		"RequiredSkill": null
 	},
 	{
@@ -69,7 +69,7 @@
 		"CommandName": "give",
 		"CommandDescription": "Gives and item you own to another player.",
 		"CommandSyntax": "give <item identifier> to <playername>",
-		"CommandExpression": "give {.+} to {.+}",
+		"ParamsExpression": "give {.+} to {.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GiveItem",
 		"PassCommandAsFirstArg": false,

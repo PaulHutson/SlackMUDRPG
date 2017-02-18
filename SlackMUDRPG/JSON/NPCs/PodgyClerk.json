@@ -102,6 +102,7 @@
   ],
   "ResponseURL": null,
 	"NPCType": "PodgyClerk",
+	"FamilyType": "Clerk",
 	"IsGeneric": true,
 	"WalkingType": "walk",
 	"PronounSingular": "a",
@@ -191,7 +192,7 @@
         {
           "StepID": "5-3",
           "Scope": "saytoplayer",
-          "AdditionalData": "Look, I've got people to process... I've got your name down here as... {playercharacter}... move along, as you can I have more people to register.",
+          "AdditionalData": "Look, I've got people to process... I've got your name down here as... {playercharacter}... move along, as you can see I have more people to register.",
           "NextStep": null,
           "ResponseOptions": null
         }

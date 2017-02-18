@@ -1,0 +1,59 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Production",
+    "SkillTypeDescription": "Skills related to the production of items"
+  },
+  "SkillName": "Fletching",
+	"CanUseWithoutLearning":  true,
+  "SkillDescription": "The ability to fletch arrows.",
+  "SkillLearnText": "You've learnt how to make arrows.",
+  "LevelIncreaseText": "You feel you've gotten better at fletching.",
+  "ActivityType":  "Fletching",
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 8
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "INT",
+      "PreReqLevel": 7
+    }
+  ],
+  "SkillSteps": [
+		{
+			"StepType": "OwnedObject",
+			"StepRequiredObject": "Family.Feather",
+			"RequiredObjectAmount": 1,
+			"FailureOutput": "You don't have any feathers",
+			"SuccessOutput": null
+		},
+		{
+      "StepType": "OwnedObject",
+      "StepRequiredObject": "Family.Stick",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have any sticks",
+      "SuccessOutput": null
+    },
+		{
+			"StepType": "CheckReceipe",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": "Trait.Fletching",
+			"FailureOutput": "The item you're trying to make is not something you use fletching for.",
+			"SuccessOutput": null
+		},
+    {
+      "StepType": "UseReceipe",
+      "StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+      "FailureOutput": "Failed to fletch an arrow.",
+      "SuccessOutput": null
+    }      
+  ]
+}

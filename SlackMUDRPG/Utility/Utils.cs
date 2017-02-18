@@ -20,7 +20,20 @@ namespace SlackMUDRPG.Utility
 		/// <param name="paramName">Parameter name.</param>
 		public static string GetQueryParam(string paramName)
 		{
-			return HttpContext.Current.Request.Form[paramName] ?? HttpContext.Current.Request.QueryString[paramName] ?? "";
+			string formParam = null;
+			if (HttpContext.Current.Request.Form[paramName] != null)
+			{
+				formParam = HttpContext.Current.Request.Form[paramName];
+			}
+
+			string queryParam = null;
+			if (HttpContext.Current.Request.QueryString[paramName] != null)
+			{
+				queryParam = HttpContext.Current.Request.QueryString[paramName];
+			}
+
+
+			return formParam ?? queryParam ?? "";
 		}
 
 		#endregion
@@ -112,6 +125,29 @@ namespace SlackMUDRPG.Utility
 
 			// Calls the method
 			return method.Invoke(method.IsStatic ? null : obj, parameters);
+		}
+
+		/// <summary>
+		/// Returns an new instanace of a give className by calling its constructor with the supplied args.
+		/// </summary>
+		/// <param name="className">Name of the class (fully qualified) to instantiate.</param>
+		/// <param name="args">Object array of args required for instantiation.</param>
+		/// <returns></returns>
+		public static object ConstructWithArgs(string className, params object[] args)
+		{
+			// Build at array of constructor arg types for GetContructorCall.
+			List<Type> types = new List<Type>();
+
+			foreach (var type in args)
+			{
+				Type t = type.GetType();
+				types.Add(t);
+			}
+
+			Type[] typesArray = types.ToArray();
+
+			// Instantiate and return new object
+			return Type.GetType(className).GetConstructor(typesArray).Invoke(args);
 		}
 
 		/// <summary>

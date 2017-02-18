@@ -1,0 +1,16 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Hunting Arrow",
+	"PluralPronoun": "some",
+	"PluralName": "Hunting Arrows",
+	"ItemType": "Consumable",
+	"ItemFamily": "Arrow",
+	"ItemDescription": "This hunting arrow has a metal point and is designed to make hunting easier",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 3,
+	"Toughness": 1,
+	"DestroyedOutput": null
+}

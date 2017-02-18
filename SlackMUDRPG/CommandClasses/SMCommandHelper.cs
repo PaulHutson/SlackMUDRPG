@@ -17,12 +17,12 @@ namespace SlackMUDRPG.CommandClasses
 		/// <summary>
 		/// Stores the trimmed user emter command string.
 		/// </summary>
-		private string userCmd;
+		public string userCmd;
 
 		/// <summary>
 		/// Stores the determined command name.
 		/// </summary>
-		private string cmdName;
+		public string cmdName;
 
 		/// <summary>
 		/// Stores an instance of the SMCommand object defined by cmdName.

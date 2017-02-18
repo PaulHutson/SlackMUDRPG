@@ -116,7 +116,7 @@ namespace SlackMUDRPG.CommandClasses
                     if (!hasAllRequiredSkills)
                     {
                         // Tell the player they can't really wield that item.
-                        attackingCharacter.sendMessageToPlayer("You don't have the required skills to use " + smi.SingularPronoun + " " + smi.ItemName + " so won't be able to do much damage with it...");
+                        attackingCharacter.sendMessageToPlayer("You are not skilled with the " + smi.ItemFamily + ", practicing gives you a chance to increase your skill");
                     }
                 }
             }

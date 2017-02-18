@@ -1,0 +1,72 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Production",
+    "SkillTypeDescription": "Skills related to the production of items"
+  },
+  "SkillName": "Blacksmithing",
+	"CanUseWithoutLearning":  true,
+  "SkillDescription": "The ability to craft things made of metal.",
+  "SkillLearnText": "You've learnt how to craft things from metal.",
+  "LevelIncreaseText":  "You feel you've gotten better metalwork.",
+  "ActivityType":  "Forging",
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 8
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "STR",
+      "PreReqLevel": 10
+    },
+    {
+      "IsSkill": false,
+      "SkillStatName": "INT",
+      "PreReqLevel": 5
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Hammer",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have a hammer equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Tongs",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have any tongs equipped",
+      "SuccessOutput": null
+    },
+		{
+      "StepType": "CheckObjectInLocation",
+      "StepRequiredObject": "Family.Anvil",
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+      "FailureOutput": "There is no anvil here",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "CheckReceipe",
+      "StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": "Trait.BlackSmithing",
+      "FailureOutput": "The item you're trying to make is not something you use blacksmithing for.",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "UseReceipe",
+      "StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+      "FailureOutput": "Failed to make {PRODUCTNAME}.",
+      "SuccessOutput": null
+    }      
+  ]
+}

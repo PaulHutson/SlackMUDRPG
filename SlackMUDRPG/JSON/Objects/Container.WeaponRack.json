@@ -1,0 +1,17 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Weapon Rack",
+	"PluralPronoun": "some",
+	"PluralName": "Weapon Racks",
+	"ItemType": "Container",
+	"ItemFamily": "Rack",
+	"ItemDescription": "A weapon rack.",
+	"ItemWeight": 1,
+	"ItemCapacity": 10,
+	"ItemSize": 2,
+	"HitPoints": 10,
+	"MaxHitPoints": 10,
+	"BaseDamage": 0.1,
+	"Toughness": 5,
+	"HeldItems": null
+}
