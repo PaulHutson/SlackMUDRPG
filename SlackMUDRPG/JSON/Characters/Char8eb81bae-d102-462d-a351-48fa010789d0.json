@@ -1,0 +1,197 @@
+{
+  "firstname": "a",
+  "lastname": "a",
+  "lastinteractiondate": "2017-02-18T18:02:49.0290049+00:00",
+  "lastlogindate": "2017-02-18T18:02:45.8479696+00:00",
+  "age": 18,
+  "sex": "M",
+  "pkFlag": false,
+  "userID": "8eb81bae-d102-462d-a351-48fa010789d0",
+  "username": "a",
+  "password": "EAAAAAj/DpVh6ysqgfd/Ypu5PCq5npKpJpUXNICBE+xbT9h/",
+  "roomID": "Ravensmere.Harbour South.Arrivals Area",
+  "questLog": [
+    {
+      "questName": "Welcome to Ravensmere",
+      "questStep": "Visit the Clerk in the arrivals hall",
+      "lastDateUpdated": 1487440323,
+      "expires": 0,
+      "completed": false
+    }
+  ],
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "f4ea679d-0104-4c45-80a5-653fea424a01",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RightFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "characterWeight": 50,
+  "characterSize": 160,
+  "connectionService": "WS",
+  "lastUsedCommand": "resp Y",
+  "npCsWaitingForResponses": [
+    {
+      "npcid": "PodgyClerk",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Y"
+        },
+        {
+          "shortCutToken": "N"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Arrivals Area",
+      "timeOut": 1487441329
+    },
+    {
+      "npcid": "PodgyClerk",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Paul"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Arrivals Area",
+      "timeOut": 1487441344
+    },
+    {
+      "npcid": "PodgyClerk",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Y"
+        },
+        {
+          "shortCutToken": "N"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Arrivals Area",
+      "timeOut": 1487441440
+    },
+    {
+      "npcid": "PodgyClerk",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "{variable}"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Arrivals Area",
+      "timeOut": 1487441456
+    },
+    {
+      "npcid": "PodgyClerk",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Y"
+        },
+        {
+          "shortCutToken": "N"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Arrivals Area",
+      "timeOut": 1487441708
+    },
+    {
+      "npcid": "PodgyClerk",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "{variable}"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Arrivals Area",
+      "timeOut": 1487441732
+    },
+    {
+      "npcid": "PodgyClerk",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Y"
+        },
+        {
+          "shortCutToken": "N"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Arrivals Area",
+      "timeOut": 1487441967
+    },
+    {
+      "npcid": "PodgyClerk",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "{variable}"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Arrivals Area",
+      "timeOut": 1487441979
+    }
+  ]
+}

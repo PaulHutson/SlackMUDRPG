@@ -4,7 +4,7 @@
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
   "Outside": false,
-	"RoomDescription": "The stench of amonia brings tears to your eyes. Cured hides of varying colour and size obscure every inch of the walls and discarded animal hair litters the floor. ",
+	"RoomDescription": "The stench of ammonia brings tears to your eyes. Cured hides of varying colour and size obscure every inch of the walls and discarded animal hair litters the floor. ",
 	"RoomExits": [
     {
       "Shortcut": "RPS",

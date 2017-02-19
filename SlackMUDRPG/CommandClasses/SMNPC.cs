@@ -253,17 +253,26 @@ namespace SlackMUDRPG.CommandClasses
 							invokingCharacter.UpdateQuest(qtu);
 						}
 						break;
-					case "checkquestinprogress":
-						// Check the quest log isn't null
-						if (invokingCharacter.QuestLog != null)
-						{
-							if (invokingCharacter.QuestLog.Count(questcheck => (questcheck.QuestName.ToLower() == npccs.AdditionalData.ToLower()) && (questcheck.Completed)) > 0)
-							{
-								continueToNextStep = false;
-							}
-						}
-						break;
-					case "teachskill":
+                    case "checkquestinprogress":
+                        // Check the quest log isn't null
+                        if (invokingCharacter.QuestLog != null)
+                        {
+                            if (invokingCharacter.QuestLog.Count(questcheck => (questcheck.QuestName.ToLower() == npccs.AdditionalData.ToLower()) && (questcheck.Completed)) > 0)
+                            {
+                                continueToNextStep = false;
+                            }
+                        }
+                        break;
+                    case "responseoption":
+                        // Add a response option
+                        List<ShortcutToken> stl = new List<ShortcutToken>();
+                        ShortcutToken st = new ShortcutToken();
+                        st.ShortCutToken = npccs.AdditionalData;
+                        stl.Add(st);
+
+                        AddResponse(npcc, npccs, invokingCharacter, stl, null);
+                        break;
+                    case "teachskill":
 						// Check if the player already has the skill
 						if (invokingCharacter.Skills == null)
 						{
@@ -396,39 +405,48 @@ namespace SlackMUDRPG.CommandClasses
 			// If an option has been set..
 			if (thereIsAnOption)
 			{
-				// Set up a list to hold them in the character (if there isn't one already)
-				if (this.AwaitingCharacterResponses == null)
-				{
-					this.AwaitingCharacterResponses = new List<SMNPCAwaitingCharacterResponse>();
-				}
-			
-				// Create the awaiting response token.
-				SMNPCAwaitingCharacterResponse acr = new SMNPCAwaitingCharacterResponse();
-				acr.ConversationID = npcc.ConversationID;
-				acr.ConversationStep = npccs.StepID;
-				acr.WaitingForCharacter = invokingCharacter;
-				acr.RoomID = this.RoomID;
-
-				// Work out the timeout conversation if there is one.
-				string nextStepAfterTimeout = null;
-				int timeout = 1000;
-				if (npccs.NextStep != null)
-				{
-					string[] getNextStep = npccs.NextStep.Split('.');
-					nextStepAfterTimeout = getNextStep[0];
-					timeout = int.Parse(getNextStep[1]);
-				}
-            
-				// Set the conversation timeout
-				acr.ConversationStepAfterTimeout = nextStepAfterTimeout;
-				acr.UnixTimeStampTimeout = Utility.Utils.GetUnixTimeOffset(timeout);
-
-				// Add the item to the character, and send a message to the player regarding the available responses.
-				this.AwaitingCharacterResponses.Add(acr);
-				invokingCharacter.SetAwaitingResponse(this.UserID, stl, timeout, this.RoomID);
-				invokingCharacter.sendMessageToPlayer(responseOptions);
+                AddResponse(npcc, npccs, invokingCharacter, stl, responseOptions);
 			}
 		}
+
+        public void AddResponse(NPCConversations npcc, NPCConversationStep npccs, SMCharacter invokingCharacter, List<ShortcutToken> stl, string responseOptions)
+        {
+            // Set up a list to hold them in the character (if there isn't one already)
+            if (this.AwaitingCharacterResponses == null)
+            {
+                this.AwaitingCharacterResponses = new List<SMNPCAwaitingCharacterResponse>();
+            }
+
+            // Create the awaiting response token.
+            SMNPCAwaitingCharacterResponse acr = new SMNPCAwaitingCharacterResponse();
+            acr.ConversationID = npcc.ConversationID;
+            acr.ConversationStep = npccs.StepID;
+            acr.WaitingForCharacter = invokingCharacter;
+            acr.RoomID = this.RoomID;
+
+            // Work out the timeout conversation if there is one.
+            string nextStepAfterTimeout = null;
+            int timeout = 1000;
+            if (npccs.NextStep != null)
+            {
+                string[] getNextStep = npccs.NextStep.Split('.');
+                nextStepAfterTimeout = getNextStep[0];
+                timeout = int.Parse(getNextStep[1]);
+            }
+
+            // Set the conversation timeout
+            acr.ConversationStepAfterTimeout = nextStepAfterTimeout;
+            acr.UnixTimeStampTimeout = Utility.Utils.GetUnixTimeOffset(timeout);
+
+            // Add the item to the character, and send a message to the player regarding the available responses.
+            this.AwaitingCharacterResponses.Add(acr);
+            invokingCharacter.SetAwaitingResponse(this.UserID, stl, timeout, this.RoomID);
+
+            if (responseOptions != null)
+            {
+                invokingCharacter.sendMessageToPlayer(responseOptions);
+            }
+        }
 
 		public void ProcessCharacterResponse(string responseShortCut, SMCharacter invokingCharacter)
 		{
@@ -456,7 +474,7 @@ namespace SlackMUDRPG.CommandClasses
 							// Get the relevant part of the conversation to go to
 							NPCConversationStep currentStep = npcc.ConversationSteps.FirstOrDefault(step => step.StepID == acr.ConversationStep);
 							
-							if (currentStep != null)
+							if ((currentStep != null) && (currentStep.ResponseOptions != null))
 							{
 								NPCConversationStepResponseOptions nextstep = currentStep.ResponseOptions.FirstOrDefault(ro => ro.ResponseOptionShortcut.ToLower() == responseShortCut.ToLower());
 								
