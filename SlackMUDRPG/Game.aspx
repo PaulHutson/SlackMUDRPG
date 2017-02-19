@@ -133,35 +133,8 @@
 				</div>
 			</div>
 			<div class="FormRow">
-				<div class="FormRomLabel">
-					Character Firstname:
-				</div>
-				<div>
-					<asp:TextBox runat="server" ID="tb_FirstName"></asp:TextBox>
-				</div>
-			</div>
-			<div class="FormRow">
-				<div class="FormRomLabel">
-					Character Lastname:
-				</div>
-				<div>
-					<asp:TextBox runat="server" ID="tb_LastName"></asp:TextBox>
-				</div>
-			</div>
-			<div class="FormRow">
-				<div class="FormRomLabel">
-					Male or Female
-				</div>
-				<div>
-					<asp:DropDownList runat="server" ID="ddl_Sex">
-						<asp:ListItem Text="Male" Value="M"></asp:ListItem>
-						<asp:ListItem Text="Female" Value="F"></asp:ListItem>
-					</asp:DropDownList>
-				</div>
-			</div>
-			<div class="FormRow">
 				<div class="InformationRow">
-					<div class="Strong">Note:</div> Your class will be set through gameplay...
+					<div class="Strong">Note:</div> Your character details will be set through gameplay...
 				</div>
 			</div>
 			<div class="FormRow">

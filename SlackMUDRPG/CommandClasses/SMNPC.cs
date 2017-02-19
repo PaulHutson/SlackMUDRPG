@@ -263,16 +263,21 @@ namespace SlackMUDRPG.CommandClasses
                             }
                         }
                         break;
-                    case "responseoption":
-                        // Add a response option
-                        List<ShortcutToken> stl = new List<ShortcutToken>();
-                        ShortcutToken st = new ShortcutToken();
-                        st.ShortCutToken = npccs.AdditionalData;
-                        stl.Add(st);
-
-                        AddResponse(npcc, npccs, invokingCharacter, stl, null);
-                        break;
-                    case "teachskill":
+					case "setplayerattribute":
+						// Add a response option
+						switch (npccs.AdditionalData.ToLower())
+						{
+							case "firstname":
+								invokingCharacter.FirstName = invokingCharacter.VariableResponse;
+								break;
+							case "lastname":
+								invokingCharacter.LastName = invokingCharacter.VariableResponse;
+								break;
+						}
+						invokingCharacter.SaveToApplication();
+						invokingCharacter.SaveToFile();
+						break;
+					case "teachskill":
 						// Check if the player already has the skill
 						if (invokingCharacter.Skills == null)
 						{
@@ -426,7 +431,7 @@ namespace SlackMUDRPG.CommandClasses
 
             // Work out the timeout conversation if there is one.
             string nextStepAfterTimeout = null;
-            int timeout = 1000;
+            int timeout = 10000;
             if (npccs.NextStep != null)
             {
                 string[] getNextStep = npccs.NextStep.Split('.');
@@ -442,7 +447,7 @@ namespace SlackMUDRPG.CommandClasses
             this.AwaitingCharacterResponses.Add(acr);
             invokingCharacter.SetAwaitingResponse(this.UserID, stl, timeout, this.RoomID);
 
-            if (responseOptions != null)
+            if ((responseOptions != null) && (!responseOptions.Contains("{variable}")))
             {
                 invokingCharacter.sendMessageToPlayer(responseOptions);
             }
@@ -457,7 +462,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (this.AwaitingCharacterResponses != null)
 			{
 				// Delete all responses over that time
-				this.AwaitingCharacterResponses.RemoveAll(awaitingitems => awaitingitems.UnixTimeStampTimeout < currentUnixTime);
+				// this.AwaitingCharacterResponses.RemoveAll(awaitingitems => awaitingitems.UnixTimeStampTimeout < currentUnixTime);
 
 				if (this.AwaitingCharacterResponses.Count > 0)
 				{
@@ -478,6 +483,14 @@ namespace SlackMUDRPG.CommandClasses
 							{
 								NPCConversationStepResponseOptions nextstep = currentStep.ResponseOptions.FirstOrDefault(ro => ro.ResponseOptionShortcut.ToLower() == responseShortCut.ToLower());
 								
+								// TODO - Update this location with the character variable info.
+
+								if (nextstep == null)
+								{
+									nextstep = currentStep.ResponseOptions.FirstOrDefault(ro => ro.ResponseOptionShortcut.ToLower() == "{variable}");
+									invokingCharacter.VariableResponse = responseShortCut;
+								}
+
 								if (nextstep != null)
 								{
 									NPCResponseOptionAction nroa = nextstep.ResponseOptionActionSteps.FirstOrDefault();
@@ -496,6 +509,11 @@ namespace SlackMUDRPG.CommandClasses
 										// Remove the item from the awaiting items.
 										AwaitingCharacterResponses.Remove(acr);
 
+										// Remove it from the character too, it's processed now so we don't need it any more!
+										invokingCharacter.NPCsWaitingForResponses.RemoveAll(ar => ar.NPCID == this.UserID);
+										invokingCharacter.SaveToApplication();
+										invokingCharacter.SaveToFile();
+										
 										// process it
 										ProcessConversationStep(npcc, convostep[1], invokingCharacter);
 									}
@@ -511,8 +529,9 @@ namespace SlackMUDRPG.CommandClasses
         {
             string responseString = responseStringToProcess;
             responseString = responseString.Replace("{playercharacter}", invokingCharacter.GetFullName());
+			responseString = responseString.Replace("{response}", invokingCharacter.VariableResponse);
 
-            return responseString;
+			return responseString;
 		}
 
 		/// <summary>
