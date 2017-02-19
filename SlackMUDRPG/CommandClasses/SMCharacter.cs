@@ -94,6 +94,7 @@ namespace SlackMUDRPG.CommandClasses
 		public string ResponseURL { get; set; }
 		public string ConnectionService { get; set; }
 		public string LastUsedCommand { get; set; }
+		public string VariableResponse { get; set; }
 		public List<AwaitingResponseFromCharacter> NPCsWaitingForResponses { get; set; }
 
 		/// <summary>
@@ -291,7 +292,7 @@ namespace SlackMUDRPG.CommandClasses
                             currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
 
 							// Expire any awaiting responses from NPCs (to clean the memory / character file up)
-							ExpireResponse(true);
+							NPCsWaitingForResponses = null;
 
 							// Move the player to the new location
 							this.RoomID = smr.RoomID;
@@ -2270,26 +2271,33 @@ namespace SlackMUDRPG.CommandClasses
 
 		public void AddQuest(SMQuest smq)
 		{
-			// Construct a new status based on the quest
-			SMQuestStatus smqs = new SMQuestStatus();
-			smqs.Completed = false;
-			smqs.Expires = 0;
-			smqs.LastDateUpdated = Utility.Utils.GetUnixTime();
-			smqs.QuestName = smq.QuestName;
-			smqs.QuestStep = smq.QuestSteps.First().Name;
-
 			// Add the item to the quest log
 			if (this.QuestLog == null)
 			{
 				this.QuestLog = new List<SMQuestStatus>();
 			}
-			this.QuestLog.Add(smqs);
 
-			// Tell the player the new quest has been added
-			this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"Quest \"{smqs.QuestName}\" added to quest log."));
+			// Check the quest log doesn't already include a quest with the name already..
+			// .. i.e. you can't have it twice at the same time!
+			if (this.QuestLog.Count(q => q.QuestName == smq.QuestName) == 0)
+			{
+				// Construct a new status based on the quest
+				SMQuestStatus smqs = new SMQuestStatus();
+				smqs.Completed = false;
+				smqs.Expires = 0;
+				smqs.LastDateUpdated = Utility.Utils.GetUnixTime();
+				smqs.QuestName = smq.QuestName;
+				smqs.QuestStep = smq.QuestSteps.First().Name;
 
-			this.SaveToApplication();
-			this.SaveToFile();
+
+				this.QuestLog.Add(smqs);
+
+				// Tell the player the new quest has been added
+				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"Quest \"{smqs.QuestName}\" added to quest log."));
+
+				this.SaveToApplication();
+				this.SaveToFile();
+			}
 		}
 
 		public void UpdateQuest(SMQuest smq)
@@ -2355,6 +2363,18 @@ namespace SlackMUDRPG.CommandClasses
 										numberToGive--;
 									}
 									
+									break;
+								case "key":
+									// Get the item (with a new GUID)
+									SMItem keyBeingGiven = SMItemFactory.Get("Misc", "Key");
+									string[] keyInfo = reward.AdditionalData.Split('.');
+									keyBeingGiven.ItemDescription = keyInfo[0];
+									keyBeingGiven.ItemName = keyInfo[0];
+									keyBeingGiven.AdditionalData = keyInfo[1];
+
+									// Pass the key to the player
+									this.PickUpItem("", keyBeingGiven, true);
+
 									break;
 							}
 						}

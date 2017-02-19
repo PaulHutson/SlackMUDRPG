@@ -226,7 +226,15 @@ namespace SlackMUDRPG.CommandClasses
 							{
 								return $"resp {token.ShortCutToken}";
 							}
-						}
+
+                            if (token.ShortCutToken.ToLower() == "{variable}")
+                            {
+                                token.ShortCutToken = commandText;
+
+                                return $"resp {token.ShortCutToken}";
+                            }
+
+                        }
 					}
 				}
 			}

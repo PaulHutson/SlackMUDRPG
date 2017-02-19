@@ -176,13 +176,27 @@
           "NextStep": "2.1",
           "ResponseOptions": null
         },
-        {
-          "StepID": "2",
-          "Scope": "emote",
-          "AdditionalData": "gestures towards the Arrivals Area Entrance",
-          "NextStep": null,
-          "ResponseOptions": null
-        }
+				{
+					"StepID": "2",
+					"Scope": "emote",
+					"AdditionalData": "gestures towards the Arrivals Area Entrance",
+					"NextStep": "3.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "3",
+					"Scope": "CheckQuestInProgress",
+					"AdditionalData": "Welcome to Ravensmere",
+					"NextStep": "4.0",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "4",
+					"Scope": "addquest",
+					"AdditionalData": "PodgyClerk.Welcome to Ravensmere",
+					"NextStep": null,
+					"ResponseOptions": null
+				}
       ]
     },
     {

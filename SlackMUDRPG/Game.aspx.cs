@@ -16,9 +16,9 @@ namespace SlackMUDRPG
 
 		protected void btn_CreateCharacter_Click(object sender, EventArgs e)
 		{
-			if ((tb_CreateUserName.Text != "") && (tb_CreatePassword.Text != "") && (tb_FirstName.Text != "") && (tb_LastName.Text != ""))
+			if ((tb_CreateUserName.Text != "") && (tb_CreatePassword.Text != ""))
 			{
-				Response.Cookies["ProvinceUserID"].Value = new SlackMUDRPG.CommandClasses.SlackMud().CreateCharacter(Guid.NewGuid().ToString(), tb_FirstName.Text, tb_LastName.Text, ddl_Sex.Text, "18", "BaseCharacter", null, tb_CreateUserName.Text, tb_CreatePassword.Text);
+				Response.Cookies["ProvinceUserID"].Value = new SlackMUDRPG.CommandClasses.SlackMud().CreateCharacter(Guid.NewGuid().ToString(), "New", "Arrival", "m", "18", "BaseCharacter", null, tb_CreateUserName.Text, tb_CreatePassword.Text, false);
 			}
 		}
 	}

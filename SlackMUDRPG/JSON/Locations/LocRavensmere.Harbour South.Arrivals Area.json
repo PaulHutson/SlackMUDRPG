@@ -14,7 +14,10 @@
 		{
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
+			"RoomID": "Ravensmere.Harbour South.Docklands Way South",
+      "RoomLockID": "RavensmereAAEtoDWS",
+      "Locked": true,
+      "Lockable": false
 		}
 	],
 	"RoomItems": null

@@ -58,33 +58,6 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.TextBox tb_CreatePassword;
         
         /// <summary>
-        /// tb_FirstName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_FirstName;
-        
-        /// <summary>
-        /// tb_LastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_LastName;
-        
-        /// <summary>
-        /// ddl_Sex control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_Sex;
-        
-        /// <summary>
         /// btn_CreateCharacter control.
         /// </summary>
         /// <remarks>

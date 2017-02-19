@@ -80,7 +80,10 @@ namespace SlackMUDRPG.CommandClasses
 
 					// Clear old responses an quests from the character
 					character.ClearQuests();
-					character.ClearResponses();
+					if (character.NPCsWaitingForResponses != null)
+					{
+						character.NPCsWaitingForResponses.RemoveAll(a => a.NPCID != "");
+					}
 
 					// Return the text output
 					character.sendMessageToPlayer(returnString);
@@ -255,7 +258,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="sexIn">M or F for the male / Female character</param>
 		/// <param name="characterType">M or F for the male / Female character</param>
 		/// <returns>A string with the character information</returns>
-		public string CreateCharacter(string userID, string firstName, string lastName, string sexIn, string age, string characterType = "BaseCharacter", string responseURL = null, string userName = null, string password = null)
+		public string CreateCharacter(string userID, string firstName, string lastName, string sexIn, string age, string characterType = "BaseCharacter", string responseURL = null, string userName = null, string password = null, bool autoLogin = true)
 		{
 			// Get the path for the character
 			string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
@@ -321,7 +324,7 @@ namespace SlackMUDRPG.CommandClasses
 				SMChar.SaveToFile();
 
 				// Check if there is a response URL
-				if (responseURL != null)
+				if ((responseURL != null) && (autoLogin))
 				{
 					// Log the newly created character into the game if in something like Slack
 					Login(userID, true, responseURL);
