@@ -1921,11 +1921,14 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				foreach (SMItem item in container.HeldItems)
 				{
-					if (item.AdditionalData.ToLower() == additionalData.ToLower())
+					if (item.AdditionalData != null)
 					{
-						return item;
+						if (item.AdditionalData.ToLower() == additionalData.ToLower())
+						{
+							return item;
+						}
 					}
-
+					
 					if (item.ItemType == "container")
 					{
 						SMItem smi = this.FindItemInContainerByAdditionalData(additionalData, item);
@@ -1957,7 +1960,7 @@ namespace SlackMUDRPG.CommandClasses
                         return true;
                     }
 
-                    if (slot.EquippedItem.ItemType == "container")
+                    if (slot.EquippedItem.ItemType.ToLower() == "container")
                     {
                         SMItem item = this.FindItemInContainerByAdditionalData(lockedKeyCode, slot.EquippedItem);
                         if (item != null)
