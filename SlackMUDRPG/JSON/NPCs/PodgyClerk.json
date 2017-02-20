@@ -278,7 +278,7 @@
 					"StepID": "4-8",
 					"Scope": "setplayerattribute",
 					"AdditionalData": "lastname",
-					"NextStep": "4-9",
+					"NextStep": "4-9.0",
 					"ResponseOptions": null
 				},
 				{

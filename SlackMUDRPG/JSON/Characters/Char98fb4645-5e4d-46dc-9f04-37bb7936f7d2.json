@@ -1,0 +1,123 @@
+{
+  "firstname": "a",
+  "lastname": "b",
+  "lastinteractiondate": "2017-02-20T20:13:34.1381499+00:00",
+  "lastlogindate": "2017-02-20T20:13:17.8541956+00:00",
+  "age": 18,
+  "sex": "m",
+  "pkFlag": false,
+  "userID": "98fb4645-5e4d-46dc-9f04-37bb7936f7d2",
+  "username": "aa",
+  "password": "EAAAALEIX+TFeTnttIM24XVao4cqBti3WEJwccC56rd6Ppm5",
+  "roomID": "Ravensmere.Harbour South.Arrivals Area",
+  "questLog": [
+    {
+      "questName": "Welcome to Ravensmere",
+      "questStep": "Visit the Clerk in the arrivals hall",
+      "lastDateUpdated": 1487621350,
+      "expires": 0,
+      "completed": true
+    }
+  ],
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ],
+      "equippedItem": {
+        "itemID": "eb187e63-272c-408e-a647-08c17082cdbd",
+        "singularPronoun": "a",
+        "itemName": "Key to access the arrivals hall entrance to the city",
+        "pluralName": "Keys",
+        "pluralPronoun": "some",
+        "itemType": "Misc",
+        "itemFamily": "Key",
+        "itemDescription": "Key to access the arrivals hall entrance to the city",
+        "itemWeight": 0,
+        "itemCapacity": 0,
+        "itemSize": 0,
+        "hitPoints": 1000000000,
+        "maxHitPoints": 1000000000,
+        "baseDamage": 0.001,
+        "toughness": 1,
+        "additionalData": "RavensmereAAEtoDWS"
+      }
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "246a4409-91bb-4ccf-a4ee-096e674bed89",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RightFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "characterWeight": 50,
+  "characterSize": 160,
+  "connectionService": "WS",
+  "lastUsedCommand": "resp Y",
+  "variableResponse": "m",
+  "npCsWaitingForResponses": []
+}
