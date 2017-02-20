@@ -246,34 +246,153 @@
             }
 					]
         },
-        {
-          "StepID": "4-7",
-          "Scope": "saytoplayer",
-          "AdditionalData": "I see, {response}, is *that* what your family name is?",
-          "NextStep": null,
-          "ResponseOptions": [
-            {
-              "ResponseOptionShortcut": "Y",
-              "ResponseOptionText": "Yes",
-              "ResponseOptionActionSteps": [
-                {
-                  "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "GivePass.setplayername"
-                }
-              ]
-            },
-            {
-              "ResponseOptionShortcut": "N",
-              "ResponseOptionText": "No",
-              "ResponseOptionActionSteps": [
-                {
-                  "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.4-5"
-                }
-              ]
-            }
-          ]
-        },
+				{
+					"StepID": "4-7",
+					"Scope": "saytoplayer",
+					"AdditionalData": "I see, {response}, is *that* what your family name is?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Enter.4-8"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Enter.4-5"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "4-8",
+					"Scope": "setplayerattribute",
+					"AdditionalData": "lastname",
+					"NextStep": "4-9",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "4-9",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Right... and, forgive me for asking because it's a bit hard to tell from here.. are you male or female?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "M",
+							"ResponseOptionText": "Male",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Enter.4-10"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "F",
+							"ResponseOptionText": "Female",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Enter.4-11"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "4-10",
+					"Scope": "setvariableresponse",
+					"AdditionalData": "m",
+					"NextStep": "4-11.0",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "4-11",
+					"Scope": "setplayerattribute",
+					"AdditionalData": "sex",
+					"NextStep": "4-12.0",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "4-12",
+					"Scope": "saytoplayer",
+					"AdditionalData": "So, to be clear you're *checks notes* {playername} and you're male...?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "GivePass.preamble"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Enter.4-9"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "4-13",
+					"Scope": "setvariableresponse",
+					"AdditionalData": "f",
+					"NextStep": "4-14.0",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "4-14",
+					"Scope": "setplayerattribute",
+					"AdditionalData": "sex",
+					"NextStep": "4-15.0",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "4-15",
+					"Scope": "saytoplayer",
+					"AdditionalData": "So, to be clear you're *checks notes* {playername} and you're female...?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "GivePass.preamble"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Enter.4-9"
+								}
+							]
+						}
+					]
+				},
         {
           "StepID": "5-1",
           "Scope": "emotetoplayer",
@@ -300,31 +419,31 @@
     {
       "ConversationID": "GivePass",
       "ConversationStep": [
-        {
-          "StepID": "setplayername",
-          "Scope": "setplayerattribute",
-          "AdditionalData": "lastname",
-          "NextStep": "1.0",
-          "ResponseOptions": null
-        },
+				{
+					"StepID": "preamble",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Right... you're free to enter the city...",
+					"NextStep": "1.0",
+					"ResponseOptions": null
+				},
         {
           "StepID": "1",
           "Scope": "saytoplayer",
-          "AdditionalData": "Very well, take this pass and head through either of the doors ahead to enter the city",
+          "AdditionalData": "... take this pass and head through either of the doors ahead.",
           "NextStep": "2.2",
           "ResponseOptions": null
         },
 				{
 					"StepID": "2",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "gestures towards the door to the Docklands Way South (DWS)",
+					"Scope": "updatequest",
+					"AdditionalData": "PodgyClerk.Welcome to Ravensmere",
 					"NextStep": "3.0",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "3",
-					"Scope": "updatequest",
-					"AdditionalData": "PodgyClerk.Welcome to Ravensmere",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "gestures towards the door to the Docklands Way South (DWS)",
 					"NextStep": null,
 					"ResponseOptions": null
 				}

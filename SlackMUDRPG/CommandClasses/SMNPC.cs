@@ -273,9 +273,15 @@ namespace SlackMUDRPG.CommandClasses
 							case "lastname":
 								invokingCharacter.LastName = invokingCharacter.VariableResponse;
 								break;
+							case "sex":
+								invokingCharacter.Sex = char.Parse(invokingCharacter.VariableResponse);
+								break;
 						}
 						invokingCharacter.SaveToApplication();
 						invokingCharacter.SaveToFile();
+						break;
+					case "setvariableresponse":
+						invokingCharacter.VariableResponse = npccs.AdditionalData.ToLower();
 						break;
 					case "teachskill":
 						// Check if the player already has the skill
