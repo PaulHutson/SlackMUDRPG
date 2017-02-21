@@ -54,7 +54,7 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("CurrentActivity")]
 		public string CurrentActivity { get; set; }
 
-		[JsonProperty("CurrentActivity")]
+		[JsonProperty("NewbieTipsDisabled")]
 		public bool NewbieTipsDisabled { get; set; }
 
 		[JsonProperty("QuestLog")]
@@ -2119,29 +2119,67 @@ namespace SlackMUDRPG.CommandClasses
 			Commands.SendMessage(this.ConnectionService, "SlackMud", message, "SlackMud", userIDToSendTo, this.ResponseURL);
 		}
 
-    /// <summary>
-    /// Sends an ooc message to the zone you're in ...
-    /// ... or globally if the "global" bool is true
-    /// </summary>
-    /// <param name="message">the message being sent to the player</param>
-    /// <param name="global">If "global" is sent into this it will send the message globally</param>
-    public void SendOOC(string message, string global = "")
-    {
-        List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
-        string region = "GLOBAL";
-        string currentRoomName = this.GetRoom().RoomID;
-        if (global.ToLower() == "global")
-        {
-            string currentArea = currentRoomName.Substring(0, currentRoomName.IndexOf('.') - 1);
-            region = currentArea;
-            smcs = smcs.FindAll(smc => smc.RoomID.Substring(0, smc.RoomID.IndexOf('.')) == currentRoomName);
-        }
+		/// <summary>
+		/// Enable or disable the tips
+		/// </summary>
+		/// <param name="enabledisable">Expected: on or off</param>
+		public void NewbieTips(string enabledisable)
+		{
+			switch (enabledisable.ToLower())
+			{
+				case "on":
+					this.NewbieTipsOn();
+					break;
+				case "off":
+					this.NewbieTipsOff();
+					break;
+				default:
+					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Please specify \"on\" or \"off\" when using the newbietips command."));
+					break;
+			}
+		}
 
-        foreach (SMCharacter smc in smcs)
-        {
-            smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.GetFullName() + " OOC[" + currentRoomName + "]: " + message));
-        }
-    }
+		/// <summary>
+		/// Enable newbie tips if they have been disabled.
+		/// </summary>
+		private void NewbieTipsOn()
+		{
+			this.NewbieTipsDisabled = false;
+			this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Newbie tips enabled [to disable them again type \"newbietips off\"]"));
+		}
+
+		/// <summary>
+		/// Disable newbie tips.
+		/// </summary>
+		private void NewbieTipsOff()
+		{
+			this.NewbieTipsDisabled = true;
+			this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Newbie tips disabled [to enable them again type \"newbietips on\"]"));
+		}
+
+		/// <summary>
+		/// Sends an ooc message to the zone you're in ...
+		/// ... or globally if the "global" bool is true
+		/// </summary>
+		/// <param name="message">the message being sent to the player</param>
+		/// <param name="global">If "global" is sent into this it will send the message globally</param>
+		public void SendOOC(string message, string global = "")
+		{
+			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+			string region = "GLOBAL";
+			string currentRoomName = this.GetRoom().RoomID;
+			if (global.ToLower() == "global")
+			{
+				string currentArea = currentRoomName.Substring(0, currentRoomName.IndexOf('.') - 1);
+				region = currentArea;
+				smcs = smcs.FindAll(smc => smc.RoomID.Substring(0, smc.RoomID.IndexOf('.')) == currentRoomName);
+			}
+
+			foreach (SMCharacter smc in smcs)
+			{
+				smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.GetFullName() + " OOC[" + currentRoomName + "]: " + message));
+			}
+		}
 
 		#endregion
 

@@ -263,15 +263,26 @@ namespace SlackMUDRPG.CommandClasses
                             }
                         }
                         break;
+					case "checkquestcomplete":
+						// Check the player has completed the quest
+						if (invokingCharacter.QuestLog != null)
+						{
+							if (invokingCharacter.QuestLog.Count(questcheck => (questcheck.QuestName.ToLower() == npccs.AdditionalData.ToLower()) && (questcheck.Completed)) == 0)
+							{
+								continueToNextStep = false;
+							}
+						}
+						break;
 					case "setplayerattribute":
 						// Add a response option
+						string s = invokingCharacter.VariableResponse.ToLower();
 						switch (npccs.AdditionalData.ToLower())
 						{
 							case "firstname":
-								invokingCharacter.FirstName = invokingCharacter.VariableResponse;
+								invokingCharacter.FirstName = char.ToUpper(s[0]) + s.Substring(1);
 								break;
 							case "lastname":
-								invokingCharacter.LastName = invokingCharacter.VariableResponse;
+								invokingCharacter.LastName = char.ToUpper(s[0]) + s.Substring(1);
 								break;
 							case "sex":
 								invokingCharacter.Sex = char.Parse(invokingCharacter.VariableResponse);
