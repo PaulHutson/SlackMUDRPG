@@ -27,8 +27,11 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("Outside")]
         public bool Outside { get; set; }
 
-        [JsonProperty("RoomDescription")]
+		[JsonProperty("RoomDescription")]
 		public string RoomDescription { get; set; }
+
+		[JsonProperty("RoomNewbieTips")]
+		public string RoomNewbieTips { get; set; }
 
 		[JsonProperty("RoomExits")]
 		public List<SMExit> RoomExits { get; set; }
@@ -232,7 +235,7 @@ namespace SlackMUDRPG.CommandClasses
         /// <summary>
         /// Gets a list of all the people in the room.
         /// </summary>
-        public string GetPeopleDetails(string userID = "0")
+        public string GetPeopleDetails(SMCharacter smc = null)
 		{
 			string returnString = "\n> \n> People:\n";
 
@@ -243,7 +246,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (smcs != null)
 			{
 				bool isFirst = true;
-				foreach (SMCharacter smc in smcs)
+				foreach (SMCharacter character in smcs)
 				{
 					if (!isFirst)
 					{
@@ -255,7 +258,7 @@ namespace SlackMUDRPG.CommandClasses
 						returnString += "> ";
 					}
 
-					if (smc.UserID == userID)
+					if (character.UserID == smc.UserID)
 					{
 						returnString += "You";
 					}
@@ -341,16 +344,28 @@ namespace SlackMUDRPG.CommandClasses
         /// </summary>
         /// <param name="smr">An SMRoom</param>
         /// <returns>String including a full location string</returns>
-        public string GetLocationInformation(string userID = "0")
+        public string GetLocationInformation(SMCharacter smc = null)
 		{
 			// Construct the room string.
-			string returnString = "*Location Details - " + this.RoomID.Replace(".",", ")  + ":*\n";
+			string returnString = "";
+				
+			if (smc != null)
+			{
+				if ((!smc.NewbieTipsDisabled) && (this.RoomNewbieTips != null) && (this.RoomNewbieTips != ""))
+				{
+					returnString += OutputFormatterFactory.Get().Bold("~~~~~ NEWBIE TIPS ~~~~~");
+					returnString += OutputFormatterFactory.Get().ListItem(this.RoomNewbieTips);
+					returnString += OutputFormatterFactory.Get().Bold("~~~~~     END     ~~~~~");
+				}
+			}
+
+			returnString += "*Location Details - " + this.RoomID.Replace(".",", ")  + ":*\n";
 
 			// Create the string and add the basic room description.
 			returnString += "> " + this.RoomDescription;
 
 			// Add the people within the location
-			returnString += this.GetPeopleDetails(userID);
+			returnString += this.GetPeopleDetails(smc);
 
             // Add the NPCs within the location
             returnString += this.GetNPCDetails();

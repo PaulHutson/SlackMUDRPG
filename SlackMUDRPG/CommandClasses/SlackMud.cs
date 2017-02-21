@@ -76,7 +76,7 @@ namespace SlackMUDRPG.CommandClasses
 						returnString = OutputFormatterFactory.Get().Bold("Welcome to SlackMud!");
 						returnString += OutputFormatterFactory.Get().General("We've created your character in the magical world of Arrelvia!"); // TODO, use a welcome script!
 					}
-					returnString += GetLocationDetails(character.RoomID, character.UserID);
+					returnString += GetLocationDetails(character.RoomID, character);
 
 					// Clear old responses an quests from the character
 					character.ClearQuests();
@@ -418,7 +418,7 @@ namespace SlackMUDRPG.CommandClasses
 			return roomInMem;
 		}
 
-		public string GetLocationDetails(string roomID, string userID = "0")
+		public string GetLocationDetails(string roomID, SMCharacter smc)
 		{
 			// Variable for the return string
 			string returnString = "";
@@ -435,7 +435,7 @@ namespace SlackMUDRPG.CommandClasses
 			else
 			{
 				// Return the room description, exits, people and objects 
-				returnString = smr.GetLocationInformation(userID);
+				returnString = smr.GetLocationInformation(smc);
 			}
 
 			// Return the text output

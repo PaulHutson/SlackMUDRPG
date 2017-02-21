@@ -5,6 +5,7 @@
 	"RoomLocationZ": "1",
   "Outside": true,
 	"RoomDescription": "You stand on a busy wooden dock surrounded by a bustling crowd. There are many ships arriving along the waterfront, and people are filing out and heading into an arrivals area. Over the tops of large wooden buildings, tall blue spires can be seen and beyond, a large mountain range which seems to surround this foreign settlement.",
+	"RoomNewbieTips": "You've just arrived off of a boat in the MUD named *Province*.  You can use a whole range of commands to look around, talk and generally interact with the game... for a start, it would be worth you trying to move to the Arrivals Area by using the shortcut code for the area by typing either \"move aae\" or simply \"aae\"... [To disable tips type \"newbietips off\"]",
 	"RoomExits": [
 		{
 			"Shortcut": "AAE",

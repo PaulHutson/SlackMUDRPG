@@ -1,21 +1,21 @@
 {
-  "firstname": "dada",
-  "lastname": "dwadada",
-  "lastinteractiondate": "2017-02-21T22:34:41.9479482+00:00",
-  "lastlogindate": "2017-02-21T22:41:59.1334654+00:00",
+  "firstname": "Uio",
+  "lastname": "Dwad",
+  "lastinteractiondate": "2017-02-21T22:44:28.4765074+00:00",
+  "lastlogindate": "2017-02-21T22:43:50.6245993+00:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
-  "userID": "471b4178-1845-4f55-af3d-7bc894c30f2d",
-  "username": "aaa",
-  "password": "EAAAAI7whBFur7irtIQOZAKsj63zdJM2fagYiVaDz/hsC15D",
-  "roomID": "Ravensmere.Harbour South.Arrivals Area",
+  "userID": "f89adcc2-be3f-4414-9c9f-296a9dab42a2",
+  "username": "dwd",
+  "password": "EAAAAOrXr64aFT/88v6SkOyqwiF+XjNcwwqinzc08vF6gL5c",
+  "roomID": "Ravensmere.Harbour South.Docklands Way South",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1487704099,
+      "lastDateUpdated": 1487717032,
       "expires": 0,
       "completed": true
     }
@@ -38,7 +38,7 @@
         "any"
       ],
       "equippedItem": {
-        "itemID": "710f7afb-74e7-431f-812d-7be7981ae974",
+        "itemID": "ec5d717b-4611-4670-b8fc-dac4df7cda31",
         "singularPronoun": "a",
         "itemName": "Key to access the arrivals hall entrance to the city",
         "pluralName": "Keys",
@@ -68,7 +68,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "1e3c257d-7398-4398-a280-c9bef58614ff",
+        "itemID": "8982330f-7780-4ee6-afc8-cf9b4f2c6592",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -118,6 +118,6 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move AAE",
+  "lastUsedCommand": "move DWS",
   "variableResponse": "m"
 }

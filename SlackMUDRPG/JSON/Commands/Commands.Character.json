@@ -154,5 +154,18 @@
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "{name|lower}",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Character",
+		"CommandName": "newbietips",
+		"CommandDescription": "Disable or enable newbie tips",
+		"CommandSyntax": "newbietips on|off",
+		"ParamsExpression": "newbietips {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "NewbieTips",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "\"newbietips on\" or \"newbietips off\"",
+		"RequiredSkill": null
 	}
 ]

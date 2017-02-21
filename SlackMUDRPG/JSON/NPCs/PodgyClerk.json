@@ -108,19 +108,23 @@
 	"PronounSingular": "a",
 	"PronounMultiple": "some",
   "NPCResponses": [
-    {
-      "ResponseType": "PlayerCharacter.Enter",
-      "ResponseTimeOfDay": "all",
-      "AdditionalData": null,
-      "Faction": null,
-      "Frequency": 100,
-      "ResponseSteps": [
-        {
+		{
+			"ResponseType": "PlayerCharacter.Enter",
+			"ResponseTimeOfDay": "all",
+			"AdditionalData": null,
+			"Faction": null,
+			"Frequency": 100,
+			"ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Enter.CheckQuest"
+				},
+				{
           "ResponseStepType": "Conversation",
-          "ResponseStepData": "Enter.CheckQuest"
+          "ResponseStepData": "EnterQuestComplete.CheckQuest"
         }
-      ]
-    }
+			]
+		}
   ],
   "NPCConversationStructures": [
     {
@@ -143,7 +147,7 @@
         {
           "StepID": "2",
           "Scope": "saytoplayer",
-          "AdditionalData": "Welcome to Ravensmere traveller.  Would this be your first visiting the city?",
+          "AdditionalData": "Welcome to Ravensmere traveller.  Would this be your first time visiting the city?",
           "NextStep": null,
           "ResponseOptions": [
             {
@@ -228,28 +232,35 @@
           "NextStep": "4-5.0",
           "ResponseOptions": null
         },
-        {
-          "StepID": "4-5",
-          "Scope": "saytoplayer",
-          "AdditionalData": "And what is your family name?",
-          "NextStep": null,
-          "ResponseOptions": [
+				{
+					"StepID": "4-5",
+					"Scope": "saytoplayer",
+					"AdditionalData": "And what is your family name?",
+					"NextStep": null,
+					"ResponseOptions": [
 						{
-              "ResponseOptionShortcut": "{variable}",
-              "ResponseOptionText": "{variable}",
-              "ResponseOptionActionSteps": [
-                {
-                  "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.4-7"
-                }
-              ]
-            }
+							"ResponseOptionShortcut": "{variable}",
+							"ResponseOptionText": "{variable}",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Enter.4-6"
+								}
+							]
+						}
 					]
-        },
+				},
+				{
+					"StepID": "4-6",
+					"Scope": "saytoplayer",
+					"AdditionalData": "... {response} ...",
+					"NextStep": "4-7.2",
+					"ResponseOptions": null
+				},
 				{
 					"StepID": "4-7",
 					"Scope": "saytoplayer",
-					"AdditionalData": "I see, {response}, is *that* what your family name is?",
+					"AdditionalData": "... that's an odd family name... nevermind, we have room for everyone here... did I hear you correctly?",
 					"NextStep": null,
 					"ResponseOptions": [
 						{
@@ -326,7 +337,7 @@
 				{
 					"StepID": "4-12",
 					"Scope": "saytoplayer",
-					"AdditionalData": "So, to be clear you're *checks notes* {playername} and you're male...?",
+					"AdditionalData": "So, to be clear you're *checks notes* {playercharacter} and you're male...?",
 					"NextStep": null,
 					"ResponseOptions": [
 						{
@@ -368,7 +379,7 @@
 				{
 					"StepID": "4-15",
 					"Scope": "saytoplayer",
-					"AdditionalData": "So, to be clear you're *checks notes* {playername} and you're female...?",
+					"AdditionalData": "So, to be clear you're *checks notes* {playercharacter} and you're female...?",
 					"NextStep": null,
 					"ResponseOptions": [
 						{
@@ -416,9 +427,9 @@
         }
       ]
     },
-    {
-      "ConversationID": "GivePass",
-      "ConversationStep": [
+		{
+			"ConversationID": "GivePass",
+			"ConversationStep": [
 				{
 					"StepID": "preamble",
 					"Scope": "saytoplayer",
@@ -426,13 +437,13 @@
 					"NextStep": "1.0",
 					"ResponseOptions": null
 				},
-        {
-          "StepID": "1",
-          "Scope": "saytoplayer",
-          "AdditionalData": "... take this pass and head through either of the doors ahead.",
-          "NextStep": "2.2",
-          "ResponseOptions": null
-        },
+				{
+					"StepID": "1",
+					"Scope": "saytoplayer",
+					"AdditionalData": "... take this pass and head through either of the doors ahead.",
+					"NextStep": "2.2",
+					"ResponseOptions": null
+				},
 				{
 					"StepID": "2",
 					"Scope": "updatequest",
@@ -447,8 +458,41 @@
 					"NextStep": null,
 					"ResponseOptions": null
 				}
-      ]
-    }
+			]
+		},
+		{
+			"ConversationID": "EnterQuestComplete",
+			"ConversationStep": [
+				{
+					"StepID": "CheckQuest",
+					"Scope": "checkquestcomplete",
+					"AdditionalData": "Welcome to Ravensmere",
+					"NextStep": "1.0",
+					"ResponseOptions": null
+				},
+				{
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Hrm.. not you again...",
+          "NextStep": "2.2",
+          "ResponseOptions": null
+        },
+				{
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... I bet you're going to try to waste my time, well.. as you can see I have a lot of people to process.",
+          "NextStep": "3.2",
+          "ResponseOptions": null
+        },
+				{
+          "StepID": "3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "turns his attention back to the person he was previously talking to.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+			]
+		}
   ],
   "NPCMovementAlgorithms": null,
   "NPCMovementTarget": null

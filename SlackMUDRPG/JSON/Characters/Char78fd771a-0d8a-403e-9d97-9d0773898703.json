@@ -1,23 +1,23 @@
 {
-  "firstname": "dada",
-  "lastname": "dwadada",
-  "lastinteractiondate": "2017-02-21T22:34:41.9479482+00:00",
-  "lastlogindate": "2017-02-21T22:41:59.1334654+00:00",
+  "firstname": "New",
+  "lastname": "Arrival",
+  "lastinteractiondate": "2017-02-21T22:43:21.6198336+00:00",
+  "lastlogindate": "2017-02-21T22:43:13.7621003+00:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
-  "userID": "471b4178-1845-4f55-af3d-7bc894c30f2d",
-  "username": "aaa",
-  "password": "EAAAAI7whBFur7irtIQOZAKsj63zdJM2fagYiVaDz/hsC15D",
+  "userID": "78fd771a-0d8a-403e-9d97-9d0773898703",
+  "username": "dad",
+  "password": "EAAAAGGcsK2yfQ32oS6L1pa0kgv8tBJputC16aeUWW9UtMIr",
   "roomID": "Ravensmere.Harbour South.Arrivals Area",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1487704099,
+      "lastDateUpdated": 1487716962,
       "expires": 0,
-      "completed": true
+      "completed": false
     }
   ],
   "attributes": {
@@ -36,25 +36,7 @@
       "name": "RightHand",
       "allowedTypes": [
         "any"
-      ],
-      "equippedItem": {
-        "itemID": "710f7afb-74e7-431f-812d-7be7981ae974",
-        "singularPronoun": "a",
-        "itemName": "Key to access the arrivals hall entrance to the city",
-        "pluralName": "Keys",
-        "pluralPronoun": "some",
-        "itemType": "Misc",
-        "itemFamily": "Key",
-        "itemDescription": "Key to access the arrivals hall entrance to the city",
-        "itemWeight": 0,
-        "itemCapacity": 0,
-        "itemSize": 0,
-        "hitPoints": 1000000000,
-        "maxHitPoints": 1000000000,
-        "baseDamage": 0.001,
-        "toughness": 1,
-        "additionalData": "RavensmereAAEtoDWS"
-      }
+      ]
     },
     {
       "name": "LeftHand",
@@ -68,7 +50,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "1e3c257d-7398-4398-a280-c9bef58614ff",
+        "itemID": "b5053b13-f2a7-46ea-971d-521bc5ff5212",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -119,5 +101,19 @@
   "characterSize": 160,
   "connectionService": "WS",
   "lastUsedCommand": "move AAE",
-  "variableResponse": "m"
+  "npCsWaitingForResponses": [
+    {
+      "npcid": "PodgyClerk",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Y"
+        },
+        {
+          "shortCutToken": "N"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Arrivals Area",
+      "timeOut": 1487727002
+    }
+  ]
 }
