@@ -5,6 +5,7 @@
 	"RoomLocationZ": "1",
   "Outside": false,
 	"RoomDescription": "You stand in a large hall full of weary travellers. Magnificant painted scenes of a seafaring culture line the walls, and clerks move around with large stacks of documents. A podgy man with a monacle and greasy hair beckons to all new arrivals..",
+	"RoomNewbieTips": "This is the arrivals area for the MUD named *Province*.  You can use a whole range of commands to look around, talk and generally interact with the game... for a start, it would be worth you trying to move to the Arrivals Area",
 	"RoomExits": [
 		{
 			"Shortcut": "AAE",

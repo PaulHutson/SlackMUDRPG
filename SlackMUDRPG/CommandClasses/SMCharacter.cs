@@ -54,6 +54,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("CurrentActivity")]
 		public string CurrentActivity { get; set; }
 
+		[JsonProperty("CurrentActivity")]
+		public bool NewbieTipsDisabled { get; set; }
+
 		[JsonProperty("QuestLog")]
 		public List<SMQuestStatus> QuestLog { get; set; }
 
@@ -206,7 +209,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		public void GetRoomDetails()
 		{
-			this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this.UserID));
+			this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
 		}
 
 		/// <summary>
@@ -298,7 +301,7 @@ namespace SlackMUDRPG.CommandClasses
 							this.RoomID = smr.RoomID;
                             this.SaveToApplication();
                             this.SaveToFile();
-                            this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
+                            this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
 
                             // Announce arrival to other players in the same place
                             smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " walks in."), this, true);
@@ -347,7 +350,7 @@ namespace SlackMUDRPG.CommandClasses
 					this.RoomID = smr.RoomID;
 					this.SaveToApplication();
 					this.SaveToFile();
-					this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID));
+					this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
 
 					// Announce arrival to other players in the same place
 					smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " arrives in haste."), this, true);

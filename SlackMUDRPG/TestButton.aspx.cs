@@ -28,7 +28,7 @@ namespace SlackMUDRPG
 		protected void btn_TestLoc_Click(object sender, EventArgs e)
 		{
 			SMCharacter smc = new SlackMud().GetCharacter(tb_CharID.Text);
-			new SlackMud().GetLocationDetails(smc.RoomID, smc.UserID);
+			new SlackMud().GetLocationDetails(smc.RoomID, smc);
 		}
 
 		protected void btn_MoveRoom_Click(object sender, EventArgs e)
