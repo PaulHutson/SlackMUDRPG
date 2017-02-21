@@ -1,4 +1,7 @@
+using Microsoft.Bot.Connector;
+using Microsoft.Web.WebSockets;
 using SlackMUDRPG.BotFramework;
+using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Handlers;
 using System;
 using System.Collections.Generic;
@@ -10,41 +13,6 @@ namespace SlackMUDRPG.CommandClasses
 {
 	public static class Commands
 	{
-		#region "Example Code"
-
-		//static String[] helloList = { "Hello", "Greetings", "Bonjour", "A very good day to you all", "Hey", "Howdy", "Well Hello!", "Yo", "Hi", "Beunas dias", "Good day", "Hi-ya", "How goes it?", "Howdy-do", "Shalom", "Whazzzzuppp?", "G'Day" };
-		//static Random rnd = new Random();
-		//public static string HelloSlack(string extraItemsIn = "")
-		//{
-		//	int r = rnd.Next(helloList.Count());
-
-
-		//	// Create actual name links
-		//	// String format: <a class="internal_member_link" data-member-name="kerryb" target="/team/kerryb" href="/team/kerryb">@kerryb</a>
-
-		//	string extraItemsList = "";
-
-		//	if ((extraItemsIn != null) && (extraItemsIn != ""))
-		//	{
-		//		String[] splitString = extraItemsIn.Split(' ');
-		//		foreach (string item in splitString)
-		//		{
-		//			if ((item.Substring(0, 1) == "@") || (item.Substring(0, 1) == "#"))
-		//			{
-		//				extraItemsList += "<" + item + "> ";
-		//			}
-		//			else
-		//			{
-		//				extraItemsList += item + " ";
-		//			}
-		//		}
-		//	}
-
-		//	return helloList[r] + " " + extraItemsList;
-		//}
-
-		#endregion
-
 		public static void SendMessage(string serviceType, string nameOfHook, string messageContent, string botName, string channelOrPersonTo, string responseURL = null)
 		{
 			if (serviceType != null)
@@ -72,11 +40,13 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else if (serviceType.ToLower() == "ws")
 				{
-					SlackMUDRPG.Global.wsClients.SingleOrDefault(r => ((GameAccessWebSocketHandler)r).userID == channelOrPersonTo).Send(messageContent);
+					WebSocketCollection wsClients = (WebSocketCollection)HttpContext.Current.Application["WSClients"];
+					wsClients.SingleOrDefault(r => ((GameAccessWebSocketHandler)r).userID == channelOrPersonTo).Send(messageContent);
 				}
 				else if (serviceType.ToLower() == "bc")
 				{
-					BotClient bc = Global.botClients.FirstOrDefault(bot => bot.UserID == channelOrPersonTo);
+					List<BotClient> botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
+					BotClient bc = botClients.FirstOrDefault(bot => bot.UserID == channelOrPersonTo);
 					if (bc != null)
 					{
 						BotClientUtility.SendMessage(bc, messageContent);

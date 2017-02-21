@@ -2,29 +2,28 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
 using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
 using System.Threading;
 using Microsoft.Web.WebSockets;
-using SlackMUDRPG.BotFramework;
 using System.Web.Http;
-using Microsoft.Bot.Connector;
+using SlackMUDRPG.BotFramework;
 
 namespace SlackMUDRPG
 {
 	public class Global : System.Web.HttpApplication
 	{
-		public static WebSocketCollection wsClients = new WebSocketCollection();
-		public static List<BotClient> botClients = new List<BotClient>();
-
 		protected void Application_Start(object sender, EventArgs e)
 		{
-			Application["TestOutput"] = 0;
+			// Websocket 
+			WebSocketCollection wsClients = new WebSocketCollection();
+			Application["WSClients"] = wsClients;
 
+			// Botclients
+			List<BotClient> botClients = new List<BotClient>();
+			Application["BotClients"] = botClients;
+			
 			// Character List
 			List<SMCharacter> smc = new List<SMCharacter>();
 			Application["SMCharacters"] = smc;

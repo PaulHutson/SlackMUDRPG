@@ -14,7 +14,10 @@ namespace SlackMUDRPG.Handlers
 		public override void OnOpen()
 		{
 			this.userID = this.WebSocketContext.QueryString["userID"];
-			SlackMUDRPG.Global.wsClients.Add(this);
+
+			WebSocketCollection wsClients = (WebSocketCollection)HttpContext.Current.Application["WSClients"];
+			wsClients.Add(this);
+			HttpContext.Current.Application["WSClients"] = wsClients;
 			string loginResponse = new SlackMUDRPG.CommandClasses.SlackMud().Login(this.userID, false, null, "WS");
 			if (loginResponse == null)
 			{
@@ -38,8 +41,9 @@ namespace SlackMUDRPG.Handlers
 		public override void OnClose()
 		{
 			this.userID = this.WebSocketContext.QueryString["userID"];
-			SlackMUDRPG.Global.wsClients.Remove(this);
-			
+			WebSocketCollection wsClients = (WebSocketCollection)HttpContext.Current.Application["WSClients"];
+			wsClients.Remove(this);
+			HttpContext.Current.Application["WSClients"] = wsClients;
 		}
 	}
 }
