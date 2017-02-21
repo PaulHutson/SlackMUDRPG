@@ -268,7 +268,6 @@
     <Content Include="JSON\Pulse\Notices.json" />
     <Content Include="JSON\Objects\Furniture.Bed.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern Upstairs Rooms.json" />
-    <Content Include="Handlers\GameAccess.ashx" />
     <Content Include="MasterPage\Site.Master" />
     <Content Include="JSON\Objects\Misc.Book.json" />
     <Content Include="JSON\Objects\Misc.Sign.json" />
@@ -283,6 +282,7 @@
     <Content Include="JSON\Locations\LocRavensmere Boundary.Oldwood.Small Stream.json" />
     <Content Include="JSON\Objects\Consumable.HuntingArrow.json" />
     <Content Include="JSON\NPCs\Derick Felhirst.json" />
+    <Content Include="Handlers\GameAccess.ashx" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -353,7 +353,9 @@
     <Content Include="Style\Site.css" />
     <Content Include="TestButton.aspx" />
     <Content Include="ToDo.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BotFramework\MessagesController.cs" />
@@ -373,6 +375,7 @@
     <Compile Include="CommandClasses\SMHelp.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
     <Compile Include="CommandClasses\SMItemFactory.cs" />
+    <Compile Include="CommandClasses\SMItemHelper.cs" />
     <Compile Include="CommandClasses\SMItemUtils.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMNPC.cs" />
@@ -382,6 +385,7 @@
     <Compile Include="CommandClasses\SMRequiredSkill.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
+    <Compile Include="CommandClasses\SMSlot.cs" />
     <Compile Include="Commands.aspx.cs">
       <DependentUpon>Commands.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -439,21 +443,18 @@
     <Compile Include="TestButton.aspx.designer.cs">
       <DependentUpon>TestButton.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Utility\ClassBuilder.cs" />
     <Compile Include="Utility\Crypto.cs" />
     <Compile Include="Utility\Formatters\DefaultOutputFormatter.cs" />
-    <Compile Include="Utility\Formatters\SlackOutputFormatter.cs" />
-    <Compile Include="Utility\Formatters\OutputFormatterFactory.cs" />
     <Compile Include="Utility\Formatters\OutputFormatter.cs" />
+    <Compile Include="Utility\Formatters\OutputFormatterFactory.cs" />
+    <Compile Include="Utility\Formatters\SlackOutputFormatter.cs" />
     <Compile Include="Utility\Path.cs" />
     <Compile Include="Utility\SlackWebHooks.cs" />
     <Compile Include="Utility\TagReplacer.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />
-    <Compile Include="CommandClasses\SMSlot.cs" />
     <Compile Include="Utility\Utils.cs" />
-    <Compile Include="Utility\ClassBuilder.cs" />
-    <Compile Include="CommandClasses\SMItemHelper.cs" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

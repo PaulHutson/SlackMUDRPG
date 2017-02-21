@@ -1,18 +1,20 @@
 {
   "firstname": "New",
   "lastname": "Arrival",
-  "lastinteractiondate": "2017-02-15T09:14:24.9934515+00:00",
-  "lastlogindate": "2017-02-21T21:38:35.1780276+00:00",
-  "age": 20,
+  "lastinteractiondate": "2017-02-21T20:28:47.518081+00:00",
+  "lastlogindate": "2017-02-21T20:41:26.1832653+00:00",
+  "age": 18,
   "sex": "m",
   "pkFlag": false,
-  "userID": "default-user",
-  "roomID": "Ravensmere.Harbour South.Landing Area",
+  "userID": "471b4178-1845-4f55-af3d-7bc894c30f2d",
+  "username": "aaa",
+  "password": "EAAAAI7whBFur7irtIQOZAKsj63zdJM2fagYiVaDz/hsC15D",
+  "roomID": "Ravensmere.Harbour South.Arrivals Area",
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1487705144,
+      "lastDateUpdated": 1487704099,
       "expires": 0,
       "completed": false
     }
@@ -47,7 +49,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "1ccbeb95-cec5-478b-a5cd-0ba90a5c84af",
+        "itemID": "1e3c257d-7398-4398-a280-c9bef58614ff",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -88,7 +90,7 @@
       "name": "Legs"
     },
     {
-      "name": "RigthFoot"
+      "name": "RightFoot"
     },
     {
       "name": "LeftFoot"
@@ -96,5 +98,21 @@
   ],
   "characterWeight": 50,
   "characterSize": 160,
-  "connectionService": "BC"
+  "connectionService": "WS",
+  "lastUsedCommand": "move AAE",
+  "npCsWaitingForResponses": [
+    {
+      "npcid": "PodgyClerk",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "Y"
+        },
+        {
+          "shortCutToken": "N"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Arrivals Area",
+      "timeOut": 1487719687
+    }
+  ]
 }
