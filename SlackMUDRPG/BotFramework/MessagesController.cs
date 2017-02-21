@@ -4,11 +4,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
-using Newtonsoft.Json;
-using System.EnterpriseServices;
-using SlackMUDRPG.CommandClasses;
+using System.Web;
+using System.Collections.Generic;
 
 namespace SlackMUDRPG.BotFramework
 {
@@ -21,19 +19,19 @@ namespace SlackMUDRPG.BotFramework
 		/// POST: api/Messages
 		/// Receive a message from a user and reply to it
 		/// </summary>
-		public async Task<HttpResponseMessage> Post([FromBody]Microsoft.Bot.Connector.Activity activity)
+		public HttpResponseMessage Post([FromBody]Microsoft.Bot.Connector.Activity activity)
 		{
 			if (activity.Type == ActivityTypes.Message)
 			{
-                this.userID = activity.From.Id;
+				this.userID = activity.From.Id;
 
-                if (this.userID.Contains(':'))
-                {
-                    this.userID = this.userID.Replace(':', '-');
-                }
+				if (this.userID.Contains(':'))
+				{
+					this.userID = this.userID.Replace(':', '-');
+				}
 
-                BotClient connectingClient = Global.botClients.FirstOrDefault(bc => ((bc.BotURL == activity.ServiceUrl) && (bc.UserID == this.userID)));
-				
+				List<BotClient> botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
+				BotClient connectingClient = botClients.FirstOrDefault(bc => ((bc.BotURL == activity.ServiceUrl) && (bc.UserID == this.userID)));
 
 				if (connectingClient == null)
 				{
@@ -42,7 +40,10 @@ namespace SlackMUDRPG.BotFramework
 					connectingClient.UserName = activity.From.Name;
 					connectingClient.BotURL = activity.ServiceUrl;
 					connectingClient.ConversationAccount = activity.Conversation;
-					SlackMUDRPG.Global.botClients.Add(connectingClient);
+
+					botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
+					botClients.Add(connectingClient);
+					HttpContext.Current.Application["BotClients"] = botClients;
 
 					string loginResponse = new SlackMUDRPG.CommandClasses.SlackMud().Login(this.userID, false, null, "BC");
 					if (loginResponse == null)
@@ -60,20 +61,20 @@ namespace SlackMUDRPG.BotFramework
 							new SlackMUDRPG.CommandClasses.SlackMud().Login(this.userID, false, null, "BC");
 
 							// Issue the look command
-							new SMCommandUtility(this.userID).InitateCommand("look");
+							new CommandClasses.SMCommandUtility(this.userID).InitateCommand("look");
 						}
 						else
 						{
 							BotClientUtility.SendMessage(connectingClient, loginResponse);
-							new SMCommandUtility(this.userID).InitateCommand("look");
+							new CommandClasses.SMCommandUtility(this.userID).InitateCommand("look");
 						}
 					};
 				}
 				else
 				{
-					new SMCommandUtility(this.userID).InitateCommand(activity.Text);
+					new CommandClasses.SMCommandUtility(this.userID).InitateCommand(activity.Text);
 				}
-				
+
 				//this.userID = activity.From.Id;
 
 				//ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
@@ -100,7 +101,7 @@ namespace SlackMUDRPG.BotFramework
 			var response = Request.CreateResponse(HttpStatusCode.OK);
 			return response;
 		}
-		
+
 		private Microsoft.Bot.Connector.Activity HandleSystemMessage(Microsoft.Bot.Connector.Activity message)
 		{
 			if (message.Type == ActivityTypes.DeleteUserData)
