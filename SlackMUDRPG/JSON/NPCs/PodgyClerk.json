@@ -474,20 +474,6 @@
           "StepID": "1",
           "Scope": "saytoplayer",
           "AdditionalData": "Hrm.. not you again...",
-          "NextStep": "2.2",
-          "ResponseOptions": null
-        },
-				{
-          "StepID": "2",
-          "Scope": "saytoplayer",
-          "AdditionalData": "... I bet you're going to try to waste my time, well.. as you can see I have a lot of people to process.",
-          "NextStep": "3.2",
-          "ResponseOptions": null
-        },
-				{
-          "StepID": "3",
-          "Scope": "emotetoplayer",
-          "AdditionalData": "turns his attention back to the person he was previously talking to.",
           "NextStep": null,
           "ResponseOptions": null
         }
