@@ -353,9 +353,9 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				if ((!smc.NewbieTipsDisabled) && (this.RoomNewbieTips != null) && (this.RoomNewbieTips != ""))
 				{
-					returnString += OutputFormatterFactory.Get().Bold("~~~~~ NEWBIE TIPS ~~~~~");
-					returnString += OutputFormatterFactory.Get().ListItem(this.RoomNewbieTips);
-					returnString += OutputFormatterFactory.Get().Bold("~~~~~     END     ~~~~~");
+					returnString += ResponseFormatterFactory.Get().Bold("~~~~~ NEWBIE TIPS ~~~~~");
+					returnString += ResponseFormatterFactory.Get().ListItem(this.RoomNewbieTips);
+					returnString += ResponseFormatterFactory.Get().Bold("~~~~~     END     ~~~~~");
 				}
 			}
 
@@ -392,17 +392,17 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (targetCharacter != null)
             {
-                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of " + targetCharacter.GetFullName() + " (Level " + targetCharacter.CalculateLevel() + "):"));
+                smc.sendMessageToPlayer(ResponseFormatterFactory.Get().Bold("Description of " + targetCharacter.GetFullName() + " (Level " + targetCharacter.CalculateLevel() + "):"));
                 if ((targetCharacter.Description != null) || (targetCharacter.Description != ""))
                 {
-                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(targetCharacter.Description));
+                    smc.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic(targetCharacter.Description));
                 }
                 else
                 {
-                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("No description set..."));
+                    smc.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("No description set..."));
                 }
-                smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetCharacter.GetInventoryList()));
-				targetCharacter.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(smc.GetFullName() + " looks at you"));
+                smc.sendMessageToPlayer(ResponseFormatterFactory.Get().CodeBlock(targetCharacter.GetInventoryList()));
+				targetCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic(smc.GetFullName() + " looks at you"));
 				return;
             }
 
@@ -411,16 +411,16 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (targetNPC != null)
 			{
-				smc.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("Description of " + targetNPC.GetFullName() + " (Level " + targetNPC.CalculateLevel() + "):"));
+				smc.sendMessageToPlayer(ResponseFormatterFactory.Get().Bold("Description of " + targetNPC.GetFullName() + " (Level " + targetNPC.CalculateLevel() + "):"));
 				if ((targetNPC.Description != null) || (targetNPC.Description != ""))
 				{
-					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(targetNPC.Description));
+					smc.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic(targetNPC.Description));
 				}
 				else
 				{
-					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("No description set..."));
+					smc.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("No description set..."));
 				}
-				smc.sendMessageToPlayer(OutputFormatterFactory.Get().CodeBlock(targetNPC.GetInventoryList()));
+				smc.sendMessageToPlayer(ResponseFormatterFactory.Get().CodeBlock(targetNPC.GetInventoryList()));
 				targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.ExaminesThem", smc, targetNPC.UserID);
 				targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.Examines", smc);
 				return;
@@ -436,12 +436,12 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (smi != null)
 			{
-				string itemDeatils = OutputFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":");
-				itemDeatils += OutputFormatterFactory.Get().ListItem(smi.ItemDescription);
+				string itemDeatils = ResponseFormatterFactory.Get().Bold("Description of \"" + smi.ItemName + "\":");
+				itemDeatils += ResponseFormatterFactory.Get().ListItem(smi.ItemDescription);
 
 				if (smi.CanHoldOtherItems())
 				{
-					itemDeatils += OutputFormatterFactory.Get().Italic($"This \"{smi.ItemName}\" contains the following items:");
+					itemDeatils += ResponseFormatterFactory.Get().Italic($"This \"{smi.ItemName}\" contains the following items:");
 					itemDeatils += SMItemHelper.GetContainerContents(smi);
 				}
 
@@ -450,7 +450,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Otherwise nothing found
-			smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not inspect that item."));
+			smc.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Can not inspect that item."));
 		}
 
 		#endregion
@@ -536,7 +536,7 @@ namespace SlackMUDRPG.CommandClasses
 		public void ChatSay(string speech, SMCharacter charSpeaking)
 		{
 			// Construct the message
-			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " says:", 0) + " \"" + speech + "\"";
+			string message = ResponseFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " says:", 0) + " \"" + speech + "\"";
 
 			// Send the message to all people connected to the room
 			foreach (SMCharacter smc in this.GetPeople())
@@ -554,7 +554,7 @@ namespace SlackMUDRPG.CommandClasses
 		public void ChatWhisper(string speech, SMCharacter charSpeaking, string whisperToName)
 		{
 			// Construct the message
-			string message = OutputFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " whispers:", 0) + " \"" + speech + "\"";
+			string message = ResponseFormatterFactory.Get().Italic(charSpeaking.GetFullName() + " whispers:", 0) + " \"" + speech + "\"";
 
 			// See if the person being whispered to is in the room
 			SMCharacter smc = this.GetPeople().FirstOrDefault(charWhisperedto => charWhisperedto.GetFullName() == whisperToName);
@@ -583,7 +583,7 @@ namespace SlackMUDRPG.CommandClasses
 			foreach (SMCharacter smc in this.GetPeople())
 			{
 				// construct the local message to be sent.
-				message = OutputFormatterFactory.Get().Bold(charSpeaking.GetFullName() + " shouts:", 0) + " \"" + speech + "\"";
+				message = ResponseFormatterFactory.Get().Bold(charSpeaking.GetFullName() + " shouts:", 0) + " \"" + speech + "\"";
 				this.ChatSendMessage(smc, message);
 			}
 
@@ -599,7 +599,7 @@ namespace SlackMUDRPG.CommandClasses
 				SMExit smre = otherRooms.RoomExits.FirstOrDefault(smef => smef.RoomID == this.RoomID);
 
 				// Construct the message
-				message = OutputFormatterFactory.Get().Italic("Someone shouts from " + smre.Description + " (" + smre.Shortcut + "):",0) + " \"" + speech + "\"";
+				message = ResponseFormatterFactory.Get().Italic("Someone shouts from " + smre.Description + " (" + smre.Shortcut + "):",0) + " \"" + speech + "\"";
 
 				// Send the message to all people connected to the room
 				foreach (SMCharacter smcInOtherRoom in otherRooms.GetPeople())
@@ -625,7 +625,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Output the message
-			string message = OutputFormatterFactory.Get().Italic(precursor + charSpeaking.GetFullName() + " " + speech);
+			string message = ResponseFormatterFactory.Get().Italic(precursor + charSpeaking.GetFullName() + " " + speech);
 
 			// Send the message to all people connected to the room
 			foreach (SMCharacter smc in this.GetPeople())
@@ -737,7 +737,7 @@ namespace SlackMUDRPG.CommandClasses
                                     smnpcl.Add(newNPC);
                                     HttpContext.Current.Application["SMNPCs"] = smnpcl;
 
-                                    this.Announce(OutputFormatterFactory.Get().Italic(newNPC.GetFullName() + " walks in"));
+                                    this.Announce(ResponseFormatterFactory.Get().Italic(newNPC.GetFullName() + " walks in"));
                                 }
                             }
 
@@ -756,7 +756,7 @@ namespace SlackMUDRPG.CommandClasses
 									smnpcl.Add(newNPC);
                                     HttpContext.Current.Application["SMNPCs"] = smnpcl;
 
-                                    this.Announce(OutputFormatterFactory.Get().Italic(newNPC.PronounSingular.ToUpper() + " " + newNPC.GetFullName() + " " + newNPC.WalkingType + "s in"));
+                                    this.Announce(ResponseFormatterFactory.Get().Italic(newNPC.PronounSingular.ToUpper() + " " + newNPC.GetFullName() + " " + newNPC.WalkingType + "s in"));
                                 }
                             }
                         }

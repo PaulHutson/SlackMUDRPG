@@ -25,7 +25,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <summary>
 		/// OutputFormatter instance to use when displaying help to the user
 		/// </summary>
-		private OutputFormatter outputFormatter;
+		private ResponseFormatter outputFormatter;
 
 		/// <summary>
 		/// SMHelp class constructor, populate commandsList
@@ -36,7 +36,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			this.character = new SlackMud().GetCharacter(UserId);
 
-			this.outputFormatter = OutputFormatterFactory.Get();
+			this.outputFormatter = ResponseFormatterFactory.Get();
 		}
 
 		/// <summary>

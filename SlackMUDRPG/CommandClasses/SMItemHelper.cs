@@ -171,7 +171,7 @@ namespace SlackMUDRPG.CommandClasses
 			// If the container is empty
 			if (container.HeldItems == null || !container.HeldItems.Any())
 			{
-				return OutputFormatterFactory.Get().Italic("Empty");
+				return ResponseFormatterFactory.Get().Italic("Empty");
 			}
 
 			// Get list of item counts
@@ -193,7 +193,7 @@ namespace SlackMUDRPG.CommandClasses
 					itemDetails += line.SingularName;
 				}
 
-				output += OutputFormatterFactory.Get().General(itemDetails);
+				output += ResponseFormatterFactory.Get().General(itemDetails);
 			}
 
 			return output;

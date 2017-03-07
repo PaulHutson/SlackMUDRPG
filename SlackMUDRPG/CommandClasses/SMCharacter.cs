@@ -103,19 +103,19 @@ namespace SlackMUDRPG.CommandClasses
 		/// <summary>
 		/// Holds the class instance of the output formater.
 		/// </summary>
-		private OutputFormatter outputer = null;
+		private ResponseFormatter outputer = null;
 
 		/// <summary>
 		/// Gets or sets the outputer for formating output to the user.
 		/// </summary>
 		/// <value>The outputer.</value>
-		private OutputFormatter Outputer
+		private ResponseFormatter Outputer
 		{
 			get
 			{
 				if (this.outputer == null)
 				{
-					this.Outputer = OutputFormatterFactory.Get();
+					this.Outputer = ResponseFormatterFactory.Get();
 				}
 
 				return this.outputer;
@@ -245,12 +245,12 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else
 				{
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Character not logged in, please login before trying to move."));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Character not logged in, please login before trying to move."));
 				}
 			}
 			else
 			{
-				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Character not logged in, please login before trying to move."));
+				this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Character not logged in, please login before trying to move."));
 			}
 
 			if (foundCharacter)
@@ -280,7 +280,7 @@ namespace SlackMUDRPG.CommandClasses
                             // Find out if the character has keys for the location
                             if (!this.CheckKey(sme.RoomLockID))
                             {
-                                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("The door is locked and you do not have a key"));
+                                this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("The door is locked and you do not have a key"));
                                 initiateMove = false;
                             }
                         }
@@ -291,7 +291,7 @@ namespace SlackMUDRPG.CommandClasses
                             // Walk out of the room code.
                             SMRoom currentRoom = this.GetRoom();
 
-                            currentRoom.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " walks out."), this, true);
+                            currentRoom.Announce(ResponseFormatterFactory.Get().Italic(this.GetFullName() + " walks out."), this, true);
                             currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
 
 							// Expire any awaiting responses from NPCs (to clean the memory / character file up)
@@ -304,14 +304,14 @@ namespace SlackMUDRPG.CommandClasses
                             this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
 
                             // Announce arrival to other players in the same place
-                            smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " walks in."), this, true);
+                            smr.Announce(ResponseFormatterFactory.Get().Italic(this.GetFullName() + " walks in."), this, true);
                             smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
                         }
                     }
                 }
                 else
                 {
-                    this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Exit name: " + exitShortcut + " not found, please check and try again"));
+                    this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Exit name: " + exitShortcut + " not found, please check and try again"));
                 }
 			}
 		}
@@ -343,7 +343,7 @@ namespace SlackMUDRPG.CommandClasses
 					// Walk out of the room code.
 					SMRoom currentRoom = this.GetRoom();
 
-					currentRoom.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " flees."), this, true);
+					currentRoom.Announce(ResponseFormatterFactory.Get().Italic(this.GetFullName() + " flees."), this, true);
 					currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
 				
 					// Move the player to the new location
@@ -353,12 +353,12 @@ namespace SlackMUDRPG.CommandClasses
 					this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
 
 					// Announce arrival to other players in the same place
-					smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " arrives in haste."), this, true);
+					smr.Announce(ResponseFormatterFactory.Get().Italic(this.GetFullName() + " arrives in haste."), this, true);
 					smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
 				}
 				else
 				{
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find an exit to flee through."));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Can not find an exit to flee through."));
 				}
 			}
 		}
@@ -379,7 +379,7 @@ namespace SlackMUDRPG.CommandClasses
         public void SetDescription(string newDescription)
         {
             this.Description = newDescription;
-            this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Description Updated to: " + newDescription));
+            this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Description Updated to: " + newDescription));
 			this.SaveToApplication();
 		}
 
@@ -409,7 +409,7 @@ namespace SlackMUDRPG.CommandClasses
 		public void GetSkills()
 		{
 			// Variables for output
-			string messageToSend = OutputFormatterFactory.Get().Bold("Skills:");
+			string messageToSend = ResponseFormatterFactory.Get().Bold("Skills:");
 			string actualSkills = "";
 
 			// Craft all of the output elements.
@@ -417,14 +417,14 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				foreach (SMSkillHeld smsh in this.Skills)
 				{
-					actualSkills += OutputFormatterFactory.Get().ListItem(smsh.SkillName + " level " + smsh.SkillLevel);
+					actualSkills += ResponseFormatterFactory.Get().ListItem(smsh.SkillName + " level " + smsh.SkillLevel);
 				}
 			}
 			
 			// Check if they actually had any skills...
 			if (actualSkills == "")
 			{
-				actualSkills = OutputFormatterFactory.Get().ListItem("You do not have any skills yet, try to use some to learn them.");
+				actualSkills = ResponseFormatterFactory.Get().ListItem("You do not have any skills yet, try to use some to learn them.");
 			}
 
 			// Tell the player
@@ -437,19 +437,19 @@ namespace SlackMUDRPG.CommandClasses
 		public void GetStats()
 		{
 			// Set up the output
-			string messageToSend = OutputFormatterFactory.Get().Bold("Statistics:");
+			string messageToSend = ResponseFormatterFactory.Get().Bold("Statistics:");
 
 			// Craft all of the output elements.
-			messageToSend += OutputFormatterFactory.Get().ListItem("Level: " + this.CalculateLevel());
-			messageToSend += OutputFormatterFactory.Get().ListItem("-----------------------");
-			messageToSend += OutputFormatterFactory.Get().ListItem("Charisma: " + this.Attributes.Charisma);
-			messageToSend += OutputFormatterFactory.Get().ListItem("Dexterity: " + this.Attributes.Dexterity);
-			messageToSend += OutputFormatterFactory.Get().ListItem("Fortitude: " + this.Attributes.Fortitude);
-			messageToSend += OutputFormatterFactory.Get().ListItem("Hit Points: " + this.Attributes.HitPoints + " / " + this.Attributes.MaxHitPoints);
-			messageToSend += OutputFormatterFactory.Get().ListItem("Social Standing: " + this.Attributes.SocialStanding);
-			messageToSend += OutputFormatterFactory.Get().ListItem("Strength: " + this.Attributes.Strength);
-			messageToSend += OutputFormatterFactory.Get().ListItem("Toughness: " + this.Attributes.GetToughness());
-			messageToSend += OutputFormatterFactory.Get().ListItem("WillPower: " + this.Attributes.WillPower);
+			messageToSend += ResponseFormatterFactory.Get().ListItem("Level: " + this.CalculateLevel());
+			messageToSend += ResponseFormatterFactory.Get().ListItem("-----------------------");
+			messageToSend += ResponseFormatterFactory.Get().ListItem("Charisma: " + this.Attributes.Charisma);
+			messageToSend += ResponseFormatterFactory.Get().ListItem("Dexterity: " + this.Attributes.Dexterity);
+			messageToSend += ResponseFormatterFactory.Get().ListItem("Fortitude: " + this.Attributes.Fortitude);
+			messageToSend += ResponseFormatterFactory.Get().ListItem("Hit Points: " + this.Attributes.HitPoints + " / " + this.Attributes.MaxHitPoints);
+			messageToSend += ResponseFormatterFactory.Get().ListItem("Social Standing: " + this.Attributes.SocialStanding);
+			messageToSend += ResponseFormatterFactory.Get().ListItem("Strength: " + this.Attributes.Strength);
+			messageToSend += ResponseFormatterFactory.Get().ListItem("Toughness: " + this.Attributes.GetToughness());
+			messageToSend += ResponseFormatterFactory.Get().ListItem("WillPower: " + this.Attributes.WillPower);
 
 			// Tell the player
 			this.sendMessageToPlayer(messageToSend);
@@ -494,7 +494,7 @@ namespace SlackMUDRPG.CommandClasses
 			PlayerNote newNote = new PlayerNote();
 			newNote.Note = addition;
 			this.Notes.Add(newNote);
-			this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Note added to journal"));
+			this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Note added to journal"));
 
 			this.SaveToApplication();
 			this.SaveToFile();
@@ -505,19 +505,19 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		public void GetNotes()
 		{
-			string notes = OutputFormatterFactory.Get().Bold("Your Journal:");
+			string notes = ResponseFormatterFactory.Get().Bold("Your Journal:");
 			if ((Notes != null) && (Notes.Count>0))
 			{
 				int countNotes = 0;
 				foreach(PlayerNote pn in this.Notes)
 				{
 					countNotes++;
-					notes += OutputFormatterFactory.Get().ListItem(countNotes + ") " + pn.Note);
+					notes += ResponseFormatterFactory.Get().ListItem(countNotes + ") " + pn.Note);
 				}
 			}
 			else
 			{
-				notes += OutputFormatterFactory.Get().ListItem("You have no notes, to add a note use the command \"add note whateveryouwant\"");
+				notes += ResponseFormatterFactory.Get().ListItem("You have no notes, to add a note use the command \"add note whateveryouwant\"");
 			}
 			this.sendMessageToPlayer(notes);
 		}
@@ -533,12 +533,12 @@ namespace SlackMUDRPG.CommandClasses
 				try
 				{
 					this.Notes.RemoveAt(int.Parse(removeitem)-1);
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Note removed from journal."));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Note removed from journal."));
 					this.SaveToApplication();
 					this.SaveToFile();
 				} catch
 				{
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not remove that note, please check the number and try again."));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Can not remove that note, please check the number and try again."));
 				}
 			}
 		}
@@ -555,17 +555,17 @@ namespace SlackMUDRPG.CommandClasses
             if (smr.RoomItems.Count(roomitem => roomitem.ItemFamily.ToLower() == "bed") > 0) 
             {
                 // If there is a bed send them a message to say they're logging out.
-                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("You feel weary and slip into a pleasant sleep (you have been logged out from the game world)."));
+                this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("You feel weary and slip into a pleasant sleep (you have been logged out from the game world)."));
 
                 // .. remove them from the world.
                 List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
                 smcs.Remove(this);
                 HttpContext.Current.Application["SMCharacters"] = smcs;
-                smr.Announce(OutputFormatterFactory.Get().Italic(this.GetFullName() + " falls into a deep sleep"));
+                smr.Announce(ResponseFormatterFactory.Get().Italic(this.GetFullName() + " falls into a deep sleep"));
             }
             else // If there isn't a bed tell them that they can't log out here.
             {
-                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("There is no bed in this location so you can not sleep here."));
+                this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("There is no bed in this location so you can not sleep here."));
             }
         }
 
@@ -583,17 +583,17 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				if (item.ItemType == "Readable")
 				{
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().Bold("The " + item.ItemName + " reads:"));
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().ListItem(item.ItemExtraDetail));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().Bold("The " + item.ItemName + " reads:"));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().ListItem(item.ItemExtraDetail));
 				}
 				else
 				{
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("That item can not be read"));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("That item can not be read"));
 				}
 			}
 			else
 			{
-				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find item"));
+				this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Can not find item"));
 			}
 		}
 
@@ -603,7 +603,7 @@ namespace SlackMUDRPG.CommandClasses
 		public void Who()
 		{
 			// Construct the string
-			string whoOnlineString = OutputFormatterFactory.Get().Bold("People online:");
+			string whoOnlineString = ResponseFormatterFactory.Get().Bold("People online:");
 
 			// Get the list of all online
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
@@ -625,10 +625,10 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Add the list to the output string.
-			whoOnlineString += OutputFormatterFactory.Get().General(whoList);
+			whoOnlineString += ResponseFormatterFactory.Get().General(whoList);
 
 			// Quantify the number of people online presently
-			whoOnlineString += OutputFormatterFactory.Get().Italic(smcs.Count.ToString() + " currently online");
+			whoOnlineString += ResponseFormatterFactory.Get().Italic(smcs.Count.ToString() + " currently online");
 
 			// Send the message back to the player
 			this.sendMessageToPlayer(whoOnlineString);
@@ -734,7 +734,7 @@ namespace SlackMUDRPG.CommandClasses
             }
             else
             {
-                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("You are already " + this.CurrentActivity));
+                this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("You are already " + this.CurrentActivity));
             }
         }
 
@@ -764,7 +764,7 @@ namespace SlackMUDRPG.CommandClasses
             }
             else
             {
-                this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("The receipe for the item " + nameOfReceipe + " does not exist"));
+                this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("The receipe for the item " + nameOfReceipe + " does not exist"));
             }
         }
 
@@ -773,7 +773,7 @@ namespace SlackMUDRPG.CommandClasses
         /// </summary>
         public void StopActivity()
         {
-			this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Stopped " + this.CurrentActivity));
+			this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Stopped " + this.CurrentActivity));
 			this.CurrentActivity = null;
 		}
 
@@ -2134,7 +2134,7 @@ namespace SlackMUDRPG.CommandClasses
 					this.NewbieTipsOff();
 					break;
 				default:
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Please specify \"on\" or \"off\" when using the newbietips command."));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Please specify \"on\" or \"off\" when using the newbietips command."));
 					break;
 			}
 		}
@@ -2145,7 +2145,7 @@ namespace SlackMUDRPG.CommandClasses
 		private void NewbieTipsOn()
 		{
 			this.NewbieTipsDisabled = false;
-			this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Newbie tips enabled [to disable them again type \"newbietips off\"]"));
+			this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Newbie tips enabled [to disable them again type \"newbietips off\"]"));
 		}
 
 		/// <summary>
@@ -2154,7 +2154,7 @@ namespace SlackMUDRPG.CommandClasses
 		private void NewbieTipsOff()
 		{
 			this.NewbieTipsDisabled = true;
-			this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Newbie tips disabled [to enable them again type \"newbietips on\"]"));
+			this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Newbie tips disabled [to enable them again type \"newbietips on\"]"));
 		}
 
 		/// <summary>
@@ -2177,7 +2177,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			foreach (SMCharacter smc in smcs)
 			{
-				smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.GetFullName() + " OOC[" + currentRoomName + "]: " + message));
+				smc.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic(this.GetFullName() + " OOC[" + currentRoomName + "]: " + message));
 			}
 		}
 
@@ -2273,7 +2273,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (!respondedToPlayer)
 			{
-				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Can not find a waiting response with that shortcut... did you wait too long to respond?"));
+				this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic("Can not find a waiting response with that shortcut... did you wait too long to respond?"));
 			}
 		}
 
@@ -2337,7 +2337,7 @@ namespace SlackMUDRPG.CommandClasses
 				this.QuestLog.Add(smqs);
 
 				// Tell the player the new quest has been added
-				this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"Quest \"{smqs.QuestName}\" added to quest log."));
+				this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"Quest \"{smqs.QuestName}\" added to quest log."));
 
 				this.SaveToApplication();
 				this.SaveToFile();
@@ -2376,12 +2376,12 @@ namespace SlackMUDRPG.CommandClasses
 				if (nextStep != null)
 				{
 					smqs.QuestStep = nextStep.Name;
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"Quest \"{smq.QuestName}\" updated."));
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"Next step \"{nextStep.Instructions}\"."));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"Quest \"{smq.QuestName}\" updated."));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"Next step \"{nextStep.Instructions}\"."));
 				}
 				else // Finish the quest!
 				{
-					this.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"Quest \"{smq.QuestName}\" completed!"));
+					this.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"Quest \"{smq.QuestName}\" completed!"));
 					smqs.Completed = true;
 
 					// Get the rewards
@@ -2448,7 +2448,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (this.QuestLog != null)
 			{
-				questLogResponse = OutputFormatterFactory.Get().Bold("Quest log:");
+				questLogResponse = ResponseFormatterFactory.Get().Bold("Quest log:");
 
 				List<SMQuestStatus> questStatusList = this.QuestLog;
 				IOrderedEnumerable<SMQuestStatus> statusList = questStatusList.OrderBy(qs => qs.Completed);
@@ -2457,7 +2457,7 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					if ((smq.Completed != true) || (getCompleted))
 					{
-						questLogResponse += OutputFormatterFactory.Get().ListItem(OutputFormatterFactory.Get().Italic($"{smq.QuestName} - {smq.QuestStep}"), 0);
+						questLogResponse += ResponseFormatterFactory.Get().ListItem(ResponseFormatterFactory.Get().Italic($"{smq.QuestName} - {smq.QuestStep}"), 0);
 					}
 				}
 			}
@@ -2465,11 +2465,11 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				if (!getCompleted)
 				{
-					questLogResponse = OutputFormatterFactory.Get().Italic("You do not have any quests in progress.");
+					questLogResponse = ResponseFormatterFactory.Get().Italic("You do not have any quests in progress.");
 				}
 				else
 				{
-					questLogResponse = OutputFormatterFactory.Get().Italic("You have not completed any quests yet.");
+					questLogResponse = ResponseFormatterFactory.Get().Italic("You have not completed any quests yet.");
 				}
 			}
 

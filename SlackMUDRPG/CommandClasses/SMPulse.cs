@@ -97,13 +97,13 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				string noticeS = smn.FirstOrDefault(notice => notice.NoticeType == "DayStart").Notice ?? "A new day begins...";
 				newTime = newTime - numberOfMinutesPerGameDay;
-				new SlackMud().BroadcastMessage(OutputFormatterFactory.Get().Italic(noticeS));
+				new SlackMud().BroadcastMessage(ResponseFormatterFactory.Get().Italic(noticeS));
 				HttpContext.Current.Application["DayOrNight"] = "D";
 			}
 			else if ((newTime > numberOfMinutesPerDayTime) && (HttpContext.Current.Application["DayOrNight"].ToString() != "N"))
 			{
 				string noticeS = smn.FirstOrDefault(notice => notice.NoticeType == "NightStart").Notice ?? "Night falls";
-				new SlackMud().BroadcastMessage(OutputFormatterFactory.Get().Italic(noticeS));
+				new SlackMud().BroadcastMessage(ResponseFormatterFactory.Get().Italic(noticeS));
 				HttpContext.Current.Application["DayOrNight"] = "N";
 			}
 

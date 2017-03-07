@@ -137,7 +137,7 @@ namespace SlackMUDRPG.CommandClasses
 								{
 									// Drop the item
 									this.GetRoom().AddItem(itemIn);
-									this.GetRoom().Announce(OutputFormatterFactory.Get().Italic($"\"{this.GetFullName()}\" dropped {itemIn.SingularPronoun} {itemIn.ItemName}."));
+									this.GetRoom().Announce(ResponseFormatterFactory.Get().Italic($"\"{this.GetFullName()}\" dropped {itemIn.SingularPronoun} {itemIn.ItemName}."));
 								}
 								else
 								{
@@ -197,14 +197,14 @@ namespace SlackMUDRPG.CommandClasses
                         break;
                     case "saytoplayer":
                         // Construct the message
-                        string sayToPlayerMessage = OutputFormatterFactory.Get().Italic(this.GetFullName() + " says:", 0) + " \"" + ProcessResponseString(npccs.AdditionalData, invokingCharacter) + "\"";
+                        string sayToPlayerMessage = ResponseFormatterFactory.Get().Italic(this.GetFullName() + " says:", 0) + " \"" + ProcessResponseString(npccs.AdditionalData, invokingCharacter) + "\"";
 
                         // Send the message
                         invokingCharacter.sendMessageToPlayer(sayToPlayerMessage);
                         break;
 					case "emotetoplayer":
 						// Construct the message
-						string emoteToPlayerMessage = OutputFormatterFactory.Get().Italic(this.GetFullName() + " " + ProcessResponseString(npccs.AdditionalData, invokingCharacter));
+						string emoteToPlayerMessage = ResponseFormatterFactory.Get().Italic(this.GetFullName() + " " + ProcessResponseString(npccs.AdditionalData, invokingCharacter));
 
 						// Send the message
 						invokingCharacter.sendMessageToPlayer(emoteToPlayerMessage);
@@ -320,7 +320,7 @@ namespace SlackMUDRPG.CommandClasses
 							invokingCharacter.SaveToFile();
 
 							// Inform the player they have learnt a new skill
-							invokingCharacter.sendMessageToPlayer(OutputFormatterFactory.Get().Italic($"You learn a new skill: {smsh.SkillName}({smsh.SkillLevel})."));
+							invokingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"You learn a new skill: {smsh.SkillName}({smsh.SkillLevel})."));
 						}
 						
 						break;
@@ -361,7 +361,7 @@ namespace SlackMUDRPG.CommandClasses
         private void ProcessResponseOptions(NPCConversations npcc, NPCConversationStep npccs, SMCharacter invokingCharacter)
         {
 			// Set the response option variables up
-            string responseOptions = OutputFormatterFactory.Get().Bold(this.GetFullName() + " Responses:") + OutputFormatterFactory.Get().NewLine;
+            string responseOptions = ResponseFormatterFactory.Get().Bold(this.GetFullName() + " Responses:") + ResponseFormatterFactory.Get().NewLine;
 			bool thereIsAnOption = false;
 			List<ShortcutToken> stl = new List<ShortcutToken>();
 
@@ -416,7 +416,7 @@ namespace SlackMUDRPG.CommandClasses
 				// Check that the response can be added
 				if (canAddResponse)
 				{
-					responseOptions += OutputFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " (" + npcccsro.ResponseOptionShortcut + ")");
+					responseOptions += ResponseFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " (" + npcccsro.ResponseOptionShortcut + ")");
 					ShortcutToken st = new ShortcutToken();
 					st.ShortCutToken = npcccsro.ResponseOptionShortcut;
 					stl.Add(st);

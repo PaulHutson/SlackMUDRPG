@@ -69,12 +69,12 @@ namespace SlackMUDRPG.CommandClasses
                     
 					if (!newCharacter)
 					{
-						returnString = OutputFormatterFactory.Get().Bold("Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")");
+						returnString = ResponseFormatterFactory.Get().Bold("Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")");
 					}
 					else
 					{
-						returnString = OutputFormatterFactory.Get().Bold("Welcome to SlackMud!");
-						returnString += OutputFormatterFactory.Get().General("We've created your character in the magical world of Arrelvia!"); // TODO, use a welcome script!
+						returnString = ResponseFormatterFactory.Get().Bold("Welcome to SlackMud!");
+						returnString += ResponseFormatterFactory.Get().General("We've created your character in the magical world of Arrelvia!"); // TODO, use a welcome script!
 					}
 					returnString += GetLocationDetails(character.RoomID, character);
 
@@ -93,7 +93,7 @@ namespace SlackMUDRPG.CommandClasses
                     if (room != null)
                     {
                         // Announce someone has walked into the room.
-                        room.Announce(OutputFormatterFactory.Get().Italic(character.GetFullName() + " walks in."));
+                        room.Announce(ResponseFormatterFactory.Get().Italic(character.GetFullName() + " walks in."));
                         room.ProcessNPCReactions("PlayerCharacter.Enter", character);
                     }
 
@@ -430,7 +430,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (smr == null)
 			{
 				// If they don't exist inform the person as to how to create a new user
-				returnString = OutputFormatterFactory.Get().Italic("Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com");
+				returnString = ResponseFormatterFactory.Get().Italic("Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com");
 			}
 			else
 			{
