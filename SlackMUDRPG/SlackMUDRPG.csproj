@@ -461,6 +461,7 @@
     <Compile Include="Utility\Crypto.cs" />
     <Compile Include="Utility\Formatters\OutputFormatter.cs" />
     <Compile Include="Utility\Formatters\OutputFormatterSkype.cs" />
+    <Compile Include="Utility\Formatters\OutputFormatterDefault.cs" />
     <Compile Include="Utility\Formatters\OutputFormatterSlack.cs" />
     <Compile Include="Utility\Formatters\OutputFormatterHTML.cs" />
     <Compile Include="Utility\Formatters\ResponseFormatterDefault.cs" />
