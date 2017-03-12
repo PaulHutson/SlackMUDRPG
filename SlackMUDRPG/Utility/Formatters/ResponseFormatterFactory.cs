@@ -9,9 +9,8 @@ namespace SlackMUDRPG.Utility.Formatters
 	public static class ResponseFormatterFactory
 	{
 		/// <summary>
-		/// Returns OutputFormatter instance bases in the output target name (e.g. slack)
+		/// Returns aRutputFormatter instance
 		/// </summary>
-		/// 
 		/// <returns>OutputFormatter Instance</returns>
 		public static ResponseFormatter Get()
 		{
