@@ -459,9 +459,14 @@
     </Compile>
     <Compile Include="Utility\ClassBuilder.cs" />
     <Compile Include="Utility\Crypto.cs" />
+    <Compile Include="Utility\Formatters\OutputFormatter.cs" />
+    <Compile Include="Utility\Formatters\OutputFormatterSkype.cs" />
+    <Compile Include="Utility\Formatters\OutputFormatterSlack.cs" />
+    <Compile Include="Utility\Formatters\OutputFormatterHTML.cs" />
     <Compile Include="Utility\Formatters\ResponseFormatterDefault.cs" />
     <Compile Include="Utility\Formatters\ResponseFormatter.cs" />
     <Compile Include="Utility\Formatters\ResponseFormatterFactory.cs" />
+    <Compile Include="Utility\Formatters\OutputFormatterFactory.cs" />
     <Compile Include="Utility\Path.cs" />
     <Compile Include="Utility\SlackWebHooks.cs" />
     <Compile Include="Utility\TagReplacer.cs" />
