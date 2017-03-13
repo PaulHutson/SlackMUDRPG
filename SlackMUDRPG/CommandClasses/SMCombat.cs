@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SlackMUDRPG.Utility.Formatters;
 
 namespace SlackMUDRPG.CommandClasses
 {
@@ -42,7 +43,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 			else // Report that the target is already dead...
 			{
-				attackingCharacter.sendMessageToPlayer(targetCharacter.GetFullName() + " is already dead!");
+				attackingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().General($"{targetCharacter.GetFullName()} is already dead!"));
 			}
 		}
 
@@ -61,7 +62,7 @@ namespace SlackMUDRPG.CommandClasses
             }
 			else // Report that the target can not be found
 			{
-				attackingCharacter.sendMessageToPlayer(targetItem.ItemName + " can not be found");
+				attackingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().General($"{targetItem.ItemName} can not be found"));
 			}
 		}
 
@@ -80,7 +81,7 @@ namespace SlackMUDRPG.CommandClasses
             }
             else // Report that the target can not be found
             {
-                attackingCharacter.sendMessageToPlayer(targetCreature.CreatureName + " can not be found");
+                attackingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().General($"{targetCreature.CreatureName} can not be found"));
             }
         }
 
@@ -116,19 +117,12 @@ namespace SlackMUDRPG.CommandClasses
                     if (!hasAllRequiredSkills)
                     {
                         // Tell the player they can't really wield that item.
-                        attackingCharacter.sendMessageToPlayer("You are not skilled with the " + smi.ItemFamily + ", practicing gives you a chance to increase your skill");
+                        attackingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().General($"You are not skilled with the {smi.ItemFamily}, practicing gives you a chance to increase your skill"));
                     }
                 }
             }
             return skillToUse;
         }
 		#endregion
-
-		#region "Combat Helper Functions"
-
-
-
-		#endregion
-
 	}
 }
