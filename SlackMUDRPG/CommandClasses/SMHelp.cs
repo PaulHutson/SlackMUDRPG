@@ -25,7 +25,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <summary>
 		/// OutputFormatter instance to use when displaying help to the user
 		/// </summary>
-		private OutputFormatter outputFormatter;
+		private ResponseFormatter responseFormatter;
 
 		/// <summary>
 		/// SMHelp class constructor, populate commandsList
@@ -36,7 +36,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			this.character = new SlackMud().GetCharacter(UserId);
 
-			this.outputFormatter = OutputFormatterFactory.Get();
+			this.responseFormatter = ResponseFormatterFactory.Get();
 		}
 
 		/// <summary>
@@ -86,9 +86,9 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			string output = "";
 
-			output += this.outputFormatter.General("The following types of command are available, type \"", 0);
-			output += this.outputFormatter.Italic("help <command_type>", 0);
-			output += this.outputFormatter.General("\" for more details:");
+			output += this.responseFormatter.General("The following types of command are available, type \"", 0);
+			output += this.responseFormatter.Italic("help <command_type>", 0);
+			output += this.responseFormatter.General("\" for more details:");
 
 			var commandFamilies = from cmd in this.commandList
 								  group cmd by cmd.CommandFamily into family
@@ -100,7 +100,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			foreach (var family in commandFamilies)
 			{
-				output += this.outputFormatter.ListItem(family.FamilyName);
+				output += this.responseFormatter.ListItem(family.FamilyName);
 			}
 
 			this.OutputHelp(output);
@@ -114,11 +114,11 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			string output = "";
 
-			output += this.outputFormatter.General($"The following commands are available \"", 0);
-			output += this.outputFormatter.Italic(Utils.ToTitleCase(family), 0);
-			output += this.outputFormatter.General("\", type \"", 0);
-			output += this.outputFormatter.Italic("help <command>", 0);
-			output += this.outputFormatter.General("\" for details of how to use a command:");
+			output += this.responseFormatter.General($"The following commands are available \"", 0);
+			output += this.responseFormatter.Italic(Utils.ToTitleCase(family), 0);
+			output += this.responseFormatter.General("\", type \"", 0);
+			output += this.responseFormatter.Italic("help <command>", 0);
+			output += this.responseFormatter.General("\" for details of how to use a command:");
 
 			List<SMCommand> commands = this.GetCommandsForFamily(family);
 
@@ -131,7 +131,7 @@ namespace SlackMUDRPG.CommandClasses
 					Dictionary<string, string> data = new Dictionary<string, string>();
 					data.Add("name", alias);
 
-					output += this.outputFormatter.ListItem(new TagReplacer(cmd.CommandSyntax).Replace(data));
+					output += this.responseFormatter.ListItem(new TagReplacer(cmd.CommandSyntax).Replace(data));
 				}
 			}
 
@@ -174,7 +174,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		private void CommandNotFound()
 		{
-			string output = this.outputFormatter.Italic("Sorry, unable to find help in that!");
+			string output = this.responseFormatter.Italic("Sorry, unable to find help in that!");
 
 			this.OutputHelp(output);
 		}
@@ -230,26 +230,26 @@ namespace SlackMUDRPG.CommandClasses
 					Dictionary<string, string> data = new Dictionary<string, string>();
 					data.Add("name", alias);
 
-					helpString += this.outputFormatter.Bold(alias, 0);
-					helpString += this.outputFormatter.General($": {new TagReplacer(command.CommandDescription).Replace(data)}");
+					helpString += this.responseFormatter.Bold(alias, 0);
+					helpString += this.responseFormatter.General($": {new TagReplacer(command.CommandDescription).Replace(data)}");
 
-					helpString += this.outputFormatter.General("");
+					helpString += this.responseFormatter.General("");
 
-					helpString += this.outputFormatter.ListItem(
-						this.outputFormatter.General("Command Syntax: ", 0) +
-						this.outputFormatter.Italic(new TagReplacer(command.CommandSyntax).Replace(data), 0)
+					helpString += this.responseFormatter.ListItem(
+						this.responseFormatter.General("Command Syntax: ", 0) +
+						this.responseFormatter.Italic(new TagReplacer(command.CommandSyntax).Replace(data), 0)
 					);
 
-					helpString += this.outputFormatter.ListItem(
-						this.outputFormatter.General("Example: ", 0) +
-						this.outputFormatter.Italic(new TagReplacer(command.ExampleUsage).Replace(data), 0)
+					helpString += this.responseFormatter.ListItem(
+						this.responseFormatter.General("Example: ", 0) +
+						this.responseFormatter.Italic(new TagReplacer(command.ExampleUsage).Replace(data), 0)
 					);
 
 					if (command.RequiredSkill != null)
 					{
-						helpString += this.outputFormatter.ListItem(
-							this.outputFormatter.General("Required Skill: ", 0) +
-							this.outputFormatter.Italic(command.RequiredSkill.Replace("Skill.", ""), 0)
+						helpString += this.responseFormatter.ListItem(
+							this.responseFormatter.General("Required Skill: ", 0) +
+							this.responseFormatter.Italic(command.RequiredSkill.Replace("Skill.", ""), 0)
 						);
 					}
 				}

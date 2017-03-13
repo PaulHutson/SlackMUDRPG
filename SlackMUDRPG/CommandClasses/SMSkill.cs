@@ -45,6 +45,19 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("SkillSteps")]
 		public List<SMSkillStep> SkillSteps { get; set; }
 
+		/// <summary>
+		/// Holds the class instance of the response formater.
+		/// </summary>
+		private ResponseFormatter Formatter = null;
+
+		/// <summary>
+		/// Class constructor
+		/// </summary>
+		public SMSkill()
+		{
+			this.Formatter = ResponseFormatterFactory.Get();
+		}
+
 		public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, string extraData, int skillLoop, bool beginSkillUse = true, string targetType = null, string targetID = null, bool isPassive = false)
 		{
 			// Output variables for passive skills that need output (like "dodge")
@@ -83,7 +96,7 @@ namespace SlackMUDRPG.CommandClasses
 								case "Object":
 									if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
 									{
-										smc.sendMessageToPlayer(smss.FailureOutput);
+										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
 										continueCycle = false;
 										smc.StopActivity();
 									}
@@ -91,7 +104,7 @@ namespace SlackMUDRPG.CommandClasses
 								case "EquippedObject":
 									if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true)) && (!isPassive))
 									{
-										smc.sendMessageToPlayer(smss.FailureOutput);
+										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
 										continueCycle = false;
 										smc.StopActivity();
 									}
@@ -102,7 +115,7 @@ namespace SlackMUDRPG.CommandClasses
 										string getTargetName = GetTargetName(smc, targetType, targetID);
 										if (getTargetName != null)
 										{
-											smc.sendMessageToPlayer(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null));
+											smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null)));
 										}
 										continueCycle = false;
 										smc.StopActivity();
@@ -116,7 +129,7 @@ namespace SlackMUDRPG.CommandClasses
 											string getTargetName = GetTargetName(smc, targetType, targetID);
 											if (getTargetName != null)
 											{
-												smc.sendMessageToPlayer(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null));
+												smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null)));
 											}
 										}
 										SkillIncrease(smc, false);
@@ -134,7 +147,7 @@ namespace SlackMUDRPG.CommandClasses
 											string getTargetName = GetTargetName(smc, targetType, targetID);
 											if (getTargetName != null)
 											{
-												smc.sendMessageToPlayer(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null));
+												smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null)));
 											}
 										}
 										SkillIncrease(smc, false);
@@ -147,7 +160,7 @@ namespace SlackMUDRPG.CommandClasses
 								case "CheckReceipe":
 									if (!CheckReceipe(smss, smc, this.BaseStat, extraData, null, 0, null))
 									{
-                                        smc.sendMessageToPlayer(smss.FailureOutput);
+                                        smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
                                         continueCycle = false;
 										smc.StopActivity();
 									}
@@ -155,7 +168,7 @@ namespace SlackMUDRPG.CommandClasses
 								case "UseReceipe":
 									if (!UseReceipe(smss, smc, this.BaseStat, extraData, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
 									{
-										smc.sendMessageToPlayer(smss.FailureOutput);
+										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
 										continueCycle = false;
 									}
 									smc.StopActivity();
@@ -165,18 +178,18 @@ namespace SlackMUDRPG.CommandClasses
 									{
 										// Get the character
 										var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-										smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetChar.GetFullName(), ""));
+										smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetChar.GetFullName(), "")));
 									}
 									else
 									{
 										var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-										smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, targetItem.SingularPronoun + " " + targetItem.ItemName, ""));
+										smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetItem.SingularPronoun + " " + targetItem.ItemName, "")));
 									}
 									break;
 								case "OwnedObject":
 									if (!CheckHasItem(smss, smc))
 									{
-										smc.sendMessageToPlayer(smss.FailureOutput);
+										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
 										continueCycle = false;
 										smc.StopActivity();
 									}
@@ -184,7 +197,7 @@ namespace SlackMUDRPG.CommandClasses
 								case "ConsumeObject":
 									if (!ConsumeItem(smss, smc, targetType, targetID))
 									{
-										smc.sendMessageToPlayer(smss.FailureOutput);
+										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
 										continueCycle = false;
 										smc.StopActivity();
 									}
@@ -192,13 +205,13 @@ namespace SlackMUDRPG.CommandClasses
 								case "CreateDestroyedObject":
 									if (!CreateDestroyedObject(smss, smc, targetID))
 									{
-										smc.sendMessageToPlayer(smss.FailureOutput);
+										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
 									};
 									break;
 								case "CheckObjectInLocation":
 									if (!CheckObjectinLocation(smss, smc))
 									{
-										smc.sendMessageToPlayer(smss.FailureOutput);
+										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
 									};
 									break;
 								case "Pause":
@@ -301,7 +314,7 @@ namespace SlackMUDRPG.CommandClasses
 								{
 									if (targetItem.ObjectTrait != extraDataItemSplit[1])
 									{
-										smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(smss.SuccessOutput));
+										smc.sendMessageToPlayer(this.Formatter.Italic(smss.SuccessOutput));
 										return false;
 									}
 								}
@@ -362,7 +375,7 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else
 				{
-					smc.sendMessageToPlayer("You do not have the required item equipped");
+					smc.sendMessageToPlayer(this.Formatter.General("You do not have the required item equipped"));
 					return false;
 				}
 			}
@@ -410,7 +423,7 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else
 				{
-					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+					smc.sendMessageToPlayer(this.Formatter.Italic("Cannot find the target"));
 					smc.StopActivity();
 					return false;
 				}
@@ -430,7 +443,7 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else
 				{
-					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+					smc.sendMessageToPlayer(this.Formatter.Italic("Cannot find the target"));
 					smc.StopActivity();
 					return false;
 				}
@@ -487,13 +500,13 @@ namespace SlackMUDRPG.CommandClasses
 							smc.GetRoom().RemoveItem(targetItem);
 						}
 
-						smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
+						smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName)));
 						SkillIncrease(smc);
 						smc.CurrentActivity = null;
 					}
 					else
 					{
-						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+						smc.sendMessageToPlayer(this.Formatter.Italic("Cannot find the target"));
 						smc.StopActivity();
 						return false;
 					}
@@ -544,18 +557,18 @@ namespace SlackMUDRPG.CommandClasses
 									smc.GetRoom().AddItem(targetItem.GetDestroyedItem());
 								}
 
-								smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
+								smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName)));
 								SkillIncrease(smc);
 							}
 						}
 						else
 						{
-							smc.sendMessageToPlayer("_You're unable to damage " + targetItem.ItemName + "_");
+							smc.sendMessageToPlayer(this.Formatter.Italic($"You're unable to damage {targetItem.ItemName}"));
 						}
 					}
 					else
 					{
-						smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+						smc.sendMessageToPlayer(this.Formatter.Italic("Cannot find the target"));
 						smc.StopActivity();
 						return false;
 					}
@@ -678,7 +691,7 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else
 				{
-					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+					smc.sendMessageToPlayer(this.Formatter.Italic("Cannot find the target"));
 					smc.StopActivity();
 					return false;
 				}
@@ -698,7 +711,7 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else
 				{
-					smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+					smc.sendMessageToPlayer(this.Formatter.Italic("Cannot find the target"));
 					smc.StopActivity();
 					return false;
 				}
@@ -737,7 +750,7 @@ namespace SlackMUDRPG.CommandClasses
 						}
 						else
 						{
-							smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+							smc.sendMessageToPlayer(this.Formatter.Italic("Cannot find the target"));
 							smc.StopActivity();
 							return false;
 						}
@@ -778,13 +791,13 @@ namespace SlackMUDRPG.CommandClasses
 						}
 						else
 						{
-							smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+							smc.sendMessageToPlayer(this.Formatter.Italic("Cannot find the target"));
 							smc.StopActivity();
 							return false;
 						}
                     }
                     // Announce the creation of the item.
-                    smc.GetRoom().Announce(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName));
+                    smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, oldItemName, newItemName)));
 
                     // Skill Increase
                     SkillIncrease(smc);
@@ -802,18 +815,18 @@ namespace SlackMUDRPG.CommandClasses
 							targetChar.Attributes.HitPoints = targetChar.Attributes.HitPoints - (int)actualDamageAmount;
 							if ((int)actualDamageAmount > 0)
 							{
-								smc.sendMessageToPlayer("_Hit " + targetChar.GetFullName() + " for " + (int)actualDamageAmount + " damage_");
-								targetChar.sendMessageToPlayer("_You were hit by " + smc.GetFullName() + " for " + (int)actualDamageAmount + " damage (HP " + targetChar.Attributes.HitPoints + "/" + targetChar.Attributes.MaxHitPoints + " remaining)_");
+								smc.sendMessageToPlayer(this.Formatter.Italic($"Hit {targetChar.GetFullName()} for {(int)actualDamageAmount} damage"));
+								targetChar.sendMessageToPlayer(this.Formatter.Italic($"You were hit by {smc.GetFullName()} for {(int)actualDamageAmount} damage (HP {targetChar.Attributes.HitPoints} / {targetChar.Attributes.MaxHitPoints} remaining)"));
 								targetChar.SaveToApplication();
 							}
 							else
 							{
-								smc.sendMessageToPlayer("_You're unable to damage " + targetChar.GetFullName() + "_");
+								smc.sendMessageToPlayer(this.Formatter.Italic($"You're unable to damage {targetChar.GetFullName()}"));
 							}
 						}
 						else
 						{
-							smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+							smc.sendMessageToPlayer(this.Formatter.Italic("Cannot find the target"));
 							smc.StopActivity();
 							return false;
 						}
@@ -827,16 +840,16 @@ namespace SlackMUDRPG.CommandClasses
 							smc.GetRoom().UpdateItem(targetItem.ItemID, "HP", newTargetHP);
 							if ((int)actualDamageAmount > 0)
 							{
-								smc.sendMessageToPlayer("_Hit " + targetItem.ItemName + " for " + (int)actualDamageAmount + " damage_");
+								smc.sendMessageToPlayer(this.Formatter.Italic($"Hit {targetItem.ItemName} for {(int)actualDamageAmount} damage"));
 							}
 							else
 							{
-								smc.sendMessageToPlayer("_You're unable to damage " + targetItem.ItemName + "_");
+								smc.sendMessageToPlayer(this.Formatter.Italic($"You're unable to damage {targetItem.ItemName}"));
 							}
 						}
 						else
 						{
-							smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic("Cannot find the target"));
+							smc.sendMessageToPlayer(this.Formatter.Italic("Cannot find the target"));
 							smc.StopActivity();
 							return false;
 						}
@@ -955,7 +968,7 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					smi.ItemName = ReplaceTags(smi.ItemName, targetItem);
 					smr.AddItem(smi);
-					smr.Announce(smc.GetFullName() + " creates " + smi.SingularPronoun + " " + smi.ItemName);
+					smr.Announce(this.Formatter.Italic($"{smc.GetFullName()} creates {smi.SingularPronoun} {smi.ItemName}"));
 				}
 
 				return true;
@@ -1098,7 +1111,7 @@ namespace SlackMUDRPG.CommandClasses
 											}
 											else
 											{
-												smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(SuccessOutputParse(receipeStep.FailureOutput, smc, materialType[1], "")));
+												smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(receipeStep.FailureOutput, smc, materialType[1], "")));
 											}
 										}
 									}
@@ -1119,7 +1132,7 @@ namespace SlackMUDRPG.CommandClasses
                                             
                                             if (!materialFound)
                                             {
-                                                smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(SuccessOutputParse(receipeStep.FailureOutput, smc, materialType[1], "")));
+                                                smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(receipeStep.FailureOutput, smc, materialType[1], "")));
                                                 currentNumber = 0;
                                                 return false;
                                             }
@@ -1189,12 +1202,12 @@ namespace SlackMUDRPG.CommandClasses
 
 									// Place it in the location where the character is.
 									smc.GetRoom().AddItem(smi);
-                                    smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(SuccessOutputParse(receipeStep.SuccessOutput, smc, smi.SingularPronoun + " " + smi.ItemName, "")));
+                                    smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(receipeStep.SuccessOutput, smc, smi.SingularPronoun + " " + smi.ItemName, "")));
 
                                     break;
                                 case "Information":
                                     SMItem producedItem = smr.GetProducedItem();
-                                    smc.GetRoom().Announce(SuccessOutputParse(receipeStep.SuccessOutput, smc, producedItem.SingularPronoun + " " + producedItem.ItemName, ""));
+                                    smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(receipeStep.SuccessOutput, smc, producedItem.SingularPronoun + " " + producedItem.ItemName, "")));
                                     break;
 								case "Pause":
 									System.Threading.Thread.Sleep(receipeStep.RequiredObjectAmount * 1000);
@@ -1261,7 +1274,7 @@ namespace SlackMUDRPG.CommandClasses
                             smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName).SkillLevel++;
 
                             // Send message to the player.
-                            smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.LevelIncreaseText + " (" + this.SkillName + " increased in level to " + (currentSkillLevel + 1) + ")"));
+                            smc.sendMessageToPlayer(this.Formatter.Italic(this.LevelIncreaseText + " (" + this.SkillName + " increased in level to " + (currentSkillLevel + 1) + ")"));
                         }
                         else
                         {
@@ -1298,7 +1311,7 @@ namespace SlackMUDRPG.CommandClasses
                 smc.Skills = newSkillGroup;
             }
 			
-			smc.sendMessageToPlayer(OutputFormatterFactory.Get().Italic(this.SkillLearnText));
+			smc.sendMessageToPlayer(this.Formatter.Italic(this.SkillLearnText));
 		}
 
 		#endregion

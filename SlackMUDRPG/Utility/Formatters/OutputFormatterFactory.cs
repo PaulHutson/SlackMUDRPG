@@ -9,27 +9,22 @@ namespace SlackMUDRPG.Utility.Formatters
 	public static class OutputFormatterFactory
 	{
 		/// <summary>
-		/// Returns OutputFormatter instance bases in the output target name (e.g. slack)
+		/// Returns a new OutputFormatter instance based on the target platform e.g. Slack.
 		/// </summary>
-		/// <param name="targetPlatform">Case insensitive name of the out target platform</param>
-		/// <returns>OutputFormatter Instance</returns>
-		public static OutputFormatter Get(string targetPlatform = null)
+		/// <param name="targetPlatform">Case insensitive name of the target platform.</param>
+		/// <returns>OutputFormatter instance.</returns>
+		public static OutputFormatter Get(string targetPlatform)
 		{
-			if (targetPlatform == null)
-			{
-				targetPlatform = Utils.GetQueryParam("st");
-			}
-
-			targetPlatform = targetPlatform == null ? targetPlatform : targetPlatform.ToString().ToLower();
-
-			switch (targetPlatform)
+			switch (targetPlatform.ToLower())
 			{
 				case "slack":
-					return new SlackOutputFormatter();
-				case "ws":
-					return new WSOutputFormatter();
+					return new OutputFormatterSlack();
+				case "html":
+					return new OutputFormatterHTML();
+				case "skype":
+					return new OutputFormatterSkype();
 				default:
-					return new DefaultOutputFormatter();
+					return new OutputFormatterDefault();
 			}
 		}
 	}

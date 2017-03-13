@@ -3,6 +3,7 @@ using Microsoft.Web.WebSockets;
 using SlackMUDRPG.BotFramework;
 using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Handlers;
+using SlackMUDRPG.Utility.Formatters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				if (serviceType.ToLower() == "slack")
 				{
+					messageContent = GetFormattedMessage("slack", messageContent);
+
 					using (WebClient client = new WebClient())
 					{
 						SlackClient sclient;
@@ -40,11 +43,15 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else if (serviceType.ToLower() == "ws")
 				{
+					messageContent = GetFormattedMessage("html", messageContent);
+
 					WebSocketCollection wsClients = (WebSocketCollection)HttpContext.Current.Application["WSClients"];
 					wsClients.SingleOrDefault(r => ((GameAccessWebSocketHandler)r).userID == channelOrPersonTo).Send(messageContent);
 				}
 				else if (serviceType.ToLower() == "bc")
 				{
+					messageContent = GetFormattedMessage("skype", messageContent);
+
 					List<BotClient> botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
 					BotClient bc = botClients.FirstOrDefault(bot => bot.UserID == channelOrPersonTo);
 					if (bc != null)
@@ -53,6 +60,17 @@ namespace SlackMUDRPG.CommandClasses
 					}
 				}
 			}
+		}
+
+		/// <summary>
+		/// Formats a given text string for a given output channel, replacing/stripping tags as required.
+		/// </summary>
+		/// <param name="platform">The target platform where the text will be outputted.</param>
+		/// <param name="message">The text output to format.</param>
+		/// <returns>The formatted text.</returns>
+		private static string GetFormattedMessage(string platform, string message)
+		{
+			return OutputFormatterFactory.Get(platform).ProcessOutput(message);
 		}
 
 		public static string GetAccessToken(string serviceType, string nameOfHook)

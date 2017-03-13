@@ -34,8 +34,8 @@ namespace SlackMUDRPG.CommandClasses
 			if (!File.Exists(path))
 			{
 				// If they don't exist inform the person as to how to create a new user
-				returnString = "You must create a character, to do so, use the command /sm CreateCharacter FIRSTNAME,LASTNAME,SEX,AGE\n";
-				returnString += "i.e. /sm CreateCharacter Paul,Hutson,m,34";
+				returnString = ResponseFormatterFactory.Get().General("You must create a character, to do so, use the command /sm CreateCharacter FIRSTNAME,LASTNAME,SEX,AGE");
+				returnString += ResponseFormatterFactory.Get().General("i.e. /sm CreateCharacter Paul,Hutson,m,34");
 
 				// return information [need to return this without a player!]
 				return returnString;
@@ -44,7 +44,7 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				if ((character != null) && (!newCharacter))
 				{
-					returnString += "You're already logged in!";
+					returnString = ResponseFormatterFactory.Get().General("You're already logged in!");
 					return returnString;
 				}
 				else
@@ -69,12 +69,12 @@ namespace SlackMUDRPG.CommandClasses
                     
 					if (!newCharacter)
 					{
-						returnString = OutputFormatterFactory.Get().Bold("Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")");
+						returnString = ResponseFormatterFactory.Get().Bold("Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")");
 					}
 					else
 					{
-						returnString = OutputFormatterFactory.Get().Bold("Welcome to SlackMud!");
-						returnString += OutputFormatterFactory.Get().General("We've created your character in the magical world of Arrelvia!"); // TODO, use a welcome script!
+						returnString = ResponseFormatterFactory.Get().Bold("Welcome to SlackMud!");
+						returnString += ResponseFormatterFactory.Get().General("We've created your character in the magical world of Arrelvia!"); // TODO, use a welcome script!
 					}
 					returnString += GetLocationDetails(character.RoomID, character);
 
@@ -93,7 +93,7 @@ namespace SlackMUDRPG.CommandClasses
                     if (room != null)
                     {
                         // Announce someone has walked into the room.
-                        room.Announce(OutputFormatterFactory.Get().Italic(character.GetFullName() + " walks in."));
+                        room.Announce(ResponseFormatterFactory.Get().Italic(character.GetFullName() + " walks in."));
                         room.ProcessNPCReactions("PlayerCharacter.Enter", character);
                     }
 
@@ -189,63 +189,6 @@ namespace SlackMUDRPG.CommandClasses
 			List<SMNPC> npcl = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
 			npcl.Remove(npcchar);
 			HttpContext.Current.Application["SMNPCs"] = npcl;
-		}
-
-        /// <summary>
-        /// Gets a character object, and loads it into memory.
-        /// </summary>
-        /// <param name="userID">userID is based on the id from the slack channel</param>
-        /// <param name="newCharacter">newCharacter to change the output of the text based on whether the character is new or not</param>
-        /// <returns>String message for usage</returns>
-        public string GetCharacterOLD(string userID, bool newCharacter = false)
-		{
-			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
-			SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
-
-			if ((character != null) && (!newCharacter))
-			{
-				return "You're already logged in!";
-			}
-			else
-			{
-				string path = FilePathSystem.GetFilePath("Characters", "Char" + userID);
-
-				if (File.Exists(path))
-				{
-					SMCharacter smc = new SMCharacter();
-
-					using (StreamReader r = new StreamReader(path))
-					{
-						string json = r.ReadToEnd();
-						smc = JsonConvert.DeserializeObject<SMCharacter>(json);
-					}
-
-					SMRoom room = smc.GetRoom();
-					if (room != null)
-					{
-						//TODO room.Announce() someone has entered the room or new player ect...
-					}
-
-					smcs.Add(smc);
-					HttpContext.Current.Application["SMCharacters"] = smcs;
-
-					if (!newCharacter)
-					{
-						return "Welcome back " + smc.FirstName;
-					}
-
-					string returnString = "Welcome to SlackMud!\n";
-					returnString += "We've created your character in the magical world of Arrelvia!"; // TODO, use a welcome script!
-																									  // TODO, get room details
-
-					return returnString;
-				}
-				else
-				{
-					// If the UserID doesn't have a character already, inform them that they need to create one.
-					return "You do not have a character yet, you need to create one...";
-				}
-			}
 		}
 
 		/// <summary>
@@ -346,7 +289,7 @@ namespace SlackMUDRPG.CommandClasses
                 List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
                 SMCharacter character = smcs.FirstOrDefault(smc => smc.UserID == userID);
 
-				return "You already have a character, you cannot create another.";
+				return ResponseFormatterFactory.Get().General("You already have a character, you cannot create another.");
 			}   
         }
 
@@ -430,7 +373,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (smr == null)
 			{
 				// If they don't exist inform the person as to how to create a new user
-				returnString = OutputFormatterFactory.Get().Italic("Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com");
+				returnString = ResponseFormatterFactory.Get().Italic("Location does not exist?  Please report this as an error to hutsonphutty+SlackMud@gmail.com");
 			}
 			else
 			{
@@ -519,7 +462,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		public void GlobalAnnounce(string msg)
 		{
-			BroadcastMessage("*GLOBAL MESSAGE: " + msg + "*");
+			BroadcastMessage(ResponseFormatterFactory.Get().Bold($"GLOBAL MESSAGE: {msg}"));
 		}
 
 		public void BroadcastMessage(string msg)
