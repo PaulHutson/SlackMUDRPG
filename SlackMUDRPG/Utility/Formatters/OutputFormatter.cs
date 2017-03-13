@@ -41,7 +41,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <returns>Prces string with simple tags replaced for output.</returns>
 		private string ProcessSimpleTags(string str)
 		{
-			Regex tagMatcher = new Regex(@"\[(b|code|i|li|s|u)\](.+)?\[\/\1\]");
+			Regex tagMatcher = new Regex(@"\[(b|code|i|li|s|u)\](.+?)?\[\/\1\]");
 
 			Match match = tagMatcher.Match(str);
 
@@ -89,7 +89,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <returns>Prces string with advanced tags replaced for output.</returns>
 		private string ProcessAdvancedTags(string str)
 		{
-			Regex tagMatcher = new Regex(@"\[(color|size)=(.+)\](.+)?\[\/\1\]");
+			Regex tagMatcher = new Regex(@"\[(color|size)=(.+)\](.+?)?\[\/\1\]");
 
 			Match match = tagMatcher.Match(str);
 
