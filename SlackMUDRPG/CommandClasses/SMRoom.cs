@@ -343,7 +343,7 @@ namespace SlackMUDRPG.CommandClasses
 		{
 			// Construct the room string.
 			string returnString = "";
-				
+
 			if (smc != null)
 			{
 				if ((!smc.NewbieTipsDisabled) && (this.RoomNewbieTips != null) && (this.RoomNewbieTips != ""))
@@ -354,7 +354,9 @@ namespace SlackMUDRPG.CommandClasses
 				}
 			}
 
+			// Add the location details for the room
 			returnString += this.Formatter.Bold($"Location Details - {this.RoomID.Replace(".",", ")}:");
+			returnString += this.Formatter.Italic(this.RoomDescription, 2);
 
 			// Add the people within the location
 			returnString += this.GetPeopleDetails(smc);
