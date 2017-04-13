@@ -10,37 +10,40 @@ using System.Threading;
 
 namespace SlackMUDRPG.CommandClasses
 {
-	public class SMRoom
-	{
-		[JsonProperty("RoomID")]
-		public string RoomID { get; set; }
+    public class SMRoom
+    {
+        [JsonProperty("RoomID")]
+        public string RoomID { get; set; }
 
-		[JsonProperty("RoomLocationX")]
-		public int RoomLocationX { get; set; }
+        [JsonProperty("RoomLocationX")]
+        public int RoomLocationX { get; set; }
 
-		[JsonProperty("RoomLocationY")]
-		public int RoomLocationY { get; set; }
+        [JsonProperty("RoomLocationY")]
+        public int RoomLocationY { get; set; }
 
-		[JsonProperty("RoomLocationZ")]
-		public int RoomLocationZ { get; set; }
+        [JsonProperty("RoomLocationZ")]
+        public int RoomLocationZ { get; set; }
 
         [JsonProperty("Outside")]
         public bool Outside { get; set; }
 
-		[JsonProperty("RoomDescription")]
-		public string RoomDescription { get; set; }
+        [JsonProperty("RoomDescription")]
+        public string RoomDescription { get; set; }
 
-		[JsonProperty("RoomNewbieTips")]
-		public string RoomNewbieTips { get; set; }
+        [JsonProperty("RoomNewbieTips")]
+        public string RoomNewbieTips { get; set; }
 
-		[JsonProperty("RoomExits")]
-		public List<SMExit> RoomExits { get; set; }
+        [JsonProperty("RoomExits")]
+        public List<SMExit> RoomExits { get; set; }
 
-		[JsonProperty("RoomItems")]
-		public List<SMItem> RoomItems { get; set; }
+        [JsonProperty("RoomItems")]
+        public List<SMItem> RoomItems { get; set; }
 
-		[JsonProperty("NPCSpawns")]
-		public List<SMSpawn> NPCSpawns { get; set; }
+        [JsonProperty("NPCSpawns")]
+        public List<SMSpawn> NPCSpawns { get; set; }
+
+        [JsonProperty("NPCShopItems")]
+        public SMShop NPCShopItems { get; set; }
 
 		/// <summary>
 		/// Holds the class instance of the response formater.
@@ -131,7 +134,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 			else
 			{
-				returnString += this.Formatter.General("Room Exits:");
+				returnString += this.Formatter.Bold("Room Exits:");
 
 				string[] exits = new string[this.RoomExits.Count];
 
