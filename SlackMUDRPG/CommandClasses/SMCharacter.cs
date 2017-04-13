@@ -69,13 +69,16 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("Slots")]
 		public List<SMSlot> Slots { get; set; }
 
-		[JsonProperty("BodyParts")]
-		public List<SMBodyPart> BodyParts { get; set; }
+        [JsonProperty("BodyParts")]
+        public List<SMBodyPart> BodyParts { get; set; }
 
-		/// <summary>
-		/// Dynaimic property holding the weight of the character
-		/// </summary>
-		public int CharacterWeight
+        [JsonProperty("Currency")]
+        public SMCurrency Currency { get; set; }
+
+        /// <summary>
+        /// Dynaimic property holding the weight of the character
+        /// </summary>
+        public int CharacterWeight
 		{
 			get
 			{

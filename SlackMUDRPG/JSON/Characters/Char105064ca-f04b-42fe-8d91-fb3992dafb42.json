@@ -1,0 +1,103 @@
+{
+  "firstname": "New",
+  "lastname": "Arrival",
+  "lastinteractiondate": "2017-04-13T20:39:10.1031062+01:00",
+  "lastlogindate": "2017-04-13T20:39:12.5636169+01:00",
+  "age": 18,
+  "sex": "m",
+  "pkFlag": false,
+  "userID": "105064ca-f04b-42fe-8d91-fb3992dafb42",
+  "username": "m",
+  "password": "EAAAAAGBzNpsmi4vzp+jvHsgRr+0JrMPJurHeNXFCChefnPd",
+  "roomID": "Ravensmere.Harbour South.Landing Area",
+  "newbieTipsDisabled": false,
+  "questLog": [
+    {
+      "questName": "Welcome to Ravensmere",
+      "questStep": "Visit the Clerk in the arrivals hall",
+      "lastDateUpdated": 1492112354,
+      "expires": 0,
+      "completed": false
+    }
+  ],
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "b7209007-68f4-4500-af6e-97d6e13fa7ee",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RightFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "characterWeight": 50,
+  "characterSize": 160,
+  "connectionService": "WS"
+}
