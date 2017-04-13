@@ -1003,7 +1003,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// Picks up item from the current room.
 		/// </summary>
 		/// <param name="itemIdentifier">Items identifier (id, name or family).</param>
-		public void PickUpItem(string itemIdentifier, SMItem itemBeingGiven = null, bool ignoreWeight = false)
+		public void PickUpItem(string itemIdentifier, SMItem itemBeingGiven = null, bool ignoreWeight = false, bool suppressOutputMessages = false)
 		{
 			// Set the variables for use later.
 			SMItem item;
@@ -1028,7 +1028,10 @@ namespace SlackMUDRPG.CommandClasses
 			if (item == null)
 			{
 				// ... inform the player
-				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to pick up!"));
+                if (!suppressOutputMessages)
+                {
+                    this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to pick up!"));
+                }
 				return;
 			}
 
@@ -1038,14 +1041,20 @@ namespace SlackMUDRPG.CommandClasses
 			// If the item is larger than size 1 then it needs to be picked up with an empty hand.
 			if ((hand == null) && (item.ItemSize > 1))
 			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"You need an empty hand to {action} that item."));
+                if (!suppressOutputMessages)
+                {
+                    this.sendMessageToPlayer(this.Formatter.Italic($"You need an empty hand to {action} that item."));
+                }
 				return;
 			}
 
 			// Check the item can be picked up based on its weight
 			if ((this.WeightLimit < this.GetCurrentWeight() + item.ItemWeight) && (!ignoreWeight))
 			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to {action} {item.ItemName}, this would exceed your weight limit of \"{this.WeightLimit}\"."));
+                if (!suppressOutputMessages)
+                {
+                    this.sendMessageToPlayer(this.Formatter.Italic($"Unable to {action} {item.ItemName}, this would exceed your weight limit of \"{this.WeightLimit}\"."));
+                }
 				return;
 			}
 
@@ -1054,7 +1063,10 @@ namespace SlackMUDRPG.CommandClasses
 				// Check the slot can equip the item
 				if (!hand.canEquipItem(item))
 				{
-					this.sendMessageToPlayer(this.Formatter.Italic($"Unable to {action} {item.ItemName}, {hand.GetReadableName()} cannot epuip items of type \"{item.ItemType}\"."));
+                    if (!suppressOutputMessages)
+                    {
+                        this.sendMessageToPlayer(this.Formatter.Italic($"Unable to {action} {item.ItemName}, {hand.GetReadableName()} cannot epuip items of type \"{item.ItemType}\"."));
+                    }
 					return;
 				}
 				else
@@ -1078,7 +1090,10 @@ namespace SlackMUDRPG.CommandClasses
 									output += $"in {slot.EquippedItem.SingularPronoun} {slot.EquippedItem.ItemName}.";
 
 							SMItemHelper.PutItemInContainer(item, slot.EquippedItem);
-							this.sendMessageToPlayer(this.Formatter.Italic(output));
+                            if (!suppressOutputMessages)
+                            {
+                                this.sendMessageToPlayer(this.Formatter.Italic(output));
+                            }
 							
 							break;
 						}
@@ -1090,10 +1105,16 @@ namespace SlackMUDRPG.CommandClasses
 			if (itemBeingGiven == null)
 			{
 				this.GetRoom().RemoveItem(item);
-				this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} {actioned} {item.SingularPronoun} {item.ItemName}."));
+                if (!suppressOutputMessages)
+                {
+                    this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} {actioned} {item.SingularPronoun} {item.ItemName}."));
+                }
 			}
-			
-			this.sendMessageToPlayer(this.Formatter.Italic($"You {actioned} {item.SingularPronoun} {item.ItemName}."));
+
+            if (!suppressOutputMessages)
+            {
+                this.sendMessageToPlayer(this.Formatter.Italic($"You {actioned} {item.SingularPronoun} {item.ItemName}."));
+            }
 			this.SaveToApplication();
 		}
 
