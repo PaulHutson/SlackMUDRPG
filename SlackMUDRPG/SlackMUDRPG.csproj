@@ -297,6 +297,7 @@
     <Content Include="JSON\Objects\Consumable.HuntingArrow.json" />
     <Content Include="JSON\NPCs\Derick Felhirst.json" />
     <Content Include="Handlers\GameAccess.ashx" />
+    <Content Include="JSON\Misc\Currency.BaseCharacter.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />

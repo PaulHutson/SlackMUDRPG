@@ -1,25 +1,16 @@
 {
   "firstname": "New",
   "lastname": "Arrival",
-  "lastinteractiondate": "2017-04-13T20:39:10.1031062+01:00",
-  "lastlogindate": "2017-04-13T21:00:29.8606462+01:00",
+  "lastinteractiondate": "2017-04-13T21:02:48.9814599+01:00",
+  "lastlogindate": "2017-04-13T21:02:48.9814599+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
-  "userID": "105064ca-f04b-42fe-8d91-fb3992dafb42",
-  "username": "m",
-  "password": "EAAAAAGBzNpsmi4vzp+jvHsgRr+0JrMPJurHeNXFCChefnPd",
+  "userID": "aad6411d-45ef-441f-aab6-1b3f9173e0ed",
+  "username": "aa",
+  "password": "EAAAAL9l/XB1q9WiGcBNDcDyvVIsCea+43o7WqUYqeIa7gqc",
   "roomID": "Ravensmere.Harbour South.Landing Area",
   "newbieTipsDisabled": false,
-  "questLog": [
-    {
-      "questName": "Welcome to Ravensmere",
-      "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1492112354,
-      "expires": 0,
-      "completed": false
-    }
-  ],
   "attributes": {
     "str": 10,
     "int": 10,
@@ -50,7 +41,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "b7209007-68f4-4500-af6e-97d6e13fa7ee",
+        "itemID": "eb118feb-0ead-40c8-ab1b-130c909294d8",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -97,7 +88,9 @@
       "name": "LeftFoot"
     }
   ],
+  "currency": {
+    "amountOfCurrency": 0
+  },
   "characterWeight": 50,
-  "characterSize": 160,
-  "connectionService": "WS"
+  "characterSize": 160
 }
