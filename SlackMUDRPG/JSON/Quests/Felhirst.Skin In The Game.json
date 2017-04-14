@@ -8,7 +8,7 @@
 			"Type": "Get",
 			"CharacterName": "Derick Felhirst",
 			"LocationID": "Ravensmere.Harbour South.Felhirsts Tannery",
-			"AdditionalData": "itemName.Rabbit Skin,1",
+			"AdditionalData": "ItemName.Rabbit Skin,1",
 			"Instructions": "Get a rabbit skin and return it to Felhirst"
 		}
 	],

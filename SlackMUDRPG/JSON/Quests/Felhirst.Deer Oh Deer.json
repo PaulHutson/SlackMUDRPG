@@ -8,7 +8,7 @@
 			"Type": "Get",
 			"CharacterName": "Derick Felhirst",
 			"LocationID": "Ravensmere.Harbour South.Felhirsts Tannery",
-			"AdditionalData": "itemName.Deer Skin,1",
+			"AdditionalData": "ItemName.Deer Skin,1",
 			"Instructions": "Get a deer skin and return it to Felhirst"
 		}
 	],

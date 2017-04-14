@@ -2435,19 +2435,25 @@ namespace SlackMUDRPG.CommandClasses
 									}
 									
 									break;
-								case "key":
-									// Get the item (with a new GUID)
-									SMItem keyBeingGiven = SMItemFactory.Get("Misc", "Key");
-									string[] keyInfo = reward.AdditionalData.Split('.');
-									keyBeingGiven.ItemDescription = keyInfo[0];
-									keyBeingGiven.ItemName = keyInfo[0];
-									keyBeingGiven.AdditionalData = keyInfo[1];
+                                case "key":
+                                    // Get the item (with a new GUID)
+                                    SMItem keyBeingGiven = SMItemFactory.Get("Misc", "Key");
+                                    string[] keyInfo = reward.AdditionalData.Split('.');
+                                    keyBeingGiven.ItemDescription = keyInfo[0];
+                                    keyBeingGiven.ItemName = keyInfo[0];
+                                    keyBeingGiven.AdditionalData = keyInfo[1];
 
-									// Pass the key to the player
-									this.PickUpItem("", keyBeingGiven, true);
+                                    // Pass the key to the player
+                                    this.PickUpItem("", keyBeingGiven, true);
 
-									break;
-							}
+                                    break;
+                                case "money":
+                                    // Get the item (with a new GUID)
+                                    this.Currency.AddCurrency(int.Parse(reward.AdditionalData));
+                                    this.sendMessageToPlayer("[i]Received " + reward.AdditionalData + " marks[/i]");
+
+                                    break;
+                            }
 						}
 					}
 				}

@@ -128,6 +128,12 @@
           "ResponseStepType": "ItemCheck",
           "ResponseStepData": "LearnToTan.ShowHowToTan"
         }
+      ],
+      "PreRequisites": [
+        {
+          "Type": "InProgressQuest",
+          "AdditionalData": "The Art Of Tanning"
+        }
       ]
     },
     {
@@ -141,6 +147,12 @@
           "ResponseStepType": "ItemCheck",
           "ResponseStepData": "SkinInTheGame.ReceiveSkin"
         }
+      ],
+      "PreRequisites": [
+        {
+          "Type": "InProgressQuest",
+          "AdditionalData": "Skin In The Game"
+        }
       ]
     },
     {
@@ -153,6 +165,12 @@
         {
           "ResponseStepType": "ItemCheck",
           "ResponseStepData": "DeerOhDeer.ReceiveSkin"
+        }
+      ],
+      "PreRequisites": [
+        {
+          "Type": "InProgressQuest",
+          "AdditionalData": "Deer Oh Deer"
         }
       ]
     }
@@ -224,6 +242,10 @@
               "ResponseOptionShortcut": "EM",
               "ResponseOptionText": "Earn a little money [i][Quest][/i]",
               "PreRequisites": [
+                {
+                  "Type": "HasDoneQuest",
+                  "AdditionalData": "The Art Of Tanning"
+                },
                 {
                   "Type": "HasNotDoneQuest",
                   "AdditionalData": "Skin In The Game"
@@ -449,7 +471,7 @@
         {
           "StepID": "GetMeARabbitSkin2",
           "Scope": "saytoplayer",
-          "AdditionalData": "... tell yer what.. if you bring me one I'll give you 3 coin...",
+          "AdditionalData": "... tell yer what.. if you bring me one I'll give you 3 marks...",
           "NextStep": "GetMeARabbitSkin3.2",
           "ResponseOptions": null
         },
@@ -517,7 +539,7 @@
         {
           "StepID": "ReceiveSkin",
           "Scope": "CheckQuestInProgress",
-          "AdditionalData": "Skin In The Game",
+          "AdditionalData": "Deer Oh Deer",
           "NextStep": "DeerOhDeer1.0",
           "ResponseOptions": null
         },
@@ -543,7 +565,7 @@
           "ResponseOptions": null
         },
         {
-          "StepID": "SkinInTheGame4",
+          "StepID": "DeerOhDeer4",
           "Scope": "updatequest",
           "AdditionalData": "Felhirst.Deer Oh Deer",
           "NextStep": null,
