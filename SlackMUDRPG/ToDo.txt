@@ -129,7 +129,15 @@
 	- Jobs system (get jobs from a notice board)
 		- Means we need a new notice board system, with a "LOOK AT" and/or "EXAMINE" command.
 	- Implement story arcs (locations you need to go to, get clues, clues generate if someone is on a quest on entry to the location / they can only see them themselves)
-	
+
+10) Currency and Shops
+	DONE- Basic Currency
+	DONE- Basic Room Shops
+			DONE- Include being able to buy items from an NPC from a "room" shop
+	- Charater shops
+		- Allow NPCs to sell things.
+	- Add a base amount of currency to a player character when they're created (5).
+
 V0.2 Items
 
 1) Generate World
