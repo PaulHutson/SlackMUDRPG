@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Protocols;
+using Newtonsoft.Json;
 using SlackMUDRPG.Utility.Formatters;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,9 @@ namespace SlackMUDRPG.CommandClasses
 {
     public class SMShop
     {
+        [JsonProperty("ShopInventory")]
         public List<SMShopItem> ShopInventory { get; set; }
+
         private ResponseFormatter Formatter = null;
 
         public SMShop() {
@@ -46,7 +49,7 @@ namespace SlackMUDRPG.CommandClasses
                     }
                 }
 
-                returnString += this.Formatter.ListItem(shopNumber + ". " + ssi.Item + " - " + ssi.Cost + " " + currencyPlural + amountAvailable);
+                returnString += this.Formatter.ListItem(shopNumber + ". " + ssi.Item.ItemName + " - " + ssi.Cost + " " + currencyPlural + amountAvailable);
             }
 
             return returnString;
@@ -96,10 +99,19 @@ namespace SlackMUDRPG.CommandClasses
 
     public class SMShopItem
     {
-        public int ItemNumber { get; }
-        public SMItem Item { get; }
+        [JsonProperty("ItemNumber")]
+        public int ItemNumber { get; set; }
+
+        [JsonProperty("Item")]
+        public SMItem Item { get; set; }
+
+        [JsonProperty("AmountForSale")]
         public int AmountForSale { get; set; }
-        public bool UnlimitedAvailable { get; }
-        public int Cost { get; }
+
+        [JsonProperty("UnlimitedAvailable")]
+        public bool UnlimitedAvailable { get; set; }
+
+        [JsonProperty("Cost")]
+        public int Cost { get; set; }
     }
 }

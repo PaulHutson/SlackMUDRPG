@@ -298,6 +298,7 @@
     <Content Include="JSON\NPCs\Derick Felhirst.json" />
     <Content Include="Handlers\GameAccess.ashx" />
     <Content Include="JSON\Misc\Currency.BaseCharacter.json" />
+    <Content Include="JSON\NPCs\Bert Rengle.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -400,6 +401,7 @@
     <Compile Include="CommandClasses\SMReceipe.cs" />
     <Compile Include="CommandClasses\SMRequiredSkill.cs" />
     <Compile Include="CommandClasses\SMRoom.cs" />
+    <Compile Include="CommandClasses\SMShop.cs" />
     <Compile Include="CommandClasses\SMSkill.cs" />
     <Compile Include="CommandClasses\SMSlot.cs" />
     <Compile Include="Commands.aspx.cs">

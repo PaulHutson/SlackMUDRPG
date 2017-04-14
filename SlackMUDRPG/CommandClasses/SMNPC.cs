@@ -324,7 +324,92 @@ namespace SlackMUDRPG.CommandClasses
 						}
 						
 						break;
-					case "wait":
+                    case "shopitem":
+                        // Get the scope
+                        string scope = npccs.AdditionalData;
+
+                        // Check the scope
+                        if (scope == "room") // Items found in a room
+                        {
+                            // get the shop items from the room
+                            List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+                            SMRoom smr = smrs.FirstOrDefault(room => room.RoomID == this.RoomID);
+                            if (smr != null)
+                            {
+                                // Check that the room items aren't null
+                                if (smr.NPCShopItems != null)
+                                {
+                                    // Return the list to the player
+                                    invokingCharacter.sendMessageToPlayer(smr.NPCShopItems.GetInventory());
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // TODO: variable implementation later (i.e. for NPCs carrying items to sell)
+                        }
+                        
+                        break;
+                    case "shopbuyitem":
+                        // Get the variable data
+                        string variableResponse = invokingCharacter.VariableResponse;
+                        string[] nextSteps = npccs.AdditionalData.Split('|');
+
+                        // Check the variable response is an int.
+                        int checkOutput;
+                        int.TryParse(variableResponse, out checkOutput);
+                        if (checkOutput>0)
+                        {
+                            // Check the choice is a valid number
+                            List<SMRoom> smrs2 = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+                            SMRoom smr2 = smrs2.FirstOrDefault(room => room.RoomID == this.RoomID);
+                            if (smr2 != null)
+                            {
+                                // Find the shop item
+                                SMShopItem shopItemToBuy = smr2.NPCShopItems.ShopInventory.FirstOrDefault(i => i.ItemNumber == int.Parse(variableResponse));
+                                if (shopItemToBuy != null)
+                                {
+                                    // Check the player has enough money for the item
+                                    if (invokingCharacter.Currency.CheckCurrency(shopItemToBuy.Cost))
+                                    {
+                                        // Set the item id to be a generated one.
+                                        shopItemToBuy.Item.ItemID = Guid.NewGuid().ToString();
+
+                                        // Buy the item.
+                                        invokingCharacter.PickUpItem("", shopItemToBuy.Item, true);
+
+                                        // Remove the money from the player
+                                        invokingCharacter.Currency.RemoveCurrency(shopItemToBuy.Cost);
+
+                                        // Save the Character
+                                        invokingCharacter.SaveToApplication();
+                                        invokingCharacter.SaveToFile();
+
+                                        // TODO: Reduce the number of items available, add the currency to the NPC, etc.
+                                        // Need to think on this as it's a bit more complex (we don't save NPCs to the application
+                                        // with different states as yet, so it'd involve a bit of work, although not massive).
+
+                                        // Continue the conversation
+                                        ProcessConversationStep(npcc, nextSteps[0], invokingCharacter);
+                                    }
+                                    else
+                                    {
+                                        // Play the failure conversation
+                                        invokingCharacter.sendMessageToPlayer("[i]Not enough money to buy that.[/i]");
+                                        ProcessConversationStep(npcc, nextSteps[1], invokingCharacter);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Play the failure conversation.
+                            invokingCharacter.sendMessageToPlayer("[i]Please check the item number you've selected...[/i]");
+                            ProcessConversationStep(npcc, nextSteps[1], invokingCharacter);
+                        }
+                        
+                        break;
+                    case "wait":
                         System.Threading.Thread.Sleep(int.Parse(npccs.AdditionalData) * 1000);
                         break;
                 }

@@ -1,41 +1,101 @@
 {
-	"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern",
-	"RoomLocationX": "1",
-	"RoomLocationY": "1",
-	"RoomLocationZ": "1",
+  "RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern",
+  "RoomLocationX": "1",
+  "RoomLocationY": "1",
+  "RoomLocationZ": "1",
   "Outside": false,
-	"RoomDescription": "This tavern has seen better days, and although the spitoons are overflowing and the floor feels like tar, the atmosphere is quite lively and people make merry all around.",
-	"RoomExits": [
-		{
-			"Shortcut": "DWS",
-			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
-		},
-		{
-			"Shortcut": "STT",
-			"Description": "Scalebrewers Tavern Toilet",
-			"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Toilet"
-		},
-		{
-			"Shortcut": "STC",
-			"Description": "Scalebrewers Tavern Cellar",
-			"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Cellar"
-		},
-		{
-			"Shortcut": "STR",
-			"Description": "Scalebrewers Tavern Rooms",
-			"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Upstairs Rooms"
-		}
-	],
-	"RoomItems": [
-		{
-			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca99",
-			"ItemName": "Wooden Stick",
-			"ItemType": "weapon",
-			"ItemDescription": "A wooden stick.",
-			"ItemWeight": 1,
-			"ItemSize": 1,
-			"CanHoldOtherItems": false
-		}
-	]
+  "RoomDescription": "This tavern has seen better days, and although the spitoons are overflowing and the floor feels like tar, the atmosphere is quite lively and people make merry all around.",
+  "RoomExits": [
+    {
+      "Shortcut": "DWS",
+      "Description": "Docklands Way South",
+      "RoomID": "Ravensmere.Harbour South.Docklands Way South"
+    },
+    {
+      "Shortcut": "STT",
+      "Description": "Scalebrewers Tavern Toilet",
+      "RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Toilet"
+    },
+    {
+      "Shortcut": "STC",
+      "Description": "Scalebrewers Tavern Cellar",
+      "RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Cellar"
+    },
+    {
+      "Shortcut": "STR",
+      "Description": "Scalebrewers Tavern Rooms",
+      "RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Upstairs Rooms"
+    }
+  ],
+  "RoomItems": [
+    {
+      "ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca99",
+      "ItemName": "Wooden Stick",
+      "ItemType": "weapon",
+      "ItemDescription": "A wooden stick.",
+      "ItemWeight": 1,
+      "ItemSize": 1,
+      "CanHoldOtherItems": false
+    }
+  ],
+  "NPCShopItems": {
+    "ShopInventory": [
+      {
+        "ItemNumber": 1,
+        "Item": {
+          "ItemID": "GENERATE",
+          "SingularPronoun": "a",
+          "ItemName": "Finest Harbour Ale",
+          "PluralName": "Finest Harbour Ale",
+          "PluralPronoun": "some",
+          "ItemType": "Ale",
+          "ItemFamily": "Beer",
+          "ItemDescription": "A lovely golden looking ale with a strange tang to it.",
+          "ItemWeight": 1,
+          "ItemCapacity": 0,
+          "ItemSize": 1,
+          "HitPoints": 1,
+          "MaxHitPoints": 1,
+          "BaseDamage": 0.0001,
+          "Toughness": 1,
+          "DestroyedOutput": null,
+          "RequiredSkills": null,
+          "AdditionalData": null,
+          "ObjectTrait": null,
+          "HeldItems": null
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 1
+      },
+      {
+        "ItemNumber": 2,
+        "Item": {
+          "ItemID": "GENERATE",
+          "SingularPronoun": "a",
+          "ItemName": "Dark n Stormy Stout",
+          "PluralName": "Dark n Stormy Stout",
+          "PluralPronoun": "some",
+          "ItemType": "Stout",
+          "ItemFamily": "Beer",
+          "ItemDescription": "A dark and burnt flavoured stout with a good nose to it.",
+          "ItemWeight": 1,
+          "ItemCapacity": 0,
+          "ItemSize": 1,
+          "HitPoints": 1,
+          "MaxHitPoints": 1,
+          "BaseDamage": 0.0001,
+          "Toughness": 1,
+          "DestroyedOutput": null,
+          "RequiredSkills": null,
+          "AdditionalData": null,
+          "ObjectTrait": null,
+          "HeldItems": null
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 1
+      }
+    ]
+  }
 }

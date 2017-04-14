@@ -1,0 +1,328 @@
+﻿{
+  "firstname": "Bert",
+  "lastname": "Rengle",
+  "description": "A rotund looking man with sharp eyes and a weary worn grin.  His head is bald and is complemented by several extra chins.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 42,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "BertRengle",
+  "RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 9,
+    "int": 15,
+    "chr": 13,
+    "dex": 10,
+    "wp": 12,
+    "ft": 20,
+    "hp": 20,
+    "maxhp": 20,
+    "SocialStanding": 9
+  },
+  "Skills": null,
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+	"NPCType": "BertRengle",
+	"FamilyType": "Barman",
+	"IsGeneric": false,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+  "NPCResponses": [
+		{
+			"ResponseType": "PlayerCharacter.Enter",
+			"ResponseTimeOfDay": "all",
+			"AdditionalData": null,
+			"Faction": null,
+			"Frequency": 100,
+			"ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Enter.1"
+				}
+			]
+		},
+		{
+      "ResponseType": "PlayerCharacter.Leave",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 80,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Leave.1"
+        }
+      ]
+    },
+		{
+      "ResponseType": "PlayerCharacter.List",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Shop.1"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "Enter",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Welcome to the Scale Brewers Tavern!  Please take a seat and let me know if you want anything from the bar...",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "gestures to the bar",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... as you can see I have a fine selection of drinks available and we offer a modest selection of food for the discerning traveller",
+          "NextStep": "4.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Would you like to see what's on offer now?",
+          "NextStep": null,
+          "ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.2"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "ShopLeave.NotNow"
+								}
+							]
+						}
+					]
+        }
+      ]
+    },
+		{
+      "ConversationID": "Leave",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Do take the time to stop by again!",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "Shop",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Here's what we have on offer today...",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "shopitem",
+          "AdditionalData": "room",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Would you like to buy something?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NoBuy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Can you tell me which item you'd like to buy? (Enter the number of the item)",
+          "NextStep": null,
+          "ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "{variable}",
+							"ResponseOptionText": "{variable}",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.5"
+								}
+							]
+						}
+					]
+        },
+        {
+          "StepID": "5",
+          "Scope": "shopbuyitem",
+          "AdditionalData": "ShopBuy|ShopNotValid",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShopNotValid",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Sorry, I can't sell you that...",
+          "NextStep": "BuySomethingElse.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "BuySomethingElse",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Would you like to buy something else?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NoBuy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "ShopBuy",
+          "Scope": "saytoplayer",
+          "AdditionalData": "You're going to enjoy that...!",
+          "NextStep": "BuySomethingElse.1",
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "ShopLeave",
+      "ConversationStep": [
+        {
+          "StepID": "NoBuy",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Rightio... you know where I am if you want anything else.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "NotNow",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Not a problem, let me know if you need anything...",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

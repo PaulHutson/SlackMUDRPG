@@ -42,7 +42,7 @@ namespace SlackMUDRPG.CommandClasses
         /// <returns></returns>
         public bool CheckCurrency(int amountToCheck)
         {
-            if (amountToCheck >= AmountOfCurrency) {
+            if (AmountOfCurrency >= amountToCheck) {
                 return true;
             }
             else
