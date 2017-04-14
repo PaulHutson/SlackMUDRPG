@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "Skin In The Game",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Take a rabbit skin to Felhirst",
+			"Type": "Get",
+			"CharacterName": "Derick Felhirst",
+			"LocationID": "Ravensmere.Harbour South.Felhirsts Tannery",
+			"AdditionalData": "itemName.Rabbit Skin,1",
+			"Instructions": "Get a rabbit skin and return it to Felhirst"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Money",
+			"AdditionalData": "3"
+		}
+	]
+}

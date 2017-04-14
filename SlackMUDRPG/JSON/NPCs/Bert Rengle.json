@@ -237,7 +237,7 @@
         {
           "StepID": "4",
           "Scope": "saytoplayer",
-          "AdditionalData": "Can you tell me which item you'd like to buy? (Enter the number of the item)",
+          "AdditionalData": "Can you tell me which item you'd like to buy? [i](Enter the number of the item)[/i]",
           "NextStep": null,
           "ResponseOptions": [
 						{

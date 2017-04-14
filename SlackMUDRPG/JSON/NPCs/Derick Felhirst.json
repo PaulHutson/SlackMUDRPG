@@ -21,8 +21,8 @@
     "maxhp": 20,
     "SocialStanding": 15
   },
-	"Skills": [
-		{
+  "Skills": [
+    {
       "SkillName": "Tanning",
       "SkillLevel": 30
     },
@@ -30,7 +30,7 @@
       "SkillName": "Dodge",
       "SkillLevel": 30
     }
-	],
+  ],
   "Slots": [
     {
       "Name": "RightHand",
@@ -84,27 +84,27 @@
     }
   ],
   "ResponseURL": null,
-	"NPCType": "DerickFelhirst",
-	"FamilyType": "Tanner",
-	"IsGeneric": false,
-	"WalkingType": "walk",
-	"PronounSingular": "a",
-	"PronounMultiple": "some",
+  "NPCType": "DerickFelhirst",
+  "FamilyType": "Tanner",
+  "IsGeneric": false,
+  "WalkingType": "walk",
+  "PronounSingular": "a",
+  "PronounMultiple": "some",
   "NPCResponses": [
-		{
-			"ResponseType": "PlayerCharacter.Enter",
-			"ResponseTimeOfDay": "all",
-			"AdditionalData": null,
-			"Faction": null,
-			"Frequency": 100,
-			"ResponseSteps": [
-				{
-					"ResponseStepType": "Conversation",
-					"ResponseStepData": "Enter.1"
-				}
-			]
-		},
-		{
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Enter.1"
+        }
+      ]
+    },
+    {
       "ResponseType": "PlayerCharacter.Leave",
       "ResponseTimeOfDay": "all",
       "AdditionalData": null,
@@ -117,7 +117,7 @@
         }
       ]
     },
-		{
+    {
       "ResponseType": "PlayerCharacter.GivesItemToThem",
       "ResponseTimeOfDay": "all",
       "AdditionalData": "Family.Skin",
@@ -129,146 +129,185 @@
           "ResponseStepData": "LearnToTan.ShowHowToTan"
         }
       ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.GivesItemToThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "ItemName.Rabbit Skin",
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "ItemCheck",
+          "ResponseStepData": "SkinInTheGame.ReceiveSkin"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.GivesItemToThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "ItemName.Deer Skin",
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "ItemCheck",
+          "ResponseStepData": "DeerOhDeer.ReceiveSkin"
+        }
+      ]
     }
   ],
   "NPCConversationStructures": [
-		{
-			"ConversationID": "Enter",
-			"ConversationStep": [
-				{
-					"StepID": "1",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "looks up and smiles towards you as you enter the Tannery",
-					"NextStep": "2.1",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "2",
-					"Scope": "saytoplayer",
-					"AdditionalData": "Greetings!  What can I do you for?",
-					"NextStep": null,
-					"ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "LTT",
-							"ResponseOptionText": "Learn to Tan",
-							"PreRequisites": [
-								{
-									"Type": "HasNotDoneQuest",
-									"AdditionalData": "The Art Of Tanning"
-								},
-								{
-									"Type": "IsNotInProgressQuest",
-									"AdditionalData": "The Art Of Tanning"
-								}
-							],
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.LearnToTan"
-								}
-							]
-						},
-						{
-							"ResponseOptionShortcut": "Sk",
-							"ResponseOptionText": "I've brought you a skin back as requested",
-							"PreRequisites": [
-								{
-									"Type": "InProgressQuest",
-									"AdditionalData": "The Art Of Tanning"
-								}
-							],
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.LearnToTan-Return"
-								}
-							]
-						},
-						{
-							"ResponseOptionShortcut": "BL",
-							"ResponseOptionText": "Buy Leather",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.BuyLeather"
-								}
-							]
-						}
-					]
-				},
-				{
-					"StepID": "LearnToTan",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "smiles warmly",
-					"NextStep": "LearnToTan-2.1",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "LearnToTan-2",
-					"Scope": "saytoplayer",
-					"AdditionalData": "Ah, great - always keen to see someone take up tanning, there's so much demand in the city for our skills...",
-					"NextStep": "LearnToTan-3.3",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "LearnToTan-3",
-					"Scope": "saytoplayer",
-					"AdditionalData": "You'll need to bring me a skin so that I can show you how things are done - I know there are deer and rabbits outside the Ravensgate, to the North West of the city...",
-					"NextStep": "LearnToTan-4.3",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "LearnToTan-4",
-					"Scope": "saytoplayer",
-					"AdditionalData": "... here, take this Skinning Knife - so you can skin a corpse once you've caught one of the animals",
-					"NextStep": "LearnToTan-5.3",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "LearnToTan-5",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "passes a skinning knife to you",
-					"NextStep": "LearnToTan-5-2.3",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "LearnToTan-5-2",
-					"Scope": "giveitem",
-					"AdditionalData": "Weapon.SkinningKnife,1",
-					"NextStep": "LearnToTan-6.3",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "LearnToTan-6",
-					"Scope": "saytoplayer",
-					"AdditionalData": "Come back to see me when you've got a skin and I'll show you what needs to happen.",
-					"NextStep": "LearnToTan-7.0",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "LearnToTan-7",
-					"Scope": "addquest",
-					"AdditionalData": "Felhirst.The Art Of Tanning",
-					"NextStep": null,
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "LearnToTan-Return",
-					"Scope": "saytoplayer",
-					"AdditionalData": "Excellent!  Give me the skin and I'll show you how it's tanned into leather.",
-					"NextStep": null,
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "BuyLeather",
-					"Scope": "saytoplayer",
-					"AdditionalData": "I've got nothing for sale at the moment, come back later and maybe I'll have something ready for you.",
-					"NextStep": null,
-					"ResponseOptions": null
-				}
-			]
-		},
-		{
+    {
+      "ConversationID": "Enter",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks up and smiles towards you as you enter the Tannery",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Greetings!  What can I do you for?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "LTT",
+              "ResponseOptionText": "Learn to Tan [i][Quest][/i]",
+              "PreRequisites": [
+                {
+                  "Type": "HasNotDoneQuest",
+                  "AdditionalData": "The Art Of Tanning"
+                },
+                {
+                  "Type": "IsNotInProgressQuest",
+                  "AdditionalData": "The Art Of Tanning"
+                }
+              ],
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.LearnToTan"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "Sk",
+              "ResponseOptionText": "I've brought you a skin back as requested",
+              "PreRequisites": [
+                {
+                  "Type": "InProgressQuest",
+                  "AdditionalData": "The Art Of Tanning"
+                }
+              ],
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.LearnToTan-Return"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "SHOP",
+              "ResponseOptionText": "Buy Leather or a Good Quality Skinning Knife",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.1"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "EM",
+              "ResponseOptionText": "Earn a little money [i][Quest][/i]",
+              "PreRequisites": [
+                {
+                  "Type": "HasNotDoneQuest",
+                  "AdditionalData": "Skin In The Game"
+                },
+                {
+                  "Type": "IsNotInProgressQuest",
+                  "AdditionalData": "Skin In The Game"
+                }
+              ],
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "SkinInTheGame.GetMeARabbitSkin"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "LearnToTan",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "smiles warmly",
+          "NextStep": "LearnToTan-2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "LearnToTan-2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Ah, great - always keen to see someone take up tanning, there's so much demand in the city for our skills...",
+          "NextStep": "LearnToTan-3.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "LearnToTan-3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "You'll need to bring me a skin so that I can show you how things are done - I know there are deer and rabbits outside the Ravensgate, to the North West of the city...",
+          "NextStep": "LearnToTan-4.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "LearnToTan-4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... here, take this Skinning Knife - so you can skin a corpse once you've caught one of the animals",
+          "NextStep": "LearnToTan-5.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "LearnToTan-5",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "passes a skinning knife to you",
+          "NextStep": "LearnToTan-5-2.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "LearnToTan-5-2",
+          "Scope": "giveitem",
+          "AdditionalData": "Weapon.SkinningKnife,1",
+          "NextStep": "LearnToTan-6.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "LearnToTan-6",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Come back to see me when you've got a skin and I'll show you what needs to happen.",
+          "NextStep": "LearnToTan-7.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "LearnToTan-7",
+          "Scope": "addquest",
+          "AdditionalData": "Felhirst.The Art Of Tanning",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "LearnToTan-Return",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Excellent!  Give me the skin and I'll show you how it's tanned into leather.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
       "ConversationID": "Leave",
       "ConversationStep": [
         {
@@ -280,122 +319,370 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "LearnToTan",
-			"ConversationStep": [
-				{
-					"StepID": "ShowHowToTan",
-					"Scope": "CheckQuestInProgress",
-					"AdditionalData": "The Art Of Tanning",
-					"NextStep": "ShowHowToTan1.0",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan1",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "carefully examines the skin..",
-					"NextStep": "ShowHowToTan-Skin1.5",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin1",
-					"Scope": "saytoplayer",
-					"AdditionalData": "... hrm, yes, this will do...",
-					"NextStep": "ShowHowToTan-Skin2.3",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin2",
-					"Scope": "saytoplayer",
-					"AdditionalData": "... watch carefully...",
-					"NextStep": "ShowHowToTan-Skin3.3",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin3",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "rubs the skin over with a brush to rid it of any imperfections on the surface...",
-					"NextStep": "ShowHowToTan-Skin4.8",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin4",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "examines the skin back and front flicking a piece of dried flesh from one corner.",
-					"NextStep": "ShowHowToTan-Skin5.8",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin5",
-					"Scope": "saytoplayer",
-					"AdditionalData": "It's important to make sure the skin is properly prepared before you begin.  Doing so means you get better leather from the tanning.",
-					"NextStep": "ShowHowToTan-Skin6.8",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin6",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "turns to the bucket full of a golden looking liquid and submerges the skin into it... pushing it down and around vigerously.",
-					"NextStep": "ShowHowToTan-Skin7.8",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin7",
-					"Scope": "saytoplayer",
-					"AdditionalData": "Normally the process takes quite a while - but we can do it quickly this time for you...",
-					"NextStep": "ShowHowToTan-Skin8.5",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin8",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "pulls the now leathery looking skin out of the bucket and begins to pour water over it.",
-					"NextStep": "ShowHowToTan-Skin9.8",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin9",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "finally tests the leather hide looking to see if there are any issues...",
-					"NextStep": "ShowHowToTan-Skin10.8",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin10",
-					"Scope": "saytoplayer",
-					"AdditionalData": "There we are - that's how you do it... feel free to come back here and use the bucket if you want to practice!",
-					"NextStep": "ShowHowToTan-Skin11.5",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin11",
-					"Scope": "saytoplayer",
-					"AdditionalData": "Have this as a momento.",
-					"NextStep": "ShowHowToTan-Skin12.5",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin12",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "passes the leather to you.",
-					"NextStep": "ShowHowToTan-Skin13.2",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin13",
-					"Scope": "teachskill",
-					"AdditionalData": "Tanning.1",
-					"NextStep": "ShowHowToTan-Skin14.1",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "ShowHowToTan-Skin14",
-					"Scope": "updatequest",
-					"AdditionalData": "Felhirst.The Art Of Tanning",
-					"NextStep": null,
-					"ResponseOptions": null
-				}
-			]
+      "ConversationStep": [
+        {
+          "StepID": "ShowHowToTan",
+          "Scope": "CheckQuestInProgress",
+          "AdditionalData": "The Art Of Tanning",
+          "NextStep": "ShowHowToTan1.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "carefully examines the skin..",
+          "NextStep": "ShowHowToTan-Skin1.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... hrm, yes, this will do...",
+          "NextStep": "ShowHowToTan-Skin2.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... watch carefully...",
+          "NextStep": "ShowHowToTan-Skin3.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "rubs the skin over with a brush to rid it of any imperfections on the surface...",
+          "NextStep": "ShowHowToTan-Skin4.8",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin4",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "examines the skin back and front flicking a piece of dried flesh from one corner.",
+          "NextStep": "ShowHowToTan-Skin5.8",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin5",
+          "Scope": "saytoplayer",
+          "AdditionalData": "It's important to make sure the skin is properly prepared before you begin.  Doing so means you get better leather from the tanning.",
+          "NextStep": "ShowHowToTan-Skin6.8",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin6",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "turns to the bucket full of a golden looking liquid and submerges the skin into it... pushing it down and around vigerously.",
+          "NextStep": "ShowHowToTan-Skin7.8",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin7",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Normally the process takes quite a while - but we can do it quickly this time for you...",
+          "NextStep": "ShowHowToTan-Skin8.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin8",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "pulls the now leathery looking skin out of the bucket and begins to pour water over it.",
+          "NextStep": "ShowHowToTan-Skin9.8",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin9",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "finally tests the leather hide looking to see if there are any issues...",
+          "NextStep": "ShowHowToTan-Skin10.8",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin10",
+          "Scope": "saytoplayer",
+          "AdditionalData": "There we are - that's how you do it... feel free to come back here and use the bucket if you want to practice!",
+          "NextStep": "ShowHowToTan-Skin11.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin11",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Have this as a momento.",
+          "NextStep": "ShowHowToTan-Skin12.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin12",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "passes the leather to you.",
+          "NextStep": "ShowHowToTan-Skin13.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin13",
+          "Scope": "teachskill",
+          "AdditionalData": "Tanning.1",
+          "NextStep": "ShowHowToTan-Skin14.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin14",
+          "Scope": "updatequest",
+          "AdditionalData": "Felhirst.The Art Of Tanning",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "SkinInTheGame",
+      "ConversationStep": [
+        {
+          "StepID": "GetMeARabbitSkin",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Ah, well.. you look like you might be able to find me a rabbit skin...",
+          "NextStep": "GetMeARabbitSkin2.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "GetMeARabbitSkin2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... tell yer what.. if you bring me one I'll give you 3 coin...",
+          "NextStep": "GetMeARabbitSkin3.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "GetMeARabbitSkin3",
+          "Scope": "addquest",
+          "AdditionalData": "Felhirst.Skin In The Game",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ReceiveSkin",
+          "Scope": "CheckQuestInProgress",
+          "AdditionalData": "Skin In The Game",
+          "NextStep": "SkinInTheGame1.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "SkinInTheGame1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "carefully examines the skin..",
+          "NextStep": "SkinInTheGame2.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "SkinInTheGame2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "looks good to me...",
+          "NextStep": "SkinInTheGame3.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "SkinInTheGame3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... here's the money I promised you",
+          "NextStep": "SkinInTheGame4.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "SkinInTheGame4",
+          "Scope": "updatequest",
+          "AdditionalData": "Felhirst.Skin In The Game",
+          "NextStep": "SkinInTheGame5.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "SkinInTheGame5",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... tell you what, I'll give you 5 marks if you bring me a Deer Skin... ",
+          "NextStep": "SkinInTheGame6.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "SkinInTheGame6",
+          "Scope": "addquest",
+          "AdditionalData": "Felhirst.Deer Oh Deer",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "DeerOhDeer",
+      "ConversationStep": [
+        {
+          "StepID": "ReceiveSkin",
+          "Scope": "CheckQuestInProgress",
+          "AdditionalData": "Skin In The Game",
+          "NextStep": "DeerOhDeer1.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "DeerOhDeer1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks the skin over carefully.",
+          "NextStep": "DeerOhDeer2.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "DeerOhDeer2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Yes, this'll do nicely...",
+          "NextStep": "DeerOhDeer3.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "DeerOhDeer3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... here's the money I promised you",
+          "NextStep": "DeerOhDeer4.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "SkinInTheGame4",
+          "Scope": "updatequest",
+          "AdditionalData": "Felhirst.Deer Oh Deer",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "Shop",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Here's what I have on offer today...",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "shopitem",
+          "AdditionalData": "room",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Would you like to buy something?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NoBuy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "What'll it be? [i](Enter the number of the item)[/i]",
+          "NextStep": null,
+          "ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "{variable}",
+							"ResponseOptionText": "{variable}",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.5"
+								}
+							]
+						}
+					]
+        },
+        {
+          "StepID": "5",
+          "Scope": "shopbuyitem",
+          "AdditionalData": "ShopBuy|ShopNotValid",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShopNotValid",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Sorry, I can't sell you that...",
+          "NextStep": "BuySomethingElse.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "BuySomethingElse",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Would you like to buy something else?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NoBuy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "ShopBuy",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Make good use of that!",
+          "NextStep": "BuySomethingElse.1",
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "ShopLeave",
+      "ConversationStep": [
+        {
+          "StepID": "NoBuy",
+          "Scope": "saytoplayer",
+          "AdditionalData": "OK, come back when you want to buy something...",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "NotNow",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Not a problem, come back when you want to buy something...",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
     }
   ],
   "NPCMovementAlgorithms": null,
