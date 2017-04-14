@@ -66,8 +66,15 @@ namespace SlackMUDRPG.CommandClasses
 
 					// Set the last login datetime
 					character.LastLogindate = DateTime.Now;
-                    
-					if (!newCharacter)
+
+                    // Check that the currency is OK.
+                    if (character.Currency == null)
+                    {
+                        character.Currency = new SMCurrency();
+                        character.Currency.AmountOfCurrency = 5;
+                    }
+
+                    if (!newCharacter)
 					{
 						returnString = ResponseFormatterFactory.Get().Bold("Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")");
 					}
