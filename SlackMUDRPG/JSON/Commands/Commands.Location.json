@@ -24,5 +24,18 @@
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "{name|lower}",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "List",
+		"CommandName": "list, li",
+		"CommandDescription": "This will return a list of shop items from NPCs in a location.",
+		"CommandSyntax": "{name|lower}",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "GetItemsForSaleList",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
 	}
 ]

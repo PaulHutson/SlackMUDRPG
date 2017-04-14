@@ -202,10 +202,26 @@ namespace SlackMUDRPG.CommandClasses
 			this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
 		}
 
-		/// <summary>
-		/// Get the exits from the room.
-		/// </summary>
-		public void GetRoomExits()
+        /// <summary>
+        /// Invokes a list of all items being sold by NPCs in a room.
+        /// </summary>
+        public void GetItemsForSaleList()
+        {
+            this.GetRoom().ProcessNPCReactions("PlayerCharacter.list", this);
+        }
+
+        /// <summary>
+        /// Gets the total money the characer has available.
+        /// </summary>
+        public void GetMoney()
+        {
+            this.sendMessageToPlayer("[i]You currently have [b]" + this.Currency.GetCurrencyAmount() + "[/b] in your account[/i]");
+        }
+
+        /// <summary>
+        /// Get the exits from the room.
+        /// </summary>
+        public void GetRoomExits()
 		{
 			this.sendMessageToPlayer(this.GetRoom().GetExitDetails());
 		}

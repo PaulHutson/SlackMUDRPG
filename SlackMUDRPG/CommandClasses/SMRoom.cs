@@ -672,16 +672,16 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					switch (actionType) {
 						case "PlayerCharacter.ExaminesThem":
-							lNPCs = lNPCs.FindAll(npc => ((npc.NPCResponses.Count(npcr => npcr.ResponseType == actionType) > 0) && (npc.UserID == extraData)));
+							lNPCs = lNPCs.FindAll(npc => ((npc.NPCResponses.Count(npcr => npcr.ResponseType.ToLower() == actionType.ToLower()) > 0) && (npc.UserID == extraData)));
 							break;
 						default:
-							lNPCs = lNPCs.FindAll(npc => npc.NPCResponses.Count(npcr => npcr.ResponseType == actionType) > 0);
+							lNPCs = lNPCs.FindAll(npc => npc.NPCResponses.Count(npcr => npcr.ResponseType.ToLower() == actionType.ToLower()) > 0);
 							break;
 					}
 				}
 				else
 				{
-					lNPCs = lNPCs.FindAll(npc => npc.NPCResponses.Count(npcr => npcr.ResponseType == actionType) > 0);
+					lNPCs = lNPCs.FindAll(npc => npc.NPCResponses.Count(npcr => npcr.ResponseType.ToLower() == actionType.ToLower()) > 0);
 				}
 				
                 if (lNPCs != null)

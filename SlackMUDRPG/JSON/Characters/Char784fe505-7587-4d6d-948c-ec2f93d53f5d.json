@@ -1,8 +1,8 @@
 {
   "firstname": "Aad",
   "lastname": "Dada",
-  "lastinteractiondate": "2017-04-14T15:04:45.6875705+01:00",
-  "lastlogindate": "2017-04-14T15:04:27.4628259+01:00",
+  "lastinteractiondate": "2017-04-14T15:22:16.3195366+01:00",
+  "lastlogindate": "2017-04-14T15:22:12.5642008+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
@@ -134,6 +134,23 @@
             "maxHitPoints": 1,
             "baseDamage": 0.0001,
             "toughness": 1
+          },
+          {
+            "itemID": "27af8a09-abb9-43d9-b028-432d6a8d1ab1",
+            "singularPronoun": "a",
+            "itemName": "Finest Harbour Ale",
+            "pluralName": "Finest Harbour Ale",
+            "pluralPronoun": "some",
+            "itemType": "Ale",
+            "itemFamily": "Beer",
+            "itemDescription": "A lovely golden looking ale with a strange tang to it.",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 1,
+            "maxHitPoints": 1,
+            "baseDamage": 0.0001,
+            "toughness": 1
           }
         ]
       }
@@ -169,12 +186,12 @@
     }
   ],
   "currency": {
-    "amountOfCurrency": 7
+    "amountOfCurrency": 6
   },
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
   "lastUsedCommand": "resp N",
-  "variableResponse": "2",
+  "variableResponse": "1",
   "npCsWaitingForResponses": []
 }

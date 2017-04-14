@@ -51,10 +51,10 @@ namespace SlackMUDRPG.CommandClasses
         public void RespondToAction(string actionType, SMCharacter invokingCharacter, SMItem itemIn = null)
         {
             // Get a list of characters that respond to this action type in the room
-            List<NPCResponses> listToChooseFrom = NPCResponses.FindAll(npcr => npcr.ResponseType == actionType);
+            List<NPCResponses> listToChooseFrom = NPCResponses.FindAll(npcr => npcr.ResponseType.ToLower() == actionType.ToLower());
 
             // If there are some responses for this character for the actionType
-            if (listToChooseFrom != null)
+                if (listToChooseFrom != null)
             {
                 // If there is more than one of the item randomise the list
                 if (listToChooseFrom.Count > 1) {

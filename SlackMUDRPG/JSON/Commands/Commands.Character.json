@@ -167,5 +167,18 @@
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "\"newbietips on\" or \"newbietips off\"",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Character",
+		"CommandName": "money, m",
+		"CommandDescription": "Tells you how much money you have",
+		"CommandSyntax": "{name|lower}",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "GetMoney",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
 	}
 ]
