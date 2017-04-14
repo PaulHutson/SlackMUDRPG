@@ -241,6 +241,9 @@ namespace SlackMUDRPG.CommandClasses
 				// Add default body parts to the new character
 				SMChar.BodyParts = CreateBodyPartsFromJSON("BodyParts." + characterType);
 
+                // Add the base currency
+                SMChar.Currency = CreateCurrencyFromJSON("Currency.BaseCharacter");
+
 				// Set the start location
 				SMChar.RoomID = "1";
 				string defaultRoomPath = FilePathSystem.GetFilePath("Scripts", "EnterWorldProcess-FirstLocation");
@@ -407,11 +410,33 @@ namespace SlackMUDRPG.CommandClasses
 			return slots;
 		}
 
-		#endregion
+        #endregion
 
-		#region "BodyPart Methods"
+        #region "Currency Method"
 
-		private List<SMBodyPart> CreateBodyPartsFromJSON(string filename)
+        private SMCurrency CreateCurrencyFromJSON(string filename)
+        {
+            string path = FilePathSystem.GetFilePath("Misc", filename);
+
+            SMCurrency currency = new SMCurrency();
+
+            if (File.Exists(path))
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    currency = JsonConvert.DeserializeObject<SMCurrency>(json);
+                }
+            }
+
+            return currency;
+        }
+
+        #endregion
+
+        #region "BodyPart Methods"
+
+        private List<SMBodyPart> CreateBodyPartsFromJSON(string filename)
 		{
 			string path = FilePathSystem.GetFilePath("Misc", filename);
 

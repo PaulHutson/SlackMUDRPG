@@ -1,0 +1,197 @@
+{
+  "firstname": "Aad",
+  "lastname": "Dada",
+  "lastinteractiondate": "2017-04-14T15:22:16.3195366+01:00",
+  "lastlogindate": "2017-04-14T15:22:12.5642008+01:00",
+  "age": 18,
+  "sex": "m",
+  "pkFlag": false,
+  "userID": "784fe505-7587-4d6d-948c-ec2f93d53f5d",
+  "username": "dad",
+  "password": "EAAAAKDST94l9rYbwwdiLeBSA1vpIa3uoXSoktdBU9qyHI2f",
+  "roomID": "Ravensmere.Harbour South.Scalebrewers Tavern",
+  "newbieTipsDisabled": false,
+  "questLog": [
+    {
+      "questName": "Welcome to Ravensmere",
+      "questStep": "Visit the Clerk in the arrivals hall",
+      "lastDateUpdated": 1492171454,
+      "expires": 0,
+      "completed": true
+    }
+  ],
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ],
+      "equippedItem": {
+        "itemID": "731d609e-a718-4695-90c0-d26cf470147f",
+        "singularPronoun": "a",
+        "itemName": "Key to access the arrivals hall entrance to the city",
+        "pluralName": "Keys",
+        "pluralPronoun": "some",
+        "itemType": "Misc",
+        "itemFamily": "Key",
+        "itemDescription": "Key to access the arrivals hall entrance to the city",
+        "itemWeight": 0,
+        "itemCapacity": 0,
+        "itemSize": 0,
+        "hitPoints": 1000000000,
+        "maxHitPoints": 1000000000,
+        "baseDamage": 0.001,
+        "toughness": 1,
+        "additionalData": "RavensmereAAEtoDWS"
+      }
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ],
+      "equippedItem": {
+        "itemID": "729b5201-305c-448d-b5c5-5391473bfa27",
+        "singularPronoun": "a",
+        "itemName": "Finest Harbour Ale",
+        "pluralName": "Finest Harbour Ale",
+        "pluralPronoun": "some",
+        "itemType": "Ale",
+        "itemFamily": "Beer",
+        "itemDescription": "A lovely golden looking ale with a strange tang to it.",
+        "itemWeight": 1,
+        "itemCapacity": 0,
+        "itemSize": 1,
+        "hitPoints": 1,
+        "maxHitPoints": 1,
+        "baseDamage": 0.0001,
+        "toughness": 1
+      }
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "aaaed8b6-27dc-4928-8282-929dd8af68f5",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1,
+        "heldItems": [
+          {
+            "itemID": "f6ba5eab-0412-4d54-8b80-02f3a1b90083",
+            "singularPronoun": "a",
+            "itemName": "Dark n Stormy Stout",
+            "pluralName": "Dark n Stormy Stout",
+            "pluralPronoun": "some",
+            "itemType": "Stout",
+            "itemFamily": "Beer",
+            "itemDescription": "A dark and burnt flavoured stout with a good nose to it.",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 1,
+            "maxHitPoints": 1,
+            "baseDamage": 0.0001,
+            "toughness": 1
+          },
+          {
+            "itemID": "5fbf8b72-b133-44db-9e22-d05ab526fcba",
+            "singularPronoun": "a",
+            "itemName": "Dark n Stormy Stout",
+            "pluralName": "Dark n Stormy Stout",
+            "pluralPronoun": "some",
+            "itemType": "Stout",
+            "itemFamily": "Beer",
+            "itemDescription": "A dark and burnt flavoured stout with a good nose to it.",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 1,
+            "maxHitPoints": 1,
+            "baseDamage": 0.0001,
+            "toughness": 1
+          },
+          {
+            "itemID": "27af8a09-abb9-43d9-b028-432d6a8d1ab1",
+            "singularPronoun": "a",
+            "itemName": "Finest Harbour Ale",
+            "pluralName": "Finest Harbour Ale",
+            "pluralPronoun": "some",
+            "itemType": "Ale",
+            "itemFamily": "Beer",
+            "itemDescription": "A lovely golden looking ale with a strange tang to it.",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 1,
+            "maxHitPoints": 1,
+            "baseDamage": 0.0001,
+            "toughness": 1
+          }
+        ]
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RightFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "currency": {
+    "amountOfCurrency": 6
+  },
+  "characterWeight": 50,
+  "characterSize": 160,
+  "connectionService": "WS",
+  "lastUsedCommand": "resp N",
+  "variableResponse": "1",
+  "npCsWaitingForResponses": []
+}

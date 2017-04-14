@@ -1,21 +1,21 @@
 {
-  "firstname": "Uio",
-  "lastname": "Dwad",
-  "lastinteractiondate": "2017-02-21T22:44:28.4765074+00:00",
-  "lastlogindate": "2017-02-21T22:43:50.6245993+00:00",
+  "firstname": "Orgal",
+  "lastname": "Joran",
+  "lastinteractiondate": "2017-04-13T22:41:33.0499508+01:00",
+  "lastlogindate": "2017-04-13T22:41:28.2971555+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
-  "userID": "f89adcc2-be3f-4414-9c9f-296a9dab42a2",
-  "username": "dwd",
-  "password": "EAAAAOrXr64aFT/88v6SkOyqwiF+XjNcwwqinzc08vF6gL5c",
-  "roomID": "Ravensmere.Harbour South.Docklands Way South",
+  "userID": "71eb6d21-13c6-4b21-aba7-556c98eb2cc2",
+  "username": "j",
+  "password": "EAAAAAPLwZ16vDPUiihHf4oNSosFFN/p70z9ljNBrsBVKThz",
+  "roomID": "Ravensmere.Harbour South.Scalebrewers Tavern",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1487717032,
+      "lastDateUpdated": 1492113887,
       "expires": 0,
       "completed": true
     }
@@ -38,7 +38,7 @@
         "any"
       ],
       "equippedItem": {
-        "itemID": "ec5d717b-4611-4670-b8fc-dac4df7cda31",
+        "itemID": "e142d295-fa19-4c34-827e-8abbcd7a1739",
         "singularPronoun": "a",
         "itemName": "Key to access the arrivals hall entrance to the city",
         "pluralName": "Keys",
@@ -68,7 +68,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "8982330f-7780-4ee6-afc8-cf9b4f2c6592",
+        "itemID": "cdde300a-c113-4978-8ed6-d60bc5f80874",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -115,9 +115,13 @@
       "name": "LeftFoot"
     }
   ],
+  "currency": {
+    "amountOfCurrency": 0
+  },
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move DWS",
-  "variableResponse": "m"
+  "lastUsedCommand": "resp Y",
+  "variableResponse": "m",
+  "npCsWaitingForResponses": []
 }

@@ -84,9 +84,9 @@
     }
   ],
   "ResponseURL": null,
-	"NPCType": "PodgyClerk",
-	"FamilyType": "Clerk",
-	"IsGeneric": true,
+	"NPCType": "DerickFelhirst",
+	"FamilyType": "Tanner",
+	"IsGeneric": false,
 	"WalkingType": "walk",
 	"PronounSingular": "a",
 	"PronounMultiple": "some",

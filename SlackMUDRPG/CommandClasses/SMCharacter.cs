@@ -69,13 +69,16 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("Slots")]
 		public List<SMSlot> Slots { get; set; }
 
-		[JsonProperty("BodyParts")]
-		public List<SMBodyPart> BodyParts { get; set; }
+        [JsonProperty("BodyParts")]
+        public List<SMBodyPart> BodyParts { get; set; }
 
-		/// <summary>
-		/// Dynaimic property holding the weight of the character
-		/// </summary>
-		public int CharacterWeight
+        [JsonProperty("Currency")]
+        public SMCurrency Currency { get; set; }
+
+        /// <summary>
+        /// Dynaimic property holding the weight of the character
+        /// </summary>
+        public int CharacterWeight
 		{
 			get
 			{
@@ -199,10 +202,26 @@ namespace SlackMUDRPG.CommandClasses
 			this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
 		}
 
-		/// <summary>
-		/// Get the exits from the room.
-		/// </summary>
-		public void GetRoomExits()
+        /// <summary>
+        /// Invokes a list of all items being sold by NPCs in a room.
+        /// </summary>
+        public void GetItemsForSaleList()
+        {
+            this.GetRoom().ProcessNPCReactions("PlayerCharacter.list", this);
+        }
+
+        /// <summary>
+        /// Gets the total money the characer has available.
+        /// </summary>
+        public void GetMoney()
+        {
+            this.sendMessageToPlayer("[i]You currently have [b]" + this.Currency.GetCurrencyAmount() + "[/b] in your account[/i]");
+        }
+
+        /// <summary>
+        /// Get the exits from the room.
+        /// </summary>
+        public void GetRoomExits()
 		{
 			this.sendMessageToPlayer(this.GetRoom().GetExitDetails());
 		}
@@ -1000,7 +1019,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// Picks up item from the current room.
 		/// </summary>
 		/// <param name="itemIdentifier">Items identifier (id, name or family).</param>
-		public void PickUpItem(string itemIdentifier, SMItem itemBeingGiven = null, bool ignoreWeight = false)
+		public void PickUpItem(string itemIdentifier, SMItem itemBeingGiven = null, bool ignoreWeight = false, bool suppressOutputMessages = false)
 		{
 			// Set the variables for use later.
 			SMItem item;
@@ -1025,7 +1044,10 @@ namespace SlackMUDRPG.CommandClasses
 			if (item == null)
 			{
 				// ... inform the player
-				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to pick up!"));
+                if (!suppressOutputMessages)
+                {
+                    this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to pick up!"));
+                }
 				return;
 			}
 
@@ -1035,14 +1057,20 @@ namespace SlackMUDRPG.CommandClasses
 			// If the item is larger than size 1 then it needs to be picked up with an empty hand.
 			if ((hand == null) && (item.ItemSize > 1))
 			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"You need an empty hand to {action} that item."));
+                if (!suppressOutputMessages)
+                {
+                    this.sendMessageToPlayer(this.Formatter.Italic($"You need an empty hand to {action} that item."));
+                }
 				return;
 			}
 
 			// Check the item can be picked up based on its weight
 			if ((this.WeightLimit < this.GetCurrentWeight() + item.ItemWeight) && (!ignoreWeight))
 			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to {action} {item.ItemName}, this would exceed your weight limit of \"{this.WeightLimit}\"."));
+                if (!suppressOutputMessages)
+                {
+                    this.sendMessageToPlayer(this.Formatter.Italic($"Unable to {action} {item.ItemName}, this would exceed your weight limit of \"{this.WeightLimit}\"."));
+                }
 				return;
 			}
 
@@ -1051,7 +1079,10 @@ namespace SlackMUDRPG.CommandClasses
 				// Check the slot can equip the item
 				if (!hand.canEquipItem(item))
 				{
-					this.sendMessageToPlayer(this.Formatter.Italic($"Unable to {action} {item.ItemName}, {hand.GetReadableName()} cannot epuip items of type \"{item.ItemType}\"."));
+                    if (!suppressOutputMessages)
+                    {
+                        this.sendMessageToPlayer(this.Formatter.Italic($"Unable to {action} {item.ItemName}, {hand.GetReadableName()} cannot epuip items of type \"{item.ItemType}\"."));
+                    }
 					return;
 				}
 				else
@@ -1075,7 +1106,10 @@ namespace SlackMUDRPG.CommandClasses
 									output += $"in {slot.EquippedItem.SingularPronoun} {slot.EquippedItem.ItemName}.";
 
 							SMItemHelper.PutItemInContainer(item, slot.EquippedItem);
-							this.sendMessageToPlayer(this.Formatter.Italic(output));
+                            if (!suppressOutputMessages)
+                            {
+                                this.sendMessageToPlayer(this.Formatter.Italic(output));
+                            }
 							
 							break;
 						}
@@ -1087,10 +1121,16 @@ namespace SlackMUDRPG.CommandClasses
 			if (itemBeingGiven == null)
 			{
 				this.GetRoom().RemoveItem(item);
-				this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} {actioned} {item.SingularPronoun} {item.ItemName}."));
+                if (!suppressOutputMessages)
+                {
+                    this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} {actioned} {item.SingularPronoun} {item.ItemName}."));
+                }
 			}
-			
-			this.sendMessageToPlayer(this.Formatter.Italic($"You {actioned} {item.SingularPronoun} {item.ItemName}."));
+
+            if (!suppressOutputMessages)
+            {
+                this.sendMessageToPlayer(this.Formatter.Italic($"You {actioned} {item.SingularPronoun} {item.ItemName}."));
+            }
 			this.SaveToApplication();
 		}
 
