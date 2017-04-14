@@ -68,57 +68,7 @@
 			"HitPoints": 50000,
 			"MaxHitPoints": 50000,
 			"BaseDamage": 20,
-			"Toughness": 5,
-			"HeldItems": [
-				{
-					"ItemID": "FelhirstsSkinningKnife1",
-					"ItemName": "Skinning Knife",
-					"SingularPronoun": "a",
-					"PluralName": "Skinning Knives",
-					"PluralPronoun": "some",
-					"ItemType": "Weapon",
-					"ItemFamily": "Knife",
-					"ItemDescription": "This Skinning knife looks to be of poor quality",
-					"ItemWeight": 1,
-					"ItemSize": 1,
-					"HitPoints": 50,
-					"MaxHitPoints": 50,
-					"BaseDamage": 1,
-					"Toughness": 1
-				},
-				{
-					"ItemID": "FelhirstsSkinningKnife2",
-					"ItemName": "Skinning Knife",
-					"SingularPronoun": "a",
-					"PluralName": "Skinning Knives",
-					"PluralPronoun": "some",
-					"ItemType": "Weapon",
-					"ItemFamily": "Knife",
-					"ItemDescription": "This Skinning knife looks to be of poor quality",
-					"ItemWeight": 1,
-					"ItemSize": 1,
-					"HitPoints": 50,
-					"MaxHitPoints": 50,
-					"BaseDamage": 1,
-					"Toughness": 1
-				},
-				{
-					"ItemID": "FelhirstsSkinningKnife3",
-					"ItemName": "Skinning Knife",
-					"SingularPronoun": "a",
-					"PluralName": "Skinning Knives",
-					"PluralPronoun": "some",
-					"ItemType": "Weapon",
-					"ItemFamily": "Knife",
-					"ItemDescription": "This Skinning knife looks to be of poor quality",
-					"ItemWeight": 1,
-					"ItemSize": 1,
-					"HitPoints": 50,
-					"MaxHitPoints": 50,
-					"BaseDamage": 1,
-					"Toughness": 1
-				}
-			]
+			"Toughness": 5
 		}
 	],
   "NPCShopItems": {
