@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "Deer Oh Deer",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Take a deer skin to Felhirst",
+			"Type": "Get",
+			"CharacterName": "Derick Felhirst",
+			"LocationID": "Ravensmere.Harbour South.Felhirsts Tannery",
+			"AdditionalData": "ItemName.Deer Skin,1",
+			"Instructions": "Get a deer skin and return it to Felhirst"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Money",
+			"AdditionalData": "5"
+		}
+	]
+}

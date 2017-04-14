@@ -53,8 +53,67 @@ namespace SlackMUDRPG.CommandClasses
             // Get a list of characters that respond to this action type in the room
             List<NPCResponses> listToChooseFrom = NPCResponses.FindAll(npcr => npcr.ResponseType.ToLower() == actionType.ToLower());
 
+            // Cull any prerequisites.
+            if ((listToChooseFrom != null) && (invokingCharacter != null))
+            {
+                // get the quests for use later
+                List<SMQuestStatus> smqs = new List<SMQuestStatus>();
+                if (invokingCharacter.QuestLog != null)
+                {
+                    smqs = invokingCharacter.QuestLog;
+                }
+
+                // .. if there is, loop around them.
+                foreach (NPCResponses npr in listToChooseFrom)
+                {
+                    if (npr.PreRequisites != null)
+                    {
+                        bool canUseResponse = true;
+                        foreach (NPCConversationStepResponseOptionsPreRequisites prereq in npr.PreRequisites)
+                        {
+                            // Check the prereq types.
+                            switch (prereq.Type)
+                            {
+                                case "HasDoneQuest":
+                                    if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (quest.Completed)) == 0)
+                                    {
+                                        canUseResponse = false;
+                                    }
+                                    break;
+                                case "InProgressQuest":
+                                    if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (!quest.Completed)) == 0)
+                                    {
+                                        canUseResponse = false;
+                                    }
+                                    break;
+                                case "HasNotDoneQuest":
+                                    if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData)) != 0)
+                                    {
+                                        canUseResponse = false;
+                                    }
+                                    break;
+                                case "IsNotInProgressQuest":
+                                    if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (!quest.Completed)) != 0)
+                                    {
+                                        canUseResponse = false;
+                                    }
+                                    break;
+                            }
+                        }
+
+                        // Remove any items from the list that can't be used.
+                        if (!canUseResponse)
+                        {
+                            npr.RemoveItemFromResponses = true;
+                        }
+                    }
+                }
+
+                listToChooseFrom.RemoveAll(resp => resp.RemoveItemFromResponses == true);
+            }
+
             // If there are some responses for this character for the actionType
-                if (listToChooseFrom != null)
+            if (listToChooseFrom != null)
             {
                 // If there is more than one of the item randomise the list
                 if (listToChooseFrom.Count > 1) {
@@ -110,40 +169,55 @@ namespace SlackMUDRPG.CommandClasses
                         case "Conversation":
                             ProcessConversation(NPCRS, invokingCharacter);
                             break;
-						case "Attack":
+                        case "Attack":
                             this.Attack(invokingCharacter.GetFullName());
                             break;
                         case "UseSkill":
-							string[] dataSplit = null;
-							if (NPCRS.ResponseStepData.Contains('.'))
-							{
-								dataSplit = NPCRS.ResponseStepData.Split('.');
-							}
-							else
-							{
-								dataSplit[0] = NPCRS.ResponseStepData;
-								dataSplit[1] = null;
-							}
-							
-							this.UseSkill(dataSplit[0], dataSplit[1]);
-                            break;
-						case "ItemCheck":
-							// Get the additional data
-							string[] itemType = npr.AdditionalData.Split('.');
+                            string[] dataSplit = null;
+                            if (NPCRS.ResponseStepData.Contains('.'))
+                            {
+                                dataSplit = NPCRS.ResponseStepData.Split('.');
+                            }
+                            else
+                            {
+                                dataSplit[0] = NPCRS.ResponseStepData;
+                                dataSplit[1] = null;
+                            }
 
-							if (itemType[0] == "Family")
-							{
-								if (itemIn.ItemFamily != itemType[1])
-								{
-									// Drop the item
-									this.GetRoom().AddItem(itemIn);
-									this.GetRoom().Announce(ResponseFormatterFactory.Get().Italic($"\"{this.GetFullName()}\" dropped {itemIn.SingularPronoun} {itemIn.ItemName}."));
-								}
-								else
-								{
-									ProcessConversation(NPCRS, invokingCharacter);
-								}
-							}
+                            this.UseSkill(dataSplit[0], dataSplit[1]);
+                            break;
+                        case "ItemCheck":
+                            // Get the additional data
+                            string[] itemType = npr.AdditionalData.Split('.');
+
+                            if (itemType[0] == "Family")
+                            {
+                                if (itemIn.ItemFamily != itemType[1])
+                                {
+                                    // Drop the item
+                                    this.GetRoom().AddItem(itemIn);
+                                    this.GetRoom().Announce(ResponseFormatterFactory.Get().Italic($"\"{this.GetFullName()}\" dropped {itemIn.SingularPronoun} {itemIn.ItemName}."));
+                                }
+                                else
+                                {
+                                    ProcessConversation(NPCRS, invokingCharacter);
+                                }
+                            }
+                            else if (itemType[0] == "ItemName")
+                            {
+                                string[] itemName = itemType[1].Split(',');
+
+                                if (itemIn.ItemName != itemName[0])
+                                {
+                                    // Drop the item
+                                    this.GetRoom().AddItem(itemIn);
+                                    this.GetRoom().Announce(ResponseFormatterFactory.Get().Italic($"\"{this.GetFullName()}\" dropped {itemIn.SingularPronoun} {itemIn.ItemName}."));
+                                }
+                                else
+                                {
+                                    ProcessConversation(NPCRS, invokingCharacter);
+                                }
+                            }
 
 							break;
 					}
@@ -737,6 +811,12 @@ namespace SlackMUDRPG.CommandClasses
 
         [JsonProperty("ResponseSteps")]
         public List<NPCResponseStep> ResponseSteps { get; set; }
+
+        [JsonProperty("PreRequisites")]
+        public List<NPCConversationStepResponseOptionsPreRequisites> PreRequisites { get; set; }
+
+        // Used for when we want to mark items for culling from a collection (like when a prereq fails).
+        public bool RemoveItemFromResponses { get; set; }
     }
 
     /// <summary>
@@ -829,7 +909,7 @@ namespace SlackMUDRPG.CommandClasses
 
 		[JsonProperty("AdditionalData")]
 		public string AdditionalData { get; set; }
-	}
+    }
 
 	/// <summary>
 	/// Response action steps govern what happen when a certain response is 

@@ -1,0 +1,201 @@
+{
+  "firstname": "We",
+  "lastname": "No",
+  "lastinteractiondate": "2017-04-14T22:46:29.6745357+01:00",
+  "lastlogindate": "2017-04-14T22:46:20.8241517+01:00",
+  "age": 18,
+  "sex": "m",
+  "pkFlag": false,
+  "userID": "a82517cc-466b-400e-b0ac-426acded7f7c",
+  "username": "d",
+  "password": "EAAAALn7/LDfkWdMHvNN9lszX7mhGX6leJAQPtmapRSvWGSR",
+  "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+  "newbieTipsDisabled": false,
+  "questLog": [
+    {
+      "questName": "Welcome to Ravensmere",
+      "questStep": "Visit the Clerk in the arrivals hall",
+      "lastDateUpdated": 1492202464,
+      "expires": 0,
+      "completed": true
+    },
+    {
+      "questName": "The Art Of Tanning",
+      "questStep": "Take a skin to Felhirst",
+      "lastDateUpdated": 1492205076,
+      "expires": 0,
+      "completed": true
+    },
+    {
+      "questName": "Skin In The Game",
+      "questStep": "Take a rabbit skin to Felhirst",
+      "lastDateUpdated": 1492205433,
+      "expires": 0,
+      "completed": true
+    },
+    {
+      "questName": "Deer Oh Deer",
+      "questStep": "Take a deer skin to Felhirst",
+      "lastDateUpdated": 1492205795,
+      "expires": 0,
+      "completed": true
+    }
+  ],
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "skills": [
+    {
+      "skillName": "Tanning",
+      "skillLevel": 1
+    }
+  ],
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ],
+      "equippedItem": {
+        "itemID": "810cd405-5673-4ad4-852e-f81d0a9f7936",
+        "singularPronoun": "a",
+        "itemName": "Key to access the arrivals hall entrance to the city",
+        "pluralName": "Keys",
+        "pluralPronoun": "some",
+        "itemType": "Misc",
+        "itemFamily": "Key",
+        "itemDescription": "Key to access the arrivals hall entrance to the city",
+        "itemWeight": 0,
+        "itemCapacity": 0,
+        "itemSize": 0,
+        "hitPoints": 1000000000,
+        "maxHitPoints": 1000000000,
+        "baseDamage": 0.001,
+        "toughness": 1,
+        "additionalData": "RavensmereAAEtoDWS"
+      }
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ],
+      "equippedItem": {
+        "itemID": "93007ea7-ceb0-4c36-ab25-cb84cd721432",
+        "singularPronoun": "a",
+        "itemName": "Skinning Knife",
+        "pluralName": "Skinning Knives",
+        "pluralPronoun": "some",
+        "itemType": "Weapon",
+        "itemFamily": "Skinning Knife",
+        "itemDescription": "A skinning knife",
+        "itemWeight": 1,
+        "itemCapacity": 0,
+        "itemSize": 1,
+        "hitPoints": 50,
+        "maxHitPoints": 50,
+        "baseDamage": 1.0,
+        "toughness": 3
+      }
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "85c154ba-f800-425f-af16-e11fc8777c45",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1,
+        "heldItems": [
+          {
+            "itemID": "8a44f78e-02d5-4339-b9ca-4672e728c65e",
+            "singularPronoun": "a",
+            "itemName": "Leather Strip",
+            "pluralName": "Leather Strips",
+            "pluralPronoun": "some",
+            "itemType": "resource",
+            "itemFamily": "Leather",
+            "itemDescription": "A strip of leather ready for use",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 2,
+            "maxHitPoints": 2,
+            "baseDamage": 0.001,
+            "toughness": 3
+          }
+        ]
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RightFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "currency": {
+    "amountOfCurrency": 10
+  },
+  "characterWeight": 50,
+  "characterSize": 160,
+  "connectionService": "WS",
+  "lastUsedCommand": "give Deer Skin to Derick Felhirst",
+  "variableResponse": "m",
+  "npCsWaitingForResponses": [
+    {
+      "npcid": "DerickFelhirst",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "SHOP"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
+      "timeOut": 1492216381
+    }
+  ]
+}
