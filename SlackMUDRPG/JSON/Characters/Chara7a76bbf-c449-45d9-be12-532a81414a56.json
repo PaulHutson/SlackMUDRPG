@@ -1,15 +1,15 @@
 {
   "firstname": "O",
   "lastname": "H",
-  "lastinteractiondate": "2017-04-15T11:21:15.1600856+01:00",
-  "lastlogindate": "2017-04-15T11:33:00.0428363+01:00",
+  "lastinteractiondate": "2017-04-15T11:53:17.7675796+01:00",
+  "lastlogindate": "2017-04-15T11:56:05.7211765+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
   "userID": "a7a76bbf-c449-45d9-be12-532a81414a56",
   "username": "f",
   "password": "EAAAAJY4+HP/LHtwZd6wPvuk9g7EjZwKp+o1u30usa1yj+4T",
-  "roomID": "Ravensmere.Military District.Ramparts Parade",
+  "roomID": "Ravensmere.Harbour South.Swabbies Lane",
   "newbieTipsDisabled": false,
   "questLog": [
     {
@@ -121,6 +121,6 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move RP",
+  "lastUsedCommand": "move SL",
   "variableResponse": "m"
 }

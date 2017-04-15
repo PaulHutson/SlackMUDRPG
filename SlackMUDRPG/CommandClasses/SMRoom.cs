@@ -386,7 +386,7 @@ namespace SlackMUDRPG.CommandClasses
         {
             // Check if it's a character first
             SMCharacter targetCharacter = this.GetPeople().FirstOrDefault(checkChar => checkChar.GetFullName().ToLower() == thingToInspect.ToLower());
-
+            
 			if (targetCharacter != null)
             {
                 smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetCharacter.GetFullName() + " (Level " + targetCharacter.CalculateLevel() + "):"));
@@ -404,7 +404,7 @@ namespace SlackMUDRPG.CommandClasses
             }
 
 			// If not a character, check if it is an NPC...
-			SMNPC targetNPC = this.GetNPCs().FirstOrDefault(checkChar => checkChar.GetFullName().ToLower() == thingToInspect.ToLower());
+			SMNPC targetNPC = this.GetNPCs().FirstOrDefault(checkChar => (checkChar.GetFullName().ToLower() == thingToInspect.ToLower()) || (checkChar.NPCType.ToLower() == thingToInspect.ToLower()));
 
 			if (targetNPC != null)
 			{

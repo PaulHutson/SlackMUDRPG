@@ -17,5 +17,13 @@
       "RoomID": "Ravensmere.Harbour South.The Sailmakers Arms"
     }
 	],
-	"RoomItems": null
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 2,
+			"SpawnFrequency": 70,
+			"Unique": false
+		}
+	]
 }
