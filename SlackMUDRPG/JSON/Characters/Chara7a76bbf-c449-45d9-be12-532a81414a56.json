@@ -1,15 +1,15 @@
 {
   "firstname": "O",
   "lastname": "H",
-  "lastinteractiondate": "2017-04-15T15:15:36.5795004+01:00",
-  "lastlogindate": "2017-04-15T15:15:24.5499647+01:00",
+  "lastinteractiondate": "2017-04-15T15:32:06.3664984+01:00",
+  "lastlogindate": "2017-04-15T15:33:27.7098636+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
   "userID": "a7a76bbf-c449-45d9-be12-532a81414a56",
   "username": "f",
   "password": "EAAAAJY4+HP/LHtwZd6wPvuk9g7EjZwKp+o1u30usa1yj+4T",
-  "roomID": "Ravensmere.Military District.Steelforge Blacksmiths",
+  "roomID": "Ravensmere.Harbour South.Arrivals Area",
   "newbieTipsDisabled": false,
   "questLog": [
     {
@@ -41,7 +41,7 @@
     "dex": 10,
     "wp": 10,
     "ft": 0,
-    "hp": 10,
+    "hp": 5,
     "maxhp": 10,
     "socialStanding": 8
   },
@@ -53,6 +53,10 @@
     {
       "skillName": "BlackSmithing",
       "skillLevel": 1
+    },
+    {
+      "skillName": "Dodge",
+      "skillLevel": 1
     }
   ],
   "slots": [
@@ -60,48 +64,13 @@
       "name": "RightHand",
       "allowedTypes": [
         "any"
-      ],
-      "equippedItem": {
-        "itemID": "07e053ea-964b-48ac-978f-c23ec05db4bd",
-        "singularPronoun": "a",
-        "itemName": "Key to access the arrivals hall entrance to the city",
-        "pluralName": "Keys",
-        "pluralPronoun": "some",
-        "itemType": "Misc",
-        "itemFamily": "Key",
-        "itemDescription": "Key to access the arrivals hall entrance to the city",
-        "itemWeight": 0,
-        "itemCapacity": 0,
-        "itemSize": 0,
-        "hitPoints": 1000000000,
-        "maxHitPoints": 1000000000,
-        "baseDamage": 0.001,
-        "toughness": 1,
-        "additionalData": "RavensmereAAEtoDWS"
-      }
+      ]
     },
     {
       "name": "LeftHand",
       "allowedTypes": [
         "any"
-      ],
-      "equippedItem": {
-        "itemID": "dc749cf1-7e61-4b57-8f82-706d1cb6a9e8",
-        "singularPronoun": "a",
-        "itemName": "Practice Blacksmith Hammer",
-        "pluralName": "Practice Blacksmith Hammers",
-        "pluralPronoun": "some",
-        "itemType": "weapons",
-        "itemFamily": "Hammer",
-        "itemDescription": "This Practice Blacksmithing Hammer is made for use when learning to blacksmith.",
-        "itemWeight": 4,
-        "itemCapacity": 0,
-        "itemSize": 3,
-        "hitPoints": 500,
-        "maxHitPoints": 500,
-        "baseDamage": 4.0,
-        "toughness": 4
-      }
+      ]
     },
     {
       "name": "Back",
@@ -181,18 +150,6 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "give nugget to MasterSmith Duncan",
-  "variableResponse": "m",
-  "npCsWaitingForResponses": [
-    {
-      "npcid": "MasterSmithDuncan",
-      "shortCutTokens": [
-        {
-          "shortCutToken": "SHOP"
-        }
-      ],
-      "roomID": "Ravensmere.Military District.Steelforge Blacksmiths",
-      "timeOut": 1492275724
-    }
-  ]
+  "lastUsedCommand": "move AA",
+  "variableResponse": "m"
 }
