@@ -21,5 +21,13 @@
       "Lockable": false
 		}
 	],
-	"RoomItems": null
+	"RoomItems": null,
+	"NPCSpawns": [
+		{
+			"TypeOfNPC": "Guard-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 90,
+			"Unique": false
+		}
+	]
 }

@@ -162,65 +162,85 @@ namespace SlackMUDRPG.CommandClasses
                 invokingCharacter = new SlackMud().GetCharacter(invokingCharacter.UserID);
 
                 // Check the character is still in the same room
-                if (invokingCharacter.RoomID == this.RoomID)
+                if (invokingCharacter != null)
                 {
-                    switch (NPCRS.ResponseStepType)
+                    if (invokingCharacter.RoomID == this.RoomID)
                     {
-                        case "Conversation":
-                            ProcessConversation(NPCRS, invokingCharacter);
-                            break;
-                        case "Attack":
-                            this.Attack(invokingCharacter.GetFullName());
-                            break;
-                        case "UseSkill":
-                            string[] dataSplit = null;
-                            if (NPCRS.ResponseStepData.Contains('.'))
-                            {
-                                dataSplit = NPCRS.ResponseStepData.Split('.');
-                            }
-                            else
-                            {
-                                dataSplit[0] = NPCRS.ResponseStepData;
-                                dataSplit[1] = null;
-                            }
-
-                            this.UseSkill(dataSplit[0], dataSplit[1]);
-                            break;
-                        case "ItemCheck":
-                            // Get the additional data
-                            string[] itemType = npr.AdditionalData.Split('.');
-
-                            if (itemType[0] == "Family")
-                            {
-                                if (itemIn.ItemFamily != itemType[1])
+                        switch (NPCRS.ResponseStepType)
+                        {
+                            case "Conversation":
+                                ProcessConversation(NPCRS, invokingCharacter);
+                                break;
+                            case "LeaveDeSpawn":
+                                // Announce that they're leaving...
+                                if (this.IsGeneric)
                                 {
-                                    // Drop the item
-                                    this.GetRoom().AddItem(itemIn);
-                                    this.GetRoom().Announce(ResponseFormatterFactory.Get().Italic($"\"{this.GetFullName()}\" dropped {itemIn.SingularPronoun} {itemIn.ItemName}."));
+                                    this.GetRoom().Announce("[i]" + this.PronounSingular + " " + this.GetFullName() + " walks out.[/i]", this, true);
                                 }
                                 else
                                 {
-                                    ProcessConversation(NPCRS, invokingCharacter);
+                                    this.GetRoom().Announce("[i]" + this.GetFullName() + " walks out.[/i]", this, true);
                                 }
-                            }
-                            else if (itemType[0] == "ItemName")
-                            {
-                                string[] itemName = itemType[1].Split(',');
 
-                                if (itemIn.ItemName != itemName[0])
+                                // .. remove them from the world.
+                                List<SMNPC> npcListToRemoveFrom = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
+                                npcListToRemoveFrom.Remove(this);
+                                HttpContext.Current.Application["SMNPCs"] = npcListToRemoveFrom;
+
+                                break;
+                            case "Attack":
+                                this.Attack(invokingCharacter.GetFullName());
+                                break;
+                            case "UseSkill":
+                                string[] dataSplit = null;
+                                if (NPCRS.ResponseStepData.Contains('.'))
                                 {
-                                    // Drop the item
-                                    this.GetRoom().AddItem(itemIn);
-                                    this.GetRoom().Announce(ResponseFormatterFactory.Get().Italic($"\"{this.GetFullName()}\" dropped {itemIn.SingularPronoun} {itemIn.ItemName}."));
+                                    dataSplit = NPCRS.ResponseStepData.Split('.');
                                 }
                                 else
                                 {
-                                    ProcessConversation(NPCRS, invokingCharacter);
+                                    dataSplit[0] = NPCRS.ResponseStepData;
+                                    dataSplit[1] = null;
                                 }
-                            }
 
-							break;
-					}
+                                this.UseSkill(dataSplit[0], dataSplit[1]);
+                                break;
+                            case "ItemCheck":
+                                // Get the additional data
+                                string[] itemType = npr.AdditionalData.Split('.');
+
+                                if (itemType[0] == "Family")
+                                {
+                                    if (itemIn.ItemFamily != itemType[1])
+                                    {
+                                        // Drop the item
+                                        this.GetRoom().AddItem(itemIn);
+                                        this.GetRoom().Announce(ResponseFormatterFactory.Get().Italic($"\"{this.GetFullName()}\" dropped {itemIn.SingularPronoun} {itemIn.ItemName}."));
+                                    }
+                                    else
+                                    {
+                                        ProcessConversation(NPCRS, invokingCharacter);
+                                    }
+                                }
+                                else if (itemType[0] == "ItemName")
+                                {
+                                    string[] itemName = itemType[1].Split(',');
+
+                                    if (itemIn.ItemName != itemName[0])
+                                    {
+                                        // Drop the item
+                                        this.GetRoom().AddItem(itemIn);
+                                        this.GetRoom().Announce(ResponseFormatterFactory.Get().Italic($"\"{this.GetFullName()}\" dropped {itemIn.SingularPronoun} {itemIn.ItemName}."));
+                                    }
+                                    else
+                                    {
+                                        ProcessConversation(NPCRS, invokingCharacter);
+                                    }
+                                }
+
+                                break;
+                        }
+                    }
                 }
             }
         }

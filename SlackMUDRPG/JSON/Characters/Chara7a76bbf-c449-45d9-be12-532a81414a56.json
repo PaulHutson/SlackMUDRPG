@@ -1,0 +1,126 @@
+{
+  "firstname": "O",
+  "lastname": "H",
+  "lastinteractiondate": "2017-04-15T11:21:15.1600856+01:00",
+  "lastlogindate": "2017-04-15T11:33:00.0428363+01:00",
+  "age": 18,
+  "sex": "m",
+  "pkFlag": false,
+  "userID": "a7a76bbf-c449-45d9-be12-532a81414a56",
+  "username": "f",
+  "password": "EAAAAJY4+HP/LHtwZd6wPvuk9g7EjZwKp+o1u30usa1yj+4T",
+  "roomID": "Ravensmere.Military District.Ramparts Parade",
+  "newbieTipsDisabled": false,
+  "questLog": [
+    {
+      "questName": "Welcome to Ravensmere",
+      "questStep": "Visit the Clerk in the arrivals hall",
+      "lastDateUpdated": 1492251237,
+      "expires": 0,
+      "completed": true
+    }
+  ],
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ],
+      "equippedItem": {
+        "itemID": "07e053ea-964b-48ac-978f-c23ec05db4bd",
+        "singularPronoun": "a",
+        "itemName": "Key to access the arrivals hall entrance to the city",
+        "pluralName": "Keys",
+        "pluralPronoun": "some",
+        "itemType": "Misc",
+        "itemFamily": "Key",
+        "itemDescription": "Key to access the arrivals hall entrance to the city",
+        "itemWeight": 0,
+        "itemCapacity": 0,
+        "itemSize": 0,
+        "hitPoints": 1000000000,
+        "maxHitPoints": 1000000000,
+        "baseDamage": 0.001,
+        "toughness": 1,
+        "additionalData": "RavensmereAAEtoDWS"
+      }
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "a8847740-30c5-4c03-b3d1-8ab103936113",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RightFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "currency": {
+    "amountOfCurrency": 5
+  },
+  "characterWeight": 50,
+  "characterSize": 160,
+  "connectionService": "WS",
+  "lastUsedCommand": "move RP",
+  "variableResponse": "m"
+}
