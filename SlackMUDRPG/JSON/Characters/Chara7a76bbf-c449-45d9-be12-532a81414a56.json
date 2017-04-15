@@ -1,15 +1,15 @@
 {
   "firstname": "O",
   "lastname": "H",
-  "lastinteractiondate": "2017-04-15T13:56:59.1048521+01:00",
-  "lastlogindate": "2017-04-15T13:56:54.0699852+01:00",
+  "lastinteractiondate": "2017-04-15T15:15:36.5795004+01:00",
+  "lastlogindate": "2017-04-15T15:15:24.5499647+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
   "userID": "a7a76bbf-c449-45d9-be12-532a81414a56",
   "username": "f",
   "password": "EAAAAJY4+HP/LHtwZd6wPvuk9g7EjZwKp+o1u30usa1yj+4T",
-  "roomID": "Ravensmere.Harbour South.Zogs Arcanum",
+  "roomID": "Ravensmere.Military District.Steelforge Blacksmiths",
   "newbieTipsDisabled": false,
   "questLog": [
     {
@@ -23,6 +23,13 @@
       "questName": "The Root Of The Problem",
       "questStep": "Bring an arteir root to Mr Zog",
       "lastDateUpdated": 1492259248,
+      "expires": 0,
+      "completed": true
+    },
+    {
+      "questName": "The Magic Of Metal",
+      "questStep": "Take an iron nugget to MasterSmith Duncan",
+      "lastDateUpdated": 1492264827,
       "expires": 0,
       "completed": true
     }
@@ -41,6 +48,10 @@
   "skills": [
     {
       "skillName": "Dig",
+      "skillLevel": 1
+    },
+    {
+      "skillName": "BlackSmithing",
       "skillLevel": 1
     }
   ],
@@ -73,7 +84,24 @@
       "name": "LeftHand",
       "allowedTypes": [
         "any"
-      ]
+      ],
+      "equippedItem": {
+        "itemID": "dc749cf1-7e61-4b57-8f82-706d1cb6a9e8",
+        "singularPronoun": "a",
+        "itemName": "Practice Blacksmith Hammer",
+        "pluralName": "Practice Blacksmith Hammers",
+        "pluralPronoun": "some",
+        "itemType": "weapons",
+        "itemFamily": "Hammer",
+        "itemDescription": "This Practice Blacksmithing Hammer is made for use when learning to blacksmith.",
+        "itemWeight": 4,
+        "itemCapacity": 0,
+        "itemSize": 3,
+        "hitPoints": 500,
+        "maxHitPoints": 500,
+        "baseDamage": 4.0,
+        "toughness": 4
+      }
     },
     {
       "name": "Back",
@@ -95,7 +123,26 @@
         "hitPoints": 5,
         "maxHitPoints": 5,
         "baseDamage": 1E-10,
-        "toughness": 1
+        "toughness": 1,
+        "heldItems": [
+          {
+            "itemID": "d3ef3492-37a7-47eb-8dd7-898d405e2131",
+            "singularPronoun": "a pair of",
+            "itemName": "Practice Tongs",
+            "pluralName": "Practice Tongs",
+            "pluralPronoun": "some",
+            "itemType": "tools",
+            "itemFamily": "Tongs",
+            "itemDescription": "Practice Metal tongs",
+            "itemWeight": 3,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 300,
+            "maxHitPoints": 300,
+            "baseDamage": 1.0,
+            "toughness": 1
+          }
+        ]
       }
     }
   ],
@@ -134,27 +181,18 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "give root to Mr Zog",
+  "lastUsedCommand": "give nugget to MasterSmith Duncan",
   "variableResponse": "m",
   "npCsWaitingForResponses": [
     {
-      "npcid": "MrZog",
+      "npcid": "MasterSmithDuncan",
       "shortCutTokens": [
         {
-          "shortCutToken": "TMM"
-        },
-        {
-          "shortCutToken": "LFW"
-        },
-        {
           "shortCutToken": "SHOP"
-        },
-        {
-          "shortCutToken": "RO"
         }
       ],
-      "roomID": "Ravensmere.Harbour South.Zogs Arcanum",
-      "timeOut": 1492271015
+      "roomID": "Ravensmere.Military District.Steelforge Blacksmiths",
+      "timeOut": 1492275724
     }
   ]
 }

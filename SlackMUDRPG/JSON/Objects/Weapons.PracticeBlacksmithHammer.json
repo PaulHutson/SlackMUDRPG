@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Practice Blacksmith Hammer",
+	"SingularPronoun": "a",
+	"PluralName": "Practice Blacksmith Hammers",
+	"PluralPronoun": "some",
+  "ItemType": "weapons",
+  "ItemFamily": "Hammer",
+	"ItemDescription": "This Practice Blacksmithing Hammer is made for use when learning to blacksmith.",
+	"ItemWeight": 4,
+  "ItemSize": 3,
+  "HitPoints": 500,
+  "MaxHitPoints": 500,
+  "BaseDamage": 4,
+  "Toughness": 4,
+	"CanHoldOtherItems": false
+}

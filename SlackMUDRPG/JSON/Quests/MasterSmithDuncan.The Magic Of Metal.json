@@ -1,0 +1,25 @@
+﻿{
+	"QuestName": "The Magic Of Metal",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Take an iron nugget to MasterSmith Duncan",
+			"Type": "Get",
+			"CharacterName": "MasterSmith Duncan",
+			"LocationID": "Ravensmere.Military District.Steelforge Blacksmiths",
+			"AdditionalData": "ItemName.Iron Nugget,1",
+			"Instructions": "Get an Iron Nugget and return it to MasterSmith Duncan, he'll teach you how to smith"
+		}
+	],
+	"Rewards": [
+		{
+      "Type": "Item",
+      "AdditionalData": "Weapons.PracticeBlacksmithHammer,1"
+    },
+    {
+			"Type": "Item",
+			"AdditionalData": "Tools.PracticeTongs,1"
+		}
+	]
+}

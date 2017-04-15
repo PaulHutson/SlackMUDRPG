@@ -303,6 +303,7 @@
     <Content Include="JSON\NPCs\Guard-GenericComingAndGoing.json" />
     <Content Include="JSON\NPCs\Beggar.json" />
     <Content Include="JSON\NPCs\Mr Zog.json" />
+    <Content Include="JSON\NPCs\MasterSmith Duncan.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -348,6 +349,9 @@
     <Content Include="JSON\Objects\Environment.ArteirPlant.json" />
     <Content Include="JSON\Objects\Resource.ArteirRoot.json" />
     <Content Include="JSON\Skills\Skill.Dig.json" />
+    <Content Include="JSON\Quests\MasterSmithDuncan.The Magic Of Metal.json" />
+    <Content Include="JSON\Objects\Weapons.PracticeBlacksmithHammer.json" />
+    <Content Include="JSON\Objects\Tools.PracticeTongs.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
     <Content Include="scripts\ai.1.0.7-build00691.min.js" />
