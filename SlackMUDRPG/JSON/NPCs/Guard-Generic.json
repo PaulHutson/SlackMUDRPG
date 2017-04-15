@@ -1,0 +1,196 @@
+﻿{
+  "firstname": "Guard",
+  "lastname": "Soldier",
+  "description": "A generic guardsman, you're unable to see much of his face due to the tight fitting helmet.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 22,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "GenericGuardsman",
+  "RoomID": "IsSpawned",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 12,
+    "int": 8,
+    "chr": 8,
+    "dex": 10,
+    "wp": 10,
+    "ft": 20,
+    "hp": 20,
+    "maxhp": 20,
+    "SocialStanding": 8
+  },
+  "Skills": [
+    {
+      "SkillName": "Sword Use",
+      "SkillLevel": 15
+    },
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 15
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 15
+    }
+  ],
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453SergeantsSword",
+        "SingularPronoun": "an",
+        "ItemName": "Iron Sword",
+        "PluralName": "Iron Swords",
+        "PluralPronoun": "some",
+        "ItemType": "Weapon",
+        "ItemFamily": "Sword",
+        "ItemDescription": "This Iron sword is good for keeping the masses down.",
+        "ItemWeight": 2,
+        "ItemCapacity": 0,
+        "ItemSize": 2,
+        "HitPoints": 25,
+        "MaxHitPoints": 25,
+        "BaseDamage": 6.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": [
+          {
+            "SkillName": "Sword Use",
+            "SkillLevel": "1"
+          }
+        ],
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+	"NPCType": "Guard-Generic",
+	"FamilyType": "Guard",
+	"IsGeneric": true,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.ExaminesThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 50,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Examines.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Attack",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Attack.1"
+				},
+				{
+          "ResponseStepType": "Attack",
+          "ResponseStepData": null
+        }
+      ]
+    },
+    {
+      "ResponseType": "Pulse",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "AllPeople",
+      "Faction": null,
+      "Frequency": 10,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "LeaveDeSpawn",
+          "ResponseStepData": null
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "Examines",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Move along citizen.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Attack",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "shout",
+          "AdditionalData": "To Arms!  To Arms!",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

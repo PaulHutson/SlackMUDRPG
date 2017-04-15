@@ -17,5 +17,13 @@
 			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road"
 		}
 	],
-	"RoomItems": null
+	"RoomItems": null,
+	"NPCSpawns": [
+		{
+			"TypeOfNPC": "Guard-Generic",
+			"MaxNumber": 2,
+			"SpawnFrequency": 90,
+			"Unique": false
+		}
+	]
 }

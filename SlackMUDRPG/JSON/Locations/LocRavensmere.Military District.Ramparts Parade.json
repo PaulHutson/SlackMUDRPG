@@ -32,5 +32,13 @@
 			"RoomID": "Ravensmere.Industrial Quarter.Ravens South"
 		}
 	],
-	"RoomItems": null
+	"RoomItems": null,
+	"NPCSpawns": [
+		{
+			"TypeOfNPC": "Guard-GenericComingAndGoing",
+			"MaxNumber": 6,
+			"SpawnFrequency": 100,
+			"Unique": false
+		}
+	]
 }
