@@ -1,89 +1,44 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Site.Master" AutoEventWireup="true" CodeBehind="Game.aspx.cs" Inherits="SlackMUDRPG.Game" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ph_Title" runat="server">
+	TODO
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ph_Header" runat="server">
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		var ws;
-		var userid;
-		var protocol = "";
-		$(document).ready(function () {
-			if (location.protocol === 'https:') {
-				protocol = "s";
-			}
-			if (Cookies.get('ProvinceUserID') != null) {
-				console.log("Cookie:" + Cookies.get('ProvinceUserID'));
-				$("#PlayArea").show();
-				$("#LoginCreateCharacterForm").hide();
-				var baseurl = window.location.href;
-				var arr = baseurl.split("/");
-				var url = 'ws' + protocol + '://' + arr[2] + '/Handlers/GameAccess.ashx?userID=' + Cookies.get('ProvinceUserID');
-				ws = new WebSocket(url);
-				ws.onopen = function () {
-					$('#messages').prepend('Connected <br/>');
-					$('#cmdSend').click(function () {
-						SendMessage();
-						ScrollToBottom();
-					});
-				};
-				ws.onmessage = function (e) {
-					if (e.data.substring(0,27) == "You must create a character") {
-						$("#PlayArea").hide();
-						$("#LoginCreateCharacterForm").show();
-					}
-					$('#OutputWindow').append(e.data + '<br/>');
-					ScrollToBottom();
-				};
-				$('#cmdLeave').click(function () {
-					ws.close();
-					ScrollToBottom();
-				});
-				ws.onclose = function () {
-					$('#OutputWindow').append('Closed <br/>');
-					ScrollToBottom();
-				};
-				ws.onerror = function (e) {
-					$('#OutputWindow').append('Oops something went wront <br/>');
-					ScrollToBottom();
-				};
-			} else {
-				// Show the login / char creation form
-				$("#LoginCreateCharacterForm").show();
-			};
-		});
-
-		function SendMessage() {
-			ws.send($('#txtMessage').val());
-			$('#txtMessage').val('');
-		};
-
-		$(window).keydown(function (event) {
-			if (event.keyCode == 13) {
-				event.preventDefault();
-				SendMessage();
-				return false;
-			};
-		});
-
-		function ScrollToBottom() {
-			var ta = document.getElementById('OutputWindow');
-			ta.scrollTop = ta.scrollHeight;
-		};
-	</script>
+	<link rel="stylesheet" href="css/slackmud_page_game.css" />
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ph_MainContent" runat="server">
-	<div id="PlayArea">
-		<div>
-			<div id="OutputWindow"></div>
-		</div>
-		<div>
-			<input type="text" id="txtMessage" />
-			<input type="button" value="Send" id="cmdSend" />
-		</div>
-	</div>
-	
 
-	<div id="LoginCreateCharacterForm">
+<asp:Content ID="Content3" ContentPlaceHolderID="ph_MainContent" runat="server">
+
+		<!-- Game play section -->
+		<section class="page-content" id="gameplay-section">
+			<div class="container full-height">
+				<div class="row full-height">
+					<div class="col-xs-12 full-height">
+						<div class="content-block">
+							<div class="game-output" id="game-output"></div>
+							<div class="game-input">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Enter commands here..." id="game-input">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button" id="submit-cmd">Send</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Login/Create character form -->
+		<!--
+		<section class="page-content" id="login-create-section">
+			LOGIN/CREATE
+		</section>
+		-->
+
+	<div id="login-create-section">
 		<div id="LoginForm">
 			<div class="FormRow">
 				<div class="FormRomLabel">
@@ -151,3 +106,8 @@
 	</div>
 
 </asp:Content>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="ph_PageJavaScript" runat="server">
+	<script type="text/javascript" src="scripts/slackmud_gamepage_websockets.js"></script>
+</asp:Content>
+

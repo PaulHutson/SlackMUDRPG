@@ -411,6 +411,7 @@
     <Content Include="scripts\JS.Cookie.js" />
     <Content Include="css\Site.css" />
     <Content Include="scripts\slackmud.js" />
+    <Content Include="scripts\slackmud_gamepage_websockets.js" />
     <Content Include="TestButton.aspx" />
     <Content Include="ToDo.txt" />
     <Content Include="Web.config">
