@@ -124,7 +124,14 @@ namespace SlackMUDRPG.Utility
 			object[] parameters = GetParamsArrayForMethod(method, args).ToArray();
 
 			// Calls the method
-			return method.Invoke(method.IsStatic ? null : obj, parameters);
+            try
+            {
+                return method.Invoke(method.IsStatic ? null : obj, parameters);
+            }
+            catch
+            {
+                return null;
+            }
 		}
 
 		/// <summary>

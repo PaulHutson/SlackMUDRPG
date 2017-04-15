@@ -7,8 +7,8 @@
 	"RoomDescription": "There are several empty hospital beds shown around this obviously well used room... clearly many people have been through here before!",
 	"RoomExits": [
 		{
-			"Shortcut": "D1",
-			"Description": "A portal leads you back out to the real world...",
+			"Shortcut": "DWS",
+			"Description": "Docklands Way South",
 			"RoomID": "1"
 		}
 	],

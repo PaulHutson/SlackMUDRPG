@@ -21,7 +21,20 @@
     "maxhp": 35,
     "SocialStanding": 15
   },
-  "Skills": null,
+  "Skills": [
+    {
+      "SkillName": "Basic Attack",
+      "SkillLevel": 30
+    },
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 30
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 30
+    }
+  ],
   "Slots": [
     {
       "Name": "RightHand",
@@ -146,6 +159,19 @@
         {
           "Type": "InProgressQuest",
           "AdditionalData": "The Magic Of Metal"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Attack",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+				{
+          "ResponseStepType": "Attack",
+          "ResponseStepData": null
         }
       ]
     }
