@@ -17,7 +17,7 @@
 	</head>
 
 	<body>
-		<form id="form1" runat="server">
+		<form id="form1" runat="server" class="full-height">
 			<!-- Social media pre header -->
 			<nav class="navbar navbar-slackmud-social navbar-fixed-top">
 				<div class="container">
@@ -84,5 +84,7 @@
 		<script type="text/javascript" src="../scripts/JS.Cookie.js"></script>
 		<script type="text/javascript" src="../scripts/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../scripts/slackmud.js"></script>
+
+		<asp:ContentPlaceHolder ID="ph_PageJavaScript" runat="server"></asp:ContentPlaceHolder>
 	</body>
 </html>
