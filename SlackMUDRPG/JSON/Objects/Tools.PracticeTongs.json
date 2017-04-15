@@ -1,16 +1,16 @@
 ﻿{
-	"ItemName": "Tongs",
+	"ItemName": "Practice Tongs",
 	"SingularPronoun": "a pair of",
-	"PluralName": "Tongs",
+	"PluralName": "Practice Tongs",
 	"PluralPronoun": "some",
   "ItemType": "tools",
   "ItemFamily": "Tongs",
-	"ItemDescription": "Metal tongs",
+	"ItemDescription": "Practice Metal tongs",
 	"ItemWeight": 3,
   "ItemSize": 1,
-  "HitPoints": 500,
-  "MaxHitPoints": 500,
+  "HitPoints": 300,
+  "MaxHitPoints": 300,
   "BaseDamage": 1,
-  "Toughness": 3,
+  "Toughness": 1,
 	"CanHoldOtherItems": false
 }

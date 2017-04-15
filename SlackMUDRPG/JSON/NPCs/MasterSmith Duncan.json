@@ -1,0 +1,497 @@
+﻿{
+  "firstname": "MasterSmith",
+  "lastname": "Duncan",
+  "description": "A well built man wearing a long smithing apron.  He has no hair and is clean shaven.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 34,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "MasterSmithDuncan",
+  "RoomID": "Ravensmere.Military District.Steelforge Blacksmiths",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 20,
+    "int": 15,
+    "chr": 12,
+    "dex": 15,
+    "wp": 12,
+    "ft": 20,
+    "hp": 35,
+    "maxhp": 35,
+    "SocialStanding": 15
+  },
+  "Skills": null,
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+				  "ItemID": "MastersBlacksmithHammer",
+				  "ItemName": "Best Quality Blacksmith Hammer",
+				  "SingularPronoun": "a",
+				  "PluralName": "Best Quality Blacksmith Hammers",
+				  "PluralPronoun": "some",
+				  "ItemType": "weapons",
+				  "ItemFamily": "Hammer",
+				  "ItemDescription": "This Best Quality Blacksmithing Hammer has been crafted by a master.",
+				  "ItemWeight": 3,
+				  "ItemSize": 2,
+				  "HitPoints": 50000,
+				  "MaxHitPoints": 50000,
+				  "BaseDamage": 10,
+				  "Toughness": 10,
+				  "CanHoldOtherItems": false
+			  }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+	"NPCType": "MasterSmithDuncan",
+	"FamilyType": "Blacksmith",
+	"IsGeneric": false,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+  "NPCResponses": [
+		{
+			"ResponseType": "PlayerCharacter.Enter",
+			"ResponseTimeOfDay": "all",
+			"AdditionalData": null,
+			"Faction": null,
+			"Frequency": 100,
+			"ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Enter.1"
+				}
+			]
+		},
+		{
+      "ResponseType": "PlayerCharacter.Leave",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 20,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Leave.1"
+        }
+      ]
+    },
+		{
+      "ResponseType": "PlayerCharacter.List",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Shop.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.GivesItemToThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "ItemName.Iron Nugget",
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "LearnToBlacksmith.Return"
+        }
+      ],
+      "PreRequisites": [
+        {
+          "Type": "InProgressQuest",
+          "AdditionalData": "The Magic Of Metal"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "Enter",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Hello - what can I do you for?",
+          "NextStep": null,
+          "ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "LTB",
+							"ResponseOptionText": "Learn to Blacksmith",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "LearnToBlacksmith.1"
+								}
+							],
+              "PreRequisites": [
+                {
+                  "Type": "HasNotDoneQuest",
+                  "AdditionalData": "The Magic Of Metal"
+                },
+                {
+                  "Type": "IsNotInProgressQuest",
+                  "AdditionalData": "The Magic Of Metal"
+                }
+              ]
+						},
+						{
+							"ResponseOptionShortcut": "SHOP",
+							"ResponseOptionText": "Do you have any items for sale?",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.1"
+								}
+							]
+						}
+					]
+        }
+      ]
+    },
+		{
+      "ConversationID": "LearnToBlacksmith",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks {playercharacter} over.",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "maybe you have the aptitude for it... ",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... bring me an iron nugget and I'll see about teaching you the basics.",
+          "NextStep": "4.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "addquest",
+          "AdditionalData": "MasterSmithDuncan.The Magic Of Metal",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "Return",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Ah, you've returned, excellent...",
+          "NextStep": "5.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "5",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... lets look at this iron you've brought me...",
+          "NextStep": "6.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "6",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks over the iron nugget.",
+          "NextStep": "7.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "7",
+          "Scope": "saytoplayer",
+          "AdditionalData": "That'll do fine",
+          "NextStep": "8.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "8",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Right then, observe me while I heat the forge a little",
+          "NextStep": "9.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "9",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "pumps the giant bellows to create some more heat in the coals",
+          "NextStep": "10.7",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "10",
+          "Scope": "saytoplayer",
+          "AdditionalData": "When the heat is just right you can use the tongs to heat the metal...",
+          "NextStep": "11.4",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "11",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "pushes the iron nugget into the coals using the tongs to let it heat for a moment",
+          "NextStep": "12.7",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "12",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "pulls the nugget out of the coals and immediately starts to hit it over and over with his hammer.",
+          "NextStep": "13.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "13",
+          "Scope": "saytoplayer",
+          "AdditionalData": "There, you can see it taking shape now...",
+          "NextStep": "14.4",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "14",
+          "Scope": "emotetoplayer",
+          "AdditionalData": ".. starts to shape the metal into a horseshoe shape.",
+          "NextStep": "15.8",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "15",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "thrusts the hot horseshoe into a barrel of water and then pulls it out again to show it to you.",
+          "NextStep": "16.8",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "16",
+          "Scope": "saytoplayer",
+          "AdditionalData": "and there we are, a single Horseshoe... useful, no?",
+          "NextStep": "17.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "17",
+          "Scope": "saytoplayer",
+          "AdditionalData": "I think I've given you something to get on with.. here, have a practice hammer and tongs - they're not good, but they'll do the job for you.",
+          "NextStep": "18.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "18",
+          "Scope": "updatequest",
+          "AdditionalData": "MasterSmithDuncan.The Magic Of Metal",
+          "NextStep": "19.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "19",
+          "Scope": "teachskill",
+          "AdditionalData": "BlackSmithing.1",
+          "NextStep": "20.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "20",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Feel free to practice using the forge and anvils here.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "Leave",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "mutters under his breath about young people not showing the proper respect.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "Shop",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "I've a few items in stock - here's what there is...",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "shopitem",
+          "AdditionalData": "room",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Anything you want?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NoBuy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Which item would you like? [i](Enter the number of the item)[/i]",
+          "NextStep": null,
+          "ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "{variable}",
+							"ResponseOptionText": "{variable}",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.5"
+								}
+							]
+						}
+					]
+        },
+        {
+          "StepID": "5",
+          "Scope": "shopbuyitem",
+          "AdditionalData": "ShopBuy|ShopNotValid",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShopNotValid",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Sorry, I can't sell you that...",
+          "NextStep": "BuySomethingElse.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "BuySomethingElse",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Would you like something else?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NoBuy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "ShopBuy",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Pleasure doing business with you!",
+          "NextStep": "BuySomethingElse.1",
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "ShopLeave",
+      "ConversationStep": [
+        {
+          "StepID": "NoBuy",
+          "Scope": "saytoplayer",
+          "AdditionalData": "If you need something do come back.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "NotNow",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Fair enough.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}
