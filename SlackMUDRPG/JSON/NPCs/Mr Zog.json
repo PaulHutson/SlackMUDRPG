@@ -158,16 +158,16 @@
                 }
               ]
             },
-            {
-              "ResponseOptionShortcut": "SHOP",
-              "ResponseOptionText": "I have very little money, what's cheap?",
-              "ResponseOptionActionSteps": [
-                {
-                  "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Shop.1"
-                }
-              ]
-            },
+            //{
+            //  "ResponseOptionShortcut": "SHOP",
+            //  "ResponseOptionText": "I have very little money, what's cheap?",
+            //  "ResponseOptionActionSteps": [
+            //    {
+            //      "NPCResponseOptionActionType": "Conversation",
+            //      "AdditionalData": "Shop.1"
+            //    }
+            //  ]
+            //},
             {
               "ResponseOptionShortcut": "RO",
               "ResponseOptionText": "I've brought the root back to you as you asked..",
@@ -300,17 +300,17 @@
                   "AdditionalData": "LookingForWork.1"
                 }
               ]
-            },
-            {
-              "ResponseOptionShortcut": "SHOP",
-              "ResponseOptionText": "I have very little money, what's cheap?",
-              "ResponseOptionActionSteps": [
-                {
-                  "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Shop.1"
-                }
-              ]
             }
+            //{
+            //  "ResponseOptionShortcut": "SHOP",
+            //  "ResponseOptionText": "I have very little money, what's cheap?",
+            //  "ResponseOptionActionSteps": [
+            //    {
+            //      "NPCResponseOptionActionType": "Conversation",
+            //      "AdditionalData": "Shop.1"
+            //    }
+            //  ]
+            //}
           ]
         }
       ]
