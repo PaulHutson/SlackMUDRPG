@@ -1,0 +1,231 @@
+﻿{
+  "firstname": "Beggar",
+  "lastname": "",
+  "description": "A pitiful looking beggar dressed in rags, scruffy long hair and a scruffy beard",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 32,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "GenericBeggar",
+  "RoomID": "IsSpawned",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 7,
+    "int": 8,
+    "chr": 6,
+    "dex": 7,
+    "wp": 7,
+    "ft": 8,
+    "hp": 8,
+    "maxhp": 8,
+    "SocialStanding": 3
+  },
+  "Skills": null,
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "BeggingPot",
+        "SingularPronoun": "a",
+        "ItemName": "metal pot",
+        "PluralName": "metal pots",
+        "PluralPronoun": "some",
+        "ItemType": "Pot",
+        "ItemFamily": "Pot",
+        "ItemDescription": "This metal pot has been used for begging long over the years.",
+        "ItemWeight": 1,
+        "ItemCapacity": 0,
+        "ItemSize": 1,
+        "HitPoints": 10,
+        "MaxHitPoints": 10,
+        "BaseDamage": 0.001,
+        "Toughness": 2,
+        "DestroyedOutput": null,
+        "RequiredSkills": null,
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+	"NPCType": "Beggar",
+	"FamilyType": "Beggar",
+	"IsGeneric": true,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.ExaminesThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 35,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Examines.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Attack",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Attack.1"
+				},
+				{
+          "ResponseStepType": "LeaveDeSpawn",
+          "ResponseStepData": null
+        }
+      ]
+    },
+    {
+      "ResponseType": "Pulse",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "AllPeople",
+      "Faction": null,
+      "Frequency": 50,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "LeaveDeSpawn",
+          "ResponseStepData": null
+        }
+      ]
+    },
+    {
+      "ResponseType": "Pulse",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "AllPeople",
+      "Faction": null,
+      "Frequency": 50,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "GeneralChitChat.Choice"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "GeneralChitChat",
+      "ConversationStep": [
+        {
+          "StepID": "Choice",
+          "Scope": "choice",
+          "AdditionalData": "random1,random2",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Can you spare some marks?",
+          "NextStep": "random1-1.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random1-1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "rattles his begging pot at {playercharacter}.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random2",
+          "Scope": "say",
+          "AdditionalData": "It sure is cold today, I could do with some food.",
+          "NextStep": "random2-2.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random2-2",
+          "Scope": "emote",
+          "AdditionalData": "wraps his arms around himself and rubs to try to keep warm.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Examines",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Can you spare some marks for an old beggar...?",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Attack",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emote",
+          "AdditionalData": "shuffles away as quietly as they can.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

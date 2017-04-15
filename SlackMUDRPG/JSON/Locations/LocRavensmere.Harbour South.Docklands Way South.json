@@ -59,10 +59,16 @@
 	],
 	"RoomItems": null,
 	"NPCSpawns": [
-		{
-			"TypeOfNPC": "Guard-Generic",
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "Beggar",
 			"MaxNumber": 1,
-			"SpawnFrequency": 90,
+			"SpawnFrequency": 10,
 			"Unique": false
 		}
 	]

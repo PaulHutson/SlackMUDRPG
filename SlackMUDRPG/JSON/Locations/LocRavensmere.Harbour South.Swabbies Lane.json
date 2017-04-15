@@ -22,5 +22,13 @@
 			"RoomID": "Ravensmere.Harbour South.Bridge Row"
 		}
 	],
-	"RoomItems": null
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 3,
+			"SpawnFrequency": 70,
+			"Unique": false
+		}
+	]
 }

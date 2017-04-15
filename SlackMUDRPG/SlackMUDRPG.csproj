@@ -301,6 +301,7 @@
     <Content Include="JSON\NPCs\Bert Rengle.json" />
     <Content Include="JSON\NPCs\Guard-Generic.json" />
     <Content Include="JSON\NPCs\Guard-GenericComingAndGoing.json" />
+    <Content Include="JSON\NPCs\Beggar.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
