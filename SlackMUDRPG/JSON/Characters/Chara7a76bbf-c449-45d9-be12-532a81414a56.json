@@ -1,21 +1,28 @@
 {
   "firstname": "O",
   "lastname": "H",
-  "lastinteractiondate": "2017-04-15T11:53:17.7675796+01:00",
-  "lastlogindate": "2017-04-15T11:56:05.7211765+01:00",
+  "lastinteractiondate": "2017-04-15T13:56:59.1048521+01:00",
+  "lastlogindate": "2017-04-15T13:56:54.0699852+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
   "userID": "a7a76bbf-c449-45d9-be12-532a81414a56",
   "username": "f",
   "password": "EAAAAJY4+HP/LHtwZd6wPvuk9g7EjZwKp+o1u30usa1yj+4T",
-  "roomID": "Ravensmere.Harbour South.Swabbies Lane",
+  "roomID": "Ravensmere.Harbour South.Zogs Arcanum",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
       "lastDateUpdated": 1492251237,
+      "expires": 0,
+      "completed": true
+    },
+    {
+      "questName": "The Root Of The Problem",
+      "questStep": "Bring an arteir root to Mr Zog",
+      "lastDateUpdated": 1492259248,
       "expires": 0,
       "completed": true
     }
@@ -31,6 +38,12 @@
     "maxhp": 10,
     "socialStanding": 8
   },
+  "skills": [
+    {
+      "skillName": "Dig",
+      "skillLevel": 1
+    }
+  ],
   "slots": [
     {
       "name": "RightHand",
@@ -116,11 +129,32 @@
     }
   ],
   "currency": {
-    "amountOfCurrency": 5
+    "amountOfCurrency": 8
   },
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move SL",
-  "variableResponse": "m"
+  "lastUsedCommand": "give root to Mr Zog",
+  "variableResponse": "m",
+  "npCsWaitingForResponses": [
+    {
+      "npcid": "MrZog",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "TMM"
+        },
+        {
+          "shortCutToken": "LFW"
+        },
+        {
+          "shortCutToken": "SHOP"
+        },
+        {
+          "shortCutToken": "RO"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Zogs Arcanum",
+      "timeOut": 1492271015
+    }
+  ]
 }

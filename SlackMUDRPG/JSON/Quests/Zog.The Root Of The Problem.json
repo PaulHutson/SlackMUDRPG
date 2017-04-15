@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "The Root Of The Problem",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Bring an arteir root to Mr Zog",
+			"Type": "Get",
+			"CharacterName": "Mr Zog",
+			"LocationID": "Ravensmere.Harbour South.Zogs Arcanum",
+			"AdditionalData": "ItemName.Arteir Root,1",
+			"Instructions": "Get a arteir root and take it to Mr Zog"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Money",
+			"AdditionalData": "3"
+		}
+	]
+}

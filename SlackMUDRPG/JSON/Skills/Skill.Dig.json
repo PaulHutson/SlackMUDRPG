@@ -1,0 +1,75 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Environment",
+    "SkillTypeDescription": "Skills related to manipulating the environment"
+  },
+  "SkillName": "Dig",
+	"CanUseWithoutLearning":  true,
+  "SkillDescription": "The ability to dig for items.",
+  "SkillLearnText": "You've learnt how to dig for items.",
+  "LevelIncreaseText": "You feel you've gotten better at digging",
+  "ActivityType":  "Digging",
+  "BaseStat": "STR",
+  "LevelMultiplier": 1,
+  "ImprovementSpeed": 5,
+  "Prerequisites": null,
+  "SkillSteps": [
+    {
+      "StepType": "Target",
+      "StepRequiredObject": "Plant",
+      "RequiredObjectAmount": 1,
+			"ExtraData": "Object",
+      "FailureOutput": "You must choose something to dig",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} starts to dig {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} continues to dig {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "After digging around {TARGETNAME}, {CHARNAME} finally pulls it up."
+    },
+    {
+      "StepType": "CreateDestroyedObject",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": null,
+      "SuccessOutput": "Produced {ITEMNAMES} [i](located in the same place as you)[/i]."
+    },
+    {
+      "StepType": "ConsumeObject",
+      "StepRequiredObject": "{TARGET}",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "",
+      "SuccessOutput": null
+    }
+  ]
+}

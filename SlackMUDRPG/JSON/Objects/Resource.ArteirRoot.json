@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "an",
+	"ItemName": "Arteir Root",
+	"PluralPronoun": "some",
+	"PluralName": "Arteir Root",
+	"ItemType": "Resource",
+	"ItemFamily": "Root",
+	"ItemDescription": "An arteir root, long and thing and earthy when cut into",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.005,
+	"Toughness": 1
+}
