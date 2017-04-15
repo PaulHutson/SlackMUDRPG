@@ -1,0 +1,19 @@
+.game-info-accordion {
+    width: calc(100% - 30px);
+    height: 100%;
+    overflow-y: scroll;
+    margin-left: 15px;
+    margin-top: -15px;
+}
+
+.game-info-accordion .panel {
+    border-radius: 0;
+}
+
+.game-info-accordion .panel + .panel {
+    margin: 0;
+}
+
+.game-info-accordion > .panel-slackmud:nth-child(odd) .panel-heading {
+    background-color: rgba(43, 43, 43, 0.4);
+}

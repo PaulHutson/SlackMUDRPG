@@ -177,7 +177,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Commands.aspx" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\images\facebook_logo_small.png" />
+    <Content Include="css\images\site_background.jpg" />
+    <Content Include="css\images\slackmud_header_logo.png" />
+    <Content Include="css\images\twitter_logo_small.png" />
+    <Content Include="css\slackmud_bs_panel.css" />
+    <Content Include="css\slackmud_footer.css" />
+    <Content Include="css\slackmud_gameinfo_accordion.css" />
+    <Content Include="css\slackmud_helpers.css" />
+    <Content Include="css\slackmud_main.css" />
+    <Content Include="css\slackmud_navbar.css" />
+    <Content Include="css\slackmud_page_game.css" />
+    <Content Include="css\slackmud_page_info.css" />
+    <Content Include="css\slackmud_sidenav.css" />
+    <Content Include="css\slackmud_site_background.css" />
     <Content Include="Default.aspx" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Game.aspx" />
     <Content Include="GameAccess.aspx" />
     <Content Include="HTMLTemplates\CommandTemplate.html" />
@@ -304,6 +323,14 @@
     <Content Include="JSON\NPCs\Beggar.json" />
     <Content Include="JSON\NPCs\Mr Zog.json" />
     <Content Include="JSON\NPCs\MasterSmith Duncan.json" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -355,6 +382,8 @@
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
     <Content Include="scripts\ai.1.0.7-build00691.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\jquery-3.1.1.js" />
     <Content Include="scripts\jquery-3.1.1.min.js" />
     <Content Include="scripts\jquery-3.1.1.slim.js" />
@@ -380,7 +409,8 @@
     <Content Include="scripts\jquery.signalR-2.2.1.js" />
     <Content Include="scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="scripts\JS.Cookie.js" />
-    <Content Include="Style\Site.css" />
+    <Content Include="css\Site.css" />
+    <Content Include="scripts\slackmud.js" />
     <Content Include="TestButton.aspx" />
     <Content Include="ToDo.txt" />
     <Content Include="Web.config">

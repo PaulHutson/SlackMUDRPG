@@ -1,0 +1,8 @@
+/* Side navigation styles*/
+@import url('slackmud_sidenav.css');
+
+/* Custom bootstrap panel styles */
+@import url('slackmud_bs_panel.css');
+
+/* Game info section accordion styles */
+@import url('slackmud_gameinfo_accordion.css');
