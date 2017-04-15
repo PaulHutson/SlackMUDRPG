@@ -1663,14 +1663,20 @@ namespace SlackMUDRPG.CommandClasses
 
 			foreach (SMSlot slot in this.Slots)
 			{
-				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems.Any())
+				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems())
 				{
-					item = SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
+                    if (slot.EquippedItem.HeldItems != null)
+                    {
+                        if (slot.EquippedItem.HeldItems.Any())
+                        {
+                            item = SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
 
-					if (item != null)
-					{
-						return item;
-					}
+                            if (item != null)
+                            {
+                                return item;
+                            }
+                        }
+                    }
 				}
 			}
 
@@ -1865,14 +1871,17 @@ namespace SlackMUDRPG.CommandClasses
 				if (!slot.isEmpty())
 				{
 					// Look inside the equipped item if it is a container
-					if (slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems.Any())
+					if (slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems != null)
 					{
-						if (SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier) != null)
-						{
-							SMItemHelper.RemoveItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
-							this.SaveToApplication();
-							break;
-						}
+                        if (slot.EquippedItem.HeldItems.Any())
+                        {
+                            if (SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier) != null)
+                            {
+                                SMItemHelper.RemoveItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
+                                this.SaveToApplication();
+                                break;
+                            }
+                        }
 					}
 				}
 			}

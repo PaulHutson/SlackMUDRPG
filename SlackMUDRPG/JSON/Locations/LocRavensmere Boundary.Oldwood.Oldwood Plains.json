@@ -17,7 +17,76 @@
 			"RoomID": "Ravensmere Boundary.Oldwood.Small Stream"
 		}
 	],
-	"RoomItems": null,
+  "RoomItems": [
+    {
+      "ItemID": "ArteirPlant",
+      "SingularPronoun": "an",
+      "ItemName": "Arteir Plant",
+      "PluralPronoun": "some",
+      "PluralName": "Arteir Plants",
+      "ItemType": "Environment",
+      "ItemFamily": "Plant",
+      "ItemDescription": "A small green plant that has large leaves that lay close to the ground.",
+      "ItemWeight": 1000,
+      "ItemSize": 2,
+      "HitPoints": 1000,
+      "MaxHitPoints": 1000,
+      "BaseDamage": 0.001,
+      "Toughness": 1,
+      "DestroyedOutput": "Resource.ArteirRoot,1"
+    },
+    {
+      "ItemID": "ArteirPlant2",
+      "SingularPronoun": "an",
+      "ItemName": "Arteir Plant",
+      "PluralPronoun": "some",
+      "PluralName": "Arteir Plants",
+      "ItemType": "Environment",
+      "ItemFamily": "Plant",
+      "ItemDescription": "A small green plant that has large leaves that lay close to the ground.",
+      "ItemWeight": 1000,
+      "ItemSize": 2,
+      "HitPoints": 1000,
+      "MaxHitPoints": 1000,
+      "BaseDamage": 0.001,
+      "Toughness": 1,
+      "DestroyedOutput": "Resource.ArteirRoot,1"
+    },
+    {
+      "ItemID": "ArteirPlant3",
+      "SingularPronoun": "an",
+      "ItemName": "Arteir Plant",
+      "PluralPronoun": "some",
+      "PluralName": "Arteir Plants",
+      "ItemType": "Environment",
+      "ItemFamily": "Plant",
+      "ItemDescription": "A small green plant that has large leaves that lay close to the ground.",
+      "ItemWeight": 1000,
+      "ItemSize": 2,
+      "HitPoints": 1000,
+      "MaxHitPoints": 1000,
+      "BaseDamage": 0.001,
+      "Toughness": 1,
+      "DestroyedOutput": "Resource.ArteirRoot,1"
+    },
+    {
+      "ItemID": "ArteirPlant4",
+      "SingularPronoun": "an",
+      "ItemName": "Arteir Plant",
+      "PluralPronoun": "some",
+      "PluralName": "Arteir Plants",
+      "ItemType": "Environment",
+      "ItemFamily": "Plant",
+      "ItemDescription": "A small green plant that has large leaves that lay close to the ground.",
+      "ItemWeight": 1000,
+      "ItemSize": 2,
+      "HitPoints": 1000,
+      "MaxHitPoints": 1000,
+      "BaseDamage": 0.001,
+      "Toughness": 1,
+      "DestroyedOutput": "Resource.ArteirRoot,1"
+    }
+  ],
 	"NPCSpawns": [
 		{
 			"TypeOfNPC": "YoungDeer",

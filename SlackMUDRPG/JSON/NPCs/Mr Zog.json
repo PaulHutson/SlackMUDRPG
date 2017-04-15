@@ -1,0 +1,487 @@
+﻿{
+  "firstname": "Mr",
+  "lastname": "Zog",
+  "description": "What appear to be scarlet butterflys flitter around the head of this tall and gangly man with round spectacles. His eyes are half closed and he seems to be muttering strange words.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 47,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "MrZog",
+  "RoomID": "Ravensmere.Harbour South.Zogs Arcanum",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 8,
+    "int": 16,
+    "chr": 13,
+    "dex": 10,
+    "wp": 15,
+    "ft": 20,
+    "hp": 20,
+    "maxhp": 20,
+    "SocialStanding": 15
+  },
+  "Skills": null,
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+  "NPCType": "MrZog",
+  "FamilyType": "Magica",
+  "IsGeneric": false,
+  "WalkingType": "walk",
+  "PronounSingular": "a",
+  "PronounMultiple": "some",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Enter.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Leave",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 50,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Leave.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.GivesItemToThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "ItemName.Arteir Root",
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "RootOfTheProblem.1"
+        }
+      ],
+      "PreRequisites": [
+        {
+          "Type": "InProgressQuest",
+          "AdditionalData": "The Root Of The Problem"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "Enter",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "Mr Zogs eyes flutter open and each scarlet butterfly puffs into smoke.  He looks at you and coughs into his fist.",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Welcome to mine humble shop.  How might I be of service?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "TMM",
+              "ResponseOptionText": "I've never seen anything like this place! Tell me more!",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "About.1"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "LFW",
+              "ResponseOptionText": "I'm looking for work",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "LookingForWork.1"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "SHOP",
+              "ResponseOptionText": "I have very little money, what's cheap?",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.1"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "RO",
+              "ResponseOptionText": "I've brought the root back to you as you asked..",
+              "PreRequisites": [
+                {
+                  "Type": "InProgressQuest",
+                  "AdditionalData": "The Root Of The Problem"
+                }
+              ],
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "LookingForWork.Return"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ConversationID": "LookingForWork",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Hrm, I've a few items I'm in need of...",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "... ponders for a moment then focuses back on {playercharacter}...",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Could you bring me some arteir root - you should be able to find some outside of the city to the north?",
+          "NextStep": "4.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "I'll pay you 3 marks for the root!",
+          "NextStep": "5.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "5",
+          "Scope": "addquest",
+          "AdditionalData": "Zog.The Root Of The Problem",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "Return",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Excellent... well, give it to me then...",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Leave",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "When the aura wills it you will return...",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "About",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Well, this is my humble Arcanum - full of wonderous and, if you now how to use them, powerful items...",
+          "NextStep": "2.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "... gestures at a bauble on the shelf behind him...",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... that looks like a relatively unpowerful bauble to the untrained eye...",
+          "NextStep": "4.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "... flicks his wrist and the bauble seems to fly off the shelf and crash to the floor.",
+          "NextStep": "5.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "5",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks at the bauble intensely and a smokey shape quickly materialises showing a vague copy of {playercharacter}.",
+          "NextStep": "6.4",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "6",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Now, is there anything else I can do for you today?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "LFW",
+              "ResponseOptionText": "I'm looking for work",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "LookingForWork.1"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "SHOP",
+              "ResponseOptionText": "I have very little money, what's cheap?",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+		{
+      "ConversationID": "Shop",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Here's what I have on offer today...",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "shopitem",
+          "AdditionalData": "room",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Is there anything there that tickles your fancy?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NoBuy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "If you'd like to point out which items... [i](Enter the number of the item)[/i]",
+          "NextStep": null,
+          "ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "{variable}",
+							"ResponseOptionText": "{variable}",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.5"
+								}
+							]
+						}
+					]
+        },
+        {
+          "StepID": "5",
+          "Scope": "shopbuyitem",
+          "AdditionalData": "ShopBuy|ShopNotValid",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShopNotValid",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Sorry, I can't possibly sell you that...",
+          "NextStep": "BuySomethingElse.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "BuySomethingElse",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Is there anything else you'd like today?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NoBuy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "ShopBuy",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Do be careful with that.",
+          "NextStep": "BuySomethingElse.1",
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "ShopLeave",
+      "ConversationStep": [
+        {
+          "StepID": "NoBuy",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Do not waste my time, come back when you want to actually purchase something...",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "NotNow",
+          "Scope": "saytoplayer",
+          "AdditionalData": "I see.  Well, if you [i]ever[/i] want to actually buy something do let me know...",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "RootOfTheProblem",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "CheckQuestInProgress",
+          "AdditionalData": "The Root Of The Problem",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Good, just as requested - here's the money as promised...",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "... quickly puts the root in a bag careful not to touch it too much and passes some money over the desk to you absent mindedly",
+          "NextStep": "4.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "updatequest",
+          "AdditionalData": "Zog.The Root Of The Problem",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

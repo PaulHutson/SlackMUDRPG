@@ -57,13 +57,6 @@
         "any"
       ],
       "EquippedItem": null
-    },
-    {
-      "Name": "Back",
-      "AllowedTypes": [
-        "containers"
-      ],
-      "EquippedItem": null
     }
   ],
   "BodyParts": [
