@@ -24,7 +24,7 @@ html {
 body {
     background: none;
     font-family: 'Cinzel', serif;
-    height: calc(100% - 160px);
+    height: calc(100% - 150px);
     min-height: calc(100% - 160px);
 }
 

@@ -7,12 +7,12 @@
 }
 
 .navbar-slackmud-social .navbar-nav > li > a {
-    padding: 15px 15px;
+    padding: 10px;
 }
 
 .navbar-slackmud-social .navbar-nav > li > a > img.logo {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
 }
 
 .navbar-slackmud-social .navbar-nav > li > a:hover,
@@ -29,7 +29,7 @@
     background-color: rgba(43, 43, 43, 1.0);
     color: rgba(255, 255, 255, 1.0);
     border-radius: 0;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .navbar-slackmud .navbar-nav > li > a {
