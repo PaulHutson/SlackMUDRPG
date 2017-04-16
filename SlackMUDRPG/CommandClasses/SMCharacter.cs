@@ -640,6 +640,28 @@ namespace SlackMUDRPG.CommandClasses
 			this.sendMessageToPlayer(whoOnlineString);
 		}
 
+        /// <summary>
+        /// Updates the password for the character
+        /// </summary>
+        /// <param name="newPassword">The new password</param>
+        public void SetPassword(string newPassword)
+        {
+            this.Password = Utility.Crypto.EncryptStringAES(newPassword, "ProvinceMud");
+            this.SaveToApplication();
+            this.SaveToFile();
+            this.sendMessageToPlayer("[i]Password updated[/i]");
+        }
+
+        /// <summary>
+        /// Sets the username to be different if needed.
+        /// </summary>
+        /// <param name="newUserName">The new username to use</param>
+        public void SetUserName(string newUserName)
+        {
+            this.Username = newUserName;
+            this.sendMessageToPlayer("[i]Username updated[/i]");
+        }
+
 		#endregion
 
 		#region "Skill Related Items"
