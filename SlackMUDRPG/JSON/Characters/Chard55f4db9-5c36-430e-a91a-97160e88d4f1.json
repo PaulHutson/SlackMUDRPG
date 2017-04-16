@@ -1,14 +1,14 @@
 {
   "firstname": "Bert",
   "lastname": "Jay",
-  "lastinteractiondate": "2017-04-16T15:40:29.5934793+01:00",
-  "lastlogindate": "2017-04-16T15:39:30.2971218+01:00",
+  "lastinteractiondate": "2017-04-16T15:58:48.9716065+01:00",
+  "lastlogindate": "2017-04-16T15:58:32.9487021+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
   "userID": "d55f4db9-5c36-430e-a91a-97160e88d4f1",
-  "username": "aa",
-  "password": "EAAAAGiOAnVYoX8Sv9HlF0fU9rWyeuILro0V09AfzbyWk5Ei",
+  "username": "Paul",
+  "password": "EAAAAAUGGDWIrDWGNVFjfQ872Le+lblLslXN9p24c4XDkQXl",
   "roomID": "Ravensmere.Harbour South.Docklands Way South",
   "newbieTipsDisabled": false,
   "questLog": [
@@ -121,6 +121,6 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move DWS",
+  "lastUsedCommand": "setpassword paul101",
   "variableResponse": "m"
 }
