@@ -189,6 +189,7 @@
     <Content Include="css\slackmud_footer.css" />
     <Content Include="css\slackmud_gameinfo_accordion.css" />
     <Content Include="css\slackmud_helpers.css" />
+    <Content Include="css\slackmud_login_create.css" />
     <Content Include="css\slackmud_main.css" />
     <Content Include="css\slackmud_navbar.css" />
     <Content Include="css\slackmud_page_game.css" />
@@ -412,6 +413,7 @@
     <Content Include="css\Site.css" />
     <Content Include="scripts\slackmud.js" />
     <Content Include="scripts\slackmud_gamepage_websockets.js" />
+    <Content Include="scripts\slackmud_login_create.js" />
     <Content Include="TestButton.aspx" />
     <Content Include="ToDo.txt" />
     <Content Include="Web.config">
