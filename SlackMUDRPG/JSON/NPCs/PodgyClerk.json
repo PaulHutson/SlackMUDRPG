@@ -294,13 +294,27 @@
 						}
 					]
 				},
-				{
-					"StepID": "4-8",
-					"Scope": "setplayerattribute",
-					"AdditionalData": "lastname",
-					"NextStep": "4-9.0",
-					"ResponseOptions": null
-				},
+        {
+          "StepID": "4-8",
+          "Scope": "setplayerattribute",
+          "AdditionalData": "lastname",
+          "NextStep": "4-8Check.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4-8Check",
+          "Scope": "checkplayername",
+          "AdditionalData": "4-9|4-8CheckCantUse",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4-8CheckCantUse",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Hrm, looking at my records that name has already been used.. please choose another..",
+          "NextStep": "4-2.1",
+          "ResponseOptions": null
+        },
 				{
 					"StepID": "4-9",
 					"Scope": "saytoplayer",

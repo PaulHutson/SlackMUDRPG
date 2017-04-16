@@ -1,0 +1,96 @@
+{
+  "firstname": "New",
+  "lastname": "Arrival",
+  "lastinteractiondate": "2017-04-16T14:58:05.4125635+01:00",
+  "lastlogindate": "2017-04-16T14:58:05.4125635+01:00",
+  "age": 18,
+  "sex": "m",
+  "pkFlag": false,
+  "userID": "dd1320e0-23b2-4d7d-813b-bb95956b73da",
+  "username": "aa",
+  "password": "EAAAAJUCu3DvA3upZV5DgnzDdeOg9MdsDlLR1jWEvkE8kqTZ",
+  "roomID": "Ravensmere.Harbour South.Landing Area",
+  "newbieTipsDisabled": false,
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "5c5e13ce-4071-4b35-a326-310fbb4d2bf5",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RightFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "currency": {
+    "amountOfCurrency": 5
+  },
+  "characterWeight": 50,
+  "characterSize": 160
+}
