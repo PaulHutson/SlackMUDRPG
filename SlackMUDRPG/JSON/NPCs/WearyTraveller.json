@@ -14,14 +14,23 @@
     "str": 10,
     "int": 10,
     "chr": 10,
-    "dex": 10,
+    "dex": 50,
     "wp": 10,
-    "ft": 10,
-    "hp": 10,
-    "maxhp": 10,
+    "ft": 50,
+    "hp": 1000,
+    "maxhp": 1000,
     "SocialStanding": 8
   },
-  "Skills": null,
+  "Skills": [
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 50
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 50
+    }
+  ],
   "Slots": [
     {
       "Name": "RightHand",

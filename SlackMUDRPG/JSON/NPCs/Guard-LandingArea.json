@@ -14,25 +14,25 @@
     "str": 15,
     "int": 10,
     "chr": 10,
-    "dex": 10,
+    "dex": 15,
     "wp": 10,
-    "ft": 20,
-    "hp": 20,
-    "maxhp": 20,
+    "ft": 50,
+    "hp": 1000,
+    "maxhp": 1000,
     "SocialStanding": 13
   },
   "Skills": [
     {
       "SkillName": "Sword Use",
-      "SkillLevel": 30
+      "SkillLevel": 50
     },
     {
       "SkillName": "Dodge",
-      "SkillLevel": 30
+      "SkillLevel": 50
     },
     {
       "SkillName": "Parry",
-      "SkillLevel": 30
+      "SkillLevel": 50
     }
   ],
   "Slots": [
@@ -157,11 +157,7 @@
 				{
 					"ResponseStepType": "Conversation",
 					"ResponseStepData": "Attack.1"
-				},
-				{
-          "ResponseStepType": "Attack",
-          "ResponseStepData": null
-        }
+				}
       ]
     }
   ],
@@ -192,6 +188,13 @@
 				},
 				{
 					"StepID": "4",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Please make your way to see the Clerk to register.",
+					"NextStep": "5.0",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "5",
 					"Scope": "addquest",
 					"AdditionalData": "PodgyClerk.Welcome to Ravensmere",
 					"NextStep": null,
@@ -217,7 +220,21 @@
         {
           "StepID": "1",
           "Scope": "saytoplayer",
-          "AdditionalData": "You're going to regret that...",
+          "AdditionalData": "Oi, you - yes, you...",
+          "NextStep": "2.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "points at {playercharacter}.",
+          "NextStep": "3.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Stop that and make your way into the arrivals hall - you're only embarassing yourself here.",
           "NextStep": null,
           "ResponseOptions": null
         }
