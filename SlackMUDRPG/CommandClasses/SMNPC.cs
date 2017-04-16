@@ -367,25 +367,52 @@ namespace SlackMUDRPG.CommandClasses
 							}
 						}
 						break;
-					case "setplayerattribute":
-						// Add a response option
-						string s = invokingCharacter.VariableResponse.ToLower();
-						switch (npccs.AdditionalData.ToLower())
-						{
-							case "firstname":
-								invokingCharacter.FirstName = char.ToUpper(s[0]) + s.Substring(1);
-								break;
-							case "lastname":
-								invokingCharacter.LastName = char.ToUpper(s[0]) + s.Substring(1);
-								break;
-							case "sex":
-								invokingCharacter.Sex = char.Parse(invokingCharacter.VariableResponse);
-								break;
-						}
-						invokingCharacter.SaveToApplication();
-						invokingCharacter.SaveToFile();
-						break;
-					case "setvariableresponse":
+                    case "setplayerattribute":
+                        // Add a response option
+                        string s = invokingCharacter.VariableResponse.ToLower();
+                        switch (npccs.AdditionalData.ToLower())
+                        {
+                            case "firstname":
+                                invokingCharacter.FirstName = char.ToUpper(s[0]) + s.Substring(1);
+                                break;
+                            case "lastname":
+                                invokingCharacter.LastName = char.ToUpper(s[0]) + s.Substring(1);
+                                break;
+                            case "sex":
+                                invokingCharacter.Sex = char.Parse(invokingCharacter.VariableResponse);
+                                break;
+                        }
+                        invokingCharacter.SaveToApplication();
+                        invokingCharacter.SaveToFile();
+                        break;
+                    case "checkplayername":
+                        // Gather the info
+                        string[] nextStepsCheckPlayerName = npccs.AdditionalData.Split('|');
+                        string name = invokingCharacter.GetFullName();
+                        bool nameCanBeUsed = new SMAccountHelper().CheckCharNameCanBeUsed(name);
+                        
+                        if (nameCanBeUsed)
+                        {
+                            // Add the name to the list so no one else can use it
+                            new SMAccountHelper().AddNameToList(name, invokingCharacter.UserID);
+
+                            // Play the succcess conversation step
+                            ProcessConversationStep(npcc, nextStepsCheckPlayerName[0], invokingCharacter);
+                        }
+                        else
+                        {
+                            // Reset the player name
+                            invokingCharacter.FirstName = "New";
+                            invokingCharacter.LastName = "Arrival";
+                            invokingCharacter.SaveToApplication();
+                            invokingCharacter.SaveToFile();
+
+                            // Play the failure conversaton steps (i.e. go back through the same thing again).
+                            ProcessConversationStep(npcc, nextStepsCheckPlayerName[1], invokingCharacter);
+                        }
+                        
+                        break;
+                    case "setvariableresponse":
 						invokingCharacter.VariableResponse = npccs.AdditionalData.ToLower();
 						break;
 					case "teachskill":

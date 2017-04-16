@@ -133,16 +133,19 @@ namespace SlackMUDRPG
 			Files = d.GetFiles();
 			foreach (FileInfo file in Files)
 			{
-				string NPCFilePath = FilePathSystem.GetFilePath("NPCs", file.Name, "");
-				// Use a stream reader to read the file in (based on the path)
-				using (StreamReader r = new StreamReader(NPCFilePath))
-				{
-					// Create a new JSON string to be used...
-					string json = r.ReadToEnd();
-
-					// ... get the information from the help file
-					lnpcs.Add(JsonConvert.DeserializeObject<SMNPC>(json));
-				}
+                if (file.Name != "NPCNamesList.json")
+                {
+                    string NPCFilePath = FilePathSystem.GetFilePath("NPCs", file.Name, "");
+                    // Use a stream reader to read the file in (based on the path)
+                    using (StreamReader r = new StreamReader(NPCFilePath))
+                    {
+                        // Create a new JSON string to be used...
+                        string json = r.ReadToEnd();
+                        
+                        // ... get the information from the help file
+                        lnpcs.Add(JsonConvert.DeserializeObject<SMNPC>(json));
+                    }
+                }
 			}
 
 			Application["SMNPCs"] = lnpcs;

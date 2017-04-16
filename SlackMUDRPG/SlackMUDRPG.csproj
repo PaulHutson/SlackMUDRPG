@@ -304,6 +304,8 @@
     <Content Include="JSON\NPCs\Beggar.json" />
     <Content Include="JSON\NPCs\Mr Zog.json" />
     <Content Include="JSON\NPCs\MasterSmith Duncan.json" />
+    <Content Include="JSON\Characters\CharNamesList.json" />
+    <Content Include="JSON\NPCs\NPCNamesList.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -393,6 +395,7 @@
     <Compile Include="CommandClasses\Commands.cs" />
     <Compile Include="CommandClasses\SlackClient.cs" />
     <Compile Include="CommandClasses\SlackMud.cs" />
+    <Compile Include="CommandClasses\SMAccount.cs" />
     <Compile Include="CommandClasses\SMAttributes.cs" />
     <Compile Include="CommandClasses\SMBodyPart.cs" />
     <Compile Include="CommandClasses\SMCharacter.cs" />
