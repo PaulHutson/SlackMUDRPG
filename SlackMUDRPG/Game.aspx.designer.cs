@@ -13,57 +13,75 @@ namespace SlackMUDRPG {
     public partial class Game {
         
         /// <summary>
-        /// tb_UserName control.
+        /// username control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_UserName;
+        protected global::System.Web.UI.WebControls.TextBox username;
         
         /// <summary>
-        /// tb_Password control.
+        /// password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_Password;
+        protected global::System.Web.UI.WebControls.TextBox password;
         
         /// <summary>
-        /// btn_Login control.
+        /// loginBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Login;
+        protected global::System.Web.UI.WebControls.Button loginBtn;
         
         /// <summary>
-        /// tb_CreateUserName control.
+        /// newUsername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_CreateUserName;
+        protected global::System.Web.UI.WebControls.TextBox newUsername;
         
         /// <summary>
-        /// tb_CreatePassword control.
+        /// email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_CreatePassword;
+        protected global::System.Web.UI.WebControls.TextBox email;
         
         /// <summary>
-        /// btn_CreateCharacter control.
+        /// newPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_CreateCharacter;
+        protected global::System.Web.UI.WebControls.TextBox newPassword;
+        
+        /// <summary>
+        /// repeatPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox repeatPassword;
+        
+        /// <summary>
+        /// createBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button createBtn;
     }
 }

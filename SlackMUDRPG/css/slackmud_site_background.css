@@ -1,0 +1,8 @@
+/* Fixed Full Screen Background */
+html {
+    background: rgba(43, 43, 43, 1.0) url("images/site_background.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

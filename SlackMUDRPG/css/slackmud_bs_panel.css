@@ -1,0 +1,27 @@
+.panel-slackmud {
+    border: none;
+    background: transparent;
+}
+
+.panel-slackmud > .panel-heading {
+    background-color: rgba(43, 43, 43, 0.79);
+    border-radius: 0;
+    color: rgba(255, 255, 255, 1.0);
+    text-align: center;
+}
+
+.panel-slackmud > .panel-heading:hover,
+.panel-slackmud > .panel-heading:focus, {
+    background-color: rgba(103, 103, 103, 1.0);
+}
+
+.panel-slackmud > .panel-heading > .panel-title {
+    font-size: 1.5em;
+}
+
+.panel-slackmud > .panel-heading + .panel-collapse > .panel-body {
+    border: 0;
+    background-color: rgba(43, 43, 43, 0.4);
+    color: rgba(255, 255, 255, 1.0);
+    font-size: 1.1em;
+}

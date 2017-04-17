@@ -1,7 +1,7 @@
 ﻿{
 	"Name": "Blacksmith Hammer",
 	"Description": "The knowledge of how to make a Blacksmith Hammer.",
-	"Produces": "Weapons.BlacksmithHammer",
+	"Produces": "Weapon.BlacksmithHammer",
 	"PauseTime": 20,
 	"NeedToLearn": false,
 	"ProductionTrait": "Trait.BlackSmithing",

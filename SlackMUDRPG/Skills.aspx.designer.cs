@@ -10,24 +10,15 @@
 namespace SlackMUDRPG {
     
     
-    public partial class Commands {
+    public partial class Skills {
         
         /// <summary>
-        /// commandTypesList control.
+        /// skillListings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal commandTypesList;
-        
-        /// <summary>
-        /// commandListings control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal commandListings;
+        protected global::System.Web.UI.WebControls.Literal skillListings;
     }
 }

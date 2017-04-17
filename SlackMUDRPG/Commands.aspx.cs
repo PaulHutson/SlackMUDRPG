@@ -14,63 +14,104 @@ namespace SlackMUDRPG
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			// Prepare a string for output later
-			string outputString = "";
+			commandTypesList.Text = this.GetCommandFamilyListHtml();
 
-			// Get all the loaded receipes
-			List<SMCommand> smrl = (List<SMCommand>)Application["SMCommands"];
+			commandListings.Text = this.GetCommandFamiliesListingHtml();
+		}
 
-			// Get the receipe template html
-			string template = "";
+		/// <summary>
+		/// Gets the HTML for a list on command family navigation links
+		/// </summary>
+		/// <returns>String of HTML li elements</returns>
+		private string GetCommandFamilyListHtml()
+		{
+			string html = String.Empty;
 
-			string templatesPath = FilePathSystem.GetRootFilePath("HTMLTemplates", "CommandTemplate", ".html");
-
-			if (File.Exists(templatesPath))
+			foreach(string family in this.GetCommandFamilies())
 			{
-				using (StreamReader r = new StreamReader(templatesPath))
+				html += $"<li><a href=\"#\" data-group=\"commands-{family.ToLower()}\">{family} Commands</a></li>";
+			}
+
+			return html;
+		}
+
+		/// <summary>
+		/// Gets the HTML for the command listings for all command familes
+		/// </summary>
+		/// <returns>String of HTML command entrires</returns>
+		private string GetCommandFamiliesListingHtml()
+		{
+			string html = String.Empty;
+
+			List<string> families = this.GetCommandFamilies();
+
+			foreach(string family in families)
+			{
+				html += $"<div class=\"info-group\" id=\"commands-{family.ToLower()}\">";
+				html += this.GetCommandFamilyListingHtml(family);
+				html += $"</div>";
+			}
+
+			return html;
+		}
+
+		/// <summary>
+		/// Gets the HTML of command listings for a given command family
+		/// </summary>
+		/// <param name="family">The command family to get the listing for</param>
+		/// <returns>String of HTML command entrires</returns>
+		private string GetCommandFamilyListingHtml(string family)
+		{
+			string html = String.Empty;
+
+			List<SMCommand> commands = this.GetCommandsForFamily(family);
+
+			if (commands != null)
+			{
+				foreach(SMCommand command in commands)
 				{
-					template = r.ReadToEnd();
+					string guid = Guid.NewGuid().ToString();
+					string template = Utils.GetHtmlTemplate("CommandTemplate");
+
+					template = template.Replace("{panelId}", guid);
+					template = template.Replace("{Name}", command.CommandName);
+					template = template.Replace("{Description}", command.CommandDescription);
+					template = template.Replace("{RequiredSkills}", Utils.noneIfNull(command.RequiredSkill));
+					template = template.Replace("{ExampleUsage}", command.ExampleUsage);
+					template = template.Replace("{CommandSyntax}", command.CommandSyntax);
+
+					html += template;
 				}
 			}
 
-			// Sort the list alphabetically
-			smrl = smrl.OrderBy(x => x.CommandFamily).ToList();
+			return html;
+		}
 
-			// Scroll around those
-			foreach (SMCommand command in smrl)
-			{
+		/// <summary>
+		/// Gets a list of command family names based on those loaded in the current application
+		/// </summary>
+		/// <returns>Ordered list of command family name strings</returns>
+		private List<string> GetCommandFamilies()
+		{
+			List<SMCommand> smcl = (List<SMCommand>)Application["SMCommands"];
 
-				string baseCommandName = command.CommandName;
-				if (baseCommandName.Contains(','))
-				{
-					string[] splitCommandName = baseCommandName.Split(',');
-					baseCommandName = splitCommandName[0];
-				}
+			List<string> filtered = smcl.Select(cmd => cmd.CommandFamily).Distinct().ToList();
 
-				string commandItem = template;
-				// replace all {name|lower} items with the base name
-				commandItem = commandItem.Replace("{name|lower}", "<i>" + baseCommandName + "</i>");
+			return filtered.OrderBy(cmd => cmd).ToList();
+		}
 
-				// Get each item and build it into the relevant string
-				commandItem = commandItem.Replace("{Family}", command.CommandFamily);
-				commandItem = commandItem.Replace("{Title}", command.CommandName);
-				commandItem = commandItem.Replace("{Description}", command.CommandDescription);
-				if (command.RequiredSkill != null)
-				{
-					commandItem = commandItem.Replace("{RequiredSkills}", command.RequiredSkill);
-				}
-				else
-				{
-					commandItem = commandItem.Replace("{RequiredSkills}", "None");
-				}
-				commandItem = commandItem.Replace("{ExampleUsage}", command.ExampleUsage);
-				commandItem = commandItem.Replace("{CommandSyntax}", command.CommandSyntax);
+		/// <summary>
+		/// Gets a list of commands in a given family based on those loadin in the current application
+		/// </summary>
+		/// <param name="commandFamily">Family name to get command for</param>
+		/// <returns>Ordered list of SMCommand objects for the given family name</returns>
+		private List<SMCommand> GetCommandsForFamily(string commandFamily)
+		{
+			List<SMCommand> smcl = (List<SMCommand>)Application["SMCommands"];
 
-				outputString += commandItem;
-			}
+			List<SMCommand> filtered = smcl.Where(cmd => cmd.CommandFamily == commandFamily).ToList();
 
-			// Add all the receipes to the page
-			lit_CommandList.Text = outputString;
+			return filtered.OrderBy(cmd => cmd.CommandName).ToList();
 		}
 	}
 }

@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Site.Master" AutoEventWireup="true" CodeBehind="Commands.aspx.cs" Inherits="SlackMUDRPG.Commands" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Site.Master" AutoEventWireup="true" CodeBehind="Recipes.aspx.cs" Inherits="SlackMUDRPG.Receipes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ph_Title" runat="server">
-	SlakMud - Commands
+	SlakMud - Receipes
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ph_Header" runat="server">
@@ -16,7 +16,7 @@
 					<div class="content-block">
 						<nav class="side-nav">
 							<ul>
-								<asp:Literal runat="server" id="commandTypesList"></asp:Literal>
+								<asp:Literal runat="server" id="recipesTypesList"></asp:Literal>
 							</ul>
 						</nav>
 					</div>
@@ -25,7 +25,7 @@
 				<div class="col-xs-9 full-height">
 					<div class="content-block">
 						<div class="panel-group game-info-accordion" id="accordion">
-							<asp:Literal runat="server" id="commandListings"></asp:Literal>
+							<asp:Literal runat="server" id="recipeListings"></asp:Literal>
 						</div>
 					</div>
 				</div>

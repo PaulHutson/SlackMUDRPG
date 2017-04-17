@@ -177,11 +177,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Commands.aspx" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\images\facebook_logo_small.png" />
+    <Content Include="css\images\site_background.jpg" />
+    <Content Include="css\images\slackmud_header_logo.png" />
+    <Content Include="css\images\twitter_logo_small.png" />
+    <Content Include="css\slackmud_bs_panel.css" />
+    <Content Include="css\slackmud_footer.css" />
+    <Content Include="css\slackmud_gameinfo_accordion.css" />
+    <Content Include="css\slackmud_helpers.css" />
+    <Content Include="css\slackmud_login_create.css" />
+    <Content Include="css\slackmud_main.css" />
+    <Content Include="css\slackmud_navbar.css" />
+    <Content Include="css\slackmud_page_game.css" />
+    <Content Include="css\slackmud_page_info.css" />
+    <Content Include="css\slackmud_sidenav.css" />
+    <Content Include="css\slackmud_site_background.css" />
     <Content Include="Default.aspx" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Game.aspx" />
     <Content Include="GameAccess.aspx" />
     <Content Include="HTMLTemplates\CommandTemplate.html" />
-    <Content Include="HTMLTemplates\ReceipeTemplate.html" />
+    <Content Include="HTMLTemplates\RecipeTemplate.html" />
+    <Content Include="HTMLTemplates\SkillTemplate.html" />
+    <Content Include="Items.aspx" />
     <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Commands\Commands.General.json" />
@@ -231,7 +253,7 @@
     <Content Include="JSON\Objects\Environment.CopperVein.json" />
     <Content Include="JSON\Locations\LocOutside2.json" />
     <Content Include="JSON\Skills\Skill.Carpentry.json" />
-    <Content Include="JSON\Receipe\Weapons.WoodenSword.json" />
+    <Content Include="JSON\Receipe\Weapon.WoodenSword.json" />
     <Content Include="JSON\Objects\Resource.LeatherStrip.json" />
     <Content Include="JSON\Objects\Tools.Chisel.json" />
     <Content Include="JSON\Objects\Weapons.CarpenterHammer.json" />
@@ -304,6 +326,14 @@
     <Content Include="JSON\NPCs\Beggar.json" />
     <Content Include="JSON\NPCs\Mr Zog.json" />
     <Content Include="JSON\NPCs\MasterSmith Duncan.json" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="JSON\Characters\CharNamesList.json" />
     <Content Include="JSON\NPCs\NPCNamesList.json" />
     <Content Include="JSON\Misc\HashKey.json" />
@@ -331,18 +361,18 @@
     <Content Include="JSON\Skills\Skill.Whittling.json" />
     <Content Include="JSON\Receipe\Resource.Stick.json" />
     <Content Include="JSON\Skills\Skill.BlackSmithing.json" />
-    <Content Include="JSON\Receipe\Weapons.Sword.json" />
+    <Content Include="JSON\Receipe\Weapon.Sword.json" />
     <Content Include="JSON\Objects\Weapon.Sword.json" />
     <Content Include="JSON\Objects\Weapons.BlacksmithHammer.json" />
     <Content Include="JSON\Objects\Tools.Tongs.json" />
     <Content Include="JSON\Objects\Tools.Anvil.json" />
-    <Content Include="JSON\Receipe\Weapons.Knife.json" />
+    <Content Include="JSON\Receipe\Weapon.Knife.json" />
     <Content Include="JSON\Receipe\Tools.Tongs.json" />
-    <Content Include="JSON\Receipe\Weapons.BlacksmithHammer.json" />
+    <Content Include="JSON\Receipe\Weapon.BlacksmithHammer.json" />
     <Content Include="JSON\Receipe\Resource.ArrowHead.json" />
     <Content Include="JSON\Objects\Resource.ArrowHead.json" />
     <Content Include="JSON\Receipe\Consumable.HuntingArrow.json" />
-    <Content Include="JSON\Receipe\RangedWeapons.HuntingBow.json" />
+    <Content Include="JSON\Receipe\RangedWeapon.HuntingBow.json" />
     <Content Include="JSON\Objects\RangedWeapon.HuntingBow.json" />
     <Content Include="JSON\Skills\Skill.Knife.json" />
     <Content Include="JSON\Quests\Felhirst.The Art Of Tanning.json" />
@@ -366,6 +396,8 @@
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
     <Content Include="scripts\ai.1.0.7-build00691.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\jquery-3.1.1.js" />
     <Content Include="scripts\jquery-3.1.1.min.js" />
     <Content Include="scripts\jquery-3.1.1.slim.js" />
@@ -387,11 +419,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Receipes.aspx" />
+    <Content Include="Recipes.aspx" />
     <Content Include="scripts\jquery.signalR-2.2.1.js" />
     <Content Include="scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="scripts\JS.Cookie.js" />
-    <Content Include="Style\Site.css" />
+    <Content Include="css\Site.css" />
+    <Content Include="scripts\slackmud.js" />
+    <Content Include="scripts\slackmud_gamepage_websockets.js" />
+    <Content Include="scripts\slackmud_login_create.js" />
+    <Content Include="scripts\slackmud_info_page.js" />
+    <Content Include="Skills.aspx" />
     <Content Include="TestButton.aspx" />
     <Content Include="ToDo.txt" />
     <Content Include="Web.config">
@@ -466,6 +503,13 @@
       <DependentUpon>GameAccess.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handlers\GameAccessWebSocketHandler.cs" />
+    <Compile Include="Items.aspx.cs">
+      <DependentUpon>Items.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Items.aspx.designer.cs">
+      <DependentUpon>Items.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterPage\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -474,12 +518,19 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Receipes.aspx.cs">
-      <DependentUpon>Receipes.aspx</DependentUpon>
+    <Compile Include="Recipes.aspx.cs">
+      <DependentUpon>Recipes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Receipes.aspx.designer.cs">
-      <DependentUpon>Receipes.aspx</DependentUpon>
+    <Compile Include="Recipes.aspx.designer.cs">
+      <DependentUpon>Recipes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Skills.aspx.cs">
+      <DependentUpon>Skills.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Skills.aspx.designer.cs">
+      <DependentUpon>Skills.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestButton.aspx.cs">
       <DependentUpon>TestButton.aspx</DependentUpon>
