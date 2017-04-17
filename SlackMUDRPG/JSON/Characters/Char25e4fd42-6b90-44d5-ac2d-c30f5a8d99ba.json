@@ -1,23 +1,23 @@
 {
-  "firstname": "Io",
-  "lastname": "Rn",
-  "lastinteractiondate": "2017-04-17T20:17:31.5800055+01:00",
-  "lastlogindate": "2017-04-17T20:20:17.7020201+01:00",
+  "firstname": "New",
+  "lastname": "Arrival",
+  "lastinteractiondate": "2017-04-17T20:24:03.0626853+01:00",
+  "lastlogindate": "2017-04-17T20:24:03.1566769+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
-  "userID": "a99353f5-1afc-41ae-a629-9510e08f514a",
-  "username": "aa",
-  "password": "EAAAAKUvuavRbXLzy6KA4tOYzycTs2ROEiG6dbmeNCsmEKSo",
-  "roomID": "Ravensmere.Harbour South.Docklands Way South",
+  "userID": "25e4fd42-6b90-44d5-ac2d-c30f5a8d99ba",
+  "username": "a",
+  "password": "EAAAAEMZm31Ytmc20FxJcCNocWfwyE15jGdGUuNS2eNGMGgb",
+  "roomID": "Ravensmere.Harbour South.Landing Area",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1492415556,
+      "lastDateUpdated": 1492457045,
       "expires": 0,
-      "completed": true
+      "completed": false
     }
   ],
   "attributes": {
@@ -36,25 +36,7 @@
       "name": "RightHand",
       "allowedTypes": [
         "any"
-      ],
-      "equippedItem": {
-        "itemID": "0feee139-5db4-4645-973c-71ba4882fb53",
-        "singularPronoun": "a",
-        "itemName": "Key to access the arrivals hall entrance to the city",
-        "pluralName": "Keys",
-        "pluralPronoun": "some",
-        "itemType": "Misc",
-        "itemFamily": "Key",
-        "itemDescription": "Key to access the arrivals hall entrance to the city",
-        "itemWeight": 0,
-        "itemCapacity": 0,
-        "itemSize": 0,
-        "hitPoints": 1000000000,
-        "maxHitPoints": 1000000000,
-        "baseDamage": 0.001,
-        "toughness": 1,
-        "additionalData": "RavensmereAAEtoDWS"
-      }
+      ]
     },
     {
       "name": "LeftHand",
@@ -68,7 +50,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "70b398fd-bfe5-4a8c-ad2e-f7722a3940c6",
+        "itemID": "961c192d-3c79-44c0-9524-1676324aab96",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -120,7 +102,5 @@
   },
   "characterWeight": 50,
   "characterSize": 160,
-  "connectionService": "WS",
-  "lastUsedCommand": "flush",
-  "variableResponse": "Yon Death"
+  "connectionService": "WS"
 }

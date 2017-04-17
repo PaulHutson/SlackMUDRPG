@@ -337,7 +337,6 @@
     <Content Include="JSON\Characters\CharNamesList.json" />
     <Content Include="JSON\NPCs\NPCNamesList.json" />
     <Content Include="JSON\Misc\HashKey.json" />
-    <Content Include="JSON\Misc\ActualHashkey.json" />
     <Content Include="JSON\NPCs\Captain Barnard.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
