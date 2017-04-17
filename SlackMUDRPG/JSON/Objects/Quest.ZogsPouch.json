@@ -1,0 +1,52 @@
+﻿{
+  "itemID": "Generate",
+  "SingularPronoun": "a",
+  "ItemName": "Small Pouch",
+  "PluralPronoun": "some",
+  "PluralName": "Small Pouches",
+  "ItemType": "Container",
+  "ItemFamily": "Pouch",
+  "ItemDescription": "This is a book",
+  "ItemExtraDetail": "This is the content of the book...",
+  "ItemWeight": 0,
+  "ItemSize": 0,
+  "HitPoints": 1000000000,
+  "MaxHitPoints": 1000000000,
+  "BaseDamage": 0.001,
+  "Toughness": 1,
+  "HeldItem": [
+    {
+      "itemID": "Generate",
+      "SingularPronoun": "a",
+      "ItemName": "Small Purple Runestone",
+      "PluralPronoun": "some",
+      "PluralName": "Small Purple Runestones",
+      "ItemType": "Container",
+      "ItemFamily": "Pouch",
+      "ItemDescription": "Small Purple Runestone covered in strange markings.",
+      "ItemWeight": 0,
+      "ItemSize": 0,
+      "HitPoints": 1000000000,
+      "MaxHitPoints": 1000000000,
+      "BaseDamage": 0.001,
+      "Toughness": 1
+    },
+    {
+      "itemID": "Generate",
+      "SingularPronoun": "a",
+      "ItemName": "small note",
+      "PluralPronoun": "some",
+      "PluralName": "small notes",
+      "ItemType": "Readable",
+      "ItemFamily": "Note",
+      "ItemDescription": "A slip of paper with some writing on it.",
+      "ItemExtraDetail": "I am a runestone, that will out you to the test.  Cast your intent upon me and I shall do the rest... [i]To practice with the runestone use the command \"cast fly runestone\"[/i]",
+      "ItemWeight": 1,
+      "ItemSize": 1,
+      "HitPoints": 1000000000,
+      "MaxHitPoints": 1000000000,
+      "BaseDamage": 0.001,
+      "Toughness": 50
+    }
+  ]
+}

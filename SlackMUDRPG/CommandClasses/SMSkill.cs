@@ -173,7 +173,31 @@ namespace SlackMUDRPG.CommandClasses
 									}
 									smc.StopActivity();
 									break;
-								case "Information":
+                                case "Cast":
+                                    string targetName = "";
+                                    if (targetType == "Character")
+                                    {
+                                        var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+                                        targetName = targetChar.GetFullName();
+                                    }
+                                    else
+                                    {
+                                        var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+                                        targetName = targetItem.ItemName;
+                                    }
+
+                                    if (!Cast(smss, smc, this.BaseStat, extraData, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+                                    {
+                                        smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, targetName, "")));
+                                        SkillIncrease(smc, false);
+                                    }
+                                    else
+                                    {
+                                        smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetName, "")));
+                                        SkillIncrease(smc, true);
+                                    }
+                                    break;
+                                case "Information":
 									if (targetType == "Character")
 									{
 										// Get the character
@@ -587,6 +611,45 @@ namespace SlackMUDRPG.CommandClasses
 
             return true;
 		}
+
+        private bool Cast(SMSkillStep smss, SMCharacter smc, string baseStat, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
+        {
+            // Check whether the casting is completed properly or not
+            // Get the base attribute from the character
+            int baseStatValue = smc.Attributes.GetBaseStatValue(baseStat);
+
+            // Work out the damage multiplier based on attribute level (+/-)
+            int baseStatRequiredAmount = 0;
+            if (this.Prerequisites != null)
+            {
+                baseStatRequiredAmount = this.Prerequisites.First(pr => pr.SkillStatName == baseStat).PreReqLevel;
+            }
+
+            float positiveNegativeBaseStat = baseStatValue - baseStatRequiredAmount;
+
+            SMSkillHeld theCharacterSkill = null;
+            if (smc.Skills != null)
+            {
+                smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+            }
+            int charLevelOfSkill = 0;
+            if (theCharacterSkill != null)
+            {
+                charLevelOfSkill = theCharacterSkill.SkillLevel;
+            }
+            float successMultiplier = (positiveNegativeBaseStat + charLevelOfSkill) / 100;
+
+            Random r = new Random();
+            double rDouble = r.NextDouble();
+            if ((rDouble * 100) < (charLevelOfSkill * successMultiplier))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 		private bool StepHit(SMSkillStep smss, SMCharacter smc, string baseStat, string targetType, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
 		{

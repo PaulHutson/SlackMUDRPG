@@ -27,6 +27,18 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("Outside")]
         public bool Outside { get; set; }
 
+        [JsonProperty("Instanced")]
+        public bool Instanced { get; set; }
+
+        [JsonProperty("SafeZone")]
+        public bool SafeZone { get; set; }
+
+        [JsonProperty("SafeZoneCharAttributes")]
+        public List<SMRoomSafeCharacterAttributes> SafeZoneCharAttributes { get; set; }
+
+        [JsonProperty("InstanceReloadLocation")]
+        public string InstanceReloadLocation { get; set; }
+
         [JsonProperty("RoomDescription")]
         public string RoomDescription { get; set; }
 
@@ -357,8 +369,13 @@ namespace SlackMUDRPG.CommandClasses
 				}
 			}
 
-			// Add the location details for the room
-			returnString += this.Formatter.Bold($"Location Details - {this.RoomID.Replace(".",", ")}:");
+            // Add the location details for the room
+            string nameOfLocation = this.RoomID;
+            if (nameOfLocation.Contains("||"))
+            {
+                nameOfLocation = nameOfLocation.Substring(0, nameOfLocation.IndexOf("||"));
+            }
+			returnString += this.Formatter.Bold($"Location Details - {nameOfLocation.Replace(".",", ")}:");
 			returnString += this.Formatter.Italic(this.RoomDescription, 2);
 
 			// Add the people within the location
@@ -800,4 +817,13 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("Unique")]
 		public bool Unique { get; set; }
 	}
+
+    public class SMRoomSafeCharacterAttributes
+    {
+        [JsonProperty("CharacterName")]
+        public string CharacterName { get; set; }
+
+        [JsonProperty("CharacterName")]
+        public SMAttributes SavedAttributes { get; set; }
+    }
 }

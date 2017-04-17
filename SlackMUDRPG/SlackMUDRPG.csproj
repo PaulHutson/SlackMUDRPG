@@ -334,6 +334,11 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="JSON\Characters\CharNamesList.json" />
+    <Content Include="JSON\NPCs\NPCNamesList.json" />
+    <Content Include="JSON\Misc\HashKey.json" />
+    <Content Include="JSON\Misc\ActualHashkey.json" />
+    <Content Include="JSON\NPCs\Captain Barnard.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -382,6 +387,11 @@
     <Content Include="JSON\Quests\MasterSmithDuncan.The Magic Of Metal.json" />
     <Content Include="JSON\Objects\Weapons.PracticeBlacksmithHammer.json" />
     <Content Include="JSON\Objects\Tools.PracticeTongs.json" />
+    <Content Include="JSON\Quests\Zog.A Test Of Power.json" />
+    <Content Include="JSON\Objects\Book.AMagistasCompanion.json" />
+    <Content Include="JSON\Objects\Quest.ZogsPouch.json" />
+    <Content Include="JSON\Objects\Quest.ZogsRuneStone.json" />
+    <Content Include="JSON\Skills\Skill.Cast-Fly.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
     <Content Include="scripts\ai.1.0.7-build00691.min.js" />
@@ -430,6 +440,7 @@
     <Compile Include="CommandClasses\Commands.cs" />
     <Compile Include="CommandClasses\SlackClient.cs" />
     <Compile Include="CommandClasses\SlackMud.cs" />
+    <Compile Include="CommandClasses\SMAccount.cs" />
     <Compile Include="CommandClasses\SMAttributes.cs" />
     <Compile Include="CommandClasses\SMBodyPart.cs" />
     <Compile Include="CommandClasses\SMCharacter.cs" />
@@ -447,6 +458,7 @@
     <Compile Include="CommandClasses\SMItemUtils.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMNPC.cs" />
+    <Compile Include="CommandClasses\SMParty.cs" />
     <Compile Include="CommandClasses\SMPulse.cs" />
     <Compile Include="CommandClasses\SMQuest.cs" />
     <Compile Include="CommandClasses\SMReceipe.cs" />

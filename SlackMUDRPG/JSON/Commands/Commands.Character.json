@@ -180,5 +180,70 @@
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "{name|lower}",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Party",
+		"CommandName": "createparty",
+		"CommandDescription": "Creates a new party",
+		"CommandSyntax": "{name|lower}",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "CreateParty",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Party",
+		"CommandName": "invitetoparty, invite",
+		"CommandDescription": "Invites someone to a party",
+		"CommandSyntax": "{name|lower} <name-of-character-to-invite>",
+		"ParamsExpression": "invite to party {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "InviteToParty",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Party",
+		"CommandName": "leaveparty",
+		"CommandDescription": "Leaves the party you're currently in",
+		"CommandSyntax": "{name|lower}",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "LeaveParty",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Party",
+		"CommandName": "acceptinvite",
+		"CommandDescription": "Accepts an invite to a party",
+		"CommandSyntax": "{name|lower}",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "AcceptPartyInvite",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Party",
+		"CommandName": "whoisinparty, whoisintheparty",
+		"CommandDescription": "Returns a list of the people you're in a party with",
+		"CommandSyntax": "{name|lower}",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "WhoIsInParty",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
 	}
 ]

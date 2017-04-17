@@ -367,25 +367,52 @@ namespace SlackMUDRPG.CommandClasses
 							}
 						}
 						break;
-					case "setplayerattribute":
-						// Add a response option
-						string s = invokingCharacter.VariableResponse.ToLower();
-						switch (npccs.AdditionalData.ToLower())
-						{
-							case "firstname":
-								invokingCharacter.FirstName = char.ToUpper(s[0]) + s.Substring(1);
-								break;
-							case "lastname":
-								invokingCharacter.LastName = char.ToUpper(s[0]) + s.Substring(1);
-								break;
-							case "sex":
-								invokingCharacter.Sex = char.Parse(invokingCharacter.VariableResponse);
-								break;
-						}
-						invokingCharacter.SaveToApplication();
-						invokingCharacter.SaveToFile();
-						break;
-					case "setvariableresponse":
+                    case "setplayerattribute":
+                        // Add a response option
+                        string s = invokingCharacter.VariableResponse.ToLower();
+                        switch (npccs.AdditionalData.ToLower())
+                        {
+                            case "firstname":
+                                invokingCharacter.FirstName = char.ToUpper(s[0]) + s.Substring(1);
+                                break;
+                            case "lastname":
+                                invokingCharacter.LastName = char.ToUpper(s[0]) + s.Substring(1);
+                                break;
+                            case "sex":
+                                invokingCharacter.Sex = char.Parse(invokingCharacter.VariableResponse);
+                                break;
+                        }
+                        invokingCharacter.SaveToApplication();
+                        invokingCharacter.SaveToFile();
+                        break;
+                    case "checkplayername":
+                        // Gather the info
+                        string[] nextStepsCheckPlayerName = npccs.AdditionalData.Split('|');
+                        string name = invokingCharacter.GetFullName();
+                        bool nameCanBeUsed = new SMAccountHelper().CheckCharNameCanBeUsed(name);
+                        
+                        if (nameCanBeUsed)
+                        {
+                            // Add the name to the list so no one else can use it
+                            new SMAccountHelper().AddNameToList(name, invokingCharacter.UserID);
+
+                            // Play the succcess conversation step
+                            ProcessConversationStep(npcc, nextStepsCheckPlayerName[0], invokingCharacter);
+                        }
+                        else
+                        {
+                            // Reset the player name
+                            invokingCharacter.FirstName = "New";
+                            invokingCharacter.LastName = "Arrival";
+                            invokingCharacter.SaveToApplication();
+                            invokingCharacter.SaveToFile();
+
+                            // Play the failure conversaton steps (i.e. go back through the same thing again).
+                            ProcessConversationStep(npcc, nextStepsCheckPlayerName[1], invokingCharacter);
+                        }
+                        
+                        break;
+                    case "setvariableresponse":
 						invokingCharacter.VariableResponse = npccs.AdditionalData.ToLower();
 						break;
 					case "teachskill":
@@ -501,6 +528,91 @@ namespace SlackMUDRPG.CommandClasses
                             invokingCharacter.sendMessageToPlayer("[i]Please check the item number you've selected...[/i]");
                             ProcessConversationStep(npcc, nextSteps[1], invokingCharacter);
                         }
+                        
+                        break;
+                    case "checkplayerinroom":
+                        // Get the name to check from the variable response
+                        string charnameToCheck = invokingCharacter.VariableResponse;
+
+                        // Get the next steps
+                        string[] nextStepsCheckPlayerInRoom = npccs.AdditionalData.Split('|');
+
+                        // Get the character
+                        SMCharacter checkcharacter = invokingCharacter.GetRoom().GetPeople().FirstOrDefault(pn => pn.GetFullName().ToLower() == charnameToCheck.ToLower());
+                        
+                        if (checkcharacter != null) // found the character
+                        {
+                            ProcessConversationStep(npcc, nextStepsCheckPlayerInRoom[0], invokingCharacter);
+                        }
+                        else // Character not found
+                        {
+                            ProcessConversationStep(npcc, nextStepsCheckPlayerInRoom[0], invokingCharacter);
+                        }
+
+                        break;
+                    case "partyinvite":
+                        // Leave any parties the player is currently in.
+                        if (invokingCharacter.PartyReference != null)
+                        {
+                            SMParty smp = SMPartyHelper.GetParty(invokingCharacter.PartyReference.PartyID);
+                            smp.LeaveParty(invokingCharacter);
+                        }
+
+                        // Invite the named character to a party (secretly, suppressing the message).
+                        new SMParty().InviteToParty(invokingCharacter, invokingCharacter.VariableResponse, true);
+
+                        break;
+                    case "acceptpartyinvite":
+                        // Accept any open invites, suppressing the messages
+                        invokingCharacter.AcceptPartyInvite(true);
+
+                        break;
+                    case "movecharacterparty":
+                        // Move a whole party from one location to another
+                        // Get the location information and other information
+                        // Get the next steps
+                        string[] additionalInformationMoveCharacterParty = npccs.AdditionalData.Split('|');
+
+                        // Find the party
+                        SMPartyHelper.GetParty(invokingCharacter.PartyReference.PartyID).MoveAllPartyMembersToLocation(additionalInformationMoveCharacterParty[0], additionalInformationMoveCharacterParty[1], additionalInformationMoveCharacterParty[2], true);
+                        
+                        break;
+                    case "startconversation":
+                        // Find the name of the person we want to start a conversation with
+                        // and the conversation we're going to go to.
+                        string[] nextStepsStartConversation = npccs.AdditionalData.Split('|');
+
+                        // Find the character from the name.
+                        List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+                        SMCharacter smcStartConversation = smcs.FirstOrDefault(smc => smc.GetFullName().ToLower() == invokingCharacter.VariableResponse.ToLower());
+
+                        // Start the conversation
+                        ProcessConversationStep(npcc, nextStepsStartConversation[1], smcStartConversation);
+
+                        break;
+                    case "checkskilllevel":
+                        // Find the name of the person we want to start a conversation with
+                        // and the conversation we're going to go to.
+                        string[] nextStepsCheckSkillLevel = npccs.AdditionalData.Split('|');
+                        string nextStepCheckSkillLevel = nextStepsCheckSkillLevel[2];
+
+
+                        // Get the character skill level for the specificed skill.
+                        // Check if the player already has the skill
+                        if (invokingCharacter.Skills == null)
+                        {
+                            nextStepCheckSkillLevel = nextStepsCheckSkillLevel[3];
+                        }
+                        else
+                        {
+                            if (invokingCharacter.Skills.Count(skill => ((skill.SkillName == nextStepsCheckSkillLevel[0])&&(skill.SkillLevel.ToString() == nextStepsCheckSkillLevel[1]))) == 0)
+                            {
+                                nextStepCheckSkillLevel = nextStepsCheckSkillLevel[3];
+                            }
+                        }
+                        
+                        // Process the conversation.
+                        ProcessConversationStep(npcc, nextStepCheckSkillLevel, invokingCharacter);
                         
                         break;
                     case "wait":

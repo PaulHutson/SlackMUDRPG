@@ -83,6 +83,19 @@ namespace SlackMUDRPG.CommandClasses
 						returnString = ResponseFormatterFactory.Get().Bold("Welcome to SlackMud!");
 						returnString += ResponseFormatterFactory.Get().General("We've created your character in the magical world of Arrelvia!"); // TODO, use a welcome script!
 					}
+
+                    // Check if the player was last in an instanced location.
+                    if (character.RoomID.Contains("||"))
+                    {
+                        // Find the details of the original room type
+                        SMRoom originalRoom = GetRoom(character.RoomID.Substring(0, character.RoomID.IndexOf("||")));
+                        character.RoomID = originalRoom.InstanceReloadLocation;
+                    }
+
+                    // Clear out any old party references
+                    character.PartyReference = null;
+
+                    // Get the location details
 					returnString += GetLocationDetails(character.RoomID, character);
 
 					// Clear old responses an quests from the character
@@ -116,7 +129,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns>A character</returns>
 		public SMCharacter GetCharacter(string userID, string userName = null, string password = null)
 		{
-			// Get the room file if it exists
+			// Get the character file if it exists
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			SMCharacter charInMem = smcs.FirstOrDefault(smc => smc.UserID == userID);
 
@@ -137,11 +150,11 @@ namespace SlackMUDRPG.CommandClasses
 						bool canLogin = true;
 						if (password != null)
 						{
-							canLogin = (Crypto.DecryptStringAES(charInMem.Password, "ProvinceMUD") == password);
+							canLogin = (Crypto.DecryptStringAES(charInMem.Password) == password);
 						}
 						if ((canLogin) && (password != null))
 						{
-							canLogin = (Crypto.DecryptStringAES(charInMem.Password, "ProvinceMUD") == password);
+							canLogin = (Crypto.DecryptStringAES(charInMem.Password) == password);
 						}
 
 						if (canLogin)
@@ -232,7 +245,7 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				if (password != null)
 				{
-					SMChar.Password = Utility.Crypto.EncryptStringAES(password, "ProvinceMud");
+					SMChar.Password = Utility.Crypto.EncryptStringAES(password);
 				}
 				
 				// Add default attributes to the character
@@ -357,6 +370,13 @@ namespace SlackMUDRPG.CommandClasses
 
 						// ... get the information from the the room information.
 						roomInMem = JsonConvert.DeserializeObject<SMRoom>(json);
+
+                        // Check whether the room is instanced or not
+                        if (roomInMem.Instanced)
+                        {
+                            // First change the name of the room.
+                            roomInMem.RoomID = roomInMem.RoomID + "||" + Guid.NewGuid();
+                        }
 
 						// Add the room to the application memory 
 						smrs.Add(roomInMem);

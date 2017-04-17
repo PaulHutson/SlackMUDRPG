@@ -14,14 +14,23 @@
     "str": 7,
     "int": 15,
     "chr": 10,
-    "dex": 12,
+    "dex": 50,
     "wp": 12,
-    "ft": 20,
-    "hp": 20,
-    "maxhp": 20,
+    "ft": 50,
+    "hp": 1000,
+    "maxhp": 1000,
     "SocialStanding": 8
   },
-  "Skills": null,
+  "Skills":  [
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 50
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 50
+    }
+  ],
   "Slots": [
     {
       "Name": "RightHand",
@@ -285,13 +294,27 @@
 						}
 					]
 				},
-				{
-					"StepID": "4-8",
-					"Scope": "setplayerattribute",
-					"AdditionalData": "lastname",
-					"NextStep": "4-9.0",
-					"ResponseOptions": null
-				},
+        {
+          "StepID": "4-8",
+          "Scope": "setplayerattribute",
+          "AdditionalData": "lastname",
+          "NextStep": "4-8Check.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4-8Check",
+          "Scope": "checkplayername",
+          "AdditionalData": "4-9|4-8CheckCantUse",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4-8CheckCantUse",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Hrm, looking at my records that name has already been used.. please choose another..",
+          "NextStep": "4-2.1",
+          "ResponseOptions": null
+        },
 				{
 					"StepID": "4-9",
 					"Scope": "saytoplayer",

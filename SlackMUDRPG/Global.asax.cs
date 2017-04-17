@@ -133,24 +133,29 @@ namespace SlackMUDRPG
 			Files = d.GetFiles();
 			foreach (FileInfo file in Files)
 			{
-				string NPCFilePath = FilePathSystem.GetFilePath("NPCs", file.Name, "");
-				// Use a stream reader to read the file in (based on the path)
-				using (StreamReader r = new StreamReader(NPCFilePath))
-				{
-					// Create a new JSON string to be used...
-					string json = r.ReadToEnd();
-
-					// ... get the information from the help file
-					lnpcs.Add(JsonConvert.DeserializeObject<SMNPC>(json));
-				}
+                if (file.Name != "NPCNamesList.json")
+                {
+                    string NPCFilePath = FilePathSystem.GetFilePath("NPCs", file.Name, "");
+                    // Use a stream reader to read the file in (based on the path)
+                    using (StreamReader r = new StreamReader(NPCFilePath))
+                    {
+                        // Create a new JSON string to be used...
+                        string json = r.ReadToEnd();
+                        
+                        // ... get the information from the help file
+                        lnpcs.Add(JsonConvert.DeserializeObject<SMNPC>(json));
+                    }
+                }
 			}
 
 			Application["SMNPCs"] = lnpcs;
 
-			#region "The Pulse"
+            Application["Parties"] = new List<SMParty>();
 
-			// Set the current context to pass into the thread
-			HttpContext ctx = HttpContext.Current;
+            #region "The Pulse"
+
+            // Set the current context to pass into the thread
+            HttpContext ctx = HttpContext.Current;
 
 			// Create a new thread
 			Thread pulse = new Thread(new ThreadStart(() =>
