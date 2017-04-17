@@ -308,6 +308,7 @@
     <Content Include="JSON\NPCs\NPCNamesList.json" />
     <Content Include="JSON\Misc\HashKey.json" />
     <Content Include="JSON\Misc\ActualHashkey.json" />
+    <Content Include="JSON\NPCs\Captain Barnard.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -415,6 +416,7 @@
     <Compile Include="CommandClasses\SMItemUtils.cs" />
     <Compile Include="CommandClasses\SMMiscObjectTypes.cs" />
     <Compile Include="CommandClasses\SMNPC.cs" />
+    <Compile Include="CommandClasses\SMParty.cs" />
     <Compile Include="CommandClasses\SMPulse.cs" />
     <Compile Include="CommandClasses\SMQuest.cs" />
     <Compile Include="CommandClasses\SMReceipe.cs" />

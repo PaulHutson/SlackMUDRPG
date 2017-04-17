@@ -150,10 +150,12 @@ namespace SlackMUDRPG
 
 			Application["SMNPCs"] = lnpcs;
 
-			#region "The Pulse"
+            Application["Parties"] = new List<SMParty>();
 
-			// Set the current context to pass into the thread
-			HttpContext ctx = HttpContext.Current;
+            #region "The Pulse"
+
+            // Set the current context to pass into the thread
+            HttpContext ctx = HttpContext.Current;
 
 			// Create a new thread
 			Thread pulse = new Thread(new ThreadStart(() =>
