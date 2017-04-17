@@ -9,7 +9,7 @@ Notes about the code / game will go here.
 
 Please see the [contributing information](https://github.com/PaulHutson/SlackMUDRPG/blob/master/CONTRIBUTING.md).
 
-**TLDR**; to get started, <a href="https://www.clahub.com/agreements/PaulHutson/SlackMUDRPG">sign the Contributor License Agreement</a>. 
+**TLDR**; to get started, please sign the Contributor License Agreement!. 
 
 ## License
 
