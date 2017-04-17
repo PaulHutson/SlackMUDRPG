@@ -646,7 +646,7 @@ namespace SlackMUDRPG.CommandClasses
         /// <param name="newPassword">The new password</param>
         public void SetPassword(string newPassword)
         {
-            this.Password = Utility.Crypto.EncryptStringAES(newPassword, "ProvinceMud");
+            this.Password = Utility.Crypto.EncryptStringAES(newPassword);
             this.SaveToApplication();
             this.SaveToFile();
             this.sendMessageToPlayer("[i]Password updated[/i]");
