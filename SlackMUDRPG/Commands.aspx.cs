@@ -76,7 +76,7 @@ namespace SlackMUDRPG
 					template = template.Replace("{panelId}", guid);
 					template = template.Replace("{Name}", command.CommandName);
 					template = template.Replace("{Description}", command.CommandDescription);
-					template = template.Replace("{RequiredSkills}", command.RequiredSkill);
+					template = template.Replace("{RequiredSkills}", this.noneIfNull(command.RequiredSkill));
 					template = template.Replace("{ExampleUsage}", command.ExampleUsage);
 					template = template.Replace("{CommandSyntax}", command.CommandSyntax);
 
@@ -134,6 +134,21 @@ namespace SlackMUDRPG
 			}
 
 			return template;
+		}
+
+		/// <summary>
+		/// Returns the string None if value is null otherwise the value
+		/// </summary>
+		/// <param name="value">Some string value to check</param>
+		/// <returns>None or value</returns>
+		private string noneIfNull(string value)
+		{
+			if (value == null)
+			{
+				return "None";
+			}
+
+			return value;
 		}
 	}
 }
