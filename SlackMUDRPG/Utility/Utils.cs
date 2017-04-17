@@ -263,6 +263,47 @@ namespace SlackMUDRPG.Utility
 		}
 
 		#endregion
+
+		#region "Templates"
+
+		/// <summary>
+		/// Gets an HTML template file as a string, based on the template name provided
+		/// </summary>
+		/// <param name="templateName">Name of the temaplte to loead</param>
+		/// <returns>String representing the HTML template file contents</returns>
+		public static string GetHtmlTemplate(string templateName)
+		{
+			string template = String.Empty;
+
+			string templatesPath = FilePathSystem.GetRootFilePath("HTMLTemplates", templateName, ".html");
+
+			if (File.Exists(templatesPath))
+			{
+				using (StreamReader r = new StreamReader(templatesPath))
+				{
+					template = r.ReadToEnd();
+				}
+			}
+
+			return template;
+		}
+
+		/// <summary>
+		/// Returns the string None if value is null otherwise the value
+		/// </summary>
+		/// <param name="value">Some string value to check</param>
+		/// <returns>None or value</returns>
+		public static string noneIfNull(string value)
+		{
+			if (value == null)
+			{
+				return "None";
+			}
+
+			return value;
+		}
+
+		#endregion
 	}
 
 	public static class ThreadSafeRandom

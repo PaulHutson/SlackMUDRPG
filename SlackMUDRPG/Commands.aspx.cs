@@ -71,12 +71,12 @@ namespace SlackMUDRPG
 				foreach(SMCommand command in commands)
 				{
 					string guid = Guid.NewGuid().ToString();
-					string template = this.GetHtmlTemplate("CommandTemplate");
+					string template = Utils.GetHtmlTemplate("CommandTemplate");
 
 					template = template.Replace("{panelId}", guid);
 					template = template.Replace("{Name}", command.CommandName);
 					template = template.Replace("{Description}", command.CommandDescription);
-					template = template.Replace("{RequiredSkills}", this.noneIfNull(command.RequiredSkill));
+					template = template.Replace("{RequiredSkills}", Utils.noneIfNull(command.RequiredSkill));
 					template = template.Replace("{ExampleUsage}", command.ExampleUsage);
 					template = template.Replace("{CommandSyntax}", command.CommandSyntax);
 
@@ -112,43 +112,6 @@ namespace SlackMUDRPG
 			List<SMCommand> filtered = smcl.Where(cmd => cmd.CommandFamily == commandFamily).ToList();
 
 			return filtered.OrderBy(cmd => cmd.CommandName).ToList();
-		}
-
-		/// <summary>
-		/// Gets an HTML template file as a string, based on the template name provided
-		/// </summary>
-		/// <param name="templateName">Name of the temaplte to loead</param>
-		/// <returns>String representing the HTML template file contents</returns>
-		private string GetHtmlTemplate(string templateName)
-		{
-			string template = String.Empty;
-
-			string templatesPath = FilePathSystem.GetRootFilePath("HTMLTemplates", templateName, ".html");
-
-			if (File.Exists(templatesPath))
-			{
-				using (StreamReader r = new StreamReader(templatesPath))
-				{
-					template = r.ReadToEnd();
-				}
-			}
-
-			return template;
-		}
-
-		/// <summary>
-		/// Returns the string None if value is null otherwise the value
-		/// </summary>
-		/// <param name="value">Some string value to check</param>
-		/// <returns>None or value</returns>
-		private string noneIfNull(string value)
-		{
-			if (value == null)
-			{
-				return "None";
-			}
-
-			return value;
 		}
 	}
 }
