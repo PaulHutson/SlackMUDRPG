@@ -1,15 +1,15 @@
 {
   "firstname": "Io",
   "lastname": "Rn",
-  "lastinteractiondate": "2017-04-17T17:16:25.9063688+01:00",
-  "lastlogindate": "2017-04-17T17:20:06.4212191+01:00",
+  "lastinteractiondate": "2017-04-17T20:17:31.5800055+01:00",
+  "lastlogindate": "2017-04-17T20:17:28.2222887+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
   "userID": "a99353f5-1afc-41ae-a629-9510e08f514a",
   "username": "aa",
   "password": "EAAAAKUvuavRbXLzy6KA4tOYzycTs2ROEiG6dbmeNCsmEKSo",
-  "roomID": "Ravensmere.Military District.Sparring Area",
+  "roomID": "Ravensmere.Harbour South.Docklands Way South",
   "newbieTipsDisabled": false,
   "questLog": [
     {
@@ -121,6 +121,6 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "cast fly wooden chest",
+  "lastUsedCommand": "flush",
   "variableResponse": "Yon Death"
 }

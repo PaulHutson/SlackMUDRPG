@@ -338,16 +338,38 @@ namespace SlackMUDRPG.CommandClasses
             return "1";
         }
 
-		#endregion
+        public string GetFlushLocation()
+        {
+            string defaultRoomPath = FilePathSystem.GetFilePath("Scripts", "Flush-Location");
+            if (File.Exists(defaultRoomPath))
+            {
+                // Use a stream reader to read the file in (based on the path)
+                using (StreamReader r = new StreamReader(defaultRoomPath))
+                {
+                    // Create a new JSON string to be used...
+                    string json = r.ReadToEnd();
 
-		#region "Location Methods"
+                    // ... get the information from the the start location token..
+                    SMStartLocation sl = JsonConvert.DeserializeObject<SMStartLocation>(json);
 
-		/// <summary>
-		/// Gets a room and also loads the room to memory if it isn't already there.
-		/// </summary>
-		/// <param name="roomID">The id of the location you want to load</param>
-		/// <returns>A room</returns>
-		public SMRoom GetRoom(string roomID)
+                    // Set the start location.
+                    return sl.StartLocation;
+                }
+            }
+
+            return "1";
+        }
+
+        #endregion
+
+        #region "Location Methods"
+
+        /// <summary>
+        /// Gets a room and also loads the room to memory if it isn't already there.
+        /// </summary>
+        /// <param name="roomID">The id of the location you want to load</param>
+        /// <returns>A room</returns>
+        public SMRoom GetRoom(string roomID)
 		{
 			// Get the room file if it exists
 			List<SMRoom> smrs = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];

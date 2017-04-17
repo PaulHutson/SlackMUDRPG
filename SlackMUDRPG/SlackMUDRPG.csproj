@@ -362,6 +362,7 @@
     <Content Include="JSON\Objects\Quest.ZogsPouch.json" />
     <Content Include="JSON\Objects\Quest.ZogsRuneStone.json" />
     <Content Include="JSON\Skills\Skill.Cast-Fly.json" />
+    <Content Include="JSON\Scripts\Flush-Location.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
     <Content Include="scripts\ai.1.0.7-build00691.min.js" />

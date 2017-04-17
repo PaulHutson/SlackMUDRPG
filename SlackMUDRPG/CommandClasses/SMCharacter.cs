@@ -430,7 +430,7 @@ namespace SlackMUDRPG.CommandClasses
         /// </summary>
         public void Flush()
         {
-            this.RoomID = new SlackMud().GetStartingLocation();
+            this.RoomID = new SlackMud().GetFlushLocation();
             this.GetRoomDetails();
             this.SaveToApplication();
             this.SaveToFile();

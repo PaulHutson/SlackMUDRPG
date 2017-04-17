@@ -90,19 +90,19 @@
 		"ExampleUsage": "{name|lower}",
 		"RequiredSkill": null
 	},
-	//{
-	//	"CommandFamily": "General",
-	//	"CommandName": "flush",
-	//	"CommandDescription": "Flush the character from menu and set them at the start location.",
-	//	"CommandSyntax": "flush",
-	//	"ParamsExpression": null,
-	//	"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
-	//	"CommandMethod": "Flush",
-	//	"PassCommandAsFirstArg": false,
-	//	"PassUserIDAsFirstArg": false,
-	//	"ExampleUsage": "flush",
-	//	"RequiredSkill": null
-	//},
+	{
+		"CommandFamily": "General",
+		"CommandName": "flush",
+		"CommandDescription": "Flush the character from menu and set them at the start location.",
+		"CommandSyntax": "flush",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Flush",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "flush",
+		"RequiredSkill": null
+	},
   {
     "CommandFamily": "General",
     "CommandName": "setpassword",
