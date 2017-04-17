@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Protocols;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -18,9 +21,16 @@ namespace SlackMUDRPG.Utility
 		/// </summary>
 		/// <param name="plainText">The text to encrypt.</param>
 		/// <param name="sharedSecret">A password used to generate a key for encryption.</param>
-		public static string EncryptStringAES(string plainText, string sharedSecret)
+		public static string EncryptStringAES(string plainText, string sharedSecret = null)
 		{
-			if (string.IsNullOrEmpty(plainText))
+            // Check if the secret is null or empty...
+            if (sharedSecret == null)
+            {
+                // .. if it is, get the secret from the file.
+                sharedSecret = GetSecretKey();
+            }
+
+            if (string.IsNullOrEmpty(plainText))
 				throw new ArgumentNullException("plainText");
 			if (string.IsNullOrEmpty(sharedSecret))
 				throw new ArgumentNullException("sharedSecret");
@@ -74,8 +84,15 @@ namespace SlackMUDRPG.Utility
 		/// </summary>
 		/// <param name="cipherText">The text to decrypt.</param>
 		/// <param name="sharedSecret">A password used to generate a key for decryption.</param>
-		public static string DecryptStringAES(string cipherText, string sharedSecret)
+		public static string DecryptStringAES(string cipherText, string sharedSecret = null)
 		{
+            // Check if the secret is null or empty...
+            if (sharedSecret == null)
+            {
+                // .. if it is, get the secret from the file.
+                sharedSecret = GetSecretKey();
+            }
+
 			if (string.IsNullOrEmpty(cipherText))
 				throw new ArgumentNullException("cipherText");
 			if (string.IsNullOrEmpty(sharedSecret))
@@ -142,5 +159,51 @@ namespace SlackMUDRPG.Utility
 
 			return buffer;
 		}
+
+        private static string GetSecretKey()
+        {
+            // Find the location for the secret key we're using
+            string[] secretKeyFileLocation = new string[2];
+
+            // Check if the secret key location has been set correctly...
+            if (ConfigurationManager.AppSettings.Get("CryptoKeyLocation") == null)
+            {
+                // .. if not use the default location.
+                secretKeyFileLocation[0] = "Misc";
+                secretKeyFileLocation[1] = "HashKey";
+            }
+            else
+            {
+                secretKeyFileLocation = ConfigurationManager.AppSettings.Get("CryptoKeyLocation").Split('|');
+            }
+
+            // Load the char names list into memory
+            string path = FilePathSystem.GetFilePath(secretKeyFileLocation[0], secretKeyFileLocation[1]);
+            CryptoSecret secretKey = new CryptoSecret();
+
+            if (File.Exists(path))
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    secretKey = JsonConvert.DeserializeObject<CryptoSecret>(json);
+                }
+            }
+
+            if (secretKey.key != null)
+            {
+                return secretKey.key;
+            }
+            else
+            {
+                return "No key file found!";
+            }
+        }
 	}
+
+    public class CryptoSecret
+    {
+        [JsonProperty("key")]
+        public string key { get; set; }
+    }
 }

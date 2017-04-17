@@ -306,6 +306,8 @@
     <Content Include="JSON\NPCs\MasterSmith Duncan.json" />
     <Content Include="JSON\Characters\CharNamesList.json" />
     <Content Include="JSON\NPCs\NPCNamesList.json" />
+    <Content Include="JSON\Misc\HashKey.json" />
+    <Content Include="JSON\Misc\ActualHashkey.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />

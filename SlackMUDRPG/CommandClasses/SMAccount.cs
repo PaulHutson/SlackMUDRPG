@@ -191,7 +191,7 @@ namespace SlackMUDRPG.CommandClasses
             }
 
             // Find the relevant one
-            SMAccount smcn = allCharacters.FirstOrDefault(c => ((c.EmailAddress == usernameIn) && (c.HashedPassword == Utility.Crypto.DecryptStringAES(passwordIn, "ProvinceMud"))));
+            SMAccount smcn = allCharacters.FirstOrDefault(c => ((c.EmailAddress == usernameIn) && (c.HashedPassword == Utility.Crypto.DecryptStringAES(passwordIn))));
 
             // Check if we've found an account
             if (smcn != null)

@@ -137,11 +137,11 @@ namespace SlackMUDRPG.CommandClasses
 						bool canLogin = true;
 						if (password != null)
 						{
-							canLogin = (Crypto.DecryptStringAES(charInMem.Password, "ProvinceMUD") == password);
+							canLogin = (Crypto.DecryptStringAES(charInMem.Password) == password);
 						}
 						if ((canLogin) && (password != null))
 						{
-							canLogin = (Crypto.DecryptStringAES(charInMem.Password, "ProvinceMUD") == password);
+							canLogin = (Crypto.DecryptStringAES(charInMem.Password) == password);
 						}
 
 						if (canLogin)
@@ -232,7 +232,7 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				if (password != null)
 				{
-					SMChar.Password = Utility.Crypto.EncryptStringAES(password, "ProvinceMud");
+					SMChar.Password = Utility.Crypto.EncryptStringAES(password);
 				}
 				
 				// Add default attributes to the character
