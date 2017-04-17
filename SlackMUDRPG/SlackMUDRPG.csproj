@@ -202,6 +202,7 @@
     <Content Include="GameAccess.aspx" />
     <Content Include="HTMLTemplates\CommandTemplate.html" />
     <Content Include="HTMLTemplates\RecipeTemplate.html" />
+    <Content Include="Items.aspx" />
     <Content Include="JSON\Characters\Char123.json" />
     <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Commands\Commands.General.json" />
@@ -487,6 +488,13 @@
       <DependentUpon>GameAccess.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handlers\GameAccessWebSocketHandler.cs" />
+    <Compile Include="Items.aspx.cs">
+      <DependentUpon>Items.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Items.aspx.designer.cs">
+      <DependentUpon>Items.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterPage\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
