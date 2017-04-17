@@ -24,18 +24,27 @@
     {
 			"Shortcut": "ES1",
 			"Description": "Large Empty Shop",
-			"RoomID": "Ravensmere.Harbour South.EmptyShop1"
+			"RoomID": "Ravensmere.Harbour South.EmptyShop1",
+      "RoomLockID": "ES1Lock",
+      "Locked": true,
+      "Lockable": true
 		},
     {
 			"Shortcut": "ES2",
 			"Description": "Mediums Sized Empty Shop",
-			"RoomID": "Ravensmere.Harbour South.EmptyShop2"
+			"RoomID": "Ravensmere.Harbour South.EmptyShop2",
+      "RoomLockID": "ES2Lock",
+      "Locked": true,
+      "Lockable": true
 		},
     {
-			"Shortcut": "ES2",
+			"Shortcut": "ES3",
 			"Description": "Small Empty Shop",
-			"RoomID": "Ravensmere.Harbour South.EmptyShop3"
-		}
+			"RoomID": "Ravensmere.Harbour South.EmptyShop3",
+      "RoomLockID": "ES3Lock",
+      "Locked": true,
+      "Lockable": true
+		},
 	],
 	"RoomItems": null
 }
