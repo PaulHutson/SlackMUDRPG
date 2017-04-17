@@ -55,7 +55,7 @@
 							<li><a href="/">Home</a></li>
 							<li><a href="Game.aspx">Game</a></li>
 							<li><a href="Commands.aspx">Commands</a></li>
-							<li><a href="Receipes.aspx">Recipes</a></li>
+							<li><a href="Recipes.aspx">Recipes</a></li>
 							<li><a href="Skills.aspx">Skills</a></li>
 						</ul>
 					</div>
