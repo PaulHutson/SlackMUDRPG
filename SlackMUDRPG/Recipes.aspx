@@ -9,9 +9,6 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ph_MainContent" runat="server">
-	<asp:Literal runat="server" ID="lit_ReceipeList"></asp:Literal>
-
-
 	<section class="page-content">
 		<div class="container full-height">
 			<div class="row full-height">
