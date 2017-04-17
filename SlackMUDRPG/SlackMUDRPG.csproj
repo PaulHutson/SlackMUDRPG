@@ -414,6 +414,7 @@
     <Content Include="scripts\slackmud.js" />
     <Content Include="scripts\slackmud_gamepage_websockets.js" />
     <Content Include="scripts\slackmud_login_create.js" />
+    <Content Include="scripts\slackmud_info_page.js" />
     <Content Include="TestButton.aspx" />
     <Content Include="ToDo.txt" />
     <Content Include="Web.config">

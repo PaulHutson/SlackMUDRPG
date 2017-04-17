@@ -1,9 +1,17 @@
 .game-info-accordion {
     width: calc(100% - 30px);
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-left: 15px;
     margin-top: -15px;
+}
+
+.game-info-accordion > .info-group {
+    display: none;
+}
+
+.game-info-accordion> .info-group:first-child {
+    display: block;
 }
 
 .game-info-accordion .panel {
@@ -14,6 +22,11 @@
     margin: 0;
 }
 
-.game-info-accordion > .panel-slackmud:nth-child(odd) .panel-heading {
+.game-info-accordion .panel-slackmud:nth-child(odd) .panel-heading {
     background-color: rgba(43, 43, 43, 0.4);
+
+}
+
+.game-info-accordion .panel-slackmud:nth-child(even) > .panel-heading + .panel-collapse > .panel-body {
+	background-color: rgba(43, 43, 43, 0.79);
 }
