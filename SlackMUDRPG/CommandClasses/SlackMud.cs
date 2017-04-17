@@ -92,6 +92,9 @@ namespace SlackMUDRPG.CommandClasses
                         character.RoomID = originalRoom.InstanceReloadLocation;
                     }
 
+                    // Clear out any old party references
+                    character.PartyReference = null;
+
                     // Get the location details
 					returnString += GetLocationDetails(character.RoomID, character);
 
@@ -126,7 +129,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <returns>A character</returns>
 		public SMCharacter GetCharacter(string userID, string userName = null, string password = null)
 		{
-			// Get the room file if it exists
+			// Get the character file if it exists
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			SMCharacter charInMem = smcs.FirstOrDefault(smc => smc.UserID == userID);
 

@@ -28,6 +28,7 @@ namespace SlackMUDRPG.CommandClasses
                 SMPartyMember smpm = new SMPartyMember();
                 smpm.CharacterName = invokingCharacter.GetFullName();
                 smpm.UserID = invokingCharacter.UserID;
+                PartyMembers = new List<SMPartyMember>();
                 PartyMembers.Add(smpm);
 
                 // Add the party to the global memory
@@ -44,6 +45,9 @@ namespace SlackMUDRPG.CommandClasses
                 {
                     invokingCharacter.sendMessageToPlayer("[i]Party created.[/i]");
                 }
+
+                // Save the player information to the application.
+                invokingCharacter.SaveToApplication();
             }
             else // They are already in a party
             {
@@ -102,7 +106,10 @@ namespace SlackMUDRPG.CommandClasses
                         }
 
                         // Add the SMPartyReference to the character
-                        smc.PartyReference = new SMPartyReference(invokingCharacter.PartyReference.PartyID, "invited");
+                        smc.PartyReference = new SMPartyReference(invokingCharacter.PartyReference.PartyID, "Invited");
+                        
+                        // Save the player information to the application.
+                        smc.SaveToApplication();
                     }
                 }
                 else
@@ -150,32 +157,47 @@ namespace SlackMUDRPG.CommandClasses
 
                     // .. and save the list out
                     HttpContext.Current.Application["Parties"] = smp;
-
+                    
                     // ... send a message to all the people in the party.
-                    sp.SendMessageToAllPartyMembers(sp, "[i]{playercharacter} joined the party[/i]");
-
+                    if (!suppressMessages)
+                    {
+                        sp.SendMessageToAllPartyMembers(sp, "[i]" + smpm.CharacterName + " joined the party[/i]");
+                    }
+                    
                     // ... change the status of the party element on the character to "joined"
-                    invokingCharacter.PartyReference.Status = "joined";
+                    invokingCharacter.PartyReference.Status = "Joined";
+                    
+                    // Save the player information to the application.
+                    invokingCharacter.SaveToApplication();
                 }
                 else // .. the party no longer exists, so can't be joined
                 {
                     // Tell the player
-                    invokingCharacter.sendMessageToPlayer("[i]That party no longer exists.[/i]");
+                    if (!suppressMessages)
+                    {
+                        invokingCharacter.sendMessageToPlayer("[i]That party no longer exists.[/i]");
+                    }
 
                     // Remove the reference from their party invite list.
                     invokingCharacter.PartyReference = null;
+                    
+                    // Save the player information to the application.
+                    invokingCharacter.SaveToApplication();
                 }
             }
             else // No party
             {
-                invokingCharacter.sendMessageToPlayer("[i]You have no open party invites.[/i]");
+                if (!suppressMessages)
+                {
+                    invokingCharacter.sendMessageToPlayer("[i]You have no open party invites.[/i]");
+                }
             }
         }
 
         public void LeaveParty(SMCharacter invokingCharacter, bool suppressMessages = false)
         {
             // Find the current party if they have one (and it's not just at "invited" stage).
-            if ((invokingCharacter.PartyReference == null) || (invokingCharacter.PartyReference.Status == "Invited"))
+            if ((invokingCharacter.PartyReference == null) || (invokingCharacter.PartyReference.Status != "Invited"))
             {
                 // Remove them from the party reference.
                 // Get the list of parties
@@ -186,7 +208,7 @@ namespace SlackMUDRPG.CommandClasses
 
                 if (!suppressMessages)
                 {
-                    sp.SendMessageToAllPartyMembers(sp, "[i]{playercharacter} left the party[/i]");
+                    sp.SendMessageToAllPartyMembers(sp, "[i]" + invokingCharacter.GetFullName() + " left the party[/i]");
                 }
                 
                 // Remove the party from the global list element.
@@ -208,10 +230,16 @@ namespace SlackMUDRPG.CommandClasses
 
                 // Remove the party reference from the character file
                 invokingCharacter.PartyReference = null;
+                
+                // Save the player information to the application.
+                invokingCharacter.SaveToApplication();
             }
             else
             {
-                invokingCharacter.sendMessageToPlayer("[i]You are not in a party so can't leave one[/i]");
+                if (!suppressMessages)
+                {
+                    invokingCharacter.sendMessageToPlayer("[i]You are not in a party so can't leave one[/i]");
+                }
             }
         }
 
@@ -237,23 +265,56 @@ namespace SlackMUDRPG.CommandClasses
 
         public void FindAllPartyMembers(SMCharacter invokingCharacter)
         {
-            string stringToSend = "[b]Party Members:[/b] ";
-            bool first = true;
-
-            foreach(SMPartyMember pm in this.PartyMembers)
+            if (invokingCharacter.PartyReference != null)
             {
-                if (first)
-                {
-                    first = false;
-                }
-                else
-                {
-                    stringToSend += ", ";
-                }
-                stringToSend += pm.CharacterName;
-            }
+                SMParty sp = SMPartyHelper.GetParty(invokingCharacter.PartyReference.PartyID);
 
-            invokingCharacter.sendMessageToPlayer(stringToSend);
+                string stringToSend = "[b]Party Members:[/b] ";
+                bool first = true;
+
+                foreach (SMPartyMember pm in sp.PartyMembers)
+                {
+                    if (first)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        stringToSend += ", ";
+                    }
+                    stringToSend += pm.CharacterName;
+                }
+
+                invokingCharacter.sendMessageToPlayer(stringToSend);
+            }
+            else // They're not in a party
+            {
+                invokingCharacter.sendMessageToPlayer("[i]You're not in a party.[/i]");
+            }
+        }
+
+        public void MoveAllPartyMembersToLocation(string roomIDToMoveTo, string leavingMethod, string enteringMethod, bool processResponses = true)
+        {
+            // See if the person being invited exists in memory
+            List<SMCharacter> characterList = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+
+            SMRoom smr = new SlackMud().GetRoom(roomIDToMoveTo);
+
+            // Scroll through the party members
+            foreach (SMPartyMember smpmToMove in this.PartyMembers)
+            {
+                // See if the person being invited exists in memory
+                SMCharacter smc = characterList.FirstOrDefault(ch => ch.GetFullName() == smpmToMove.CharacterName);
+                
+                if (smc != null)
+                {
+                    // Move the player.
+                    smc.ActualMove(smr, leavingMethod, enteringMethod, processResponses);
+
+                    // Save the player move.
+                    smc.SaveToApplication();
+                }
+            }
         }
     }
 

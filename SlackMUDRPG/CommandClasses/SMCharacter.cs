@@ -297,48 +297,7 @@ namespace SlackMUDRPG.CommandClasses
                         // If the room is not lot or the character has the right key, let them in.
                         if (initiateMove)
                         {
-                            // Walk out of the room code.
-                            SMRoom currentRoom = this.GetRoom();
-
-                            currentRoom.Announce(this.Formatter.Italic(this.GetFullName() + " walks out."), this, true);
-                            currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
-
-							// Expire any awaiting responses from NPCs (to clean the memory / character file up)
-							NPCsWaitingForResponses = null;
-
-                            // Check if the player is leaving a safezone
-                            if (currentRoom.SafeZone)
-                            {
-                                // Reload their stats as they were when they were first in the room.
-                                SMRoomSafeCharacterAttributes smrsca = currentRoom.SafeZoneCharAttributes.FirstOrDefault(a => a.CharacterName == this.GetFullName());
-
-                                // See if there were some attributes in memory (there should be).
-                                if (smrsca != null)
-                                {
-                                    this.Attributes = smrsca.SavedAttributes;
-                                    smr.SafeZoneCharAttributes.Remove(smrsca);
-                                }
-                            }
-
-							// Move the player to the new location
-							this.RoomID = smr.RoomID;
-                            this.SaveToApplication();
-                            this.SaveToFile();
-                            this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
-
-                            // If this is a safe zone, copy the character attributes out for use on death.
-                            if (smr.SafeZone)
-                            {
-                                SMRoomSafeCharacterAttributes smrsca = new SMRoomSafeCharacterAttributes();
-                                smrsca.CharacterName = this.GetFullName();
-                                smrsca.SavedAttributes = this.Attributes;
-
-                                smr.SafeZoneCharAttributes.Add(smrsca);
-                            }
-
-                            // Announce arrival to other players in the same place
-                            smr.Announce(this.Formatter.Italic(this.GetFullName() + " walks in."), this, true);
-                            smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
+                            ActualMove(smr, " walks out.", " walks in.");
                         }
                     }
                 }
@@ -348,6 +307,56 @@ namespace SlackMUDRPG.CommandClasses
                 }
 			}
 		}
+
+        public void ActualMove(SMRoom smr, string leavingMethod, string enteringMethod, bool processResponses = true)
+        {
+            // Walk out of the room code.
+            SMRoom currentRoom = this.GetRoom();
+
+            currentRoom.Announce(this.Formatter.Italic(this.GetFullName() + leavingMethod), this, true);
+
+            if (processResponses)
+            {
+                currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
+            }
+            
+            // Expire any awaiting responses from NPCs (to clean the memory / character file up)
+            NPCsWaitingForResponses = null;
+
+            // Check if the player is leaving a safezone
+            if (currentRoom.SafeZone)
+            {
+                // Reload their stats as they were when they were first in the room.
+                SMRoomSafeCharacterAttributes smrsca = currentRoom.SafeZoneCharAttributes.FirstOrDefault(a => a.CharacterName == this.GetFullName());
+
+                // See if there were some attributes in memory (there should be).
+                if (smrsca != null)
+                {
+                    this.Attributes = smrsca.SavedAttributes;
+                    smr.SafeZoneCharAttributes.Remove(smrsca);
+                }
+            }
+
+            // Move the player to the new location
+            this.RoomID = smr.RoomID;
+            this.SaveToApplication();
+            this.SaveToFile();
+            this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
+
+            // If this is a safe zone, copy the character attributes out for use on death.
+            if (smr.SafeZone)
+            {
+                SMRoomSafeCharacterAttributes smrsca = new SMRoomSafeCharacterAttributes();
+                smrsca.CharacterName = this.GetFullName();
+                smrsca.SavedAttributes = this.Attributes;
+
+                smr.SafeZoneCharAttributes.Add(smrsca);
+            }
+
+            // Announce arrival to other players in the same place
+            smr.Announce(this.Formatter.Italic(this.GetFullName() + enteringMethod), this, true);
+            smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
+        }
 
 		/// <summary>
 		/// Flee from a location via a random exit.
@@ -2648,12 +2657,41 @@ namespace SlackMUDRPG.CommandClasses
 			GetQuestLog(true);
 		}
 
-		#endregion
-	}
+        #endregion
 
-	#region "Other Class Structures"
+        #region "Parties"
 
-	public class AwaitingResponseFromCharacter
+        public void InviteToParty(string characterName, bool suppressMessages = false)
+        {
+            new SMParty().InviteToParty(this, characterName, suppressMessages);
+        }
+
+        public void AcceptPartyInvite(bool suppressMessages = false)
+        {
+            new SMParty().JoinParty(this, suppressMessages);
+        }
+
+        public void LeaveParty(bool suppressMessages = false)
+        {
+            new SMParty().LeaveParty(this, suppressMessages);
+        }
+
+        public void CreateParty(bool suppressMessages = false)
+        {
+            new SMParty().CreateParty(this, suppressMessages);
+        }
+
+        public void WhoIsInParty()
+        {
+            new SMParty().FindAllPartyMembers(this);
+        }
+
+        #endregion
+    }
+
+    #region "Other Class Structures"
+
+    public class AwaitingResponseFromCharacter
 	{
 		public string NPCID { get; set; }
 		public List<ShortcutToken> ShortCutTokens { get; set; }

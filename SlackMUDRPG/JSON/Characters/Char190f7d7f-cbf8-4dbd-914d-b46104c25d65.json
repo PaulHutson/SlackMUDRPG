@@ -1,21 +1,21 @@
 {
-  "firstname": "Io",
-  "lastname": "Rn",
-  "lastinteractiondate": "2017-04-17T15:52:35.8369932+01:00",
-  "lastlogindate": "2017-04-17T15:52:32.0748075+01:00",
+  "firstname": "Yon",
+  "lastname": "Death",
+  "lastinteractiondate": "2017-04-17T15:52:45.1446039+01:00",
+  "lastlogindate": "2017-04-17T15:52:41.7362702+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
-  "userID": "a99353f5-1afc-41ae-a629-9510e08f514a",
-  "username": "aa",
-  "password": "EAAAAKUvuavRbXLzy6KA4tOYzycTs2ROEiG6dbmeNCsmEKSo",
+  "userID": "190f7d7f-cbf8-4dbd-914d-b46104c25d65",
+  "username": "da",
+  "password": "EAAAAM17lWod/zmYHW+6X39j6gCWurzmkEchC865w3QZXiLd",
   "roomID": "Ravensmere.Military District.Battle Coordinators Office",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1492415556,
+      "lastDateUpdated": 1492427559,
       "expires": 0,
       "completed": true
     }
@@ -38,7 +38,7 @@
         "any"
       ],
       "equippedItem": {
-        "itemID": "0feee139-5db4-4645-973c-71ba4882fb53",
+        "itemID": "f66b51d2-60af-4e23-9e1f-08f25d4f66f5",
         "singularPronoun": "a",
         "itemName": "Key to access the arrivals hall entrance to the city",
         "pluralName": "Keys",
@@ -68,7 +68,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "70b398fd-bfe5-4a8c-ad2e-f7722a3940c6",
+        "itemID": "f1fb13ea-700b-4a17-bdf1-57d181418c2a",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -122,6 +122,6 @@
   "characterSize": 160,
   "connectionService": "WS",
   "lastUsedCommand": "resp N",
-  "variableResponse": "Yon Death",
+  "variableResponse": "m",
   "npCsWaitingForResponses": []
 }

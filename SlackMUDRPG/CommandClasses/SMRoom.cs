@@ -30,6 +30,12 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("Instanced")]
         public bool Instanced { get; set; }
 
+        [JsonProperty("SafeZone")]
+        public bool SafeZone { get; set; }
+
+        [JsonProperty("SafeZoneCharAttributes")]
+        public List<SMRoomSafeCharacterAttributes> SafeZoneCharAttributes { get; set; }
+
         [JsonProperty("InstanceReloadLocation")]
         public string InstanceReloadLocation { get; set; }
 
@@ -811,4 +817,13 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("Unique")]
 		public bool Unique { get; set; }
 	}
+
+    public class SMRoomSafeCharacterAttributes
+    {
+        [JsonProperty("CharacterName")]
+        public string CharacterName { get; set; }
+
+        [JsonProperty("CharacterName")]
+        public SMAttributes SavedAttributes { get; set; }
+    }
 }
