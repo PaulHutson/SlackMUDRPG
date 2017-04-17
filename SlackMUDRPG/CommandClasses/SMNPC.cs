@@ -530,6 +530,66 @@ namespace SlackMUDRPG.CommandClasses
                         }
                         
                         break;
+                    case "checkplayerinroom":
+                        // Get the name to check from the variable response
+                        string charnameToCheck = invokingCharacter.VariableResponse;
+
+                        // Get the next steps
+                        string[] nextStepsCheckPlayerInRoom = npccs.AdditionalData.Split('|');
+
+                        // Get the character
+                        SMCharacter checkcharacter = invokingCharacter.GetRoom().GetPeople().FirstOrDefault(pn => pn.GetFullName().ToLower() == charnameToCheck.ToLower());
+                        
+                        if (checkcharacter != null) // found the character
+                        {
+                            ProcessConversationStep(npcc, nextStepsCheckPlayerInRoom[0], invokingCharacter);
+                        }
+                        else // Character not found
+                        {
+                            ProcessConversationStep(npcc, nextStepsCheckPlayerInRoom[0], invokingCharacter);
+                        }
+
+                        break;
+                    case "partyinvite":
+                        // Leave any parties the player is currently in.
+                        if (invokingCharacter.PartyReference != null)
+                        {
+                            SMParty smp = SMPartyHelper.GetParty(invokingCharacter.PartyReference.PartyID);
+                            smp.LeaveParty(invokingCharacter);
+                        }
+
+                        // Invite the named character to a party (secretly, suppressing the message).
+                        new SMParty().InviteToParty(invokingCharacter, invokingCharacter.VariableResponse, true);
+
+                        break;
+                    case "acceptpartyinvite":
+                        // Accept any open invites, suppressing the messages
+                        invokingCharacter.AcceptPartyInvite(true);
+
+                        break;
+                    case "movecharacterparty":
+                        // Move a whole party from one location to another
+                        // Get the location information and other information
+                        // Get the next steps
+                        string[] additionalInformationMoveCharacterParty = npccs.AdditionalData.Split('|');
+
+                        // Find the party
+                        SMPartyHelper.GetParty(invokingCharacter.PartyReference.PartyID).MoveAllPartyMembersToLocation(additionalInformationMoveCharacterParty[0], additionalInformationMoveCharacterParty[1], additionalInformationMoveCharacterParty[2], true);
+                        
+                        break;
+                    case "startconversation":
+                        // Find the name of the person we want to start a conversation with
+                        // and the conversation we're going to go to.
+                        string[] nextStepsStartConversation = npccs.AdditionalData.Split('|');
+
+                        // Find the character from the name.
+                        List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+                        SMCharacter smcStartConversation = smcs.FirstOrDefault(smc => smc.GetFullName().ToLower() == invokingCharacter.VariableResponse.ToLower());
+
+                        // Start the conversation
+                        ProcessConversationStep(npcc, nextStepsStartConversation[1], smcStartConversation);
+
+                        break;
                     case "wait":
                         System.Threading.Thread.Sleep(int.Parse(npccs.AdditionalData) * 1000);
                         break;

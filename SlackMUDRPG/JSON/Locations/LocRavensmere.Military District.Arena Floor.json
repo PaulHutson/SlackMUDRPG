@@ -4,6 +4,8 @@
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
   "Outside": true,
+  "Instanced": true,
+  "InstanceReloadLocation": "Ravensmere.Military District.Battle Coordinators Office",
 	"RoomDescription": "The arena floor is covered in fine well trodden sand, here and there there are ominous darker patches where blood has dried into the sand.",
 	"RoomExits": [
 		{

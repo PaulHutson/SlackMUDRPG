@@ -51,7 +51,10 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("RoomID")]
 		public string RoomID { get; set; }
 
-		[JsonProperty("CurrentActivity")]
+        [JsonProperty("PartyReference")]
+        public SMPartyReference PartyReference { get; set; }
+
+        [JsonProperty("CurrentActivity")]
 		public string CurrentActivity { get; set; }
 
 		[JsonProperty("NewbieTipsDisabled")]
@@ -294,24 +297,7 @@ namespace SlackMUDRPG.CommandClasses
                         // If the room is not lot or the character has the right key, let them in.
                         if (initiateMove)
                         {
-                            // Walk out of the room code.
-                            SMRoom currentRoom = this.GetRoom();
-
-                            currentRoom.Announce(this.Formatter.Italic(this.GetFullName() + " walks out."), this, true);
-                            currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
-
-							// Expire any awaiting responses from NPCs (to clean the memory / character file up)
-							NPCsWaitingForResponses = null;
-
-							// Move the player to the new location
-							this.RoomID = smr.RoomID;
-                            this.SaveToApplication();
-                            this.SaveToFile();
-                            this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
-
-                            // Announce arrival to other players in the same place
-                            smr.Announce(this.Formatter.Italic(this.GetFullName() + " walks in."), this, true);
-                            smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
+                            ActualMove(smr, " walks out.", " walks in.");
                         }
                     }
                 }
@@ -321,6 +307,56 @@ namespace SlackMUDRPG.CommandClasses
                 }
 			}
 		}
+
+        public void ActualMove(SMRoom smr, string leavingMethod, string enteringMethod, bool processResponses = true)
+        {
+            // Walk out of the room code.
+            SMRoom currentRoom = this.GetRoom();
+
+            currentRoom.Announce(this.Formatter.Italic(this.GetFullName() + leavingMethod), this, true);
+
+            if (processResponses)
+            {
+                currentRoom.ProcessNPCReactions("PlayerCharacter.Leave", this);
+            }
+            
+            // Expire any awaiting responses from NPCs (to clean the memory / character file up)
+            NPCsWaitingForResponses = null;
+
+            // Check if the player is leaving a safezone
+            if (currentRoom.SafeZone)
+            {
+                // Reload their stats as they were when they were first in the room.
+                SMRoomSafeCharacterAttributes smrsca = currentRoom.SafeZoneCharAttributes.FirstOrDefault(a => a.CharacterName == this.GetFullName());
+
+                // See if there were some attributes in memory (there should be).
+                if (smrsca != null)
+                {
+                    this.Attributes = smrsca.SavedAttributes;
+                    smr.SafeZoneCharAttributes.Remove(smrsca);
+                }
+            }
+
+            // Move the player to the new location
+            this.RoomID = smr.RoomID;
+            this.SaveToApplication();
+            this.SaveToFile();
+            this.sendMessageToPlayer(new SlackMud().GetLocationDetails(this.RoomID, this));
+
+            // If this is a safe zone, copy the character attributes out for use on death.
+            if (smr.SafeZone)
+            {
+                SMRoomSafeCharacterAttributes smrsca = new SMRoomSafeCharacterAttributes();
+                smrsca.CharacterName = this.GetFullName();
+                smrsca.SavedAttributes = this.Attributes;
+
+                smr.SafeZoneCharAttributes.Add(smrsca);
+            }
+
+            // Announce arrival to other players in the same place
+            smr.Announce(this.Formatter.Italic(this.GetFullName() + enteringMethod), this, true);
+            smr.ProcessNPCReactions("PlayerCharacter.Enter", this);
+        }
 
 		/// <summary>
 		/// Flee from a location via a random exit.
@@ -878,65 +914,141 @@ namespace SlackMUDRPG.CommandClasses
         /// </summary>
         public void Die()
         {
-            // First create a corpse where they are, with all the associated items attached!
-            // Drop all the items the character is holding
-            string droppedItemsAnnouncement = "";
-            bool isFirstDroppedItem = true;
-			if (this.Slots != null)
-			{
-				foreach (SMSlot smcs in this.Slots)
-				{
-					if (((smcs.Name == "RightHand") || (smcs.Name == "LeftHand")) && (!smcs.isEmpty()))
-					{
-						SMItem droppedItem = smcs.EquippedItem;
-						this.GetRoom().AddItem(droppedItem);
-						if (!isFirstDroppedItem)
-						{
-							droppedItemsAnnouncement += ", ";
-						}
-						else
-						{
-							isFirstDroppedItem = false;
-						}
-						droppedItemsAnnouncement += droppedItem.SingularPronoun + " " + droppedItem.ItemName;
-						smcs.EquippedItem = null;
-					}
-				}
-			}
+            // Get the room the char is currently in
+            SMRoom smr = this.GetRoom();
 
-			SMItem corpse = ProduceCorpse();
-			SMRoom currentRoom = this.GetRoom();
+            // Check whether they're in a safe zone or not...
+            if (smr.SafeZone)
+            {
+                // Check if it is an NPC... 
+                if (this.GetType().Name != "SMNPC")
+                {
+                    // Get the saved attribues
+                    SMRoomSafeCharacterAttributes smsca = smr.SafeZoneCharAttributes.FirstOrDefault(ca => ca.CharacterName == this.GetFullName());
+                    
+                    if (smsca != null)
+                    {
+                        // Load the attributes back into memory for the character
+                        this.Attributes = smsca.SavedAttributes;
+                    }
 
-            currentRoom.AddItem(corpse);
-			
-			// Check whether it's an NPC
-			if (this.GetType().Name != "SMNPC")
-			{
-				// Then move the player back to the hospital
-				this.RoomID = "Hospital";
-				this.Attributes.HitPoints = this.Attributes.MaxHitPoints / 2;
+                    // Move the player to the reload location (if they're not already in the location).
+                    if (this.RoomID != smr.InstanceReloadLocation)
+                    {
+                        // Set the char room id to be the new id
+                        this.RoomID = smr.InstanceReloadLocation;
 
-				// Tell the player they've died and announce their new location
-				this.sendMessageToPlayer(this.Formatter.General("You have died and have awoken feeling groggy - you won't be at full health yet, you'll need to recharge yourself!"));
-				this.GetRoomDetails();
+                        // Tell the players in the room the person has been moved.
+                        smr.Announce(this.GetFullName() + " has been moved to " + smr.InstanceReloadLocation.Replace(".", ", "), this, true);
 
-				// TODO reduce the number of rerolls they have
-				// If they get to 0 rerolls the character is permenant dead.
+                        // Tell the player they've been moved to the other location...
+                        this.sendMessageToPlayer(this.Formatter.Italic("You would have died..."));
+                        this.GetRoomDetails();
+                    }
+                    
+                    // Save the player
+                    this.SaveToApplication();
+                    this.SaveToFile();
+                }
+                else // it is an NPC
+                {
+                    // First create a corpse where they are, with all the associated items attached!
+                    // Drop all the items the character is holding
+                    string droppedItemsAnnouncement = "";
+                    bool isFirstDroppedItem = true;
+                    if (this.Slots != null)
+                    {
+                        foreach (SMSlot smcs in this.Slots)
+                        {
+                            if (((smcs.Name == "RightHand") || (smcs.Name == "LeftHand")) && (!smcs.isEmpty()))
+                            {
+                                SMItem droppedItem = smcs.EquippedItem;
+                                this.GetRoom().AddItem(droppedItem);
+                                if (!isFirstDroppedItem)
+                                {
+                                    droppedItemsAnnouncement += ", ";
+                                }
+                                else
+                                {
+                                    isFirstDroppedItem = false;
+                                }
+                                droppedItemsAnnouncement += droppedItem.SingularPronoun + " " + droppedItem.ItemName;
+                                smcs.EquippedItem = null;
+                            }
+                        }
+                    }
 
-				// Announce the items the player dropped.
-				currentRoom.Announce(this.Formatter.General($"While dying {this.GetFullName()} dropped the following items: {droppedItemsAnnouncement}"));
+                    SMItem corpse = ProduceCorpse();
+                    SMRoom currentRoom = this.GetRoom();
 
-				// Reset the character activity
-				this.CurrentActivity = null;
+                    currentRoom.AddItem(corpse);
 
-				// Save the player
-				this.SaveToApplication();
-				this.SaveToFile();
-			}
-			else
-			{
-				new SlackMud().RemoveNPCFromMemory(this.UserID);
-			}			
+                    // Remove the character from memory (they really do die here).
+                    new SlackMud().RemoveNPCFromMemory(this.UserID);
+                }
+            }
+            else
+            {
+                // First create a corpse where they are, with all the associated items attached!
+                // Drop all the items the character is holding
+                string droppedItemsAnnouncement = "";
+                bool isFirstDroppedItem = true;
+                if (this.Slots != null)
+                {
+                    foreach (SMSlot smcs in this.Slots)
+                    {
+                        if (((smcs.Name == "RightHand") || (smcs.Name == "LeftHand")) && (!smcs.isEmpty()))
+                        {
+                            SMItem droppedItem = smcs.EquippedItem;
+                            this.GetRoom().AddItem(droppedItem);
+                            if (!isFirstDroppedItem)
+                            {
+                                droppedItemsAnnouncement += ", ";
+                            }
+                            else
+                            {
+                                isFirstDroppedItem = false;
+                            }
+                            droppedItemsAnnouncement += droppedItem.SingularPronoun + " " + droppedItem.ItemName;
+                            smcs.EquippedItem = null;
+                        }
+                    }
+                }
+
+                SMItem corpse = ProduceCorpse();
+                SMRoom currentRoom = this.GetRoom();
+
+                currentRoom.AddItem(corpse);
+
+                // Check whether it's an NPC
+                if (this.GetType().Name != "SMNPC")
+                {
+                    // Then move the player back to the hospital
+                    this.RoomID = "Hospital";
+                    this.Attributes.HitPoints = this.Attributes.MaxHitPoints / 2;
+
+                    // Tell the player they've died and announce their new location
+                    this.sendMessageToPlayer(this.Formatter.General("You have died and have awoken feeling groggy - you won't be at full health yet, you'll need to recharge yourself!"));
+                    this.GetRoomDetails();
+
+                    // TODO reduce the number of rerolls they have
+                    // If they get to 0 rerolls the character is permenant dead.
+
+                    // Announce the items the player dropped.
+                    currentRoom.Announce(this.Formatter.General($"While dying {this.GetFullName()} dropped the following items: {droppedItemsAnnouncement}"));
+
+                    // Reset the character activity
+                    this.CurrentActivity = null;
+
+                    // Save the player
+                    this.SaveToApplication();
+                    this.SaveToFile();
+                }
+                else
+                {
+                    new SlackMud().RemoveNPCFromMemory(this.UserID);
+                }
+            }
         }
 
 		public virtual SMItem ProduceCorpse()
@@ -2545,12 +2657,41 @@ namespace SlackMUDRPG.CommandClasses
 			GetQuestLog(true);
 		}
 
-		#endregion
-	}
+        #endregion
 
-	#region "Other Class Structures"
+        #region "Parties"
 
-	public class AwaitingResponseFromCharacter
+        public void InviteToParty(string characterName, bool suppressMessages = false)
+        {
+            new SMParty().InviteToParty(this, characterName, suppressMessages);
+        }
+
+        public void AcceptPartyInvite(bool suppressMessages = false)
+        {
+            new SMParty().JoinParty(this, suppressMessages);
+        }
+
+        public void LeaveParty(bool suppressMessages = false)
+        {
+            new SMParty().LeaveParty(this, suppressMessages);
+        }
+
+        public void CreateParty(bool suppressMessages = false)
+        {
+            new SMParty().CreateParty(this, suppressMessages);
+        }
+
+        public void WhoIsInParty()
+        {
+            new SMParty().FindAllPartyMembers(this);
+        }
+
+        #endregion
+    }
+
+    #region "Other Class Structures"
+
+    public class AwaitingResponseFromCharacter
 	{
 		public string NPCID { get; set; }
 		public List<ShortcutToken> ShortCutTokens { get; set; }
