@@ -83,6 +83,16 @@ namespace SlackMUDRPG.CommandClasses
 						returnString = ResponseFormatterFactory.Get().Bold("Welcome to SlackMud!");
 						returnString += ResponseFormatterFactory.Get().General("We've created your character in the magical world of Arrelvia!"); // TODO, use a welcome script!
 					}
+
+                    // Check if the player was last in an instanced location.
+                    if (character.RoomID.Contains("||"))
+                    {
+                        // Find the details of the original room type
+                        SMRoom originalRoom = GetRoom(character.RoomID.Substring(0, character.RoomID.IndexOf("||")));
+                        character.RoomID = originalRoom.InstanceReloadLocation;
+                    }
+
+                    // Get the location details
 					returnString += GetLocationDetails(character.RoomID, character);
 
 					// Clear old responses an quests from the character
@@ -357,6 +367,13 @@ namespace SlackMUDRPG.CommandClasses
 
 						// ... get the information from the the room information.
 						roomInMem = JsonConvert.DeserializeObject<SMRoom>(json);
+
+                        // Check whether the room is instanced or not
+                        if (roomInMem.Instanced)
+                        {
+                            // First change the name of the room.
+                            roomInMem.RoomID = roomInMem.RoomID + "||" + Guid.NewGuid();
+                        }
 
 						// Add the room to the application memory 
 						smrs.Add(roomInMem);
