@@ -154,7 +154,53 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "LookingForWork.1"
+                  "AdditionalData": "LookingForWork.1",
+                  "PreRequisites": [
+                    {
+                      "Type": "HasNotDoneQuest",
+                      "AdditionalData": "The Root Of The Problem"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "Magic",
+              "ResponseOptionText": "Is this magic stuff something I could learn?",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ATestOfPower.1",
+                  "PreRequisites": [
+                    {
+                      "Type": "HasNotDoneQuest",
+                      "AdditionalData": "A Test Of Power"
+                    },
+                    {
+                      "Type": "IsNotInProgressQuest",
+                      "AdditionalData": "A Test Of Power"
+                    },
+                    {
+                      "Type": "HasDoneQuest",
+                      "AdditionalData": "The Root Of The Problem"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "Test",
+              "ResponseOptionText": "I feel I'm ready for you to test me",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ATestOfPower.Test",
+                  "PreRequisites": [
+                    {
+                      "Type": "IsInProgressQuest",
+                      "AdditionalData": "A Test Of Power"
+                    }
+                  ]
                 }
               ]
             },
@@ -476,6 +522,179 @@
           "StepID": "4",
           "Scope": "updatequest",
           "AdditionalData": "Zog.The Root Of The Problem",
+          "NextStep": "5.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "5",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Is there anything else I can do for you today?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Magic",
+              "ResponseOptionText": "Is this magic stuff something I could learn?",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ATestOfPower.1"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "RootOfTheProblem.End"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "End",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Very well, please come back tomorrow if you want to earn some more money... I may have some more jobs then.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "ATestOfPower",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "Zog coughs into his hand sending sparks shooting out of his ears. His eyes seem to twinkle as it examines you.",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "One might try for years to master the arcane arts and not even be able to summon a drop of water but, there are some, like myself, who have the inate talent in our blood.",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "concentrates and then the shops light starts to wane and his skin seems to glow gently with a golden gleem.",
+          "NextStep": "4.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Awakening this talent is difficult and often unrewarding.  However I can see potential in you.  Yes.  Yes I can!  Much potential. ",
+          "NextStep": "5.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "5",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "hands you a small pouch.",
+          "NextStep": "6.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "6",
+          "Scope": "giveitem",
+          "AdditionalData": "QuestItem.ZogsPouch,1",
+          "NextStep": "7.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "7",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Within that pouch lies a runestone. The stone is imbued with concentrated magic allowing a none magi such as yourself to be able to manipulate it without channeling your own magical stores into it.",
+          "NextStep": "8.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "8",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Take it away with you, read the instructions inside and make the runestone hover but an inch above your hand and I will talk to you further.",
+          "NextStep": "9.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "9",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "relaxes a little and the light in the shop returns to normal.",
+          "NextStep": "10.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "10",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Make that cube fly and then perhaps, I will show you a thing or two.",
+          "NextStep": "11.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "11",
+          "Scope": "addquest",
+          "AdditionalData": "Zog.A Test Of Power",
+          "NextStep": "12.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "12",
+          "Scope": "teachskill",
+          "AdditionalData": "Fly.1",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "Test",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Hrm, is that so...",
+          "NextStep": "Test2.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "Test2",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "concentrates on {playercharacter}...",
+          "NextStep": "Test3.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "Test3",
+          "Scope": "checkskilllevel",
+          "AdditionalData": "Fly|10|TestPass|TestFail",
+          "NextStep": "Test2.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "TestPass",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Ah - yes, I can see it in your aura, you [b]do[/b] have power...",
+          "NextStep": "TestPass2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "TestPass2",
+          "Scope": "updatequest",
+          "AdditionalData": "Zog.A Test Of Power",
+          "NextStep": "TestPass3.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "TestPass3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Here, take this book - it contains some other spells for you to try...",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "TestFail",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Hrm, you're not quite skilled enough yet... come back when you've practiced some more...",
           "NextStep": null,
           "ResponseOptions": null
         }

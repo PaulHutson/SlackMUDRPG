@@ -1,15 +1,15 @@
 {
   "firstname": "Io",
   "lastname": "Rn",
-  "lastinteractiondate": "2017-04-17T15:52:35.8369932+01:00",
-  "lastlogindate": "2017-04-17T15:52:32.0748075+01:00",
+  "lastinteractiondate": "2017-04-17T17:16:25.9063688+01:00",
+  "lastlogindate": "2017-04-17T17:20:06.4212191+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
   "userID": "a99353f5-1afc-41ae-a629-9510e08f514a",
   "username": "aa",
   "password": "EAAAAKUvuavRbXLzy6KA4tOYzycTs2ROEiG6dbmeNCsmEKSo",
-  "roomID": "Ravensmere.Military District.Battle Coordinators Office",
+  "roomID": "Ravensmere.Military District.Sparring Area",
   "newbieTipsDisabled": false,
   "questLog": [
     {
@@ -121,7 +121,6 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "resp N",
-  "variableResponse": "Yon Death",
-  "npCsWaitingForResponses": []
+  "lastUsedCommand": "cast fly wooden chest",
+  "variableResponse": "Yon Death"
 }

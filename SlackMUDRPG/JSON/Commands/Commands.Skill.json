@@ -24,5 +24,18 @@
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "build Wooden Hut",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Skill",
+		"CommandName": "cast",
+		"CommandDescription": "Enables the player to cast a spell.",
+		"CommandSyntax": "cast <Name Of Spell> <Optional Target>",
+		"ParamsExpression": "{.+} {.+}?",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Cast",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "cast fly stick, or cast thunderbolt",
+		"RequiredSkill": null
 	}
 ]

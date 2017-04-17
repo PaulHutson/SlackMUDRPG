@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "A Test Of Power",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Levitate a runestone",
+			"Type": "SkillTest",
+			"CharacterName": "Mr Zog",
+			"LocationID": "Ravensmere.Harbour South.Zogs Arcanum",
+			"AdditionalData": "Levitate",
+			"Instructions": "Demonstrate that you can levitate a runestone to Mr Zog"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Object",
+			"AdditionalData": "Book.AMagistasCompanion,1"
+		}
+	]
+}
