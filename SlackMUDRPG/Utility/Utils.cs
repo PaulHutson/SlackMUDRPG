@@ -81,6 +81,16 @@ namespace SlackMUDRPG.Utility
 			return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(input.ToLower());
 		}
 
+		/// <summary>
+		/// Splits a given camel case string into sepeate words with sapces
+		/// </summary>
+		/// <param name="value">The string value to split</param>
+		/// <returns>The split string</returns>
+		public static string SplitCamelCase(string value)
+		{
+			return Regex.Replace(value, "(?!^)([A-Z])", " $1");
+		}
+
 		#endregion
 
 		#region "Reflection"
