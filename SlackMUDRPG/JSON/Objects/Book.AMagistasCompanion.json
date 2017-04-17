@@ -1,0 +1,16 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "book entitled \"A Magistas Companion\"",
+	"PluralPronoun": "some",
+	"PluralName": "books entitled \"A Magistas Companion\"",
+	"ItemType": "Readable",
+	"ItemFamily": "Book",
+	"ItemDescription": "This worn tome looks to have been well used",
+	"ItemExtraDetail": "SpellsSpellsSpells... all you need to know about spells",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1000000000,
+	"MaxHitPoints": 1000000000,
+	"BaseDamage": 0.001,
+	"Toughness": 50
+}

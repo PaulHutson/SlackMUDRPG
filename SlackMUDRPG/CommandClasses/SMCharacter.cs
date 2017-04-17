@@ -793,13 +793,23 @@ namespace SlackMUDRPG.CommandClasses
 			    else
 			    {
 				    // Can't use the skill so let the player know!
-				    this.sendMessageToPlayer(this.Formatter.General($"You need to learn the \"{skillName}\" skill before you can use it."));
+				    this.sendMessageToPlayer(this.Formatter.Italic($"You need to learn the \"{skillName}\" skill before you can use it."));
 			    }
             }
             else
             {
                 this.sendMessageToPlayer(this.Formatter.Italic($"You are already {this.CurrentActivity}"));
             }
+        }
+
+        /// <summary>
+        /// Cast a spell
+        /// </summary>
+        /// <param name="spellName">The name of the spell being cast</param>
+        /// <param name="targetName">The target name if any</param>
+        public void Cast(string spellName, string targetName = null)
+        {
+            UseSkill(spellName, targetName);
         }
 
 		/// <summary>

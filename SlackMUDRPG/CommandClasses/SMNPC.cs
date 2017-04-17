@@ -590,6 +590,31 @@ namespace SlackMUDRPG.CommandClasses
                         ProcessConversationStep(npcc, nextStepsStartConversation[1], smcStartConversation);
 
                         break;
+                    case "checkskilllevel":
+                        // Find the name of the person we want to start a conversation with
+                        // and the conversation we're going to go to.
+                        string[] nextStepsCheckSkillLevel = npccs.AdditionalData.Split('|');
+                        string nextStepCheckSkillLevel = nextStepsCheckSkillLevel[2];
+
+
+                        // Get the character skill level for the specificed skill.
+                        // Check if the player already has the skill
+                        if (invokingCharacter.Skills == null)
+                        {
+                            nextStepCheckSkillLevel = nextStepsCheckSkillLevel[3];
+                        }
+                        else
+                        {
+                            if (invokingCharacter.Skills.Count(skill => ((skill.SkillName == nextStepsCheckSkillLevel[0])&&(skill.SkillLevel.ToString() == nextStepsCheckSkillLevel[1]))) == 0)
+                            {
+                                nextStepCheckSkillLevel = nextStepsCheckSkillLevel[3];
+                            }
+                        }
+                        
+                        // Process the conversation.
+                        ProcessConversationStep(npcc, nextStepCheckSkillLevel, invokingCharacter);
+                        
+                        break;
                     case "wait":
                         System.Threading.Thread.Sleep(int.Parse(npccs.AdditionalData) * 1000);
                         break;

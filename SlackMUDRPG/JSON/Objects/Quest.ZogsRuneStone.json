@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Small Purple Runestone",
+	"PluralPronoun": "some",
+	"PluralName": "Small Purple Runestones",
+	"ItemType": "Container",
+	"ItemFamily": "Pouch",
+	"ItemDescription": "Small Purple Runestone covered in strange markings.",
+	"ItemWeight": 0,
+	"ItemSize": 0,
+	"HitPoints": 1000000000,
+	"MaxHitPoints": 1000000000,
+	"BaseDamage": 0.001,
+  "Toughness": 1
+}
