@@ -1,0 +1,86 @@
+/* Socal media top nav bar */
+.navbar-slackmud-social {
+    background-color: rgba(36, 36, 36, 1.0);
+    color: rgba(255, 255, 255, 1.0);
+    border-radius: 0;
+    margin: 0;
+}
+
+.navbar-slackmud-social .navbar-nav > li > a {
+    padding: 10px;
+}
+
+.navbar-slackmud-social .navbar-nav > li > a > img.logo {
+    width: 15px;
+    height: 15px;
+}
+
+.navbar-slackmud-social .navbar-nav > li > a:hover,
+.navbar-slackmud-social .navbar-nav > li > a:focus,
+.navbar-slackmud-social .navbar-nav > .active > a:hover,
+.navbar-slackmud-social .navbar-nav > .active > a:focus,
+.navbar-slackmud-social .navbar-nav > .open > a {
+    text-decoration: none;
+    background-color: rgba(103, 103, 103, 1.0);
+}
+
+/* Main site nav bar */
+.navbar-slackmud {
+    background-color: rgba(43, 43, 43, 1.0);
+    color: rgba(255, 255, 255, 1.0);
+    border-radius: 0;
+    margin-top: 40px;
+}
+
+.navbar-slackmud .navbar-nav > li > a {
+    color: rgba(255, 255, 255, 1.0);
+    line-height: 50px;
+    font-weight: 700;
+    font-size: 1.4em;
+    padding: 15px 25px;
+}
+
+.navbar-slackmud .navbar-nav > .active > a {
+    color: rgba(255, 255, 255, 1.0);
+    background-color: transparent;
+}
+
+.navbar-slackmud .navbar-nav > li > a:hover,
+.navbar-slackmud .navbar-nav > li > a:focus,
+.navbar-slackmud .navbar-nav > .active > a:hover,
+.navbar-slackmud .navbar-nav > .active > a:focus,
+.navbar-slackmud .navbar-nav > .open > a {
+    text-decoration: none;
+    background-color: rgba(103, 103, 103, 1.0);
+}
+
+.navbar-slackmud .navbar-brand {
+    color: rgba(255, 255, 255, 1.0);
+    height: 80px;
+    padding-right: 40px;
+}
+
+.navbar-slackmud .navbar-brand img {
+    padding-top: 10px;
+}
+
+.navbar-slackmud .navbar-toggle {
+    background-color: rgba(68, 68, 68, 1.0);
+    margin-top: 22px;
+}
+
+/* Below style are for dropdowns only */
+.navbar-slackmud .icon-bar {
+    background-color: rgba(36, 36, 36, 1.0);
+}
+
+.navbar-slackmud .navbar-nav .dropdown-menu {
+  background-color: rgba(36, 36, 36, 1.0);
+}
+.navbar-slackmud .navbar-nav .dropdown-menu > li >a {
+  color: rgba(255, 255, 255, 1.0);
+}
+.navbar-slackmud .navbar-nav .dropdown-menu > li > a:hover,
+.navbar-slackmud .navbar-nav .dropdown-menu > li > a:focus {
+  color: rgba(36, 36, 36, 1.0);
+}

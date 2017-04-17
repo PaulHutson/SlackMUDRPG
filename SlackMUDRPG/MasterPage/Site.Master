@@ -2,26 +2,90 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title><asp:ContentPlaceHolder ID="ph_Title" runat="server"></asp:ContentPlaceHolder></title>
-	<link href="../Style/Site.css" rel="stylesheet" />
-	<script src="../scripts/JS.Cookie.js"></script>
-    <asp:ContentPlaceHolder ID="ph_Header" runat="server"></asp:ContentPlaceHolder>
-</head>
-<body>
-    <form id="form1" runat="server">
-		<div id="Header">
-			Province - Menu: <a href="Game.aspx">Game</a> | <a href="Commands.aspx">Commands</a> | <a href="Receipes.aspx">Receipes</a>
-		</div>
-		<div>
-			<asp:ContentPlaceHolder ID="ph_MainContent" runat="server">
-        
-			</asp:ContentPlaceHolder>
-		</div>
-		<div id="Footer">
-			I'm the footer area
-		</div>
-    </form>
-</body>
+<html lang="en">
+
+	<head runat="server">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title><asp:ContentPlaceHolder ID="ph_Title" runat="server"></asp:ContentPlaceHolder></title>
+		
+		<link rel="stylesheet" href="../Content/bootstrap.min.css" />
+		<link rel="stylesheet" href="../css/slackmud_main.css" />
+
+		<asp:ContentPlaceHolder ID="ph_Header" runat="server"></asp:ContentPlaceHolder>
+	</head>
+
+	<body>
+		<form id="form1" runat="server" class="full-height">
+			<!-- Social media pre header -->
+			<nav class="navbar navbar-slackmud-social navbar-fixed-top">
+				<div class="container">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#">
+								<img class="logo" src="../css/images/facebook_logo_small.png" alt="facebook">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img class="logo" src="../css/images/twitter_logo_small.png" alt="twitter">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<!-- Main navigation header -->
+			<nav class="navbar navbar-slackmud navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#slackmud_nav_collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/">
+							<img src="../css/images/slackmud_header_logo.png" alt="SlackMud">
+						</a>
+					</div>
+
+					<div class="collapse navbar-collapse" id="slackmud_nav_collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="/">Home</a></li>
+							<li><a href="Game.aspx">Game</a></li>
+							<li><a href="Commands.aspx">Commands</a></li>
+							<li><a href="Skills.aspx">Skills</a></li>
+							<li><a href="Items.aspx">Items</a></li>
+							<li><a href="Recipes.aspx">Recipes</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<asp:ContentPlaceHolder ID="ph_MainContent" runat="server"></asp:ContentPlaceHolder>
+
+			<footer>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-8 col-lg-offset-2 col-xs-12">
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+								dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+								aliquip ex ea commodo consequat.
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+
+		</form>
+
+		<script type="text/javascript" src="../scripts/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../scripts/JS.Cookie.js"></script>
+		<script type="text/javascript" src="../scripts/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../scripts/slackmud.js"></script>
+
+		<asp:ContentPlaceHolder ID="ph_PageJavaScript" runat="server"></asp:ContentPlaceHolder>
+	</body>
 </html>

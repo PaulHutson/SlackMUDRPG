@@ -1,0 +1,36 @@
+.side-nav {
+    height: 100%;
+    margin-top: -30px;
+    overflow-y: auto;
+}
+
+.side-nav > ul {
+    margin: 0;
+    padding: 0;
+}
+
+.side-nav > ul > li {
+    list-style: none;
+}
+.side-nav > ul > li > a {
+    display: inline-block;
+    color: rgba(255, 255, 255, 1.0);
+    font-size: 1.3em;
+    text-align: center;
+    padding: 30px 10px;
+    width: 100%;
+}
+
+.side-nav > ul > li:nth-child(odd) > a {
+    background: rgba(43, 43, 43, 0.79);
+}
+
+.side-nav > ul > li > a:hover,
+.side-nav > ul > li > a:focus {
+    background: rgba(103, 103, 103, 1.0);
+    text-decoration: none;
+}
+
+.side-nav > ul > li > a.active {
+    text-decoration: underline;
+}

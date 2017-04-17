@@ -1,0 +1,19 @@
+/* Login / Create Form Styles */
+@import url('slackmud_login_create.css');
+
+.game-output {
+    height: calc(100% - 94px);
+    width: calc(100% - 60px);
+    margin: 0 30px;
+    overflow-y: scroll;
+    background-color: rgba(238, 238, 238, 1.0);
+    font-size: 1.15em;
+    padding: 15px;
+}
+
+.game-input {
+    width: calc(100% - 30px);
+    font-size: 1.15em;
+    padding-left: 30px;
+    margin: 30px 0;
+}

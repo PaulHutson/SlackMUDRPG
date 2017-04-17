@@ -81,6 +81,16 @@ namespace SlackMUDRPG.Utility
 			return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(input.ToLower());
 		}
 
+		/// <summary>
+		/// Splits a given camel case string into sepeate words with sapces
+		/// </summary>
+		/// <param name="value">The string value to split</param>
+		/// <returns>The split string</returns>
+		public static string SplitCamelCase(string value)
+		{
+			return Regex.Replace(value, "(?!^)([A-Z])", " $1");
+		}
+
 		#endregion
 
 		#region "Reflection"
@@ -250,6 +260,47 @@ namespace SlackMUDRPG.Utility
 				list[k] = list[n];
 				list[n] = value;
 			}
+		}
+
+		#endregion
+
+		#region "Templates"
+
+		/// <summary>
+		/// Gets an HTML template file as a string, based on the template name provided
+		/// </summary>
+		/// <param name="templateName">Name of the temaplte to loead</param>
+		/// <returns>String representing the HTML template file contents</returns>
+		public static string GetHtmlTemplate(string templateName)
+		{
+			string template = String.Empty;
+
+			string templatesPath = FilePathSystem.GetRootFilePath("HTMLTemplates", templateName, ".html");
+
+			if (File.Exists(templatesPath))
+			{
+				using (StreamReader r = new StreamReader(templatesPath))
+				{
+					template = r.ReadToEnd();
+				}
+			}
+
+			return template;
+		}
+
+		/// <summary>
+		/// Returns the string None if value is null otherwise the value
+		/// </summary>
+		/// <param name="value">Some string value to check</param>
+		/// <returns>None or value</returns>
+		public static string noneIfNull(string value)
+		{
+			if (value == null)
+			{
+				return "None";
+			}
+
+			return value;
 		}
 
 		#endregion

@@ -1,153 +1,122 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Site.Master" AutoEventWireup="true" CodeBehind="Game.aspx.cs" Inherits="SlackMUDRPG.Game" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ph_Title" runat="server">
+	SlackMUD - Game
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ph_Header" runat="server">
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		var ws;
-		var userid;
-		var protocol = "";
-		$(document).ready(function () {
-			if (location.protocol === 'https:') {
-				protocol = "s";
-			}
-			if (Cookies.get('ProvinceUserID') != null) {
-				console.log("Cookie:" + Cookies.get('ProvinceUserID'));
-				$("#PlayArea").show();
-				$("#LoginCreateCharacterForm").hide();
-				var baseurl = window.location.href;
-				var arr = baseurl.split("/");
-				var url = 'ws' + protocol + '://' + arr[2] + '/Handlers/GameAccess.ashx?userID=' + Cookies.get('ProvinceUserID');
-				ws = new WebSocket(url);
-				ws.onopen = function () {
-					$('#messages').prepend('Connected <br/>');
-					$('#cmdSend').click(function () {
-						SendMessage();
-						ScrollToBottom();
-					});
-				};
-				ws.onmessage = function (e) {
-					if (e.data.substring(0,27) == "You must create a character") {
-						$("#PlayArea").hide();
-						$("#LoginCreateCharacterForm").show();
-					}
-					$('#OutputWindow').append(e.data + '<br/>');
-					ScrollToBottom();
-				};
-				$('#cmdLeave').click(function () {
-					ws.close();
-					ScrollToBottom();
-				});
-				ws.onclose = function () {
-					$('#OutputWindow').append('Closed <br/>');
-					ScrollToBottom();
-				};
-				ws.onerror = function (e) {
-					$('#OutputWindow').append('Oops something went wront <br/>');
-					ScrollToBottom();
-				};
-			} else {
-				// Show the login / char creation form
-				$("#LoginCreateCharacterForm").show();
-			};
-		});
-
-		function SendMessage() {
-			ws.send($('#txtMessage').val());
-			$('#txtMessage').val('');
-		};
-
-		$(window).keydown(function (event) {
-			if (event.keyCode == 13) {
-				event.preventDefault();
-				SendMessage();
-				return false;
-			};
-		});
-
-		function ScrollToBottom() {
-			var ta = document.getElementById('OutputWindow');
-			ta.scrollTop = ta.scrollHeight;
-		};
-	</script>
+	<link rel="stylesheet" href="css/slackmud_page_game.css" />
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="ph_MainContent" runat="server">
-	<div id="PlayArea">
-		<div>
-			<div id="OutputWindow"></div>
+	<!-- Game play section -->
+	<section class="page-content" id="gameplay-section">
+		<div class="container full-height">
+			<div class="row full-height">
+				<div class="col-xs-12 full-height">
+					<div class="content-block">
+						<div class="game-output" id="game-output"></div>
+						<div class="game-input">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter commands here..." id="game-input">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" id="submit-cmd">Send</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div>
-			<input type="text" id="txtMessage" />
-			<input type="button" value="Send" id="cmdSend" />
-		</div>
-	</div>
-	
+	</section>
 
-	<div id="LoginCreateCharacterForm">
-		<div id="LoginForm">
-			<div class="FormRow">
-				<div class="FormRomLabel">
-					Username:
-				</div>
-				<div>
-					<asp:TextBox runat="server" ID="tb_UserName"></asp:TextBox>
-				</div>
-			</div>
-			<div class="FormRow">
-				<div class="FormRomLabel">
-					Password:
-				</div>
-				<div>
-					<asp:TextBox runat="server" ID="tb_Password" TextMode="Password"></asp:TextBox>
-				</div>
-			</div>
-			<div class="FormRow">
-				<div>
-					<asp:Button runat="server" ID="btn_Login" Text="Login" />
-				</div>
-			</div>
-			<div>
-				Create Character
-			</div>
-		</div>
-		<div id="CreateForm">
-			<div class="FormRow">
-				<div class="InformationRow">
-					You can create a new character for the game via the below form.
-				</div>
-			</div>
-			<div class="FormRow">
-				<div class="FormRomLabel">
-					Username:
-				</div>
-				<div>
-					<asp:TextBox runat="server" ID="tb_CreateUserName"></asp:TextBox>
-				</div>
-			</div>
-			<div class="FormRow">
-				<div class="FormRomLabel">
-					Password:
-				</div>
-				<div>
-					<asp:TextBox runat="server" ID="tb_CreatePassword"></asp:TextBox>
-				</div>
-			</div>
-			<div class="FormRow">
-				<div class="InformationRow">
-					<div class="Strong">Note:</div> Your character details will be set through gameplay...
-				</div>
-			</div>
-			<div class="FormRow">
-				<div class="FormRomLabel">
-				</div>
-				<div>
-					<asp:Button runat="server" ID="btn_CreateCharacter" Text="Create Character" OnClick="btn_CreateCharacter_Click" />
-				</div>
-			</div>
-			<div class="FormRow">
-				I already have a character, let me log in
-			</div>
-		</div>
-	</div>
+	<!-- Login/create character forms -->
+	<section class="login-create-section" id="login-create-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-8 col-xs-offset-2">
+					<div class="panel panel-login">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-6 tabs" id="login-tab">
+									Login
+								</div>
+								<div class="col-xs-6 tabs active" id="create-tab">
+									Create Character
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									<!-- Login Form -->
+									<div class="login-form" style="display: none;">
+										<h2>Login To Play</h2>
 
+										<div class="form-group">
+											<asp:TextBox runat="server" id="username" class="form-control" placeholder="Username"></asp:TextBox>
+										</div>
+
+										<div class="form-group">
+											<asp:TextBox runat="server" id="password" TextMode="Password" class="form-control" placeholder="Password"></asp:TextBox>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+													<asp:Button runat="server" id="loginBtn" class="form-control btn btn-submit" Text="Login" />
+												</div>
+											</div>
+										</div>
+
+										<p class="text-center">Don't have a character? <a href="#" class="create-link">Create</a> one to play.</p>
+									</div>
+
+									<!-- Create character form -->
+									<div class="create-form" style="display: block;">
+										<h2>Create A Character</h2>
+										<p>You can create a new character for the game via the below form.</p>
+
+										<div class="form-group">
+											<asp:TextBox runat="server" id="newUsername" class="form-control" placeholder="Username"></asp:TextBox>
+										</div>
+
+										<div class="form-group">
+											<asp:TextBox runat="server" id="email" TextMode="Email" class="form-control" placeholder="Email Address"></asp:TextBox>
+										</div>
+
+										<div class="form-group">
+											<asp:TextBox runat="server" id="newPassword" TextMode="Password" class="form-control" placeholder="Passowrd"></asp:TextBox>
+										</div>
+
+										<div class="form-group">
+											<asp:TextBox runat="server" id="repeatPassword" TextMode="Password" class="form-control" placeholder="repeatPassword Passowrd"></asp:TextBox>
+										</div>
+
+										<p class="text-center"><strong>Note: </strong> Your character details will be set through gameplay.</p>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+													<asp:Button runat="server" id="createBtn" class="form-control btn btn-submit" Text="Create Character" OnClick="createBtnClick" />
+												</div>
+											</div>
+										</div>
+
+										<p class="text-center">Already registered? <a href="#" class="login-link">Login</a> to play.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </asp:Content>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="ph_PageJavaScript" runat="server">
+	<script type="text/javascript" src="scripts/slackmud_gamepage_websockets.js"></script>
+	<script type="text/javascript" src="scripts/slackmud_login_create.js"></script>
+</asp:Content>
+

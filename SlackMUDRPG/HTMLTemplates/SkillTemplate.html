@@ -2,28 +2,27 @@
 	<div class="panel-heading">
 		<h4 class="panel-title">
 			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#{panelId}">
-				{Name}
+				{SkillName}
 			</a>
 		</h4>
 	</div>
 	<div id="{panelId}" class="panel-collapse collapse">
 		<div class="panel-body">
 			{Description}
-			<br/>
-			<br/>
-			<strong>Required Skills:</strong>
-			<br/>
-			{RequiredSkills}
-			<br/>
-			<br/>
-			<strong>Example Usage:</strong>
-			<br/>
-			{ExampleUsage}
-			<br/>
-			<br/>
-			<strong>Command Syntax:</strong>
-			<br/>
-			{CommandSyntax}
+			<br />
+			<br />
+			<strong>Base Attribute: </strong>{BaseStat}
+			<br />
+			<br />
+			<strong>Prerequisites:</strong>
+			<br />
+			{SkillPrerequisites}
+			<br />
+			<br />
+			<strong>Notes:</strong>
+			<br />
+			<!-- Passive/Learning -->
+			{SkillNotes}
 		</div>
 	</div>
 </div>
