@@ -26,6 +26,7 @@
 
 /* Main site nav bar */
 .navbar-slackmud {
+	font-family: 'Cinzel', serif;
     background-color: rgba(43, 43, 43, 1.0);
     color: rgba(255, 255, 255, 1.0);
     border-radius: 0;
@@ -35,7 +36,6 @@
 .navbar-slackmud .navbar-nav > li > a {
     color: rgba(255, 255, 255, 1.0);
     line-height: 50px;
-    font-weight: 700;
     font-size: 1.4em;
     padding: 15px 25px;
 }
