@@ -192,6 +192,7 @@
     <Content Include="css\slackmud_login_create.css" />
     <Content Include="css\slackmud_main.css" />
     <Content Include="css\slackmud_navbar.css" />
+    <Content Include="css\slackmud_navbar_collapse.css" />
     <Content Include="css\slackmud_page_game.css" />
     <Content Include="css\slackmud_page_info.css" />
     <Content Include="css\slackmud_sidenav.css" />
