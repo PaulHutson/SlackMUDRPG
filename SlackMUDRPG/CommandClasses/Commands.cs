@@ -46,7 +46,13 @@ namespace SlackMUDRPG.CommandClasses
 					messageContent = GetFormattedMessage("html", messageContent);
 
 					WebSocketCollection wsClients = (WebSocketCollection)HttpContext.Current.Application["WSClients"];
-					wsClients.SingleOrDefault(r => ((GameAccessWebSocketHandler)r).userID == channelOrPersonTo).Send(messageContent);
+
+					List<WebSocketHandler> filtered = wsClients.Where(r => ((GameAccessWebSocketHandler)r).userID == channelOrPersonTo).ToList();
+
+					foreach (WebSocketHandler h in filtered)
+					{
+						h.Send(messageContent);
+					}
 				}
 				else if (serviceType.ToLower() == "bc")
 				{
