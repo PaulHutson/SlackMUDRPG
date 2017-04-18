@@ -14,5 +14,11 @@
   {
     "characterName": "Yon Death",
     "accountReference": "190f7d7f-cbf8-4dbd-914d-b46104c25d65"
+  },
+  {
+    "characterName": "New Arrival",
+    "accountReference": "5a7bd4ed-36a8-42f3-9c27-8e7b42ff7976",
+    "userName": "a",
+    "hashedPassword": "EAAAAL8cn1dnCMn6rUEBKTaX+BFZvdViB+nUWu7GoAfDHYHL"
   }
 ]

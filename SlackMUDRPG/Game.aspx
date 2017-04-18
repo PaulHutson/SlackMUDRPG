@@ -54,17 +54,17 @@
 										<h2>Login To Play</h2>
 
 										<div class="form-group">
-											<asp:TextBox runat="server" id="username" class="form-control" placeholder="Username"></asp:TextBox>
+											<asp:TextBox runat="server" id="tb_username" class="form-control" placeholder="Username"></asp:TextBox>
 										</div>
 
 										<div class="form-group">
-											<asp:TextBox runat="server" id="password" TextMode="Password" class="form-control" placeholder="Password"></asp:TextBox>
+											<asp:TextBox runat="server" id="tb_password" TextMode="Password" class="form-control" placeholder="Password"></asp:TextBox>
 										</div>
 
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<asp:Button runat="server" id="loginBtn" class="form-control btn btn-submit" Text="Login" />
+													<asp:Button runat="server" id="loginBtn" class="form-control btn btn-submit" Text="Login"  OnClick="loginBtnClick" />
 												</div>
 											</div>
 										</div>
@@ -75,7 +75,7 @@
 									<!-- Create character form -->
 									<div class="create-form" style="display: block;">
 										<h2>Create A Character</h2>
-										<p>You can create a new character for the game via the below form.</p>
+										<p>You can create a new account and character for the game via the below form.</p>
 
 										<div class="form-group">
 											<asp:TextBox runat="server" id="newUsername" class="form-control" placeholder="Username"></asp:TextBox>
@@ -86,11 +86,11 @@
 										</div>
 
 										<div class="form-group">
-											<asp:TextBox runat="server" id="newPassword" TextMode="Password" class="form-control" placeholder="Passowrd"></asp:TextBox>
+											<asp:TextBox runat="server" id="newPassword" TextMode="Password" class="form-control" placeholder="Password"></asp:TextBox>
 										</div>
 
 										<div class="form-group">
-											<asp:TextBox runat="server" id="repeatPassword" TextMode="Password" class="form-control" placeholder="repeatPassword Passowrd"></asp:TextBox>
+											<asp:TextBox runat="server" id="repeatPassword" TextMode="Password" class="form-control" placeholder="Repeat Password"></asp:TextBox>
 										</div>
 
 										<p class="text-center"><strong>Note: </strong> Your character details will be set through gameplay.</p>

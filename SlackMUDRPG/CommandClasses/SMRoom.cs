@@ -259,7 +259,7 @@ namespace SlackMUDRPG.CommandClasses
         /// </summary>
         public string GetPeopleDetails(SMCharacter smc = null)
 		{
-			string returnString = this.Formatter.General("People:");
+			string returnString = this.Formatter.Bold("People:");
 
 			// Get the people within the location
 			List<SMCharacter> smcs = this.GetPeople();
@@ -318,7 +318,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		public string GetItemDetails()
         {
-            string returnString = this.Formatter.General("Objects:");
+            string returnString = this.Formatter.Bold("Objects:");
 
             // Check if the character already exists or not.
             if ((this.RoomItems != null) && (this.RoomItems.Count > 0))
@@ -364,7 +364,7 @@ namespace SlackMUDRPG.CommandClasses
 				if ((!smc.NewbieTipsDisabled) && (this.RoomNewbieTips != null) && (this.RoomNewbieTips != ""))
 				{
 					returnString += this.Formatter.Bold("~~~~~ NEWBIE TIPS ~~~~~");
-					returnString += this.Formatter.ListItem(this.RoomNewbieTips);
+					returnString += this.Formatter.General(this.RoomNewbieTips);
 					returnString += this.Formatter.Bold("~~~~~     END     ~~~~~");
 				}
 			}

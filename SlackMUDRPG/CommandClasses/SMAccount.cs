@@ -19,6 +19,9 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("EmailAddress")]
         public string EmailAddress { get; set; }
 
+        [JsonProperty("UserName")]
+        public string UserName { get; set; }
+
         [JsonProperty("HashedPassword")]
         public string HashedPassword { get; set; }
 
@@ -92,11 +95,12 @@ namespace SlackMUDRPG.CommandClasses
         }
 
         /// <summary>
-        /// Adds the name to the CharNamesList
+        /// Checks that a username / password combination is valid
         /// </summary>
-        /// <param name="fullCharName">The full name of the character being added</param>
+        /// <param name="username">The username being checked</param>
+        /// <param name="password">The password being checked</param>
         /// <returns></returns>
-        public void AddNameToList(string fullCharName, string accountReference)
+        public bool CheckUserName(string username)
         {
             // Load the char names list into memory
             string path = FilePathSystem.GetFilePath("Characters", "CharNamesList");
@@ -111,14 +115,105 @@ namespace SlackMUDRPG.CommandClasses
                 }
             }
 
+            // Select the name from the list
+            SMAccount smcn = allCharacters.FirstOrDefault(c => (c.UserName == username));
+
+            // if the name doesn't exist...
+            if (smcn == null)
+            {
+                return true; // .. the name can be used
+            }
+            else
+            {
+                return false; // .. the name can't be used
+            }
+        }
+
+        /// <summary>
+        /// Get the account reference
+        /// </summary>
+        /// <param name="username">The username to check</param>
+        /// <param name="password">The password to check</param>
+        /// <returns></returns>
+        public string GetAccountReference(string username, string password)
+        {
+            // Load the char names list into memory
+            string path = FilePathSystem.GetFilePath("Characters", "CharNamesList");
+            List<SMAccount> allCharacters = new List<SMAccount>();
+
+            if (File.Exists(path))
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    allCharacters = JsonConvert.DeserializeObject<List<SMAccount>>(json);
+                }
+            }
+
+            // Select the name from the list
+            SMAccount smcn = allCharacters.FirstOrDefault(c => ((c.UserName == username) && (Utility.Crypto.DecryptStringAES(c.HashedPassword) == password)));
+
+            // if the username / password is correct
+            if (smcn != null)
+            {
+                return smcn.AccountReference; // .. return the account reference.
+            }
+            else
+            {
+                return ""; // .. return nothing
+            }
+        }
+
+        /// <summary>
+        /// Adds the name to the CharNamesList
+        /// </summary>
+        /// <param name="fullCharName">The full name of the character being added</param>
+        /// <returns></returns>
+        public void AddNameToList(string fullCharName, string accountReference, SMCharacter smc = null)
+        {
+            // Load the char names list into memory
+            string path = FilePathSystem.GetFilePath("Characters", "CharNamesList");
+            List<SMAccount> allCharacters = new List<SMAccount>();
+            
+            // Check if the file exists at the path.
+            if (File.Exists(path))
+            {
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    allCharacters = JsonConvert.DeserializeObject<List<SMAccount>>(json);
+                }
+            }
+
             // Create a new character reference
             SMAccount smcn = new SMAccount();
             smcn.CharacterName = fullCharName;
             smcn.AccountReference = accountReference;
+            // If the character is passed in...
+            if (smc != null)
+            {
+                // ... check if there is a username and password associated
+                if ((smc.Username != null) && (smc.Password != null))
+                {
+                    // Assigned the username to the email address
+                    smcn.UserName = smc.Username;
+                    smcn.HashedPassword = smc.Password;
+                }
+            }
+
+            // Check if the account reference is already in the list
+            SMAccount sma = allCharacters.FirstOrDefault(c => c.AccountReference == accountReference);
+
+            // If it does exist...
+            if (sma != null)
+            {
+                // ... remove the old version
+                allCharacters.Remove(sma);
+            } 
 
             // Add the character to the list
             allCharacters.Add(smcn);
-
+            
             // Save the list to disk.
             string listJSON = JsonConvert.SerializeObject(allCharacters, Formatting.Indented);
 
