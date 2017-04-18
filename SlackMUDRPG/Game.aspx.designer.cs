@@ -13,6 +13,15 @@ namespace SlackMUDRPG {
     public partial class Game {
         
         /// <summary>
+        /// pnl_LoginError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_LoginError;
+        
+        /// <summary>
         /// tb_username control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,24 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button loginBtn;
+        
+        /// <summary>
+        /// pnl_CreateError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_CreateError;
+        
+        /// <summary>
+        /// lit_CreateError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal lit_CreateError;
         
         /// <summary>
         /// newUsername control.
@@ -83,5 +110,14 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button createBtn;
+        
+        /// <summary>
+        /// lit_VariableJavascript control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal lit_VariableJavascript;
     }
 }

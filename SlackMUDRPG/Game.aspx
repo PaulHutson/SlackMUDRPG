@@ -53,6 +53,10 @@
 									<div class="login-form" style="display: none;">
 										<h2>Login To Play</h2>
 
+                                        <asp:Panel runat="server" ID="pnl_LoginError" Visible="false">
+                                        <p class="error">Username and password were not valid.</p>
+                                        </asp:Panel>
+
 										<div class="form-group">
 											<asp:TextBox runat="server" id="tb_username" class="form-control" placeholder="Username"></asp:TextBox>
 										</div>
@@ -76,6 +80,12 @@
 									<div class="create-form" style="display: block;">
 										<h2>Create A Character</h2>
 										<p>You can create a new account and character for the game via the below form.</p>
+
+                                        <asp:Panel runat="server" ID="pnl_CreateError" Visible="false">
+                                        <p class="error">
+                                            <asp:Literal runat="server" ID="lit_CreateError"></asp:Literal>
+                                        </p>
+                                        </asp:Panel>
 
 										<div class="form-group">
 											<asp:TextBox runat="server" id="newUsername" class="form-control" placeholder="Username"></asp:TextBox>
@@ -118,5 +128,6 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="ph_PageJavaScript" runat="server">
 	<script type="text/javascript" src="scripts/slackmud_gamepage_websockets.js"></script>
 	<script type="text/javascript" src="scripts/slackmud_login_create.js"></script>
+    <asp:Literal runat="server" ID="lit_VariableJavascript"></asp:Literal>
 </asp:Content>
 
