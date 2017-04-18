@@ -9,6 +9,7 @@
 
 /* Navbar Styles */
 @import url('slackmud_navbar.css');
+@import url('slackmud_navbar_collapse.css');
 
 /* Footer Styles */
 @import url('slackmud_footer.css');
@@ -25,7 +26,7 @@ body {
     background: none;
     font-family: 'Marcellus', serif;
     height: calc(100% - 150px);
-    min-height: calc(100% - 160px);
+    min-height: calc(100% - 150px);
 }
 
 .page-content {
