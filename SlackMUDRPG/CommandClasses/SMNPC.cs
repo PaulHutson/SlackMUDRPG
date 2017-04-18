@@ -394,7 +394,7 @@ namespace SlackMUDRPG.CommandClasses
                         if (nameCanBeUsed)
                         {
                             // Add the name to the list so no one else can use it
-                            new SMAccountHelper().AddNameToList(name, invokingCharacter.UserID);
+                            new SMAccountHelper().AddNameToList(name, invokingCharacter.UserID, invokingCharacter);
 
                             // Play the succcess conversation step
                             ProcessConversationStep(npcc, nextStepsCheckPlayerName[0], invokingCharacter);

@@ -13,6 +13,22 @@ namespace SlackMUDRPG.CommandClasses
 	{
 		#region "Login and Character Methods"
 
+        public bool WebLogin(string username, string password, out string accountID)
+        {
+            // Find the account reference for the username and password
+            accountID = new SMAccountHelper().GetAccountReference(username, password);
+
+            // If we've returned anything except a blank information stream then it's a real person.
+            if (accountID != "")
+            {
+                return true;
+            }
+            else // Can't log in as the username / password aren't valid
+            {
+                return false;
+            }
+        }
+
 		/// <summary>
 		/// Logs someone in with the Slack UserID
 		/// </summary>
@@ -289,8 +305,11 @@ namespace SlackMUDRPG.CommandClasses
 				// Write the character to the stream
 				SMChar.SaveToFile();
 
-				// Check if there is a response URL
-				if ((responseURL != null) && (autoLogin))
+                // Write an account reference to the CharNamesList
+                new SMAccountHelper().AddNameToList(SMChar.GetFullName(), SMChar.UserID, SMChar);
+
+                // Check if there is a response URL
+                if ((responseURL != null) && (autoLogin))
 				{
 					// Log the newly created character into the game if in something like Slack
 					Login(userID, true, responseURL);
