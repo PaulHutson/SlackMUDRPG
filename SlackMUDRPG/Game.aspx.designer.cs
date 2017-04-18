@@ -13,22 +13,22 @@ namespace SlackMUDRPG {
     public partial class Game {
         
         /// <summary>
-        /// username control.
+        /// tb_username control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox username;
+        protected global::System.Web.UI.WebControls.TextBox tb_username;
         
         /// <summary>
-        /// password control.
+        /// tb_password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox password;
+        protected global::System.Web.UI.WebControls.TextBox tb_password;
         
         /// <summary>
         /// loginBtn control.
