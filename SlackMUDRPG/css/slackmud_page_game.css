@@ -1,6 +1,11 @@
 /* Login / Create Form Styles */
 @import url('slackmud_login_create.css');
 
+.game-output,
+.game-input {
+    font-family: 'Raleway', sans-serif;
+}
+
 .game-output {
     height: calc(100% - 94px);
     width: calc(100% - 60px);
