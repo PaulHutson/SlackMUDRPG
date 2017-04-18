@@ -1,5 +1,5 @@
 /* Google Font Imports */
-@import url('https://fonts.googleapis.com/css?family=Cinzel:400,700');
+@import url('https://fonts.googleapis.com/css?family=Marcellus|Raleway:400,700');
 
 /* General helper class styles */
 @import url('slackmud_helpers.css');
@@ -23,7 +23,7 @@ html {
 
 body {
     background: none;
-    font-family: 'Cinzel', serif;
+    font-family: 'Marcellus', serif;
     height: calc(100% - 150px);
     min-height: calc(100% - 160px);
 }
