@@ -263,17 +263,37 @@ namespace SlackMUDRPG.CommandClasses
                             }
                         }
                         break;
-					case "checkquestcomplete":
-						// Check the player has completed the quest
-						if (invokingCharacter.QuestLog != null)
-						{
-							if (invokingCharacter.QuestLog.Count(questcheck => (questcheck.QuestName.ToLower() == npccs.AdditionalData.ToLower()) && (questcheck.Completed)) == 0)
-							{
-								continueToNextStep = false;
-							}
-						}
-						break;
-					case "setplayerattribute":
+                    case "checkquestcomplete":
+                        // Check the player has completed the quest
+                        if (invokingCharacter.QuestLog != null)
+                        {
+                            if (invokingCharacter.QuestLog.Count(questcheck => (questcheck.QuestName.ToLower() == npccs.AdditionalData.ToLower()) && (questcheck.Completed)) == 0)
+                            {
+                                continueToNextStep = false;
+                            }
+                        }
+                        break;
+                    case "checkquestnotcomplete":
+                        // Check the player has completed the quest
+                        if (invokingCharacter.QuestLog != null)
+                        {
+                            if (invokingCharacter.QuestLog.Count(questcheck => (questcheck.QuestName.ToLower() == npccs.AdditionalData.ToLower()) && (!questcheck.Completed)) == 0)
+                            {
+                                continueToNextStep = false;
+                            }
+                        }
+                        break;
+                    case "checknothasquest":
+                        // Check the player has completed the quest
+                        if (invokingCharacter.QuestLog != null)
+                        {
+                            if (invokingCharacter.QuestLog.Count(questcheck => (questcheck.QuestName.ToLower() == npccs.AdditionalData.ToLower())) > 0)
+                            {
+                                continueToNextStep = false;
+                            }
+                        }
+                        break;
+                    case "setplayerattribute":
 						// Add a response option
 						string s = invokingCharacter.VariableResponse.ToLower();
 						switch (npccs.AdditionalData.ToLower())

@@ -1,20 +1,21 @@
 {
-  "firstname": "New",
-  "lastname": "Arrival",
-  "lastinteractiondate": "2017-02-15T09:14:24.9934515+00:00",
-  "lastlogindate": "2017-02-21T21:38:35.1780276+00:00",
+  "firstname": "A",
+  "lastname": "B",
+  "lastinteractiondate": "2017-02-22T18:01:37.7032567+00:00",
+  "lastlogindate": "2017-02-22T18:00:56.3019842+00:00",
   "age": 20,
   "sex": "m",
   "pkFlag": false,
   "userID": "default-user",
-  "roomID": "Ravensmere.Harbour South.Landing Area",
+  "roomID": "Ravensmere.Harbour South.Arrivals Area",
+  "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
       "lastDateUpdated": 1487705144,
       "expires": 0,
-      "completed": false
+      "completed": true
     }
   ],
   "attributes": {
@@ -33,7 +34,25 @@
       "name": "RightHand",
       "allowedTypes": [
         "any"
-      ]
+      ],
+      "equippedItem": {
+        "itemID": "83141089-d7ff-45f7-9081-b26d5ca06de2",
+        "singularPronoun": "a",
+        "itemName": "Key to access the arrivals hall entrance to the city",
+        "pluralName": "Keys",
+        "pluralPronoun": "some",
+        "itemType": "Misc",
+        "itemFamily": "Key",
+        "itemDescription": "Key to access the arrivals hall entrance to the city",
+        "itemWeight": 0,
+        "itemCapacity": 0,
+        "itemSize": 0,
+        "hitPoints": 1000000000,
+        "maxHitPoints": 1000000000,
+        "baseDamage": 0.001,
+        "toughness": 1,
+        "additionalData": "RavensmereAAEtoDWS"
+      }
     },
     {
       "name": "LeftHand",
@@ -96,5 +115,7 @@
   ],
   "characterWeight": 50,
   "characterSize": 160,
-  "connectionService": "BC"
+  "connectionService": "BC",
+  "lastUsedCommand": "move AAE",
+  "variableResponse": "m"
 }

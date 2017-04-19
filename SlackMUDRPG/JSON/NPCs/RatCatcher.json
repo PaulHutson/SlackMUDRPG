@@ -1,0 +1,290 @@
+﻿{
+  "firstname": "Joe",
+  "lastname": "Bartlett",
+  "description": "Ragged looking with a sharp looking nose and a full beard that covers his mouth entirely.  His stance looks easy while his eyes are constantly scanning the floor.  In his hands a bloodied wooden club is nestled against his thigh.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 37,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "JoeBartlett",
+  "RoomID": "Ravensmere.Harbour South.Ravensmere Promande South",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 10,
+    "hp": 1000,
+    "maxhp": 1000,
+    "SocialStanding": 8
+  },
+  "Skills": null,
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453a",
+        "SingularPronoun": "a",
+        "ItemName": "Wooden Club",
+        "PluralName": "Wooden Clubs",
+        "PluralPronoun": "some",
+        "ItemType": "Weapon",
+        "ItemFamily": "Club",
+        "ItemDescription": "This wooden club is spattered with dried blood.",
+        "ItemWeight": 2,
+        "ItemCapacity": 0,
+        "ItemSize": 2,
+        "HitPoints": 25,
+        "MaxHitPoints": 25,
+        "BaseDamage": 6.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": [
+          {
+            "SkillName": "Sword Use",
+            "SkillLevel": "1"
+          }
+        ],
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+	"NPCType": "JoeBartlett",
+	"FamilyType": "Rat Catcher",
+	"IsGeneric": true,
+	"WalkingType": "walk",
+	"PronounSingular": "",
+	"PronounMultiple": "",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "GeneralChitChat.Choice"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.ExaminesThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 50,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Examines.1"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "GeneralChitChat",
+      "ConversationStep": [
+        {
+          "StepID": "Choice",
+          "Scope": "choice",
+          "AdditionalData": "random1,random2",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Now I know you're around here Mr. Ratty Rat... come to Joe.",
+          "NextStep": "random1-1.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random1-1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks around the boardwalk..",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random2",
+          "Scope": "say",
+          "AdditionalData": "Just need a few more rats today before I can head to the Scalebrewers for a bevvy or two.",
+          "NextStep": "random1-1.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "CheckQuest",
+          "Scope": "CheckQuestInProgress",
+          "AdditionalData": "RatsRatsRats",
+          "NextStep": "ShowHowToTan1.0",
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Examines",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "catches {playername}s eye.",
+          "NextStep": "CheckQuest1.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "CheckQuest1",
+          "Scope": "checknothasquest",
+          "AdditionalData": "RatsRatsRats",
+          "NextStep": "CheckQuest2.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "CheckQuest2",
+          "Scope": "checkquestnotcomplete",
+          "AdditionalData": "RatsRatsRats",
+          "NextStep": "2.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Want to help out with catching a few Rats?  There's a copper or two in it for you...",
+          "NextStep": "4.0",
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes, why not?",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Quest.1"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Examines.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "I",
+              "ResponseOptionText": "Ignore",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Examines.4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Fine, get out of the way and let me do my job then...",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Quest",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": ".. ah, bless you.. right, what we.. er.. you need to do is catch or...",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "coughs",
+          "NextStep": "3.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... to be more precise... bludgeon to death 5 rats and bring their wholly lifeless corpses to me.  Whereupon I will give you a couple of coppers for your trouble.",
+          "NextStep": "4.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Time's-a-wasting... off you go....",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "QuestInProgress",
+      "ConversationStep": []
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

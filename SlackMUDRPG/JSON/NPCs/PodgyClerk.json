@@ -103,7 +103,7 @@
   "ResponseURL": null,
 	"NPCType": "PodgyClerk",
 	"FamilyType": "Clerk",
-	"IsGeneric": true,
+	"IsGeneric": false,
 	"WalkingType": "walk",
 	"PronounSingular": "a",
 	"PronounMultiple": "some",

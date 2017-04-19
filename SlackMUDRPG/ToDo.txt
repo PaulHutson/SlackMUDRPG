@@ -124,8 +124,8 @@
 		- AI Creatures (movement)
 
 9) Implement Story element
-	- Get jobs from NPCS
-		- Quests implementation, allowing an NPC to give a player a job.
+	DONE- Get jobs from NPCS
+		DONE- Quests implementation, allowing an NPC to give a player a job.
 	- Jobs system (get jobs from a notice board)
 		- Means we need a new notice board system, with a "LOOK AT" and/or "EXAMINE" command.
 	- Implement story arcs (locations you need to go to, get clues, clues generate if someone is on a quest on entry to the location / they can only see them themselves)
@@ -162,14 +162,14 @@ V0.2 Items
 
 2) More Stuff
 	DONE- Characters (basic, stay in locations, can talk back / say set phrases)
-	- Character Jobs (basic, can get jobs / tasks from a character)
+	DONE- Character Jobs (basic, can get jobs / tasks from a character)
 	- Characters (advanced, can move around routes, change their persona based on location (i.e. bob goes to the pub at night and gets drunk so speaks differently)
 	- Character Jobs (advanced, can get jobs from characters but they react to what has already been done (i.e. the jobs are generated on a frequency - Mrs Miggens doesn't always need flour if she has already had loads delivered already).
 	- Creatures (advanced, they can react / follow scripts as to what they do.)
 
 
 MISC Thoughts:
-	- Timeout Characters
+	DONE- Timeout Characters
 	- Possibility to look through an exit to the lands beyond, i.e. "LOOK E" returns "You can see fields to the east, with mountains in the background"
 
 	Extra items
