@@ -4,12 +4,12 @@
 	"Daily": true,
 	"QuestSteps": [
 		{
-			"Name": "Levitate a runestone",
+			"Name": "Prove the power you have within you is strong enough",
 			"Type": "SkillTest",
 			"CharacterName": "Mr Zog",
 			"LocationID": "Ravensmere.Harbour South.Zogs Arcanum",
 			"AdditionalData": "Levitate",
-			"Instructions": "Demonstrate that you can levitate a runestone to Mr Zog"
+			"Instructions": "Demonstrate that you can empower the runestone"
 		}
 	],
 	"Rewards": [

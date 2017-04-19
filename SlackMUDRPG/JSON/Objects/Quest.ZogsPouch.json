@@ -21,7 +21,7 @@
       "ItemName": "Small Purple Runestone",
       "PluralPronoun": "some",
       "PluralName": "Small Purple Runestones",
-      "ItemType": "Container",
+      "ItemType": "Runestone",
       "ItemFamily": "Pouch",
       "ItemDescription": "Small Purple Runestone covered in strange markings.",
       "ItemWeight": 0,

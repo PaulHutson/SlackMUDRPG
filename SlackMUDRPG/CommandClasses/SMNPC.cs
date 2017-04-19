@@ -298,12 +298,19 @@ namespace SlackMUDRPG.CommandClasses
                         break;
 					case "emotetoplayer":
 						// Construct the message
-						string emoteToPlayerMessage = ResponseFormatterFactory.Get().Italic(this.GetFullName() + " " + ProcessResponseString(npccs.AdditionalData, invokingCharacter));
+						string emoteToPlayerMessage = ResponseFormatterFactory.Get().Italic(this.GetFullName() + " " + ProcessResponseString(npccs.AdditionalData, invokingCharacter),0);
 
 						// Send the message
 						invokingCharacter.sendMessageToPlayer(emoteToPlayerMessage);
 						break;
-					case "attack":
+                    case "generalemote":
+                        // Construct the message
+                        string emoteSelfToPlayerMessage = ResponseFormatterFactory.Get().Italic(ProcessResponseString(npccs.AdditionalData, invokingCharacter), 0);
+
+                        // Send the message
+                        invokingCharacter.sendMessageToPlayer(emoteSelfToPlayerMessage);
+                        break;
+                    case "attack":
 						// Simply attack a target player
 						this.Attack(invokingCharacter.GetFullName());
 						break;
@@ -652,7 +659,7 @@ namespace SlackMUDRPG.CommandClasses
         private void ProcessResponseOptions(NPCConversations npcc, NPCConversationStep npccs, SMCharacter invokingCharacter)
         {
 			// Set the response option variables up
-            string responseOptions = ResponseFormatterFactory.Get().Bold(this.GetFullName() + " Responses:") + ResponseFormatterFactory.Get().NewLine;
+            string responseOptions = ResponseFormatterFactory.Get().NewLine + ResponseFormatterFactory.Get().Bold(this.GetFullName() + " Responses:",0);
 			bool thereIsAnOption = false;
 			List<ShortcutToken> stl = new List<ShortcutToken>();
 
@@ -707,7 +714,7 @@ namespace SlackMUDRPG.CommandClasses
 				// Check that the response can be added
 				if (canAddResponse)
 				{
-					responseOptions += ResponseFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " (" + npcccsro.ResponseOptionShortcut + ")");
+					responseOptions += ResponseFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " (" + npcccsro.ResponseOptionShortcut + ")",0);
 					ShortcutToken st = new ShortcutToken();
 					st.ShortCutToken = npcccsro.ResponseOptionShortcut;
 					stl.Add(st);
