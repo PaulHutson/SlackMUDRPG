@@ -129,7 +129,7 @@
           "StepID": "1",
           "Scope": "emotetoplayer",
           "AdditionalData": "Mr Zogs eyes flutter open and each scarlet butterfly puffs into smoke.  He looks at you and coughs into his fist.",
-          "NextStep": "2.1",
+          "NextStep": "2.4",
           "ResponseOptions": null
         },
         {
