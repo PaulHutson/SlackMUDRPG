@@ -128,7 +128,7 @@
         {
           "StepID": "1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "Mr Zogs eyes flutter open and each scarlet butterfly puffs into smoke.  He looks at you and coughs into his fist.",
+          "AdditionalData": "looks to be concentrating when his eyes flutter open and each scarlet butterfly puffs into smoke.  He looks at you and coughs into his fist.",
           "NextStep": "2.4",
           "ResponseOptions": null
         },
@@ -154,13 +154,13 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "LookingForWork.1",
-                  "PreRequisites": [
-                    {
-                      "Type": "HasNotDoneQuest",
-                      "AdditionalData": "The Root Of The Problem"
-                    }
-                  ]
+                  "AdditionalData": "LookingForWork.1"
+                }
+              ],
+              "PreRequisites": [
+                {
+                  "Type": "HasNotDoneQuest",
+                  "AdditionalData": "The Root Of The Problem"
                 }
               ]
             },
@@ -170,21 +170,21 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "ATestOfPower.1",
-                  "PreRequisites": [
-                    {
-                      "Type": "HasNotDoneQuest",
-                      "AdditionalData": "A Test Of Power"
-                    },
-                    {
-                      "Type": "IsNotInProgressQuest",
-                      "AdditionalData": "A Test Of Power"
-                    },
-                    {
-                      "Type": "HasDoneQuest",
-                      "AdditionalData": "The Root Of The Problem"
-                    }
-                  ]
+                  "AdditionalData": "ATestOfPower.1"
+                }
+              ],
+              "PreRequisites": [
+                {
+                  "Type": "HasNotDoneQuest",
+                  "AdditionalData": "A Test Of Power"
+                },
+                {
+                  "Type": "IsNotInProgressQuest",
+                  "AdditionalData": "A Test Of Power"
+                },
+                {
+                  "Type": "HasDoneQuest",
+                  "AdditionalData": "The Root Of The Problem"
                 }
               ]
             },
@@ -194,13 +194,13 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "ATestOfPower.Test",
-                  "PreRequisites": [
-                    {
-                      "Type": "IsInProgressQuest",
-                      "AdditionalData": "A Test Of Power"
-                    }
-                  ]
+                  "AdditionalData": "ATestOfPower.Test"
+                }
+              ],
+              "PreRequisites": [
+                {
+                  "Type": "InProgressQuest",
+                  "AdditionalData": "A Test Of Power"
                 }
               ]
             },
@@ -568,7 +568,7 @@
         {
           "StepID": "1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "Zog coughs into his hand sending sparks shooting out of his ears. His eyes seem to twinkle as it examines you.",
+          "AdditionalData": "coughs into his hand sending sparks shooting out of his ears. His eyes seem to twinkle as it examines you.",
           "NextStep": "2.1",
           "ResponseOptions": null
         },
@@ -596,28 +596,28 @@
         {
           "StepID": "5",
           "Scope": "emotetoplayer",
-          "AdditionalData": "hands you a small pouch.",
+          "AdditionalData": "hands you a small stone.",
           "NextStep": "6.1",
           "ResponseOptions": null
         },
         {
           "StepID": "6",
           "Scope": "giveitem",
-          "AdditionalData": "QuestItem.ZogsPouch,1",
+          "AdditionalData": "Quest.ZogsRuneStone,1",
           "NextStep": "7.3",
           "ResponseOptions": null
         },
         {
           "StepID": "7",
           "Scope": "saytoplayer",
-          "AdditionalData": "Within that pouch lies a runestone. The stone is imbued with concentrated magic allowing a none magi such as yourself to be able to manipulate it without channeling your own magical stores into it.",
+          "AdditionalData": "That is a runestone. The stone helps a non magi, such as yourself, to be able to open themselves to the magical forces and channel magical through it and into it... it is one of the ways we magi can increase our channelling abilities.",
           "NextStep": "8.3",
           "ResponseOptions": null
         },
         {
           "StepID": "8",
           "Scope": "saytoplayer",
-          "AdditionalData": "Take it away with you, read the instructions inside and make the runestone hover but an inch above your hand and I will talk to you further.",
+          "AdditionalData": "Take it away with you and try to make the runestone glow brilliantly, once you have done so I will talk to you further.",
           "NextStep": "9.3",
           "ResponseOptions": null
         },
@@ -631,7 +631,7 @@
         {
           "StepID": "10",
           "Scope": "saytoplayer",
-          "AdditionalData": "Make that cube fly and then perhaps, I will show you a thing or two.",
+          "AdditionalData": "Make that runestone glow and then, perhaps, I will show you a thing or two.",
           "NextStep": "11.0",
           "ResponseOptions": null
         },
@@ -645,7 +645,14 @@
         {
           "StepID": "12",
           "Scope": "teachskill",
-          "AdditionalData": "Fly.1",
+          "AdditionalData": "Channelling.1",
+          "NextStep": "13.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "13",
+          "Scope": "generalemote",
+          "AdditionalData": "You feel something unlock within your very soul as Mr Zog stares at you intently.",
           "NextStep": null,
           "ResponseOptions": null
         },
@@ -666,7 +673,7 @@
         {
           "StepID": "Test3",
           "Scope": "checkskilllevel",
-          "AdditionalData": "Fly|10|TestPass|TestFail",
+          "AdditionalData": "Channelling|3|TestPass|TestFail",
           "NextStep": "Test2.2",
           "ResponseOptions": null
         },

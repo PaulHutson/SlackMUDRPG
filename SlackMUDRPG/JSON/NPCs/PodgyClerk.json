@@ -337,7 +337,7 @@
 							"ResponseOptionActionSteps": [
 								{
 									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.4-11"
+									"AdditionalData": "Enter.4-13"
 								}
 							]
 						}
