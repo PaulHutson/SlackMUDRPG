@@ -175,21 +175,23 @@ namespace SlackMUDRPG.CommandClasses
 									break;
                                 case "Cast":
                                     string targetName = "";
-                                    if (targetType == "Character")
+                                    if (targetType != null)
                                     {
-                                        var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-                                        targetName = targetChar.GetFullName();
+                                        if (targetType == "Character")
+                                        {
+                                            var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+                                            targetName = targetChar.GetFullName();
+                                        }
+                                        else
+                                        {
+                                            var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+                                            targetName = targetItem.ItemName;
+                                        }
                                     }
-                                    else
-                                    {
-                                        var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-                                        targetName = targetItem.ItemName;
-                                    }
-
+                                    
                                     if (!Cast(smss, smc, this.BaseStat, extraData, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
                                     {
                                         smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, targetName, "")));
-                                        SkillIncrease(smc, false);
                                     }
                                     else
                                     {
@@ -198,18 +200,24 @@ namespace SlackMUDRPG.CommandClasses
                                     }
                                     break;
                                 case "Information":
-									if (targetType == "Character")
-									{
-										// Get the character
-										var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-										smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetChar.GetFullName(), "")));
-									}
-									else
-									{
-										var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-										smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetItem.SingularPronoun + " " + targetItem.ItemName, "")));
-									}
-									break;
+                                    string targetNameInformation = "";
+                                    if (targetType != null)
+                                    {
+                                        if (targetType == "Character")
+                                        {
+                                            // Get the character
+                                            var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+                                            targetNameInformation = targetChar.GetFullName();
+                                        }
+                                        else
+                                        {
+                                            var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+                                            targetNameInformation = targetItem.SingularPronoun + " " + targetItem.ItemName;
+                                        }
+                                    }
+
+                                    smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetNameInformation, "")));
+                                    break;
 								case "OwnedObject":
 									if (!CheckHasItem(smss, smc))
 									{
@@ -630,7 +638,7 @@ namespace SlackMUDRPG.CommandClasses
             SMSkillHeld theCharacterSkill = null;
             if (smc.Skills != null)
             {
-                smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+                theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName.ToLower() == this.SkillName.ToLower());
             }
             int charLevelOfSkill = 0;
             if (theCharacterSkill != null)
@@ -640,8 +648,9 @@ namespace SlackMUDRPG.CommandClasses
             float successMultiplier = (positiveNegativeBaseStat + charLevelOfSkill) / 100;
 
             Random r = new Random();
-            double rDouble = r.NextDouble();
-            if ((rDouble * 100) < (charLevelOfSkill * successMultiplier))
+            double rDouble = r.NextDouble() * 100;
+            double checkAmount = ((charLevelOfSkill * successMultiplier) * 100) + 20;
+            if (rDouble < checkAmount)
             {
                 return true;
             }
@@ -1317,7 +1326,7 @@ namespace SlackMUDRPG.CommandClasses
             if (currentSkillLevel < maxSkillLevel)
             {
                 // Chance of the skill increasing in level
-                double chanceOfSkillIncrease = 10 - currentSkillLevel;
+                double chanceOfSkillIncrease = 20 - currentSkillLevel;
                 if ((chanceOfSkillIncrease < 0) || (!skillSuccess))
                 {
                     chanceOfSkillIncrease = 1;

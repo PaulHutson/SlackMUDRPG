@@ -478,9 +478,16 @@
 					"StepID": "3",
 					"Scope": "emotetoplayer",
 					"AdditionalData": "gestures towards the door to the Docklands Way South (DWS)",
-					"NextStep": null,
+					"NextStep": "4.0",
 					"ResponseOptions": null
-				}
+				},
+        {
+          "StepID": "4",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "The City of Ravensmere|1",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
 			]
 		},
 		{

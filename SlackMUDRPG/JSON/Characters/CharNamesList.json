@@ -26,5 +26,17 @@
     "accountReference": "bbcecf37-e9f5-43d4-93c7-e244eda3034e",
     "userName": "q",
     "hashedPassword": "EAAAAHEyglXV2SmB8ATtsGeuNqcsEg3zi4oM0xZd2u25ftTJ"
+  },
+  {
+    "characterName": "Uio Oiu",
+    "accountReference": "b701a68b-ccd6-47ee-a018-0cb850e2627d",
+    "userName": "b",
+    "hashedPassword": "EAAAAKtx11+bXvZSpUT19ClrqZSI78zvKrgeClQgl1rpfsSv"
+  },
+  {
+    "characterName": "C1 C2",
+    "accountReference": "5823c8bf-8e82-40a9-93a8-65f8f761dee6",
+    "userName": "c",
+    "hashedPassword": "EAAAAIqWTZGFmDwy+2xT8yjP4/Dxwr8sqiynurbUCWOkPnwl"
   }
 ]

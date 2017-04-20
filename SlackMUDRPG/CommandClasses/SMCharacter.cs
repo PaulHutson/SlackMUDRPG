@@ -60,10 +60,13 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("NewbieTipsDisabled")]
 		public bool NewbieTipsDisabled { get; set; }
 
-		[JsonProperty("QuestLog")]
-		public List<SMQuestStatus> QuestLog { get; set; }
+        [JsonProperty("QuestLog")]
+        public List<SMQuestStatus> QuestLog { get; set; }
 
-		[JsonProperty("Attributes")]
+        [JsonProperty("Factions")]
+        public List<SMFaction> Factions { get; set; }
+
+        [JsonProperty("Attributes")]
 		public SMAttributes Attributes { get; set; }
 
 		[JsonProperty("Skills")]

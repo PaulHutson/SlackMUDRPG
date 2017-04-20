@@ -3,28 +3,28 @@
     "SkillTypeName": "Magic",
     "SkillTypeDescription": "A skill only usable by people trained in the arcane arts"
   },
-  "SkillName": "Channelling",
+  "SkillName": "ChannelPower",
 	"CanUseWithoutLearning": false,
   "SkillDescription": "The ability to channel magic flow.",
   "SkillLearnText": "You've learnt how to channel magic flow.",
   "LevelIncreaseText":  "You feel you've gotten better at channeling magic flow.",
-  "ActivityType":  "CastingArcane",
-  "BaseStat": "INT",
+  "ActivityType":  "Channeling",
+  "BaseStat": "WP",
   "LevelMultiplier": 10,
   "ImprovementSpeed": 10,
   "Prerequisites": [
     {
       "IsSkill": false,
-      "SkillStatName": "INT",
-      "PreReqLevel": 10
+      "SkillStatName": "WP",
+      "PreReqLevel": 5
     }
   ],
   "SkillSteps": [
     {
-      "StepType": "Target",
+      "StepType": "EquippedObject",
       "StepRequiredObject": "Family.Runestone",
       "RequiredObjectAmount": 1,
-      "FailureOutput": "You must target something",
+      "FailureOutput": "You must be holding a runestone",
       "SuccessOutput": null
     },
     {
@@ -32,12 +32,12 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} concentrates and focuses on {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} concentrates and focuses on the runestone"
     },
     {
       "StepType": "Pause",
       "StepRequiredObject": null,
-      "RequiredObjectAmount": 5,
+      "RequiredObjectAmount": 1,
       "FailureOutput": null,
       "SuccessOutput": null
     },
@@ -46,12 +46,12 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "The {TARGETNAME} begins to glow a little"
+      "SuccessOutput": "The runestone begins to glow a little"
     },
     {
       "StepType": "Pause",
       "StepRequiredObject": null,
-      "RequiredObjectAmount": 5,
+      "RequiredObjectAmount": 1,
       "FailureOutput": null,
       "SuccessOutput": null
     },
@@ -60,12 +60,19 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "ExtraData": "Fly",
-      "FailureOutput": "The {TARGETNAME} stops glowing",
-      "SuccessOutput": "The {TARGETNAME} glows more and the runes shine a brilliant red."
+      "FailureOutput": "The runestone stops glowing",
+      "SuccessOutput": "The runestone glows more and the runes shine a brilliant red."
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": null,
+      "SuccessOutput": null
     },
     {
       "StepType": "Repeat",
-      "StepRequiredObject": "Activity.CastingArcane",
+      "StepRequiredObject": "Activity.Channeling",
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
       "SuccessOutput": null

@@ -453,7 +453,14 @@
           "StepID": "ShowHowToTan-Skin14",
           "Scope": "updatequest",
           "AdditionalData": "Felhirst.The Art Of Tanning",
-          "NextStep": null,
+          "NextStep": "ShowHowToTan-Skin15.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShowHowToTan-Skin15",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "Derick Felhirst|5",
+          "NextStep": "TestPass6.0",
           "ResponseOptions": null
         }
       ]
@@ -528,6 +535,13 @@
           "StepID": "SkinInTheGame6",
           "Scope": "addquest",
           "AdditionalData": "Felhirst.Deer Oh Deer",
+          "NextStep": "SkinInTheGame7.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "SkinInTheGame7",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "Derick Felhirst|5",
           "NextStep": null,
           "ResponseOptions": null
         }
@@ -568,6 +582,13 @@
           "StepID": "DeerOhDeer4",
           "Scope": "updatequest",
           "AdditionalData": "Felhirst.Deer Oh Deer",
+          "NextStep": "DeerOhDeer5.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "DeerOhDeer5",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "Derick Felhirst|5",
           "NextStep": null,
           "ResponseOptions": null
         }
