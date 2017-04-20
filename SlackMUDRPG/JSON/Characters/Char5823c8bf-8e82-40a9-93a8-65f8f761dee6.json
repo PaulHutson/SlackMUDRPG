@@ -1,15 +1,15 @@
 {
   "firstname": "C1",
   "lastname": "C2",
-  "lastinteractiondate": "2017-04-20T21:28:43.3341064+01:00",
-  "lastlogindate": "2017-04-20T21:28:07.1750202+01:00",
+  "lastinteractiondate": "2017-04-20T22:14:31.7369487+01:00",
+  "lastlogindate": "2017-04-20T22:14:17.089255+01:00",
   "age": 18,
   "sex": "f",
   "pkFlag": false,
   "userID": "5823c8bf-8e82-40a9-93a8-65f8f761dee6",
   "username": "c",
   "password": "EAAAAIqWTZGFmDwy+2xT8yjP4/Dxwr8sqiynurbUCWOkPnwl",
-  "roomID": "Ravensmere.Harbour South.Docklands Way South",
+  "roomID": "Ravensmere.Harbour South.Zogs Arcanum",
   "newbieTipsDisabled": false,
   "questLog": [
     {
@@ -127,6 +127,21 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move DWS",
-  "variableResponse": "f"
+  "lastUsedCommand": "say hi",
+  "variableResponse": "f",
+  "npCsWaitingForResponses": [
+    {
+      "npcid": "MrZog",
+      "shortCutTokens": [
+        {
+          "shortCutToken": "TMM"
+        },
+        {
+          "shortCutToken": "LFW"
+        }
+      ],
+      "roomID": "Ravensmere.Harbour South.Zogs Arcanum",
+      "timeOut": 1492732874
+    }
+  ]
 }

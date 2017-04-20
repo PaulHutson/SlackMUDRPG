@@ -63,7 +63,7 @@ namespace SlackMUDRPG.CommandClasses
 				// handles adding the line start, command (inc aliases) and opens a non-capturing group
 				if (i == 0)
 				{
-					ret += "^(?:" + String.Join(" |", this.CommandName.Split(',').Select(s => s.Trim())) + " )";
+					ret += "^(?-i:" + String.Join(" |", this.CommandName.Split(',').Select(s => s.Trim())) + " )";
 					ret += "(?:";
 				}
 

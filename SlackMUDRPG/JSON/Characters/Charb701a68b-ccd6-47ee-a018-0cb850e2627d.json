@@ -1,8 +1,8 @@
 {
   "firstname": "Uio",
   "lastname": "Oiu",
-  "lastinteractiondate": "2017-04-20T21:44:40.7329646+01:00",
-  "lastlogindate": "2017-04-20T21:44:34.2248842+01:00",
+  "lastinteractiondate": "2017-04-20T22:23:31.279167+01:00",
+  "lastlogindate": "2017-04-20T22:59:15.1020394+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
@@ -10,7 +10,6 @@
   "username": "b",
   "password": "EAAAAKtx11+bXvZSpUT19ClrqZSI78zvKrgeClQgl1rpfsSv",
   "roomID": "Ravensmere.Harbour South.Zogs Arcanum",
-  "currentActivity": "Channeling",
   "newbieTipsDisabled": false,
   "questLog": [
     {
@@ -229,7 +228,7 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "cast channelpower",
+  "lastUsedCommand": "Say hi",
   "variableResponse": "m",
   "npCsWaitingForResponses": [
     {
@@ -240,7 +239,7 @@
         }
       ],
       "roomID": "Ravensmere.Harbour South.Zogs Arcanum",
-      "timeOut": 1492731078
+      "timeOut": 1492735559
     }
   ]
 }
