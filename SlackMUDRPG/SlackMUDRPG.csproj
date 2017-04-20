@@ -454,6 +454,7 @@
     <Compile Include="CommandClasses\SMCommandUtility.cs" />
     <Compile Include="CommandClasses\SMCreature.cs" />
     <Compile Include="CommandClasses\SMCurrency.cs" />
+    <Compile Include="CommandClasses\SMFaction.cs" />
     <Compile Include="CommandClasses\SMHelp.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
     <Compile Include="CommandClasses\SMItemFactory.cs" />

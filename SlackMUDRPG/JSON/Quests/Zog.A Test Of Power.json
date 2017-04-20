@@ -14,7 +14,7 @@
 	],
 	"Rewards": [
 		{
-			"Type": "Object",
+			"Type": "Item",
 			"AdditionalData": "Book.AMagistasCompanion,1"
 		}
 	]

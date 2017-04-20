@@ -298,6 +298,13 @@
           "StepID": "ShopBuy",
           "Scope": "saytoplayer",
           "AdditionalData": "You're going to enjoy that...!",
+          "NextStep": "ShopBuy2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShopBuy2",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "Bert Rengle|1",
           "NextStep": "BuySomethingElse.1",
           "ResponseOptions": null
         }
