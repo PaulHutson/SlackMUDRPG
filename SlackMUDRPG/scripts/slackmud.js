@@ -1,4 +1,18 @@
 ﻿$(document).ready(function () {
+	/**
+	 * Add active class to top nav link that corresponds to the page that is currently active
+	 */
+	function highlightActivePageLink() {
+		var currentPage = window.location.pathname.replace(/^\//, "");
+
+		var activeLink = $(".site-top-nav a").filter(function () {
+			return $(this).data("url") == currentPage;
+		});
+
+		activeLink.first().parents("li").addClass("active");
+	}
+
+	highlightActivePageLink();
 
 	/**
 	 * Handle clicks on the main navigation links.
