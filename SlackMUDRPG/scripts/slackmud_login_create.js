@@ -1,7 +1,15 @@
 "use strict"
 
 $(function () {
-    $("#login-tab").on("click", function(e) {
+	$(".login-form input, .create-form input").on("keyup", function (e) {
+		if ($(this).val() != "") {
+			$(this).parents(".form-wrapper").find(".alert").slideUp(750, function () {
+				$(this).remove();
+			});
+		}
+	});
+
+    $(".tab-login").on("click", function(e) {
         if ($(this).hasClass("active")) {
             return;
         }
@@ -9,7 +17,7 @@ $(function () {
         showLogin();
     });
 
-    $("#create-tab").on("click", function(e) {
+    $(".tab-create").on("click", function(e) {
         if ($(this).hasClass("active")) {
             return;
         }
@@ -40,14 +48,14 @@ $(function () {
     function showLogin() {
         $(".login-form").delay(100).fadeIn(100);
         $(".create-form").fadeOut(100);
-        $("#login-tab").addClass("active");
-        $("#create-tab").removeClass("active");
+        $(".tab-login").addClass("active");
+        $(".tab-create").removeClass("active");
     };
 
     function showCreate() {
         $(".create-form").delay(100).fadeIn(100);
         $(".login-form").fadeOut(100);
-        $("#create-tab").addClass("active");
-        $("#login-tab").removeClass("active");
+        $(".tab-create").addClass("active");
+        $(".tab-login").removeClass("active");
     };
 });
