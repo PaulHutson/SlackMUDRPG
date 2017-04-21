@@ -52,12 +52,15 @@
 
 					<div class="collapse navbar-collapse" id="slackmud_nav_collapse">
 						<ul class="nav navbar-nav site-top-nav">
-							<li><a data-url="" href="#">Home</a></li>
-							<li><a data-url="Game.aspx" href="#">Game</a></li>
-							<li><a data-url="Commands.aspx" href="#">Commands</a></li>
-							<li><a data-url="Skills.aspx" href="#">Skills</a></li>
-							<li><a data-url="Items.aspx" href="#">Items</a></li>
-							<li><a data-url="Recipes.aspx" href="#">Recipes</a></li>
+							<li><a class="link" data-url="" href="#">Home</a></li>
+							<li><a class="link" data-url="Game.aspx" href="#">Game</a></li>
+							<li><a class="link" data-url="Commands.aspx" href="#">Commands</a></li>
+							<li><a class="link" data-url="Skills.aspx" href="#">Skills</a></li>
+							<li><a class="link" data-url="Items.aspx" href="#">Items</a></li>
+							<li><a class="link" data-url="Recipes.aspx" href="#">Recipes</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><asp:LinkButton ID="logoutBtn" runat="server" Visible="false" OnClick="logoutBtnClick">Logout</asp:LinkButton></li>
 						</ul>
 					</div>
 				</div>

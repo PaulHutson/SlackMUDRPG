@@ -15,6 +15,10 @@
     height: 15px;
 }
 
+.navbar-slackmud .navbar-nav > li.active {
+    background-color: rgba(36, 36, 36, 1.0);
+}
+
 .navbar-slackmud-social .navbar-nav > li > a:hover,
 .navbar-slackmud-social .navbar-nav > li > a:focus,
 .navbar-slackmud-social .navbar-nav > .active > a:hover,

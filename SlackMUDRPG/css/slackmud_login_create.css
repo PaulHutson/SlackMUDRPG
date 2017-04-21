@@ -63,13 +63,13 @@
 }
 
 .panel-login .btn-submit {
-    background-color: rgba(43, 43, 43, 1.0);
+	background-color: rgba(103, 103, 103, 1.0);
     border: 0;
     border-radius: 0;
 }
 
 .panel-login .btn-submit:hover {
-    background-color: rgba(103, 103, 103, 1.0);
+    background-color: rgba(43, 43, 43, 1.0);
 }
 
 .panel-login > .panel-heading {
