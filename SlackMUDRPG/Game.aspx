@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Site.Master" AutoEventWireup="true" CodeBehind="Game.aspx.cs" Inherits="SlackMUDRPG.Game" %>
+<%@ MasterType VirtualPath="~/MasterPage/Site.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ph_Title" runat="server">
 	SlackMUD - Game

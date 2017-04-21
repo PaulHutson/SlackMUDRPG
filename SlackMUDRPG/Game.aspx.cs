@@ -49,6 +49,9 @@ namespace SlackMUDRPG
 					this.setUserIDCookie(userID);
 					this.setEverLoggedInCookie();
 
+					// show logout button
+					Master.showLogoutBtn();
+
 					this.clearLoginForm();
 				}
 				else

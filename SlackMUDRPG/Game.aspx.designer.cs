@@ -164,5 +164,17 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal lit_VariableJavascript;
+        
+        /// <summary>
+        /// Master property.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated property.
+        /// </remarks>
+        public new SlackMUDRPG.MasterPage.Site Master {
+            get {
+                return ((SlackMUDRPG.MasterPage.Site)(base.Master));
+            }
+        }
     }
 }

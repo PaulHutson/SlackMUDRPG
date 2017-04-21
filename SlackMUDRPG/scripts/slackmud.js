@@ -18,7 +18,7 @@
 	 * Handle clicks on the main navigation links.
 	 * Opens new window for link if you are on the game page.
 	 */
-	$(".site-top-nav a").on("click", function (e) {
+	$(".site-top-nav a.link").on("click", function (e) {
 		e.preventDefault();
 
 		var dataUrl = $(this).data("url");
