@@ -645,7 +645,7 @@
         {
           "StepID": "12",
           "Scope": "teachskill",
-          "AdditionalData": "Channeling.1",
+          "AdditionalData": "ChannelPower.1",
           "NextStep": "13.0",
           "ResponseOptions": null
         },
