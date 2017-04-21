@@ -21,6 +21,7 @@
 				sendMessage();
 				scrollToBottom();
 			});
+			enableInput();
 		};
 
 		ws.onmessage = function (e) {
@@ -34,16 +35,19 @@
 		$('#cmdLeave').click(function () {
 			ws.close();
 			scrollToBottom();
+			disableInput();
 		});
 
 		ws.onclose = function () {
 			gameOutput.append('Closed <br/>');
 			scrollToBottom();
+			disableInput();
 		};
 
 		ws.onerror = function (e) {
 			gameOutput.append('Oops something went wront <br/>');
 			scrollToBottom();
+			disableInput();
 		};
 	} else {
 		showLoginCreate();
@@ -67,6 +71,16 @@
 	function scrollToBottom() {
 		gameOutput.scrollTop(gameOutput[0].scrollHeight);
 	};
+
+	function disableInput() {
+		$("#game-input").prop('disabled', true);
+		$("#submit-cmd").prop('disabled', true);
+	}
+
+	function enableInput() {
+		$("#game-input").prop('disabled', false);
+		$("#submit-cmd").prop('disabled', false);
+	}
 
 	$(window).keydown(function (event) {
 		if (event.keyCode == 13) {
