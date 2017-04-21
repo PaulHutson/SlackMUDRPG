@@ -14,16 +14,13 @@ namespace SlackMUDRPG
 		{
 			if (!IsPostBack)
 			{
-				if (Request.Cookies["ProvinceEverLoggedIn"] != null)
+				if (Request.Cookies["ProvinceEverLoggedIn"] != null && Request.Cookies["ProvinceEverLoggedIn"].Value == "Y")
 				{
-					if (Request.Cookies["ProvinceEverLoggedIn"].Value == "Y")
-					{
-						this.showLoginForm();
-					}
-					else
-					{
-						this.showCreateForm();
-					}
+					this.showLoginForm();
+				}
+				else
+				{
+					this.showCreateForm();
 				}
 			}
 		}
