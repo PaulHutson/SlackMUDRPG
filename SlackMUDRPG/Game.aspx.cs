@@ -14,13 +14,16 @@ namespace SlackMUDRPG
 		{
 			if (!IsPostBack)
 			{
-				if (Request.Cookies["ProvinceEverLoggedIn"] != null && Request.Cookies["ProvinceEverLoggedIn"].Value == "Y")
+				if (Request.Cookies["ProvinceEverLoggedIn"] != null)
 				{
-					this.showLoginForm();
-				}
-				else
-				{
-					this.showCreateForm();
+					if (Request.Cookies["ProvinceEverLoggedIn"].Value == "Y")
+					{
+						this.showLoginForm();
+					}
+					else
+					{
+						this.showCreateForm();
+					}
 				}
 			}
 		}
@@ -43,10 +46,8 @@ namespace SlackMUDRPG
 				if (sm.WebLogin(tb_username.Text, tb_password.Text, out userID))
 				{
 					// Login
-					Response.Cookies["ProvinceUserID"].Value = userID;
-
-					// Set ever looked in cookie so we know the show the login rather than create screen
-					Response.Cookies["ProvinceEverLoggedIn"].Value = "Y";
+					this.setUserIDCookie(userID);
+					this.setEverLoggedInCookie();
 
 					this.clearLoginForm();
 				}
@@ -70,7 +71,7 @@ namespace SlackMUDRPG
 				// TODO need some other checks here for errors i.e. the passwords not being the same!
 
 				if (new SMAccountHelper().CheckUserName(newUsername.Text)) {
-					Response.Cookies["ProvinceUserID"].Value = new SlackMUDRPG.CommandClasses.SlackMud().CreateCharacter(
+					string userID = new SlackMUDRPG.CommandClasses.SlackMud().CreateCharacter(
 						Guid.NewGuid().ToString(),
 						"New",
 						"Arrival",
@@ -83,7 +84,8 @@ namespace SlackMUDRPG
 						false
 					);
 
-					Response.Cookies["ProvinceEverLoggedIn"].Value = "Y";
+					this.setUserIDCookie(userID);
+					this.setEverLoggedInCookie();
 
 					this.clearCreateForm();
 				}
@@ -109,6 +111,22 @@ namespace SlackMUDRPG
 
 				this.showCreateForm();
 			}
+		}
+
+		private void setUserIDCookie(string userID)
+		{
+			HttpCookie cookie = new HttpCookie("ProvinceUserID");
+			cookie.Expires = DateTime.Now.AddMonths(1);
+			cookie.Value = userID;
+			Response.Cookies.Add(cookie);
+		}
+
+		private void setEverLoggedInCookie()
+		{
+			HttpCookie cookie = new HttpCookie("ProvinceEverLoggedIn");
+			cookie.Expires = DateTime.Now.AddDays(999);
+			cookie.Value = "Y";
+			Response.Cookies.Add(cookie);
 		}
 
 		private string getAlertHtml(string msg, string type = "danger")
