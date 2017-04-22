@@ -48,6 +48,9 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("RoomExits")]
         public List<SMExit> RoomExits { get; set; }
 
+        [JsonProperty("Properties")]
+        public List<SMRoomProperty> Properties { get; set; }
+
         [JsonProperty("RoomItems")]
         public List<SMItem> RoomItems { get; set; }
 
@@ -409,7 +412,13 @@ namespace SlackMUDRPG.CommandClasses
             
 			if (targetCharacter != null)
             {
-                smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetCharacter.GetFullName() + " (Level " + targetCharacter.CalculateLevel() + "):"));
+                string levelText = "";
+                if (int.Parse(targetCharacter.CalculateLevel()) > 0)
+                {
+                    levelText = " (Level " + targetCharacter.CalculateLevel() + ")";
+                }
+                
+                smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetCharacter.GetFullName() + levelText + ":"));
                 if ((targetCharacter.Description != null) || (targetCharacter.Description != ""))
                 {
                     smc.sendMessageToPlayer(this.Formatter.Italic(targetCharacter.Description));
@@ -428,7 +437,13 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (targetNPC != null)
 			{
-				smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetNPC.GetFullName() + " (Level " + targetNPC.CalculateLevel() + "):"));
+                string levelText = "";
+                if (int.Parse(targetNPC.CalculateLevel()) > 0)
+                {
+                    levelText = " (Level " + targetNPC.CalculateLevel() + ")";
+                }
+
+                smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetNPC.GetFullName() + levelText + ":")); 
 				if ((targetNPC.Description != null) || (targetNPC.Description != ""))
 				{
 					smc.sendMessageToPlayer(this.Formatter.Italic(targetNPC.Description));
@@ -469,6 +484,26 @@ namespace SlackMUDRPG.CommandClasses
 			// Otherwise nothing found
 			smc.sendMessageToPlayer(this.Formatter.Italic("Can not inspect that item."));
 		}
+
+        /// <summary>
+        /// Find out if the room has a specific property type
+        /// </summary>
+        /// <param name="propertyName">The name of the property to check for</param>
+        /// <returns></returns>
+        public bool HasProperty(string propertyName)
+        {
+            if (this.Properties != null)
+            {
+                SMRoomProperty smrp = this.Properties.FirstOrDefault(p => p.Name.ToLower() == propertyName.ToLower());
+
+                if (smrp != null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
 		#endregion
 
@@ -912,5 +947,11 @@ namespace SlackMUDRPG.CommandClasses
 
         [JsonProperty("CharacterName")]
         public SMAttributes SavedAttributes { get; set; }
+    }
+
+    public class SMRoomProperty
+    {
+        [JsonProperty("Name")]
+        public string Name { get; set; }
     }
 }

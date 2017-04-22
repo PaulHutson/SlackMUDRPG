@@ -1,0 +1,20 @@
+﻿{
+	"QuestName": "Hooked",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Help Crusty Fish",
+			"Type": "Help",
+			"CharacterName": "Crusty Bateman",
+			"LocationID": "Ravensmere.Harbour South.Ravensmere Promande South",
+			"Instructions": "Help Crusty get some fish"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Item",
+			"AdditionalData": "Tools.FishingRod,1"
+		}
+	]
+}

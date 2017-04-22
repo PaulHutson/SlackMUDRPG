@@ -1,0 +1,437 @@
+﻿{
+  "firstname": "Crusty",
+  "lastname": "Bateman",
+  "description": "A well kempt man wearing a big coat - obviously used to keep him warm while standing on the docks and fishing.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 26,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "CrustyBateman",
+  "RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 9,
+    "int": 15,
+    "chr": 12,
+    "dex": 12,
+    "wp": 12,
+    "ft": 20,
+    "hp": 20,
+    "maxhp": 20,
+    "SocialStanding": 15
+  },
+  "Skills": [
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 30
+    },
+    {
+      "SkillName": "Fish",
+      "SkillLevel": 30
+    }
+  ],
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "CrustysRod",
+        "ItemName": "Fishing Rod",
+        "SingularPronoun": "a",
+        "PluralName": "Fishing Rods",
+        "PluralPronoun": "some",
+        "ItemType": "tools",
+        "ItemFamily": "Rod",
+        "ItemDescription": "Fishing Rod",
+        "ItemWeight": 1,
+        "ItemSize": 2,
+        "HitPoints": 20,
+        "MaxHitPoints": 20,
+        "BaseDamage": 0.05,
+        "Toughness": 3,
+        "CanHoldOtherItems": false
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+  "NPCType": "DerickFelhirst",
+  "FamilyType": "Tanner",
+  "IsGeneric": false,
+  "WalkingType": "walk",
+  "PronounSingular": "a",
+  "PronounMultiple": "some",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Enter.1"
+        }
+      ],
+      "PreRequisites": [
+        {
+          "Type": "HasNotDoneQuest",
+          "AdditionalData": "Hooked"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Shop.1"
+        }
+      ],
+      "PreRequisites": [
+        {
+          "Type": "HasDoneQuest",
+          "AdditionalData": "Hooked"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "Enter",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "Beckons to you",
+          "NextStep": "2.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Ello Skipper. Help a fellow out will ya? I'll teach you a thing about fishin if ya do",
+          "NextStep": "3.4",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "Crusty looks at you with his kind weary eyes. One of his arms is in a sling and he seems to be having a hard time casting his fishing line out.",
+          "NextStep": "4.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Well.. will you help a poor bloke out?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "I'm listening",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "LTF.Start"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "I'm busy, Maybe another time",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NotNow"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ConversationID": "LTF",
+      "ConversationStep": [
+        {
+          "StepID": "Start",
+          "Scope": "addquest",
+          "AdditionalData": "Crusty.Hooked",
+          "NextStep": "1.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Your a goodun you are! right heres the deal. You cast a line out.",
+          "NextStep": "2.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "I keep the fish you gain the skill, I even have a spare hook and line you can have so you can catch your own!",
+          "NextStep": "3.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "Crusty Bateman hands you a simple hook n line. One end remains tied to his leg.",
+          "NextStep": "4.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Right! simply fish and your bound to catch sumthink eventually. Go ahead cast one out now",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "CastLine",
+              "ResponseOptionText": "Cast the line out",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "LTF.5"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "5",
+          "Scope": "generalemote",
+          "AdditionalData": "The line bobs out into the water and Crusty sits back on his feet watching it patiently",
+          "NextStep": "6.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "6",
+          "Scope": "generalemote",
+          "AdditionalData": "The line dips down a little and Crusty sits forward watching intensely...",
+          "NextStep": "7.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "7",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Quick, pull the line in again... quick!",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Pull",
+              "ResponseOptionText": "Pull the line in",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "LTF.8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "8",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Oooh, a silverfish, I'avn't ad one of them for an age!  Yur-a-goodn'!",
+          "NextStep": "9.4",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "9",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Heres your hook n line.  Use it near any body of water to catch a fish ... better equipment will giv yer better results.",
+          "NextStep": "10.4",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "10",
+          "Scope": "saytoplayer",
+          "AdditionalData": "If you ever want to fish again just let ole Crusty know!",
+          "NextStep": "11.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "11",
+          "Scope": "teachskill",
+          "AdditionalData": "Fish.1",
+          "NextStep": "12.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "12",
+          "Scope": "updatequest",
+          "AdditionalData": "Crusty.Hooked",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "Shop",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "I've got a few fish an some fishing line if that's any good to ya...?",
+          "NextStep": "2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "shopitem",
+          "AdditionalData": "room",
+          "NextStep": "3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Wan any o'that?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.4"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NoBuy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "What'll it be? [i](Enter the item number from the list above)[/i]",
+          "NextStep": null,
+          "ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "{variable}",
+							"ResponseOptionText": "{variable}",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.5"
+								}
+							]
+						}
+					]
+        },
+        {
+          "StepID": "5",
+          "Scope": "shopbuyitem",
+          "AdditionalData": "ShopBuy|ShopNotValid",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShopNotValid",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Sorry, I can't sell you that...",
+          "NextStep": "BuySomethingElse.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "BuySomethingElse",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Wan anythin' else?",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShopBuy",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Pleasure doin' business with ya!",
+          "NextStep": "BuySomethingElse.1",
+          "ResponseOptions": null
+        }
+      ]
+    },
+		{
+      "ConversationID": "ShopLeave",
+      "ConversationStep": [
+        {
+          "StepID": "NoBuy",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Awight, back to me fishin'...",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "NotNow",
+          "Scope": "saytoplayer",
+          "AdditionalData": "You know where ol Crusty is if you change yer mind...",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

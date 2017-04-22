@@ -1,21 +1,28 @@
 {
   "firstname": "Paul",
   "lastname": "Hutson",
-  "lastinteractiondate": "2017-04-22T14:27:13.9275168+01:00",
-  "lastlogindate": "2017-04-22T14:22:54.9968138+01:00",
+  "lastinteractiondate": "2017-04-22T19:42:57.6810267+01:00",
+  "lastlogindate": "2017-04-22T19:42:48.8069924+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
   "userID": "4a314da4-94a8-4ff2-a867-ae5e1c141b7d",
   "username": "p",
   "password": "EAAAAAt1TLtMUs+hxUwLSuVf3+vuu2Ig52p7GoPU3ab+T5HW",
-  "roomID": "Ravensmere.Harbour South.Landing Area",
+  "roomID": "Ravensmere.Harbour South.Ravensmere Promenade South",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
       "lastDateUpdated": 1492856153,
+      "expires": 0,
+      "completed": true
+    },
+    {
+      "questName": "Hooked",
+      "questStep": "Help Crusty Fish",
+      "lastDateUpdated": 1492885928,
       "expires": 0,
       "completed": true
     }
@@ -37,6 +44,12 @@
     "maxhp": 10,
     "socialStanding": 8
   },
+  "skills": [
+    {
+      "skillName": "Fish",
+      "skillLevel": 1
+    }
+  ],
   "slots": [
     {
       "name": "RightHand",
@@ -71,7 +84,24 @@
       "name": "LeftHand",
       "allowedTypes": [
         "any"
-      ]
+      ],
+      "equippedItem": {
+        "itemID": "cc1cd829-5e29-4fdf-9178-ef0e43b5d97c",
+        "singularPronoun": "a",
+        "itemName": "Fishing Rod",
+        "pluralName": "Fishing Rods",
+        "pluralPronoun": "some",
+        "itemType": "tools",
+        "itemFamily": "Rod",
+        "itemDescription": "Fishing Rod",
+        "itemWeight": 1,
+        "itemCapacity": 0,
+        "itemSize": 2,
+        "hitPoints": 20,
+        "maxHitPoints": 20,
+        "baseDamage": 0.05,
+        "toughness": 3
+      }
     },
     {
       "name": "Back",
@@ -152,6 +182,7 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move AAE",
-  "variableResponse": "m"
+  "lastUsedCommand": "resp N",
+  "variableResponse": "m",
+  "npCsWaitingForResponses": []
 }
