@@ -1,21 +1,21 @@
 {
-  "firstname": "Paul",
-  "lastname": "Hutson",
-  "lastinteractiondate": "2017-04-22T12:42:32.0495427+01:00",
-  "lastlogindate": "2017-04-22T13:00:47.2941868+01:00",
+  "firstname": "Ll",
+  "lastname": "Lll",
+  "lastinteractiondate": "2017-04-22T12:45:10.673699+01:00",
+  "lastlogindate": "2017-04-22T12:44:48.1316379+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
-  "userID": "4a314da4-94a8-4ff2-a867-ae5e1c141b7d",
-  "username": "p",
-  "password": "EAAAAAt1TLtMUs+hxUwLSuVf3+vuu2Ig52p7GoPU3ab+T5HW",
+  "userID": "4b489ba5-bdfb-4c49-8253-b21274336613",
+  "username": "l",
+  "password": "EAAAAGjYdYUVnJxEuBPhXbS//by8Domk1bdGL54yLo7mvQQa",
   "roomID": "Ravensmere.Military District.Target Practice",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1492856153,
+      "lastDateUpdated": 1492861378,
       "expires": 0,
       "completed": true
     }
@@ -44,27 +44,22 @@
         "any"
       ],
       "equippedItem": {
-        "itemID": "SimpleBow1",
+        "itemID": "779ccba9-2637-4983-8e57-65f39ddc728f",
         "singularPronoun": "a",
-        "itemName": "Simple Bow",
-        "pluralName": "Simple Bows",
+        "itemName": "Key to access the arrivals hall entrance to the city",
+        "pluralName": "Keys",
         "pluralPronoun": "some",
-        "itemType": "RangedWeapon",
-        "itemFamily": "Bow",
-        "itemDescription": "This is a simple bow like that which someone would use to catch simple fare.",
-        "itemWeight": 2,
+        "itemType": "Misc",
+        "itemFamily": "Key",
+        "itemDescription": "Key to access the arrivals hall entrance to the city",
+        "itemWeight": 0,
         "itemCapacity": 0,
-        "itemSize": 2,
-        "hitPoints": 50,
-        "maxHitPoints": 50,
-        "baseDamage": 1.0,
-        "toughness": 3,
-        "requiredSkills": [
-          {
-            "skillName": "Bow Use",
-            "skillLevel": "1"
-          }
-        ]
+        "itemSize": 0,
+        "hitPoints": 1000000000,
+        "maxHitPoints": 1000000000,
+        "baseDamage": 0.001,
+        "toughness": 1,
+        "additionalData": "RavensmereAAEtoDWS"
       }
     },
     {
@@ -79,7 +74,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "df566c2a-0d79-4718-87f3-b265c62920ec",
+        "itemID": "3e95f202-e9a8-4172-958f-a95798f4f850",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -93,27 +88,7 @@
         "hitPoints": 5,
         "maxHitPoints": 5,
         "baseDamage": 1E-10,
-        "toughness": 1,
-        "heldItems": [
-          {
-            "itemID": "90b57d17-c6a2-4bd7-85d0-7757410b63cb",
-            "singularPronoun": "a",
-            "itemName": "Key to access the arrivals hall entrance to the city",
-            "pluralName": "Keys",
-            "pluralPronoun": "some",
-            "itemType": "Misc",
-            "itemFamily": "Key",
-            "itemDescription": "Key to access the arrivals hall entrance to the city",
-            "itemWeight": 0,
-            "itemCapacity": 0,
-            "itemSize": 0,
-            "hitPoints": 1000000000,
-            "maxHitPoints": 1000000000,
-            "baseDamage": 0.001,
-            "toughness": 1,
-            "additionalData": "RavensmereAAEtoDWS"
-          }
-        ]
+        "toughness": 1
       }
     }
   ],
