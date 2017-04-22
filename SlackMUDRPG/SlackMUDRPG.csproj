@@ -263,7 +263,7 @@
     <Content Include="JSON\Misc\BodyParts.BaseCharacter.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Docklands Way South.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern.json" />
-    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers  TavernCellar.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern Cellar.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern Toilet.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Swabbies Lane.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Zogs Arcanum.json" />
