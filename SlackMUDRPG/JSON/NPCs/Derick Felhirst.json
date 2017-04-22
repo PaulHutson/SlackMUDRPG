@@ -642,7 +642,7 @@
         {
           "StepID": "4",
           "Scope": "saytoplayer",
-          "AdditionalData": "What'll it be? [i](Enter the number of the item)[/i]",
+          "AdditionalData": "What'll it be? [i](Enter the item number from the list above)[/i]",
           "NextStep": null,
           "ResponseOptions": [
 						{
