@@ -1,7 +1,7 @@
 {
   "firstname": "Paul",
   "lastname": "Hutson",
-  "lastinteractiondate": "2017-04-22T14:23:11.2406866+01:00",
+  "lastinteractiondate": "2017-04-22T14:27:13.9275168+01:00",
   "lastlogindate": "2017-04-22T14:22:54.9968138+01:00",
   "age": 18,
   "sex": "m",
@@ -9,7 +9,7 @@
   "userID": "4a314da4-94a8-4ff2-a867-ae5e1c141b7d",
   "username": "p",
   "password": "EAAAAAt1TLtMUs+hxUwLSuVf3+vuu2Ig52p7GoPU3ab+T5HW",
-  "roomID": "Ravensmere.Harbour South.Scalebrewers Cellar",
+  "roomID": "Ravensmere.Harbour South.Landing Area",
   "newbieTipsDisabled": false,
   "questLog": [
     {
@@ -152,6 +152,6 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move STC",
+  "lastUsedCommand": "move AAE",
   "variableResponse": "m"
 }
