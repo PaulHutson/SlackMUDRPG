@@ -4,7 +4,12 @@
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
   "Outside": true,
-	"RoomDescription": "A gentle stream trickles through the center of wide dry river bed, most likely dammed further up stream. Grassy banks crumble creating shallow gradients for animals to gather and drink water.",
+  "RoomDescription": "A gentle stream trickles through the center of wide dry river bed, most likely dammed further up stream. Grassy banks crumble creating shallow gradients for animals to gather and drink water.",
+  "Properties": [
+    {
+      "Name": "CanFish"
+    }
+  ],
 	"RoomExits": [
 		{
 			"Shortcut": "OWR",

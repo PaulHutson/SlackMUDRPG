@@ -1,15 +1,20 @@
 {
-	"RoomID": "Ravensmere.Harbour South.Ravensmere Promande South",
+	"RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
   "Outside": true,
-	"RoomDescription": "The boardwalk creeks under your feet, smells of tar and fresh fish invade your senses and men and women barter for the goods hauled from vessels recently arrived. A cold breeze blows in from the ocean beyond the bay and the masts of the many docked ships sway from side to side. ",
+  "RoomDescription": "The boardwalk creeks under your feet, smells of tar and fresh fish invade your senses and men and women barter for the goods hauled from vessels recently arrived. A cold breeze blows in from the ocean beyond the bay and the masts of the many docked ships sway from side to side. ",
+  "Properties": [
+    {
+      "Name": "CanFish"
+    }
+  ],
 	"RoomExits": [
 		{
 			"Shortcut": "DWS",
 			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.Harbour South.DockalandsWaySouth"
+			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
 		},
 		{
 			"Shortcut": "PAH",
@@ -44,7 +49,53 @@
       "RoomLockID": "ES3Lock",
       "Locked": true,
       "Lockable": true
-		},
+		}
 	],
-	"RoomItems": null
+	"RoomItems": null,
+  "NPCShopItems": {
+    "ShopInventory": [
+      {
+        "ItemNumber": 1,
+        "Item": {
+	        "SingularPronoun": "a",
+	        "ItemName": "fish",
+	        "PluralPronoun": "some",
+	        "PluralName": "fish",
+	        "ItemType": "Resource",
+	        "ItemFamily": "Fish",
+	        "ItemDescription": "A silver sided fish",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 1,
+	        "MaxHitPoints": 1,
+	        "BaseDamage": 0.001,
+	        "Toughness": 1
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 1
+      },
+      {
+        "ItemNumber": 2,
+        "Item": {
+	        "SingularPronoun": "some",
+	        "ItemName": "Fishing Line",
+	        "PluralPronoun": "some",
+	        "PluralName": "Fishing Line",
+	        "ItemType": "resource",
+	        "ItemFamily": "Fishing Line",
+	        "ItemDescription": "Some fishing line used to make fishing rods",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 0,
+	        "MaxHitPoints": 0,
+	        "BaseDamage": 0.00000001,
+	        "Toughness": 0
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 2
+      }
+    ]
+  }
 }

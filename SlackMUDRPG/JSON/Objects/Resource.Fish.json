@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "fish",
+	"PluralPronoun": "some",
+	"PluralName": "fish",
+	"ItemType": "Resource",
+	"ItemFamily": "Fish",
+	"ItemDescription": "A silver sided fish",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.001,
+	"Toughness": 1
+}

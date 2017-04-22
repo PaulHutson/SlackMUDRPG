@@ -13,8 +13,8 @@
     },
     {
 			"Shortcut": "RPS",
-			"Description": "Ravensmere Promande South",
-			"RoomID": "Ravensmere.Harbour South.Ravensmere Promande South"
+			"Description": "Ravensmere Promenade South",
+			"RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South"
 		}
 	],
 	"RoomItems": null
