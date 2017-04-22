@@ -1996,8 +1996,10 @@ namespace SlackMUDRPG.CommandClasses
 		/// Removes an owned item by searching all slots and their contents for a given identifier.
 		/// </summary>
 		/// <param name="itemIdentifier"></param>
-		public void RemoveOwnedItem(string itemIdentifier)
+		public void RemoveOwnedItem(string itemIdentifier, bool tellPlayer = false)
 		{
+            bool haveRemovedItem = false;
+
 			// Check in each slot (not recursive)
 			foreach (SMSlot slot in this.Slots)
 			{
@@ -2006,7 +2008,8 @@ namespace SlackMUDRPG.CommandClasses
 					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
 					{
 						slot.EquippedItem = null;
-						this.SaveToApplication();
+                        haveRemovedItem = true;
+                        this.SaveToApplication();
 						break;
 					}
 				}
@@ -2025,6 +2028,7 @@ namespace SlackMUDRPG.CommandClasses
                             if (SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier) != null)
                             {
                                 SMItemHelper.RemoveItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
+                                haveRemovedItem = true;
                                 this.SaveToApplication();
                                 break;
                             }
@@ -2034,6 +2038,13 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// TODO check in clothing slots e.g. pockets
+
+            // Announce it to the player if needed
+            if (tellPlayer && haveRemovedItem)
+            {
+                // Send the message
+                this.sendMessageToPlayer("[i]Removed " + itemIdentifier + " from inventory.[/i]");
+            }
 		}
 
 		/// <summary>
@@ -2088,6 +2099,17 @@ namespace SlackMUDRPG.CommandClasses
 
 			return rightHand.isEmpty() && leftHand.isEmpty();
 		}
+
+        /// <summary>
+        /// Destroy an item in your posession, so we don't have to continually drop quivers everywhere
+        /// </summary>
+        /// <param name="itemIdentifier">The identified of the item</param>
+        public void DestroyItem(string itemIdentifier)
+        {
+            // Remove the owned item
+            RemoveOwnedItem(itemIdentifier, true);
+            this.SaveToFile();
+        }
 
 		#endregion
 
