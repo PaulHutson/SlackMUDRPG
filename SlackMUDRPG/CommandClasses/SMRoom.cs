@@ -639,7 +639,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Output the message
-			string message = this.Formatter.Italic(precursor + charSpeaking.GetFullName() + " " + speech);
+			string message = this.Formatter.Italic(precursor + charSpeaking.GetFullName() + " " + speech,0);
 
 			// Send the message to all people connected to the room
 			foreach (SMCharacter smc in this.GetPeople())
