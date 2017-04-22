@@ -340,6 +340,7 @@
     <Content Include="JSON\Misc\HashKey.json" />
     <Content Include="JSON\NPCs\Captain Barnard.json" />
     <Content Include="JSON\Characters\Char218db549-1030-474f-977a-0be347e11054.json" />
+    <Content Include="JSON\Objects\Consumable.TrainingArrow.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -395,6 +396,7 @@
     <Content Include="JSON\Skills\Skill.Cast-Fly.json" />
     <Content Include="JSON\Scripts\Flush-Location.json" />
     <Content Include="JSON\Skills\Skill.Cast-Arcane.json" />
+    <Content Include="JSON\Objects\RangedWeapon.TrainingBow.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
     <Content Include="scripts\ai.1.0.7-build00691.min.js" />
