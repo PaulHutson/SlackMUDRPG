@@ -100,5 +100,15 @@
 			"SpawnFrequency": 90,
 			"Unique": false
 		}
-	]
+	],
+  "ItemSpawns": [
+    {
+      "ItemName": "Arteir Plant",
+      "TypeOfItem": "Environment.ArteirPlant",
+      "SpawnMessage": "An arteir plant sprouts",
+      "MaxNumber": 5,
+      "MaxSpawnAtOnce": 1,
+      "SpawnFrequency": 60
+    }
+  ]
 }
