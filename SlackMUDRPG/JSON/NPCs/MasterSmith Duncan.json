@@ -446,7 +446,7 @@
         {
           "StepID": "4",
           "Scope": "saytoplayer",
-          "AdditionalData": "Which item would you like? [i](Enter the number of the item)[/i]",
+          "AdditionalData": "Which item would you like? [i](Enter the item number from the list above)[/i]",
           "NextStep": null,
           "ResponseOptions": [
 						{
