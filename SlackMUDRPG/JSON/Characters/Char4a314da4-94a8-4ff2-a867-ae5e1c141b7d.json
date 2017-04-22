@@ -1,15 +1,15 @@
 {
   "firstname": "Paul",
   "lastname": "Hutson",
-  "lastinteractiondate": "2017-04-22T12:42:32.0495427+01:00",
-  "lastlogindate": "2017-04-22T13:06:51.6714536+01:00",
+  "lastinteractiondate": "2017-04-22T14:23:11.2406866+01:00",
+  "lastlogindate": "2017-04-22T14:22:54.9968138+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
   "userID": "4a314da4-94a8-4ff2-a867-ae5e1c141b7d",
   "username": "p",
   "password": "EAAAAAt1TLtMUs+hxUwLSuVf3+vuu2Ig52p7GoPU3ab+T5HW",
-  "roomID": "Ravensmere.Military District.Target Practice",
+  "roomID": "Ravensmere.Harbour South.Scalebrewers Cellar",
   "newbieTipsDisabled": false,
   "questLog": [
     {
@@ -152,6 +152,6 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move TP",
+  "lastUsedCommand": "move STC",
   "variableResponse": "m"
 }
