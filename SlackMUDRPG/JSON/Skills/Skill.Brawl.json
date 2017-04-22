@@ -25,7 +25,7 @@
       "StepType": "Target",
       "StepRequiredObject": "Character",
       "RequiredObjectAmount": 1,
-      "FailureOutput": "You must choose something to attack",
+      "FailureOutput": "You can't attack that.",
       "SuccessOutput": null
     },
     {
