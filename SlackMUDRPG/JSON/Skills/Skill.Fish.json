@@ -4,7 +4,7 @@
     "SkillTypeDescription": "Skills related to manipulating the environment"
   },
   "SkillName": "Fish",
-	"CanUseWithoutLearning":  true,
+	"CanUseWithoutLearning":  false,
   "SkillDescription": "The ability to fish.",
   "SkillLearnText": "You've learnt how to fish",
   "LevelIncreaseText":  "You feel you're better at fishing",
