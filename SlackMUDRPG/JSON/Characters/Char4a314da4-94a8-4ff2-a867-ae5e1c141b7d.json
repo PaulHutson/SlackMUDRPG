@@ -1,0 +1,157 @@
+{
+  "firstname": "Paul",
+  "lastname": "Hutson",
+  "lastinteractiondate": "2017-04-22T11:41:27.7415831+01:00",
+  "lastlogindate": "2017-04-22T11:41:22.596659+01:00",
+  "age": 18,
+  "sex": "m",
+  "pkFlag": false,
+  "userID": "4a314da4-94a8-4ff2-a867-ae5e1c141b7d",
+  "username": "p",
+  "password": "EAAAAAt1TLtMUs+hxUwLSuVf3+vuu2Ig52p7GoPU3ab+T5HW",
+  "roomID": "Ravensmere.Military District.Target Practice",
+  "newbieTipsDisabled": false,
+  "questLog": [
+    {
+      "questName": "Welcome to Ravensmere",
+      "questStep": "Visit the Clerk in the arrivals hall",
+      "lastDateUpdated": 1492856153,
+      "expires": 0,
+      "completed": true
+    }
+  ],
+  "factions": [
+    {
+      "factionName": "The City of Ravensmere",
+      "level": 1
+    }
+  ],
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ],
+      "equippedItem": {
+        "itemID": "SimpleBow1",
+        "singularPronoun": "a",
+        "itemName": "Simple Bow",
+        "pluralName": "Simple Bows",
+        "pluralPronoun": "some",
+        "itemType": "RangedWeapon",
+        "itemFamily": "Bow",
+        "itemDescription": "This is a simple bow like that which someone would use to catch simple fare.",
+        "itemWeight": 2,
+        "itemCapacity": 0,
+        "itemSize": 2,
+        "hitPoints": 50,
+        "maxHitPoints": 50,
+        "baseDamage": 1.0,
+        "toughness": 3,
+        "requiredSkills": [
+          {
+            "skillName": "Bow Use",
+            "skillLevel": "1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "df566c2a-0d79-4718-87f3-b265c62920ec",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1,
+        "heldItems": [
+          {
+            "itemID": "90b57d17-c6a2-4bd7-85d0-7757410b63cb",
+            "singularPronoun": "a",
+            "itemName": "Key to access the arrivals hall entrance to the city",
+            "pluralName": "Keys",
+            "pluralPronoun": "some",
+            "itemType": "Misc",
+            "itemFamily": "Key",
+            "itemDescription": "Key to access the arrivals hall entrance to the city",
+            "itemWeight": 0,
+            "itemCapacity": 0,
+            "itemSize": 0,
+            "hitPoints": 1000000000,
+            "maxHitPoints": 1000000000,
+            "baseDamage": 0.001,
+            "toughness": 1,
+            "additionalData": "RavensmereAAEtoDWS"
+          }
+        ]
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RightFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "currency": {
+    "amountOfCurrency": 5
+  },
+  "characterWeight": 50,
+  "characterSize": 160,
+  "connectionService": "WS",
+  "lastUsedCommand": "destroy quiver",
+  "variableResponse": "m"
+}

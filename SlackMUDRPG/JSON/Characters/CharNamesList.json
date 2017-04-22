@@ -38,5 +38,11 @@
     "accountReference": "5823c8bf-8e82-40a9-93a8-65f8f761dee6",
     "userName": "c",
     "hashedPassword": "EAAAAIqWTZGFmDwy+2xT8yjP4/Dxwr8sqiynurbUCWOkPnwl"
+  },
+  {
+    "characterName": "Paul Hutson",
+    "accountReference": "4a314da4-94a8-4ff2-a867-ae5e1c141b7d",
+    "userName": "p",
+    "hashedPassword": "EAAAAAt1TLtMUs+hxUwLSuVf3+vuu2Ig52p7GoPU3ab+T5HW"
   }
 ]
