@@ -56,13 +56,23 @@ namespace SlackMUDRPG.CommandClasses
 				}
 				else if (serviceType.ToLower() == "bc")
 				{
-					messageContent = GetFormattedMessage("skype", messageContent);
-
 					List<BotClient> botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
 					BotClient bc = botClients.FirstOrDefault(bot => bot.UserID == channelOrPersonTo);
 					if (bc != null)
 					{
-						BotClientUtility.SendMessage(bc, messageContent);
+                        string formatType = "skype";
+                        if (bc.ChannelType.ToLower() == "skype")
+                        {
+                            formatType = "skype";
+                        }
+                        else if (bc.ChannelType.ToLower() == "slack") 
+                        {
+                            formatType = "slack";
+                        }
+
+                        messageContent = GetFormattedMessage(formatType, messageContent);
+
+                        BotClientUtility.SendMessage(bc, messageContent);
 					}
 				}
 			}

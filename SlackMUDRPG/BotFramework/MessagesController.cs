@@ -83,6 +83,7 @@ namespace SlackMUDRPG.BotFramework
             connectingClient.BotURL = activity.ServiceUrl;
             connectingClient.ConversationAccount = activity.Conversation;
             connectingClient.FromID = activity.Recipient.Id;
+            connectingClient.ChannelType = activity.ChannelId;
 
             botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
             botClients.RemoveAll(c => c.UserID == connectingClient.UserID);
@@ -164,5 +165,7 @@ namespace SlackMUDRPG.BotFramework
 		public ConversationAccount ConversationAccount { get; set; }
 		public string BotURL { get; set; }
         public string FromID { get; set; }
-	}
+        public string ChannelType { get; set; }
+
+    }
 }
