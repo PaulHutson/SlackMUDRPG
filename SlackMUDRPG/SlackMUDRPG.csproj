@@ -184,8 +184,12 @@
     <Content Include="css\images\facebook_logo_small.png" />
     <Content Include="css\images\favicon.png" />
     <Content Include="css\images\province_header_logo.png" />
+    <Content Include="css\images\province_main_logo.png" />
+    <Content Include="css\images\province_p_200.png" />
     <Content Include="css\images\site_background.jpg" />
+    <Content Include="css\images\skype_200.png" />
     <Content Include="css\images\slackmud_header_logo.png" />
+    <Content Include="css\images\slack_200.png" />
     <Content Include="css\images\twitter_logo_small.png" />
     <Content Include="css\slackmud_bs_panel.css" />
     <Content Include="css\slackmud_footer.css" />
@@ -196,6 +200,7 @@
     <Content Include="css\slackmud_navbar.css" />
     <Content Include="css\slackmud_navbar_collapse.css" />
     <Content Include="css\slackmud_page_game.css" />
+    <Content Include="css\slackmud_page_home.css" />
     <Content Include="css\slackmud_page_info.css" />
     <Content Include="css\slackmud_sidenav.css" />
     <Content Include="css\slackmud_site_background.css" />
