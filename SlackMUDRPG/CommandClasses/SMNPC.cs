@@ -175,7 +175,7 @@ namespace SlackMUDRPG.CommandClasses
                                 // Announce that they're leaving...
                                 if (this.IsGeneric)
                                 {
-                                    this.GetRoom().Announce("[i]" + this.PronounSingular + " " + this.GetFullName() + " walks out.[/i]", this, true);
+                                    this.GetRoom().Announce("[i]" + this.PronounSingular.ToUpper() + " " + this.GetFullName() + " walks out.[/i]", this, true);
                                 }
                                 else
                                 {
