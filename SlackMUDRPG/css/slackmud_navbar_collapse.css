@@ -24,6 +24,7 @@
     .navbar-nav {
         float: none !important;
         margin-top: 7.5px;
+		margin-bottom: 0;
     }
     .navbar-nav > li {
         float: none;
@@ -34,6 +35,11 @@
     }
     .collapse.in{
         display:block !important;
+    }
+
+    .navbar-nav.navbar-right {
+        margin-bottom: 0;
+        margin-top: 0;
     }
 
     /* Site specific styles for collapsed menu */
@@ -72,5 +78,9 @@
 @media(max-width: 767px){
     body .page-content {
         margin-top: 95px;
+    }
+
+    .navbar-slackmud .navbar-nav > li > a {
+        padding-left: 15px;
     }
 }
