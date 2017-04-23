@@ -19,7 +19,7 @@
 						<div class="game-output" id="game-output"></div>
 						<div class="game-input">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Enter commands here..." id="game-input">
+								<input type="text" class="form-control" placeholder="Enter commands here..." id="game-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 								<span class="input-group-btn">
 									<button class="btn btn-default" type="button" id="submit-cmd">Send</button>
 								</span>
