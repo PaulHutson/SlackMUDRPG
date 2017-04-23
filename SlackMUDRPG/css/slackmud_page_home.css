@@ -54,6 +54,7 @@
     border: 2px solid rgba(255, 255, 255, 1);
     padding: 5px 25px 11px 25px;
     background-color: transparent;
+	margin-bottom: 30px;
 }
 
 .btn-start-playing:hover {
@@ -63,11 +64,11 @@
 
 /*  Play/add list links styles */
 .slackmud-list-group {
-    margin-top: -30px;
     font-family: 'Marcellus SC', serif;
     font-size: 1.2em;
     letter-spacing: 1px;
     color: rgba(255, 255, 255, 1);
+	margin: 0;
 }
 
 .slackmud-list-group > .list-group-item {
@@ -94,4 +95,22 @@
 .slackmud-list-group > .list-group-item p {
     color: rgba(255, 255, 255, 1);
     margin-top: 15px;
+}
+
+
+@media(max-width:520px){
+    .main-logo {
+        padding: 0;
+        margin: 0 auto;
+        margin-bottom: 30px;
+        max-width: 94%;
+    }
+
+    .home-page-blurb {
+        font-size: 1.5em;
+    }
+
+    .slackmud-list-group > .list-group-item img {
+        width: 40%;
+    }
 }

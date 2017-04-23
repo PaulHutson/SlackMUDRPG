@@ -442,6 +442,7 @@
     <Content Include="css\Site.css" />
     <Content Include="scripts\slackmud.js" />
     <Content Include="scripts\slackmud_gamepage_websockets.js" />
+    <Content Include="scripts\slackmud_home_page.js" />
     <Content Include="scripts\slackmud_login_create.js" />
     <Content Include="scripts\slackmud_info_page.js" />
     <Content Include="Skills.aspx" />
