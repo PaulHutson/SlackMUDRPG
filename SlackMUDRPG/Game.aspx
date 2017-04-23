@@ -2,7 +2,7 @@
 <%@ MasterType VirtualPath="~/MasterPage/Site.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ph_Title" runat="server">
-	SlackMUD - Game
+	Province - Web Play
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ph_Header" runat="server">
@@ -127,6 +127,4 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="ph_PageJavaScript" runat="server">
 	<script type="text/javascript" src="scripts/slackmud_gamepage_websockets.js"></script>
 	<script type="text/javascript" src="scripts/slackmud_login_create.js"></script>
-    <asp:Literal runat="server" ID="lit_VariableJavascript"></asp:Literal>
 </asp:Content>
-
