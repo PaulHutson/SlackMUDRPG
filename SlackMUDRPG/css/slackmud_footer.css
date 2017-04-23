@@ -5,3 +5,10 @@ footer {
     color: rgba(255, 255, 255, 1.0);
     text-align: center;
 }
+
+
+@media(max-width: 767px) {
+    footer {
+        font-size: 0.8em;
+    }
+}

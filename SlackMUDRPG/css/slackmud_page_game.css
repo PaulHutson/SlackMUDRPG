@@ -52,7 +52,7 @@
         height: 100%;
     }
 
-    .col-xs-12 {
+    #gameplay-section .col-xs-12 {
         padding: 0;
     }
 
@@ -74,7 +74,7 @@
     }
 
     .game-input .form-control {
-        font-size: 0.8em;
+        font-size: 16px;
     }
 
     footer {
