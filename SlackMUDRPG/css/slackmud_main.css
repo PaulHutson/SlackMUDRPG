@@ -40,3 +40,7 @@ body {
     height: 100%;
     padding-top: 30px;
 }
+
+.content-block-no-pad {
+    padding: 0;
+}

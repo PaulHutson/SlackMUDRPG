@@ -12,7 +12,7 @@
 	<section class="page-content" id="gameplay-section">
 			<div class="container full-height">
 				<div class="row full-height">
-					<div class="col-xs-9 full-height text-center">
+					<div class="col-sm-9 col-xs-12 text-center">
 						<div class="content-block">
 							<img class="img-responsive main-logo" src="css/images/province_main_logo.png" alt="Province">
 
@@ -34,19 +34,18 @@
 						</div>
 					</div>
 
-					<div class="col-xs-3 full-height">
-						<div class="content-block">
-
+					<div class="col-sm-3 col-xs-12">
+						<div class="content-block content-block-no-pad clearfix">
 							<div class="list-group slackmud-list-group text-center">
-								<a href="#" id="webPlayLink" runat="server" class="list-group-item">
+								<a href="#" id="webPlayLink" runat="server" class="list-group-item col-sm-12 col-xs-4">
 									<img src="css/images/province_p_200.png" alt="Web Play">
 									<p class="list-group-item-text">Web Play</p>
 								</a>
-								<a href="#" id="addSlackLink" runat="server" class="list-group-item">
+								<a href="#" id="addSlackLink" runat="server" class="list-group-item col-sm-12 col-xs-4">
 									<img src="css/images/slack_200.png" alt="Add To Slack">
 									<p class="list-group-item-text">Add to Slack</p>
 								</a>
-								<a href="#" id="addSkypeLink" runat="server" class="list-group-item">
+								<a href="#" id="addSkypeLink" runat="server" class="list-group-item col-sm-12 col-xs-4">
 									<img src="css/images/skype_200.png" alt="Add To Skype">
 									<p class="list-group-item-text">Add to Skype</p>
 								</a>
@@ -59,4 +58,5 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ph_PageJavaScript" runat="server">
+	<script type="text/javascript" src="scripts/slackmud_home_page.js"></script>
 </asp:Content>
