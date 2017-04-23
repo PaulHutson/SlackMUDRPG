@@ -90,3 +90,15 @@
     background-color: transparent;
     cursor: default;
 }
+
+@media(max-width: 1200px) {
+    body .login-create-section {
+        margin-top: 110px;
+    }
+}
+
+@media(max-width: 767px) {
+    body .login-create-section {
+        margin-top: 95px;
+    }
+}

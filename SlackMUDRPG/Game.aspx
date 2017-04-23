@@ -35,7 +35,7 @@
 	<section class="login-create-section" id="login-create-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-8 col-xs-offset-2">
+				<div class="col-sm-8 col-xs-12 col-sm-offset-2">
 					<div class="panel panel-login">
 						<div class="panel-heading">
 							<div class="row">
