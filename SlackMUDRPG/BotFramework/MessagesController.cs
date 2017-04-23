@@ -148,7 +148,7 @@ namespace SlackMUDRPG.BotFramework
 			ConnectorClient connector = new ConnectorClient(new Uri(bc.BotURL));
 			IMessageActivity newMessage = Microsoft.Bot.Connector.Activity.CreateMessageActivity();
 			newMessage.Type = ActivityTypes.Message;
-			newMessage.From = new ChannelAccount("<BotId>", "<BotName>");
+			newMessage.From = new ChannelAccount();
 			newMessage.Conversation = bc.ConversationAccount;
 			newMessage.Recipient = new ChannelAccount(bc.UserID);
 			newMessage.Text = message;
