@@ -727,7 +727,7 @@ namespace SlackMUDRPG.CommandClasses
 				// Check that the response can be added
 				if (canAddResponse)
 				{
-					responseOptions += ResponseFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " (" + npcccsro.ResponseOptionShortcut + ")",0);
+					responseOptions += ResponseFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " [" + npcccsro.ResponseOptionShortcut + "]",0);
 					ShortcutToken st = new ShortcutToken();
 					st.ShortCutToken = npcccsro.ResponseOptionShortcut;
 					stl.Add(st);

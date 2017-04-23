@@ -158,7 +158,7 @@ namespace SlackMUDRPG.CommandClasses
 
 				for (int i = 0; i < this.RoomExits.Count; i++)
 				{
-					exits[i] = $"{this.RoomExits[i].Description} ({this.RoomExits[i].Shortcut})";
+					exits[i] = $"{this.RoomExits[i].Description} [{this.RoomExits[i].Shortcut}]";
 				}
 
 				returnString += this.Formatter.ListItem(String.Join(", ", exits));
