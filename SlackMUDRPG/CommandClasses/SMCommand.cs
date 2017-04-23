@@ -132,4 +132,14 @@ namespace SlackMUDRPG.CommandClasses
 
 		public object[] Parameters;
 	}
+
+	public class SMCommandException
+	{
+		public string Msg { get; set; }
+
+		public SMCommandException(string msg)
+		{
+			this.Msg = msg;
+		}
+	}
 }
