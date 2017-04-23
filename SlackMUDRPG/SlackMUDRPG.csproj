@@ -339,7 +339,6 @@
     <Content Include="JSON\NPCs\NPCNamesList.json" />
     <Content Include="JSON\Misc\HashKey.json" />
     <Content Include="JSON\NPCs\Captain Barnard.json" />
-    <Content Include="JSON\Characters\Char218db549-1030-474f-977a-0be347e11054.json" />
     <Content Include="JSON\Objects\Consumable.TrainingArrow.json" />
     <Content Include="JSON\NPCs\Crusty Bateman.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />

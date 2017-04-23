@@ -21,55 +21,22 @@ namespace SlackMUDRPG.BotFramework
 		/// </summary>
 		public HttpResponseMessage Post([FromBody]Microsoft.Bot.Connector.Activity activity)
 		{
-			if (activity.Type == ActivityTypes.Message)
+            this.userID = activity.From.Id;
+
+            if (this.userID.Contains(':'))
+            {
+                this.userID = this.userID.Replace(':', '-');
+            }
+
+            List<BotClient> botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
+            BotClient connectingClient = botClients.FirstOrDefault(bc => ((bc.BotURL == activity.ServiceUrl) && (bc.UserID == this.userID)));
+            
+            if (activity.Type == ActivityTypes.Message)
 			{
-				this.userID = activity.From.Id;
-
-				if (this.userID.Contains(':'))
-				{
-					this.userID = this.userID.Replace(':', '-');
-				}
-
-				List<BotClient> botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
-				BotClient connectingClient = botClients.FirstOrDefault(bc => ((bc.BotURL == activity.ServiceUrl) && (bc.UserID == this.userID)));
-
 				if (connectingClient == null)
 				{
-					connectingClient = new BotClient();
-					connectingClient.UserID = this.userID;
-					connectingClient.UserName = activity.From.Name;
-					connectingClient.BotURL = activity.ServiceUrl;
-					connectingClient.ConversationAccount = activity.Conversation;
-
-					botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
-					botClients.Add(connectingClient);
-					HttpContext.Current.Application["BotClients"] = botClients;
-
-					string loginResponse = new SlackMUDRPG.CommandClasses.SlackMud().Login(this.userID, false, null, "BC");
-					if (loginResponse == null)
-					{
-						BotClientUtility.SendMessage(connectingClient, "Character not found?");
-					}
-					else if (loginResponse != "")
-					{
-						if (loginResponse.Substring(0, 27) == "You must create a character")
-						{
-							// Create the new character
-							new SlackMUDRPG.CommandClasses.SlackMud().CreateCharacter(this.userID, "New", "Arrival", "m", "20");
-
-							// Now log them in
-							new SlackMUDRPG.CommandClasses.SlackMud().Login(this.userID, false, null, "BC");
-
-							// Issue the look command
-							new CommandClasses.SMCommandUtility(this.userID).InitateCommand("look");
-						}
-						else
-						{
-							BotClientUtility.SendMessage(connectingClient, loginResponse);
-							new CommandClasses.SMCommandUtility(this.userID).InitateCommand("look");
-						}
-					};
-				}
+                    NewUser(connectingClient, botClients, activity);
+                }
 				else
 				{
 					new CommandClasses.SMCommandUtility(this.userID).InitateCommand(activity.Text);
@@ -94,6 +61,12 @@ namespace SlackMUDRPG.BotFramework
 				//Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
 				//await connector.Conversations.ReplyToActivityAsync(reply);
 			}
+            else if (activity.Type == ActivityTypes.ConversationUpdate) {
+                if (connectingClient == null)
+                {
+                    NewUser(connectingClient, botClients, activity);
+                }
+            }
 			else
 			{
 				HandleSystemMessage(activity);
@@ -101,6 +74,42 @@ namespace SlackMUDRPG.BotFramework
 			var response = Request.CreateResponse(HttpStatusCode.OK);
 			return response;
 		}
+
+        private void NewUser(BotClient connectingClient, List<BotClient> botClients, [FromBody]Microsoft.Bot.Connector.Activity activity)
+        {
+            connectingClient = new BotClient();
+            connectingClient.UserID = this.userID;
+            connectingClient.UserName = activity.From.Name;
+            connectingClient.BotURL = activity.ServiceUrl;
+            connectingClient.ConversationAccount = activity.Conversation;
+
+            botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
+            botClients.RemoveAll(c => c.UserID == connectingClient.UserID);
+            botClients.Add(connectingClient);
+            HttpContext.Current.Application["BotClients"] = botClients;
+
+            string loginResponse = new SlackMUDRPG.CommandClasses.SlackMud().Login(this.userID, false, null, "BC");
+            if (loginResponse == null)
+            {
+                BotClientUtility.SendMessage(connectingClient, "Character not found?");
+            }
+            else if (loginResponse != "")
+            {
+                if (loginResponse.Substring(0, 27) == "You must create a character")
+                {
+                    // Create the new character
+                    string gameUserID = new SlackMUDRPG.CommandClasses.SlackMud().CreateCharacter(this.userID, "New", "Arrival", "m", "20");
+
+                    // Now log them in - note this does a "look" as part of the command.
+                    new SlackMUDRPG.CommandClasses.SlackMud().Login(gameUserID, false, null, "BC");
+                }
+                else
+                {
+                    BotClientUtility.SendMessage(connectingClient, loginResponse);
+                    new CommandClasses.SMCommandUtility(this.userID).InitateCommand("look");
+                }
+            };
+        }
 
 		private Microsoft.Bot.Connector.Activity HandleSystemMessage(Microsoft.Bot.Connector.Activity message)
 		{

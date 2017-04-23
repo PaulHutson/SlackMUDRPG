@@ -1,21 +1,19 @@
 {
-  "firstname": "Ll",
-  "lastname": "Lll",
-  "lastinteractiondate": "2017-04-22T12:45:10.673699+01:00",
-  "lastlogindate": "2017-04-22T13:06:51.5484539+01:00",
-  "age": 18,
+  "firstname": "Phut",
+  "lastname": "Meister",
+  "lastinteractiondate": "2017-04-23T11:12:31.4324469+01:00",
+  "lastlogindate": "2017-04-23T11:11:19.0226161+01:00",
+  "age": 20,
   "sex": "m",
   "pkFlag": false,
-  "userID": "4b489ba5-bdfb-4c49-8253-b21274336613",
-  "username": "l",
-  "password": "EAAAAGjYdYUVnJxEuBPhXbS//by8Domk1bdGL54yLo7mvQQa",
-  "roomID": "Ravensmere.Military District.Target Practice",
+  "userID": "default-user",
+  "roomID": "Ravensmere.Harbour South.Scalebrewers Tavern",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1492861378,
+      "lastDateUpdated": 1492942281,
       "expires": 0,
       "completed": true
     }
@@ -44,7 +42,7 @@
         "any"
       ],
       "equippedItem": {
-        "itemID": "779ccba9-2637-4983-8e57-65f39ddc728f",
+        "itemID": "f8a47771-df23-4d4d-8a44-6a7a012b2793",
         "singularPronoun": "a",
         "itemName": "Key to access the arrivals hall entrance to the city",
         "pluralName": "Keys",
@@ -74,7 +72,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "3e95f202-e9a8-4172-958f-a95798f4f850",
+        "itemID": "6140abd6-f31e-42b1-9dcc-1e61fbeac57d",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -126,7 +124,8 @@
   },
   "characterWeight": 50,
   "characterSize": 160,
-  "connectionService": "WS",
-  "lastUsedCommand": "move TP",
-  "variableResponse": "m"
+  "connectionService": "BC",
+  "lastUsedCommand": "resp N",
+  "variableResponse": "m",
+  "npCsWaitingForResponses": []
 }

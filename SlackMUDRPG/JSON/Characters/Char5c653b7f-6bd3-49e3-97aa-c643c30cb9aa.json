@@ -1,29 +1,23 @@
 {
-  "firstname": "C1",
-  "lastname": "C2",
-  "lastinteractiondate": "2017-04-20T22:14:31.7369487+01:00",
-  "lastlogindate": "2017-04-20T22:14:17.089255+01:00",
+  "firstname": "New",
+  "lastname": "Arrival",
+  "lastinteractiondate": "2017-04-23T11:06:34.5796845+01:00",
+  "lastlogindate": "2017-04-23T11:06:02.7867275+01:00",
   "age": 18,
-  "sex": "f",
+  "sex": "m",
   "pkFlag": false,
-  "userID": "5823c8bf-8e82-40a9-93a8-65f8f761dee6",
-  "username": "c",
-  "password": "EAAAAIqWTZGFmDwy+2xT8yjP4/Dxwr8sqiynurbUCWOkPnwl",
-  "roomID": "Ravensmere.Harbour South.Zogs Arcanum",
+  "userID": "5c653b7f-6bd3-49e3-97aa-c643c30cb9aa",
+  "username": "d",
+  "password": "EAAAADrMbubfb02VBgknPBifibQeYF/zh58X/MsSI40takGG",
+  "roomID": "Ravensmere.Harbour South.Landing Area",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1492720089,
+      "lastDateUpdated": 1492941856,
       "expires": 0,
-      "completed": true
-    }
-  ],
-  "factions": [
-    {
-      "factionName": "The City of Ravensmere",
-      "level": 1
+      "completed": false
     }
   ],
   "attributes": {
@@ -42,25 +36,7 @@
       "name": "RightHand",
       "allowedTypes": [
         "any"
-      ],
-      "equippedItem": {
-        "itemID": "5db86b9b-6f30-4eab-9c2a-7800cd186b90",
-        "singularPronoun": "a",
-        "itemName": "Key to access the arrivals hall entrance to the city",
-        "pluralName": "Keys",
-        "pluralPronoun": "some",
-        "itemType": "Misc",
-        "itemFamily": "Key",
-        "itemDescription": "Key to access the arrivals hall entrance to the city",
-        "itemWeight": 0,
-        "itemCapacity": 0,
-        "itemSize": 0,
-        "hitPoints": 1000000000,
-        "maxHitPoints": 1000000000,
-        "baseDamage": 0.001,
-        "toughness": 1,
-        "additionalData": "RavensmereAAEtoDWS"
-      }
+      ]
     },
     {
       "name": "LeftHand",
@@ -74,7 +50,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "5859315e-e2e5-4a71-ba61-123a2eed0e62",
+        "itemID": "19ab2cda-4cfe-4208-8bd6-d84d8c268629",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -127,21 +103,5 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "say hi",
-  "variableResponse": "f",
-  "npCsWaitingForResponses": [
-    {
-      "npcid": "MrZog",
-      "shortCutTokens": [
-        {
-          "shortCutToken": "TMM"
-        },
-        {
-          "shortCutToken": "LFW"
-        }
-      ],
-      "roomID": "Ravensmere.Harbour South.Zogs Arcanum",
-      "timeOut": 1492732874
-    }
-  ]
+  "lastUsedCommand": "move AAE"
 }

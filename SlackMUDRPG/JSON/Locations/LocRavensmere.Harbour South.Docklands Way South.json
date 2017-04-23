@@ -60,12 +60,6 @@
       "Description": "Zogs Arcanum (Shop)",
       "RoomID": "Ravensmere.Harbour South.Zogs Arcanum"
     }
-    //,
-		//{
-		//	"Shortcut": "TC",
-		//	"Description": "The construct",
-		//	"RoomID": "1"
-		//}
 	],
 	"RoomItems": null,
 	"NPCSpawns": [
