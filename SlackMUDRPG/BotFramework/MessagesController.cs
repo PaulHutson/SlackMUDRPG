@@ -82,6 +82,7 @@ namespace SlackMUDRPG.BotFramework
             connectingClient.UserName = activity.From.Name;
             connectingClient.BotURL = activity.ServiceUrl;
             connectingClient.ConversationAccount = activity.Conversation;
+            connectingClient.FromID = activity.Recipient.Id;
 
             botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
             botClients.RemoveAll(c => c.UserID == connectingClient.UserID);
@@ -148,7 +149,7 @@ namespace SlackMUDRPG.BotFramework
 			ConnectorClient connector = new ConnectorClient(new Uri(bc.BotURL));
 			IMessageActivity newMessage = Microsoft.Bot.Connector.Activity.CreateMessageActivity();
 			newMessage.Type = ActivityTypes.Message;
-			newMessage.From = new ChannelAccount();
+			newMessage.From = new ChannelAccount(bc.FromID);
 			newMessage.Conversation = bc.ConversationAccount;
 			newMessage.Recipient = new ChannelAccount(bc.UserID);
 			newMessage.Text = message;
@@ -162,5 +163,6 @@ namespace SlackMUDRPG.BotFramework
 		public string UserName { get; set; }
 		public ConversationAccount ConversationAccount { get; set; }
 		public string BotURL { get; set; }
+        public string FromID { get; set; }
 	}
 }

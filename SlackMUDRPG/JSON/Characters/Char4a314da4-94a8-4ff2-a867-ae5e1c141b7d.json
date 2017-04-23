@@ -2,7 +2,7 @@
   "firstname": "Paul",
   "lastname": "Hutson",
   "lastinteractiondate": "2017-04-22T19:42:57.6810267+01:00",
-  "lastlogindate": "2017-04-23T13:31:40.9232412+01:00",
+  "lastlogindate": "2017-04-23T13:50:38.8341198+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
@@ -196,7 +196,7 @@
         }
       ],
       "roomID": "Ravensmere.Harbour South.Ravensmere Promenade South",
-      "timeOut": 1492960703
+      "timeOut": 1492961840
     }
   ]
 }
