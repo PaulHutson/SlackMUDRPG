@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Threading;
+using SlackMUDRPG.CommandClasses;
 
 namespace SlackMUDRPG.Utility
 {
@@ -109,11 +110,18 @@ namespace SlackMUDRPG.Utility
 			// Gets method details
 			MethodInfo method = Type.GetType(className).GetMethod(methodName);
 
-			// Builds params array accounting for defaults
-			object[] parameters = GetParamsArrayForMethod(method, args);
+			try
+			{
+				// Builds params array accounting for defaults
+				object[] parameters = GetParamsArrayForMethod(method, args);
 
-			// Calls the method
-			return method.Invoke(method.IsStatic ? null : obj, parameters);
+				// Calls the method
+				return method.Invoke(method.IsStatic ? null : obj, parameters);
+			}
+			catch (Exception ex)
+			{
+				return new SMCommandException(ex.Message);
+			}
 		}
 
 		/// <summary>
@@ -130,18 +138,18 @@ namespace SlackMUDRPG.Utility
 			// Gets method details
 			MethodInfo method = Type.GetType(className).GetMethod(methodName);
 
-			// Builds params array accounting for defaults
-			object[] parameters = GetParamsArrayForMethod(method, args).ToArray();
+			try
+			{
+				// Builds params array accounting for defaults
+				object[] parameters = GetParamsArrayForMethod(method, args).ToArray();
 
-			// Calls the method
-            try
-            {
-                return method.Invoke(method.IsStatic ? null : obj, parameters);
-            }
-            catch
-            {
-                return null;
-            }
+				// Calls the method
+				return method.Invoke(method.IsStatic ? null : obj, parameters);
+			}
+			catch (Exception ex)
+			{
+				return new SMCommandException(ex.Message);
+			}
 		}
 
 		/// <summary>
@@ -194,7 +202,8 @@ namespace SlackMUDRPG.Utility
 				}
 				else
 				{
-					throw new ArgumentException("Not enough arguments provided");
+					// throw new ArgumentException("Not enough arguments provided");
+					return null;
 				}
 			}
 
