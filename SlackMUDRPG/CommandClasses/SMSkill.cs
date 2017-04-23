@@ -285,6 +285,7 @@ namespace SlackMUDRPG.CommandClasses
                                                     smc.GetRoom().AddItem(SMItemFactory.Get(objectNameInfo[0], objectNameInfo[1]));
                                                     smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, null, null)));
                                                 }
+                                                SkillIncrease(smc, true);
                                             }
                                             else // Failure anyway.. skill passed, but they failed :/
                                             {
