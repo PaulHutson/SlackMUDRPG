@@ -38,10 +38,12 @@ namespace SlackMUDRPG.MasterPage
 			if (Request.Cookies["ProvinceUserID"] != null)
 			{
 				HttpCookie cookie = Request.Cookies["ProvinceUserID"];
-				cookie.Expires = DateTime.Now.AddDays(-1d);
-				Response.Cookies.Add(cookie);
 
-				this.closeWsConnections(cookie.Value);
+                HttpCookie myCookie = new HttpCookie("ProvinceUserID");
+                myCookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(myCookie);
+
+                this.closeWsConnections(cookie.Value);
 			}
 
 			this.hideLogoutBtn();
