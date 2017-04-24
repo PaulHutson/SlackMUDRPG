@@ -1,15 +1,15 @@
 {
   "firstname": "Paul",
   "lastname": "Hutson",
-  "lastinteractiondate": "2017-04-22T19:42:57.6810267+01:00",
-  "lastlogindate": "2017-04-23T15:08:36.3468622+01:00",
+  "lastinteractiondate": "2017-04-24T08:10:09.1979757+01:00",
+  "lastlogindate": "2017-04-24T08:10:05.671088+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
   "userID": "4a314da4-94a8-4ff2-a867-ae5e1c141b7d",
   "username": "p",
   "password": "EAAAAAt1TLtMUs+hxUwLSuVf3+vuu2Ig52p7GoPU3ab+T5HW",
-  "roomID": "Ravensmere.Harbour South.Ravensmere Promenade South",
+  "roomID": "Ravensmere.Harbour South.Felhirsts Tannery",
   "newbieTipsDisabled": false,
   "questLog": [
     {
@@ -25,6 +25,13 @@
       "lastDateUpdated": 1492885928,
       "expires": 0,
       "completed": true
+    },
+    {
+      "questName": "The Art Of Tanning",
+      "questStep": "Take a skin to Felhirst",
+      "lastDateUpdated": 1493017912,
+      "expires": 0,
+      "completed": false
     }
   ],
   "factions": [
@@ -142,6 +149,57 @@
             "baseDamage": 0.001,
             "toughness": 1,
             "additionalData": "RavensmereAAEtoDWS"
+          },
+          {
+            "itemID": "4d4aac7d-7214-4910-9ffb-5edfd1256d9d",
+            "singularPronoun": "a",
+            "itemName": "fish",
+            "pluralName": "fish",
+            "pluralPronoun": "some",
+            "itemType": "Resource",
+            "itemFamily": "Fish",
+            "itemDescription": "A silver sided fish",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 1,
+            "maxHitPoints": 1,
+            "baseDamage": 0.001,
+            "toughness": 1
+          },
+          {
+            "itemID": "1bdb682a-89e2-4d3a-a06c-48785645f8f9",
+            "singularPronoun": "a",
+            "itemName": "Skinning Knife",
+            "pluralName": "Skinning Knives",
+            "pluralPronoun": "some",
+            "itemType": "Weapon",
+            "itemFamily": "Knife",
+            "itemDescription": "A knife primarily used for skinning animals",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 50,
+            "maxHitPoints": 50,
+            "baseDamage": 1.0,
+            "toughness": 3
+          },
+          {
+            "itemID": "1bdb682a-89e2-4d3a-a06c-48785645f8f9",
+            "singularPronoun": "a",
+            "itemName": "Skinning Knife",
+            "pluralName": "Skinning Knives",
+            "pluralPronoun": "some",
+            "itemType": "Weapon",
+            "itemFamily": "Knife",
+            "itemDescription": "A knife primarily used for skinning animals",
+            "itemWeight": 1,
+            "itemCapacity": 0,
+            "itemSize": 1,
+            "hitPoints": 50,
+            "maxHitPoints": 50,
+            "baseDamage": 1.0,
+            "toughness": 3
           }
         ]
       }
@@ -177,26 +235,12 @@
     }
   ],
   "currency": {
-    "amountOfCurrency": 5
+    "amountOfCurrency": 4
   },
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "resp N",
-  "variableResponse": "m",
-  "npCsWaitingForResponses": [
-    {
-      "npcid": "CrustyBateman",
-      "shortCutTokens": [
-        {
-          "shortCutToken": "Y"
-        },
-        {
-          "shortCutToken": "N"
-        }
-      ],
-      "roomID": "Ravensmere.Harbour South.Ravensmere Promenade South",
-      "timeOut": 1492966518
-    }
-  ]
+  "lastUsedCommand": "resp LTT",
+  "variableResponse": "1",
+  "npCsWaitingForResponses": []
 }

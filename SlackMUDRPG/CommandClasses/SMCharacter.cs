@@ -155,6 +155,8 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				w.WriteLine(charJSON);
 			}
+
+            this.SaveToApplication();
 		}
 
 		/// <summary>
@@ -1166,7 +1168,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// Picks up item from the current room.
 		/// </summary>
 		/// <param name="itemIdentifier">Items identifier (id, name or family).</param>
-		public void PickUpItem(string itemIdentifier, SMItem itemBeingGiven = null, bool ignoreWeight = false, bool suppressOutputMessages = false)
+		public void PickUpItem(string itemIdentifier, SMItem itemBeingGiven = null, bool ignoreWeight = false, bool suppressOutputMessages = false, bool isQuestItem = false)
 		{
 			// Set the variables for use later.
 			SMItem item;
@@ -1278,7 +1280,7 @@ namespace SlackMUDRPG.CommandClasses
             {
                 this.sendMessageToPlayer(this.Formatter.Italic($"You {actioned} {item.SingularPronoun} {item.ItemName}."));
             }
-			this.SaveToApplication();
+            this.SaveToFile();
 		}
 
 		/// <summary>
