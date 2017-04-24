@@ -41,11 +41,11 @@
 									<img src="css/images/province_p_200.png" alt="Web Play">
 									<p class="list-group-item-text">Web Play</p>
 								</a>
-								<a href="#" id="addSlackLink" runat="server" class="list-group-item col-sm-12 col-xs-4">
+								<a href="#" target="_blank" id="addSlackLink" runat="server" class="list-group-item col-sm-12 col-xs-4">
 									<img src="css/images/slack_200.png" alt="Add To Slack">
 									<p class="list-group-item-text">Add to Slack</p>
 								</a>
-								<a href="#" id="addSkypeLink" runat="server" class="list-group-item col-sm-12 col-xs-4">
+								<a href="#" target="_blank" id="addSkypeLink" runat="server" class="list-group-item col-sm-12 col-xs-4">
 									<img src="css/images/skype_200.png" alt="Add To Skype">
 									<p class="list-group-item-text">Add to Skype</p>
 								</a>
