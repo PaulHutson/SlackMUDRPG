@@ -155,8 +155,6 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				w.WriteLine(charJSON);
 			}
-
-            this.SaveToApplication();
 		}
 
 		/// <summary>
