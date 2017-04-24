@@ -68,7 +68,41 @@
 			"HitPoints": 50000,
 			"MaxHitPoints": 50000,
 			"BaseDamage": 20,
-			"Toughness": 5
+			"Toughness": 5,
+      "HeldItems": [
+        {
+          "ItemID": "SKnife1",
+          "ItemName": "Skinning Knife",
+          "SingularPronoun": "a",
+          "PluralName": "Skinning Knives",
+          "PluralPronoun": "some",
+          "ItemType": "Weapon",
+          "ItemFamily": "Knife",
+          "ItemDescription": "A knife primarily used for skinning animals",
+          "ItemWeight": 1,
+          "ItemSize": 1,
+          "HitPoints": 50,
+          "MaxHitPoints": 50,
+          "BaseDamage": 1,
+          "Toughness": 3
+        },
+        {
+          "ItemID": "SKnife2",
+          "ItemName": "Skinning Knife",
+          "SingularPronoun": "a",
+          "PluralName": "Skinning Knives",
+          "PluralPronoun": "some",
+          "ItemType": "Weapon",
+          "ItemFamily": "Knife",
+          "ItemDescription": "A knife primarily used for skinning animals",
+          "ItemWeight": 1,
+          "ItemSize": 1,
+          "HitPoints": 50,
+          "MaxHitPoints": 50,
+          "BaseDamage": 1,
+          "Toughness": 3
+        }
+      ]
 		}
 	],
   "NPCShopItems": {
