@@ -12,5 +12,25 @@
 			"RoomID": "Ravensmere.Harbour South.Mizzens Snicket"
 		}
 	],
-	"RoomItems": null
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+			"TypeOfNPC": "Drunk-Sailor",
+			"MaxNumber": 3,
+			"SpawnFrequency": 100,
+			"Unique": false
+		},
+    {
+      "TypeOfNPC": "Old-Sailor",
+      "MaxNumber": 1,
+      "SpawnFrequency": 5,
+      "Unique": false
+    },
+    {
+      "TypeOfNPC": "Young-Sailor",
+      "MaxNumber": 1,
+      "SpawnFrequency": 5,
+      "Unique": false
+    }
+	]
 }

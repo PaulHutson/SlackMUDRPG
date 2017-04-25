@@ -27,17 +27,27 @@
       "RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern Upstairs Rooms"
     }
   ],
-  "RoomItems": [
+	"NPCSpawns": [
     {
-      "ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcaca99",
-      "ItemName": "Wooden Stick",
-      "ItemType": "weapon",
-      "ItemDescription": "A wooden stick.",
-      "ItemWeight": 1,
-      "ItemSize": 1,
-      "CanHoldOtherItems": false
+			"TypeOfNPC": "Drunk-Sailor",
+			"MaxNumber": 3,
+			"SpawnFrequency": 100,
+			"Unique": false
+		},
+    {
+      "TypeOfNPC": "Old-Sailor",
+      "MaxNumber": 1,
+      "SpawnFrequency": 10,
+      "Unique": false
+    },
+    {
+      "TypeOfNPC": "Young-Sailor",
+      "MaxNumber": 1,
+      "SpawnFrequency": 5,
+      "Unique": false
     }
-  ],
+	],
+  "RoomItems": null,
   "NPCShopItems": {
     "ShopInventory": [
       {

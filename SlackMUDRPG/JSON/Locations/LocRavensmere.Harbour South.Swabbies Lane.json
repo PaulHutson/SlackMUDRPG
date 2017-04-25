@@ -29,6 +29,18 @@
 			"MaxNumber": 3,
 			"SpawnFrequency": 70,
 			"Unique": false
-		}
+		},
+    {
+      "TypeOfNPC": "Old-Sailor",
+      "MaxNumber": 1,
+      "SpawnFrequency": 10,
+      "Unique": false
+    },
+    {
+      "TypeOfNPC": "Young-Sailor",
+      "MaxNumber": 1,
+      "SpawnFrequency": 5,
+      "Unique": false
+    }
 	]
 }

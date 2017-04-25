@@ -47,5 +47,19 @@
 			"BaseDamage": 0.001,
 			"Toughness": 1
 		}
+	],
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Old-Sailor",
+      "MaxNumber": 1,
+      "SpawnFrequency": 10,
+      "Unique": false
+    },
+    {
+      "TypeOfNPC": "Young-Sailor",
+      "MaxNumber": 1,
+      "SpawnFrequency": 5,
+      "Unique": false
+    }
 	]
 }
