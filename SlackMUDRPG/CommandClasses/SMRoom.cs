@@ -501,12 +501,12 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (smi != null)
 			{
-				string itemDeatils = this.Formatter.Bold("Description of \"" + smi.ItemName + "\":");
-				itemDeatils += this.Formatter.ListItem(smi.ItemDescription);
+				string itemDeatils = this.Formatter.Bold("Description of \"" + smi.ItemName + "\":", 1);
+				itemDeatils += this.Formatter.General(smi.ItemDescription, 1);
 
 				if (smi.CanHoldOtherItems())
 				{
-					itemDeatils += this.Formatter.Italic($"This \"{smi.ItemName}\" contains the following items:");
+					itemDeatils += this.Formatter.Italic($"This \"{smi.ItemName}\" contains the following items:", 1);
 					itemDeatils += SMItemHelper.GetContainerContents(smi);
 				}
 

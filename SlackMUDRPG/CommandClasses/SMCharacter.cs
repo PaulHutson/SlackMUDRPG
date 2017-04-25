@@ -1958,7 +1958,7 @@ namespace SlackMUDRPG.CommandClasses
 				if (slot.EquippedItem.HeldItems != null && slot.EquippedItem.HeldItems.Any())
 				{
 					listing += this.Formatter.Italic($"Capacity: {SMItemHelper.GetItemUsedCapacity(slot.EquippedItem)} / {slot.EquippedItem.ItemCapacity}");
-					listing += this.Formatter.Italic($"This \"{slot.EquippedItem.ItemName}\" contains the following items:");
+					listing += this.Formatter.Italic($"This \"{slot.EquippedItem.ItemName}\" contains the following items:", 1);
 					listing += SMItemHelper.GetContainerContents(slot.EquippedItem);
 				}
 				else
