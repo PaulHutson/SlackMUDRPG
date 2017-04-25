@@ -1,0 +1,116 @@
+/* Big P province logo styles */
+.main-logo {
+    padding: 0 30px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    max-width: 80%;
+}
+
+/* Genera; blurb styles */
+.home-page-blurb {
+    font-family: 'Marcellus SC', serif;
+    font-size: 1.9em;
+    line-height: 1.2em;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 1);
+    padding: 0 30px;
+}
+
+.home-page-blurb p {
+    margin-bottom: 40px;
+}
+
+.home-page-blurb p.tagline {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    font-size: 1.3em;
+    position: relative;
+}
+
+.tagline span::before,
+.tagline span::after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    border-top: 3px solid rgba(255, 255, 255, 1);
+    top: 0.5em;
+    width: 8%;
+}
+
+.tagline span::before {
+    right: 100%;
+}
+
+.tagline span::after {
+    left: 100%;
+}
+
+.btn-start-playing {
+    font-size: 1.1em;
+    letter-spacing: 4px;
+	color: rgba(255, 255, 255, 1);
+    border-radius: 0;
+    border: 2px solid rgba(255, 255, 255, 1);
+    padding: 5px 25px 11px 25px;
+    background-color: transparent;
+	margin-bottom: 30px;
+}
+
+.btn-start-playing:hover {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(103, 103, 103, 1.0);
+}
+
+/*  Play/add list links styles */
+.slackmud-list-group {
+    font-family: 'Marcellus SC', serif;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 1);
+	margin: 0;
+}
+
+.slackmud-list-group > .list-group-item {
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 15px;
+}
+
+.slackmud-list-group > .list-group-item:nth-child(even) {
+    background: rgba(43, 43, 43, 0.5);
+}
+
+.slackmud-list-group > .list-group-item:hover {
+    background: rgba(43, 43, 43, 1);
+}
+
+.slackmud-list-group > .list-group-item img {
+    display: block;
+    width: 20%;
+    margin: 0 auto;
+}
+
+.slackmud-list-group > .list-group-item p {
+    color: rgba(255, 255, 255, 1);
+    margin-top: 15px;
+}
+
+
+@media(max-width:520px){
+    .main-logo {
+        padding: 0;
+        margin: 0 auto;
+        margin-bottom: 30px;
+        max-width: 94%;
+    }
+
+    .home-page-blurb {
+        font-size: 1.2em;
+    }
+
+    .slackmud-list-group > .list-group-item img {
+        width: 40%;
+    }
+}

@@ -182,8 +182,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\images\facebook_logo_small.png" />
+    <Content Include="css\images\favicon.png" />
+    <Content Include="css\images\province_header_logo.png" />
+    <Content Include="css\images\province_main_logo.png" />
+    <Content Include="css\images\province_p_200.png" />
     <Content Include="css\images\site_background.jpg" />
+    <Content Include="css\images\skype_200.png" />
     <Content Include="css\images\slackmud_header_logo.png" />
+    <Content Include="css\images\slack_200.png" />
     <Content Include="css\images\twitter_logo_small.png" />
     <Content Include="css\slackmud_bs_panel.css" />
     <Content Include="css\slackmud_footer.css" />
@@ -194,6 +200,7 @@
     <Content Include="css\slackmud_navbar.css" />
     <Content Include="css\slackmud_navbar_collapse.css" />
     <Content Include="css\slackmud_page_game.css" />
+    <Content Include="css\slackmud_page_home.css" />
     <Content Include="css\slackmud_page_info.css" />
     <Content Include="css\slackmud_sidenav.css" />
     <Content Include="css\slackmud_site_background.css" />
@@ -263,7 +270,7 @@
     <Content Include="JSON\Misc\BodyParts.BaseCharacter.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Docklands Way South.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern.json" />
-    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers  TavernCellar.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern Cellar.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Scalebrewers Tavern Toilet.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Swabbies Lane.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Zogs Arcanum.json" />
@@ -339,7 +346,8 @@
     <Content Include="JSON\NPCs\NPCNamesList.json" />
     <Content Include="JSON\Misc\HashKey.json" />
     <Content Include="JSON\NPCs\Captain Barnard.json" />
-    <Content Include="JSON\Characters\Char218db549-1030-474f-977a-0be347e11054.json" />
+    <Content Include="JSON\Objects\Consumable.TrainingArrow.json" />
+    <Content Include="JSON\NPCs\Crusty Bateman.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -395,6 +403,12 @@
     <Content Include="JSON\Skills\Skill.Cast-Fly.json" />
     <Content Include="JSON\Scripts\Flush-Location.json" />
     <Content Include="JSON\Skills\Skill.Cast-Arcane.json" />
+    <Content Include="JSON\Objects\RangedWeapon.TrainingBow.json" />
+    <Content Include="JSON\Skills\Skill.Fish.json" />
+    <Content Include="JSON\Objects\Resource.Fish.json" />
+    <Content Include="JSON\Objects\Tools.FishingRod.json" />
+    <Content Include="JSON\Objects\Resource.FishingLine.json" />
+    <Content Include="JSON\Quests\Crusty.Hooked.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
     <Content Include="scripts\ai.1.0.7-build00691.min.js" />
@@ -428,6 +442,7 @@
     <Content Include="css\Site.css" />
     <Content Include="scripts\slackmud.js" />
     <Content Include="scripts\slackmud_gamepage_websockets.js" />
+    <Content Include="scripts\slackmud_home_page.js" />
     <Content Include="scripts\slackmud_login_create.js" />
     <Content Include="scripts\slackmud_info_page.js" />
     <Content Include="Skills.aspx" />
@@ -454,6 +469,7 @@
     <Compile Include="CommandClasses\SMCommandUtility.cs" />
     <Compile Include="CommandClasses\SMCreature.cs" />
     <Compile Include="CommandClasses\SMCurrency.cs" />
+    <Compile Include="CommandClasses\SMFaction.cs" />
     <Compile Include="CommandClasses\SMHelp.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />
     <Compile Include="CommandClasses\SMItemFactory.cs" />

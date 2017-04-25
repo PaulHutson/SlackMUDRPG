@@ -13,6 +13,33 @@ namespace SlackMUDRPG {
     public partial class Game {
         
         /// <summary>
+        /// tab_Login control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tab_Login;
+        
+        /// <summary>
+        /// tab_Create control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tab_Create;
+        
+        /// <summary>
+        /// form_Login control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl form_Login;
+        
+        /// <summary>
         /// pnl_LoginError control.
         /// </summary>
         /// <remarks>
@@ -20,6 +47,15 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnl_LoginError;
+        
+        /// <summary>
+        /// lit_LoginError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal lit_LoginError;
         
         /// <summary>
         /// tb_username control.
@@ -47,6 +83,15 @@ namespace SlackMUDRPG {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button loginBtn;
+        
+        /// <summary>
+        /// form_Create control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl form_Create;
         
         /// <summary>
         /// pnl_CreateError control.
@@ -112,12 +157,15 @@ namespace SlackMUDRPG {
         protected global::System.Web.UI.WebControls.Button createBtn;
         
         /// <summary>
-        /// lit_VariableJavascript control.
+        /// Master property.
         /// </summary>
         /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// Auto-generated property.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal lit_VariableJavascript;
+        public new SlackMUDRPG.MasterPage.Site Master {
+            get {
+                return ((SlackMUDRPG.MasterPage.Site)(base.Master));
+            }
+        }
     }
 }

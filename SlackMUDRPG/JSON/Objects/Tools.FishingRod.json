@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Fishing Rod",
+	"SingularPronoun": "a",
+	"PluralName": "Fishing Rods",
+	"PluralPronoun": "some",
+  "ItemType": "tools",
+  "ItemFamily": "Rod",
+	"ItemDescription": "Fishing Rod",
+	"ItemWeight": 1,
+  "ItemSize": 2,
+  "HitPoints": 20,
+  "MaxHitPoints": 20,
+  "BaseDamage": 0.05,
+  "Toughness": 3,
+	"CanHoldOtherItems": false
+}

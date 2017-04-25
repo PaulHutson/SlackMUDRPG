@@ -175,21 +175,23 @@ namespace SlackMUDRPG.CommandClasses
 									break;
                                 case "Cast":
                                     string targetName = "";
-                                    if (targetType == "Character")
+                                    if (targetType != null)
                                     {
-                                        var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-                                        targetName = targetChar.GetFullName();
+                                        if (targetType == "Character")
+                                        {
+                                            var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+                                            targetName = targetChar.GetFullName();
+                                        }
+                                        else
+                                        {
+                                            var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+                                            targetName = targetItem.ItemName;
+                                        }
                                     }
-                                    else
-                                    {
-                                        var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-                                        targetName = targetItem.ItemName;
-                                    }
-
+                                    
                                     if (!Cast(smss, smc, this.BaseStat, extraData, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
                                     {
                                         smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, targetName, "")));
-                                        SkillIncrease(smc, false);
                                     }
                                     else
                                     {
@@ -198,18 +200,24 @@ namespace SlackMUDRPG.CommandClasses
                                     }
                                     break;
                                 case "Information":
-									if (targetType == "Character")
-									{
-										// Get the character
-										var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-										smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetChar.GetFullName(), "")));
-									}
-									else
-									{
-										var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-										smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetItem.SingularPronoun + " " + targetItem.ItemName, "")));
-									}
-									break;
+                                    string targetNameInformation = "";
+                                    if (targetType != null)
+                                    {
+                                        if (targetType == "Character")
+                                        {
+                                            // Get the character
+                                            var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+                                            targetNameInformation = targetChar.GetFullName();
+                                        }
+                                        else
+                                        {
+                                            var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+                                            targetNameInformation = targetItem.SingularPronoun + " " + targetItem.ItemName;
+                                        }
+                                    }
+
+                                    smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetNameInformation, "")));
+                                    break;
 								case "OwnedObject":
 									if (!CheckHasItem(smss, smc))
 									{
@@ -232,13 +240,61 @@ namespace SlackMUDRPG.CommandClasses
 										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
 									};
 									break;
-								case "CheckObjectInLocation":
-									if (!CheckObjectinLocation(smss, smc))
-									{
-										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-									};
-									break;
-								case "Pause":
+                                case "CheckObjectInLocation":
+                                    if (!CheckObjectinLocation(smss, smc))
+                                    {
+                                        smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+                                    };
+                                    break;
+                                case "CheckRoomProperty":
+                                    if (!CheckRoomProperty(smss, smc))
+                                    {
+                                        smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+                                    };
+                                    break;
+                                case "SkillCheck":
+                                    if (!SkillCheck(smss, smc))
+                                    {
+                                        // Failed
+                                        smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput,smc,null,null)));
+                                    }
+                                    else
+                                    {
+                                        // Passed
+                                        // Create any objects that are associated with this.
+                                        if (smss.ExtraData != null)
+                                        {
+                                            // Get the various parts for the object creation...
+                                            string[] objectCreationInfo = smss.ExtraData.Split('|');
+                                            string[] objectNameInfo = objectCreationInfo[0].Split('.');
+
+                                            // Check if an object is created this time
+                                            Random rSkillCheck = new Random();
+                                            double rDoubleSkillCheck = rSkillCheck.NextDouble();
+
+                                            // Check if an object is created...
+                                            if (rDoubleSkillCheck * 100 <= int.Parse(objectCreationInfo[2]))
+                                            {
+                                                // ... loop around the number
+                                                int loopNumber = int.Parse(objectCreationInfo[1]);
+
+                                                // Loop around and create some items.
+                                                while (loopNumber > 0)
+                                                {
+                                                    loopNumber--;
+                                                    smc.GetRoom().AddItem(SMItemFactory.Get(objectNameInfo[0], objectNameInfo[1]));
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, null, null)));
+                                                }
+                                                SkillIncrease(smc, true);
+                                            }
+                                            else // Failure anyway.. skill passed, but they failed :/
+                                            {
+                                                smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, null, null)));
+                                            }
+                                        }
+                                    };
+                                    break;
+                                case "Pause":
 									System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
 									break;
 								case "Repeat":
@@ -630,7 +686,7 @@ namespace SlackMUDRPG.CommandClasses
             SMSkillHeld theCharacterSkill = null;
             if (smc.Skills != null)
             {
-                smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+                theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName.ToLower() == this.SkillName.ToLower());
             }
             int charLevelOfSkill = 0;
             if (theCharacterSkill != null)
@@ -640,8 +696,9 @@ namespace SlackMUDRPG.CommandClasses
             float successMultiplier = (positiveNegativeBaseStat + charLevelOfSkill) / 100;
 
             Random r = new Random();
-            double rDouble = r.NextDouble();
-            if ((rDouble * 100) < (charLevelOfSkill * successMultiplier))
+            double rDouble = r.NextDouble() * 100;
+            double checkAmount = ((charLevelOfSkill * successMultiplier) * 100) + 20;
+            if (rDouble < checkAmount)
             {
                 return true;
             }
@@ -1090,11 +1147,64 @@ namespace SlackMUDRPG.CommandClasses
 			return false;
 		}
 
+        /// <summary>
+        /// Check that the room ha sa specific property
+        /// </summary>
+        /// <param name="smss">The skill step</param>
+        /// <param name="smc">The character</param>
+        /// <returns></returns>
+        private bool CheckRoomProperty(SMSkillStep smss, SMCharacter smc)
+        {
+            // Find the property name
+            string propertyName = smss.StepRequiredObject;
 
-		/// <summary>
-		/// Checks the receipe the character is trying to use.
-		/// </summary>
-		private bool CheckReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string nameOfReceipe, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
+            // Check the room has the property - returned from the HasProperty command.
+
+            return smc.GetRoom().HasProperty(propertyName);
+        }
+
+
+        private bool SkillCheck(SMSkillStep smss, SMCharacter smc)
+        {
+            // Random
+            Random rSkillCheck = new Random();
+            double rDoubleSkillCheck = (rSkillCheck.NextDouble() * 100);
+
+            // Work out bonuses
+            // Get the base attribute from the character
+            int baseStatValue = smc.Attributes.GetBaseStatValue(this.BaseStat);
+
+            // Work out the damage multiplier based on attribute level (+/-)
+            int baseStatRequiredAmount = this.Prerequisites.First(pr => pr.SkillStatName == this.BaseStat).PreReqLevel;
+            float positiveNegativeBaseStat = baseStatValue - baseStatRequiredAmount;
+
+            SMSkillHeld theCharacterSkill = null;
+            if (smc.Skills != null)
+            {
+                theCharacterSkill = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+            }
+            int charLevelOfSkill = 0;
+            if (theCharacterSkill != null)
+            {
+                charLevelOfSkill = theCharacterSkill.SkillLevel;
+            }
+            float checkSkillUse = ((positiveNegativeBaseStat + charLevelOfSkill) / 100) * 100;
+
+            // Return true or false
+            if (rDoubleSkillCheck <= checkSkillUse)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        /// <summary>
+        /// Checks the receipe the character is trying to use.
+        /// </summary>
+        private bool CheckReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string nameOfReceipe, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
 		{
 			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
 			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
@@ -1317,7 +1427,7 @@ namespace SlackMUDRPG.CommandClasses
             if (currentSkillLevel < maxSkillLevel)
             {
                 // Chance of the skill increasing in level
-                double chanceOfSkillIncrease = 10 - currentSkillLevel;
+                double chanceOfSkillIncrease = 20 - currentSkillLevel;
                 if ((chanceOfSkillIncrease < 0) || (!skillSuccess))
                 {
                     chanceOfSkillIncrease = 1;

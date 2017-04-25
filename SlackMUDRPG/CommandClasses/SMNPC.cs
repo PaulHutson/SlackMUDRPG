@@ -175,7 +175,7 @@ namespace SlackMUDRPG.CommandClasses
                                 // Announce that they're leaving...
                                 if (this.IsGeneric)
                                 {
-                                    this.GetRoom().Announce("[i]" + this.PronounSingular + " " + this.GetFullName() + " walks out.[/i]", this, true);
+                                    this.GetRoom().Announce("[i]" + this.PronounSingular.ToUpper() + " " + this.GetFullName() + " walks out.[/i]", this, true);
                                 }
                                 else
                                 {
@@ -602,8 +602,7 @@ namespace SlackMUDRPG.CommandClasses
                         // and the conversation we're going to go to.
                         string[] nextStepsCheckSkillLevel = npccs.AdditionalData.Split('|');
                         string nextStepCheckSkillLevel = nextStepsCheckSkillLevel[2];
-
-
+                        
                         // Get the character skill level for the specificed skill.
                         // Check if the player already has the skill
                         if (invokingCharacter.Skills == null)
@@ -612,15 +611,29 @@ namespace SlackMUDRPG.CommandClasses
                         }
                         else
                         {
-                            if (invokingCharacter.Skills.Count(skill => ((skill.SkillName == nextStepsCheckSkillLevel[0])&&(skill.SkillLevel.ToString() == nextStepsCheckSkillLevel[1]))) == 0)
+                            if (invokingCharacter.Skills.Count(skill => ((skill.SkillName == nextStepsCheckSkillLevel[0]) && (skill.SkillLevel >= int.Parse(nextStepsCheckSkillLevel[1])))) == 0)
                             {
                                 nextStepCheckSkillLevel = nextStepsCheckSkillLevel[3];
                             }
                         }
-                        
+
                         // Process the conversation.
                         ProcessConversationStep(npcc, nextStepCheckSkillLevel, invokingCharacter);
-                        
+
+                        break;
+                    case "increasefactionlevel":
+                        // find which faction you're increasing and by how much
+                        string[] nextStepsIncreaseFactionLevel = npccs.AdditionalData.Split('|');
+
+                        // Increase the character faction.
+                        SMFactionHelper.IncreaseFactionLevel(invokingCharacter, nextStepsIncreaseFactionLevel[0], int.Parse(nextStepsIncreaseFactionLevel[1]));
+                        break;
+                    case "decreasefactionlevel":
+                        // find which faction you're decreasing and by how much
+                        string[] nextStepsDecreaseFactionLevel = npccs.AdditionalData.Split('|');
+
+                        // Decrease the character faction.
+                        SMFactionHelper.DecreaseFactionLevel(invokingCharacter, nextStepsDecreaseFactionLevel[0], int.Parse(nextStepsDecreaseFactionLevel[1]));
                         break;
                     case "wait":
                         System.Threading.Thread.Sleep(int.Parse(npccs.AdditionalData) * 1000);
@@ -714,7 +727,7 @@ namespace SlackMUDRPG.CommandClasses
 				// Check that the response can be added
 				if (canAddResponse)
 				{
-					responseOptions += ResponseFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " (" + npcccsro.ResponseOptionShortcut + ")",0);
+					responseOptions += ResponseFormatterFactory.Get().ListItem(ProcessResponseString(npcccsro.ResponseOptionText, invokingCharacter) + " [" + npcccsro.ResponseOptionShortcut + "]",0);
 					ShortcutToken st = new ShortcutToken();
 					st.ShortCutToken = npcccsro.ResponseOptionShortcut;
 					stl.Add(st);

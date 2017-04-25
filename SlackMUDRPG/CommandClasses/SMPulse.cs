@@ -135,18 +135,30 @@ namespace SlackMUDRPG.CommandClasses
 			// If there are any rooms in memory...
 			if (smrl != null)
 			{
-				// ... find the rooms that have any possible spawns.
-				smrl = smrl.FindAll(room => room.NPCSpawns != null);
-				if (smrl != null)
+                // ... find the rooms that have any possible NPC spawns.
+                List<SMRoom> roomsWithNPCSpawns = smrl.FindAll(room => room.NPCSpawns != null);
+				if (roomsWithNPCSpawns != null)
 				{
 					// loop around the rooms
-					foreach (SMRoom smr in smrl)
+					foreach (SMRoom smr in roomsWithNPCSpawns)
 					{
 						// Check whether there are any spawns.
 						smr.Spawn();
 					}
 				}
-			}
+
+                // ... find the rooms that have any possible Item spawns.
+                List<SMRoom> roomsWithItemSpawns = smrl.FindAll(room => room.ItemSpawns != null);
+                if (roomsWithItemSpawns != null)
+                {
+                    // loop around the rooms
+                    foreach (SMRoom smr in roomsWithItemSpawns)
+                    {
+                        // Check whether there are any spawns.
+                        smr.ItemSpawn();
+                    }
+                }
+            }
 
 			// TODO Randonly decide whether the weather effect will change.
 			

@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "some",
+	"ItemName": "Fishing Line",
+	"PluralPronoun": "some",
+	"PluralName": "Fishing Line",
+	"ItemType": "resource",
+	"ItemFamily": "Fishing Line",
+	"ItemDescription": "Some fishing line used to make fishing rods",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 0,
+	"MaxHitPoints": 0,
+	"BaseDamage": 0.00000001,
+	"Toughness": 0
+}

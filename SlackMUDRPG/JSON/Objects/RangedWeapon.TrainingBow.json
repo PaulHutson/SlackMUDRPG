@@ -1,0 +1,21 @@
+﻿{
+	"ItemName": "Training Bow",
+	"SingularPronoun": "a",
+	"PluralName": "Training Bows",
+	"PluralPronoun": "some",
+	"ItemType": "RangedWeapon",
+	"ItemFamily": "Bow",
+	"ItemDescription": "This is a training bow made for practicing archery... it'd still be good for hunting though.",
+	"ItemWeight": 2,
+	"ItemSize": 2,
+	"HitPoints": 15,
+	"MaxHitPoints": 15,
+	"BaseDamage": 1,
+	"Toughness": 3,
+	"RequiredSkills": [
+		{
+			"SkillName": "Bow Use",
+			"SkillLevel":  "1"
+		}
+	]
+}

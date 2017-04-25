@@ -63,13 +63,13 @@
 }
 
 .panel-login .btn-submit {
-    background-color: rgba(43, 43, 43, 1.0);
+	background-color: rgba(103, 103, 103, 1.0);
     border: 0;
     border-radius: 0;
 }
 
 .panel-login .btn-submit:hover {
-    background-color: rgba(103, 103, 103, 1.0);
+    background-color: rgba(43, 43, 43, 1.0);
 }
 
 .panel-login > .panel-heading {
@@ -89,4 +89,20 @@
 .panel-login > .panel-heading .tabs.active {
     background-color: transparent;
     cursor: default;
+}
+
+@media(max-width: 1200px) {
+    body .login-create-section {
+        margin-top: 110px;
+    }
+}
+
+@media(max-width: 767px) {
+    body .login-create-section {
+        margin-top: 65px;
+    }
+
+	.panel-login input {
+		font-size: 16px;
+	}
 }

@@ -610,14 +610,14 @@
         {
           "StepID": "7",
           "Scope": "saytoplayer",
-          "AdditionalData": "That is a runestone. The stone helps a non magi, such as yourself, to be able to open themselves to the magical forces and channel magical through it and into it... it is one of the ways we magi can increase our channelling abilities.",
+          "AdditionalData": "That is a runestone. The stone helps a non magi, such as yourself, to be able to open themselves to the magical forces and channel magical through it and into it... it is one of the ways we magi can increase our channeling abilities.",
           "NextStep": "8.3",
           "ResponseOptions": null
         },
         {
           "StepID": "8",
           "Scope": "saytoplayer",
-          "AdditionalData": "Take it away with you and try to make the runestone glow brilliantly, once you have done so I will talk to you further.",
+          "AdditionalData": "Take it away with you and try to make the runestone glow brilliantly [i](command: cast channelpower)[/i], once you have done so I will talk to you further.",
           "NextStep": "9.3",
           "ResponseOptions": null
         },
@@ -645,7 +645,7 @@
         {
           "StepID": "12",
           "Scope": "teachskill",
-          "AdditionalData": "Channelling.1",
+          "AdditionalData": "ChannelPower.1",
           "NextStep": "13.0",
           "ResponseOptions": null
         },
@@ -673,28 +673,56 @@
         {
           "StepID": "Test3",
           "Scope": "checkskilllevel",
-          "AdditionalData": "Channelling|3|TestPass|TestFail",
-          "NextStep": "Test2.2",
+          "AdditionalData": "ChannelPower|3|TestPass|TestFail",
+          "NextStep": null,
           "ResponseOptions": null
         },
         {
           "StepID": "TestPass",
           "Scope": "saytoplayer",
           "AdditionalData": "Ah - yes, I can see it in your aura, you [b]do[/b] have power...",
-          "NextStep": "TestPass2",
+          "NextStep": "TestPass2.0",
           "ResponseOptions": null
         },
         {
           "StepID": "TestPass2",
           "Scope": "updatequest",
           "AdditionalData": "Zog.A Test Of Power",
-          "NextStep": "TestPass3.0",
+          "NextStep": "TestPass3.2",
           "ResponseOptions": null
         },
         {
           "StepID": "TestPass3",
           "Scope": "saytoplayer",
           "AdditionalData": "Here, take this book - it contains some other spells for you to try...",
+          "NextStep": "TestPass4.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "TestPass4",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "The Vestri|1",
+          "NextStep": "TestPass5.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "TestPass5",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "Mr Zog|5",
+          "NextStep": "TestPass6.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "TestPass6",
+          "Scope": "decreasefactionlevel",
+          "AdditionalData": "Asperas|2",
+          "NextStep": "TestPass7.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "TestPass7",
+          "Scope": "decreasefactionlevel",
+          "AdditionalData": "The Sacratus|2",
           "NextStep": null,
           "ResponseOptions": null
         },

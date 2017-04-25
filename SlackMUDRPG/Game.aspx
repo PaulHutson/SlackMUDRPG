@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Site.Master" AutoEventWireup="true" CodeBehind="Game.aspx.cs" Inherits="SlackMUDRPG.Game" %>
+<%@ MasterType VirtualPath="~/MasterPage/Site.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ph_Title" runat="server">
-	SlackMUD - Game
+	Province - Web Play
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ph_Header" runat="server">
@@ -18,7 +19,7 @@
 						<div class="game-output" id="game-output"></div>
 						<div class="game-input">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Enter commands here..." id="game-input">
+								<input type="text" class="form-control" placeholder="Enter commands here..." id="game-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 								<span class="input-group-btn">
 									<button class="btn btn-default" type="button" id="submit-cmd">Send</button>
 								</span>
@@ -34,14 +35,14 @@
 	<section class="login-create-section" id="login-create-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-8 col-xs-offset-2">
+				<div class="col-sm-8 col-xs-12 col-sm-offset-2">
 					<div class="panel panel-login">
 						<div class="panel-heading">
 							<div class="row">
-								<div class="col-xs-6 tabs" id="login-tab">
+								<div class="col-xs-6 tabs tab-login" ID="tab_Login" runat="server">
 									Login
 								</div>
-								<div class="col-xs-6 tabs active" id="create-tab">
+								<div class="col-xs-6 tabs tab-create" ID="tab_Create" runat="server">
 									Create Character
 								</div>
 							</div>
@@ -50,12 +51,12 @@
 							<div class="row">
 								<div class="col-xs-12">
 									<!-- Login Form -->
-									<div class="login-form" style="display: none;">
+									<div class="login-form form-wrapper" ID="form_Login" runat="server">
 										<h2>Login To Play</h2>
 
-                                        <asp:Panel runat="server" ID="pnl_LoginError" Visible="false">
-                                        <p class="error">Username and password were not valid.</p>
-                                        </asp:Panel>
+										<asp:Panel runat="server" ID="pnl_LoginError" Visible="false">
+											<asp:Literal runat="server" ID="lit_LoginError"></asp:Literal>
+										</asp:Panel>
 
 										<div class="form-group">
 											<asp:TextBox runat="server" id="tb_username" class="form-control" placeholder="Username"></asp:TextBox>
@@ -68,7 +69,7 @@
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<asp:Button runat="server" id="loginBtn" class="form-control btn btn-submit" Text="Login"  OnClick="loginBtnClick" />
+													<asp:Button runat="server" id="loginBtn" class="form-control btn btn-submit" Text="Login" OnClick="loginBtnClick" />
 												</div>
 											</div>
 										</div>
@@ -77,15 +78,13 @@
 									</div>
 
 									<!-- Create character form -->
-									<div class="create-form" style="display: block;">
+									<div class="create-form form-wrapper" ID="form_Create" runat="server">
 										<h2>Create A Character</h2>
 										<p>You can create a new account and character for the game via the below form.</p>
 
-                                        <asp:Panel runat="server" ID="pnl_CreateError" Visible="false">
-                                        <p class="error">
-                                            <asp:Literal runat="server" ID="lit_CreateError"></asp:Literal>
-                                        </p>
-                                        </asp:Panel>
+										<asp:Panel runat="server" ID="pnl_CreateError" Visible="false">
+											<asp:Literal runat="server" ID="lit_CreateError"></asp:Literal>
+										</asp:Panel>
 
 										<div class="form-group">
 											<asp:TextBox runat="server" id="newUsername" class="form-control" placeholder="Username"></asp:TextBox>
@@ -128,6 +127,4 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="ph_PageJavaScript" runat="server">
 	<script type="text/javascript" src="scripts/slackmud_gamepage_websockets.js"></script>
 	<script type="text/javascript" src="scripts/slackmud_login_create.js"></script>
-    <asp:Literal runat="server" ID="lit_VariableJavascript"></asp:Literal>
 </asp:Content>
-

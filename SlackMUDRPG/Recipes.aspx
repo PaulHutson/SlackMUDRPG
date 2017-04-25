@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Site.Master" AutoEventWireup="true" CodeBehind="Recipes.aspx.cs" Inherits="SlackMUDRPG.Receipes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ph_Title" runat="server">
-	SlakMud - Receipes
+	Province - Receipes
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ph_Header" runat="server">

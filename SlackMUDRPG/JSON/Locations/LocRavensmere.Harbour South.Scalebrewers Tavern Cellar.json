@@ -4,7 +4,7 @@
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
   "Outside": false,
-	"RoomDescription": "A single gaslight illuminates a room full of dark figures sitting around a hexagonal table with a gold scorpian embossed on the surface. The room falls quiet and every head turns to you.",
+	"RoomDescription": "A low ceilinged room shows a number of boxes and barrels piled up.",
 	"RoomExits": [
     {
       "Shortcut": "ST",
@@ -13,8 +13,8 @@
     },
     {
 			"Shortcut": "RPS",
-			"Description": "Ravensmere Promande South",
-			"RoomID": "Ravensmere.Harbour South.Ravensmere Promande South"
+			"Description": "Ravensmere Promenade South",
+			"RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South"
 		}
 	],
 	"RoomItems": null

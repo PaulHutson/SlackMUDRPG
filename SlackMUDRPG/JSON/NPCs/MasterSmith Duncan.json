@@ -367,6 +367,20 @@
           "StepID": "20",
           "Scope": "saytoplayer",
           "AdditionalData": "Feel free to practice using the forge and anvils here.",
+          "NextStep": "21.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "21",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "MasterSmith Duncan|5",
+          "NextStep": "22.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "22",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "The City Guard|5",
           "NextStep": null,
           "ResponseOptions": null
         }
@@ -432,7 +446,7 @@
         {
           "StepID": "4",
           "Scope": "saytoplayer",
-          "AdditionalData": "Which item would you like? [i](Enter the number of the item)[/i]",
+          "AdditionalData": "Which item would you like? [i](Enter the item number from the list above)[/i]",
           "NextStep": null,
           "ResponseOptions": [
 						{

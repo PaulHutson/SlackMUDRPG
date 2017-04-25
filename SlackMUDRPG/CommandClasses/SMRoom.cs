@@ -48,8 +48,14 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("RoomExits")]
         public List<SMExit> RoomExits { get; set; }
 
+        [JsonProperty("Properties")]
+        public List<SMRoomProperty> Properties { get; set; }
+
         [JsonProperty("RoomItems")]
         public List<SMItem> RoomItems { get; set; }
+
+        [JsonProperty("ItemSpawns")]
+        public List<SMItemSpawn> ItemSpawns { get; set; }
 
         [JsonProperty("NPCSpawns")]
         public List<SMSpawn> NPCSpawns { get; set; }
@@ -152,7 +158,7 @@ namespace SlackMUDRPG.CommandClasses
 
 				for (int i = 0; i < this.RoomExits.Count; i++)
 				{
-					exits[i] = $"{this.RoomExits[i].Description} ({this.RoomExits[i].Shortcut})";
+					exits[i] = $"{this.RoomExits[i].Description} [{this.RoomExits[i].Shortcut}]";
 				}
 
 				returnString += this.Formatter.ListItem(String.Join(", ", exits));
@@ -275,17 +281,17 @@ namespace SlackMUDRPG.CommandClasses
 					{
 						people[i] = "You";
 					}
-					//else
-					//{
-					//	people[i] = smcs[i].GetFullName();
-					//}
+					else
+					{
+						people[i] = smcs[i].GetFullName();
+					}
 				}
 
 				returnString += this.Formatter.ListItem(String.Join(", ", people));
 			}
 			else
 			{
-				returnString += this.Formatter.ListItem("There's noone here.");
+				returnString += this.Formatter.ListItem("There's nobody here.");
 			}
 
 			return returnString;
@@ -406,7 +412,13 @@ namespace SlackMUDRPG.CommandClasses
             
 			if (targetCharacter != null)
             {
-                smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetCharacter.GetFullName() + " (Level " + targetCharacter.CalculateLevel() + "):"));
+                string levelText = "";
+                if (int.Parse(targetCharacter.CalculateLevel()) > 0)
+                {
+                    levelText = " (Level " + targetCharacter.CalculateLevel() + ")";
+                }
+                
+                smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetCharacter.GetFullName() + levelText + ":"));
                 if ((targetCharacter.Description != null) || (targetCharacter.Description != ""))
                 {
                     smc.sendMessageToPlayer(this.Formatter.Italic(targetCharacter.Description));
@@ -425,7 +437,13 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (targetNPC != null)
 			{
-				smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetNPC.GetFullName() + " (Level " + targetNPC.CalculateLevel() + "):"));
+                string levelText = "";
+                if (int.Parse(targetNPC.CalculateLevel()) > 0)
+                {
+                    levelText = " (Level " + targetNPC.CalculateLevel() + ")";
+                }
+
+                smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetNPC.GetFullName() + levelText + ":")); 
 				if ((targetNPC.Description != null) || (targetNPC.Description != ""))
 				{
 					smc.sendMessageToPlayer(this.Formatter.Italic(targetNPC.Description));
@@ -466,6 +484,26 @@ namespace SlackMUDRPG.CommandClasses
 			// Otherwise nothing found
 			smc.sendMessageToPlayer(this.Formatter.Italic("Can not inspect that item."));
 		}
+
+        /// <summary>
+        /// Find out if the room has a specific property type
+        /// </summary>
+        /// <param name="propertyName">The name of the property to check for</param>
+        /// <returns></returns>
+        public bool HasProperty(string propertyName)
+        {
+            if (this.Properties != null)
+            {
+                SMRoomProperty smrp = this.Properties.FirstOrDefault(p => p.Name.ToLower() == propertyName.ToLower());
+
+                if (smrp != null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
 		#endregion
 
@@ -639,7 +677,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Output the message
-			string message = this.Formatter.Italic(precursor + charSpeaking.GetFullName() + " " + speech);
+			string message = this.Formatter.Italic(precursor + charSpeaking.GetFullName() + " " + speech,0);
 
 			// Send the message to all people connected to the room
 			foreach (SMCharacter smc in this.GetPeople())
@@ -779,6 +817,69 @@ namespace SlackMUDRPG.CommandClasses
             }
 		}
 
+        public void ItemSpawn()
+        {
+            if (this.ItemSpawns != null)
+            {
+                List<SMNPC> smnpcl = new List<SMNPC>();
+
+                // loop around the spawns
+                foreach (SMItemSpawn smis in this.ItemSpawns)
+                {
+                    // random number between 1 and 100
+                    int randomChance = (new Random().Next(1, 100));
+
+                    // Check if we should try spawning
+                    if (randomChance < smis.SpawnFrequency)
+                    {
+                        // Check how many there are of this type in the room already
+                        int numberOfItemsOfType = this.RoomItems.Count(item => item.ItemName == smis.ItemName);
+
+                        // If there are less NPCs than the max number of the type...
+                        if (numberOfItemsOfType < smis.MaxNumber)
+                        {
+                            // .. add one / some
+                            int numberToSpawn = smis.MaxSpawnAtOnce;
+                            if (numberOfItemsOfType + numberToSpawn > smis.MaxNumber)
+                            {
+                                numberToSpawn = smis.MaxNumber - numberOfItemsOfType;
+                            }
+
+                            // Split the file name
+                            string[] typeOfItem = smis.TypeOfItem.Split('.');
+                            int totalNumberSpawned = numberToSpawn;
+
+                            // Create the items
+                            while (numberToSpawn > 0)
+                            {
+                                numberToSpawn--;
+                                SMItem newItem = SMItemFactory.Get(typeOfItem[0], typeOfItem[1]);
+                                this.RoomItems.Add(newItem);
+                            }
+
+                            // Double check enough were spawned.
+                            if (totalNumberSpawned > 0)
+                            {
+                                // Remove the room from memory then add it again
+                                List<SMRoom> allRooms = (List<SMRoom>)HttpContext.Current.Application["SMRooms"];
+                                SMRoom findRoom = allRooms.FirstOrDefault(r => r.RoomID == this.RoomID);
+                                allRooms.Remove(findRoom);
+                                if (findRoom != null)
+                                {
+                                    findRoom.RoomItems = this.RoomItems;
+                                }
+                                allRooms.Add(findRoom);
+                                HttpContext.Current.Application["SMRoom"] = allRooms;
+
+                                // Announce the arrival of the items.
+                                this.Announce(this.Formatter.Italic(smis.SpawnMessage, 0));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
     }
 
@@ -818,6 +919,27 @@ namespace SlackMUDRPG.CommandClasses
 		public bool Unique { get; set; }
 	}
 
+    public class SMItemSpawn
+    {
+        [JsonProperty("ItemName")]
+        public string ItemName { get; set; }
+
+        [JsonProperty("TypeOfItem")]
+        public string TypeOfItem { get; set; }
+
+        [JsonProperty("SpawnMessage")]
+        public string SpawnMessage { get; set; }
+
+        [JsonProperty("MaxNumber")]
+        public int MaxNumber { get; set; }
+
+        [JsonProperty("MaxSpawnAtOnce")]
+        public int MaxSpawnAtOnce { get; set; }
+
+        [JsonProperty("SpawnFrequency")]
+        public int SpawnFrequency { get; set; }
+    }
+
     public class SMRoomSafeCharacterAttributes
     {
         [JsonProperty("CharacterName")]
@@ -825,5 +947,11 @@ namespace SlackMUDRPG.CommandClasses
 
         [JsonProperty("CharacterName")]
         public SMAttributes SavedAttributes { get; set; }
+    }
+
+    public class SMRoomProperty
+    {
+        [JsonProperty("Name")]
+        public string Name { get; set; }
     }
 }

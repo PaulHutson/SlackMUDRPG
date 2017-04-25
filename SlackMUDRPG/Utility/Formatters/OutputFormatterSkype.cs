@@ -10,13 +10,13 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <inheritdoc />
 		protected override string GetBoldReplacePattern()
 		{
-			return "*$2*";
+			return "**$2**";
 		}
 
 		/// <inheritdoc />
 		protected override string GetCodeBlockReplacePattern()
 		{
-			return "{code}$2{code}";
+			return "`$2`";
 		}
 
 		/// <inheritdoc />
@@ -28,7 +28,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <inheritdoc />
 		protected override string GetItalicReplacePattern()
 		{
-			return "_$2_";
+			return "*$2*";
 		}
 
 		/// <inheritdoc />
@@ -58,7 +58,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <inheritdoc />
 		protected override string GetNewLineSequence()
 		{
-			return "\n";
+			return "\n\n";
 		}
 	}
 }

@@ -1,0 +1,95 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Environment",
+    "SkillTypeDescription": "Skills related to manipulating the environment"
+  },
+  "SkillName": "Fish",
+	"CanUseWithoutLearning":  false,
+  "SkillDescription": "The ability to fish.",
+  "SkillLearnText": "You've learnt how to fish",
+  "LevelIncreaseText":  "You feel you're better at fishing",
+  "ActivityType":  "Fishing",
+  "BaseStat": "DEX",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "DEX",
+      "PreReqLevel": 4
+    }
+  ],
+  "SkillSteps": [
+		{
+			"StepType": "EquippedObject",
+			"StepRequiredObject": "Family.Rod",
+			"RequiredObjectAmount": 1,
+			"FailureOutput": "You don't have a fishing rod.",
+			"SuccessOutput": null
+		},
+    {
+      "StepType": "CheckRoomProperty",
+      "StepRequiredObject": "CanFish",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You can't fish here.",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} casts out a fishing line"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} patiently fishes"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} pulls in his line to check for any bites"
+    },
+    {
+      "StepType": "SkillCheck",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": "{CHARNAME} pulls in his line to check for any bites and finds nothing.",
+      "SuccessOutput": "{CHARNAME} pulls in his line to find a fish (now in the room).",
+      "ExtraData": "Resource.Fish|1|10"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Repeat",
+      "StepRequiredObject": "Activity.Fishing",
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    }
+  ]	
+}

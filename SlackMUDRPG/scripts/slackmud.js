@@ -1,10 +1,24 @@
 ﻿$(document).ready(function () {
+	/**
+	 * Add active class to top nav link that corresponds to the page that is currently active
+	 */
+	function highlightActivePageLink() {
+		var currentPage = window.location.pathname.replace(/^\//, "");
+
+		var activeLink = $(".site-top-nav a").filter(function () {
+			return $(this).data("url") == currentPage;
+		});
+
+		activeLink.first().parents("li").addClass("active");
+	}
+
+	highlightActivePageLink();
 
 	/**
 	 * Handle clicks on the main navigation links.
 	 * Opens new window for link if you are on the game page.
 	 */
-	$(".site-top-nav a").on("click", function (e) {
+	$(".site-top-nav a.link").on("click", function (e) {
 		e.preventDefault();
 
 		var dataUrl = $(this).data("url");

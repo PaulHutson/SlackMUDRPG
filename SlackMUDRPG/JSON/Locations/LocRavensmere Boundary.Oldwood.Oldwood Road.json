@@ -435,5 +435,23 @@
 			"SpawnFrequency": 50,
 			"Unique": false
 		}
-	]
+	],
+  "ItemSpawns": [
+    {
+      "ItemName": "Stick",
+      "TypeOfItem": "Resource.Stick",
+      "SpawnMessage": "A branch falls from a tree.",
+      "MaxNumber": 4,
+      "MaxSpawnAtOnce": 1,
+      "SpawnFrequency": 40
+    },
+    {
+      "ItemName": "Young Tree",
+      "TypeOfItem": "Environment.YoungTree",
+      "SpawnMessage": "A new tree sprouts.",
+      "MaxNumber": 10,
+      "MaxSpawnAtOnce": 1,
+      "SpawnFrequency": 15
+    }
+  ]
 }

@@ -1,23 +1,23 @@
 {
-  "firstname": "Tupp",
-  "lastname": "Greyscale",
-  "lastinteractiondate": "2017-04-17T20:52:37.2968837+01:00",
-  "lastlogindate": "2017-04-18T23:10:25.8764875+01:00",
+  "firstname": "New",
+  "lastname": "Arrival",
+  "lastinteractiondate": "2017-04-23T11:06:34.5796845+01:00",
+  "lastlogindate": "2017-04-23T11:06:02.7867275+01:00",
   "age": 18,
   "sex": "m",
   "pkFlag": false,
-  "userID": "218db549-1030-474f-977a-0be347e11054",
-  "username": "a",
-  "password": "EAAAAL8cn1dnCMn6rUEBKTaX+BFZvdViB+nUWu7GoAfDHYHL",
-  "roomID": "Ravensmere.Harbour South.Docklands Way South",
+  "userID": "5c653b7f-6bd3-49e3-97aa-c643c30cb9aa",
+  "username": "d",
+  "password": "EAAAADrMbubfb02VBgknPBifibQeYF/zh58X/MsSI40takGG",
+  "roomID": "Ravensmere.Harbour South.Landing Area",
   "newbieTipsDisabled": false,
   "questLog": [
     {
       "questName": "Welcome to Ravensmere",
       "questStep": "Visit the Clerk in the arrivals hall",
-      "lastDateUpdated": 1492457984,
+      "lastDateUpdated": 1492941856,
       "expires": 0,
-      "completed": true
+      "completed": false
     }
   ],
   "attributes": {
@@ -36,25 +36,7 @@
       "name": "RightHand",
       "allowedTypes": [
         "any"
-      ],
-      "equippedItem": {
-        "itemID": "5ecb127b-f17b-48ad-8e1a-d08b44664873",
-        "singularPronoun": "a",
-        "itemName": "Key to access the arrivals hall entrance to the city",
-        "pluralName": "Keys",
-        "pluralPronoun": "some",
-        "itemType": "Misc",
-        "itemFamily": "Key",
-        "itemDescription": "Key to access the arrivals hall entrance to the city",
-        "itemWeight": 0,
-        "itemCapacity": 0,
-        "itemSize": 0,
-        "hitPoints": 1000000000,
-        "maxHitPoints": 1000000000,
-        "baseDamage": 0.001,
-        "toughness": 1,
-        "additionalData": "RavensmereAAEtoDWS"
-      }
+      ]
     },
     {
       "name": "LeftHand",
@@ -68,7 +50,7 @@
         "Container"
       ],
       "equippedItem": {
-        "itemID": "9afef21d-b399-4d62-aa5e-66ff80a6d6a9",
+        "itemID": "19ab2cda-4cfe-4208-8bd6-d84d8c268629",
         "singularPronoun": "a",
         "itemName": "Small Backpack",
         "pluralName": "Small Backpacks",
@@ -121,6 +103,5 @@
   "characterWeight": 50,
   "characterSize": 160,
   "connectionService": "WS",
-  "lastUsedCommand": "move DWS",
-  "variableResponse": "m"
+  "lastUsedCommand": "move AAE"
 }

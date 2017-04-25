@@ -9,6 +9,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<title><asp:ContentPlaceHolder ID="ph_Title" runat="server"></asp:ContentPlaceHolder></title>
+
+		<link rel="shortcut icon" type="image/png" href="../css/images/favicon.png"/>
 		
 		<link rel="stylesheet" href="../Content/bootstrap.min.css" />
 		<link rel="stylesheet" href="../css/slackmud_main.css" />
@@ -46,18 +48,21 @@
 							<span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/">
-							<img src="../css/images/slackmud_header_logo.png" alt="SlackMud">
+							<img src="../css/images/province_header_logo.png" alt="Province">
 						</a>
 					</div>
 
 					<div class="collapse navbar-collapse" id="slackmud_nav_collapse">
 						<ul class="nav navbar-nav site-top-nav">
-							<li><a data-url="" href="#">Home</a></li>
-							<li><a data-url="Game.aspx" href="#">Game</a></li>
-							<li><a data-url="Commands.aspx" href="#">Commands</a></li>
-							<li><a data-url="Skills.aspx" href="#">Skills</a></li>
-							<li><a data-url="Items.aspx" href="#">Items</a></li>
-							<li><a data-url="Recipes.aspx" href="#">Recipes</a></li>
+							<li><a class="link" data-url="" href="#">Home</a></li>
+							<li><a class="link" data-url="Game.aspx" href="#">Game</a></li>
+							<li><a class="link" data-url="Commands.aspx" href="#">Commands</a></li>
+							<li><a class="link" data-url="Skills.aspx" href="#">Skills</a></li>
+							<li><a class="link" data-url="Items.aspx" href="#">Items</a></li>
+							<li><a class="link" data-url="Recipes.aspx" href="#">Recipes</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><asp:LinkButton ID="logoutBtn" runat="server" Visible="false" OnClick="logoutBtnClick">Logout</asp:LinkButton></li>
 						</ul>
 					</div>
 				</div>
@@ -69,11 +74,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-lg-8 col-lg-offset-2 col-xs-12">
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-								aliquip ex ea commodo consequat.
-							</p>
+							<p>Copyright 2017 - Slack Mud and Province Mud</p>
 						</div>
 					</div>
 				</div>
