@@ -1,0 +1,239 @@
+﻿{
+  "firstname": "Drunken",
+  "lastname": "Sailor",
+  "description": "A sailor who is obviously a little worse for wear after having too much to drink.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 26,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "DrunkenSailor",
+  "RoomID": "IsSpawned",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 12,
+    "int": 8,
+    "chr": 8,
+    "dex": 10,
+    "wp": 10,
+    "ft": 20,
+    "hp": 20,
+    "maxhp": 20,
+    "SocialStanding": 8
+  },
+  "Skills": [
+    {
+      "SkillName": "Sword Use",
+      "SkillLevel": 5
+    },
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 5
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 5
+    },
+    {
+      "SkillName": "Sailing",
+      "SkillLevel": 8
+    }
+  ],
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+	"NPCType": "Drunk-Sailor",
+	"FamilyType": "Sailor",
+	"IsGeneric": true,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+  "NPCResponses": [
+    {
+			"ResponseType": "PlayerCharacter.Enter",
+			"ResponseTimeOfDay": "all",
+			"AdditionalData": null,
+			"Faction": null,
+			"Frequency": 5,
+			"ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Enter.1"
+				}
+			]
+		},
+    {
+      "ResponseType": "PlayerCharacter.ExaminesThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 30,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Examines.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Attack",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Attack.1"
+				},
+				{
+          "ResponseStepType": "Attack",
+          "ResponseStepData": null
+        }
+      ]
+    },
+    {
+      "ResponseType": "Pulse",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "AllPeople",
+      "Faction": null,
+      "Frequency": 15,
+      "ResponseSteps": [
+        {
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "DrunkenBehaviour.Choice"
+				}
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "Enter",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks up at the newcomer..",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Examines",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Can you get me a beer...?",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "DrunkenBehaviour",
+      "ConversationStep": [
+        {
+          "StepID": "Choice",
+          "Scope": "choice",
+          "AdditionalData": "1,2,3,4",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "stares forlornly into his mug of ale.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "begins to hum a shanty.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Barman!  Barman... another ale if you please?",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "laughs uproariously suddenly.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Attack",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "shout",
+          "AdditionalData": "Oh.. for the love of... can't a poor Sailor get a beer in peace?",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

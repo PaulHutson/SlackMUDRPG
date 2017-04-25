@@ -348,6 +348,9 @@
     <Content Include="JSON\NPCs\Captain Barnard.json" />
     <Content Include="JSON\Objects\Consumable.TrainingArrow.json" />
     <Content Include="JSON\NPCs\Crusty Bateman.json" />
+    <Content Include="JSON\NPCs\Young-Sailor.json" />
+    <Content Include="JSON\NPCs\Old-Sailor.json" />
+    <Content Include="JSON\NPCs\Drunk-Sailor.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
