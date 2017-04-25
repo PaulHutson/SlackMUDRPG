@@ -92,7 +92,7 @@ namespace SlackMUDRPG.CommandClasses
 
                     if (!newCharacter)
 					{
-						returnString = ResponseFormatterFactory.Get().Bold("Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")");
+						returnString = ResponseFormatterFactory.Get().Bold("Welcome back " + character.FirstName + " " + character.LastName + " (you are level " + character.CalculateLevel() + ")", 1);
 					}
 					else
 					{

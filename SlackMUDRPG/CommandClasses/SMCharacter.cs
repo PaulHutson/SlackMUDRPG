@@ -1664,19 +1664,19 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Gets a string listsing the contents of each slot, optionally listing containet contents.
+		/// Gets a list of the contents of each slot, optionally listing containet contents.
 		/// </summary>
 		/// <param name="listContainerContents">Optionally list containet contents.</param>
 		/// <returns></returns>
-		public string GetInventoryList(bool listContainerContents = false)
+		public List<string> GetInventoryList(bool listContainerContents = false)
 		{
-			string inventory = string.Empty;
+			List<string> inventory = new List<string>();
 
 			if (this.Slots != null && this.Slots.Any())
 			{
 				foreach (SMSlot slot in this.Slots)
 				{
-					inventory += this.ListSlotDetails(slot.Name, listContainerContents);
+					inventory.Add(this.ListSlotDetails(slot.Name, listContainerContents));
 				}
 			}
 
