@@ -80,7 +80,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// </summary>
 		/// <param name="repeat"></param>
 		/// <returns>String of new line sequences.</returns>
-		protected string GetNewLines(int repeat)
+		public string GetNewLines(int repeat)
 		{
 			if (repeat == 0)
 			{
