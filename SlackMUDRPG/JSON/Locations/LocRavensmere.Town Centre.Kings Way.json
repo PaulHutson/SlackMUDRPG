@@ -26,14 +26,32 @@
 	"NPCSpawns": [
     {
       "TypeOfNPC": "Guard-Generic",
-      "MaxNumber": 1,
+      "MaxNumber": 2,
       "SpawnFrequency": 90,
       "Unique": false
     },
     {
 			"TypeOfNPC": "Beggar",
 			"MaxNumber": 1,
-			"SpawnFrequency": 10,
+			"SpawnFrequency": 5,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "SacratasMonk-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "Noble-Generic",
+			"MaxNumber": 3,
+			"SpawnFrequency": 45,
 			"Unique": false
 		}
 	]

@@ -1,13 +1,13 @@
 ﻿{
   "firstname": "City",
-  "lastname": "Guard",
-  "description": "A city guardsman, you're unable to see much of his face due to the tight fitting helmet.",
+  "lastname": "Noble",
+  "description": "A finely dressed Noble resplendent in what appear to be expensive clothes.",
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
-  "age": 22,
+  "age": 30,
   "sex": "m",
   "PKFlag": false,
-  "UserID": "GenericGuardsmanComingandGoing",
+  "UserID": "CityNoble",
   "RoomID": "IsSpawned",
   "CurrentActivity": null,
   "Attributes": {
@@ -19,7 +19,7 @@
     "ft": 20,
     "hp": 20,
     "maxhp": 20,
-    "SocialStanding": 8
+    "SocialStanding": 15
   },
   "Skills": [
     {
@@ -41,33 +41,7 @@
       "AllowedTypes": [
         "any"
       ],
-      "EquippedItem": {
-        "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453SergeantsSword",
-        "SingularPronoun": "an",
-        "ItemName": "Iron Sword",
-        "PluralName": "Iron Swords",
-        "PluralPronoun": "some",
-        "ItemType": "Weapon",
-        "ItemFamily": "Sword",
-        "ItemDescription": "This Iron sword is good for keeping the masses down.",
-        "ItemWeight": 2,
-        "ItemCapacity": 0,
-        "ItemSize": 2,
-        "HitPoints": 25,
-        "MaxHitPoints": 25,
-        "BaseDamage": 6.0,
-        "Toughness": 3,
-        "DestroyedOutput": null,
-        "RequiredSkills": [
-          {
-            "SkillName": "Sword Use",
-            "SkillLevel": "1"
-          }
-        ],
-        "AdditionalData": null,
-        "ObjectTrait": null,
-        "HeldItems": null
-      }
+      "EquippedItem": null
     },
     {
       "Name": "LeftHand",
@@ -114,8 +88,8 @@
     }
   ],
   "ResponseURL": null,
-	"NPCType": "Guard-GenericComingAndGoing",
-	"FamilyType": "Guard",
+	"NPCType": "Noble-Generic",
+	"FamilyType": "Noble",
 	"IsGeneric": true,
 	"WalkingType": "walk",
 	"PronounSingular": "a",
@@ -146,7 +120,7 @@
 					"ResponseStepData": "Attack.1"
 				},
 				{
-          "ResponseStepType": "Attack",
+          "ResponseStepType": "LeaveDeSpawn",
           "ResponseStepData": null
         }
       ]
@@ -156,7 +130,7 @@
       "ResponseTimeOfDay": "all",
       "AdditionalData": "AllPeople",
       "Faction": null,
-      "Frequency": 45,
+      "Frequency": 10,
       "ResponseSteps": [
         {
           "ResponseStepType": "LeaveDeSpawn",
@@ -171,8 +145,8 @@
       "ConversationStep": [
         {
           "StepID": "1",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Move along citizen.",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "studiously ignores {playercharacter}.",
           "NextStep": null,
           "ResponseOptions": null
         }
@@ -184,7 +158,7 @@
         {
           "StepID": "1",
           "Scope": "shout",
-          "AdditionalData": "To Arms!  To Arms!",
+          "AdditionalData": "GUARDS!",
           "NextStep": null,
           "ResponseOptions": null
         }

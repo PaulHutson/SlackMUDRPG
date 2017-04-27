@@ -30,6 +30,24 @@
 			"MaxNumber": 1,
 			"SpawnFrequency": 10,
 			"Unique": false
+		},
+    {
+			"TypeOfNPC": "SacratasMonk-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "Noble-Generic",
+			"MaxNumber": 2,
+			"SpawnFrequency": 45,
+			"Unique": false
 		}
 	]
 }

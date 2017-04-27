@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.Town Center.Grand Square",
+	"RoomID": "Ravensmere.Town Centre.Grand Square",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -31,14 +31,26 @@
 	"NPCSpawns": [
     {
       "TypeOfNPC": "Guard-Generic",
-      "MaxNumber": 1,
+      "MaxNumber": 3,
       "SpawnFrequency": 90,
       "Unique": false
     },
     {
 			"TypeOfNPC": "Beggar",
-			"MaxNumber": 1,
+			"MaxNumber": 2,
 			"SpawnFrequency": 10,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "SacratasMonk-Generic",
+			"MaxNumber": 3,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 2,
+			"SpawnFrequency": 25,
 			"Unique": false
 		}
 	]

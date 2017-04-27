@@ -361,6 +361,9 @@
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Greys Court East.json" />
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Greys Court West.json" />
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Genshuen Herbalists.json" />
+    <Content Include="JSON\NPCs\Noble-Generic.json" />
+    <Content Include="JSON\NPCs\AspertanPriest-Generic.json" />
+    <Content Include="JSON\NPCs\SacratasMonk-Generic.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />

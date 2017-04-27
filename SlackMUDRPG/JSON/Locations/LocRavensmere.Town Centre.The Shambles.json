@@ -17,5 +17,31 @@
       "RoomID": "Ravensmere.Town Centre.Barons Walk"
     }
 	],
-	"RoomItems": null
+  "RoomItems": null,
+  "NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "SacratasMonk-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "Noble-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 45,
+			"Unique": false
+		}
+	]
 }
