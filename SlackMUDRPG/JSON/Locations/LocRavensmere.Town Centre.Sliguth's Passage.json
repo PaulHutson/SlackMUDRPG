@@ -1,0 +1,40 @@
+{
+	"RoomID": "Ravensmere.Town Center.Sliguth's Passage",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "The bustle of the town centre dims slightly as you turn down this narrow curving thoroughfare.  The buildings are lavish but smaller than ones on the larger streets of this district.  Small boutique shops and an inn with a window full of candles are the most notable features.",
+	"RoomExits": [
+		{
+			"Shortcut": "KW",
+			"Description": "Kings Way",
+			"RoomID": "Ravensmere.Town Centre.Kings Way"
+		},
+    {
+      "Shortcut": "GCW",
+      "Description": "Greys Court West",
+      "RoomID": "Ravensmere.Town Centre.Greys Court West"
+    },
+    {
+      "Shortcut": "GH",
+      "Description": "Genshuen Herbalists",
+      "RoomID": "Ravensmere.Town Centre.Genshuen Herbalists"
+    }
+	],
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 1,
+			"SpawnFrequency": 10,
+			"Unique": false
+		}
+	]
+}

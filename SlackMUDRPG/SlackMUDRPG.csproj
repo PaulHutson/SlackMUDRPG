@@ -351,6 +351,16 @@
     <Content Include="JSON\NPCs\Young-Sailor.json" />
     <Content Include="JSON\NPCs\Old-Sailor.json" />
     <Content Include="JSON\NPCs\Drunk-Sailor.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Barons Walk.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Sliguth%27s Passage.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Grand Square.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Kings Way.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Dabbles Row.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.The Shambles.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Greystone Passage.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Greys Court East.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Greys Court West.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Genshuen Herbalists.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />

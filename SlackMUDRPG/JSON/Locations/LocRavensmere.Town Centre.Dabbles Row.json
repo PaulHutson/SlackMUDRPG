@@ -1,0 +1,35 @@
+{
+	"RoomID": "Ravensmere.Town Center.Dabbles Row",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "A sulfurous smell permeates the air and a yellow thick fog rises from the many grates in the cobbled street.  The windows are shuttered and the street seems strangely devoid of life.",
+	"RoomExits": [
+		{
+			"Shortcut": "GCW",
+			"Description": "Greys Court West",
+			"RoomID": "Ravensmere.Town Centre.Greys Court West"
+		},
+    {
+      "Shortcut": "BW",
+      "Description": "Barons Walk",
+      "RoomID": "Ravensmere.Town Centre.Barons Walk"
+    }
+	],
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 1,
+			"SpawnFrequency": 10,
+			"Unique": false
+		}
+	]
+}

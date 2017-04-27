@@ -11,11 +11,16 @@
 			"Description": "Swabbies Lane",
 			"RoomID": "Ravensmere.Harbour South.Swabbies Lane"
 		},
-		{
-			"Shortcut": "RP",
-			"Description": "Ramparts Parade",
-			"RoomID": "Ravensmere.Military District.Ramparts Parade"
-		}
+    {
+      "Shortcut": "RP",
+      "Description": "Ramparts Parade",
+      "RoomID": "Ravensmere.Military District.Ramparts Parade"
+    },
+    {
+      "Shortcut": "GCE",
+      "Description": "Greys Court East",
+      "RoomID": "Ravensmere.Town Centre.Greys Court East"
+    }
 	],
 	"RoomItems": null,
 	"NPCSpawns": [

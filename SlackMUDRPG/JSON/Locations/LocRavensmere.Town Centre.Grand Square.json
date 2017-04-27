@@ -1,0 +1,45 @@
+{
+	"RoomID": "Ravensmere.Town Center.Grand Square",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "Dazzling white flag stones make up the vast square courtyard that is Ravensmere town centre.  Large wood and stone buildings are grand and look much older here than any anywhere else in the town.  A fantasticly misshapen library made from crooked timbers looks as though it may topple at any moment.[n]Sitting in the middle of the space, a fabulous fountain fashioned from dark bronze and in the shape of large galleon is quite the sight.  Water jets shoot outward from it's many canons, falling down to be caught in oversize green copper sea shells.",
+	"RoomExits": [
+		{
+			"Shortcut": "GCE",
+			"Description": "Greys Court East",
+			"RoomID": "Ravensmere.Town Centre.Greys Court East"
+		},
+    {
+      "Shortcut": "GCW",
+      "Description": "Greys Court West",
+      "RoomID": "Ravensmere.Town Centre.Greys Court West"
+    },
+    {
+      "Shortcut": "BW",
+      "Description": "Barons Walk",
+      "RoomID": "Ravensmere.Town Centre.Barons Walk"
+    },
+    {
+      "Shortcut": "KW",
+      "Description": "Kings Way",
+      "RoomID": "Ravensmere.Town Centre.Kings Way"
+    }
+	],
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 1,
+			"SpawnFrequency": 10,
+			"Unique": false
+		}
+	]
+}
