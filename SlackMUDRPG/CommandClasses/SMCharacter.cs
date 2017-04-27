@@ -1640,7 +1640,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="slotName">Optional name of the slot to list.</param>
 		public void ListInventory(string slotName = null)
 		{
-			string inventory = this.Formatter.Bold("Your Inventory:");
+			string inventory = this.Formatter.Bold("Your Inventory:", 1);
 
 			// Weight Indicator
 			inventory += this.Formatter.Italic($"Weight: {this.GetCurrentWeight()} / {this.WeightLimit}", 2);
@@ -1944,30 +1944,28 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (slot == null)
 			{
-				return this.Formatter.Italic($"Sorry unable to find a slot called \"{Utils.SanitiseString(slotName)}\"!");
+				return this.Formatter.Italic($"Sorry unable to find a slot called \"{Utils.SanitiseString(slotName)}\"!", 1);
 			}
 
 			string listing = string.Empty;
 
-			listing += this.Formatter.Bold($"{slot.GetReadableName()}:", 0);
-			listing += this.Formatter.General($" {slot.GetEquippedItemName()}");
+			listing += this.Formatter.Bold($"{slot.GetReadableName()}: ", 0);
+			listing += this.Formatter.General($" {slot.GetEquippedItemName()}", 1);
 
 			// If the item in the slot is a container list its contents if required
 			if (listContainerContents && slot.EquippedItem != null && slot.EquippedItem.CanHoldOtherItems())
 			{
 				if (slot.EquippedItem.HeldItems != null && slot.EquippedItem.HeldItems.Any())
 				{
-					listing += this.Formatter.Italic($"Capacity: {SMItemHelper.GetItemUsedCapacity(slot.EquippedItem)} / {slot.EquippedItem.ItemCapacity}");
+					listing += this.Formatter.Italic($"Capacity: {SMItemHelper.GetItemUsedCapacity(slot.EquippedItem)} / {slot.EquippedItem.ItemCapacity}", 1);
 					listing += this.Formatter.Italic($"This \"{slot.EquippedItem.ItemName}\" contains the following items:", 1);
 					listing += SMItemHelper.GetContainerContents(slot.EquippedItem);
 				}
 				else
 				{
-					listing += this.Formatter.Italic($"This \"{slot.EquippedItem.ItemName}\" is empty.");
+					listing += this.Formatter.Italic($"This \"{slot.EquippedItem.ItemName}\" is empty.", 1);
 				}
 			}
-
-			listing += this.Formatter.General(string.Empty);
 
 			return listing;
 		}
