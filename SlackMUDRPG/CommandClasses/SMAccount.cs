@@ -260,13 +260,11 @@ namespace SlackMUDRPG.CommandClasses
             // Now save that back out.
             allCharacters.Add(smcn);
 
-            if (File.Exists(path))
+            string listJSON = JsonConvert.SerializeObject(allCharacters, Formatting.Indented);
+
+            using (StreamWriter w = new StreamWriter(path))
             {
-                using (StreamReader r = new StreamReader(path))
-                {
-                    string json = r.ReadToEnd();
-                    allCharacters = JsonConvert.DeserializeObject<List<SMAccount>>(json);
-                }
+                w.WriteLine(listJSON);
             }
         }
 
