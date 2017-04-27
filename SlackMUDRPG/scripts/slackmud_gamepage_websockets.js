@@ -64,8 +64,10 @@
 	};
 
 	function sendMessage() {
-		ws.send(gameInput.val());
-		gameInput.val('');
+		if (gameInput.val() != '') {
+			ws.send(gameInput.val());
+			gameInput.val('');
+		}
 	};
 
 	function scrollToBottom() {
