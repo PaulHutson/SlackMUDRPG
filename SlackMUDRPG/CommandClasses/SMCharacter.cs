@@ -297,7 +297,7 @@ namespace SlackMUDRPG.CommandClasses
                             }
                         }
 
-                        // If the room is not lot or the character has the right key, let them in.
+                        // If the room is not locked or the character has the right key, let them in.
                         if (initiateMove)
                         {
                             ActualMove(smr, " walks out.", " walks in.");
@@ -316,7 +316,15 @@ namespace SlackMUDRPG.CommandClasses
             // Walk out of the room code.
             SMRoom currentRoom = this.GetRoom();
 
-            currentRoom.Announce(this.Formatter.Italic(this.GetFullName() + leavingMethod), this, true);
+            string nameOfLocation = smr.RoomID;
+            if (nameOfLocation.Contains("||"))
+            {
+                nameOfLocation = nameOfLocation.Substring(0, nameOfLocation.IndexOf("||"));
+            }
+            string[] locationNameElements = nameOfLocation.Split('.');
+            nameOfLocation = " (" + locationNameElements[locationNameElements.Length-1] + ")";
+
+            currentRoom.Announce(this.Formatter.Italic(this.GetFullName() + leavingMethod + nameOfLocation), this, true);
 
             if (processResponses)
             {
