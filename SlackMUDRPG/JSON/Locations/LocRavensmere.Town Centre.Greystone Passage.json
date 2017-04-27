@@ -1,0 +1,53 @@
+{
+	"RoomID": "Ravensmere.Town Center.Greystone Passage",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "Handsome three story buildings made from a smooth grey stone stretch around the curve of Greystone Passage.  The street feels affluent, and so clean that a speck of dirt would not go unnoticed.",
+  "RoomExits": [
+    {
+      "Shortcut": "GCE",
+      "Description": "Greys Court East",
+      "RoomID": "Ravensmere.Town Centre.Greys Court East"
+    },
+    {
+      "Shortcut": "KW",
+      "Description": "Kings Way",
+      "RoomID": "Ravensmere.Town Centre.Kings Way"
+    }
+  ],
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 1,
+			"SpawnFrequency": 10,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "SacratasMonk-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "Noble-Generic",
+			"MaxNumber": 2,
+			"SpawnFrequency": 45,
+			"Unique": false
+		}
+	]
+}

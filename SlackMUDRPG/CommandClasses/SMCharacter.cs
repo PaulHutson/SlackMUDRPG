@@ -155,8 +155,6 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				w.WriteLine(charJSON);
 			}
-
-            this.SaveToApplication();
 		}
 
 		/// <summary>
@@ -1050,8 +1048,11 @@ namespace SlackMUDRPG.CommandClasses
                     // If they get to 0 rerolls the character is permenant dead.
 
                     // Announce the items the player dropped.
-                    currentRoom.Announce(this.Formatter.General($"While dying {this.GetFullName()} dropped the following items: {droppedItemsAnnouncement}"));
-
+                    if (droppedItemsAnnouncement != "")
+                    {
+                        currentRoom.Announce(this.Formatter.General($"While dying {this.GetFullName()} dropped the following items: {droppedItemsAnnouncement}"));
+                    }
+                    
                     // Reset the character activity
                     this.CurrentActivity = null;
 

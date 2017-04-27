@@ -52,6 +52,32 @@
 		}
 	],
 	"RoomItems": null,
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+      "TypeOfNPC": "Old-Sailor",
+      "MaxNumber": 3,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+      "TypeOfNPC": "Young-Sailor",
+      "MaxNumber": 3,
+      "SpawnFrequency": 75,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 1,
+			"SpawnFrequency": 10,
+			"Unique": false
+		}
+	],
   "NPCShopItems": {
     "ShopInventory": [
       {

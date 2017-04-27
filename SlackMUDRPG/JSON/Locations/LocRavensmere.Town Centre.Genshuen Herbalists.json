@@ -1,0 +1,16 @@
+{
+	"RoomID": "Ravensmere.Town Center.Genshuen Herbalists",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "Your senses are struck by strong floral scents and a pleasent assortment of colourful plants.  Some live in pots and some dried and tied into bunches.  A large wooden table sits in the centre of the room with pestles of various sizes.  In one corner, a small laboratory is setup, surounded by numerous glassjars and vials.",
+  "RoomExits": [
+    {
+      "Shortcut": "SP",
+      "Description": "Sliguth's Passage",
+      "RoomID": "Ravensmere.Town Centre.Sliguth's Passage"
+    }
+  ],
+  "RoomItems": null
+}

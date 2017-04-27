@@ -1,0 +1,58 @@
+{
+	"RoomID": "Ravensmere.Town Center.Greys Court West",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "TBC",
+  "RoomExits": [
+    {
+      "Shortcut": "SP",
+      "Description": "Sliguth's Passage",
+      "RoomID": "Ravensmere.Town Centre.Sliguth's Passage"
+    },
+    {
+      "Shortcut": "DR",
+      "Description": "Dabbles Row",
+      "RoomID": "Ravensmere.Town Centre.Dabbles Row"
+    },
+    {
+      "Shortcut": "GS",
+      "Description": "Grand Square",
+      "RoomID": "Ravensmere.Town Centre.Grand Square"
+    }
+  ],
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 2,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 1,
+			"SpawnFrequency": 10,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "SacratasMonk-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "Noble-Generic",
+			"MaxNumber": 3,
+			"SpawnFrequency": 45,
+			"Unique": false
+		}
+	]
+}

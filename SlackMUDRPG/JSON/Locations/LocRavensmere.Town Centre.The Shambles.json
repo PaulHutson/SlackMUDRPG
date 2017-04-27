@@ -1,0 +1,47 @@
+{
+	"RoomID": "Ravensmere.Town Center.The Shambles",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "Overhanging buildings stretch over the street, blocking out out all but the smallest slither of sky.  The street hangs in perpetual shadow but the colourful windows of businesses make the street seem welcoming.",
+	"RoomExits": [
+		{
+			"Shortcut": "GCE",
+			"Description": "Greys Court East",
+			"RoomID": "Ravensmere.Town Centre.Greys Court East"
+		},
+    {
+      "Shortcut": "BW",
+      "Description": "Barons Walk",
+      "RoomID": "Ravensmere.Town Centre.Barons Walk"
+    }
+	],
+  "RoomItems": null,
+  "NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "SacratasMonk-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "Noble-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 45,
+			"Unique": false
+		}
+	]
+}

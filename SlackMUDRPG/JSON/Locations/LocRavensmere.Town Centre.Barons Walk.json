@@ -1,0 +1,63 @@
+{
+	"RoomID": "Ravensmere.Town Center.Barons Walk",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "An imposing thoroughfare of timber buildings with grey stone tile roofs.  A clocktower casts an imposing shadow over the town centre and the clamour of the military training ground can be heard in the distance.",
+	"RoomExits": [
+		{
+			"Shortcut": "GP",
+			"Description": "Grand Parade - Military District",
+			"RoomID": "Ravensmere.Town Centre.Grand Parade"
+		},
+    {
+      "Shortcut": "GS",
+      "Description": "Grand Square",
+      "RoomID": "Ravensmere.Town Centre.Grand Square"
+    },
+    {
+      "Shortcut": "TS",
+      "Description": "The Shambles",
+      "RoomID": "Ravensmere.Town Centre.The Shambles"
+    },
+    {
+      "Shortcut": "DR",
+      "Description": "Dabbles Row",
+      "RoomID": "Ravensmere.Town Centre.Dabbles Row"
+    }
+	],
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 2,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 1,
+			"SpawnFrequency": 10,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "SacratasMonk-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "Noble-Generic",
+			"MaxNumber": 3,
+			"SpawnFrequency": 45,
+			"Unique": false
+		}
+	]
+}

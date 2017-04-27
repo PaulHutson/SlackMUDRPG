@@ -1,0 +1,58 @@
+{
+	"RoomID": "Ravensmere.Town Center.Kings Way",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "The road travels under many wooden passages reaching overhead from building to building.  A wall to the side is covered in mechanical cogs and gears which turn slowly, making the sound of an oversized grandfather clock.  In the centre of the wall stands a metal door slightly ajar.",
+	"RoomExits": [
+		{
+			"Shortcut": "GS",
+			"Description": "Grand Square",
+			"RoomID": "Ravensmere.Town Centre.Grand Square"
+		},
+    {
+      "Shortcut": "SP",
+      "Description": "Sliguth's Passage",
+      "RoomID": "Ravensmere.Town Centre.Sliguth's Passage"
+    },
+    {
+      "Shortcut": "GSP",
+      "Description": "Greystone Passage",
+      "RoomID": "Ravensmere.Town Centre.Greystone Passage"
+    }
+	],
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 2,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 1,
+			"SpawnFrequency": 5,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "SacratasMonk-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "Noble-Generic",
+			"MaxNumber": 3,
+			"SpawnFrequency": 45,
+			"Unique": false
+		}
+	]
+}

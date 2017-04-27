@@ -11,18 +11,41 @@
 			"Description": "Swabbies Lane",
 			"RoomID": "Ravensmere.Harbour South.Swabbies Lane"
 		},
-		{
-			"Shortcut": "RP",
-			"Description": "Ramparts Parade",
-			"RoomID": "Ravensmere.Military District.Ramparts Parade"
-		}
+    {
+      "Shortcut": "RP",
+      "Description": "Ramparts Parade",
+      "RoomID": "Ravensmere.Military District.Ramparts Parade"
+    },
+    {
+      "Shortcut": "GCE",
+      "Description": "Greys Court East",
+      "RoomID": "Ravensmere.Town Centre.Greys Court East"
+    }
 	],
 	"RoomItems": null,
 	"NPCSpawns": [
-		{
-			"TypeOfNPC": "Guard-Generic",
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "SacratasMonk-Generic",
 			"MaxNumber": 1,
-			"SpawnFrequency": 90,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+    {
+			"TypeOfNPC": "Noble-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
 			"Unique": false
 		}
 	]
