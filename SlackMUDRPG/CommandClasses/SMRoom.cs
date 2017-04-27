@@ -369,9 +369,10 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				if ((!smc.NewbieTipsDisabled) && (this.RoomNewbieTips != null) && (this.RoomNewbieTips != ""))
 				{
-					returnString += this.Formatter.Bold("~~~~~ NEWBIE TIPS ~~~~~");
-					returnString += this.Formatter.General(this.RoomNewbieTips);
-					returnString += this.Formatter.Bold("~~~~~     END     ~~~~~");
+					returnString += this.Formatter.GetNewLines(1);
+					returnString += this.Formatter.Bold("~~~~~ NEWBIE TIPS ~~~~~", 1);
+					returnString += this.Formatter.General(this.RoomNewbieTips, 1);
+					returnString += this.Formatter.Bold("~~~~~     END     ~~~~~", 2);
 				}
 			}
 
@@ -381,17 +382,19 @@ namespace SlackMUDRPG.CommandClasses
             {
                 nameOfLocation = nameOfLocation.Substring(0, nameOfLocation.IndexOf("||"));
             }
-			returnString += this.Formatter.Bold($"Location Details - {nameOfLocation.Replace(".",", ")}:");
+			returnString += this.Formatter.Bold($"Location Details - {nameOfLocation.Replace(".",", ")}:", 1);
 			returnString += this.Formatter.Italic(this.RoomDescription, 2);
 
 			// Add the people within the location
 			returnString += this.GetPeopleDetails(smc);
 
-            // Add the NPCs within the location
-            returnString += this.GetNPCDetails();
+			// Add the NPCs within the location
+			returnString += this.GetNPCDetails();
+			returnString += this.Formatter.GetNewLines(1);
 
-            // Add the exits to the room so that someone can leave.
-            returnString += this.GetExitDetails();
+			// Add the exits to the room so that someone can leave.
+			returnString += this.GetExitDetails();
+			returnString += this.Formatter.GetNewLines(1);
 
 			// Show all the items within the room that can be returned.
 			returnString += this.GetItemDetails();
@@ -417,9 +420,9 @@ namespace SlackMUDRPG.CommandClasses
                 {
                     levelText = " (Level " + targetCharacter.CalculateLevel() + ")";
                 }
-                
+
                 smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetCharacter.GetFullName() + levelText + ":"));
-                if ((targetCharacter.Description != null) || (targetCharacter.Description != ""))
+                if ((targetCharacter.Description != null) && (targetCharacter.Description != ""))
                 {
                     smc.sendMessageToPlayer(this.Formatter.Italic(targetCharacter.Description));
                 }
@@ -427,7 +430,22 @@ namespace SlackMUDRPG.CommandClasses
                 {
                     smc.sendMessageToPlayer(this.Formatter.Italic("No description set..."));
                 }
-                smc.sendMessageToPlayer(this.Formatter.CodeBlock(targetCharacter.GetInventoryList()));
+
+				List<string> inventory = targetCharacter.GetInventoryList();
+				string inventoryOutput = String.Empty;
+
+				if (inventory.Any())
+				{
+					foreach (string item in inventory)
+					{
+						inventoryOutput += this.Formatter.ListItem(item);
+					}
+
+					inventoryOutput += this.Formatter.GetNewLines(1);
+				}
+
+				smc.sendMessageToPlayer(inventoryOutput);
+
 				targetCharacter.sendMessageToPlayer(this.Formatter.Italic(smc.GetFullName() + " looks at you"));
 				return;
             }
@@ -444,7 +462,7 @@ namespace SlackMUDRPG.CommandClasses
                 }
 
                 smc.sendMessageToPlayer(this.Formatter.Bold("Description of " + targetNPC.GetFullName() + levelText + ":")); 
-				if ((targetNPC.Description != null) || (targetNPC.Description != ""))
+				if ((targetNPC.Description != null) && (targetNPC.Description != ""))
 				{
 					smc.sendMessageToPlayer(this.Formatter.Italic(targetNPC.Description));
 				}
@@ -452,7 +470,22 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					smc.sendMessageToPlayer(this.Formatter.Italic("No description set..."));
 				}
-				smc.sendMessageToPlayer(this.Formatter.CodeBlock(targetNPC.GetInventoryList()));
+
+				List<string> inventory = targetNPC.GetInventoryList();
+				string inventoryOutput = String.Empty;
+
+				if (inventory.Any())
+				{
+					foreach (string item in inventory)
+					{
+						inventoryOutput += this.Formatter.ListItem(item);
+					}
+
+					inventoryOutput += this.Formatter.GetNewLines(1);
+				}
+
+				smc.sendMessageToPlayer(inventoryOutput);
+
 				targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.ExaminesThem", smc, targetNPC.UserID);
 				targetNPC.GetRoom().ProcessNPCReactions("PlayerCharacter.Examines", smc);
 				return;
@@ -468,12 +501,12 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (smi != null)
 			{
-				string itemDeatils = this.Formatter.Bold("Description of \"" + smi.ItemName + "\":");
-				itemDeatils += this.Formatter.ListItem(smi.ItemDescription);
+				string itemDeatils = this.Formatter.Bold("Description of \"" + smi.ItemName + "\":", 1);
+				itemDeatils += this.Formatter.General(smi.ItemDescription, 1);
 
 				if (smi.CanHoldOtherItems())
 				{
-					itemDeatils += this.Formatter.Italic($"This \"{smi.ItemName}\" contains the following items:");
+					itemDeatils += this.Formatter.Italic($"This \"{smi.ItemName}\" contains the following items:", 1);
 					itemDeatils += SMItemHelper.GetContainerContents(smi);
 				}
 
