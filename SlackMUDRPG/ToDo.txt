@@ -185,3 +185,4 @@ MISC Thoughts:
 				Seasons changing (would need extra information in the location stubs for each season, quite cool though)
 					Effects of the seasons (i.e. players needing more clothes in the winter months, storms breaking houses)
 				AI creatures - how to make things move around / react?  This would need to be on the pulse system.
+				 
