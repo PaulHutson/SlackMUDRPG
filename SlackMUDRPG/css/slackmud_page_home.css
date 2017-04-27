@@ -62,6 +62,25 @@
     background-color: rgba(103, 103, 103, 1.0);
 }
 
+/* Map and Key Styles */
+.main-map {
+    padding: 30px;
+    padding-top: 0;
+}
+
+.map-key-list {
+    padding: 0 30px;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 1);
+    list-style: none;
+    text-align: left;
+}
+
+.map-key-list-item {
+    font-size: 1.1em;
+    line-height: 1.5em;
+}
+
 /*  Play/add list links styles */
 .slackmud-list-group {
     font-family: 'Marcellus SC', serif;
