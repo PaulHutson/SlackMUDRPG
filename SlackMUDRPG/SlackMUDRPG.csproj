@@ -426,6 +426,7 @@
     <Content Include="JSON\Objects\Resource.FishingLine.json" />
     <Content Include="JSON\Quests\Crusty.Hooked.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="RebuildCharNameList.aspx" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
     <Content Include="scripts\ai.1.0.7-build00691.min.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -552,6 +553,13 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RebuildCharNameList.aspx.cs">
+      <DependentUpon>RebuildCharNameList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RebuildCharNameList.aspx.designer.cs">
+      <DependentUpon>RebuildCharNameList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Recipes.aspx.cs">
       <DependentUpon>Recipes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
