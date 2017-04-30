@@ -1,0 +1,134 @@
+﻿{
+	"Name": "Iron Buckle",
+	"Description": "The knowledge to forge an Iron Buckle.",
+	"Produces": "Resource.IronBuckle",
+	"PauseTime": 10,
+	"NeedToLearn": true,
+	"ProductionTrait": "TraitBlackSmithing",
+	"Materials": [
+		{
+			"MaterialType": "ItemName.Iron Nugget",
+			"MaterialQuantity": 1
+		}
+	],
+	"RequiredSkills": [
+		{
+			"SkillName": "Blacksmithing",
+			"SkillLevel": 3
+		}
+	],
+	"StepThresholds": [
+		{
+			"ThresholdName": "Shoddy",
+			"ThresholdLevel": "0",
+			"ThresholdBonus": [
+				{
+					"ThresholdBonusName": "Toughness",
+					"ThresholdBonusValue": -1
+				}
+			]
+		},
+		{
+			"ThresholdName": "",
+			"ThresholdLevel": "50",
+			"ThresholdBonus": [
+				{
+					"ThresholdBonusName": "Toughness",
+					"ThresholdBonusValue": 1
+				}
+			]
+		},
+		{
+			"ThresholdName": "Good Quality",
+			"ThresholdLevel": "80",
+			"ThresholdBonus": [
+				{
+					"ThresholdBonusName": "Toughness",
+					"ThresholdBonusValue": 2
+				}
+			]
+		},
+		{
+			"ThresholdName": "Best Quality",
+			"ThresholdLevel": "95",
+			"ThresholdBonus": [
+				{
+					"ThresholdBonusName": "Toughness",
+					"ThresholdBonusValue": 5
+				}
+			]
+		}
+	],
+	"SkillSteps": [
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} begins to forge {TARGETNAME}."
+		},
+		{
+			"StepType": "CheckConsumeItems",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": "You do not have enough of the material \"{ITEMNAME}\" to complete the task.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 15,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} continues to forge {TARGETNAME}."
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 15,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "ConsumeItems",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": "You do not have enough \"{ITEMNAME}\" to complete the task.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 15,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} continues to forge {TARGETNAME}."
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 15,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "CreateObject",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"FailureOutput": "Failed to forge {TARGETNAME}",
+			"SuccessOutput": "You've forge \"{TARGETNAME}\" (it is located in the same place as you)."
+		}
+	]
+}

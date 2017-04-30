@@ -1,0 +1,34 @@
+﻿{
+	"RoomID": "Ravensmere.Town Centre.Tough And Sons Leather Goods Workshop",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"Outside": false,
+	"RoomDescription": "TBC",
+	"RoomExits": [
+		{
+			"Shortcut": "TAS",
+			"Description": "Tough & Sons Leather Goods",
+			"RoomID": "Ravensmere.Town Centre.Tough And Sons Leather Goods"
+		}
+	],
+	"RoomItems": [
+		{
+			"ItemID": "ToughsWorkbench",
+			"ItemName": "Workbench",
+			"SingularPronoun": "a",
+			"PluralName": "Workbenches",
+			"PluralPronoun": "some",
+			"ItemType": "tools",
+			"ItemFamily": "Workbench",
+			"ItemDescription": "A wooden workbench used for crafting items.",
+			"ItemWeight": 50,
+			"ItemSize": 50,
+			"HitPoints": 100000,
+			"MaxHitPoints": 100000,
+			"BaseDamage": 20,
+			"Toughness": 25,
+			"CanHoldOtherItems": false
+		}
+	]
+}

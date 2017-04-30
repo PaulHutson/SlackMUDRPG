@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Shoddy Leather Cutter",
+	"SingularPronoun": "a",
+	"PluralName": "Shoddy Leather Cutters",
+	"PluralPronoun": "some",
+	"ItemType": "tools",
+	"ItemFamily": "LeatherCutter",
+	"ItemDescription": "This shoddy leather cutter is used for things like Leatherwork.",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 50,
+	"MaxHitPoints": 50,
+	"BaseDamage": 1,
+	"Toughness": 3,
+	"CanHoldOtherItems": false
+}

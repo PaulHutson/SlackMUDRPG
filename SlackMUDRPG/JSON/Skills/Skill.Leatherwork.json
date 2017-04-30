@@ -1,0 +1,61 @@
+﻿{
+	"SkillType": {
+		"SkillTypeName": "Production",
+		"SkillTypeDescription": "Skills related to the production of items."
+	},
+	"SkillName": "Leatherwork",
+	"CanUseWithoutLearning": false,
+	"SkillDescription": "The ability to craft items made from leather.",
+	"SkillLearnText": "You've learnt how to craft things from leather.",
+	"LevelIncreaseText": "You feel you've gotten better at leatherwork.",
+	"ActivityType": "Leatherwork",
+	"BaseStat": "DEX",
+	"LevelMultiplier": 10,
+	"ImprovementSpeed": 10,
+	"Prerequisites": [
+		{
+			"IsSkill": false,
+			"SkillStatName": "DEX",
+			"PreReqLevel": 10
+		},
+		{
+			"IsSkill": false,
+			"SkillStatName": "INT",
+			"PreReqLevel": 5
+		}
+	],
+	"SkillSteps": [
+		{
+			"StepType": "EquippedObject",
+			"StepRequiredObject": "Family.LeatherCutter",
+			"RequiredObjectAmount": 1,
+			"ExtraData":  null,
+			"FailureOutput": "You don't have a leather cutter equipped.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "CheckObjectInLocation",
+			"StepRequiredObject": "Family.Workbench",
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+			"FailureOutput": "There is no workbench here.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "CheckReceipe",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": "Trait.Leatherwork",
+			"FailureOutput": "The item you're trying to make is not something you use leatherwork for.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "UseReceipe",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+			"FailureOutput": "Failed to craft {ITEMNAME}.",
+			"SuccessOutput": null
+		}
+	]
+}

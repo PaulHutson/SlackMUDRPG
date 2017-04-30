@@ -1,0 +1,66 @@
+﻿{
+	"RoomID": "Ravensmere.Town Centre.Tough And Sons Leather Goods",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"Outside": false,
+	"RoomDescription": "TBC",
+	"RoomExits": [
+		{
+			"Shortcut": "TLW",
+			"Description": "Toughs Leatherwork Workshop",
+			"RoomID": "Ravensmere.Town Centre.Tough And Sons Leather Goods Workshop"
+		},
+		{
+			"Shortcut": "TS",
+			"Description": "The Shambles",
+			"RoomID": "Ravensmere.Town Centre.The Shambles"
+		}
+	],
+	"RoomItems": [
+		{
+			"ItemID": "ToughsWoodenChest",
+			"SingularPronoun": "a",
+			"ItemName": "Wooden Chest",
+			"PluralPronoun": "some",
+			"PluralName": "Wooden Chests",
+			"ItemType": "Container",
+			"ItemFamily": "Chest",
+			"ItemDescription": "This solid wooden chest is great for storing items but not very portable.",
+			"ItemWeight": 100,
+			"ItemCapacity": 50,
+			"ItemSize": 50,
+			"HitPoints": 50000,
+			"MaxHitPoints": 50000,
+			"BaseDamage": 20,
+			"Toughness": 5,
+			"HeldItems": null
+		}
+	],
+	"NPCShopItems": {
+		"ShopInventory": [
+			{
+				"ItemNumber": 1,
+				"Item": {
+					"ItemName": "Shoddy Leather Cutter",
+					"SingularPronoun": "a",
+					"PluralName": "Shoddy Leather Cutters",
+					"PluralPronoun": "some",
+					"ItemType": "tools",
+					"ItemFamily": "LeatherCutter",
+					"ItemDescription": "This shoddy leather cutter is used for things like Leatherwork.",
+					"ItemWeight": 1,
+					"ItemSize": 1,
+					"HitPoints": 50,
+					"MaxHitPoints": 50,
+					"BaseDamage": 1,
+					"Toughness": 3,
+					"CanHoldOtherItems": false
+				},
+				"AmountForSale": 0,
+				"UnlimitedAvailable": true,
+				"Cost": 1
+			}
+		]
+	}
+}

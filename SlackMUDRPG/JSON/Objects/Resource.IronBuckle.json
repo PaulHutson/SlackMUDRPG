@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Iron Buckle",
+	"SingularPronoun": "an",
+	"PluralName": "Iron Buckles",
+	"PluralPronoun": "some",
+	"ItemType": "Resource",
+	"ItemFamily": "Buckle",
+	"ItemDescription": "A simple iron buckle, could be used to make a belt.",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 5,
+	"MaxHitPoints": 5,
+	"BaseDamage": 0.001,
+	"Toughness": 3,
+	"CanHoldOtherItems": false
+}
