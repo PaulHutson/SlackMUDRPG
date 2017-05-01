@@ -4,7 +4,7 @@
 		"SkillTypeDescription": "Skills related to the production of items."
 	},
 	"SkillName": "Leatherwork",
-	"CanUseWithoutLearning": false,
+	"CanUseWithoutLearning": true,
 	"SkillDescription": "The ability to craft items made from leather.",
 	"SkillLearnText": "You've learnt how to craft things from leather.",
 	"LevelIncreaseText": "You feel you've gotten better at leatherwork.",
