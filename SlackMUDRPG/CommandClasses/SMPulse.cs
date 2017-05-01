@@ -162,11 +162,28 @@ namespace SlackMUDRPG.CommandClasses
 
 			// TODO Randonly decide whether the weather effect will change.
 			
-									
-			// Work out the end time
-			// If less than two minutes
-			// Let the thread sleep for the remainder of the time
-			int timeToWait = Utility.Utils.GetDifferenceBetweenUnixTimestamps(currentUnixTime, Utility.Utils.GetUnixTime());
+
+            // Find all players who're a bit hurt and logged in.
+            List<SMCharacter> lsmc = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+            foreach (SMCharacter c in lsmc)
+            {
+                if (c.Attributes.HitPoints < c.Attributes.MaxHitPoints)
+                {
+                    Random rNumber = new Random();
+                    double rDouble = (rNumber.NextDouble() * 100);
+
+                    if (rDouble <= 10)
+                    {
+                        c.Attributes.HitPoints++;
+                    }
+                }
+            }
+            HttpContext.Current.Application["SMCharacters"] = lsmc;
+
+            // Work out the end time
+            // If less than two minutes
+            // Let the thread sleep for the remainder of the time
+            int timeToWait = Utility.Utils.GetDifferenceBetweenUnixTimestamps(currentUnixTime, Utility.Utils.GetUnixTime());
 
 			// If the time between the pulses is less than two minutes...
 			if (timeToWait < (120 * 1000))
