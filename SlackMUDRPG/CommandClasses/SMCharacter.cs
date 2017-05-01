@@ -2460,6 +2460,11 @@ namespace SlackMUDRPG.CommandClasses
 			
 			ExpireResponse();
 
+            if (this.NPCsWaitingForResponses == null)
+            {
+                this.NPCsWaitingForResponses = new List<AwaitingResponseFromCharacter>();
+            }
+
 			// If there are still characters awaiting responses
 			if (this.NPCsWaitingForResponses.Count() > 0)
 			{
@@ -2487,8 +2492,8 @@ namespace SlackMUDRPG.CommandClasses
 
 				}
 			}
-
-			if (!respondedToPlayer)
+            
+            if (!respondedToPlayer)
 			{
 				this.sendMessageToPlayer(this.Formatter.Italic("Can not find a waiting response with that shortcut... did you wait too long to respond?"));
 			}
@@ -2525,6 +2530,38 @@ namespace SlackMUDRPG.CommandClasses
 				this.SaveToFile();
 			}
 		}
+
+        public void HailNPC(string hailTarget)
+        {
+            // First get all the NPCs in the room with that name
+            SMNPC npc = this.GetRoom().GetNPCs().FirstOrDefault(n => (n.FirstName.ToLower() == hailTarget.ToLower()) || (n.LastName.ToLower() == hailTarget.ToLower()) || (n.GetFullName().ToLower() == hailTarget.ToLower()) || (n.FamilyType.ToLower() == hailTarget.ToLower()));
+
+            // Spoken to someone
+            bool spokenToSomeone = false;
+
+            // If there is someone in the list
+            if (npc != null)
+            {
+                this.sendMessageToPlayer("[i]" + this.GetFullName() + " says:[/i] \"Hail " + hailTarget + "\"");
+                npc.RespondToAction("PlayerCharacter.Hail", this);
+                spokenToSomeone = true;
+            }
+            else // Check if there is a player of the name in the room.
+            {
+                SMCharacter smc = this.GetRoom().GetPeople().FirstOrDefault(p => (p.FirstName.ToLower() == hailTarget.ToLower()) || (p.LastName.ToLower() == hailTarget.ToLower()) || (p.GetFullName().ToLower() == hailTarget.ToLower()));
+
+                if (smc != null)
+                {
+                    this.Say("Hail " + hailTarget);
+                    spokenToSomeone = true;
+                }
+            }
+
+            if (!spokenToSomeone)
+            {
+                this.sendMessageToPlayer("[i]Can not hail \"" + hailTarget + "\"[/i]");
+            }
+        }
 
 		#endregion
 

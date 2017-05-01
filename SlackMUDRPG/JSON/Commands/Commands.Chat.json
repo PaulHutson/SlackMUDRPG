@@ -76,5 +76,18 @@
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "{name|lower} Y (would be responding Y to a question from an NPC).",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Chat",
+		"CommandName": "hail, h",
+		"CommandDescription": "Hails another player or NPC in the game.",
+		"CommandSyntax": "{name|lower} <option shortcut>",
+		"ParamsExpression": "{.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "HailNPC",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower} Paul Hutson or {name|lower} Paul",
+		"RequiredSkill": null
 	}
 ]

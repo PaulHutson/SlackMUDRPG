@@ -104,8 +104,21 @@
 	"PronounSingular": "a",
 	"PronounMultiple": "some",
   "NPCResponses": [
-		{
-			"ResponseType": "PlayerCharacter.Enter",
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Enter.1"
+        }
+      ]
+    },
+    {
+			"ResponseType": "PlayerCharacter.Hail",
 			"ResponseTimeOfDay": "all",
 			"AdditionalData": null,
 			"Faction": null,
@@ -113,7 +126,7 @@
 			"ResponseSteps": [
 				{
 					"ResponseStepType": "Conversation",
-					"ResponseStepData": "Enter.1"
+					"ResponseStepData": "Hail.1"
 				}
 			]
 		},
@@ -182,19 +195,31 @@
       "ConversationStep": [
         {
           "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks up briefly as {playercharacter} enters... then looks back down to continue hammering on a sword he's working on.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Hail",
+      "ConversationStep": [
+        {
+          "StepID": "1",
           "Scope": "saytoplayer",
           "AdditionalData": "Hello - what can I do you for?",
           "NextStep": null,
           "ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "LTB",
-							"ResponseOptionText": "Learn to Blacksmith",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "LearnToBlacksmith.1"
-								}
-							],
+            {
+              "ResponseOptionShortcut": "LTB",
+              "ResponseOptionText": "Learn to Blacksmith",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "LearnToBlacksmith.1"
+                }
+              ],
               "PreRequisites": [
                 {
                   "Type": "HasNotDoneQuest",
@@ -205,22 +230,22 @@
                   "AdditionalData": "The Magic Of Metal"
                 }
               ]
-						},
-						{
-							"ResponseOptionShortcut": "SHOP",
-							"ResponseOptionText": "Do you have any items for sale?",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Shop.1"
-								}
-							]
-						}
-					]
+            },
+            {
+              "ResponseOptionShortcut": "SHOP",
+              "ResponseOptionText": "Do you have any items for sale?",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.1"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
-		{
+    {
       "ConversationID": "LearnToBlacksmith",
       "ConversationStep": [
         {
@@ -386,7 +411,7 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "Leave",
       "ConversationStep": [
         {
@@ -398,7 +423,7 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "Shop",
       "ConversationStep": [
         {
@@ -449,17 +474,17 @@
           "AdditionalData": "Which item would you like? [i](Enter the item number from the list above)[/i]",
           "NextStep": null,
           "ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "{variable}",
-							"ResponseOptionText": "{variable}",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Shop.5"
-								}
-							]
-						}
-					]
+            {
+              "ResponseOptionShortcut": "{variable}",
+              "ResponseOptionText": "{variable}",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.5"
+                }
+              ]
+            }
+          ]
         },
         {
           "StepID": "5",
@@ -512,7 +537,7 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "ShopLeave",
       "ConversationStep": [
         {

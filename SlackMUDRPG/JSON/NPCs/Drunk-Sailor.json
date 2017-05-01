@@ -126,6 +126,19 @@
       ]
     },
     {
+      "ResponseType": "PlayerCharacter.Hail",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 30,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Examines.1"
+        }
+      ]
+    },
+    {
       "ResponseType": "PlayerCharacter.Attack",
       "ResponseTimeOfDay": "all",
       "AdditionalData": null,

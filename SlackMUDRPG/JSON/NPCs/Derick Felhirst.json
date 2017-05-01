@@ -105,6 +105,19 @@
       ]
     },
     {
+      "ResponseType": "PlayerCharacter.Hail",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Hail.1"
+        }
+      ]
+    },
+    {
       "ResponseType": "PlayerCharacter.Leave",
       "ResponseTimeOfDay": "all",
       "AdditionalData": null,
@@ -182,7 +195,19 @@
         {
           "StepID": "1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "looks up and smiles towards you as you enter the Tannery",
+          "AdditionalData": "looks up and smiles towards you as you enter the Tannery then looks back down to continue with his task at hand.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Hail",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "smiles towards you",
           "NextStep": "2.1",
           "ResponseOptions": null
         },
@@ -594,7 +619,7 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "Shop",
       "ConversationStep": [
         {
@@ -645,17 +670,17 @@
           "AdditionalData": "What'll it be? [i](Enter the item number from the list above)[/i]",
           "NextStep": null,
           "ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "{variable}",
-							"ResponseOptionText": "{variable}",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Shop.5"
-								}
-							]
-						}
-					]
+            {
+              "ResponseOptionShortcut": "{variable}",
+              "ResponseOptionText": "{variable}",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.5"
+                }
+              ]
+            }
+          ]
         },
         {
           "StepID": "5",
@@ -708,7 +733,7 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "ShopLeave",
       "ConversationStep": [
         {

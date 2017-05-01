@@ -82,8 +82,21 @@
 	"PronounSingular": "a",
 	"PronounMultiple": "some",
   "NPCResponses": [
-		{
-			"ResponseType": "PlayerCharacter.Enter",
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Enter.1"
+        }
+      ]
+    },
+    {
+			"ResponseType": "PlayerCharacter.Hail",
 			"ResponseTimeOfDay": "all",
 			"AdditionalData": null,
 			"Faction": null,
@@ -91,7 +104,7 @@
 			"ResponseSteps": [
 				{
 					"ResponseStepType": "Conversation",
-					"ResponseStepData": "Enter.1"
+					"ResponseStepData": "Hail.2"
 				}
 			]
 		},
@@ -130,9 +143,14 @@
           "StepID": "1",
           "Scope": "saytoplayer",
           "AdditionalData": "Welcome to the Scale Brewers Tavern!  Please take a seat and let me know if you want anything from the bar...",
-          "NextStep": "2.1",
+          "NextStep": null,
           "ResponseOptions": null
-        },
+        }
+      ]
+    },
+    {
+      "ConversationID": "Hail",
+      "ConversationStep": [
         {
           "StepID": "2",
           "Scope": "emotetoplayer",
@@ -153,31 +171,31 @@
           "AdditionalData": "Would you like to see what's on offer now?",
           "NextStep": null,
           "ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "Y",
-							"ResponseOptionText": "Yes",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Shop.2"
-								}
-							]
-						},
-						{
-							"ResponseOptionShortcut": "N",
-							"ResponseOptionText": "No",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "ShopLeave.NotNow"
-								}
-							]
-						}
-					]
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.2"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "ShopLeave.NotNow"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
-		{
+    {
       "ConversationID": "Leave",
       "ConversationStep": [
         {
@@ -189,7 +207,7 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "Shop",
       "ConversationStep": [
         {
@@ -240,17 +258,17 @@
           "AdditionalData": "Can you tell me which item you'd like to buy? [i](Enter the item number from the list above)[/i]",
           "NextStep": null,
           "ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "{variable}",
-							"ResponseOptionText": "{variable}",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Shop.5"
-								}
-							]
-						}
-					]
+            {
+              "ResponseOptionShortcut": "{variable}",
+              "ResponseOptionText": "{variable}",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.5"
+                }
+              ]
+            }
+          ]
         },
         {
           "StepID": "5",
@@ -310,7 +328,7 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "ShopLeave",
       "ConversationStep": [
         {

@@ -135,6 +135,19 @@
       ]
     },
     {
+      "ResponseType": "PlayerCharacter.Hail",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Hail.1"
+        }
+      ]
+    },
+    {
       "ResponseType": "PlayerCharacter.Attack",
       "ResponseTimeOfDay": "all",
       "AdditionalData": null,
@@ -155,7 +168,19 @@
         {
           "StepID": "1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "looks up from reading a book.",
+          "AdditionalData": "looks to be deep in study of a ledger of some sort in front of him..",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Hail",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks up from reading the ledger.",
           "NextStep": "2.1",
           "ResponseOptions": null
         },
@@ -166,15 +191,15 @@
           "NextStep": "3.1",
           "ResponseOptions": null
         },
-				{
-					"StepID": "3",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "gestures at the book he was reading...",
-					"NextStep": "4.1",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "4",
+        {
+          "StepID": "3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "gestures at the book he was reading...",
+          "NextStep": "4.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
           "Scope": "saytoplayer",
           "AdditionalData": "Would you like to challenge someone?",
           "NextStep": null,
@@ -200,14 +225,14 @@
               ]
             }
           ]
-				},
-				{
-					"StepID": "NoChallenge",
-					"Scope": "saytoplayer",
-					"AdditionalData": "Very well, let me know if you would like to later.",
-					"NextStep": null,
-					"ResponseOptions": null
-				},
+        },
+        {
+          "StepID": "NoChallenge",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Very well, let me know if you would like to later.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
         {
           "StepID": "Challenge1",
           "Scope": "saytoplayer",
@@ -235,10 +260,10 @@
         },
         {
           "StepID": "Challenge3NotFound",
-					"Scope": "saytoplayer",
-					"AdditionalData": "Couldn't find anyone by that name, do you want to try again?",
-					"NextStep": null,
-					"ResponseOptions": [
+          "Scope": "saytoplayer",
+          "AdditionalData": "Couldn't find anyone by that name, do you want to try again?",
+          "NextStep": null,
+          "ResponseOptions": [
             {
               "ResponseOptionShortcut": "Y",
               "ResponseOptionText": "Yes",
@@ -262,19 +287,19 @@
           ]
         },
         {
-					"StepID": "Challenge3",
-					"Scope": "saytoplayer",
-					"AdditionalData": "Very well, {response}, will you accept the challenge?",
-					"NextStep": "Challenge4.0",
-					"ResponseOptions": null
-				},
+          "StepID": "Challenge3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Very well, {response}, will you accept the challenge?",
+          "NextStep": "Challenge4.0",
+          "ResponseOptions": null
+        },
         {
-					"StepID": "Challenge4",
-					"Scope": "partyinvite",
-					"AdditionalData": "suppressed",
-					"NextStep": "Challenge5.0",
-					"ResponseOptions": null
-				},
+          "StepID": "Challenge4",
+          "Scope": "partyinvite",
+          "AdditionalData": "suppressed",
+          "NextStep": "Challenge5.0",
+          "ResponseOptions": null
+        },
         {
           "StepID": "Challenge5",
           "Scope": "startconversation",
