@@ -89,6 +89,19 @@
       ]
     },
     {
+      "ResponseType": "PlayerCharacter.Hail",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Hail.1"
+        }
+      ]
+    },
+    {
       "ResponseType": "PlayerCharacter.Leave",
       "ResponseTimeOfDay": "all",
       "AdditionalData": null,
@@ -128,7 +141,19 @@
         {
           "StepID": "1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "looks to be concentrating when his eyes flutter open and each scarlet butterfly puffs into smoke.  He looks at you and coughs into his fist.",
+          "AdditionalData": "looks to be concentrating while some scarlet butterflies float in front of him.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Hail",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "seems to wake as his eyes flutter open and each scarlet butterfly puffs into smoke.  He looks at you and coughs into his fist.",
           "NextStep": "2.4",
           "ResponseOptions": null
         },
@@ -361,7 +386,7 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "Shop",
       "ConversationStep": [
         {
@@ -412,17 +437,17 @@
           "AdditionalData": "If you'd like to point out which items... [i](Enter the number of the item)[/i]",
           "NextStep": null,
           "ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "{variable}",
-							"ResponseOptionText": "{variable}",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Shop.5"
-								}
-							]
-						}
-					]
+            {
+              "ResponseOptionShortcut": "{variable}",
+              "ResponseOptionText": "{variable}",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Shop.5"
+                }
+              ]
+            }
+          ]
         },
         {
           "StepID": "5",
@@ -475,7 +500,7 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "ShopLeave",
       "ConversationStep": [
         {
@@ -494,7 +519,7 @@
         }
       ]
     },
-		{
+    {
       "ConversationID": "RootOfTheProblem",
       "ConversationStep": [
         {

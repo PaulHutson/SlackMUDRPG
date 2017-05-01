@@ -369,6 +369,7 @@
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Tough And Sons Leather Goods.json" />
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Tough And Sons Leather Goods Workshop.json" />
     <Content Include="JSON\NPCs\Allan Tough.json" />
+    <Content Include="JSON\NPCs\Noble-Generic-Harried.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />

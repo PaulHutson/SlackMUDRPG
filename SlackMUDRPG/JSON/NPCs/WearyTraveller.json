@@ -129,6 +129,19 @@
           "ResponseStepData": "Examines.1"
         }
       ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Hail",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 50,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "GeneralChitChat.Choice"
+        }
+      ]
     }
   ],
   "NPCConversationStructures": [

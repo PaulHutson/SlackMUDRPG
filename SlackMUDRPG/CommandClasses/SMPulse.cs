@@ -162,11 +162,38 @@ namespace SlackMUDRPG.CommandClasses
 
 			// TODO Randonly decide whether the weather effect will change.
 			
-									
-			// Work out the end time
-			// If less than two minutes
-			// Let the thread sleep for the remainder of the time
-			int timeToWait = Utility.Utils.GetDifferenceBetweenUnixTimestamps(currentUnixTime, Utility.Utils.GetUnixTime());
+
+            // Find all players
+            List<SMCharacter> lsmc = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+            foreach (SMCharacter c in lsmc.ToList())
+            {
+                // ...  who're a bit hurt and logged in.
+                if (c.Attributes.HitPoints < c.Attributes.MaxHitPoints)
+                {
+                    Random rNumber = new Random();
+                    double rDouble = (rNumber.NextDouble() * 100);
+
+                    if (rDouble <= 5)
+                    {
+                        c.Attributes.HitPoints++;
+                        c.SaveToApplication();
+                        c.SaveToFile();
+                    }
+                }
+
+                // ... remove any daily quests that have expired.
+                if (c.QuestLog != null)
+                {
+                    c.QuestLog.RemoveAll(qs => ((qs.Completed == true) && (qs.Daily == true) && (Utility.Utils.GetDifferenceBetweenUnixTimestamps(qs.LastDateUpdated, Utility.Utils.GetUnixTime())>86400)));
+                    c.SaveToApplication();
+                    c.SaveToFile();
+                }
+            }
+
+            // Work out the end time
+            // If less than two minutes
+            // Let the thread sleep for the remainder of the time
+            int timeToWait = Utility.Utils.GetDifferenceBetweenUnixTimestamps(currentUnixTime, Utility.Utils.GetUnixTime());
 
 			// If the time between the pulses is less than two minutes...
 			if (timeToWait < (120 * 1000))

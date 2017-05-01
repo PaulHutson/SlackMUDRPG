@@ -54,14 +54,27 @@
 	{
 		"CommandFamily": "Chat",
 		"CommandName": "ooc",
-		"CommandDescription": "Enables the player to talk in the region or optionally globally (if you write \"global\" at the end.",
-		"CommandSyntax": "ooc <whatever-you-want> {global}",
-		"ParamsExpression": "{.+} {global?}",
+		"CommandDescription": "Enables the player to talk in the region",
+		"CommandSyntax": "ooc <whatever-you-want>",
+		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "SendOOC",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "ooc I need help!",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Chat",
+		"CommandName": "oocg, oocglobal, ooc global",
+		"CommandDescription": "Enables the player to talk to all players globally",
+		"CommandSyntax": "{name|lower} <whatever-you-want>",
+		"ParamsExpression": "{.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "SendOOCGlobal",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower} I need help!",
 		"RequiredSkill": null
 	},
 	{
@@ -75,6 +88,19 @@
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "{name|lower} Y (would be responding Y to a question from an NPC).",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Chat",
+		"CommandName": "hail, h",
+		"CommandDescription": "Hails another player or NPC in the game.",
+		"CommandSyntax": "{name|lower} <option shortcut>",
+		"ParamsExpression": "{.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "HailNPC",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower} Paul Hutson or {name|lower} Paul",
 		"RequiredSkill": null
 	}
 ]

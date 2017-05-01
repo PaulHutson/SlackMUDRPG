@@ -1112,6 +1112,7 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					smi.ItemName = ReplaceTags(smi.ItemName, targetItem);
                     smi.PluralName = ReplaceTags(smi.PluralName, targetItem);
+                    smi.ItemDescription = ReplaceTags(smi.ItemDescription, targetItem);
                     smr.AddItem(smi);
 					smr.Announce(this.Formatter.Italic($"{smc.GetFullName()} creates {smi.SingularPronoun} {smi.ItemName}"));
 				}
@@ -1430,8 +1431,10 @@ namespace SlackMUDRPG.CommandClasses
 				}
 			}
 
-			// Return true from this
-			return true;
+            SkillIncrease(smc, true);
+
+            // Return true from this
+            return true;
 		}
 
 		private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetName, string objectDestroyedName)

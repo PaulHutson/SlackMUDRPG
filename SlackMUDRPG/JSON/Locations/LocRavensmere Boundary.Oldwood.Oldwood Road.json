@@ -7,10 +7,10 @@
 	"RoomDescription": "The name seems ironic as this wood stretching out from this road seems far from old. Massive stumps protrude from the ground flanked by recently planted saplings.",
 	"RoomExits": [
     {
-      "Shortcut": "RGS",
-      "Description": "Ravensgate South (road)",
-      "RoomID": "Ravensmere.Industrial Quarter.Ravens South"
-    },
+			"Shortcut": "RGS",
+			"Description": "Ravensgate South",
+			"RoomID": "Ravensmere.Industrial Quarter.Ravensgate South"
+		},
     {
 			"Shortcut": "OP",
 			"Description": "Oldwood Plains",

@@ -659,32 +659,23 @@ namespace SlackMUDRPG.CommandClasses
 		public void Who()
 		{
 			// Construct the string
-			string whoOnlineString = this.Formatter.Bold("People online:");
+			string whoOnlineString = this.Formatter.Bold("People online:",1);
 
 			// Get the list of all online
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
 			// Loop around the characters and add them to the who online list
-			bool isFirst = true;
 			string whoList = "";
 			foreach (SMCharacter smc in smcs)
 			{
-				if (isFirst)
-				{
-					isFirst = false;
-				}
-				else
-				{
-					whoList += ", ";
-				}
-				whoList += this.Formatter.General(smc.GetFullName());
+				whoList += this.Formatter.ListItem(smc.GetFullName() + " (" + smc.CalculateLevel() + ")");
 			}
 
 			// Add the list to the output string.
 			whoOnlineString += this.Formatter.General(whoList);
 
 			// Quantify the number of people online presently
-			whoOnlineString += this.Formatter.Italic(smcs.Count.ToString() + " currently online");
+			whoOnlineString += this.Formatter.Italic(smcs.Count.ToString() + " currently online",1);
 
 			// Send the message back to the player
 			this.sendMessageToPlayer(whoOnlineString);
@@ -2376,21 +2367,16 @@ namespace SlackMUDRPG.CommandClasses
 
 		/// <summary>
 		/// Sends an ooc message to the zone you're in ...
-		/// ... or globally if the "global" bool is true
 		/// </summary>
 		/// <param name="message">the message being sent to the player</param>
-		/// <param name="global">If "global" is sent into this it will send the message globally</param>
-		public void SendOOC(string message, string global = "")
+		public void SendOOC(string message)
 		{
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			string region = "GLOBAL";
 			string currentRoomName = this.GetRoom().RoomID;
-			if (global.ToLower() == "global")
-			{
-				string currentArea = currentRoomName.Substring(0, currentRoomName.IndexOf('.') - 1);
-				region = currentArea;
-				smcs = smcs.FindAll(smc => smc.RoomID.Substring(0, smc.RoomID.IndexOf('.')) == currentRoomName);
-			}
+            string currentArea = currentRoomName.Substring(0, currentRoomName.IndexOf('.'));
+			region = currentArea;
+			smcs = smcs.FindAll(smc => smc.RoomID.Substring(0, smc.RoomID.IndexOf('.')) == currentArea);
 
 			foreach (SMCharacter smc in smcs)
 			{
@@ -2398,16 +2384,30 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
-		#endregion
-
-		#region "NPC Interaction"
-
-		/// <summary>
-		/// Add an awaiting response item
+        /// <summary>
+		/// Sends an ooc message globally
 		/// </summary>
-		/// <param name="NPCID">The id of the NPC awaiting the response</param>
-		/// <param name="timeOut">The timeout for the response (unix time) response</param>
-		public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut, string roomID = null)
+		/// <param name="message">the message being sent to the player</param>
+        public void SendOOCGlobal(string message)
+        {
+            List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+            string currentRoomName = this.GetRoom().RoomID;
+            foreach (SMCharacter smc in smcs)
+            {
+                smc.sendMessageToPlayer(this.Formatter.Italic(this.GetFullName() + " OOC[" + currentRoomName + "]: " + message));
+            }
+        }
+
+        #endregion
+
+        #region "NPC Interaction"
+
+        /// <summary>
+        /// Add an awaiting response item
+        /// </summary>
+        /// <param name="NPCID">The id of the NPC awaiting the response</param>
+        /// <param name="timeOut">The timeout for the response (unix time) response</param>
+        public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut, string roomID = null)
 		{
 			if (this.NPCsWaitingForResponses == null)
 			{
@@ -2460,6 +2460,11 @@ namespace SlackMUDRPG.CommandClasses
 			
 			ExpireResponse();
 
+            if (this.NPCsWaitingForResponses == null)
+            {
+                this.NPCsWaitingForResponses = new List<AwaitingResponseFromCharacter>();
+            }
+
 			// If there are still characters awaiting responses
 			if (this.NPCsWaitingForResponses.Count() > 0)
 			{
@@ -2487,8 +2492,8 @@ namespace SlackMUDRPG.CommandClasses
 
 				}
 			}
-
-			if (!respondedToPlayer)
+            
+            if (!respondedToPlayer)
 			{
 				this.sendMessageToPlayer(this.Formatter.Italic("Can not find a waiting response with that shortcut... did you wait too long to respond?"));
 			}
@@ -2526,6 +2531,38 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
+        public void HailNPC(string hailTarget)
+        {
+            // First get all the NPCs in the room with that name
+            SMNPC npc = this.GetRoom().GetNPCs().FirstOrDefault(n => (n.FirstName.ToLower() == hailTarget.ToLower()) || (n.LastName.ToLower() == hailTarget.ToLower()) || (n.GetFullName().ToLower() == hailTarget.ToLower()) || (n.FamilyType.ToLower() == hailTarget.ToLower()));
+
+            // Spoken to someone
+            bool spokenToSomeone = false;
+
+            // If there is someone in the list
+            if (npc != null)
+            {
+                this.sendMessageToPlayer("[i]" + this.GetFullName() + " says:[/i] \"Hail " + hailTarget + "\"");
+                npc.RespondToAction("PlayerCharacter.Hail", this);
+                spokenToSomeone = true;
+            }
+            else // Check if there is a player of the name in the room.
+            {
+                SMCharacter smc = this.GetRoom().GetPeople().FirstOrDefault(p => (p.FirstName.ToLower() == hailTarget.ToLower()) || (p.LastName.ToLower() == hailTarget.ToLower()) || (p.GetFullName().ToLower() == hailTarget.ToLower()));
+
+                if (smc != null)
+                {
+                    this.Say("Hail " + smc.GetFullName());
+                    spokenToSomeone = true;
+                }
+            }
+
+            if (!spokenToSomeone)
+            {
+                this.sendMessageToPlayer("[i]Can not hail \"" + hailTarget + "\"[/i]");
+            }
+        }
+
 		#endregion
 
 		#region "Quests"
@@ -2549,8 +2586,8 @@ namespace SlackMUDRPG.CommandClasses
 				smqs.LastDateUpdated = Utility.Utils.GetUnixTime();
 				smqs.QuestName = smq.QuestName;
 				smqs.QuestStep = smq.QuestSteps.First().Name;
-
-
+                smqs.Daily = smq.Daily;
+                
 				this.QuestLog.Add(smqs);
 
 				// Tell the player the new quest has been added

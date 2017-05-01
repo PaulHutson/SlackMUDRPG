@@ -100,15 +100,15 @@
     }
   ],
   "ResponseURL": null,
-  "NPCType": "DerickFelhirst",
-  "FamilyType": "Tanner",
+  "NPCType": "CrustyBateman",
+  "FamilyType": "Fisherman",
   "IsGeneric": false,
   "WalkingType": "walk",
   "PronounSingular": "a",
   "PronounMultiple": "some",
   "NPCResponses": [
     {
-      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseType": "PlayerCharacter.Hail",
       "ResponseTimeOfDay": "all",
       "AdditionalData": null,
       "Faction": null,
