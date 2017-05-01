@@ -17,7 +17,7 @@ namespace SlackMUDRPG
 		protected void Application_Start(object sender, EventArgs e)
 		{
             // Rebuild the char names list json
-            new SMAccountHelper().RebuildCharacterJSONFile();
+            // new SMAccountHelper().RebuildCharacterJSONFile();
 
             // Websocket 
             WebSocketCollection wsClients = new WebSocketCollection();
