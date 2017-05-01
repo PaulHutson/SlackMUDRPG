@@ -2552,7 +2552,7 @@ namespace SlackMUDRPG.CommandClasses
 
                 if (smc != null)
                 {
-                    this.Say("Hail " + hailTarget);
+                    this.Say("Hail " + smc.GetFullName());
                     spokenToSomeone = true;
                 }
             }
