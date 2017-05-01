@@ -86,6 +86,12 @@
 			"MaxNumber": 1,
 			"SpawnFrequency": 10,
 			"Unique": false
-		}
+		},
+    {
+      "TypeOfNPC": "Noble-Generic-Harried",
+      "MaxNumber": 1,
+      "SpawnFrequency": 10,
+      "Unique": true
+    }
 	]
 }

@@ -1,0 +1,170 @@
+﻿{
+  "firstname": "Harried-Looking",
+  "lastname": "Noble",
+  "description": "Constantly glancing around, apparently searching for landmarks to navigate the city streets, this person is obviously unused to traveling alone. They’re practised at maintaining a neutral expression, but there’s a slight frown and puckering of the lips that can’t quite be concealed. Short, well-groomed hair and an outfit decorated with silver fringes indicate that this is a Ravensmere noble of some sort, although their exact station is unclear; whatever it may be, they cannot be too important, else they would certainly have an escort to guide them through the city. Perhaps a student, usually cloistered away in the library, given the bags underneath their eyes.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 30,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "Harried-Looking-Noble",
+  "RoomID": "IsSpawned",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 12,
+    "int": 8,
+    "chr": 8,
+    "dex": 10,
+    "wp": 10,
+    "ft": 20,
+    "hp": 20,
+    "maxhp": 20,
+    "SocialStanding": 15
+  },
+  "Skills": [
+    {
+      "SkillName": "Sword Use",
+      "SkillLevel": 15
+    },
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 15
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 15
+    }
+  ],
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+	"NPCType": "Noble-Generic-Harried",
+	"FamilyType": "Noble",
+	"IsGeneric": false,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.ExaminesThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 50,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Examines.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Attack",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Attack.1"
+				},
+				{
+          "ResponseStepType": "LeaveDeSpawn",
+          "ResponseStepData": null
+        }
+      ]
+    },
+    {
+      "ResponseType": "Pulse",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "AllPeople",
+      "Faction": null,
+      "Frequency": 90,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "LeaveDeSpawn",
+          "ResponseStepData": null
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "Examines",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Yes? What do you want?",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Attack",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "shout",
+          "AdditionalData": "GUARDS!",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}
