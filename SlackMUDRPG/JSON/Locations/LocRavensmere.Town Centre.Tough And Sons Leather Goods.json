@@ -60,7 +60,72 @@
 				"AmountForSale": 0,
 				"UnlimitedAvailable": true,
 				"Cost": 1
-			}
+			},
+			{
+				"ItemNumber": 2,
+				"Item": {
+					"SingularPronoun": "some",
+					"ItemName": "string",
+					"PluralPronoun": "some",
+					"PluralName": "string",
+					"ItemType": "String",
+					"ItemFamily": "String",
+					"ItemDescription": "A small amount of string",
+					"ItemWeight": 1,
+					"ItemSize": 1,
+					"HitPoints": 0,
+					"MaxHitPoints": 0,
+					"BaseDamage": 0.00000001,
+					"Toughness": 0
+				},
+				"AmountForSale": 0,
+				"UnlimitedAvailable": true,
+				"Cost": 3
+			},
+			{
+				"ItemNumber": 3,
+				"Item": {
+					"ItemName": "Iron Buckle",
+					"SingularPronoun": "an",
+					"PluralName": "Iron Buckles",
+					"PluralPronoun": "some",
+					"ItemType": "Resource",
+					"ItemFamily": "Buckle",
+					"ItemDescription": "A simple iron buckle, could be used to make a belt.",
+					"ItemWeight": 1,
+					"ItemSize": 1,
+					"HitPoints": 5,
+					"MaxHitPoints": 5,
+					"BaseDamage": 0.001,
+					"Toughness": 3,
+					"CanHoldOtherItems": false
+				},
+				"AmountForSale": 0,
+				"UnlimitedAvailable": true,
+				"Cost": 25
+			},
+			{
+				"ItemNumber": 4,
+				"Item": {
+					"ItemName": "Leather Strip",
+					"SingularPronoun": "a",
+					"PluralName": "Leather Strips",
+					"PluralPronoun": "some",
+					"ItemType": "resource",
+					"ItemFamily": "Leather",
+					"ItemDescription": "A strip of leather ready for use",
+					"ItemWeight": 1,
+					"ItemSize": 1,
+					"HitPoints": 2,
+					"MaxHitPoints": 2,
+					"BaseDamage": 0.001,
+					"Toughness": 3,
+					"CanHoldOtherItems": false
+				},
+				"AmountForSale": 0,
+				"UnlimitedAvailable": true,
+				"Cost": 8
+			},
 		]
 	}
 }
