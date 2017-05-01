@@ -1431,8 +1431,10 @@ namespace SlackMUDRPG.CommandClasses
 				}
 			}
 
-			// Return true from this
-			return true;
+            SkillIncrease(smc, true);
+
+            // Return true from this
+            return true;
 		}
 
 		private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetName, string objectDestroyedName)
