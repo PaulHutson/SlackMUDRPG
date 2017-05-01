@@ -668,14 +668,14 @@ namespace SlackMUDRPG.CommandClasses
 			string whoList = "";
 			foreach (SMCharacter smc in smcs)
 			{
-				whoList += this.Formatter.General(smc.GetFullName() + " (" + smc.CalculateLevel() + ")",1);
+				whoList += this.Formatter.ListItem(smc.GetFullName() + " (" + smc.CalculateLevel() + ")");
 			}
 
 			// Add the list to the output string.
 			whoOnlineString += this.Formatter.General(whoList);
 
 			// Quantify the number of people online presently
-			whoOnlineString += this.Formatter.Italic(smcs.Count.ToString() + " currently online");
+			whoOnlineString += this.Formatter.Italic(smcs.Count.ToString() + " currently online",1);
 
 			// Send the message back to the player
 			this.sendMessageToPlayer(whoOnlineString);
@@ -2586,8 +2586,8 @@ namespace SlackMUDRPG.CommandClasses
 				smqs.LastDateUpdated = Utility.Utils.GetUnixTime();
 				smqs.QuestName = smq.QuestName;
 				smqs.QuestStep = smq.QuestSteps.First().Name;
-
-
+                smqs.Daily = smq.Daily;
+                
 				this.QuestLog.Add(smqs);
 
 				// Tell the player the new quest has been added

@@ -163,10 +163,11 @@ namespace SlackMUDRPG.CommandClasses
 			// TODO Randonly decide whether the weather effect will change.
 			
 
-            // Find all players who're a bit hurt and logged in.
+            // Find all players
             List<SMCharacter> lsmc = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
             foreach (SMCharacter c in lsmc.ToList())
             {
+                // ...  who're a bit hurt and logged in.
                 if (c.Attributes.HitPoints < c.Attributes.MaxHitPoints)
                 {
                     Random rNumber = new Random();
@@ -178,6 +179,14 @@ namespace SlackMUDRPG.CommandClasses
                         c.SaveToApplication();
                         c.SaveToFile();
                     }
+                }
+
+                // ... remove any daily quests that have expired.
+                if (c.QuestLog != null)
+                {
+                    c.QuestLog.RemoveAll(qs => ((qs.Completed == true) && (qs.Daily == true) && (Utility.Utils.GetDifferenceBetweenUnixTimestamps(qs.LastDateUpdated, Utility.Utils.GetUnixTime())>86400)));
+                    c.SaveToApplication();
+                    c.SaveToFile();
                 }
             }
 

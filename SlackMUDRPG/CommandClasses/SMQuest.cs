@@ -82,7 +82,10 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("Expires")]
 		public int Expires { get; set; }
 
-		[JsonProperty("Completed")]
+        [JsonProperty("Daily")]
+        public bool Daily { get; set; }
+
+        [JsonProperty("Completed")]
 		public bool Completed { get; set; }
 	}
 
