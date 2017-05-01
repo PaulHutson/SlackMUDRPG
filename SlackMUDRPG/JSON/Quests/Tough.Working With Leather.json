@@ -1,0 +1,29 @@
+﻿{
+	"QuestName": "Working With Leather",
+	"Prerequisites": null,
+	"Daily": false,
+	"QuestSteps": [
+		{
+			"Name": "Cutting leather",
+			"Type": "Get",
+			"CharacterName": "Allan Tough",
+			"LocationID": "Ravensmere.Town Centre.Tough And Sons Leather Goods",
+			"AdditionalData": "Family.LeatherCutter,1",
+			"Instructions": "Visit Allan Tough with a Leather Cutter"
+		},
+		{
+			"Name": "A belting good time",
+			"Type": "Get",
+			"CharacterName": "Allan Tough",
+			"LocationID": "Ravensmere.Town Centre.Tough And Sons Leather Goods",
+			"AdditionalData": "Family.Leather,1|Item.Iron Buckle,1",
+			"Instructions": "Visit Allan Tough with an Iron Buckle and a Leather Strip"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Item",
+			"AdditionalData": "Clothing.SimpleLeatherBelt,1"
+		}
+	]
+}
