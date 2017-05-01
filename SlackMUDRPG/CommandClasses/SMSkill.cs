@@ -168,7 +168,16 @@ namespace SlackMUDRPG.CommandClasses
 								case "UseReceipe":
 									if (!UseReceipe(smss, smc, this.BaseStat, extraData, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
 									{
-										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+										string targetItem = String.Empty;
+										SMReceipe smr = this.GetRecipeByName(extraData);
+
+										if (smr != null)
+										{
+											SMItem producedItem = smr.GetProducedItem();
+											targetItem = $"{producedItem.SingularPronoun} {producedItem.ItemName}";
+										}
+
+										smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, targetItem, null)));
 										continueCycle = false;
 									}
 									smc.StopActivity();
@@ -244,20 +253,23 @@ namespace SlackMUDRPG.CommandClasses
                                     if (!CheckObjectinLocation(smss, smc))
                                     {
                                         smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-                                    };
+										smc.StopActivity();
+									};
                                     break;
                                 case "CheckRoomProperty":
                                     if (!CheckRoomProperty(smss, smc))
                                     {
                                         smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-                                    };
+										smc.StopActivity();
+									};
                                     break;
                                 case "SkillCheck":
                                     if (!SkillCheck(smss, smc))
                                     {
                                         // Failed
                                         smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput,smc,null,null)));
-                                    }
+										smc.StopActivity();
+									}
                                     else
                                     {
                                         // Passed
@@ -991,6 +1003,18 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Gets a recipe by its name
+		/// </summary>
+		/// <param name="recipeName">Name of the recipe to search for</param>
+		/// <returns>SMReceipe or null</returns>
+		private SMReceipe GetRecipeByName(string recipeName)
+		{
+			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
+
+			return smrl.FirstOrDefault(receipe => receipe.Name.ToLower() == recipeName.ToLower());
+		}
+		
+		/// <summary>
 		/// Check the player has an item (i.e. an arrow) and enough of them for the task.
 		/// </summary>
 		/// <param name="smss">The skill step</param>
@@ -1163,7 +1187,6 @@ namespace SlackMUDRPG.CommandClasses
             return smc.GetRoom().HasProperty(propertyName);
         }
 
-
         private bool SkillCheck(SMSkillStep smss, SMCharacter smc)
         {
             // Random
@@ -1207,14 +1230,18 @@ namespace SlackMUDRPG.CommandClasses
         private bool CheckReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string nameOfReceipe, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
 		{
 			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
-			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
-			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name.ToLower() == nameOfReceipe.ToLower());
+			SMReceipe smr = this.GetRecipeByName(nameOfReceipe);
+
 			if (smr != null)
 			{
 				if (smr.NeedToLearn)
 				{
-					// TODO Check the character knows the receipe
+					// Check the character knows the receipe
 					// return false if they don't know it.
+					if (smc.KnownRecipes == null || smc.KnownRecipes.FirstOrDefault(k => k.ToLower() == nameOfReceipe.ToLower()) == null)
+					{
+						return false;
+					}
 				}
 
 				// If the extra data field is filled in there is a required trait.
@@ -1238,8 +1265,7 @@ namespace SlackMUDRPG.CommandClasses
 		private bool UseReceipe(SMSkillStep smss, SMCharacter smc, string baseStat, string nameOfReceipe, string requiredTargetObjectType, int requiredTargetObjectAmount, string targetID)
 		{
 			// Check that the character knows the receipe or it's a receipe that everyone knows how to make intuitively.
-			List<SMReceipe> smrl = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
-			SMReceipe smr = smrl.FirstOrDefault(receipe => receipe.Name.ToLower() == nameOfReceipe.ToLower());
+			SMReceipe smr = this.GetRecipeByName(nameOfReceipe);
 			if (smr != null)
 			{
 				var continueCycle = true;
@@ -1258,6 +1284,9 @@ namespace SlackMUDRPG.CommandClasses
 							{
 								case "CheckConsumeItems":
 									// Check that the items needed for this task are available.
+
+									bool allFound = true;
+
 									foreach (SMReceipeMaterial smrm in smr.Materials)
 									{
 										bool materialFound = false;
@@ -1272,7 +1301,6 @@ namespace SlackMUDRPG.CommandClasses
 										}
 
                                         // Is the item in a container the character is wearing?
-                                        
 
 										// Check if the items are in the location with the character
 										if (!materialFound)
@@ -1285,8 +1313,14 @@ namespace SlackMUDRPG.CommandClasses
 											else
 											{
 												smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(receipeStep.FailureOutput, smc, materialType[1], "")));
+												allFound = false;
 											}
 										}
+									}
+
+									if (!allFound)
+									{
+										return false;
 									}
 									break;
 								case "ConsumeItems":

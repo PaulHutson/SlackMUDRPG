@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Simple Leather Belt",
+	"SingularPronoun": "a",
+	"PluralName": "Simple Leather Belts",
+	"PluralPronoun": "some",
+	"ItemType": "Clothing",
+	"ItemFamily": "Belt",
+	"ItemDescription": "A simple leather belt with an iron buckle to hold your trousers up.",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 5,
+	"MaxHitPoints": 5,
+	"BaseDamage": 0.01,
+	"Toughness": 3,
+	"CanHoldOtherItems": false
+}

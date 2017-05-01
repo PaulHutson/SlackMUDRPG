@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Leather Cutter",
+	"SingularPronoun": "a",
+	"PluralName": "Leather Cutters",
+	"PluralPronoun": "some",
+	"ItemType": "tools",
+	"ItemFamily": "LeatherCutter",
+	"ItemDescription": "This leather cutter is used for things like Leatherwork.",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 50,
+	"MaxHitPoints": 50,
+	"BaseDamage": 1,
+	"Toughness": 3,
+	"CanHoldOtherItems": false
+}

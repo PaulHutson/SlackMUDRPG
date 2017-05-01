@@ -1,0 +1,16 @@
+﻿{
+	"ItemName": "Workbench",
+	"SingularPronoun": "a",
+	"PluralName": "Workbenches",
+	"PluralPronoun": "some",
+	"ItemType": "tools",
+	"ItemFamily": "Workbench",
+	"ItemDescription": "A wooden workbench used for crafting items.",
+	"ItemWeight": 50,
+	"ItemSize": 50,
+	"HitPoints": 100000,
+	"MaxHitPoints": 100000,
+	"BaseDamage": 20,
+	"Toughness": 25,
+	"CanHoldOtherItems": false
+}

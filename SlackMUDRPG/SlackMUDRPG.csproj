@@ -365,6 +365,9 @@
     <Content Include="JSON\NPCs\Noble-Generic.json" />
     <Content Include="JSON\NPCs\AspertanPriest-Generic.json" />
     <Content Include="JSON\NPCs\SacratasMonk-Generic.json" />
+    <Content Include="JSON\Objects\Clothing.SimpleLeatherBelt.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Tough And Sons Leather Goods.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Tough And Sons Leather Goods Workshop.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
@@ -426,6 +429,12 @@
     <Content Include="JSON\Objects\Tools.FishingRod.json" />
     <Content Include="JSON\Objects\Resource.FishingLine.json" />
     <Content Include="JSON\Quests\Crusty.Hooked.json" />
+    <Content Include="JSON\Skills\Skill.Leatherwork.json" />
+    <Content Include="JSON\Objects\Tools.LeatherCutter.json" />
+    <Content Include="JSON\Objects\Tools.Workbench.json" />
+    <Content Include="JSON\Receipe\Clothing.SimpleLeatherBelt.json" />
+    <Content Include="JSON\Objects\Resource.IronBuckle.json" />
+    <Content Include="JSON\Receipe\Resource.IronBuckle.json" />
     <Content Include="JSON\Receipe\Tools.FishingRod.json" />
     <Content Include="JSON\Objects\Resource.String.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />

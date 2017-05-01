@@ -72,6 +72,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("Skills")]
 		public List<SMSkillHeld> Skills { get; set; }
 
+		[JsonProperty("KnownRecipes")]
+		public List<string> KnownRecipes { get; set; }
+
 		[JsonProperty("Slots")]
 		public List<SMSlot> Slots { get; set; }
 

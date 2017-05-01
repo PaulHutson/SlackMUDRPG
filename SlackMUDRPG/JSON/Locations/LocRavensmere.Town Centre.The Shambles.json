@@ -11,11 +11,16 @@
 			"Description": "Greys Court East",
 			"RoomID": "Ravensmere.Town Centre.Greys Court East"
 		},
-    {
-      "Shortcut": "BW",
-      "Description": "Barons Walk",
-      "RoomID": "Ravensmere.Town Centre.Barons Walk"
-    }
+		{
+			"Shortcut": "BW",
+			"Description": "Barons Walk",
+			"RoomID": "Ravensmere.Town Centre.Barons Walk"
+		},
+		{
+			"Shortcut": "TAS",
+			"Description": "Tough & Sons Leather Goods",
+			"RoomID": "Ravensmere.Town Centre.Tough And Sons Leather Goods"
+		}
 	],
   "RoomItems": null,
   "NPCSpawns": [
