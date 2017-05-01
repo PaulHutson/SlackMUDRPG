@@ -16,8 +16,11 @@ namespace SlackMUDRPG
 	{
 		protected void Application_Start(object sender, EventArgs e)
 		{
-			// Websocket 
-			WebSocketCollection wsClients = new WebSocketCollection();
+            // Rebuild the char names list json
+            new SMAccountHelper().RebuildCharacterJSONFile();
+
+            // Websocket 
+            WebSocketCollection wsClients = new WebSocketCollection();
 			Application["WSClients"] = wsClients;
 
 			// Botclients
