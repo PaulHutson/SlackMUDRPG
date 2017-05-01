@@ -165,20 +165,21 @@ namespace SlackMUDRPG.CommandClasses
 
             // Find all players who're a bit hurt and logged in.
             List<SMCharacter> lsmc = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
-            foreach (SMCharacter c in lsmc)
+            foreach (SMCharacter c in lsmc.ToList())
             {
                 if (c.Attributes.HitPoints < c.Attributes.MaxHitPoints)
                 {
                     Random rNumber = new Random();
                     double rDouble = (rNumber.NextDouble() * 100);
 
-                    if (rDouble <= 10)
+                    if (rDouble <= 5)
                     {
                         c.Attributes.HitPoints++;
+                        c.SaveToApplication();
+                        c.SaveToFile();
                     }
                 }
             }
-            HttpContext.Current.Application["SMCharacters"] = lsmc;
 
             // Work out the end time
             // If less than two minutes
