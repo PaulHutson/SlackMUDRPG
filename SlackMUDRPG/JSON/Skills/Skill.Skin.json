@@ -101,7 +101,7 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} uses his knife to skin {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} uses their knife to skin {TARGETNAME}"
     },
     {
       "StepType": "CreateDestroyedObject",

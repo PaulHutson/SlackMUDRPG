@@ -51,7 +51,7 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} uses his knife to attack {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} uses their knife to attack {TARGETNAME}"
     },
     {
       "StepType": "Pause",

@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "some",
+	"ItemName": "string",
+	"PluralPronoun": "some",
+	"PluralName": "string",
+	"ItemType": "String",
+	"ItemFamily": "String",
+	"ItemDescription": "A small amount of string",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 0,
+	"MaxHitPoints": 0,
+	"BaseDamage": 0.00000001,
+	"Toughness": 0
+}
