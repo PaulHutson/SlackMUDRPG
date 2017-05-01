@@ -437,6 +437,9 @@
     <Content Include="JSON\Receipe\Resource.IronBuckle.json" />
     <Content Include="JSON\Receipe\Tools.FishingRod.json" />
     <Content Include="JSON\Objects\Resource.String.json" />
+    <Content Include="JSON\Objects\Container.LargeBackpack.json" />
+    <Content Include="JSON\Receipe\Clothing.LargeBackpack.json" />
+    <Content Include="JSON\Receipe\Clothing.SmallBackpack.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="RebuildCharNameList.aspx" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />

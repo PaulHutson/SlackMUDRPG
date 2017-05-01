@@ -1365,6 +1365,7 @@ namespace SlackMUDRPG.CommandClasses
 									int baseHitPoints = smi.HitPoints;
 									float baseDamage = smi.BaseDamage;
 									int baseToughness = smi.Toughness;
+                                    int baseItemCapacity = smi.ItemCapacity;
 
                                     // Get the character level
                                     SMSkillHeld smsh = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
@@ -1401,7 +1402,10 @@ namespace SlackMUDRPG.CommandClasses
 														case "ItemWeight":
 															smi.ItemWeight = baseItemWeight + smrstb.ThresholdBonusValue;
 															break;
-													}
+                                                        case "ItemCapacity":
+                                                            smi.ItemCapacity = baseItemCapacity + smrstb.ThresholdBonusValue;
+                                                            break;
+                                                    }
 												}
 											}
 										}

@@ -1,0 +1,17 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Large Backpack",
+	"PluralPronoun": "some",
+	"PluralName": "Large Backpacks",
+	"ItemType": "Container",
+	"ItemFamily": "Backpack",
+	"ItemDescription": "A large backpack for storing goods in.",
+	"ItemWeight": 0,
+	"ItemCapacity": 35,
+	"ItemSize": 35,
+	"HitPoints": 5,
+	"MaxHitPoints": 5,
+	"BaseDamage": 0.0000000001,
+	"Toughness": 1,
+	"HeldItems": null
+}
