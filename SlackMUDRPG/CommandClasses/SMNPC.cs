@@ -331,6 +331,18 @@ namespace SlackMUDRPG.CommandClasses
 						// Simply attack a target player
 						this.Attack(invokingCharacter.GetFullName());
 						break;
+
+					case "takeitems":
+						// take items from the player
+						string[] items = npccs.AdditionalData.Split(',');
+
+						foreach (string item in items)
+						{
+							invokingCharacter.RemoveItem(item, false);
+						}
+
+						break;
+
 					case "giveitem":
 						// give an item to the player
 						string[] additionalDataSplit = npccs.AdditionalData.Split(',');
