@@ -86,7 +86,7 @@ namespace SlackMUDRPG.CommandClasses
                                         canUseResponse = false;
                                     }
                                     break;
-                                case "HasNotDoneQuest":
+								case "HasNotDoneQuest":
                                     if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData)) != 0)
                                     {
                                         canUseResponse = false;
@@ -314,6 +314,18 @@ namespace SlackMUDRPG.CommandClasses
 						// Simply attack a target player
 						this.Attack(invokingCharacter.GetFullName());
 						break;
+
+					case "takeitems":
+						// take items from the player
+						string[] items = npccs.AdditionalData.Split(',');
+
+						foreach (string item in items)
+						{
+							invokingCharacter.RemoveItem(item, false);
+						}
+
+						break;
+
 					case "giveitem":
 						// give an item to the player
 						string[] additionalDataSplit = npccs.AdditionalData.Split(',');
@@ -451,6 +463,22 @@ namespace SlackMUDRPG.CommandClasses
 							invokingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"You learn a new skill: {smsh.SkillName}({smsh.SkillLevel})."));
 						}
 						
+						break;
+					case "teachrecipe":
+						// ensure the characters KnownRecipes property is a list
+						if (invokingCharacter.KnownRecipes == null)
+						{
+							invokingCharacter.KnownRecipes = new List<string>();
+						}
+
+						// only learn the recipe if not already known
+						if (invokingCharacter.KnownRecipes.Count(recipe => recipe == npccs.AdditionalData) == 0)
+						{
+							invokingCharacter.KnownRecipes.Add(npccs.AdditionalData);
+
+							invokingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"You learnt a new recipe {npccs.AdditionalData}."));
+						}
+
 						break;
                     case "shopitem":
                         // Get the scope
@@ -708,6 +736,16 @@ namespace SlackMUDRPG.CommandClasses
 									canAddResponse = false;
 								}
 								break;
+							case "InProgressQuestStep":
+								string[] data = prereq.AdditionalData.Split('.');
+								SMQuestStatus qst = smqs.FirstOrDefault(q => q.QuestName == data[0]);
+
+								// quest not started OR quest complete OR not on correct step
+								if (qst == null || qst.Completed || qst.QuestStep != data[1])
+								{
+									canAddResponse = false;
+								}
+								break;
 							case "HasNotDoneQuest":
 								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData)) != 0)
 								{
@@ -716,6 +754,12 @@ namespace SlackMUDRPG.CommandClasses
 								break;
 							case "IsNotInProgressQuest":
 								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (!quest.Completed)) != 0)
+								{
+									canAddResponse = false;
+								}
+								break;
+							case "HasItem":
+								if (invokingCharacter.CountOwnedItems(prereq.AdditionalData) < 1)
 								{
 									canAddResponse = false;
 								}

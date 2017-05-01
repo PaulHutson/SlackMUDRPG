@@ -368,6 +368,7 @@
     <Content Include="JSON\Objects\Clothing.SimpleLeatherBelt.json" />
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Tough And Sons Leather Goods.json" />
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Tough And Sons Leather Goods Workshop.json" />
+    <Content Include="JSON\NPCs\Allan Tough.json" />
     <Content Include="JSON\NPCs\Noble-Generic-Harried.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
@@ -441,6 +442,7 @@
     <Content Include="JSON\Objects\Container.LargeBackpack.json" />
     <Content Include="JSON\Receipe\Clothing.LargeBackpack.json" />
     <Content Include="JSON\Receipe\Clothing.SmallBackpack.json" />
+    <Content Include="JSON\Quests\Tough.Working With Leather.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="RebuildCharNameList.aspx" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
