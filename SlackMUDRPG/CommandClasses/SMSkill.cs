@@ -1112,6 +1112,7 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					smi.ItemName = ReplaceTags(smi.ItemName, targetItem);
                     smi.PluralName = ReplaceTags(smi.PluralName, targetItem);
+                    smi.ItemDescription = ReplaceTags(smi.ItemDescription, targetItem);
                     smr.AddItem(smi);
 					smr.Announce(this.Formatter.Italic($"{smc.GetFullName()} creates {smi.SingularPronoun} {smi.ItemName}"));
 				}
