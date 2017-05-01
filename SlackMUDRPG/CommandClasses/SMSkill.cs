@@ -1111,7 +1111,8 @@ namespace SlackMUDRPG.CommandClasses
 				foreach (SMItem smi in smil)
 				{
 					smi.ItemName = ReplaceTags(smi.ItemName, targetItem);
-					smr.AddItem(smi);
+                    smi.PluralName = ReplaceTags(smi.PluralName, targetItem);
+                    smr.AddItem(smi);
 					smr.Announce(this.Formatter.Italic($"{smc.GetFullName()} creates {smi.SingularPronoun} {smi.ItemName}"));
 				}
 
