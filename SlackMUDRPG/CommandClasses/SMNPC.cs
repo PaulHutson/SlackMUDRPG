@@ -86,17 +86,6 @@ namespace SlackMUDRPG.CommandClasses
                                         canUseResponse = false;
                                     }
                                     break;
-
-								case "InProgressQuestStep":
-									string[] data = prereq.AdditionalData.Split('.');
-									SMQuestStatus qst = smqs.FirstOrDefault(q => q.QuestName == data[0]);
-
-									// quest not started OR quest complete OR not on correct step
-									if (qst == null || qst.Completed || qst.QuestStep != data[1])
-									{
-										canUseResponse = false;
-									}
-									break;
 								case "HasNotDoneQuest":
                                     if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData)) != 0)
                                     {
@@ -109,12 +98,6 @@ namespace SlackMUDRPG.CommandClasses
                                         canUseResponse = false;
                                     }
                                     break;
-								case "HasItem":
-									if (invokingCharacter.CountOwnedItems(prereq.AdditionalData) < 1)
-									{
-										canUseResponse = false;
-									}
-									break;
                             }
                         }
 
@@ -753,6 +736,16 @@ namespace SlackMUDRPG.CommandClasses
 									canAddResponse = false;
 								}
 								break;
+							case "InProgressQuestStep":
+								string[] data = prereq.AdditionalData.Split('.');
+								SMQuestStatus qst = smqs.FirstOrDefault(q => q.QuestName == data[0]);
+
+								// quest not started OR quest complete OR not on correct step
+								if (qst == null || qst.Completed || qst.QuestStep != data[1])
+								{
+									canAddResponse = false;
+								}
+								break;
 							case "HasNotDoneQuest":
 								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData)) != 0)
 								{
@@ -761,6 +754,12 @@ namespace SlackMUDRPG.CommandClasses
 								break;
 							case "IsNotInProgressQuest":
 								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (!quest.Completed)) != 0)
+								{
+									canAddResponse = false;
+								}
+								break;
+							case "HasItem":
+								if (invokingCharacter.CountOwnedItems(prereq.AdditionalData) < 1)
 								{
 									canAddResponse = false;
 								}
