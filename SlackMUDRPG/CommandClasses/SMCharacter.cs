@@ -659,25 +659,16 @@ namespace SlackMUDRPG.CommandClasses
 		public void Who()
 		{
 			// Construct the string
-			string whoOnlineString = this.Formatter.Bold("People online:");
+			string whoOnlineString = this.Formatter.Bold("People online:",1);
 
 			// Get the list of all online
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 
 			// Loop around the characters and add them to the who online list
-			bool isFirst = true;
 			string whoList = "";
 			foreach (SMCharacter smc in smcs)
 			{
-				if (isFirst)
-				{
-					isFirst = false;
-				}
-				else
-				{
-					whoList += ", ";
-				}
-				whoList += this.Formatter.General(smc.GetFullName());
+				whoList += this.Formatter.General(smc.GetFullName() + " (" + smc.CalculateLevel() + ")",1);
 			}
 
 			// Add the list to the output string.
@@ -2376,21 +2367,16 @@ namespace SlackMUDRPG.CommandClasses
 
 		/// <summary>
 		/// Sends an ooc message to the zone you're in ...
-		/// ... or globally if the "global" bool is true
 		/// </summary>
 		/// <param name="message">the message being sent to the player</param>
-		/// <param name="global">If "global" is sent into this it will send the message globally</param>
-		public void SendOOC(string message, string global = "")
+		public void SendOOC(string message)
 		{
 			List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
 			string region = "GLOBAL";
 			string currentRoomName = this.GetRoom().RoomID;
-			if (global.ToLower() == "global")
-			{
-				string currentArea = currentRoomName.Substring(0, currentRoomName.IndexOf('.') - 1);
-				region = currentArea;
-				smcs = smcs.FindAll(smc => smc.RoomID.Substring(0, smc.RoomID.IndexOf('.')) == currentRoomName);
-			}
+            string currentArea = currentRoomName.Substring(0, currentRoomName.IndexOf('.'));
+			region = currentArea;
+			smcs = smcs.FindAll(smc => smc.RoomID.Substring(0, smc.RoomID.IndexOf('.')) == currentArea);
 
 			foreach (SMCharacter smc in smcs)
 			{
@@ -2398,16 +2384,30 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
-		#endregion
-
-		#region "NPC Interaction"
-
-		/// <summary>
-		/// Add an awaiting response item
+        /// <summary>
+		/// Sends an ooc message globally
 		/// </summary>
-		/// <param name="NPCID">The id of the NPC awaiting the response</param>
-		/// <param name="timeOut">The timeout for the response (unix time) response</param>
-		public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut, string roomID = null)
+		/// <param name="message">the message being sent to the player</param>
+        public void SendOOCGlobal(string message)
+        {
+            List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+            string currentRoomName = this.GetRoom().RoomID;
+            foreach (SMCharacter smc in smcs)
+            {
+                smc.sendMessageToPlayer(this.Formatter.Italic(this.GetFullName() + " OOC[" + currentRoomName + "]: " + message));
+            }
+        }
+
+        #endregion
+
+        #region "NPC Interaction"
+
+        /// <summary>
+        /// Add an awaiting response item
+        /// </summary>
+        /// <param name="NPCID">The id of the NPC awaiting the response</param>
+        /// <param name="timeOut">The timeout for the response (unix time) response</param>
+        public void SetAwaitingResponse(string NPCID, List<ShortcutToken> shortCutTokens, int timeOut, string roomID = null)
 		{
 			if (this.NPCsWaitingForResponses == null)
 			{
