@@ -321,7 +321,15 @@ namespace SlackMUDRPG.CommandClasses
 
 						foreach (string item in items)
 						{
-							invokingCharacter.RemoveItem(item, false);
+							string[] itemDetails = item.Split('.');
+
+							int qtyToTake = Int32.Parse(itemDetails[1]);
+
+							while (qtyToTake > 0)
+							{
+								invokingCharacter.RemoveItem(itemDetails[0], false);
+								qtyToTake--;
+							}
 						}
 
 						break;
@@ -759,7 +767,9 @@ namespace SlackMUDRPG.CommandClasses
 								}
 								break;
 							case "HasItem":
-								if (invokingCharacter.CountOwnedItems(prereq.AdditionalData) < 1)
+								string[] additionalDataSplit = prereq.AdditionalData.Split('.');
+
+								if (invokingCharacter.CountOwnedItems(additionalDataSplit[0]) < Int32.Parse(additionalDataSplit[1]))
 								{
 									canAddResponse = false;
 								}
