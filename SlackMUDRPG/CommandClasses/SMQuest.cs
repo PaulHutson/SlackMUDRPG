@@ -76,6 +76,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("QuestStep")]
 		public string QuestStep { get; set; }
 
+		[JsonProperty("QuestStepInstructions")]
+		public string QuestStepInstructions { get; set; }
+
 		[JsonProperty("LastDateUpdated")]
 		public int LastDateUpdated { get; set; }
 
