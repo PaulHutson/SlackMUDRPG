@@ -371,6 +371,7 @@
     <Content Include="JSON\NPCs\Noble-Generic-Harried.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
     <Content Include="JSON\NPCs\Rat.json" />
+    <Content Include="JSON\Characters\CharNamesList.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
