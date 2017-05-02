@@ -90,8 +90,21 @@
 	"WalkingType": "walk",
 	"PronounSingular": "a",
 	"PronounMultiple": "some",
-	
+
 	"NPCResponses": [
+		{
+			"ResponseType": "PlayerCharacter.Hail",
+			"ResponseTimeOfDay": "all",
+			"AdditionalData": null,
+			"Faction": null,
+			"Frequency": 100,
+			"ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Enter.Hail"
+				}
+			]
+		},
 		{
 			"ResponseType": "PlayerCharacter.Enter",
 			"ResponseTimeOfDay": "all",
@@ -111,6 +124,13 @@
 		{
 			"ConversationID": "Enter",
 			"ConversationStep": [
+				{
+					"StepID": "Hail",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "looks at you from behind the counter.",
+					"NextStep": "2.1",
+					"ResponseOptions": null
+				},
 				{
 					"StepID": 1,
 					"Scope": "emotetoplayer",
