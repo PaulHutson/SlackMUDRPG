@@ -2586,6 +2586,7 @@ namespace SlackMUDRPG.CommandClasses
 				smqs.LastDateUpdated = Utility.Utils.GetUnixTime();
 				smqs.QuestName = smq.QuestName;
 				smqs.QuestStep = smq.QuestSteps.First().Name;
+				smqs.QuestStepInstructions = smq.QuestSteps.First().Instructions;
                 smqs.Daily = smq.Daily;
                 
 				this.QuestLog.Add(smqs);
@@ -2630,6 +2631,7 @@ namespace SlackMUDRPG.CommandClasses
 				if (nextStep != null)
 				{
 					smqs.QuestStep = nextStep.Name;
+					smqs.QuestStepInstructions = nextStep.Instructions;
 					this.sendMessageToPlayer(this.Formatter.Italic($"Quest \"{smq.QuestName}\" updated."));
 					this.sendMessageToPlayer(this.Formatter.Italic($"Next step \"{nextStep.Instructions}\"."));
 				}
@@ -2708,8 +2710,6 @@ namespace SlackMUDRPG.CommandClasses
 
 			if (this.QuestLog != null)
 			{
-				questLogResponse = this.Formatter.Bold("Quest log:");
-
 				List<SMQuestStatus> questStatusList = this.QuestLog;
 				IOrderedEnumerable<SMQuestStatus> statusList = questStatusList.OrderBy(qs => qs.Completed);
 				
@@ -2717,9 +2717,16 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					if ((smq.Completed != true) || (getCompleted))
 					{
-						questLogResponse += this.Formatter.ListItem(this.Formatter.Italic($"{smq.QuestName} - {smq.QuestStep}"), 0);
+						questLogResponse += this.Formatter.ListItem(this.Formatter.Italic($"{smq.QuestName} - {smq.QuestStep} ({smq.QuestStepInstructions})"), 0);
 					}
 				}
+
+				if (questLogResponse == "")
+				{
+					questLogResponse = this.Formatter.Italic("You do not have any quests in progress.");
+				}
+
+				questLogResponse = this.Formatter.Bold("Quest log:") + $" {questLogResponse}";
 			}
 			else
 			{
