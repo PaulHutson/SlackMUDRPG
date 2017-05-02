@@ -31,7 +31,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <returns>The string with new lines replaced.</returns>
 		private string ReplaceNewLines(string str)
 		{
-			return str.Replace("\n", this.GetNewLineSequence());
+			return str.Replace("\n", this.GetNewLineSequence()).Replace("[n]", this.GetNewLineSequence());
 		}
 
 		/// <summary>
