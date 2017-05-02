@@ -117,7 +117,7 @@
 	"PronounSingular": "a",
 	"PronounMultiple": "some",
   "NPCResponses": [
-		{
+    {
 			"ResponseType": "PlayerCharacter.Enter",
 			"ResponseTimeOfDay": "all",
 			"AdditionalData": null,
@@ -126,19 +126,39 @@
 			"ResponseSteps": [
 				{
 					"ResponseStepType": "Conversation",
-					"ResponseStepData": "Enter.CheckQuest"
-				},
-				{
+					"ResponseStepData": "Enter.Info"
+				}
+			]
+		},
+    {
+      "ResponseType": "PlayerCharacter.Hail",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Enter.CheckQuest"
+        },
+        {
           "ResponseStepType": "Conversation",
           "ResponseStepData": "EnterQuestComplete.CheckQuest"
         }
-			]
-		}
+      ]
+    }
   ],
   "NPCConversationStructures": [
     {
       "ConversationID": "Enter",
       "ConversationStep": [
+        {
+          "StepID": "Info",
+          "Scope": "generalemote",
+          "AdditionalData": "Podgy Clerk sits at his desk (To speak to him type [b]Hail Podgy Clerk[/b])",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
         {
           "StepID": "CheckQuest",
           "Scope": "CheckQuestInProgress",
@@ -194,7 +214,7 @@
           "AdditionalData": "What is your first name?",
           "NextStep": null,
           "ResponseOptions": [
-						{
+            {
               "ResponseOptionShortcut": "{variable}",
               "ResponseOptionText": "{variable}",
               "ResponseOptionActionSteps": [
@@ -204,36 +224,36 @@
                 }
               ]
             }
-					]
+          ]
         },
-				{
-					"StepID": "4-4",
-					"Scope": "saytoplayer",
-					"AdditionalData": "{response}, did I hear you correctly?",
-					"NextStep": null,
-					"ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "Y",
-							"ResponseOptionText": "Yes",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.4-4-1"
-								}
-							]
-						},
-						{
-							"ResponseOptionShortcut": "N",
-							"ResponseOptionText": "No",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.4-2"
-								}
-							]
-						}
-					]
-				},
+        {
+          "StepID": "4-4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "{response}, did I hear you correctly?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.4-4-1"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.4-2"
+                }
+              ]
+            }
+          ]
+        },
         {
           "StepID": "4-4-1",
           "Scope": "setplayerattribute",
@@ -241,59 +261,59 @@
           "NextStep": "4-5.0",
           "ResponseOptions": null
         },
-				{
-					"StepID": "4-5",
-					"Scope": "saytoplayer",
-					"AdditionalData": "And what is your family name?",
-					"NextStep": null,
-					"ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "{variable}",
-							"ResponseOptionText": "{variable}",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.4-6"
-								}
-							]
-						}
-					]
-				},
-				{
-					"StepID": "4-6",
-					"Scope": "saytoplayer",
-					"AdditionalData": "... {response} ...",
-					"NextStep": "4-7.2",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "4-7",
-					"Scope": "saytoplayer",
-					"AdditionalData": "... that's an odd family name... nevermind, we have room for everyone here... did I hear you correctly?",
-					"NextStep": null,
-					"ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "Y",
-							"ResponseOptionText": "Yes",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.4-8"
-								}
-							]
-						},
-						{
-							"ResponseOptionShortcut": "N",
-							"ResponseOptionText": "No",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.4-5"
-								}
-							]
-						}
-					]
-				},
+        {
+          "StepID": "4-5",
+          "Scope": "saytoplayer",
+          "AdditionalData": "And what is your family name?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "{variable}",
+              "ResponseOptionText": "{variable}",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.4-6"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4-6",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... {response} ...",
+          "NextStep": "4-7.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4-7",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... that's an odd family name... nevermind, we have room for everyone here... did I hear you correctly?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.4-8"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.4-5"
+                }
+              ]
+            }
+          ]
+        },
         {
           "StepID": "4-8",
           "Scope": "setplayerattribute",
@@ -315,118 +335,118 @@
           "NextStep": "4-2.1",
           "ResponseOptions": null
         },
-				{
-					"StepID": "4-9",
-					"Scope": "saytoplayer",
-					"AdditionalData": "Right... and, forgive me for asking because it's a bit hard to tell from here.. are you male or female?",
-					"NextStep": null,
-					"ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "M",
-							"ResponseOptionText": "Male",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.4-10"
-								}
-							]
-						},
-						{
-							"ResponseOptionShortcut": "F",
-							"ResponseOptionText": "Female",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.4-13"
-								}
-							]
-						}
-					]
-				},
-				{
-					"StepID": "4-10",
-					"Scope": "setvariableresponse",
-					"AdditionalData": "m",
-					"NextStep": "4-11.0",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "4-11",
-					"Scope": "setplayerattribute",
-					"AdditionalData": "sex",
-					"NextStep": "4-12.0",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "4-12",
-					"Scope": "saytoplayer",
-					"AdditionalData": "So, to be clear you're *checks notes* {playercharacter} and you're male...?",
-					"NextStep": null,
-					"ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "Y",
-							"ResponseOptionText": "Yes",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "GivePass.preamble"
-								}
-							]
-						},
-						{
-							"ResponseOptionShortcut": "N",
-							"ResponseOptionText": "No",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.4-9"
-								}
-							]
-						}
-					]
-				},
-				{
-					"StepID": "4-13",
-					"Scope": "setvariableresponse",
-					"AdditionalData": "f",
-					"NextStep": "4-14.0",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "4-14",
-					"Scope": "setplayerattribute",
-					"AdditionalData": "sex",
-					"NextStep": "4-15.0",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "4-15",
-					"Scope": "saytoplayer",
-					"AdditionalData": "So, to be clear you're *checks notes* {playercharacter} and you're female...?",
-					"NextStep": null,
-					"ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "Y",
-							"ResponseOptionText": "Yes",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "GivePass.preamble"
-								}
-							]
-						},
-						{
-							"ResponseOptionShortcut": "N",
-							"ResponseOptionText": "No",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Enter.4-9"
-								}
-							]
-						}
-					]
-				},
+        {
+          "StepID": "4-9",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Right... and, forgive me for asking because it's a bit hard to tell from here.. are you male or female?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "M",
+              "ResponseOptionText": "Male",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.4-10"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "F",
+              "ResponseOptionText": "Female",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.4-13"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4-10",
+          "Scope": "setvariableresponse",
+          "AdditionalData": "m",
+          "NextStep": "4-11.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4-11",
+          "Scope": "setplayerattribute",
+          "AdditionalData": "sex",
+          "NextStep": "4-12.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4-12",
+          "Scope": "saytoplayer",
+          "AdditionalData": "So, to be clear you're *checks notes* {playercharacter} and you're male...?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "GivePass.preamble"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.4-9"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "4-13",
+          "Scope": "setvariableresponse",
+          "AdditionalData": "f",
+          "NextStep": "4-14.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4-14",
+          "Scope": "setplayerattribute",
+          "AdditionalData": "sex",
+          "NextStep": "4-15.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4-15",
+          "Scope": "saytoplayer",
+          "AdditionalData": "So, to be clear you're *checks notes* {playercharacter} and you're female...?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "GivePass.preamble"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "Enter.4-9"
+                }
+              ]
+            }
+          ]
+        },
         {
           "StepID": "5-1",
           "Scope": "emotetoplayer",
