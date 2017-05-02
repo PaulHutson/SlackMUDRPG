@@ -1,0 +1,104 @@
+﻿{
+  "firstname": "Large",
+  "lastname": "Rat",
+  "description": "A long looking rodent",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 1,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "LargeRat",
+  "RoomID": "IsSpawned",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 15,
+    "wp": 10,
+    "ft": 4,
+    "hp": 5,
+    "maxhp": 5,
+    "SocialStanding": 1
+  },
+  "Skills": null,
+  "Slots": null,
+  "BodyParts": [
+    {
+      "Name": "Body"
+    }
+  ],
+	"ResponseURL": null,
+	"NPCType": "Rat",
+	"IsGeneric": true,
+	"WalkingType": "scurries",
+	"FamilyType": "Rat",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+	"DestroyedOutput": "Resource.Tail,1",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 10,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "GeneralChitChat.Choice"
+        }
+      ]
+    },
+    {
+      "ResponseType": "Pulse",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "AllPeople",
+      "Faction": null,
+      "Frequency": 20,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "LeaveDeSpawn",
+          "ResponseStepData": null
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "GeneralChitChat",
+      "ConversationStep": [
+        {
+          "StepID": "Choice",
+          "Scope": "choice",
+          "AdditionalData": "random1,random2,random3",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "scratches at some unseen sliver of sustenance behind some detritus at the side of the road.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random2",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "shuffles around warily",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks up at {playercharacter}",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}
