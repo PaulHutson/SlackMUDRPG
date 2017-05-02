@@ -174,7 +174,7 @@
 								},
 								{
 									"Type": "HasItem",
-									"AdditionalData": "LeatherCutter"
+									"AdditionalData": "LeatherCutter.1"
 								}
 							],
 							"ResponseOptionActionSteps": [
@@ -194,11 +194,11 @@
 								},
 								{
 									"Type": "HasItem",
-									"AdditionalData": "Leather Strip"
+									"AdditionalData": "Leather Strip.1"
 								},
 								{
 									"Type": "HasItem",
-									"AdditionalData": "Iron Buckle"
+									"AdditionalData": "Iron Buckle.1"
 								}
 							],
 							"ResponseOptionActionSteps": [
@@ -334,7 +334,7 @@
 				{
 					"StepID": "BeltRecipe-2",
 					"Scope": "takeitems",
-					"AdditionalData": "Iron Buckle,Leather Strip",
+					"AdditionalData": "Iron Buckle.1,Leather Strip.1",
 					"NextStep": "BeltRecipe-3.0",
 					"ResponseOptions": null
 				},
