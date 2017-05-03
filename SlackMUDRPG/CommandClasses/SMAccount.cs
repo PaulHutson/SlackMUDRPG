@@ -344,7 +344,15 @@ namespace SlackMUDRPG.CommandClasses
                         string json = r.ReadToEnd();
 
                         // Get all the commands from the commands file
-                        smcl.Add(JsonConvert.DeserializeObject<SMCharacter>(json));
+                        try
+                        {
+                            SMCharacter nsmc = JsonConvert.DeserializeObject<SMCharacter>(json);
+                            smcl.Add(nsmc);
+                        }
+                        catch
+                        {
+                            Console.WriteLine(file.Name);
+                        }
                     }
                 }
             }

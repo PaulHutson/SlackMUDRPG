@@ -17,8 +17,8 @@
     "dex": 15,
     "wp": 10,
     "ft": 4,
-    "hp": 5,
-    "maxhp": 5,
+    "hp": 2,
+    "maxhp": 2,
     "SocialStanding": 1
   },
   "Skills": null,

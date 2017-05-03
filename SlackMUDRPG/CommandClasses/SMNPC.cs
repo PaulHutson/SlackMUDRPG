@@ -970,6 +970,14 @@ namespace SlackMUDRPG.CommandClasses
 
 			return corpse;
 		}
+
+        /// <summary>
+        /// This is overiding the save to file function in the character file to stop NPCs arriving in the char folder.
+        /// </summary>
+        public override void SaveToFile()
+        {
+            // Do nothing, we don't want to save the file out for NPCs.
+        }
 	}
 
 	#region "NPC Structures"
