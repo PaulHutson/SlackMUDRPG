@@ -47,6 +47,18 @@
       "MaxNumber": 1,
       "SpawnFrequency": 10,
       "Unique": true
+    },
+    {
+      "TypeOfNPC": "Rat Catcher",
+      "MaxNumber": 1,
+      "SpawnFrequency": 25,
+      "Unique": true
+    },
+    {
+      "TypeOfNPC": "Rat",
+      "MaxNumber": 2,
+      "SpawnFrequency": 15,
+      "Unique": false
     }
 	]
 }

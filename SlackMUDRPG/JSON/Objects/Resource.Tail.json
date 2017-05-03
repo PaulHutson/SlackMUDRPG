@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "{Family} Tail",
+	"PluralPronoun": "some",
+	"PluralName": "{Family} Tail",
+	"ItemType": "Resource",
+	"ItemFamily": "Tail",
+	"ItemDescription": "A {Family} Tail",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.001,
+	"Toughness": 1
+}

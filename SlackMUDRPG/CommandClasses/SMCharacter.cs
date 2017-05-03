@@ -149,15 +149,15 @@ namespace SlackMUDRPG.CommandClasses
 		/// <summary>
 		/// Saves the character to the file system.
 		/// </summary>
-		public void SaveToFile()
+		public virtual void SaveToFile()
 		{
-			string path = FilePathSystem.GetFilePath("Characters", "Char" + this.UserID);
-			string charJSON = JsonConvert.SerializeObject(this, Formatting.Indented);
+            string path = FilePathSystem.GetFilePath("Characters", "Char" + this.UserID);
+            string charJSON = JsonConvert.SerializeObject(this, Formatting.Indented);
 
-			using (StreamWriter w = new StreamWriter(path))
-			{
-				w.WriteLine(charJSON);
-			}
+            using (StreamWriter w = new StreamWriter(path))
+            {
+                w.WriteLine(charJSON);
+            }
 		}
 
 		/// <summary>

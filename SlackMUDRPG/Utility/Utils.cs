@@ -312,10 +312,27 @@ namespace SlackMUDRPG.Utility
 			return value;
 		}
 
-		#endregion
-	}
+        #endregion
 
-	public static class ThreadSafeRandom
+        #region "Error Logging"
+
+        /// <summary>
+        /// Writes an error to the error log
+        /// </summary>
+        /// <param name="errorToLog">The error to write</param>
+        public static void LogError(string errorToLog)
+        {
+            string path = FilePathSystem.GetFilePath("Logs", "Error");
+            using (StreamWriter w = new StreamWriter(path, true))
+            {
+                w.WriteLine(errorToLog);
+            }
+        }
+
+        #endregion
+    }
+
+    public static class ThreadSafeRandom
 	{
 		[ThreadStatic]
 		private static Random Local;
