@@ -351,7 +351,7 @@ namespace SlackMUDRPG.CommandClasses
                         }
                         catch
                         {
-                            Console.WriteLine(file.Name);
+                            Utils.LogError("Failed to write char record in CharNamesList.json - record: " + file.Name);
                         }
                     }
                 }

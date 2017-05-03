@@ -617,6 +617,9 @@
     <Compile Include="Utility\UnitTestDetector.cs" />
     <Compile Include="Utility\Utils.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="JSON\Logs\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
