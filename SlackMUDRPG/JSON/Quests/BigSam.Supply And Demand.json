@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "Supply and Demand",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Catch Rabbit and Venison for Big Sam",
+			"Type": "Get",
+			"CharacterName": "Big Sam",
+			"LocationID": "Ravensmere.Harbour South.Big Sams Butchers Shop",
+			"AdditionalData": "ItemName.Bunny Rabbit Corpse,6|ItemName.Young Deer Corpse,1",
+			"Instructions": "Get six bunny rabbit corpses and one young deer corpse then return them to Big Sam"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Money",
+			"AdditionalData": "5"
+		}
+	]
+}
