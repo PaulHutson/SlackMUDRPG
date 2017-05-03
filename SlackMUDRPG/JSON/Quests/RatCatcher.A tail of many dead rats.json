@@ -1,0 +1,20 @@
+﻿{
+	"QuestName": "RA tail of many dead rats",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Get some rats for the rat catcher",
+			"Type": "Get",
+			"CharacterName": "Rat Catcher",
+			"LocationID": "Ravensmere.Harbour South.Swabbies Lane",
+			"Instructions": "Bring 5 rats to the Rat Catcher"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Money",
+			"AdditionalData": "2"
+		}
+	]
+}

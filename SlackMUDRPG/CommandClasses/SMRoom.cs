@@ -814,7 +814,7 @@ namespace SlackMUDRPG.CommandClasses
                             {
                                 // Check if the unique NPC is already somewhere in the world...
                                 smnpcl = (List<SMNPC>)HttpContext.Current.Application["SMNPCs"];
-                                if (smnpcl.Count(npc => (npc.FirstName + npc.LastName) == sms.TypeOfNPC) == 0)
+                                if (smnpcl.Count(npc => (npc.GetFullName().ToLower() == sms.TypeOfNPC.ToLower()) && (npc.RoomID.ToLower() != "isspawned")) == 0)
                                 {
                                     // ... if they're not, spawn them into the room.
                                     SMNPC newNPC = NPCHelper.GetNewNPC(sms.TypeOfNPC, true);
@@ -823,10 +823,10 @@ namespace SlackMUDRPG.CommandClasses
                                     HttpContext.Current.Application["SMNPCs"] = smnpcl;
 
                                     this.Announce(this.Formatter.Italic(newNPC.GetFullName() + " walks in"));
+                                    spawnedThisRound = true;
                                 }
                             }
-
-                            if (!spawnedThisRound)
+                            else
                             {
                                 // Check how many there are of this type in the room already
                                 int numberOfNPCsOfType = this.GetNPCs().Count(npc => npc.NPCType == sms.TypeOfNPC);

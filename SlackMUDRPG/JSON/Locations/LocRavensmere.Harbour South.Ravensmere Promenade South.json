@@ -82,6 +82,12 @@
       "MaxNumber": 1,
       "SpawnFrequency": 10,
       "Unique": true
+    },
+    {
+      "TypeOfNPC": "Rat",
+      "MaxNumber": 2,
+      "SpawnFrequency": 15,
+      "Unique": false
     }
 	],
   "NPCShopItems": {

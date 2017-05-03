@@ -1,0 +1,362 @@
+﻿{
+  "firstname": "Rat",
+  "lastname": "Catcher",
+  "description": "A man mountain ",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 47,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "RatCatcher",
+  "RoomID": "IsSpawned",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 9,
+    "int": 15,
+    "chr": 12,
+    "dex": 12,
+    "wp": 12,
+    "ft": 20,
+    "hp": 20,
+    "maxhp": 20,
+    "SocialStanding": 15
+  },
+  "Skills": [
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 10
+    },
+    {
+      "SkillName": "Brawl",
+      "SkillLevel": 10
+    }
+  ],
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "RatCatcher-Wooden-Stick",
+        "SingularPronoun": "a",
+	      "ItemName": "Wooden Stick",
+	      "PluralPronoun": "some",
+	      "PluralName": "Wooden Sticks",
+	      "ItemType": "Weapon",
+	      "ItemFamily": "Stick",
+	      "ItemDescription": "A small wooden stick.",
+	      "ItemWeight": 1,
+	      "ItemSize": 1,
+	      "HitPoints": 10,
+	      "MaxHitPoints": 10,
+	      "BaseDamage": 0.1,
+	      "Toughness": 1
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+  "NPCType": "RatCatcher",
+  "FamilyType": "RatCatcher",
+  "IsGeneric": false,
+  "WalkingType": "stalk",
+  "PronounSingular": "the",
+  "PronounMultiple": "some",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Hail",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Hail.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Enter.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "Pulse",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": "AllPeople",
+      "Faction": null,
+      "Frequency": 50,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "LeaveDeSpawn",
+          "ResponseStepData": null
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "Enter",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "scans the floor while mumbling under his breath.  You catch the word \"rats\" from time to time in the mumbling.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Hail",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks up suddenly",
+          "NextStep": "2.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Wha? Wha yer wan?  Han't ya seein I'ma tryin' to fine me some rats?",
+          "NextStep": "3.4",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "looks closely at {playercharacter}",
+          "NextStep": "4.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Wait.. wha' yer wan?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "H",
+              "ResponseOptionText": "Do you need any help catching rats?",
+              "PreRequisites": [
+								{
+									"Type": "IsNotInProgressQuest",
+									"AdditionalData": "A tail of many dead rats"
+								}
+							],
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "RatCatching.Start"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "Er, nothing.",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "RatCatching.NotNow"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "R",
+              "ResponseOptionText": "I've brought the rats tails back as requested",
+              "PreRequisites": [
+								{
+									"Type": "InProgressQuest",
+									"AdditionalData": "A tail of many dead rats"
+								},
+								{
+									"Type": "HasItem",
+									"AdditionalData": "Rat Tail.5"
+								}
+							],
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "RatCatching.RatsTails"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ConversationID": "RatCatching",
+      "ConversationStep": [
+        {
+          "StepID": "Start",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Blimey, bless ya.  Look all I nee' is for you to brin' me five rats tails... ",
+          "NextStep": "Start2.3",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "Start2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Reckn ya can do it?",
+          "NextStep": null,
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Y",
+              "ResponseOptionText": "Yes",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "RatCatching.AddQuest"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No, too busy",
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "Conversation",
+                  "AdditionalData": "RatCatching.NotNow"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "StepID": "NotNow",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Outta my way then, gotta get back to me work.  If ya feel ya can [i]lower[/i] yourself to help me at some point you'll find me roundabouts...",
+          "NextStep": "NotNow2.4",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "NotNow",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "begins to scan the floor again seemingly forgetting your conversation ever happened.",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "AddQuest",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Alrigh' bring the tails back t'me when yer done - I'm always here abouts so you'll know where t'fin me...",
+          "NextStep": "AddQuest2.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "AddQuest2",
+          "Scope": "addquest",
+          "AdditionalData": "RatCatcher.A tail of many dead rats",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "RatsTails",
+          "Scope": "generalemote",
+          "AdditionalData": "smiles a mildly toothless grin in your direction",
+          "NextStep": "RatsTails2.4",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "RatsTails2",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Ya beauty.  Give'm ere then...",
+          "NextStep": "RatsTails3.4",
+          "ResponseOptions": null
+        },
+        {
+					"StepID": "RatsTails3",
+					"Scope": "takeitems",
+					"AdditionalData": "Rat Tail.5",
+					"NextStep": "RatsTails4.0",
+					"ResponseOptions": null
+				},
+        {
+          "StepID": "RatsTails4",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Nicely done.. if ya wan' some more work tomorra you come'n back to see old Dave.",
+          "NextStep": "RatsTails5.4",
+          "ResponseOptions": null
+        },
+        {
+					"StepID": "RatsTails5",
+					"Scope": "updatequest",
+					"AdditionalData": "RatCatcher.A tail of many dead rats",
+					"NextStep": "RatsTails6.2",
+					"ResponseOptions": null
+				},
+        {
+					"StepID": "RatsTails6",
+					"Scope": "increasefactionlevel",
+					"AdditionalData": "Rat Catcher|5",
+					"NextStep": "RatsTails7.0",
+					"ResponseOptions": null
+				},
+        {
+          "StepID": "RatsTails6",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "The City of Ravensmere|1",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

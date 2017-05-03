@@ -213,8 +213,6 @@
     <Content Include="HTMLTemplates\RecipeTemplate.html" />
     <Content Include="HTMLTemplates\SkillTemplate.html" />
     <Content Include="Items.aspx" />
-    <Content Include="JSON\Characters\Char123.json" />
-    <Content Include="JSON\Characters\CharU3KH2RYAF.json" />
     <Content Include="JSON\Commands\Commands.General.json" />
     <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
@@ -242,7 +240,6 @@
     <Content Include="JSON\Objects\Environment.YoungTree.json" />
     <Content Include="JSON\Objects\Resource.TreeTrunk.json" />
     <Content Include="JSON\Objects\Resource.Log.json" />
-    <Content Include="JSON\Characters\CharU3KLW47QC.json" />
     <Content Include="JSON\Objects\Misc.Pell.json" />
     <Content Include="JSON\Locations\LocOutside1.json" />
     <Content Include="JSON\Locations\LocTrainingYard.json" />
@@ -343,7 +340,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="JSON\Characters\CharNamesList.json" />
     <Content Include="JSON\NPCs\NPCNamesList.json" />
     <Content Include="JSON\Misc\HashKey.json" />
     <Content Include="JSON\NPCs\Captain Barnard.json" />
@@ -373,6 +369,9 @@
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Big Sams Butchers Shop.json" />
     <Content Include="JSON\NPCs\Big Sam.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
+    <Content Include="JSON\NPCs\Rat Catcher.json" />
+    <Content Include="JSON\NPCs\Rat.json" />
+    <Content Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
     <Content Include="JSON\Objects\Resource.Meat.json" />
@@ -446,6 +445,8 @@
     <Content Include="JSON\Receipe\Clothing.SmallBackpack.json" />
     <Content Include="JSON\Quests\Tough.Working With Leather.json" />
     <Content Include="JSON\Quests\BigSam.Supply And Demand.json" />
+    <Content Include="JSON\Quests\RatCatcher.A tail of many dead rats.json" />
+    <Content Include="JSON\Objects\Resource.Tail.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="RebuildCharNameList.aspx" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
@@ -618,6 +619,9 @@
     <Compile Include="Utility\TagReplacer.cs" />
     <Compile Include="Utility\UnitTestDetector.cs" />
     <Compile Include="Utility\Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="JSON\Logs\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
