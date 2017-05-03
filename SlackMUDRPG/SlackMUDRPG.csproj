@@ -366,6 +366,9 @@
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Tough And Sons Leather Goods Workshop.json" />
     <Content Include="JSON\NPCs\Allan Tough.json" />
     <Content Include="JSON\NPCs\Noble-Generic-Harried.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Big Sams Butchers Shop.json" />
+    <Content Include="JSON\NPCs\Big Sam.json" />
+    <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
     <Content Include="JSON\NPCs\Rat.json" />
     <Content Include="JSON\Objects\Consumable.SimpleArrow.json" />
@@ -441,6 +444,7 @@
     <Content Include="JSON\Receipe\Clothing.LargeBackpack.json" />
     <Content Include="JSON\Receipe\Clothing.SmallBackpack.json" />
     <Content Include="JSON\Quests\Tough.Working With Leather.json" />
+    <Content Include="JSON\Quests\BigSam.Supply And Demand.json" />
     <Content Include="JSON\Quests\RatCatcher.A tail of many dead rats.json" />
     <Content Include="JSON\Objects\Resource.Tail.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />

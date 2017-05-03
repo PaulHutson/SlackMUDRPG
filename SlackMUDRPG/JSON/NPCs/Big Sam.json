@@ -1,0 +1,461 @@
+﻿{
+	"firstname": "Big",
+	"lastname": "Sam",
+	"description": "",
+	"lastinteractiondate": "2017-05-02T21:00:00.0987844+00:00",
+	"lastlogindate": "2017-05-02T21:00:00.0987844+00:00",
+	"age": 58,
+	"sex": "m",
+	"PKFlag": false,
+	"UserID": "BigSam",
+	"RoomID": "Ravensmere.Harbour South.Big Sams Butchers Shop",
+	"CurrentActivity": null,
+	"Attributes": {
+		"str": 30,
+		"int": 15,
+		"chr": 20,
+		"dex": 20,
+		"wp": 12,
+		"ft": 20,
+		"hp": 20,
+		"maxhp": 20,
+		"SocialStanding": 15
+	},
+	"Skills": [
+		{
+			"SkillName": "Dodge",
+			"SkillLevel": 30
+		}
+	],
+	"Slots": [
+		{
+			"Name": "RightHand",
+			"AllowedTypes": [
+				"any"
+			],
+			"EquippedItem": null
+		},
+		{
+			"Name": "LeftHand",
+			"AllowedTypes": [
+				"any"
+			],
+			"EquippedItem": null
+		},
+		{
+			"Name": "Back",
+			"AllowedTypes": [
+				"containers"
+			],
+			"EquippedItem": null
+		}
+	],
+	"BodyParts": [
+		{
+			"Name": "Head"
+		},
+		{
+			"Name": "Neck"
+		},
+		{
+			"Name": "Torso"
+		},
+		{
+			"Name": "Arms"
+		},
+		{
+			"Name": "RightHand"
+		},
+		{
+			"Name": "LeftHand"
+		},
+		{
+			"Name": "Legs"
+		},
+		{
+			"Name": "RightFoot"
+		},
+		{
+			"Name": "LeftFoot"
+		}
+	],
+	"ResponseURL": null,
+	"NPCType": "BigSam",
+	"FamilyType": "Butcher",
+	"IsGeneric": false,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+	"NPCResponses": [
+		{
+			"ResponseType": "PlayerCharacter.Hail",
+			"ResponseTimeOfDay": "all",
+			"AdditionalData": null,
+			"Faction": null,
+			"Frequency": 100,
+			"ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Enter.Hail"
+				}
+			]
+		}
+	],
+	"NPCConversationStructures": [
+		{
+			"ConversationID": "Enter",
+			"ConversationStep": [
+				{
+					"StepID": "Hail",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Can I help ya?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "LFW",
+							"ResponseOptionText": "I'm looking for work [i]Quest[/i]",
+							"PreRequisites": [
+								{
+									"Type": "HasNotDoneQuest",
+									"AdditionalData": "Supply and Demand"
+								},
+								{
+									"Type": "IsNotInProgressQuest",
+									"AdditionalData": "Supply and Demand"
+								}
+							],
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "conversation",
+									"AdditionalData": "LFW.IntroStep1"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "IB",
+							"ResponseOptionText": "I'm back with rabbits and deer!",
+							"PreRequisites": [
+								{
+									"Type": "InProgressQuest",
+									"AdditionalData": "Supply and Demand"
+								},
+								{
+									"Type": "HasItem",
+									"AdditionalData": "Bunny Rabbit Corpse.6"
+								},
+								{
+									"Type": "HasItem",
+									"AdditionalData": "Young Deer Corpse.1"
+								}
+							],
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "conversation",
+									"AdditionalData": "LFW.ReturnStep1"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "SHOP",
+							"ResponseOptionText": "I want to buy something",
+							"PreRequisites": null,
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "conversation",
+									"AdditionalData": "Shop.1"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ConversationID": "LFW",
+			"ConversationStep": [
+				{
+					"StepID": "IntroStep1",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Work? Yes I have work for you!",
+					"NextStep": "IntroStep2.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "IntroStep2",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Look around you...",
+					"NextStep": "IntroStep3.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "IntroStep3",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "gestures to the shops many bare shelves",
+					"NextStep": "IntroStep4.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "IntroStep4",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Since moving to Bridge Row I cant keep up with the demand!",
+					"NextStep": "IntroStep5.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "IntroStep5",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Rabbit and Venison are the most popular right now. Hunt me some deer and rabbits outside the city walls",
+					"NextStep": "IntroStep6.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "IntroStep6",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "wipes his hand against his brow leaving a large bloody smear behind",
+					"NextStep": "IntroStep7.3",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "IntroStep7",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Get me six rabbits and a single deer and I'll see you properly compensated",
+					"NextStep": "IntroStep8.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "IntroStep8",
+					"Scope": "addquest",
+					"AdditionalData": "BigSam.Supply And Demand",
+					"NextStep": null,
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "ReturnStep1",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Got what I asked for have ya? Give it over then.",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "GIVE",
+							"ResponseOptionText": "Give Big Sam six Bunny Rabbit Corpses and one Young Deer Corpse",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "LFW.Return-Give-Step1"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No, not now",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "LFW.Return-DontGive-Step1"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "Return-Give-Step1",
+					"Scope": "takeitems",
+					"AdditionalData": "Bunny Rabbit Corpse.6,Young Deer Corpse.1",
+					"NextStep": "Return-Give-Step2.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Return-Give-Step2",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "takes 6 [b]Bunny Rabbit Corpses[/b] from you.",
+					"NextStep": "Return-Give-Step3.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Return-Give-Step3",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "takes 1 [b]Young Deer Corpse[/b] from you.",
+					"NextStep": "Return-Give-Step4.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Return-Give-Step4",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "inspects your catch closely, he grips the deer on the flank and shoulders and scowls at you.",
+					"NextStep": "Return-Give-Step5.4",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Return-Give-Step5",
+					"Scope": "saytoplayer",
+					"AdditionalData": "A little scrawny... but a deals a deal. Here, this is for your trouble.",
+					"NextStep": "Return-Give-Step6.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Return-Give-Step6",
+					"Scope": "updatequest",
+					"AdditionalData": "BigSam.Supply And Demand",
+					"NextStep": "Return-Give-Step7.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Return-Give-Step7",
+					"Scope": "increasefactionlevel",
+					"AdditionalData": "Big Sam|1",
+					"NextStep": "Return-Give-Step8.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Return-Give-Step8",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Come back again tomorrow and I'll have another job for you no doubt.",
+					"NextStep": null,
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Return-DontGive-Step1",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Come back when you have then!",
+					"NextStep": null,
+					"ResponseOptions": null
+				}
+			]
+		},
+		{
+			"ConversationID": "Shop",
+			"ConversationStep": [
+				{
+					"StepID": "1",
+					"Scope": "saytoplayer",
+					"AdditionalData": "All freshly prepared today...",
+					"NextStep": "2.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "2",
+					"Scope": "shopitem",
+					"AdditionalData": "room",
+					"NextStep": "3.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "3",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Would you like to buy something?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.4"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "ShopLeave.NoBuy"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "4",
+					"Scope": "saytoplayer",
+					"AdditionalData": "What'll it be? [i](Enter the item number from the list above)[/i]",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "{variable}",
+							"ResponseOptionText": "{variable}",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.5"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "5",
+					"Scope": "shopbuyitem",
+					"AdditionalData": "ShopBuy|ShopNotValid",
+					"NextStep": null,
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "ShopNotValid",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Sorry, I can't sell you that...",
+					"NextStep": "BuySomethingElse.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BuySomethingElse",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Would you like to buy something else?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.4"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "ShopLeave.NoBuy"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "ShopBuy",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Good choice.",
+					"NextStep": "BuySomethingElse.1",
+					"ResponseOptions": null
+				}
+			]
+		},
+		{
+			"ConversationID": "ShopLeave",
+			"ConversationStep": [
+				{
+					"StepID": "NoBuy",
+					"Scope": "saytoplayer",
+					"AdditionalData": "No problem, come back anytime we get fresh produce every day...",
+					"NextStep": null,
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "NotNow",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Its been a pleasure, come back anythime we get fresh produce every day...",
+					"NextStep": null,
+					"ResponseOptions": null
+				}
+			]
+		}
+	],
+	"NPCMovementAlgorithms": null,
+	"NPCMovementTarget":  null
+}

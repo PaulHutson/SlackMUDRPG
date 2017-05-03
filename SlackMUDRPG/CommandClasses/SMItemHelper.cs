@@ -102,7 +102,7 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				foreach (SMItem smi in item.HeldItems)
 				{
-					used += GetItemWeight(smi);
+					used += smi.ItemSize;
 				}
 			}
 
@@ -128,7 +128,7 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				foreach (SMItem smi in item.HeldItems)
 				{
-					used += GetItemWeight(smi);
+					used += smi.ItemSize;
 				}
 			}
 

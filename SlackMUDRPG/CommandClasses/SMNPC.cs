@@ -942,6 +942,12 @@ namespace SlackMUDRPG.CommandClasses
 			// Create the corpse
 			SMItem corpse = SMItemFactory.Get("Misc", "Corpse");
 			corpse.ItemName = this.GetFullName() + " Corpse";
+			corpse.PluralName = this.GetFullName() + " Corpses";
+
+			double sizeWeight = this.Attributes.MaxHitPoints / 2;
+			corpse.ItemWeight = (int)Math.Ceiling(sizeWeight);
+			corpse.ItemSize = (int)Math.Ceiling(sizeWeight);
+
 
 			// If it's an animal or some such, create the destroyed output elements.
 			if (this.DestroyedOutput != null)

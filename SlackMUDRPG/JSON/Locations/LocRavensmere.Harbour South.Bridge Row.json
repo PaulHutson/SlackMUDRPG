@@ -3,46 +3,51 @@
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
-  "Outside": true,
-	"RoomDescription": "A wide throughfare with large sandy coloured flagstones. The buildings on this road are large and splendid in thier contruction.  Horse drawn carts filled with goods move on both sides and youngsters carry the uppercrust of society on fine palanquins.  Every building has the same large wooden lintels above the door.",
+	"Outside": true,
+	"RoomDescription": "A wide throughfare with large sandy coloured flagstones. The buildings on this road are large and splendid in thier contruction. Horse drawn carts filled with goods move on both sides and youngsters carry the uppercrust of society on fine palanquins. Every building has the same large wooden lintels above the door.",
 	"RoomExits": [
 		{
 			"Shortcut": "SL",
 			"Description": "Swabbies Lane",
 			"RoomID": "Ravensmere.Harbour South.Swabbies Lane"
 		},
-    {
-      "Shortcut": "RP",
-      "Description": "Ramparts Parade",
-      "RoomID": "Ravensmere.Military District.Ramparts Parade"
-    },
-    {
-      "Shortcut": "GCE",
-      "Description": "Greys Court East",
-      "RoomID": "Ravensmere.Town Centre.Greys Court East"
-    }
+		{
+			"Shortcut": "RP",
+			"Description": "Ramparts Parade",
+			"RoomID": "Ravensmere.Military District.Ramparts Parade"
+		},
+		{
+			"Shortcut": "GCE",
+			"Description": "Greys Court East",
+			"RoomID": "Ravensmere.Town Centre.Greys Court East"
+		},
+		{
+			"ShortCut": "BSB",
+			"Description": "Big Sam's Butchers Shop",
+			"RoomID": "Ravensmere.Harbour South.Big Sams Butchers Shop"
+		}
 	],
 	"RoomItems": null,
 	"NPCSpawns": [
-    {
-      "TypeOfNPC": "Guard-Generic",
-      "MaxNumber": 1,
-      "SpawnFrequency": 90,
-      "Unique": false
-    },
-    {
+		{
+			"TypeOfNPC": "Guard-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 90,
+			"Unique": false
+		},
+		{
 			"TypeOfNPC": "SacratasMonk-Generic",
 			"MaxNumber": 1,
 			"SpawnFrequency": 25,
 			"Unique": false
 		},
-    {
+		{
 			"TypeOfNPC": "AspertanPriest-Generic",
 			"MaxNumber": 1,
 			"SpawnFrequency": 25,
 			"Unique": false
 		},
-    {
+		{
 			"TypeOfNPC": "Noble-Generic",
 			"MaxNumber": 1,
 			"SpawnFrequency": 25,
