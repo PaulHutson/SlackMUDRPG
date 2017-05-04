@@ -20,6 +20,11 @@
 			"Shortcut": "OP",
 			"Description": "Oldwood Plains",
 			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains"
+		},
+		{
+			"Shortcut": "SC",
+			"Description": "Small Cave",
+			"RoomID": "Ravensmere Boundary.Oldwood.Small Cave"
 		}
 	],
 	"RoomItems": null,

@@ -232,7 +232,7 @@ namespace SlackMUDRPG.CommandClasses
         /// </summary>
         public void GetRoomExits()
 		{
-			this.sendMessageToPlayer(this.GetRoom().GetExitDetails());
+			this.sendMessageToPlayer(this.GetRoom().GetExitDetails(this));
 		}
 
 		/// <summary>

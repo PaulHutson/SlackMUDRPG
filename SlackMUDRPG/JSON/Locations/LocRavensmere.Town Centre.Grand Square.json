@@ -27,7 +27,33 @@
       "RoomID": "Ravensmere.Town Centre.Kings Way"
     }
 	],
-	"RoomItems": null,
+  "RoomItems": [
+    {
+      "itemID": "GrandSquarePoster",
+      "SingularPronoun": "a",
+      "ItemName": "Wanted Poster",
+      "PluralPronoun": "some",
+      "PluralName": "Wanted Posters",
+      "ItemType": "Quest",
+      "ItemFamily": "Poster",
+      "ItemDescription": "Wanted: The whereabouts of the Jasper twins - Wanted for smuggling contraband in and out of the town of Ravensmere. Reward: 10 Marks. Extreme caution advised, the twins can be identified by their matching hellstone signet rings - hand in the rings to the Barrack Sergeant in the Ravensmere Barracks.",
+			"ItemExtraDetail": "Wanted: The whereabouts of the Jasper twins - Wanted for smuggling contraband in and out of the town of Ravensmere. Reward: 10 Marks. Extreme caution advised, the twins can be identified by their matching hellstone signet rings - hand in the rings to the Barrack Sergeant in the Ravensmere Barracks.",
+      "ItemWeight": 1000,
+      "ItemSize": 0,
+      "HitPoints": 1000000000,
+      "MaxHitPoints": 1000000000,
+      "BaseDamage": 0.001,
+      "Toughness": 1,
+      "HeldItem": null,
+      "Effects": [
+        {
+          "Action": "OnExamine",
+          "EffectType": "AddQuest",
+          "AdditionalData": "Town.Two Rings Don't Make A Right"
+        }
+      ]
+    }
+  ],
 	"NPCSpawns": [
     {
       "TypeOfNPC": "Guard-Generic",

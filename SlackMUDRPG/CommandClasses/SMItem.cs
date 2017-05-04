@@ -74,11 +74,14 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("HeldItems")]
 		public List<SMItem> HeldItems { get; set; }
 
-		/// <summary>
-		/// Determines if the item can hold other items.
-		/// </summary>
-		/// <returns>Bool indicating if the item can hold other items.</returns>
-		public bool CanHoldOtherItems()
+        [JsonProperty("Effects")]
+        public List<SMEffect> Effects { get; set; }
+
+        /// <summary>
+        /// Determines if the item can hold other items.
+        /// </summary>
+        /// <returns>Bool indicating if the item can hold other items.</returns>
+        public bool CanHoldOtherItems()
 		{
 			return this.ItemType == "Container";
 		}

@@ -1,0 +1,17 @@
+﻿{
+  "itemID": "Generate",
+  "SingularPronoun": "a",
+  "ItemName": "Little Hellstone Signet Ring",
+  "PluralPronoun": "some",
+  "PluralName": "Little Hellstone Signet Rings",
+  "ItemType": "Quest",
+  "ItemFamily": "Bag",
+  "ItemDescription": "The gold band is capped by a vibrant crimson ruby. Could be used for identification",
+  "ItemWeight": 0,
+  "ItemSize": 0,
+  "HitPoints": 1000000000,
+  "MaxHitPoints": 1000000000,
+  "BaseDamage": 0.001,
+  "Toughness": 1,
+  "HeldItem": null
+}

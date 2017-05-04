@@ -1,0 +1,179 @@
+﻿{
+  "firstname": "Little",
+  "lastname": "Jasper",
+  "description": "",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 30,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "LittleJasper",
+  "RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Glowing Passage",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 10,
+    "int": 8,
+    "chr": 8,
+    "dex": 10,
+    "wp": 10,
+    "ft": 20,
+    "hp": 20,
+    "maxhp": 20,
+    "SocialStanding": 15
+  },
+  "Skills": [
+    {
+      "SkillName": "Dagger Use",
+      "SkillLevel": 10
+    },
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 2
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 2
+    }
+  ],
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "J2K",
+        "ItemName": "Knife",
+        "SingularPronoun": "a",
+        "PluralName": "Knives",
+        "PluralPronoun": "some",
+        "ItemType": "Weapon",
+        "ItemFamily": "Knife",
+        "ItemDescription": "A knife",
+        "ItemWeight": 1,
+        "ItemSize": 1,
+        "HitPoints": 50,
+        "MaxHitPoints": 50,
+        "BaseDamage": 3,
+        "Toughness": 3
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "itemID": "BHSSR",
+        "SingularPronoun": "a",
+        "ItemName": "Big Hellstone Signet Ring",
+        "PluralPronoun": "some",
+        "PluralName": "Big Hellstone Signet Rings",
+        "ItemType": "Quest",
+        "ItemFamily": "Bag",
+        "ItemDescription": "The gold band is capped by a vibrant crimson ruby. Could be used for identification",
+        "ItemWeight": 0,
+        "ItemSize": 0,
+        "HitPoints": 1000000000,
+        "MaxHitPoints": 1000000000,
+        "BaseDamage": 0.001,
+        "Toughness": 1,
+        "HeldItem": null
+      }
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+	"NPCType": "Little Jasper",
+	"FamilyType": "Jasper",
+	"IsGeneric": true,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Enters",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Enters.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Attack",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+				{
+          "ResponseStepType": "Attack",
+          "ResponseStepData": null
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "Enters",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Jas, wake up, weve got company - some grunt from the town",
+          "NextStep": "2.10",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "attack",
+          "AdditionalData": "",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

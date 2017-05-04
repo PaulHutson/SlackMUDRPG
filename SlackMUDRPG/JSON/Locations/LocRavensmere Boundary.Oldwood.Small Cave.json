@@ -1,0 +1,18 @@
+{
+	"RoomID": "Ravensmere Boundary.Oldwood.Small Cave",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "Fragile stalatites hang from the roof of this small, dead end cave.",
+	"RoomExits": [
+    {
+			"Shortcut": "SS",
+			"Description": "Small Stream",
+			"RoomID": "Ravensmere Boundary.Oldwood.Small Stream"
+		}
+	],
+  "RoomItems": null,
+	"NPCSpawns": null,
+  "ItemSpawns": null
+}
