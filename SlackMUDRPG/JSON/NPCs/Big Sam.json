@@ -1,14 +1,14 @@
 ﻿{
 	"firstname": "Big",
 	"lastname": "Sam",
-	"description": "",
+	"description": "Big Sam is a very round, very red faced man. From being overweight or being covered in claret? you cant quite decide.[n]In one hand he holds the biggest meat cleaver you have ever seen, and in the other, the carcass of some unidentifiable animal.",
 	"lastinteractiondate": "2017-05-02T21:00:00.0987844+00:00",
 	"lastlogindate": "2017-05-02T21:00:00.0987844+00:00",
 	"age": 58,
 	"sex": "m",
 	"PKFlag": false,
 	"UserID": "BigSam",
-	"RoomID": "Ravensmere.Harbour South.Big Sams Butchers Shop",
+	"RoomID": "Ravensmere.Harbour South.Sam And Ellas Butchery",
 	"CurrentActivity": null,
 	"Attributes": {
 		"str": 30,

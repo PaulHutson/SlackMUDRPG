@@ -22,9 +22,9 @@
 			"RoomID": "Ravensmere.Town Centre.Greys Court East"
 		},
 		{
-			"ShortCut": "BSB",
-			"Description": "Big Sam's Butchers Shop",
-			"RoomID": "Ravensmere.Harbour South.Big Sams Butchers Shop"
+			"ShortCut": "SEB",
+			"Description": "Sam & Ella's Butchery",
+			"RoomID": "Ravensmere.Harbour South.Sam And Ellas Butchery"
 		}
 	],
 	"RoomItems": null,

@@ -368,7 +368,7 @@
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Tough And Sons Leather Goods Workshop.json" />
     <Content Include="JSON\NPCs\Allan Tough.json" />
     <Content Include="JSON\NPCs\Noble-Generic-Harried.json" />
-    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Big Sams Butchers Shop.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Sam And Ellas Butchery.json" />
     <Content Include="JSON\NPCs\Big Sam.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
