@@ -39,7 +39,7 @@
 		});
 
 		ws.onclose = function () {
-			gameOutput.append('Closed <br/>');
+			gameOutput.append('Connection Closed - please refresh the screen to reconnect<br />');
 			scrollToBottom();
 			disableInput();
 		};
