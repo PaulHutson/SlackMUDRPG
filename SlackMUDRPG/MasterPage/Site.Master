@@ -24,6 +24,7 @@
 			<nav class="navbar navbar-slackmud-social navbar-fixed-top">
 				<div class="container">
 					<ul class="nav navbar-nav navbar-right">
+						<!--
 						<li>
 							<a href="#">
 								<img class="logo" src="../css/images/facebook_logo_small.png" alt="facebook">
@@ -33,6 +34,10 @@
 							<a href="#">
 								<img class="logo" src="../css/images/twitter_logo_small.png" alt="twitter">
 							</a>
+						</li>
+						-->
+						<li>
+							<a href="https://goo.gl/forms/HC3mURoLGPSG6bXT2" target="_blank">Feedback, Suggestions, Bugs? Submit them here</a>
 						</li>
 					</ul>
 				</div>
