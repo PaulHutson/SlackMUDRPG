@@ -23,5 +23,49 @@
       "SkillStatName": "DEX",
       "PreReqLevel": 5
     }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Knife",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have a Knife equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Target",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You must choose something to attack",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Hit",
+      "StepRequiredObject": "Family.Knife",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to hit {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} uses their Knife to attack {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Repeat",
+      "StepRequiredObject": "Activity.Attacking",
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    }
   ]
 }

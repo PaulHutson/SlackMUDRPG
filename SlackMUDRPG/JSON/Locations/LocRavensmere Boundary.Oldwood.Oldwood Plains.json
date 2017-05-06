@@ -15,6 +15,11 @@
 			"Shortcut": "SS",
 			"Description": "Small Stream",
 			"RoomID": "Ravensmere Boundary.Oldwood.Small Stream"
+		},
+		{
+			"Shortcut": "RIM",
+			"Description": "Rookdown Iron Mine",
+			"RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Entrance"
 		}
 	],
   "RoomItems": [

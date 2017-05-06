@@ -1,0 +1,341 @@
+﻿{
+  "firstname": "Barrack",
+  "lastname": "Sergeant",
+  "description": "A very strong guardsman with the golden rank sash of a Barrack Sergeant.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 41,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "BarrackSergeant",
+  "RoomID": "Ravensmere.Harbour South.Ravensmere Barracks",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 15,
+    "int": 10,
+    "chr": 10,
+    "dex": 15,
+    "wp": 10,
+    "ft": 50,
+    "hp": 1000,
+    "maxhp": 1000,
+    "SocialStanding": 13
+  },
+  "Skills": [
+    {
+      "SkillName": "Sword Use",
+      "SkillLevel": 50
+    },
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 50
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 50
+    }
+  ],
+  "Slots": [
+    {
+      "Name": "RightHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": {
+        "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453SergeantsSword",
+        "SingularPronoun": "an",
+        "ItemName": "Iron Sword",
+        "PluralName": "Iron Swords",
+        "PluralPronoun": "some",
+        "ItemType": "Weapon",
+        "ItemFamily": "Sword",
+        "ItemDescription": "This Iron sword is good for keeping the masses down.",
+        "ItemWeight": 2,
+        "ItemCapacity": 0,
+        "ItemSize": 2,
+        "HitPoints": 25,
+        "MaxHitPoints": 25,
+        "BaseDamage": 6.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": [
+          {
+            "SkillName": "Sword Use",
+            "SkillLevel": "1"
+          }
+        ],
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
+    },
+    {
+      "Name": "LeftHand",
+      "AllowedTypes": [
+        "any"
+      ],
+      "EquippedItem": null
+    },
+    {
+      "Name": "Back",
+      "AllowedTypes": [
+        "containers"
+      ],
+      "EquippedItem": null
+    }
+  ],
+  "BodyParts": [
+    {
+      "Name": "Head"
+    },
+    {
+      "Name": "Neck"
+    },
+    {
+      "Name": "Torso"
+    },
+    {
+      "Name": "Arms"
+    },
+    {
+      "Name": "RightHand"
+    },
+    {
+      "Name": "LeftHand"
+    },
+    {
+      "Name": "Legs"
+    },
+    {
+      "Name": "RightFoot"
+    },
+    {
+      "Name": "LeftFoot"
+    }
+  ],
+  "ResponseURL": null,
+	"NPCType": "GuardSergeant",
+	"FamilyType": "Guard",
+	"IsGeneric": true,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Hail",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "What.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.ExaminesThem",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 50,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "Examines.1"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Attack",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Attack.1"
+				}
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "What",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "What do you want?",
+          "NextStep": "2.2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "emote",
+          "AdditionalData": "looks at {playercharacter} with a steely eyed stare.",
+          "NextStep": "3.1",
+          "ResponseOptions": [
+            {
+              "ResponseOptionShortcut": "Rings",
+              "ResponseOptionText": "I've got some rings I think you want",
+              "PreRequisites": [
+                {
+                  "Type": "InProgressQuest",
+                  "AdditionalData": "Two Rings Don't Make A Right"
+                },
+                {
+                  "Type": "HasItem",
+                  "AdditionalData": "Big Hellstone Signet Ring.1"
+                },
+                {
+                  "Type": "HasItem",
+                  "AdditionalData": "Little Hellstone Signet Ring.1"
+                }
+              ],
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "conversation",
+                  "AdditionalData": "Rings.1"
+                }
+              ]
+            },
+            {
+              "ResponseOptionShortcut": "Nothing",
+              "ResponseOptionText": "Er, nothing..",
+              "PreRequisites": null,
+              "ResponseOptionActionSteps": [
+                {
+                  "NPCResponseOptionActionType": "conversation",
+                  "AdditionalData": "Nothing.1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ConversationID": "Nothing",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Well thank you very much you miserable waste of space.  Get out.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Rings",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+					"AdditionalData": "Oh have you indeed... pass them to me then",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "PASS",
+							"ResponseOptionText": "Give the Barrack Sergeant to the Two Rings",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Rings.2"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No, not now",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Nothing.1"
+								}
+							]
+						}
+					]
+        },
+				{
+					"StepID": "2",
+					"Scope": "takeitems",
+					"AdditionalData": "Big Hellstone Signet Ring.1,Little Hellstone Signet Ring.1",
+					"NextStep": "3.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "3",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "takes the rings from you from you.",
+					"NextStep": "4.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "4",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Hrm, they're the ones... good work",
+					"NextStep": "5.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "5",
+					"Scope": "updatequest",
+					"AdditionalData": "Town.Two Rings Don't Make A Right",
+					"NextStep": "6.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "6",
+					"Scope": "increasefactionlevel",
+					"AdditionalData": "The City of Ravensmere|5",
+					"NextStep": "7.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "7",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Might have some more work for someone like you - come back another time and I'll see what I can sort out...",
+					"NextStep": null,
+					"ResponseOptions": null
+				}
+      ]
+    },
+    {
+      "ConversationID": "Examines",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Do I look like someone you want to be looking at?",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    },
+    {
+      "ConversationID": "Attack",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "saytoplayer",
+          "AdditionalData": "You numpty... time to teach you a lesson",
+          "NextStep": "2.5",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "attack",
+          "AdditionalData": "",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

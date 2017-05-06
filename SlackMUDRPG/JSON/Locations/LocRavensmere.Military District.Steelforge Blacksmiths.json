@@ -182,7 +182,7 @@
         "Cost": 13
       },
       {
-        "ItemNumber": 5,
+        "ItemNumber": 6,
         "Item": {
 					"ItemID": "Chisel1",
 					"ItemName": "Shoddy Chisel",
@@ -205,7 +205,7 @@
         "Cost": 4
       },
       {
-        "ItemNumber": 6,
+        "ItemNumber": 7,
         "Item": {
 	        "SingularPronoun": "an",
 	        "ItemName": "Iron Nugget",
@@ -226,23 +226,23 @@
         "Cost": 12
       },
       {
-        "ItemNumber": 7,
+        "ItemNumber": 8,
         "Item": {
-			"ItemName": "Iron Buckle",
-			"SingularPronoun": "an",
-			"PluralName": "Iron Buckles",
-			"PluralPronoun": "some",
-			"ItemType": "Resource",
-			"ItemFamily": "Buckle",
-			"ItemDescription": "A simple iron buckle, could be used to make a belt.",
-			"ItemWeight": 1,
-			"ItemSize": 1,
-			"HitPoints": 5,
-			"MaxHitPoints": 5,
-			"BaseDamage": 0.001,
-			"Toughness": 3,
-			"CanHoldOtherItems": false
-		},
+			    "ItemName": "Iron Buckle",
+			    "SingularPronoun": "an",
+			    "PluralName": "Iron Buckles",
+			    "PluralPronoun": "some",
+			    "ItemType": "Resource",
+			    "ItemFamily": "Buckle",
+			    "ItemDescription": "A simple iron buckle, could be used to make a belt.",
+			    "ItemWeight": 1,
+			    "ItemSize": 1,
+			    "HitPoints": 5,
+			    "MaxHitPoints": 5,
+			    "BaseDamage": 0.001,
+			    "Toughness": 3,
+			    "CanHoldOtherItems": false
+		    },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
         "Cost": 18

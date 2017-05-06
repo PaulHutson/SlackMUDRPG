@@ -1,0 +1,43 @@
+{
+	"RoomID": "Ravensmere.Military District.Ravensmere Barracks",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "A splendid stone hall with large stoneglass windows at each side, each one a scene from some historic battle. Manificent statues of heros in their battle stances stand atop of stone pedestals. In the middle of the hall lies a giant wooden table with various maps laid over the surface.",
+	"RoomExits": [
+		{
+			"Shortcut": "GP",
+			"Description": "Grand Parade (Road)",
+			"RoomID": "Ravensmere.Military District.Grand Parade"
+		}
+	],
+	"RoomItems": [
+		{
+			"ItemID": "Desk",
+			"ItemName": "Desk",
+			"SingularPronoun": "a",
+			"PluralName": "Desks",
+			"PluralPronoun": "some",
+			"ItemType": "Desk",
+			"ItemFamily": "Desk",
+			"ItemDescription": "A grand desk",
+			"ItemWeight": 500000,
+			"ItemSize": 50,
+			"HitPoints": 100000,
+			"MaxHitPoints": 100000,
+			"BaseDamage": 20,
+			"Toughness": 25,
+			"CanHoldOtherItems": false
+		}
+	],
+  "NPCShopItems": null,
+	"NPCSpawns": [
+		{
+			"TypeOfNPC": "Guard-GenericComingAndGoing",
+			"MaxNumber": 6,
+			"SpawnFrequency": 90,
+			"Unique": false
+		}
+	]
+}
