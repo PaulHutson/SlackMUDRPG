@@ -324,7 +324,7 @@
         {
           "StepID": "1",
           "Scope": "saytoplayer",
-          "AdditionalData": "Well, this is my humble Arcanum - full of wonderous and, if you now how to use them, powerful items...",
+          "AdditionalData": "Well, this is my humble Arcanum - full of wonderous and, if you know how to use them, powerful items...",
           "NextStep": "2.2",
           "ResponseOptions": null
         },
@@ -345,14 +345,14 @@
         {
           "StepID": "4",
           "Scope": "emotetoplayer",
-          "AdditionalData": "... flicks his wrist and the bauble seems to fly off the shelf and crash to the floor.",
+          "AdditionalData": "... flicks his wrist and the bauble seems to fly off the shelf and hover in front of {playercharacter}.",
           "NextStep": "5.1",
           "ResponseOptions": null
         },
         {
           "StepID": "5",
           "Scope": "emotetoplayer",
-          "AdditionalData": "looks at the bauble intensely and a smokey shape quickly materialises showing a vague copy of {playercharacter}.",
+          "AdditionalData": "looks at the bauble intensely and a smokey shape quickly materialises within it showing a vague copy of {playercharacter}.",
           "NextStep": "6.4",
           "ResponseOptions": null
         },
