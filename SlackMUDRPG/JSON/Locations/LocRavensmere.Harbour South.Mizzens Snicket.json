@@ -46,7 +46,7 @@
     {
       "TypeOfNPC": "Rat",
       "MaxNumber": 2,
-      "SpawnFrequency": 15,
+      "SpawnFrequency": 50,
       "Unique": false
     }
 	]

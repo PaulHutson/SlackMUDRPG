@@ -148,5 +148,28 @@ namespace SlackMUDRPG.CommandClasses
 
 			return smil;
 		}
+
+        public void InitiateEffects(SMCharacter smc)
+        {
+            if (this.Effects != null)
+            {
+                foreach (SMEffect sme in this.Effects)
+                {
+                    switch (sme.Action)
+                    {
+                        case "OnExamine":
+                            if (sme.EffectType == "AddQuest")
+                            {
+                                SMQuest smq = SMQuestFactory.Get(sme.AdditionalData);
+                                if (smq != null)
+                                {
+                                    smc.AddQuest(smq);
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+        }
 	}
 }

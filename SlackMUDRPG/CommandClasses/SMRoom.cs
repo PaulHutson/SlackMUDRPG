@@ -568,25 +568,10 @@ namespace SlackMUDRPG.CommandClasses
 
                 if (smi.Effects != null)
                 {
-                    foreach (SMEffect sme in smi.Effects)
-                    {
-                        switch (sme.Action)
-                        {
-                            case "OnExamine":
-                                if (sme.EffectType == "AddQuest")
-                                {
-                                    SMQuest smq = SMQuestFactory.Get(sme.AdditionalData);
-                                    if (smq != null)
-                                    {
-                                        smc.AddQuest(smq);
-                                    }
-                                }
-                                break;
-                        }
-                    }
+                    smi.InitiateEffects(smc);
                 }
-
-				smc.sendMessageToPlayer(itemDeatils);
+                
+                smc.sendMessageToPlayer(itemDeatils);
 				return;
 			}
 

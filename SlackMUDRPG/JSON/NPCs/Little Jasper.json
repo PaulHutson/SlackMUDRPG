@@ -17,13 +17,13 @@
     "dex": 10,
     "wp": 10,
     "ft": 20,
-    "hp": 20,
-    "maxhp": 20,
+    "hp": 6,
+    "maxhp": 6,
     "SocialStanding": 15
   },
   "Skills": [
     {
-      "SkillName": "Dagger Use",
+      "SkillName": "Knife Use",
       "SkillLevel": 10
     },
     {
@@ -54,8 +54,14 @@
         "ItemSize": 1,
         "HitPoints": 50,
         "MaxHitPoints": 50,
-        "BaseDamage": 3,
-        "Toughness": 3
+        "BaseDamage": 2,
+        "Toughness": 3,
+	      "RequiredSkills": [
+		      {
+			      "SkillName": "Knife Use",
+			      "SkillLevel":  "1"
+		      }
+	      ]
       }
     },
     {
@@ -127,7 +133,7 @@
 	"PronounMultiple": "some",
   "NPCResponses": [
     {
-      "ResponseType": "PlayerCharacter.Enters",
+      "ResponseType": "PlayerCharacter.Enter",
       "ResponseTimeOfDay": "all",
       "AdditionalData": null,
       "Faction": null,
