@@ -140,7 +140,7 @@
 			if (keyCode == 38) {
 				usedCommandPointer = usedCommandPointer-- > 0 ? usedCommandPointer : 0;
 			} else {
-				usedCommandPointer = usedCommandPointer++ < usedCommands.length - 1 ? usedCommandPointer : usedCommands.length - 1;
+				usedCommandPointer = usedCommandPointer++ < usedCommands.length ? usedCommandPointer : usedCommands.length;
 			}
 		}
 
