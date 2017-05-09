@@ -391,7 +391,7 @@
         {
           "StepID": "20",
           "Scope": "saytoplayer",
-          "AdditionalData": "Feel free to practice using the forge and anvils here.",
+          "AdditionalData": "Feel free to practice using the forge and anvils here (to craft something you need some tongs, a blacksmith hammer and the required resources for making something - i.e. an arrowhead takes 1 iron, whereas a simple sword takes two iron and a leather strip)",
           "NextStep": "21.1",
           "ResponseOptions": null
         },

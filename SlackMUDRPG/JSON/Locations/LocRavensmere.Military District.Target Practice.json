@@ -117,7 +117,7 @@
     {
       "ItemID": "WoodenBarrel2",
       "SingularPronoun": "a",
-      "ItemName": "Wooden Barrel containing quivers of practice arrows",
+      "ItemName": "Wooden Barrel containing quivers of simple arrows (generally used for training people)",
       "PluralPronoun": "some",
       "PluralName": "Wooden Barrel",
       "ItemType": "Container",
