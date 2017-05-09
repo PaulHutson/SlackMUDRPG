@@ -74,16 +74,49 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("HeldItems")]
 		public List<SMItem> HeldItems { get; set; }
 
-        [JsonProperty("Effects")]
+		[JsonProperty("CanHoldFamilies")]
+		public List<string> CanHoldFamilies { get; set; }
+
+		[JsonProperty("Effects")]
         public List<SMEffect> Effects { get; set; }
 
-        /// <summary>
-        /// Determines if the item can hold other items.
-        /// </summary>
-        /// <returns>Bool indicating if the item can hold other items.</returns>
-        public bool CanHoldOtherItems()
+		/// <summary>
+		/// Determines if the item can hold other items.
+		/// </summary>
+		/// <returns>Bool indicating if the item can hold other items.</returns>
+		public bool CanHoldOtherItems()
 		{
 			return this.ItemType == "Container";
+		}
+
+		/// <summary>
+		/// Determines if the item can hold a given itme based on the properties of both items.
+		/// </summary>
+		/// <param name="item">The item that is to be put in this item.</param>
+		/// <returns>Bool indicating if the item can be put in this item.</returns>
+		public bool CanHoldItem(SMItem item)
+		{
+			if (!this.CanHoldOtherItems())
+			{
+				return false;
+			}
+
+			if (this.CanHoldFamilies != null && this.CanHoldFamilies.Any())
+			{
+				if (this.CanHoldFamilies.Contains("any"))
+				{
+					return true;
+				}
+
+				if (CanHoldFamilies.FirstOrDefault(s => s.ToLower() == item.ItemFamily.ToLower()) != null)
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			return true;
 		}
 
 		/// <summary>
