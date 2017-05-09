@@ -233,7 +233,7 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.LearnToTan"
+                  "AdditionalData": "Hail.LearnToTan"
                 }
               ]
             },
@@ -249,7 +249,7 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.LearnToTan-Return"
+                  "AdditionalData": "Hail.LearnToTan-Return"
                 }
               ]
             },
