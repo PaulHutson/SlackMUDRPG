@@ -1518,6 +1518,13 @@ namespace SlackMUDRPG.CommandClasses
 				return;
 			}
 
+			// Check the container can hold the family corresponding to the item
+			if (!targetContainer.CanHoldItem(itemToPut))
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"You cannot put an item of the family \"{itemToPut.ItemFamily}\" in \"{targetContainer.ItemName}\"!"));
+				return;
+			}
+
 			// Check weight limit is item not already owned
 			if (!ownedItem)
 			{
