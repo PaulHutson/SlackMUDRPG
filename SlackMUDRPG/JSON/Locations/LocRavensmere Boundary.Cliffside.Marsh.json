@@ -1,0 +1,22 @@
+{
+	"RoomID": "Ravensmere Boundary.Cliffside.Marsh",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "The remains of the forest, now mere stumps, form a closely-knit border around the base of this towering cliff. The rock is pale, almost white in places, especially where it's touched by the light. The stench of the rot rises even stronger here, and the stumps are black with decay. Every step you take finds another mushroom underfoot - that is, if you don't encounter a sinkhole first. Occasionally, something bubbles. The mountainside seems like the only solid thing here.[n][n]The air is quiet; even the animals try to avoid the marsh. There are, however, a few scattered signs of life. Someone has carved a name - \"Allan\" - into one of the few remaining trees. A rusting sconce has been drilled into the rock of the cliffside, although any torch it might have once held is long gone. And, of course, there is the mine.[n][n]The entrance has not fared well. Once, it was braced by a solid wooden henge reinforced with iron bands. Now it has partially collapsed, one side of the doorway buckling in on itself. The reinforcement is likely the only reason it hasn't succumbed completely. If you wanted to, you could squeeze through the gap and enter the caverns within.",
+	"RoomExits": [
+    {
+			"Shortcut": "OPT",
+			"Description": "Oldwood Plains Trail",
+			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains Trail"
+		},
+		{
+			"Shortcut": "CMINE",
+			"Description": "Cliffside Mine",
+			"RoomID": "Ravensmere Boundary.Cliffside.Mine"
+		}
+	],
+  "RoomItems": null,
+	"NPCSpawns": null
+}

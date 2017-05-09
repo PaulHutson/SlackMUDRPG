@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "some",
+	"ItemName": "Fungus",
+	"PluralPronoun": "some",
+	"PluralName": "Fungus",
+	"ItemType": "Environment",
+	"ItemFamily": "Fungus",
+	"ItemDescription": "A putrid looking fungus.",
+	"ItemWeight": 1,
+  "ItemSize": 1,
+  "HitPoints": 1,
+  "MaxHitPoints": 1,
+  "BaseDamage": 0.001,
+  "Toughness": 1
+}

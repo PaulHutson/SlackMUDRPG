@@ -1,0 +1,55 @@
+{
+	"RoomID": "Ravensmere Boundary.Cliffside.Mine Mineshaft Entry",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "The damp, rocky corridor around and ahead of you could have, once upon a time, accommodated three miners side by side. Time and the absence of maintenance have left it in a far worse state. It's difficult to take two steps without having to navigate around a pile of rubble or squeeze underneath a half-collapsed beam. The walls are braced every few metres by timber lintels, but here too the rot has arrived, and almost a dozen have splintered under the wear. The mountain is reclaiming its own; it can't be much longer until this place vanishes.[n][n]The cramped quarters aren't helped by the presence of jagged, rusting metal under your feet. The old tracks follow the corridor until they turn into a side passage, whose entrance is blocked off by a mass of dark red metal. Another passageway on the opposite side has collapsed entirely, leaving nothing but a wall of rubble. You have no choice but squint and follow the main shaft as it curves ahead of you.",
+	"RoomExits": [
+    {
+			"Shortcut": "ME",
+			"Description": "Mine Entrance",
+			"RoomID": "Ravensmere Boundary.Cliffside.Mine"
+		},
+		{
+			"Shortcut": "MS",
+			"Description": "Crumbling Mineshaft",
+			"RoomID": "Ravensmere Boundary.Cliffside.Mine Crumbling Mineshaft"
+		}
+	],
+  "RoomItems": [
+    {
+      "ItemID": "tracks",
+      "SingularPronoun": "some",
+      "ItemName": "tracks",
+      "PluralPronoun": "some",
+      "PluralName": "tracks",
+      "ItemType": "track",
+      "ItemFamily": "track",
+      "ItemDescription": "These must have once been used to move rubble from deeper within the mines. Now they lie useless, the iron buried or shattered entirely by fallen rubble. The wooden sleepers which hold the rails together have rotted into a black mass, amongst which a few mushrooms are starting to grow. Even if you could somehow clear the debris, a cart couldn't get more than a few metres down the corridor before derailing. ",
+      "ItemWeight": 1000,
+      "ItemSize": 50,
+      "HitPoints": 1000,
+      "MaxHitPoints": 1000,
+      "BaseDamage": 0.001,
+      "Toughness": 10
+    },
+    {
+      "ItemID": "metal",
+      "SingularPronoun": "some",
+      "ItemName": "metal",
+      "PluralPronoun": "some",
+      "PluralName": "metal",
+      "ItemType": "metal",
+      "ItemFamily": "metal",
+      "ItemDescription": "Perhaps this was once an iron minecart. If so, the extent of the decay and rust would suggest it hadn't been used since long before the mine was fully abandoned. It's sagged and fused together with the rusted tracks, forming a bulk of jagged metal; even if you could squeeze through the narrow gap, you'd slice yourself to ribbons first. There are a few fungal caps growing around it, although, oddly, some of them appear to have been removed.",
+      "ItemWeight": 1000,
+      "ItemSize": 50,
+      "HitPoints": 1000,
+      "MaxHitPoints": 1000,
+      "BaseDamage": 0.001,
+      "Toughness": 10
+    }
+  ],
+	"NPCSpawns": null
+}

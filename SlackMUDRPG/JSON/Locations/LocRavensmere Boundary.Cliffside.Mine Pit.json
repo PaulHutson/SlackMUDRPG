@@ -1,0 +1,34 @@
+{
+	"RoomID": "Ravensmere Boundary.Cliffside.Mine Pit",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "The dank hole you find yourself in seems to repel the light. Shadows are everywhere, and it's hard to discern any details. The pit seems to be around ten feet square. It's just enough to move around in and maybe swing a pick, but not much more than that. If you lean in close, you can discern that a little ore remains. Not much, though.[n][n]There's a distinct crunch of bones under your feet, although there's no way of knowing to what - or whom - they once belonged. Occasionally there's metal, probably abandoned mining equipment, and the splash of stagnant water. Running your fingers across the wall you encounter something spongy and resistant. Mushrooms? Quite possibly, given the fetid odour and what you've seen of the mine above. All in all, this place is certainly not welcoming. The ladder leaning against one wall promises an escape.",
+	"RoomExits": [
+    {
+			"Shortcut": "LADDER",
+			"Description": "Ladder to the Crumbling Mineshaft",
+			"RoomID": "Ravensmere Boundary.Cliffside.Mine Crumbling Mineshaft"
+		}
+	],
+  "RoomItems": null,
+	"NPCSpawns": [
+		{
+			"TypeOfNPC": "WoundedBear",
+			"MaxNumber": 1,
+			"SpawnFrequency": 100,
+			"Unique": false
+		}
+	],
+  "ItemSpawns": [
+    {
+      "ItemName": "Gold Vein Outcropping",
+      "TypeOfItem": "Environment.GoldVein",
+      "SpawnMessage": "Some wall crumbles and exposes a gleaming Gold Vein",
+      "MaxNumber": 1,
+      "MaxSpawnAtOnce": 1,
+      "SpawnFrequency": 5
+    }
+  ]
+}

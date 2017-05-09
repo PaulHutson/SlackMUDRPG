@@ -1,0 +1,22 @@
+{
+	"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains Trail",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "Once upon a time, this path might have been well used - the passage of many feet has worn a trail through the grass that leads towards the cliffs ahead. It's clear, however, that it's been a long while since anyone has used it. Like so many of the plains around Ravensmere, this place was thickly forested until the hungry city devoured the surrounding timber. Most of the wilderness around the road has been cleared of stumps; here, however, a fair few remain.[n][n]The brush is starting to reclaim its territory, and in some places becomes so dense that you have difficulty finding the way forward. One foot in the wrong place produces a noisy squelch and mud so viscous that you have difficulty extracting your boots. A heady musk of rot lies like a thick blanket over the area, leaving you slightly light-headed.",
+	"RoomExits": [
+    {
+			"Shortcut": "OP",
+			"Description": "Oldwood Plains",
+			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains"
+		},
+		{
+			"Shortcut": "CM",
+			"Description": "Cliffside Marsh",
+			"RoomID": "Ravensmere Boundary.Cliffside.Marsh"
+		}
+	],
+  "RoomItems": null,
+	"NPCSpawns": null
+}

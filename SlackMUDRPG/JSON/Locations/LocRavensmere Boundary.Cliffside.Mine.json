@@ -1,0 +1,80 @@
+{
+	"RoomID": "Ravensmere Boundary.Cliffside.Mine",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "Pale rock walls open up into a cavern here, just large enough for a few men to stand shoulder-to-shoulder. The walls and ceiling are braced with thick wooden pillars... although on closer inspection, the beams are black and rotting. Time has clearly not been kind to the miners' work.[n][n]The rest of the room is full of scattered industrial remnants. A few rusting pickaxes lean against one wall; three minecarts, piled high with equipment and rocky debris, are lined up against the other. This was clearly the miners' staging area - and judging from the pick-marks on the rock, it was widened artificially for just that reason. [n][n]An archway in the back wall leads through to the main mineshaft, while the collapsed lintel at the entrance promises fresher air.",
+	"RoomExits": [
+    {
+			"Shortcut": "MSE",
+			"Description": "Mineshaft Entry",
+			"RoomID": "Ravensmere Boundary.Cliffside.Mine Mineshaft Entry"
+		},
+		{
+			"Shortcut": "CM",
+			"Description": "Cliffside Marsh",
+			"RoomID": "Ravensmere Boundary.Cliffside.Marsh"
+		}
+	],
+  "RoomItems": [
+    {
+      "ItemID": "beams",
+      "SingularPronoun": "some",
+      "ItemName": "beams",
+      "PluralPronoun": "some",
+      "PluralName": "beams",
+      "ItemType": "Mine",
+      "ItemFamily": "beams",
+      "ItemDescription": "As you lean in, you get a waft of the same heady musk you noticed outside. They're a dark brown, and almost crumbling to the touch. Something viscous oozes from between the grain. You wonder how much longer they could last - and as if on cue, there's a faint rumble from the rock above as a handful of pale dust showers you.",
+      "ItemWeight": 1000,
+      "ItemSize": 50,
+      "HitPoints": 1000,
+      "MaxHitPoints": 1000,
+      "BaseDamage": 0.001,
+      "Toughness": 10
+    },
+    {
+      "ItemID": "minecarts",
+      "SingularPronoun": "some",
+      "ItemName": "minecarts",
+      "PluralPronoun": "some",
+      "PluralName": "minecarts",
+      "ItemType": "minecart",
+      "ItemFamily": "minecart",
+      "ItemDescription": "The three minecarts rest on a set of rusting iron tracks, which snakes away to the mineshaft. Two of them are full to the top with gravel and crushed rock; apparently these were used to clear away the debris after driving new shafts. The third holds a small pile of equipment. Much of it is useless - pickaxes with rotten shafts, a dented mining helmet, a shattered lantern - but there are a few things that you could take.",
+      "ItemWeight": 1000,
+      "ItemSize": 50,
+      "HitPoints": 1000,
+      "MaxHitPoints": 1000,
+      "BaseDamage": 0.001,
+      "Toughness": 10
+    },
+    {
+	    "SingularPronoun": "some",
+	    "ItemName": "Fungus",
+	    "PluralPronoun": "some",
+	    "PluralName": "Fungus",
+	    "ItemType": "Environment",
+	    "ItemFamily": "Fungus",
+	    "ItemDescription": "A putrid looking fungus.",
+	    "ItemWeight": 1,
+      "ItemSize": 1,
+      "HitPoints": 1,
+      "MaxHitPoints": 1,
+      "BaseDamage": 0.001,
+      "Toughness": 1
+    }
+  ],
+	"NPCSpawns": null,
+  "ItemSpawns": [
+    {
+      "ItemName": "Fungus",
+      "TypeOfItem": "Environment.Fungus",
+      "SpawnMessage": "Some fungus oozes into existance",
+      "MaxNumber": 2,
+      "MaxSpawnAtOnce": 1,
+      "SpawnFrequency": 20
+    }
+  ]
+}

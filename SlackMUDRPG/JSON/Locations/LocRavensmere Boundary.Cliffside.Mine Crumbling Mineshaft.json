@@ -1,0 +1,22 @@
+{
+	"RoomID": "Ravensmere Boundary.Cliffside.Mine Crumbling Mineshaft",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "The air here is stale, unwholesome, and damp. The shaft seems to stretch on forever; you have long since lost sight of the entrance. Now you are surrounded by nothing but pale rock, dripping with condensation. The rubble, at least, is farther and fewer between, and you can finally walk upright for more than a few steps at a time. Despite the decay in the air, the lintels appear to be a little stronger here... except for one, which has been shattered by some unknown force.[n][n]Picking your way forward, you notice the rails are no longer underneath your feet. Perhaps this was an exploratory shaft, looking for new veins of ore; there are several side passages which would support that explanation. If so, they can't have been very successful, since none of them extend more than a few feet before stopping.[n][n]At the deepest end of the shaft is a pit, lined and braced with wooden beams. Peering down doesn't reveal much except shadows. A ladder has been securely fastened to the closest edge, giving you a path downwards.",
+	"RoomExits": [
+    {
+			"Shortcut": "PIT",
+			"Description": "Inside the Pit",
+			"RoomID": "Ravensmere Boundary.Cliffside.Mine Pit"
+		},
+		{
+			"Shortcut": "ME",
+			"Description": "Mineshaft Entry",
+			"RoomID": "Ravensmere Boundary.Cliffside.Mine Mineshaft Entry"
+		}
+	],
+  "RoomItems": null,
+	"NPCSpawns": null
+}

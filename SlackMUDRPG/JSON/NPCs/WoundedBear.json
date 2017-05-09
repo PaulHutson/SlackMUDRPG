@@ -1,0 +1,133 @@
+﻿{
+  "firstname": "Wounded",
+  "lastname": "Bear",
+  "description": "Savage and pitiful simultaneously, this creature's roars seem equal parts pained and enraged. Froth boils over around its teeth and nose, splattering across the mine's rock. Its dark fur is matted with filth and blood and excrement, and as it rears up to unleash a bellow that shakes the rock, you notice a pickaxe head embedded deep within its belly. Perhaps this is the wound that has sent the creature mad, or perhaps it simply doesn't like you very much. Either way, it's likely the only thing that has kept your demise from being instant.",
+  "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
+  "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
+  "age": 15,
+  "sex": "m",
+  "PKFlag": false,
+  "UserID": "WoundedBear",
+  "RoomID": "IsSpawned",
+  "CurrentActivity": null,
+  "Attributes": {
+    "str": 15,
+    "int": 7,
+    "chr": 3,
+    "dex": 10,
+    "wp": 6,
+    "ft": 6,
+    "hp": 20,
+    "maxhp": 20,
+    "SocialStanding": 1
+  },
+  "Skills": [
+    {
+      "SkillName": "Dodge",
+      "SkillLevel": 8
+    },
+    {
+      "SkillName": "Brawl",
+      "SkillLevel": 20
+    }
+  ],
+  "Slots": null,
+  "BodyParts": [
+    {
+      "Name": "Body"
+    }
+  ],
+	"ResponseURL": null,
+	"NPCType": "WoundedBear",
+	"IsGeneric": true,
+	"WalkingType": "lumbers",
+	"FamilyType": "Bear",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+	"DestroyedOutput": "Resource.Meat,1",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Enter",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Attack",
+          "ResponseStepData": null
+        }
+      ]
+    },
+    {
+      "ResponseType": "Pulse",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "GeneralChitChat.Choice"
+        }
+      ]
+    },
+    {
+      "ResponseType": "PlayerCharacter.Attack",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Attack",
+          "ResponseStepData": null
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "GeneralChitChat",
+      "ConversationStep": [
+        {
+          "StepID": "Choice",
+          "Scope": "choice",
+          "AdditionalData": "random1,random2,random3,random4",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random1",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "rears up menacingly on it's hind legs",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random2",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "opens it's mout wide and roars in {playercharacter}s direction",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random3",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "scratches at the floor",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "random4",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "circles {playercharacter}",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ],
+  "NPCMovementAlgorithms": null,
+  "NPCMovementTarget": null
+}

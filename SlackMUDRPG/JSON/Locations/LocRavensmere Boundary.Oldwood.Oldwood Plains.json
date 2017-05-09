@@ -20,6 +20,11 @@
 			"Shortcut": "RIM",
 			"Description": "Rookdown Iron Mine",
 			"RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Entrance"
+		},
+		{
+			"Shortcut": "CM",
+			"Description": "Cliffside Marsh",
+			"RoomID": "Ravensmere Boundary.Cliffside.Marsh"
 		}
 	],
   "RoomItems": [
