@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "Two Rings Don't Make A Right",
+	"Prerequisites": null,
+	"Daily": false,
+	"QuestSteps": [
+		{
+			"Name": "Collect the rings",
+			"Type": "Get",
+			"CharacterName": "Barrack Sergeant",
+			"LocationID": "Ravensmere.Harbour South.Ravensmere Barracks",
+			"AdditionalData": "",
+			"Instructions": "Take two signet rings to the Barracks Guard to prove you've killed the jasper twins"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Money",
+			"AdditionalData": "10"
+		}
+	]
+}

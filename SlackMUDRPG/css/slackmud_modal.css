@@ -1,0 +1,17 @@
+﻿.modal-slackmud .modal-content {
+	border-radius: 0;
+}
+
+.modal-slackmud .btn {
+	border-radius: 0;
+}
+
+.modal-slackmud .btn-primary {
+	background-color: rgba(43, 43, 43, 1.0);
+	border-color: rgba(36, 36, 36, 1.0);
+}
+
+.modal-slackmud .btn-primary:hover {
+	background-color: rgba(103, 103, 103, 1.0);
+	border-color: rgba(103, 103, 103, 1.0);
+}

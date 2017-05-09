@@ -74,6 +74,12 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("HeldItems")]
 		public List<SMItem> HeldItems { get; set; }
 
+		[JsonProperty("CanHoldFamilies")]
+		public List<string> CanHoldFamilies { get; set; }
+
+		[JsonProperty("Effects")]
+        public List<SMEffect> Effects { get; set; }
+
 		/// <summary>
 		/// Determines if the item can hold other items.
 		/// </summary>
@@ -81,6 +87,36 @@ namespace SlackMUDRPG.CommandClasses
 		public bool CanHoldOtherItems()
 		{
 			return this.ItemType == "Container";
+		}
+
+		/// <summary>
+		/// Determines if the item can hold a given itme based on the properties of both items.
+		/// </summary>
+		/// <param name="item">The item that is to be put in this item.</param>
+		/// <returns>Bool indicating if the item can be put in this item.</returns>
+		public bool CanHoldItem(SMItem item)
+		{
+			if (!this.CanHoldOtherItems())
+			{
+				return false;
+			}
+
+			if (this.CanHoldFamilies != null && this.CanHoldFamilies.Any())
+			{
+				if (this.CanHoldFamilies.Contains("any"))
+				{
+					return true;
+				}
+
+				if (CanHoldFamilies.FirstOrDefault(s => s.ToLower() == item.ItemFamily.ToLower()) != null)
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			return true;
 		}
 
 		/// <summary>
@@ -145,5 +181,28 @@ namespace SlackMUDRPG.CommandClasses
 
 			return smil;
 		}
+
+        public void InitiateEffects(SMCharacter smc)
+        {
+            if (this.Effects != null)
+            {
+                foreach (SMEffect sme in this.Effects)
+                {
+                    switch (sme.Action)
+                    {
+                        case "OnExamine":
+                            if (sme.EffectType == "AddQuest")
+                            {
+                                SMQuest smq = SMQuestFactory.Get(sme.AdditionalData);
+                                if (smq != null)
+                                {
+                                    smc.AddQuest(smq);
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+        }
 	}
 }

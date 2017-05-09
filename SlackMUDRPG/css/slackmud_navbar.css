@@ -8,6 +8,7 @@
 
 .navbar-slackmud-social .navbar-nav > li > a {
     padding: 10px;
+	color: rgba(255, 255, 255, 1.0);
 }
 
 .navbar-slackmud-social .navbar-nav > li > a > img.logo {

@@ -232,7 +232,7 @@ namespace SlackMUDRPG.CommandClasses
         /// </summary>
         public void GetRoomExits()
 		{
-			this.sendMessageToPlayer(this.GetRoom().GetExitDetails());
+			this.sendMessageToPlayer(this.GetRoom().GetExitDetails(this));
 		}
 
 		/// <summary>
@@ -641,7 +641,12 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					this.sendMessageToPlayer(this.Formatter.Bold("The " + item.ItemName + " reads:"));
 					this.sendMessageToPlayer(this.Formatter.ListItem(item.ItemExtraDetail));
-				}
+
+                    if (item.Effects != null)
+                    {
+                        item.InitiateEffects(this);
+                    }
+                }
 				else
 				{
 					this.sendMessageToPlayer(this.Formatter.Italic("That item can not be read"));
@@ -1513,6 +1518,13 @@ namespace SlackMUDRPG.CommandClasses
 				return;
 			}
 
+			// Check the container can hold the family corresponding to the item
+			if (!targetContainer.CanHoldItem(itemToPut))
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"You cannot put an item of the family \"{itemToPut.ItemFamily}\" in \"{targetContainer.ItemName}\"!"));
+				return;
+			}
+
 			// Check weight limit is item not already owned
 			if (!ownedItem)
 			{
@@ -1558,6 +1570,7 @@ namespace SlackMUDRPG.CommandClasses
 
 			this.GetRoom().SaveToApplication();
 			this.SaveToApplication();
+            this.SaveToFile();
 		}
 
 		/// <summary>
@@ -2542,7 +2555,7 @@ namespace SlackMUDRPG.CommandClasses
             // If there is someone in the list
             if (npc != null)
             {
-                this.sendMessageToPlayer("[i]" + this.GetFullName() + " says:[/i] \"Hail " + hailTarget + "\"");
+                this.sendMessageToPlayer("[i]" + this.GetFullName() + " says:[/i] \"Hail " + npc.GetFullName() + "\"");
                 npc.RespondToAction("PlayerCharacter.Hail", this);
                 spokenToSomeone = true;
             }

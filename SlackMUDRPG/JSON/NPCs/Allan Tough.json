@@ -251,8 +251,37 @@
 					"StepID": "Intro-4",
 					"Scope": "addquest",
 					"AdditionalData": "Tough.Working With Leather",
-					"NextStep": null,
+					"NextStep": "Intro-5.2",
 					"ResponseOptions": null
+				},
+								{
+					"StepID": "Intro-5",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Would you like to shop now?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"PreRequisites": null,
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "conversation",
+									"AdditionalData": "Shop.1"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "ShopLeave.NoBuy"
+								}
+							]
+						}
+					]
 				},
 				{
 					"StepID": "Learning-1",

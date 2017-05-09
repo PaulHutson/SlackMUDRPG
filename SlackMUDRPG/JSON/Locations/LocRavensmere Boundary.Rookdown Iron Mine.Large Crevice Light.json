@@ -1,0 +1,45 @@
+{
+	"RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Large Crevice Light",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+  "RoomDescription": "This man sized recess looks newly excavated. Probably made for stowing smuggled goods before moving into the town.",
+	"RoomExits": [
+    {
+      "Shortcut": "MP",
+      "Description": "Medium Passage",
+      "RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Medium Passage"
+    }
+	],
+  "RoomItems": [
+    {
+      "itemID": "RedStickyBag",
+      "SingularPronoun": "a",
+      "ItemName": "Bag of Red Sticky Substance",
+      "PluralPronoun": "some",
+      "PluralName": "Bags of Red Sticky Substance",
+      "ItemType": "Quest",
+      "ItemFamily": "Bag",
+      "ItemDescription": "This glowing bag of red jelly has a vaguely magical feel to it.",
+      "ItemWeight": 0,
+      "ItemSize": 0,
+      "HitPoints": 1000000000,
+      "MaxHitPoints": 1000000000,
+      "BaseDamage": 0.001,
+      "Toughness": 1,
+      "HeldItem": null
+    }
+  ],
+	"NPCSpawns": null,
+  "ItemSpawns": [
+    {
+      "ItemName": "Iron Vein Outcropping",
+      "TypeOfItem": "Environment.IronVein",
+      "SpawnMessage": "Some wall crumbles and exposes a gleaming Iron Vein",
+      "MaxNumber": 1,
+      "MaxSpawnAtOnce": 1,
+      "SpawnFrequency": 10
+    }
+  ]
+}

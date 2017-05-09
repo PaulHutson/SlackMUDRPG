@@ -11,6 +11,9 @@
 @import url('slackmud_navbar.css');
 @import url('slackmud_navbar_collapse.css');
 
+/* Modal Styles */
+@import url(slackmud_modal.css);
+
 /* Footer Styles */
 @import url('slackmud_footer.css');
 
@@ -43,4 +46,9 @@ body {
 
 .content-block-no-pad {
     padding: 0;
+}
+
+.modal-open {
+    padding-right: 0px !important;
+	overflow: auto;
 }

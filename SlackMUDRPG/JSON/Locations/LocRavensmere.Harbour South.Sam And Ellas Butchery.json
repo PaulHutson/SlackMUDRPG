@@ -1,10 +1,10 @@
 ﻿{
-	"RoomID": "Ravensmere.Harbour South.Big Sams Butchers Shop",
+	"RoomID": "Ravensmere.Harbour South.Sam And Ellas Butchery",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
 	"Outside": false,
-	"RoomDescription": "The shop is small, with room for only few customres in front of the display counter. Behind the counter through a small opening a number carcasses hang from the ceiling on large metal hooks and the smell of blood hangs thick in the air.",
+	"RoomDescription": "The shop is small, with room only for a small number of customers. A large number of sharp iron hooks dangle from the wooden beams and the smell of blood hangs thick in the air.",
 	"RoomExits": [
 		{
 			"Shortcut": "BR",

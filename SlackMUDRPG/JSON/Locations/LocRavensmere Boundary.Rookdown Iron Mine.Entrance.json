@@ -1,0 +1,49 @@
+{
+	"RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Entrance",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+  "RoomDescription": "A rusty track leads into the main chamber, obviously disused for some time. The ore cart is nowhere to be seen, probably scavanged for metal when the mine was closed.[n][n]The walls of the chamber are uneven from the extraction but it seems that the miners were only interested in the larger iron veins.",
+	"RoomExits": [
+    {
+      "Shortcut": "OP",
+      "Description": "Oldwood Plains",
+      "RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains"
+    },
+    {
+			"Shortcut": "MP",
+			"Description": "Medium Passage",
+			"RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Medium Passage",
+      "Prerequisites": [
+        {
+          "Type": "IsNotInProgressQuest",
+          "AdditionalData": "Two Rings Don't Make A Right"
+        }
+      ]
+		},
+    {
+      "Shortcut": "GP",
+      "Description": "Faintly Glowing Passage",
+      "RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Glowing Passage",
+      "Prerequisites": [
+        {
+          "Type": "InProgressQuest",
+          "AdditionalData": "Two Rings Don't Make A Right"
+        }
+      ]
+    }
+	],
+	"RoomItems": null,
+	"NPCSpawns": null,
+  "ItemSpawns": [
+    {
+      "ItemName": "Iron Vein Outcropping",
+      "TypeOfItem": "Environment.IronVein",
+      "SpawnMessage": "Some wall crumbles and exposes a gleaming Iron Vein",
+      "MaxNumber": 1,
+      "MaxSpawnAtOnce": 1,
+      "SpawnFrequency": 2
+    }
+  ]
+}

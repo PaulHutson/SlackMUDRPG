@@ -142,7 +142,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// <summary>
 		/// Gets the room exit details
 		/// </summary>
-		public string GetExitDetails()
+		public string GetExitDetails(SMCharacter smc)
 		{
 			string returnString = "";
 
@@ -154,14 +154,70 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				returnString += this.Formatter.Bold("Room Exits:");
 
-				string[] exits = new string[this.RoomExits.Count];
+                string exits = "";
+                bool firstExit = true;
 
 				for (int i = 0; i < this.RoomExits.Count; i++)
 				{
-					exits[i] = $"{this.RoomExits[i].Description} [{this.RoomExits[i].Shortcut}]";
+                    bool canUseExit = true;
+
+                    if (this.RoomExits[i].Prerequisites != null)
+                    {
+                        // get the quests for use later
+                        List<SMQuestStatus> smqs = new List<SMQuestStatus>();
+                        if (smc.QuestLog != null)
+                        {
+                            smqs = smc.QuestLog;
+                        }
+
+                        foreach (SMRoomPrerequisite smrp in this.RoomExits[i].Prerequisites)
+                        {
+                            switch (smrp.Type)
+                            {
+                                case "HasDoneQuest":
+                                    if (smqs.Count(quest => (quest.QuestName == smrp.AdditionalData) && (quest.Completed)) == 0)
+                                    {
+                                        canUseExit = false;
+                                    }
+                                    break;
+                                case "InProgressQuest":
+                                    if (smqs.Count(quest => (quest.QuestName == smrp.AdditionalData) && (!quest.Completed)) == 0)
+                                    {
+                                        canUseExit = false;
+                                    }
+                                    break;
+                                case "HasNotDoneQuest":
+                                    if (smqs.Count(quest => (quest.QuestName == smrp.AdditionalData)) != 0)
+                                    {
+                                        canUseExit = false;
+                                    }
+                                    break;
+                                case "IsNotInProgressQuest":
+                                    if (smqs.Count(quest => (quest.QuestName == smrp.AdditionalData) && (!quest.Completed)) != 0)
+                                    {
+                                        canUseExit = false;
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+
+                    if (canUseExit)
+                    {
+                        if (firstExit)
+                        {
+                            firstExit = false;
+                        }
+                        else
+                        {
+                            exits += ", ";
+                        }
+
+                        exits += $"{this.RoomExits[i].Description} [{this.RoomExits[i].Shortcut}]";
+                    }
 				}
 
-				returnString += this.Formatter.ListItem(String.Join(", ", exits));
+                returnString += this.Formatter.ListItem(exits);
 			}
 
 			return returnString;
@@ -360,7 +416,7 @@ namespace SlackMUDRPG.CommandClasses
         /// </summary>
         /// <param name="smr">An SMRoom</param>
         /// <returns>String including a full location string</returns>
-        public string GetLocationInformation(SMCharacter smc = null)
+        public string GetLocationInformation(SMCharacter smc)
 		{
 			// Construct the room string.
 			string returnString = "";
@@ -393,7 +449,7 @@ namespace SlackMUDRPG.CommandClasses
 			returnString += this.Formatter.GetNewLines(1);
 
 			// Add the exits to the room so that someone can leave.
-			returnString += this.GetExitDetails();
+			returnString += this.GetExitDetails(smc);
 			returnString += this.Formatter.GetNewLines(1);
 
 			// Show all the items within the room that can be returned.
@@ -510,7 +566,12 @@ namespace SlackMUDRPG.CommandClasses
 					itemDeatils += SMItemHelper.GetContainerContents(smi);
 				}
 
-				smc.sendMessageToPlayer(itemDeatils);
+                if (smi.Effects != null)
+                {
+                    smi.InitiateEffects(smc);
+                }
+                
+                smc.sendMessageToPlayer(itemDeatils);
 				return;
 			}
 
@@ -935,6 +996,9 @@ namespace SlackMUDRPG.CommandClasses
 
         [JsonProperty("Locked")]
         public bool Locked { get; set; }
+
+        [JsonProperty("Prerequisites")]
+        public List<SMRoomPrerequisite> Prerequisites { get; set; }        
     }
 
 	public class SMSpawn
@@ -986,5 +1050,14 @@ namespace SlackMUDRPG.CommandClasses
     {
         [JsonProperty("Name")]
         public string Name { get; set; }
+    }
+
+    public class SMRoomPrerequisite
+    {
+        [JsonProperty("Type")]
+        public string Type { get; set; }
+
+        [JsonProperty("AdditionalData")]
+        public string AdditionalData { get; set; }
     }
 }

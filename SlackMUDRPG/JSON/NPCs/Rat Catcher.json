@@ -195,7 +195,7 @@
               "PreRequisites": [
 								{
 									"Type": "IsNotInProgressQuest",
-									"AdditionalData": "A tail of many dead rats"
+									"AdditionalData": "RA tail of many dead rats"
 								}
 							],
               "ResponseOptionActionSteps": [
@@ -221,7 +221,7 @@
               "PreRequisites": [
 								{
 									"Type": "InProgressQuest",
-									"AdditionalData": "A tail of many dead rats"
+									"AdditionalData": "RA tail of many dead rats"
 								},
 								{
 									"Type": "HasItem",
@@ -307,7 +307,7 @@
         },
         {
           "StepID": "RatsTails",
-          "Scope": "generalemote",
+          "Scope": "emotetoplayer",
           "AdditionalData": "smiles a mildly toothless grin in your direction",
           "NextStep": "RatsTails2.4",
           "ResponseOptions": null

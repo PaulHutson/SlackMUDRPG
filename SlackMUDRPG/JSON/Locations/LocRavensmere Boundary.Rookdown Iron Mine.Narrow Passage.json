@@ -1,0 +1,27 @@
+{
+	"RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Narrow Passage",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+  "RoomDescription": "You have to walk sideways to navigate this dark passage. The iron veins in the walls are thin and continue to decrease the further you go. The lack of high yield ore probably led to the mines closure.",
+	"RoomExits": [
+    {
+			"Shortcut": "RIM",
+			"Description": "Rookdown Iron Mine",
+			"RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Entrance"
+		}
+	],
+	"RoomItems": null,
+	"NPCSpawns": null,
+  "ItemSpawns": [
+    {
+      "ItemName": "Iron Vein Outcropping",
+      "TypeOfItem": "Environment.IronVein",
+      "SpawnMessage": "Some wall crumbles and exposes a gleaming Iron Vein",
+      "MaxNumber": 1,
+      "MaxSpawnAtOnce": 1,
+      "SpawnFrequency": 10
+    }
+  ]
+}

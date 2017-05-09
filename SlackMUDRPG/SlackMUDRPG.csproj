@@ -181,6 +181,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\images\crossed_swords_logo.png" />
     <Content Include="css\images\facebook_logo_small.png" />
     <Content Include="css\images\favicon.png" />
     <Content Include="css\images\province_header_logo.png" />
@@ -198,6 +199,7 @@
     <Content Include="css\slackmud_helpers.css" />
     <Content Include="css\slackmud_login_create.css" />
     <Content Include="css\slackmud_main.css" />
+    <Content Include="css\slackmud_modal.css" />
     <Content Include="css\slackmud_navbar.css" />
     <Content Include="css\slackmud_navbar_collapse.css" />
     <Content Include="css\slackmud_page_game.css" />
@@ -366,8 +368,19 @@
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Tough And Sons Leather Goods Workshop.json" />
     <Content Include="JSON\NPCs\Allan Tough.json" />
     <Content Include="JSON\NPCs\Noble-Generic-Harried.json" />
-    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Big Sams Butchers Shop.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Sam And Ellas Butchery.json" />
     <Content Include="JSON\NPCs\Big Sam.json" />
+    <Content Include="JSON\Locations\LocRavensmere Boundary.Oldwood.Small Cave.json" />
+    <Content Include="JSON\Locations\LocRavensmere Boundary.Rookdown Iron Mine.Entrance.json" />
+    <Content Include="JSON\Locations\LocRavensmere Boundary.Rookdown Iron Mine.Narrow Passage.json" />
+    <Content Include="JSON\Locations\LocRavensmere Boundary.Rookdown Iron Mine.Medium Passage.json" />
+    <Content Include="JSON\Locations\LocRavensmere Boundary.Rookdown Iron Mine.Large Crevice.json" />
+    <Content Include="JSON\Locations\LocRavensmere Boundary.Rookdown Iron Mine.Glowing Passage.json" />
+    <Content Include="JSON\Locations\LocRavensmere Boundary.Rookdown Iron Mine.Large Crevice Light.json" />
+    <Content Include="JSON\NPCs\Big Jasper.json" />
+    <Content Include="JSON\NPCs\Little Jasper.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Military District.Ravensmere Barracks.json" />
+    <Content Include="JSON\NPCs\Barrack Sergeant.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
     <Content Include="JSON\NPCs\Rat.json" />
@@ -447,6 +460,10 @@
     <Content Include="JSON\Quests\BigSam.Supply And Demand.json" />
     <Content Include="JSON\Quests\RatCatcher.A tail of many dead rats.json" />
     <Content Include="JSON\Objects\Resource.Tail.json" />
+    <Content Include="JSON\Objects\Quest.BagOfRedStickySubstance.json" />
+    <Content Include="JSON\Objects\Quest.LittleHellstoneSignetRing.json" />
+    <Content Include="JSON\Objects\Quest.BigHellstoneSignetRing.json" />
+    <Content Include="JSON\Quests\Town.Two Rings Don%27t Make A Right.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="RebuildCharNameList.aspx" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
@@ -508,6 +525,7 @@
     <Compile Include="CommandClasses\SMCommandUtility.cs" />
     <Compile Include="CommandClasses\SMCreature.cs" />
     <Compile Include="CommandClasses\SMCurrency.cs" />
+    <Compile Include="CommandClasses\SMEffect.cs" />
     <Compile Include="CommandClasses\SMFaction.cs" />
     <Compile Include="CommandClasses\SMHelp.cs" />
     <Compile Include="CommandClasses\SMItem.cs" />

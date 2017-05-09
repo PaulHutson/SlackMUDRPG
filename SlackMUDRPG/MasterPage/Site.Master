@@ -20,10 +20,37 @@
 
 	<body>
 		<form id="form1" runat="server" class="full-height">
+			<!-- Logout Modal -->
+			<div class="modal modal-slackmud" id="logoutModal" tabindex="-1" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+							<h4 class="modal-title">Logout</h4>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-xs-4">
+									<img src="../css/images/crossed_swords_logo.png" class="img-responsive">
+								</div>
+								<div class="col-xs-8">
+									<p><br />Logging out here does not remove your character from the game world it only disconects your browser from the server.<br /><br />As such you will remain visible to other players in the game unless you find a bed (such as in the <span style="font-style: italic;">Scalebrewers Tavern</span>) and sleep.</p>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<asp:LinkButton class="btn btn-primary" runat="server" OnClick="logoutBtnClick">Logout</asp:LinkButton>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<!-- Social media pre header -->
 			<nav class="navbar navbar-slackmud-social navbar-fixed-top">
 				<div class="container">
 					<ul class="nav navbar-nav navbar-right">
+						<!--
 						<li>
 							<a href="#">
 								<img class="logo" src="../css/images/facebook_logo_small.png" alt="facebook">
@@ -33,6 +60,10 @@
 							<a href="#">
 								<img class="logo" src="../css/images/twitter_logo_small.png" alt="twitter">
 							</a>
+						</li>
+						-->
+						<li>
+							<a href="https://goo.gl/forms/HC3mURoLGPSG6bXT2" target="_blank">Feedback, Suggestions, Bugs? Submit them here</a>
 						</li>
 					</ul>
 				</div>
@@ -62,7 +93,7 @@
 							<li><a class="link" data-url="Recipes.aspx" href="#">Recipes</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><asp:LinkButton ID="logoutBtn" runat="server" Visible="false" OnClick="logoutBtnClick">Logout</asp:LinkButton></li>
+							<li><asp:LinkButton ID="logoutBtn" runat="server" Visible="false" data-toggle="modal" data-target="#logoutModal">Logout</asp:LinkButton></li>
 						</ul>
 					</div>
 				</div>
