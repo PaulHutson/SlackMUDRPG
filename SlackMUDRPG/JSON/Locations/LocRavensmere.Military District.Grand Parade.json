@@ -25,11 +25,6 @@
       "Shortcut": "TG",
       "Description": "Training Ground",
       "RoomID": "Ravensmere.Military District.Training Ground"
-    },
-    {
-      "Shortcut": "RB",
-      "Description": "Ravensmere Barracks",
-      "RoomID": "Ravensmere.Military District.Ravensmere Barracks"
     }
 	],
 	"RoomItems": null,
