@@ -147,6 +147,9 @@
           "MaxHitPoints": 10,
           "BaseDamage": 0.1,
           "Toughness": 5,
+          "CanHoldFamilies": [
+              "arrow"
+          ],
           "HeldItems": [
             {
               "ItemID": "PracticeArrow1",
@@ -336,6 +339,9 @@
           "MaxHitPoints": 10,
           "BaseDamage": 0.1,
           "Toughness": 5,
+          "CanHoldFamilies": [
+              "arrow"
+          ],
           "HeldItems": [
             {
               "ItemID": "PracticeArrow1",
@@ -525,6 +531,9 @@
           "MaxHitPoints": 10,
           "BaseDamage": 0.1,
           "Toughness": 5,
+          "CanHoldFamilies": [
+              "arrow"
+          ],
           "HeldItems": [
             {
               "ItemID": "PracticeArrow1",
