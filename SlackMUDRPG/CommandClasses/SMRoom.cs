@@ -426,9 +426,9 @@ namespace SlackMUDRPG.CommandClasses
 				if ((!smc.NewbieTipsDisabled) && (this.RoomNewbieTips != null) && (this.RoomNewbieTips != ""))
 				{
 					returnString += this.Formatter.GetNewLines(1);
-					returnString += this.Formatter.Bold("~~~~~ NEWBIE TIPS ~~~~~", 1);
+					returnString += this.Formatter.Bold("----- NEWBIE TIPS -----", 1);
 					returnString += this.Formatter.General(this.RoomNewbieTips, 1);
-					returnString += this.Formatter.Bold("~~~~~     END     ~~~~~", 2);
+					returnString += this.Formatter.Bold("-----     END     -----", 2);
 				}
 			}
 
