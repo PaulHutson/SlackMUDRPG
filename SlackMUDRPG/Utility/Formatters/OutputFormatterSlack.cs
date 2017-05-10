@@ -10,7 +10,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <inheritdoc />
 		protected override string GetBoldReplacePattern()
 		{
-			return "*$2*";
+			return "**$2**";
 		}
 
 		/// <inheritdoc />
