@@ -58,7 +58,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <inheritdoc />
 		protected override string GetNewLineSequence()
 		{
-			return "\n";
+			return "\n\n";
 		}
 	}
 }
