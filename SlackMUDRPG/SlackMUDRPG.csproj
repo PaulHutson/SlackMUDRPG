@@ -187,6 +187,7 @@
     <Content Include="css\images\province_header_logo.png" />
     <Content Include="css\images\province_main_logo.png" />
     <Content Include="css\images\province_p_200.png" />
+    <Content Include="css\images\ravensmere-map-high-level.jpg" />
     <Content Include="css\images\ravensmere_map.jpg" />
     <Content Include="css\images\site_background.jpg" />
     <Content Include="css\images\skype_200.png" />

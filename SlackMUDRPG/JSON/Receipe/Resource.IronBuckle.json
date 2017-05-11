@@ -4,7 +4,7 @@
 	"Produces": "Resource.IronBuckle",
 	"PauseTime": 10,
 	"NeedToLearn": true,
-	"ProductionTrait": "TraitBlackSmithing",
+	"ProductionTrait": "Trait.BlackSmithing",
 	"Materials": [
 		{
 			"MaterialType": "ItemName.Iron Nugget",

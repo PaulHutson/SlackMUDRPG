@@ -10,7 +10,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <inheritdoc />
 		protected override string GetBoldReplacePattern()
 		{
-			return "*$2*";
+			return "**$2**";
 		}
 
 		/// <inheritdoc />
@@ -34,7 +34,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <inheritdoc />
 		protected override string GetListItemReplacePattern()
 		{
-			return ">$2";
+			return $"{this.GetNewLineSequence()}$2";
 		}
 
 		/// <inheritdoc />
@@ -58,7 +58,7 @@ namespace SlackMUDRPG.Utility.Formatters
 		/// <inheritdoc />
 		protected override string GetNewLineSequence()
 		{
-			return "\n";
+			return "\n\n";
 		}
 	}
 }
