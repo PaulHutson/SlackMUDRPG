@@ -389,6 +389,8 @@
     <Content Include="JSON\Locations\LocRavensmere Boundary.Cliffside.Mine Crumbling Mineshaft.json" />
     <Content Include="JSON\Locations\LocRavensmere Boundary.Cliffside.Mine Pit.json" />
     <Content Include="JSON\NPCs\WoundedBear.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Crabbies Smoking Den.json" />
+    <Content Include="JSON\NPCs\Shopkeep Crabby.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
     <Content Include="JSON\NPCs\Rat.json" />
@@ -473,6 +475,7 @@
     <Content Include="JSON\Objects\Quest.BigHellstoneSignetRing.json" />
     <Content Include="JSON\Quests\Town.Two Rings Don%27t Make A Right.json" />
     <Content Include="JSON\Objects\Environment.Fungus.json" />
+    <Content Include="JSON\Quests\Crabby.Fish For The Smoking.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="RebuildCharNameList.aspx" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />

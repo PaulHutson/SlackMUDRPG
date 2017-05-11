@@ -49,6 +49,11 @@
       "RoomLockID": "ES3Lock",
       "Locked": true,
       "Lockable": true
+		},
+    {
+			"Shortcut": "CSD",
+			"Description": "Crabbies Smoking Den",
+			"RoomID": "Ravensmere.Harbour South.Crabbies Smoking Den"
 		}
 	],
 	"RoomItems": null,
