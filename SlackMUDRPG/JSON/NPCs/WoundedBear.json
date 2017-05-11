@@ -93,6 +93,20 @@
         {
           "StepID": "Choice",
           "Scope": "choice",
+          "AdditionalData": "EChoice,Attack",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "Attack",
+          "Scope": "attack",
+          "AdditionalData": "",
+          "NextStep": null,
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "EChoice",
+          "Scope": "choice",
           "AdditionalData": "random1,random2,random3,random4",
           "NextStep": null,
           "ResponseOptions": null

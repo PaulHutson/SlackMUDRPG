@@ -1,0 +1,41 @@
+{
+	"RoomID": "Ravensmere.Harbour South.Crabbies Smoking Den",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "This tiny ramshackle hut appears to be on fire at first glance. But through the smoky haze you see the sign 'Crabbies Smoking Den - Fresh Smoked Fish'.[n][n]After knocking on the door a short man with facial tatoos and a white beard stumbles out to greet you. A halo of smoke follows him outside and he clears his throat and looks at you expectantly.",
+	"RoomExits": [
+    {
+      "Shortcut": "RPS",
+      "Description": "Ravensmere Promenade South",
+      "RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South"
+    }
+	],
+	"RoomItems": null,
+  "NPCShopItems": {
+    "ShopInventory": [
+      {
+        "ItemNumber": 1,
+        "Item": {
+	        "SingularPronoun": "a",
+	        "ItemName": "smoked fish",
+	        "PluralPronoun": "some",
+	        "PluralName": "smoked fish",
+	        "ItemType": "Resource",
+	        "ItemFamily": "Fish",
+	        "ItemDescription": "A smoked silver sided fish",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 1,
+	        "MaxHitPoints": 1,
+	        "BaseDamage": 0.001,
+	        "Toughness": 1
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 20
+      }
+    ]
+  }
+}
