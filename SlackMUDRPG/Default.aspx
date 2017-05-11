@@ -31,9 +31,10 @@
 								<a class="btn btn-start-playing" href="Game.aspx">start playing</a>
 							</div>
 
-							<img class="img-responsive main-map" src="css/images/ravensmere_map.jpg" alt="Ravensmere Map">
+							<img class="img-responsive main-map" src="css/images/ravensmere-map-high-level.jpg" alt="Ravensmere Map">
 
-							<ul class="map-key-list clearfix">
+							<!--
+								<ul class="map-key-list clearfix">
 								<li class="col-md-4 col-sm-6 col-xs-6 map-key-list-item">1. Landing Area</li>
 								<li class="col-md-4 col-sm-6 col-xs-6 map-key-list-item">2. Arrivals Area</li>
 								<li class="col-md-4 col-sm-6 col-xs-6 map-key-list-item">3. Scalebrewers Taven</li>
@@ -47,6 +48,7 @@
 								<li class="col-md-4 col-sm-6 col-xs-6 map-key-list-item">11. Oldwood Road</li>
 								<li class="col-md-4 col-sm-6 col-xs-6 map-key-list-item">12. Oldwood Plains</li>
 							</ul>
+								-->
 						</div>
 					</div>
 
