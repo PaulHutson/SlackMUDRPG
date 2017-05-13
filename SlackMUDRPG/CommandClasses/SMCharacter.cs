@@ -154,9 +154,16 @@ namespace SlackMUDRPG.CommandClasses
             string path = FilePathSystem.GetFilePath("Characters", "Char" + this.UserID);
             string charJSON = JsonConvert.SerializeObject(this, Formatting.Indented);
 
-            using (StreamWriter w = new StreamWriter(path))
+            try
             {
-                w.WriteLine(charJSON);
+                using (StreamWriter w = new StreamWriter(path))
+                {
+                    w.WriteLine(charJSON);
+                }
+            }
+            catch
+            {
+                // do nothing
             }
 		}
 
@@ -618,6 +625,8 @@ namespace SlackMUDRPG.CommandClasses
                 smcs.Remove(this);
                 HttpContext.Current.Application["SMCharacters"] = smcs;
                 smr.Announce(this.Formatter.Italic(this.GetFullName() + " falls into a deep sleep"));
+
+                new SlackMud().SendGlobalMessage(this, "[i][b]Global Message:[/b] " + this.GetFullName() + " has logged out of the game[/i]");
             }
             else // If there isn't a bed tell them that they can't log out here.
             {
@@ -625,11 +634,27 @@ namespace SlackMUDRPG.CommandClasses
             }
         }
 
-		/// <summary>
-		/// Enables the character to read a sign
-		/// </summary>
-		/// <param name="itemIdentifier">The item to be read</param>
-		public void Read(string itemIdentifier)
+        /// <summary>
+        /// Allows a player to go to wake up
+        /// </summary>
+        public void Wake()
+        {
+            // Get the room that the character is in.
+            SMRoom smr = this.GetRoom();
+            smr.Announce(this.Formatter.Italic(this.GetFullName() + " wakes up"), this, true);
+
+            // Send a message to the player to show they've woken up
+            this.sendMessageToPlayer("[i]You wake up and feel well rested after your sleep.[/i]");
+
+            // then send the details to the player for the room.
+            this.GetRoomDetails();
+        }
+
+        /// <summary>
+        /// Enables the character to read a sign
+        /// </summary>
+        /// <param name="itemIdentifier">The item to be read</param>
+        public void Read(string itemIdentifier)
 		{
 			// Get the item
 			SMItem item = this.FindItemInRoom(itemIdentifier);
@@ -1590,7 +1615,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Get player to give item to
-			SMCharacter playerToGiveTo = this.GetRoom().GetAllPeople().FirstOrDefault(smc => smc.GetFullName().ToLower() == playerName.ToLower());
+			SMCharacter playerToGiveTo = this.GetRoom().GetAllPeople().FirstOrDefault(smc => (smc.GetFullName().ToLower() == playerName.ToLower()) || (smc.FirstName.ToLower() == playerName.ToLower()) || (smc.LastName.ToLower() == playerName.ToLower()));
 
 			if (playerToGiveTo == null)
 			{

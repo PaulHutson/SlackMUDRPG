@@ -87,7 +87,7 @@ namespace SlackMUDRPG.CommandClasses
                     if (character.Currency == null)
                     {
                         character.Currency = new SMCurrency();
-                        character.Currency.AmountOfCurrency = 5;
+                        character.Currency.AmountOfCurrency = 50;
                     }
 
                     if (!newCharacter)
@@ -178,12 +178,37 @@ namespace SlackMUDRPG.CommandClasses
 							// Add the character to the application memory 
 							smcs.Add(charInMem);
 							HttpContext.Current.Application["SMCharacters"] = smcs;
-						}
+
+                            // Send a message so everyone knows someone has logged in.
+                            SendGlobalMessage(charInMem, "[i][b]Global Message:[/b] " + charInMem.GetFullName() + " has logged into the game[/i]");
+                        }
 					}
 				}
 			}
 			return charInMem;
 		}
+
+        /// <summary>
+        /// Send a global message to all players - it is suppressed for the player sending the message.
+        /// </summary>
+        /// <param name="invokingCharacter">The character invoking the message</param>
+        /// <param name="message">The message being sent</param>
+        public void SendGlobalMessage(SMCharacter invokingCharacter, string message)
+        {
+            // Load the player list.
+            List<SMCharacter> smcs = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
+
+            // Look around the players...
+            foreach (SMCharacter smc in smcs)
+            {
+                // ... if it isn't the character invoking the message send...
+                if (smc != invokingCharacter)
+                {
+                    // ... send them the message.
+                    smc.sendMessageToPlayer(message);
+                }
+            }
+        }
 
 		/// <summary>
 		/// Gets a character and also loads the character to memory if it isn't already there.

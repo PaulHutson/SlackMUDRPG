@@ -1,0 +1,81 @@
+{
+	"RoomID": "Ravensmere.Town Centre.Merchants Arms Rooms",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "A set of rooms that lead off of a corridor each contain beds for travellers to sleep in.",
+  "RoomExits": [
+    {
+      "Shortcut": "MAB",
+      "Description": "The Merchants Arms Bar",
+      "RoomID": "Ravensmere.Town Centre.The Merchants Arms"
+    }
+  ],
+  "RoomItems": [
+    {
+      "ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcbed1",
+      "SingularPronoun": "a",
+      "ItemName": "Bed",
+      "PluralPronoun": "some",
+      "PluralName": "Beds",
+      "ItemType": "Furniture",
+      "ItemFamily": "Bed",
+      "ItemDescription": "This bed looks like a comfortable place to spend a night asleep.",
+      "ItemWeight": 20,
+      "ItemSize": 20,
+      "HitPoints": 1000000000,
+      "MaxHitPoints": 1000000000,
+      "BaseDamage": 0.1,
+      "Toughness": 5
+    },
+    {
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcbed2",
+			"SingularPronoun": "a",
+	    "ItemName": "Bed",
+	    "PluralPronoun": "some",
+	    "PluralName": "Beds",
+	    "ItemType": "Furniture",
+	    "ItemFamily": "Bed",
+	    "ItemDescription": "This bed looks like a comfortable place to spend a night asleep.",
+	    "ItemWeight": 20,
+	    "ItemSize": 20,
+	    "HitPoints": 1000000000,
+	    "MaxHitPoints": 1000000000,
+	    "BaseDamage": 0.1,
+	    "Toughness": 5
+		},
+    {
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcbed3",
+			"SingularPronoun": "a",
+	    "ItemName": "Bed",
+	    "PluralPronoun": "some",
+	    "PluralName": "Beds",
+	    "ItemType": "Furniture",
+	    "ItemFamily": "Bed",
+	    "ItemDescription": "This bed looks like a comfortable place to spend a night asleep.",
+	    "ItemWeight": 20,
+	    "ItemSize": 20,
+	    "HitPoints": 1000000000,
+	    "MaxHitPoints": 1000000000,
+	    "BaseDamage": 0.1,
+	    "Toughness": 5
+		},
+    {
+			"ItemID": "2c0f0627-ef24-401d-9acb-f31cbfcbed4",
+			"SingularPronoun": "a",
+	    "ItemName": "Bed",
+	    "PluralPronoun": "some",
+	    "PluralName": "Beds",
+	    "ItemType": "Furniture",
+	    "ItemFamily": "Bed",
+	    "ItemDescription": "This bed looks like a comfortable place to spend a night asleep.",
+	    "ItemWeight": 20,
+	    "ItemSize": 20,
+	    "HitPoints": 1000000000,
+	    "MaxHitPoints": 1000000000,
+	    "BaseDamage": 0.1,
+	    "Toughness": 5
+		}
+  ]
+}

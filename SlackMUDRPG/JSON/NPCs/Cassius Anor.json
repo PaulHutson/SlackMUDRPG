@@ -1,32 +1,27 @@
 ﻿{
-  "firstname": "Shopkeep",
-  "lastname": "Crabby",
-  "description": "Hunched over and covered in a black smoky goo. Crabby looks like he would double in size if only he could stand straight. He has lost all of his teeth.",
+  "firstname": "Cassius",
+  "lastname": "Anor",
+  "description": "...",
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
-  "age": 48,
+  "age": 42,
   "sex": "m",
   "PKFlag": false,
-  "UserID": "DerickFelhirst",
-  "RoomID": "Ravensmere.Harbour South.Crabbies Smoking Den",
+  "UserID": "CassiusAnor",
+  "RoomID": "Ravensmere.Town Centre.The Merchants Arms",
   "CurrentActivity": null,
   "Attributes": {
     "str": 9,
-    "int": 9,
-    "chr": 7,
-    "dex": 13,
-    "wp": 10,
+    "int": 15,
+    "chr": 13,
+    "dex": 10,
+    "wp": 12,
     "ft": 20,
     "hp": 20,
     "maxhp": 20,
-    "SocialStanding": 6
+    "SocialStanding": 9
   },
-  "Skills": [
-    {
-      "SkillName": "Dodge",
-      "SkillLevel": 30
-    }
-  ],
+  "Skills": null,
   "Slots": [
     {
       "Name": "RightHand",
@@ -80,12 +75,12 @@
     }
   ],
   "ResponseURL": null,
-  "NPCType": "ShopkeepCrabby",
-  "FamilyType": "ShopKeeper",
-  "IsGeneric": false,
-  "WalkingType": "walk",
-  "PronounSingular": "a",
-  "PronounMultiple": "some",
+	"NPCType": "CassiusAnor",
+	"FamilyType": "Barman",
+	"IsGeneric": false,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",
@@ -101,7 +96,20 @@
       ]
     },
     {
-      "ResponseType": "PlayerCharacter.Hail",
+			"ResponseType": "PlayerCharacter.Hail",
+			"ResponseTimeOfDay": "all",
+			"AdditionalData": null,
+			"Faction": null,
+			"Frequency": 100,
+			"ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Hail.2"
+				}
+			]
+		},
+		{
+      "ResponseType": "PlayerCharacter.List",
       "ResponseTimeOfDay": "all",
       "AdditionalData": null,
       "Faction": null,
@@ -109,20 +117,7 @@
       "ResponseSteps": [
         {
           "ResponseStepType": "Conversation",
-          "ResponseStepData": "Hail.1"
-        }
-      ]
-    },
-    {
-      "ResponseType": "PlayerCharacter.Leave",
-      "ResponseTimeOfDay": "all",
-      "AdditionalData": null,
-      "Faction": null,
-      "Frequency": 50,
-      "ResponseSteps": [
-        {
-          "ResponseStepType": "Conversation",
-          "ResponseStepData": "Leave.1"
+          "ResponseStepData": "Shop.1"
         }
       ]
     }
@@ -134,7 +129,7 @@
         {
           "StepID": "1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "chews on a corn cob pipe while staring at you.",
+          "AdditionalData": "looks up from his conversation he's having at a table as {playercharacter} enters.  Nodding a quick hello he looks down smiling at the customer in front of him...",
           "NextStep": null,
           "ResponseOptions": null
         }
@@ -144,172 +139,39 @@
       "ConversationID": "Hail",
       "ConversationStep": [
         {
-          "StepID": "1",
+          "StepID": "2",
           "Scope": "emotetoplayer",
-          "AdditionalData": "focuses on {playercharacter}",
-          "NextStep": "2.1",
+          "AdditionalData": "smiles warmly to {playercharacter} and spreads his arms wide",
+          "NextStep": "3.1",
           "ResponseOptions": null
         },
         {
-          "StepID": "2",
+          "StepID": "3",
           "Scope": "saytoplayer",
-          "AdditionalData": "It be fish you wanting?",
-          "NextStep": null,
+          "AdditionalData": "Welcome to the Merchants Arms - do take a seat... is there anything I can get you today?",
+          "NextStep": "4.1",
           "ResponseOptions": [
             {
               "ResponseOptionShortcut": "Y",
-              "ResponseOptionText": "Yes, I'd like to buy some fish...",
+              "ResponseOptionText": "Yes",
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Shop.1"
+                  "AdditionalData": "Shop.2"
                 }
               ]
             },
             {
-              "ResponseOptionShortcut": "EM",
-              "ResponseOptionText": "I want to earn some money...",
-              "PreRequisites": [
-                {
-                  "Type": "HasNotDoneQuest",
-                  "AdditionalData": "Fish For The Smoking"
-                },
-                {
-                  "Type": "IsNotInProgressQuest",
-                  "AdditionalData": "Fish For The Smoking"
-                }
-              ],
+              "ResponseOptionShortcut": "N",
+              "ResponseOptionText": "No",
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Hail.GetQuest"
-                }
-              ]
-            },
-            {
-              "ResponseOptionShortcut": "Sell",
-              "ResponseOptionText": "I've got some fish for sale",
-              "PreRequisites": [
-                {
-                  "Type": "InProgressQuest",
-                  "AdditionalData": "Fish For The Smoking"
-                },
-								{
-									"Type": "HasItem",
-									"AdditionalData": "Fish.5"
-								}
-              ],
-              "ResponseOptionActionSteps": [
-                {
-                  "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Hail.SellFish"
+                  "AdditionalData": "ShopLeave.NotNow"
                 }
               ]
             }
           ]
-        },
-        {
-          "StepID": "GetQuest",
-          "Scope": "emotetoplayer",
-          "AdditionalData": "looks you up and down.",
-          "NextStep": "GetQuest-2.1",
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "GetQuest-2",
-          "Scope": "saytoplayer",
-          "AdditionalData": "I see... well, I s'pose I could always do with some more fish for smokin' - bring me 5 and I'll give you.. say.. 40 marks...",
-          "NextStep": "GetQuest-3.2",
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "GetQuest-3",
-          "Scope": "addquest",
-          "AdditionalData": "Crabby.Fish For The Smoking",
-          "NextStep": null,
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "LearnToTan-Return",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Come and speak to me when you've got the fish... I'll be 'ere or 'ere abouts...",
-          "NextStep": null,
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "SellFish",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Oh right... hand em over then...",
-          "NextStep": null,
-					"ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "GIVE",
-							"ResponseOptionText": "Give Crabby 5 Fish",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Hail.SellFish2"
-								}
-							]
-						},
-						{
-							"ResponseOptionShortcut": "N",
-							"ResponseOptionText": "No.",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Hail.SellFish-no"
-								}
-							]
-						}
-					]
-        },
-        {
-          "StepID": "SellFish-no",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Suit yourself...",
-          "NextStep": null,
-          "ResponseOptions": null
-        },
-				{
-					"StepID": "SellFish2",
-					"Scope": "takeitems",
-					"AdditionalData": "Fish.5",
-					"NextStep": "SellFish3.2",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "SellFish3",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "takes 5 [b]Fish[/b] from you.",
-					"NextStep": "SellFish4.1",
-					"ResponseOptions": null
-				},
-        {
-          "StepID": "SellFish4",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Hrm... they'll do...",
-          "NextStep": "SellFish5.3",
-          "ResponseOptions": null
-        },
-				{
-					"StepID": "SellFish5",
-					"Scope": "updatequest",
-					"AdditionalData": "Crabby.Fish For The Smoking",
-					"NextStep": "Return-Give-Step7.2",
-					"ResponseOptions": null
-				}
-      ]
-    },
-    {
-      "ConversationID": "Leave",
-      "ConversationStep": [
-        {
-          "StepID": "1",
-          "Scope": "saytoplayer",
-          "AdditionalData": "If yer tummy rumbles.. think of old Crabby!",
-          "NextStep": null,
-          "ResponseOptions": null
         }
       ]
     },
@@ -319,7 +181,35 @@
         {
           "StepID": "1",
           "Scope": "saytoplayer",
-          "AdditionalData": "Here's what I have on offer today...",
+          "AdditionalData": "I've a few ales on today...",
+          "NextStep": "1-2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "1-2",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "... leans in to speak quietly...",
+          "NextStep": "1-3.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "1-3",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... a few are only just on and as fresh as the day they were brewed...",
+          "NextStep": "1-4.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "1-4",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "... speaks up loudly enough for everyone to hear again...",
+          "NextStep": "1-5.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "1-5",
+          "Scope": "saytoplayer",
+          "AdditionalData": "... here's what there is...",
           "NextStep": "2.1",
           "ResponseOptions": null
         },
@@ -333,7 +223,7 @@
         {
           "StepID": "3",
           "Scope": "saytoplayer",
-          "AdditionalData": "Would you like any o'that?",
+          "AdditionalData": "Would you like any of that?",
           "NextStep": null,
           "ResponseOptions": [
             {
@@ -361,7 +251,7 @@
         {
           "StepID": "4",
           "Scope": "saytoplayer",
-          "AdditionalData": "What'll it be? [i](Enter the item number from the list above)[/i]",
+          "AdditionalData": "Excellent.. I can see you're someone with fine taste... which would you like? [i](Enter the item number from the list above)[/i]",
           "NextStep": null,
           "ResponseOptions": [
             {
@@ -386,14 +276,14 @@
         {
           "StepID": "ShopNotValid",
           "Scope": "saytoplayer",
-          "AdditionalData": "Sorry, I can't sell you that...",
+          "AdditionalData": "I'm terribly sorry, I can't sell you that...",
           "NextStep": "BuySomethingElse.1",
           "ResponseOptions": null
         },
         {
           "StepID": "BuySomethingElse",
           "Scope": "saytoplayer",
-          "AdditionalData": "Anythin' else?",
+          "AdditionalData": "Anything else?",
           "NextStep": null,
           "ResponseOptions": [
             {
@@ -421,7 +311,14 @@
         {
           "StepID": "ShopBuy",
           "Scope": "saytoplayer",
-          "AdditionalData": "Enjoy!",
+          "AdditionalData": "Do enjoy that... and please let me know if you need anything else...",
+          "NextStep": "ShopBuy2.1",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "ShopBuy2",
+          "Scope": "increasefactionlevel",
+          "AdditionalData": "Cassius Anor|1",
           "NextStep": "BuySomethingElse.1",
           "ResponseOptions": null
         }
@@ -433,14 +330,14 @@
         {
           "StepID": "NoBuy",
           "Scope": "saytoplayer",
-          "AdditionalData": "You know where I am if you get hungry...",
+          "AdditionalData": "You know where I am if you do want something...",
           "NextStep": null,
           "ResponseOptions": null
         },
         {
           "StepID": "NotNow",
           "Scope": "saytoplayer",
-          "AdditionalData": "Fair enough, you know where I am if you get hungry...",
+          "AdditionalData": "Of course... you know where I am if you do want something...",
           "NextStep": null,
           "ResponseOptions": null
         }

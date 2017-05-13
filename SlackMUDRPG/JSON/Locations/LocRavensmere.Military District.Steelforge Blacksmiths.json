@@ -87,7 +87,7 @@
         },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 10
+        "Cost": 100
       },
       {
         "ItemNumber": 2,
@@ -110,7 +110,7 @@
         },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 22
+        "Cost": 220
       },
       {
         "ItemNumber": 3,
@@ -133,7 +133,7 @@
 				},
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 45
+        "Cost": 450
       },
       {
         "ItemNumber": 4,
@@ -156,7 +156,7 @@
 				},
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 8
+        "Cost": 80
       },
       {
         "ItemNumber": 5,
@@ -179,7 +179,7 @@
 				},
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 13
+        "Cost": 130
       },
       {
         "ItemNumber": 6,
@@ -202,7 +202,7 @@
 				},
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 4
+        "Cost": 40
       },
       {
         "ItemNumber": 7,
@@ -223,7 +223,7 @@
         },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 12
+        "Cost": 120
       },
       {
         "ItemNumber": 8,
@@ -245,7 +245,7 @@
 		    },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 18
+        "Cost": 180
       }
 	]
   }

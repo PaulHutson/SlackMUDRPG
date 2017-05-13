@@ -1,0 +1,82 @@
+{
+	"RoomID": "Ravensmere.Town Centre.The Merchants Arms",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "A low ceilinged room expands quite a way back showing a large number of tables and chairs, some occupied, some not.  The general atmosphere seems genial, but more subdued than some of the inn's found at the Harbourside - that being said, it's mostly cleaner too...",
+  "RoomExits": [
+    {
+      "Shortcut": "GCE",
+      "Description": "Greys Court East [i](Outside)[/i]",
+      "RoomID": "Ravensmere.Town Centre.Greys Court East"
+    },
+    {
+      "Shortcut": "MAR",
+      "Description": "Merchants Arms Rooms",
+      "RoomID": "Ravensmere.Town Centre.Merchants Arms Rooms"
+    }
+  ],
+	"RoomItems": null,
+	"NPCSpawns": null,
+  "NPCShopItems": {
+    "ShopInventory": [
+      {
+        "ItemNumber": 1,
+        "Item": {
+          "ItemID": "GENERATE",
+          "SingularPronoun": "a",
+          "ItemName": "Finest Merchants Ale",
+          "PluralName": "Finest Merchants Ale",
+          "PluralPronoun": "some",
+          "ItemType": "Ale",
+          "ItemFamily": "Beer",
+          "ItemDescription": "A lovely golden looking ale with a warm hint of Arbeir root to it.",
+          "ItemWeight": 1,
+          "ItemCapacity": 0,
+          "ItemSize": 1,
+          "HitPoints": 1,
+          "MaxHitPoints": 1,
+          "BaseDamage": 0.0001,
+          "Toughness": 1,
+          "DestroyedOutput": null,
+          "RequiredSkills": null,
+          "AdditionalData": null,
+          "ObjectTrait": null,
+          "HeldItems": null
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 5
+      },
+      {
+        "ItemNumber": 2,
+        "Item": {
+          "ItemID": "GENERATE",
+          "SingularPronoun": "a",
+          "ItemName": "Top'n'Tail Bitter",
+          "PluralName": "Top'n'Tail Bitter",
+          "PluralPronoun": "some",
+          "ItemType": "Bitter",
+          "ItemFamily": "Beer",
+          "ItemDescription": "A lively looking bitter with a lovely hoppy flavouring",
+          "ItemWeight": 1,
+          "ItemCapacity": 0,
+          "ItemSize": 1,
+          "HitPoints": 1,
+          "MaxHitPoints": 1,
+          "BaseDamage": 0.0001,
+          "Toughness": 1,
+          "DestroyedOutput": null,
+          "RequiredSkills": null,
+          "AdditionalData": null,
+          "ObjectTrait": null,
+          "HeldItems": null
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 8
+      }
+    ]
+  }
+}

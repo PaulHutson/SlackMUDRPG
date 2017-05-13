@@ -1,29 +1,45 @@
 ﻿{
-  "firstname": "Shopkeep",
-  "lastname": "Crabby",
-  "description": "Hunched over and covered in a black smoky goo. Crabby looks like he would double in size if only he could stand straight. He has lost all of his teeth.",
+  "firstname": "Frederick",
+  "lastname": "Tilney",
+  "description": "Aloof in demeanour and long in the face. Sir Frederick wears a traditional hunters hat covered with a variety of multi coloured feathers, creating a wonderous plume of foliage as impressive as it is amusing. He sports a sandy coloured jacket covered in small pockets, each with a diferent shaped arrowhead held within. A curly handlebar mustache obscurues his cheeks and frames his beady little eyes.",
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
   "age": 48,
   "sex": "m",
   "PKFlag": false,
-  "UserID": "DerickFelhirst",
-  "RoomID": "Ravensmere.Harbour South.Crabbies Smoking Den",
+  "UserID": "FrederickTilney",
+  "RoomID": "Ravensmere.Town Centre.Tilney and Sons Weaponary",
   "CurrentActivity": null,
   "Attributes": {
-    "str": 9,
-    "int": 9,
-    "chr": 7,
-    "dex": 13,
-    "wp": 10,
+    "str": 12,
+    "int": 12,
+    "chr": 12,
+    "dex": 15,
+    "wp": 12,
     "ft": 20,
     "hp": 20,
     "maxhp": 20,
-    "SocialStanding": 6
+    "SocialStanding": 15
   },
   "Skills": [
     {
       "SkillName": "Dodge",
+      "SkillLevel": 30
+    },
+    {
+      "SkillName": "Parry",
+      "SkillLevel": 30
+    },
+    {
+      "SkillName": "Sword Use",
+      "SkillLevel": 30
+    },
+    {
+      "SkillName": "Knife Use",
+      "SkillLevel": 30
+    },
+    {
+      "SkillName": "Axe Use",
       "SkillLevel": 30
     }
   ],
@@ -33,7 +49,33 @@
       "AllowedTypes": [
         "any"
       ],
-      "EquippedItem": null
+      "EquippedItem": {
+        "ItemID": "a44a31e6-a28c-47ad-984d-ff24372b2453Knife",
+        "SingularPronoun": "an",
+        "ItemName": "Expensive Knife",
+        "PluralName": "Expensive Knifes",
+        "PluralPronoun": "some",
+        "ItemType": "Weapon",
+        "ItemFamily": "Knife",
+        "ItemDescription": "This knife is no ordinary knife, it's beautiful!",
+        "ItemWeight": 2,
+        "ItemCapacity": 0,
+        "ItemSize": 2,
+        "HitPoints": 25,
+        "MaxHitPoints": 25,
+        "BaseDamage": 6.0,
+        "Toughness": 3,
+        "DestroyedOutput": null,
+        "RequiredSkills": [
+          {
+            "SkillName": "Knife Use",
+            "SkillLevel": "15"
+          }
+        ],
+        "AdditionalData": null,
+        "ObjectTrait": null,
+        "HeldItems": null
+      }
     },
     {
       "Name": "LeftHand",
@@ -113,16 +155,16 @@
         }
       ]
     },
-    {
-      "ResponseType": "PlayerCharacter.Leave",
+		{
+      "ResponseType": "PlayerCharacter.List",
       "ResponseTimeOfDay": "all",
       "AdditionalData": null,
       "Faction": null,
-      "Frequency": 50,
+      "Frequency": 100,
       "ResponseSteps": [
         {
           "ResponseStepType": "Conversation",
-          "ResponseStepData": "Leave.1"
+          "ResponseStepData": "Shop.1"
         }
       ]
     }
@@ -134,7 +176,7 @@
         {
           "StepID": "1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "chews on a corn cob pipe while staring at you.",
+          "AdditionalData": "stares at {playercharacter} while continuing to polish the very expensive looking dagger he's holding.",
           "NextStep": null,
           "ResponseOptions": null
         }
@@ -146,19 +188,19 @@
         {
           "StepID": "1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "focuses on {playercharacter}",
+          "AdditionalData": "smiles slowly at {playercharacter}",
           "NextStep": "2.1",
           "ResponseOptions": null
         },
         {
           "StepID": "2",
           "Scope": "saytoplayer",
-          "AdditionalData": "It be fish you wanting?",
+          "AdditionalData": "Good day, good day. Welcome to Tilney & Sons. Purveyors of fine weaponry for [i]six[/i] generations.  How may I serve you today?",
           "NextStep": null,
           "ResponseOptions": [
             {
-              "ResponseOptionShortcut": "Y",
-              "ResponseOptionText": "Yes, I'd like to buy some fish...",
+              "ResponseOptionShortcut": "SHOP",
+              "ResponseOptionText": "What do you have on offer?",
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
@@ -167,147 +209,22 @@
               ]
             },
             {
-              "ResponseOptionShortcut": "EM",
-              "ResponseOptionText": "I want to earn some money...",
-              "PreRequisites": [
-                {
-                  "Type": "HasNotDoneQuest",
-                  "AdditionalData": "Fish For The Smoking"
-                },
-                {
-                  "Type": "IsNotInProgressQuest",
-                  "AdditionalData": "Fish For The Smoking"
-                }
-              ],
+              "ResponseOptionShortcut": "NB",
+              "ResponseOptionText": ".. I'm just browsing",
+              "PreRequisites": null,
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Hail.GetQuest"
-                }
-              ]
-            },
-            {
-              "ResponseOptionShortcut": "Sell",
-              "ResponseOptionText": "I've got some fish for sale",
-              "PreRequisites": [
-                {
-                  "Type": "InProgressQuest",
-                  "AdditionalData": "Fish For The Smoking"
-                },
-								{
-									"Type": "HasItem",
-									"AdditionalData": "Fish.5"
-								}
-              ],
-              "ResponseOptionActionSteps": [
-                {
-                  "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Hail.SellFish"
+                  "AdditionalData": "Hail.JustBrowsing"
                 }
               ]
             }
           ]
         },
         {
-          "StepID": "GetQuest",
+          "StepID": "JustBrowsing",
           "Scope": "emotetoplayer",
-          "AdditionalData": "looks you up and down.",
-          "NextStep": "GetQuest-2.1",
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "GetQuest-2",
-          "Scope": "saytoplayer",
-          "AdditionalData": "I see... well, I s'pose I could always do with some more fish for smokin' - bring me 5 and I'll give you.. say.. 40 marks...",
-          "NextStep": "GetQuest-3.2",
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "GetQuest-3",
-          "Scope": "addquest",
-          "AdditionalData": "Crabby.Fish For The Smoking",
-          "NextStep": null,
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "LearnToTan-Return",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Come and speak to me when you've got the fish... I'll be 'ere or 'ere abouts...",
-          "NextStep": null,
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "SellFish",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Oh right... hand em over then...",
-          "NextStep": null,
-					"ResponseOptions": [
-						{
-							"ResponseOptionShortcut": "GIVE",
-							"ResponseOptionText": "Give Crabby 5 Fish",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Hail.SellFish2"
-								}
-							]
-						},
-						{
-							"ResponseOptionShortcut": "N",
-							"ResponseOptionText": "No.",
-							"ResponseOptionActionSteps": [
-								{
-									"NPCResponseOptionActionType": "Conversation",
-									"AdditionalData": "Hail.SellFish-no"
-								}
-							]
-						}
-					]
-        },
-        {
-          "StepID": "SellFish-no",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Suit yourself...",
-          "NextStep": null,
-          "ResponseOptions": null
-        },
-				{
-					"StepID": "SellFish2",
-					"Scope": "takeitems",
-					"AdditionalData": "Fish.5",
-					"NextStep": "SellFish3.2",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "SellFish3",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "takes 5 [b]Fish[/b] from you.",
-					"NextStep": "SellFish4.1",
-					"ResponseOptions": null
-				},
-        {
-          "StepID": "SellFish4",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Hrm... they'll do...",
-          "NextStep": "SellFish5.3",
-          "ResponseOptions": null
-        },
-				{
-					"StepID": "SellFish5",
-					"Scope": "updatequest",
-					"AdditionalData": "Crabby.Fish For The Smoking",
-					"NextStep": "Return-Give-Step7.2",
-					"ResponseOptions": null
-				}
-      ]
-    },
-    {
-      "ConversationID": "Leave",
-      "ConversationStep": [
-        {
-          "StepID": "1",
-          "Scope": "saytoplayer",
-          "AdditionalData": "If yer tummy rumbles.. think of old Crabby!",
+          "AdditionalData": "sniffs aloofly and then continues polishing the dagger while seemingly never taking his eyes off of you.",
           "NextStep": null,
           "ResponseOptions": null
         }
@@ -319,7 +236,7 @@
         {
           "StepID": "1",
           "Scope": "saytoplayer",
-          "AdditionalData": "Here's what I have on offer today...",
+          "AdditionalData": "Well!  You've come to the [i]very[/i] best place when it comes to weapons... here's what I have in stock today...",
           "NextStep": "2.1",
           "ResponseOptions": null
         },
@@ -333,7 +250,7 @@
         {
           "StepID": "3",
           "Scope": "saytoplayer",
-          "AdditionalData": "Would you like any o'that?",
+          "AdditionalData": "Any of those tickle your fancy...?",
           "NextStep": null,
           "ResponseOptions": [
             {
@@ -361,7 +278,7 @@
         {
           "StepID": "4",
           "Scope": "saytoplayer",
-          "AdditionalData": "What'll it be? [i](Enter the item number from the list above)[/i]",
+          "AdditionalData": "Excellent... what will it be today then? [i](Enter the item number from the list above)[/i]",
           "NextStep": null,
           "ResponseOptions": [
             {
@@ -393,7 +310,7 @@
         {
           "StepID": "BuySomethingElse",
           "Scope": "saytoplayer",
-          "AdditionalData": "Anythin' else?",
+          "AdditionalData": "And would you like anything else to go with that...?",
           "NextStep": null,
           "ResponseOptions": [
             {
@@ -433,14 +350,14 @@
         {
           "StepID": "NoBuy",
           "Scope": "saytoplayer",
-          "AdditionalData": "You know where I am if you get hungry...",
+          "AdditionalData": "Of course... should you want anything you know where I am.",
           "NextStep": null,
           "ResponseOptions": null
         },
         {
           "StepID": "NotNow",
           "Scope": "saytoplayer",
-          "AdditionalData": "Fair enough, you know where I am if you get hungry...",
+          "AdditionalData": "Should you require weaponary do think Tilney!",
           "NextStep": null,
           "ResponseOptions": null
         }

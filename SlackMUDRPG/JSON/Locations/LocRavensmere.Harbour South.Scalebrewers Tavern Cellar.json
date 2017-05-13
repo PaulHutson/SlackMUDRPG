@@ -17,5 +17,13 @@
 			"RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South"
 		}
 	],
-	"RoomItems": null
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Rat",
+      "MaxNumber": 2,
+      "SpawnFrequency": 80,
+      "Unique": false
+    }
+	]
 }

@@ -8,7 +8,7 @@
   "sex": "m",
   "PKFlag": false,
   "UserID": "BarrackSergeant",
-  "RoomID": "Ravensmere.Harbour South.Ravensmere Barracks",
+  "RoomID": "Ravensmere.Military District.Ravensmere Barracks",
   "CurrentActivity": null,
   "Attributes": {
     "str": 15,
@@ -179,7 +179,7 @@
           "NextStep": "3.1",
           "ResponseOptions": [
             {
-              "ResponseOptionShortcut": "Rings",
+              "ResponseOptionShortcut": "RI",
               "ResponseOptionText": "I've got some rings I think you want",
               "PreRequisites": [
                 {
@@ -203,7 +203,7 @@
               ]
             },
             {
-              "ResponseOptionShortcut": "Nothing",
+              "ResponseOptionShortcut": "N",
               "ResponseOptionText": "Er, nothing..",
               "PreRequisites": null,
               "ResponseOptionActionSteps": [

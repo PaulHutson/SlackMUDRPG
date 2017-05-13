@@ -467,7 +467,7 @@ namespace SlackMUDRPG.CommandClasses
         public void InspectThing(SMCharacter smc, string thingToInspect)
         {
             // Check if it's a character first
-            SMCharacter targetCharacter = this.GetPeople().FirstOrDefault(checkChar => checkChar.GetFullName().ToLower() == thingToInspect.ToLower());
+            SMCharacter targetCharacter = this.GetPeople().FirstOrDefault(checkChar => (checkChar.GetFullName().ToLower() == thingToInspect.ToLower()) || (checkChar.FirstName.ToLower() == thingToInspect.ToLower()) || (checkChar.LastName.ToLower() == thingToInspect.ToLower()));
             
 			if (targetCharacter != null)
             {

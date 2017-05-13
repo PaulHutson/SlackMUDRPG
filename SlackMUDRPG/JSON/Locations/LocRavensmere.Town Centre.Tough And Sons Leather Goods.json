@@ -59,7 +59,7 @@
 				},
 				"AmountForSale": 0,
 				"UnlimitedAvailable": true,
-				"Cost": 1
+				"Cost": 22
 			},
 			{
 				"ItemNumber": 2,
@@ -80,7 +80,7 @@
 				},
 				"AmountForSale": 0,
 				"UnlimitedAvailable": true,
-				"Cost": 3
+				"Cost": 8
 			},
 			{
 				"ItemNumber": 3,
@@ -102,7 +102,7 @@
 				},
 				"AmountForSale": 0,
 				"UnlimitedAvailable": true,
-				"Cost": 25
+				"Cost": 250
 			},
 			{
 				"ItemNumber": 4,
@@ -124,8 +124,8 @@
 				},
 				"AmountForSale": 0,
 				"UnlimitedAvailable": true,
-				"Cost": 8
-			},
+				"Cost": 80
+			}
 		]
 	}
 }

@@ -60,266 +60,290 @@ namespace SlackMUDRPG.CommandClasses
 
 		public void UseSkill(SMCharacter smc, out string messageOut, out float floatOut, string extraData, int skillLoop, bool beginSkillUse = true, string targetType = null, string targetID = null, bool isPassive = false)
 		{
-			// Output variables for passive skills that need output (like "dodge")
-			messageOut = "";
-			floatOut = 0;
-
-            if (skillLoop < 5)
+            if (smc != null)
             {
-                // Increase the loop number
-                var newSkillLoop = skillLoop + 1;
-				string originCharUserID = smc.UserID;
+                // Output variables for passive skills that need output (like "dodge")
+                messageOut = "";
+                floatOut = 0;
 
-			    // Get the actual instance of the character!
-			    smc = new SlackMud().GetAllCharacters(originCharUserID); // TODO make this work with an NPC!
+                if (skillLoop < 5)
+                {
+                    // Increase the loop number
+                    var newSkillLoop = skillLoop + 1;
+                    string originCharUserID = smc.UserID;
+                    var continueCycle = true;
 
-			    // Set the character activity
-			    if (beginSkillUse)
-			    {
-				    smc.CurrentActivity = this.ActivityType;
-			    }
+                    // Get the actual instance of the character!
+                    smc = new SlackMud().GetAllCharacters(originCharUserID); // TODO make this work with an NPC!
 
-				var continueCycle = true;
+                    if (smc != null)
+                    {
+                        // Set the character activity
+                        if (beginSkillUse)
+                        {
+                            if (smc.CurrentActivity == null)
+                            {
+                                smc.CurrentActivity = "";
+                            }
+                            smc.CurrentActivity = this.ActivityType;
+                        }
+                    }
+                    else
+                    {
+                        continueCycle = false;
+                    }
 
-				// Loop around the steps
-				foreach (SMSkillStep smss in this.SkillSteps)
-				{
-					if (continueCycle)
-					{
-						// Get the character again each time we go around the loop
-						smc = new SlackMud().GetAllCharacters(originCharUserID);
+                    if (continueCycle)
+                    {
+                        // Loop around the steps
+                        foreach (SMSkillStep smss in this.SkillSteps)
+                        {
+                            if (continueCycle)
+                            {
+                                // Get the character again each time we go around the loop
+                                smc = new SlackMud().GetAllCharacters(originCharUserID);
 
-						if (smc.CurrentActivity == this.ActivityType)
-						{
-							switch (smss.StepType)
-							{
-								case "Object":
-									if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
-									{
-										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-										continueCycle = false;
-										smc.StopActivity();
-									}
-									break;
-								case "EquippedObject":
-									if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true)) && (!isPassive))
-									{
-										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-										continueCycle = false;
-										smc.StopActivity();
-									}
-									break;
-								case "Target":
-									if ((!StepRequiredTarget(smc, smss, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID)) && (!isPassive))
-									{
-										string getTargetName = GetTargetName(smc, targetType, targetID);
-										if (getTargetName != null)
-										{
-											smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null)));
-										}
-										continueCycle = false;
-										smc.StopActivity();
-									}
-									break;
-								case "Hit":
-									if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
-									{
-										if (!isPassive)
-										{
-											string getTargetName = GetTargetName(smc, targetType, targetID);
-											if (getTargetName != null)
-											{
-												smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null)));
-											}
-										}
-										SkillIncrease(smc, false);
-									}
-									else
-									{
-										SkillIncrease(smc, true);
-									}
-									break;
-								case "HitMulti":
-									if (!StepHitMulti(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
-									{
-										if (!isPassive)
-										{
-											string getTargetName = GetTargetName(smc, targetType, targetID);
-											if (getTargetName != null)
-											{
-												smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null)));
-											}
-										}
-										SkillIncrease(smc, false);
-									}
-									else
-									{
-										SkillIncrease(smc, true);
-									}
-									break;
-								case "CheckReceipe":
-									if (!CheckReceipe(smss, smc, this.BaseStat, extraData, null, 0, null))
-									{
-                                        smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-                                        continueCycle = false;
-										smc.StopActivity();
-									}
-									break;
-								case "UseReceipe":
-									if (!UseReceipe(smss, smc, this.BaseStat, extraData, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
-									{
-										string targetItem = String.Empty;
-										SMReceipe smr = this.GetRecipeByName(extraData);
-
-										if (smr != null)
-										{
-											SMItem producedItem = smr.GetProducedItem();
-											targetItem = $"{producedItem.SingularPronoun} {producedItem.ItemName}";
-										}
-
-										smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, targetItem, null)));
-										continueCycle = false;
-									}
-									smc.StopActivity();
-									break;
-                                case "Cast":
-                                    string targetName = "";
-                                    if (targetType != null)
+                                if ((smc != null) && (smc.CurrentActivity != null))
+                                {
+                                    if (smc.CurrentActivity == this.ActivityType)
                                     {
-                                        if (targetType == "Character")
+                                        switch (smss.StepType)
                                         {
-                                            var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-                                            targetName = targetChar.GetFullName();
-                                        }
-                                        else
-                                        {
-                                            var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-                                            targetName = targetItem.ItemName;
-                                        }
-                                    }
-                                    
-                                    if (!Cast(smss, smc, this.BaseStat, extraData, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
-                                    {
-                                        smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, targetName, "")));
-                                    }
-                                    else
-                                    {
-                                        smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetName, "")));
-                                        SkillIncrease(smc, true);
-                                    }
-                                    break;
-                                case "Information":
-                                    string targetNameInformation = "";
-                                    if (targetType != null)
-                                    {
-                                        if (targetType == "Character")
-                                        {
-                                            // Get the character
-                                            var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
-                                            targetNameInformation = targetChar.GetFullName();
-                                        }
-                                        else
-                                        {
-                                            var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
-                                            targetNameInformation = targetItem.SingularPronoun + " " + targetItem.ItemName;
-                                        }
-                                    }
-
-                                    smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetNameInformation, "")));
-                                    break;
-								case "OwnedObject":
-									if (!CheckHasItem(smss, smc))
-									{
-										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-										continueCycle = false;
-										smc.StopActivity();
-									}
-									break;
-								case "ConsumeObject":
-									if (!ConsumeItem(smss, smc, targetType, targetID))
-									{
-										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-										continueCycle = false;
-										smc.StopActivity();
-									}
-									break;
-								case "CreateDestroyedObject":
-									if (!CreateDestroyedObject(smss, smc, targetID))
-									{
-										smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-									};
-									break;
-                                case "CheckObjectInLocation":
-                                    if (!CheckObjectinLocation(smss, smc))
-                                    {
-                                        smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-										smc.StopActivity();
-									};
-                                    break;
-                                case "CheckRoomProperty":
-                                    if (!CheckRoomProperty(smss, smc))
-                                    {
-                                        smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
-										smc.StopActivity();
-									};
-                                    break;
-                                case "SkillCheck":
-                                    if (!SkillCheck(smss, smc))
-                                    {
-                                        // Failed
-                                        smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput,smc,null,null)));
-										smc.StopActivity();
-									}
-                                    else
-                                    {
-                                        // Passed
-                                        // Create any objects that are associated with this.
-                                        if (smss.ExtraData != null)
-                                        {
-                                            // Get the various parts for the object creation...
-                                            string[] objectCreationInfo = smss.ExtraData.Split('|');
-                                            string[] objectNameInfo = objectCreationInfo[0].Split('.');
-
-                                            // Check if an object is created this time
-                                            Random rSkillCheck = new Random();
-                                            double rDoubleSkillCheck = rSkillCheck.NextDouble();
-
-                                            // Check if an object is created...
-                                            if (rDoubleSkillCheck * 100 <= int.Parse(objectCreationInfo[2]))
-                                            {
-                                                // ... loop around the number
-                                                int loopNumber = int.Parse(objectCreationInfo[1]);
-
-                                                // Loop around and create some items.
-                                                while (loopNumber > 0)
+                                            case "Object":
+                                                if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount)) && (!isPassive))
                                                 {
-                                                    loopNumber--;
-                                                    smc.GetRoom().AddItem(SMItemFactory.Get(objectNameInfo[0], objectNameInfo[1]));
-                                                    smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, null, null)));
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+                                                    continueCycle = false;
+                                                    smc.StopActivity();
                                                 }
-                                                SkillIncrease(smc, true);
-                                            }
-                                            else // Failure anyway.. skill passed, but they failed :/
-                                            {
-                                                smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, null, null)));
-                                            }
+                                                break;
+                                            case "EquippedObject":
+                                                if ((!StepRequiredObject(smc, smss.StepRequiredObject, smss.RequiredObjectAmount, true)) && (!isPassive))
+                                                {
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+                                                    continueCycle = false;
+                                                    smc.StopActivity();
+                                                }
+                                                break;
+                                            case "Target":
+                                                if ((!StepRequiredTarget(smc, smss, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID)) && (!isPassive))
+                                                {
+                                                    string getTargetName = GetTargetName(smc, targetType, targetID);
+                                                    if (getTargetName != null)
+                                                    {
+                                                        smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null)));
+                                                    }
+                                                    continueCycle = false;
+                                                    smc.StopActivity();
+                                                }
+                                                break;
+                                            case "Hit":
+                                                if (!StepHit(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+                                                {
+                                                    if (!isPassive)
+                                                    {
+                                                        string getTargetName = GetTargetName(smc, targetType, targetID);
+                                                        if (getTargetName != null)
+                                                        {
+                                                            smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null)));
+                                                        }
+                                                    }
+                                                    SkillIncrease(smc, false);
+                                                }
+                                                else
+                                                {
+                                                    SkillIncrease(smc, true);
+                                                }
+                                                break;
+                                            case "HitMulti":
+                                                if (!StepHitMulti(smss, smc, this.BaseStat, targetType, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+                                                {
+                                                    if (!isPassive)
+                                                    {
+                                                        string getTargetName = GetTargetName(smc, targetType, targetID);
+                                                        if (getTargetName != null)
+                                                        {
+                                                            smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, getTargetName, null)));
+                                                        }
+                                                    }
+                                                    SkillIncrease(smc, false);
+                                                }
+                                                else
+                                                {
+                                                    SkillIncrease(smc, true);
+                                                }
+                                                break;
+                                            case "CheckReceipe":
+                                                if (!CheckReceipe(smss, smc, this.BaseStat, extraData, null, 0, null))
+                                                {
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+                                                    continueCycle = false;
+                                                    smc.StopActivity();
+                                                }
+                                                break;
+                                            case "UseReceipe":
+                                                if (!UseReceipe(smss, smc, this.BaseStat, extraData, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+                                                {
+                                                    string targetItem = String.Empty;
+                                                    SMReceipe smr = this.GetRecipeByName(extraData);
+
+                                                    if (smr != null)
+                                                    {
+                                                        SMItem producedItem = smr.GetProducedItem();
+                                                        targetItem = $"{producedItem.SingularPronoun} {producedItem.ItemName}";
+                                                    }
+
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, targetItem, null)));
+                                                    continueCycle = false;
+                                                }
+                                                smc.StopActivity();
+                                                break;
+                                            case "Cast":
+                                                string targetName = "";
+                                                if (targetType != null)
+                                                {
+                                                    if (targetType == "Character")
+                                                    {
+                                                        var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+                                                        targetName = targetChar.GetFullName();
+                                                    }
+                                                    else
+                                                    {
+                                                        var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+                                                        targetName = targetItem.ItemName;
+                                                    }
+                                                }
+
+                                                if (!Cast(smss, smc, this.BaseStat, extraData, smss.StepRequiredObject, smss.RequiredObjectAmount, targetID))
+                                                {
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, targetName, "")));
+                                                }
+                                                else
+                                                {
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetName, "")));
+                                                    SkillIncrease(smc, true);
+                                                }
+                                                break;
+                                            case "Information":
+                                                string targetNameInformation = "";
+                                                if (targetType != null)
+                                                {
+                                                    if (targetType == "Character")
+                                                    {
+                                                        // Get the character
+                                                        var targetChar = smc.GetRoom().GetAllPeople().FirstOrDefault(roomCharacters => roomCharacters.UserID == targetID);
+                                                        targetNameInformation = targetChar.GetFullName();
+                                                    }
+                                                    else
+                                                    {
+                                                        var targetItem = smc.GetRoom().RoomItems.FirstOrDefault(ri => ri.ItemID == targetID);
+                                                        targetNameInformation = targetItem.SingularPronoun + " " + targetItem.ItemName;
+                                                    }
+                                                }
+
+                                                smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetNameInformation, "")));
+                                                break;
+                                            case "OwnedObject":
+                                                if (!CheckHasItem(smss, smc))
+                                                {
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+                                                    continueCycle = false;
+                                                    smc.StopActivity();
+                                                }
+                                                break;
+                                            case "ConsumeObject":
+                                                if (!ConsumeItem(smss, smc, targetType, targetID))
+                                                {
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+                                                    continueCycle = false;
+                                                    smc.StopActivity();
+                                                }
+                                                break;
+                                            case "CreateDestroyedObject":
+                                                if (!CreateDestroyedObject(smss, smc, targetID))
+                                                {
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+                                                };
+                                                break;
+                                            case "CheckObjectInLocation":
+                                                if (!CheckObjectinLocation(smss, smc))
+                                                {
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+                                                    smc.StopActivity();
+                                                };
+                                                break;
+                                            case "CheckRoomProperty":
+                                                if (!CheckRoomProperty(smss, smc))
+                                                {
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(smss.FailureOutput));
+                                                    smc.StopActivity();
+                                                };
+                                                break;
+                                            case "SkillCheck":
+                                                if (!SkillCheck(smss, smc))
+                                                {
+                                                    // Failed
+                                                    smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, null, null)));
+                                                    smc.StopActivity();
+                                                }
+                                                else
+                                                {
+                                                    // Passed
+                                                    // Create any objects that are associated with this.
+                                                    if (smss.ExtraData != null)
+                                                    {
+                                                        // Get the various parts for the object creation...
+                                                        string[] objectCreationInfo = smss.ExtraData.Split('|');
+                                                        string[] objectNameInfo = objectCreationInfo[0].Split('.');
+
+                                                        // Check if an object is created this time
+                                                        Random rSkillCheck = new Random();
+                                                        double rDoubleSkillCheck = rSkillCheck.NextDouble();
+
+                                                        // Check if an object is created...
+                                                        if (rDoubleSkillCheck * 100 <= int.Parse(objectCreationInfo[2]))
+                                                        {
+                                                            // ... loop around the number
+                                                            int loopNumber = int.Parse(objectCreationInfo[1]);
+
+                                                            // Loop around and create some items.
+                                                            while (loopNumber > 0)
+                                                            {
+                                                                loopNumber--;
+                                                                smc.GetRoom().AddItem(SMItemFactory.Get(objectNameInfo[0], objectNameInfo[1]));
+                                                                smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, null, null)));
+                                                            }
+                                                            SkillIncrease(smc, true);
+                                                        }
+                                                        else // Failure anyway.. skill passed, but they failed :/
+                                                        {
+                                                            smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.FailureOutput, smc, null, null)));
+                                                        }
+                                                    }
+                                                };
+                                                break;
+                                            case "Pause":
+                                                System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
+                                                break;
+                                            case "Repeat":
+                                                this.UseSkill(smc, out messageOut, out floatOut, extraData, newSkillLoop, false, targetType, targetID, isPassive);
+                                                break;
                                         }
-                                    };
-                                    break;
-                                case "Pause":
-									System.Threading.Thread.Sleep(smss.RequiredObjectAmount * 1000);
-									break;
-								case "Repeat":
-									this.UseSkill(smc, out messageOut, out floatOut, extraData, newSkillLoop, false, targetType, targetID, isPassive);
-									break;
-							}
-						}
-					}
-				}
-			}
-            else
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    smc.StopActivity();
+                }
+            }
+            else // The char was null, return that something went wrong.
             {
-                smc.StopActivity();
+                messageOut = "";
+                floatOut = 0;
             }
         }
 
