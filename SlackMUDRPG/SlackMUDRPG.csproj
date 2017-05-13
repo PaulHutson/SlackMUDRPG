@@ -396,6 +396,7 @@
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.The Merchants Arms.json" />
     <Content Include="JSON\NPCs\Cassius Anor.json" />
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Merchants Arms Rooms.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Harbour South.Docklands Way North.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
     <Content Include="JSON\NPCs\Rat.json" />

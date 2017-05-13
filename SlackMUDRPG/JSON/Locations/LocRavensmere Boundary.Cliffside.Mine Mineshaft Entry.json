@@ -9,7 +9,8 @@
     {
 			"Shortcut": "ME",
 			"Description": "Mine Entrance",
-			"RoomID": "Ravensmere Boundary.Cliffside.Mine"
+      "RoomID": "Ravensmere Boundary.Cliffside.Mine",
+      "Echo": "There’s finally a hint of fresh air as you approach the surface. It’s barely illuminated, but certainly better than the deeper parts of the mine, and a single lonely shaft of light seems to beckon you through the crumbled exit."
 		},
 		{
 			"Shortcut": "MS",

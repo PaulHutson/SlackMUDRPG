@@ -1,0 +1,66 @@
+{
+	"RoomID": "Ravensmere.Harbour South.Docklands Way North",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "Gulls call loudly from the rooftops and swoop down at the scraps left behind by fishermen. The folk here side step the many stacks of empty crates dotted around the cobbles. The sounds of the sea can be heard clearly from here.",
+	"RoomExits": [
+		{
+			"Shortcut": "DWS",
+			"Description": "Docklands Way South",
+			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
+		},
+		{
+			"Shortcut": "BR",
+			"Description": "Bridge Row",
+			"RoomID": "Ravensmere.Harbour South.Bridge Row"
+		},
+    {
+      "Shortcut": "RPS",
+      "Description": "Ravensmere Promenade South",
+      "RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South"
+    },
+		{
+			"Shortcut": "PAH",
+			"Description": "Princes Auction House",
+			"RoomID": "Ravensmere.Harbour South.Princes Auction House",
+      "RoomLockID": "PAHLock",
+      "Locked": true,
+      "Lockable": false
+		}
+	],
+	"RoomItems": null,
+	"NPCSpawns": [
+    {
+      "TypeOfNPC": "Guard-Generic",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+      "TypeOfNPC": "Old-Sailor",
+      "MaxNumber": 1,
+      "SpawnFrequency": 90,
+      "Unique": false
+    },
+    {
+      "TypeOfNPC": "Young-Sailor",
+      "MaxNumber": 1,
+      "SpawnFrequency": 75,
+      "Unique": false
+    },
+    {
+			"TypeOfNPC": "Beggar",
+			"MaxNumber": 1,
+			"SpawnFrequency": 10,
+			"Unique": false
+		},
+    {
+      "TypeOfNPC": "Noble-Generic-Harried",
+      "MaxNumber": 1,
+      "SpawnFrequency": 10,
+      "Unique": true
+    }
+	]
+}

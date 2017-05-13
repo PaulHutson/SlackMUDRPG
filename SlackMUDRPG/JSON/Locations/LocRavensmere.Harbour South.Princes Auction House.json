@@ -10,6 +10,11 @@
 			"Shortcut": "RPS",
 			"Description": "Ravensmere Promenade South",
 			"RoomID": "Ravensmere.Harbour South.Ravensmere Promenade South"
+		},
+		{
+			"Shortcut": "DWN",
+			"Description": "Docklands Way North",
+			"RoomID": "Ravensmere.Harbour South.Docklands Way North"
 		}
 	],
 	"RoomItems": null,

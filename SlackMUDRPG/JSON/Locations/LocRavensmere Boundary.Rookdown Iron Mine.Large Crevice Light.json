@@ -7,9 +7,9 @@
   "RoomDescription": "This man sized recess looks newly excavated. Probably made for stowing smuggled goods before moving into the town.",
 	"RoomExits": [
     {
-      "Shortcut": "MP",
-      "Description": "Medium Passage",
-      "RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Medium Passage"
+      "Shortcut": "GP",
+      "Description": "Glowing Passage",
+      "RoomID": "Ravensmere Boundary.Rookdown Iron Mine.Glowing Passage"
     }
 	],
   "RoomItems": [

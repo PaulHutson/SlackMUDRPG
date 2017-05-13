@@ -13,8 +13,9 @@
     },
     {
 			"Shortcut": "OWR",
-			"Description": "Oldwood Road",
-			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road"
+			"Description": "Oldwood Road [b](Ravensmere Boundary)[/b]",
+      "RoomID": "Ravensmere Boundary.Oldwood.Oldwood Road",
+      "Echo": "The fresh air hits your face and you immediately notice that the stench of the city has gone."
 		}
 	],
 	"RoomItems": null,

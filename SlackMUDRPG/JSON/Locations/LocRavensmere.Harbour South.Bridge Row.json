@@ -13,13 +13,18 @@
 		},
 		{
 			"Shortcut": "RP",
-			"Description": "Ramparts Parade",
+			"Description": "Ramparts Parade [b](Military District)[/b]",
 			"RoomID": "Ravensmere.Military District.Ramparts Parade"
 		},
-		{
-			"Shortcut": "GCE",
-			"Description": "Greys Court East",
-			"RoomID": "Ravensmere.Town Centre.Greys Court East"
+    {
+      "Shortcut": "GCE",
+      "Description": "Greys Court East [b](Town Centre)[/b]",
+      "RoomID": "Ravensmere.Town Centre.Greys Court East"
+    },
+    {
+			"Shortcut": "DWN",
+			"Description": "Docklands Way North",
+			"RoomID": "Ravensmere.Harbour South.Docklands Way North"
 		},
 		{
 			"ShortCut": "SEB",
