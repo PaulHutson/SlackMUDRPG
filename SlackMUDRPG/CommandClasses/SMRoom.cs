@@ -998,7 +998,10 @@ namespace SlackMUDRPG.CommandClasses
         public bool Locked { get; set; }
 
         [JsonProperty("Prerequisites")]
-        public List<SMRoomPrerequisite> Prerequisites { get; set; }        
+        public List<SMRoomPrerequisite> Prerequisites { get; set; }
+
+        [JsonProperty("Echo")]
+        public string Echo { get; set; }
     }
 
 	public class SMSpawn

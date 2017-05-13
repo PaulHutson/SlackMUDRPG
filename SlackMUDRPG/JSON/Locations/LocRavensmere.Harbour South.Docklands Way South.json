@@ -6,7 +6,17 @@
   "Outside": true,
 	"RoomDescription": "A long and winding street lies ahead. Buildings of varying shapes and sizes lean over from both sides to shadow the cobbles. \nThere are shops and inns dotted up and down and empty washing lines reach from window to window.\nThe street continues round a corner and there are several smaller narrow passageways to the side.",
 	"RoomExits": [
+    {
+      "Shortcut": "SL",
+      "Description": "Swabbies Lane",
+      "RoomID": "Ravensmere.Harbour South.Swabbies Lane"
+    },
 		{
+			"Shortcut": "DWN",
+			"Description": "Docklands Way North",
+			"RoomID": "Ravensmere.Harbour South.Docklands Way North"
+		},
+    {
 			"Shortcut": "AAE",
 			"Description": "Arrivals Area Entrance",
 			"RoomID": "Ravensmere.Harbour South.Arrivals Area"
@@ -15,11 +25,6 @@
 			"Shortcut": "ST",
 			"Description": "Scalebrewers Tavern",
 			"RoomID": "Ravensmere.Harbour South.Scalebrewers Tavern"
-		},
-		{
-			"Shortcut": "SL",
-			"Description": "Swabbies Lane",
-			"RoomID": "Ravensmere.Harbour South.Swabbies Lane"
 		},
     {
       "Shortcut": "RPS",

@@ -8,8 +8,8 @@
 	"RoomExits": [
 		{
 			"Shortcut": "GP",
-			"Description": "Grand Parade - Military District",
-			"RoomID": "Ravensmere.Town Centre.Grand Parade"
+			"Description": "Grand Parade [b](Military District)[/b]",
+			"RoomID": "Ravensmere.Military.Grand Parade"
 		},
     {
       "Shortcut": "GS",

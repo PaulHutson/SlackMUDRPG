@@ -8,7 +8,7 @@
 	"RoomExits": [
 		{
 			"Shortcut": "BR",
-			"Description": "Bridge Row (Road)",
+			"Description": "Bridge Row (Road) [b](Harbour South)[/b]",
 			"RoomID": "Ravensmere.Harbour South.Bridge Row"
 		},
 		{
@@ -28,7 +28,7 @@
 		},
 		{
 			"Shortcut": "RS",
-			"Description": "Ravens South (Road)",
+			"Description": "Ravens South (Road) [b](Industrial Quarter)[/b]",
 			"RoomID": "Ravensmere.Industrial Quarter.Ravens South"
 		}
 	],

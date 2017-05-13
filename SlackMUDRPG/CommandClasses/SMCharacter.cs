@@ -310,6 +310,20 @@ namespace SlackMUDRPG.CommandClasses
                         // If the room is not locked or the character has the right key, let them in.
                         if (initiateMove)
                         {
+                            int waitTime = 0;
+
+                            // Show echos if any are around
+                            if ((sme.Echo != null) && (sme.Echo != ""))
+                            {
+                                this.sendMessageToPlayer(sme.Echo);
+                                waitTime = 4;
+                            }
+
+                            if (waitTime > 0)
+                            {
+                                Thread.Sleep(waitTime*1000);
+                            }
+                            
                             ActualMove(smr, " walks out.", " walks in.");
                         }
                     }
@@ -357,7 +371,7 @@ namespace SlackMUDRPG.CommandClasses
                     smr.SafeZoneCharAttributes.Remove(smrsca);
                 }
             }
-
+            
             // Move the player to the new location
             this.RoomID = smr.RoomID;
             this.SaveToApplication();

@@ -8,13 +8,14 @@
 	"RoomExits": [
     {
 			"Shortcut": "OPT",
-			"Description": "Oldwood Plains Trail",
+			"Description": "Oldwood Plains Trail [b](Oldwood, Ravensmere City Boundary)[/b]",
 			"RoomID": "Ravensmere Boundary.Oldwood.Oldwood Plains Trail"
 		},
 		{
 			"Shortcut": "CMINE",
 			"Description": "Cliffside Mine",
-			"RoomID": "Ravensmere Boundary.Cliffside.Mine"
+      "RoomID": "Ravensmere Boundary.Cliffside.Mine",
+      "Echo": "You can just about squeeze under the collapsed lintel to make your way into the mineshaft.  The light is poor, and you must wait a few seconds for your eyes to adjust."
 		}
 	],
   "RoomItems": null,

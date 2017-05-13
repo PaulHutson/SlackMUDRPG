@@ -11,15 +11,23 @@
     }
   ],
 	"RoomExits": [
-		{
-			"Shortcut": "DWS",
-			"Description": "Docklands Way South",
-			"RoomID": "Ravensmere.Harbour South.Docklands Way South"
+    {
+      "Shortcut": "DWS",
+      "Description": "Docklands Way South",
+      "RoomID": "Ravensmere.Harbour South.Docklands Way South"
+    },
+    {
+			"Shortcut": "DWN",
+			"Description": "Docklands Way North",
+			"RoomID": "Ravensmere.Harbour South.Docklands Way North"
 		},
 		{
 			"Shortcut": "PAH",
 			"Description": "Princes Auction House",
-			"RoomID": "Ravensmere.Harbour South.Princes Auction House"
+			"RoomID": "Ravensmere.Harbour South.Princes Auction House",
+      "RoomLockID": "PAHLock",
+      "Locked": true,
+      "Lockable": false
 		},
 		{
 			"Shortcut": "FT",

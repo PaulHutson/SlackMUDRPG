@@ -6,11 +6,16 @@
   "Outside": false,
 	"RoomDescription": "Grande Parade cuts a large swathe through the military district. Young squires carry the weapons of thier masters, and messengers dash in and out of a large building surrounded by sentry guards. All who enter are searched before being allowed to proceed indoors. The harsh clatter of metal on metal can be heard coming from a stone building with outside bellows blowing air into an impressively large metal furnace.",
 	"RoomExits": [
-		{
-			"Shortcut": "RP",
-			"Description": "Ramparts Parade (Road)",
-			"RoomID": "Ravensmere.Military District.Ramparts Parade"
-		},
+    {
+      "Shortcut": "RP",
+      "Description": "Ramparts Parade (Road)",
+      "RoomID": "Ravensmere.Military District.Ramparts Parade"
+    },
+    {
+      "Shortcut": "BW",
+      "Description": "Barons Walk (Road) [b](Town Centre)[/b]",
+      "RoomID": "Ravensmere.Town Centre.Barons Walk"
+    },
 		{
 			"Shortcut": "SFT",
 			"Description": "Steelforge Blacksmiths",

@@ -9,7 +9,8 @@
     {
 			"Shortcut": "PIT",
 			"Description": "Inside the Pit",
-			"RoomID": "Ravensmere Boundary.Cliffside.Mine Pit"
+      "RoomID": "Ravensmere Boundary.Cliffside.Mine Pit",
+      "Echo": "You carefully grip the ladder and descend into the pit.  Although the rungs sag alarmingly under your feet, they have not collapsed... yet.  The wall in front of your face begins to darken as you continue your descent, the pale rock beginning to dissolve into countless strata.  It seems they finally found the ore they were looking for.  Any further thought is interrupted by an earth-shaking roar from behind you.  You spin around as your feet finally land on solid earth again."
 		},
 		{
 			"Shortcut": "ME",

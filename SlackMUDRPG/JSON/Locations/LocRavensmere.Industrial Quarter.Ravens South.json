@@ -8,7 +8,7 @@
 	"RoomExits": [
     {
       "Shortcut": "RP",
-      "Description": "Ramparts Parade (Road)",
+      "Description": "Ramparts Parade (Road) [b](Military District)[/b]",
       "RoomID": "Ravensmere.Military District.Ramparts Parade"
     },
     {
