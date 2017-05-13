@@ -264,7 +264,7 @@ namespace SlackMUDRPG.CommandClasses
         {
             NPCConversationStep npccs = npcc.ConversationSteps.FirstOrDefault(cs => cs.StepID == stepID);
 			bool continueToNextStep = true;
-            if (npccs != null)
+            if ((npccs != null) && (this.RoomID == invokingCharacter.RoomID))
             {
                 switch (npccs.Scope.ToLower()) {
                     case "choice":
