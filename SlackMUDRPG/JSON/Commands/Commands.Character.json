@@ -118,6 +118,19 @@
 	},
 	{
 		"CommandFamily": "Character",
+		"CommandName": "wake, wake up",
+		"CommandDescription": "Allows the character to go to wake up from sleeping",
+		"CommandSyntax": "{name|lower}",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "GetRoomDetails",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Character",
 		"CommandName": "read",
 		"CommandDescription": "Allows the character to go to read something.",
 		"CommandSyntax": "read <thing-to-read>",
