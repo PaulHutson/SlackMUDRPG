@@ -625,6 +625,8 @@ namespace SlackMUDRPG.CommandClasses
                 smcs.Remove(this);
                 HttpContext.Current.Application["SMCharacters"] = smcs;
                 smr.Announce(this.Formatter.Italic(this.GetFullName() + " falls into a deep sleep"));
+
+                new SlackMud().SendGlobalMessage(this, "[i][b]Global Message:[/b] " + this.GetFullName() + " has logged out of the game[/i]");
             }
             else // If there isn't a bed tell them that they can't log out here.
             {
