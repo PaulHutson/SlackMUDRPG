@@ -26,8 +26,8 @@
 		"RequiredSkill": null
 	},
 	{
-		"CommandFamily": "List",
-		"CommandName": "list, li",
+		"CommandFamily": "List, shop",
+		"CommandName": "list, li, shop",
 		"CommandDescription": "This will return a list of shop items from NPCs in a location.",
 		"CommandSyntax": "{name|lower}",
 		"ParamsExpression": null,
