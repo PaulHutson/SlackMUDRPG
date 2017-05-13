@@ -87,7 +87,7 @@ namespace SlackMUDRPG.CommandClasses
                     if (character.Currency == null)
                     {
                         character.Currency = new SMCurrency();
-                        character.Currency.AmountOfCurrency = 5;
+                        character.Currency.AmountOfCurrency = 50;
                     }
 
                     if (!newCharacter)
