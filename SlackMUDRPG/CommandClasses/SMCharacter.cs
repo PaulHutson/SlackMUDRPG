@@ -154,9 +154,16 @@ namespace SlackMUDRPG.CommandClasses
             string path = FilePathSystem.GetFilePath("Characters", "Char" + this.UserID);
             string charJSON = JsonConvert.SerializeObject(this, Formatting.Indented);
 
-            using (StreamWriter w = new StreamWriter(path))
+            try
             {
-                w.WriteLine(charJSON);
+                using (StreamWriter w = new StreamWriter(path))
+                {
+                    w.WriteLine(charJSON);
+                }
+            }
+            catch
+            {
+                // do nothing
             }
 		}
 
@@ -633,6 +640,9 @@ namespace SlackMUDRPG.CommandClasses
             // Get the room that the character is in.
             SMRoom smr = this.GetRoom();
             smr.Announce(this.Formatter.Italic(this.GetFullName() + " wakes up"), this, true);
+
+            // Send a message to the player to show they've woken up
+            this.sendMessageToPlayer("[i]You wake up and feel well rested after your sleep.[/i]");
 
             // then send the details to the player for the room.
             this.GetRoomDetails();

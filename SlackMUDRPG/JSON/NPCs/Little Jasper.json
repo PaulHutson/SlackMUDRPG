@@ -70,13 +70,13 @@
         "any"
       ],
       "EquippedItem": {
-        "itemID": "BHSSR",
+        "itemID": "LHSSR",
         "SingularPronoun": "a",
-        "ItemName": "Big Hellstone Signet Ring",
+        "ItemName": "Little Hellstone Signet Ring",
         "PluralPronoun": "some",
-        "PluralName": "Big Hellstone Signet Rings",
+        "PluralName": "Little Hellstone Signet Rings",
         "ItemType": "Quest",
-        "ItemFamily": "Bag",
+        "ItemFamily": "Ring",
         "ItemDescription": "The gold band is capped by a vibrant crimson ruby. Could be used for identification",
         "ItemWeight": 0,
         "ItemSize": 0,
