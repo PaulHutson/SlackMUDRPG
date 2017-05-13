@@ -1590,7 +1590,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Get player to give item to
-			SMCharacter playerToGiveTo = this.GetRoom().GetAllPeople().FirstOrDefault(smc => smc.GetFullName().ToLower() == playerName.ToLower());
+			SMCharacter playerToGiveTo = this.GetRoom().GetAllPeople().FirstOrDefault(smc => (smc.GetFullName().ToLower() == playerName.ToLower()) || (smc.FirstName.ToLower() == playerName.ToLower()) || (smc.LastName.ToLower() == playerName.ToLower()));
 
 			if (playerToGiveTo == null)
 			{
