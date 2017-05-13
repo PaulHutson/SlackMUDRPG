@@ -76,7 +76,7 @@
         },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 1
+        "Cost": 5
       },
       {
         "ItemNumber": 2,
@@ -104,7 +104,7 @@
         },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 1
+        "Cost": 5
       }
     ]
   }

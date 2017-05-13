@@ -135,7 +135,7 @@
       "ResponseSteps": [
         {
           "ResponseStepType": "Conversation",
-          "ResponseStepData": "Shop.1"
+          "ResponseStepData": "Enter.1"
         }
       ],
       "PreRequisites": [

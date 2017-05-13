@@ -286,7 +286,7 @@
         {
           "StepID": "4",
           "Scope": "saytoplayer",
-          "AdditionalData": "I'll pay you 3 marks for the root!",
+          "AdditionalData": "I'll pay you 30 marks for the root!",
           "NextStep": "5.0",
           "ResponseOptions": null
         },

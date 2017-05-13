@@ -6,8 +6,8 @@
   "SkillName": "Axe Use",
 	"CanUseWithoutLearning":  true,
   "SkillDescription": "The ability to use an axe",
-  "SkillLearnText": "You've learnt how to use an axe",
-  "LevelIncreaseText":  "You feel you've gotten better using axes",
+  "SkillLearnText": "You've learnt how to wield an axe",
+  "LevelIncreaseText":  "You feel you have become better at wielding axes",
   "ActivityType":  "Passive",
   "BaseStat": "STR",
   "LevelMultiplier": 10,
@@ -22,6 +22,50 @@
       "IsSkill": false,
       "SkillStatName": "DEX",
       "PreReqLevel": 8
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "EquippedObject",
+      "StepRequiredObject": "Family.Axe",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You don't have an axe equipped",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Target",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You must choose something to attack",
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Hit",
+      "StepRequiredObject": "Family.Axe",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to hit {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
+    },
+    {
+      "StepType": "Information",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": "{CHARNAME} uses their axe to attack {TARGETNAME}"
+    },
+    {
+      "StepType": "Pause",
+      "StepRequiredObject": null,
+      "RequiredObjectAmount": 5,
+      "FailureOutput": null,
+      "SuccessOutput": null
+    },
+    {
+      "StepType": "Repeat",
+      "StepRequiredObject": "Activity.Attacking",
+      "RequiredObjectAmount": 0,
+      "FailureOutput": null,
+      "SuccessOutput": null
     }
   ]
 }

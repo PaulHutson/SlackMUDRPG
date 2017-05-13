@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.Town Center.Greys Court East",
+	"RoomID": "Ravensmere.Town Centre.Greys Court East",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -25,6 +25,16 @@
       "Shortcut": "TS",
       "Description": "The Shambles",
       "RoomID": "Ravensmere.Town Centre.The Shambles"
+    },
+    {
+      "Shortcut": "TSW",
+      "Description": "Tilney and Sons Weaponary",
+      "RoomID": "Ravensmere.Town Centre.Tilney and Sons Weaponary"
+    },
+    {
+      "Shortcut": "MA",
+      "Description": "The Merchants Arms",
+      "RoomID": "Ravensmere.Town Centre.The Merchants Arms"
     }
   ],
 	"RoomItems": null,

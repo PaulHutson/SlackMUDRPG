@@ -1,0 +1,183 @@
+{
+	"RoomID": "Ravensmere.Town Centre.Tilney and Sons Weaponary",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "Thick iron bars protect a window filled with dangerous looking weaponry.  The shop is dark and smells of chipped flint. Wooden racks rest against the walls presenting an arsenal of both melee and projectiles.",
+  "RoomExits": [
+    {
+      "Shortcut": "GCE",
+      "Description": "Greys Court East",
+      "RoomID": "Ravensmere.Town Centre.Greys Court East"
+    }
+  ],
+	"RoomItems": null,
+	"NPCSpawns": null,
+  "NPCShopItems": {
+    "ShopInventory": [
+      {
+        "ItemNumber": 1,
+        "Item": {
+	        "ItemName": "Knife",
+	        "SingularPronoun": "a",
+	        "PluralName": "Knives",
+	        "PluralPronoun": "some",
+	        "ItemType": "Weapon",
+	        "ItemFamily": "Knife",
+	        "ItemDescription": "A fine looking knife",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 50,
+	        "MaxHitPoints": 50,
+	        "BaseDamage": 4,
+	        "Toughness": 3,
+	        "RequiredSkills": [
+		        {
+			        "SkillName": "Knife Use",
+			        "SkillLevel":  "1"
+		        }
+	        ]
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 150
+      },
+      {
+        "ItemNumber": 2,
+        "Item": {
+	        "ItemName": "Best Quality Knife",
+	        "SingularPronoun": "a",
+	        "PluralName": "Best Quality Knives",
+	        "PluralPronoun": "some",
+	        "ItemType": "Weapon",
+	        "ItemFamily": "Knife",
+	        "ItemDescription": "A Best Quality knife",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 50,
+	        "MaxHitPoints": 50,
+	        "BaseDamage": 6,
+	        "Toughness": 3,
+	        "RequiredSkills": [
+		        {
+			        "SkillName": "Knife Use",
+			        "SkillLevel":  "1"
+		        }
+	        ]
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 350
+      },
+      {
+        "ItemNumber": 3,
+        "Item": {
+	        "SingularPronoun": "a",
+	        "ItemName": "Sword",
+	        "PluralPronoun": "some",
+	        "PluralName": "Swords",
+	        "ItemType": "Weapon",
+	        "ItemFamily": "Sword",
+	        "ItemDescription": "A simple but well made sword",
+	        "ItemWeight": 4,
+	        "ItemSize": 2,
+	        "HitPoints": 100,
+	        "MaxHitPoints": 100,
+	        "BaseDamage": 5.0,
+	        "Toughness": 3,
+	        "RequiredSkills": [
+		        {
+			        "SkillName": "Sword Use",
+			        "SkillLevel":  "1"
+		        }
+	        ]
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 400
+      },
+      {
+        "ItemNumber": 4,
+        "Item": {
+	        "SingularPronoun": "a",
+	        "ItemName": "Best Quality Sword",
+	        "PluralPronoun": "some",
+	        "PluralName": "Best Quality Swords",
+	        "ItemType": "Weapon",
+	        "ItemFamily": "Sword",
+	        "ItemDescription": "A Best Quality Sword",
+	        "ItemWeight": 4,
+	        "ItemSize": 2,
+	        "HitPoints": 100,
+	        "MaxHitPoints": 100,
+	        "BaseDamage": 8,
+	        "Toughness": 3,
+	        "RequiredSkills": [
+		        {
+			        "SkillName": "Sword Use",
+			        "SkillLevel":  "1"
+		        }
+	        ]
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 600
+      },
+      {
+        "ItemNumber": 5,
+        "Item": {
+	        "ItemName": "Axe",
+	        "SingularPronoun": "a",
+	        "PluralName": "Axes",
+	        "PluralPronoun": "some",
+	        "ItemType": "Weapon",
+	        "ItemFamily": "Axe",
+	        "ItemDescription": "A fine looking axe",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 50,
+	        "MaxHitPoints": 50,
+	        "BaseDamage": 5,
+	        "Toughness": 3,
+	        "RequiredSkills": [
+		        {
+			        "SkillName": "Axe Use",
+			        "SkillLevel":  "1"
+		        }
+	        ]
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 400
+      },
+      {
+        "ItemNumber": 6,
+        "Item": {
+	        "ItemName": "Good Quality Axe",
+	        "SingularPronoun": "a",
+	        "PluralName": "Good Quality Axes",
+	        "PluralPronoun": "some",
+	        "ItemType": "Weapon",
+	        "ItemFamily": "Axe",
+	        "ItemDescription": "A good quality axe",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 50,
+	        "MaxHitPoints": 50,
+	        "BaseDamage": 6.5,
+	        "Toughness": 3,
+	        "RequiredSkills": [
+		        {
+			        "SkillName": "Axe Use",
+			        "SkillLevel":  "1"
+		        }
+	        ]
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 480
+      }
+    ]
+  }
+}

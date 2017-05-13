@@ -8,14 +8,14 @@
 			"Type": "Get",
 			"CharacterName": "Shopkeep Crabby",
 			"LocationID": "Ravensmere.Harbour South.Crabbies Smoking Den",
-			"AdditionalData": "Family.Fish,10",
-			"Instructions": "Take 10 fish to Crabby in his Smoking Den"
+			"AdditionalData": "Family.Fish,5",
+			"Instructions": "Take 5 fish to Crabby in his Smoking Den"
 		}
 	],
 	"Rewards": [
 		{
 			"Type": "Money",
-			"AdditionalData": "5"
+			"AdditionalData": "40"
 		}
 	]
 }

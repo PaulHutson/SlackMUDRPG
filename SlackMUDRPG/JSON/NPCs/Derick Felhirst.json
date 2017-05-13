@@ -503,7 +503,7 @@
         {
           "StepID": "GetMeARabbitSkin2",
           "Scope": "saytoplayer",
-          "AdditionalData": "... tell yer what.. if you bring me one I'll give you 3 marks...",
+          "AdditionalData": "... tell yer what.. if you bring me one I'll give you 30 marks...",
           "NextStep": "GetMeARabbitSkin3.2",
           "ResponseOptions": null
         },
@@ -552,7 +552,7 @@
         {
           "StepID": "SkinInTheGame5",
           "Scope": "saytoplayer",
-          "AdditionalData": "... tell you what, I'll give you 5 marks if you bring me a Deer Skin... ",
+          "AdditionalData": "... tell you what, I'll give you 50 marks if you bring me a Deer Skin... ",
           "NextStep": "SkinInTheGame6.1",
           "ResponseOptions": null
         },
