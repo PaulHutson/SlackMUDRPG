@@ -625,11 +625,24 @@ namespace SlackMUDRPG.CommandClasses
             }
         }
 
-		/// <summary>
-		/// Enables the character to read a sign
-		/// </summary>
-		/// <param name="itemIdentifier">The item to be read</param>
-		public void Read(string itemIdentifier)
+        /// <summary>
+        /// Allows a player to go to wake up
+        /// </summary>
+        public void Wake()
+        {
+            // Get the room that the character is in.
+            SMRoom smr = this.GetRoom();
+            smr.Announce(this.Formatter.Italic(this.GetFullName() + " wakes up"), this, true);
+
+            // then send the details to the player for the room.
+            this.GetRoomDetails();
+        }
+
+        /// <summary>
+        /// Enables the character to read a sign
+        /// </summary>
+        /// <param name="itemIdentifier">The item to be read</param>
+        public void Read(string itemIdentifier)
 		{
 			// Get the item
 			SMItem item = this.FindItemInRoom(itemIdentifier);

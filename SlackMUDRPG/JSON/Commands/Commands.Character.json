@@ -123,7 +123,7 @@
 		"CommandSyntax": "{name|lower}",
 		"ParamsExpression": null,
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
-		"CommandMethod": "GetRoomDetails",
+		"CommandMethod": "Wake",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "{name|lower}",
