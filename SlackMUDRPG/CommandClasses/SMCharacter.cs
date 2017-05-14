@@ -519,14 +519,14 @@ namespace SlackMUDRPG.CommandClasses
 			// Craft all of the output elements.
 			messageToSend += this.Formatter.ListItem("Level: " + this.CalculateLevel());
 			messageToSend += this.Formatter.ListItem("-----------------------");
-			messageToSend += this.Formatter.ListItem("Charisma: " + this.Attributes.Charisma);
-			messageToSend += this.Formatter.ListItem("Dexterity: " + this.Attributes.Dexterity);
-			messageToSend += this.Formatter.ListItem("Fortitude: " + this.Attributes.Fortitude);
-			messageToSend += this.Formatter.ListItem("Hit Points: " + this.Attributes.HitPoints + " / " + this.Attributes.MaxHitPoints);
-			messageToSend += this.Formatter.ListItem("Social Standing: " + this.Attributes.SocialStanding);
-			messageToSend += this.Formatter.ListItem("Strength: " + this.Attributes.Strength);
-			messageToSend += this.Formatter.ListItem("Toughness: " + this.Attributes.GetToughness());
-			messageToSend += this.Formatter.ListItem("WillPower: " + this.Attributes.WillPower);
+			messageToSend += this.Formatter.ListItem("Charisma: " + this.Attributes.GetBaseStatValue("CHR"));
+			messageToSend += this.Formatter.ListItem("Dexterity: " + this.Attributes.GetBaseStatValue("DEX"));
+			messageToSend += this.Formatter.ListItem("Fortitude: " + this.Attributes.GetBaseStatValue("FT"));
+			messageToSend += this.Formatter.ListItem("Hit Points: " + this.Attributes.GetBaseStatValue("HP") + " / " + this.Attributes.GetBaseStatValue("MAXHP"));
+			messageToSend += this.Formatter.ListItem("Social Standing: " + this.Attributes.GetBaseStatValue("SS"));
+			messageToSend += this.Formatter.ListItem("Strength: " + this.Attributes.GetBaseStatValue("STR"));
+			messageToSend += this.Formatter.ListItem("Toughness: " + this.Attributes.GetBaseStatValue("T"));
+			messageToSend += this.Formatter.ListItem("WillPower: " + this.Attributes.GetBaseStatValue("WP"));
 
 			// Tell the player
 			this.sendMessageToPlayer(messageToSend);
@@ -745,6 +745,76 @@ namespace SlackMUDRPG.CommandClasses
         {
             this.Username = newUserName;
             this.sendMessageToPlayer("[i]Username updated[/i]");
+        }
+
+        /// <summary>
+        /// Drink something...
+        /// </summary>
+        /// <param name="itemName">The name of the item to drink</param>
+        public void Drink(string itemName)
+        {
+            this.ConsumeItem(itemName, "drinks", "drink", "Drinkable");
+        }
+
+        /// <summary>
+        /// Eat something...
+        /// </summary>
+        /// <param name="itemName">The name of the item to eat</param>
+        public void Eat(string itemName)
+        {
+            this.ConsumeItem(itemName, "eats", "eat", "Eatable");
+        }
+
+        /// <summary>
+        /// Consume something
+        /// </summary>
+        /// <param name="itemName">The name of the item to consume</param>
+        public void ConsumeItem(string itemName, string consumeVerb, string singularConsumeVerb, string objectTrait)
+        {
+            // Check the item exists in the characters posession.
+            SMItem smi = this.GetOwnedItem(itemName);
+
+            // Check that the character has the item about their person...
+            if (smi != null) {
+                // See if the item can be drunk...
+                if (smi.ObjectTrait.ToLower().Contains(objectTrait.ToLower()))
+                {
+                    // Check that the player has an initialised Effects list on the attributes
+                    if (this.Attributes.Effects == null)
+                    {
+                        this.Attributes.Effects = new List<SMEffect>();
+                    }
+
+                    // Check the "on consume" effects for the item...
+                    foreach (SMEffect sme in smi.Effects)
+                    {
+                        if (sme.Action.ToLower() == "onconsume")
+                        {
+                            // Change the timing on this.
+                            sme.EffectLength = Utility.Utils.GetUnixTimeOffset(sme.EffectLength);
+
+                            // Now add the effect to the attributes
+                            this.Attributes.Effects.Add(sme);
+                        }
+                    }
+
+                    // Remove the item.
+                    RemoveOwnedItem(smi.ItemName, false);
+                    this.SaveToApplication();
+                    this.SaveToFile();
+
+                    // Tell everyone that the character has drunk the item.
+                    this.GetRoom().Announce("[i]" + this.GetFullName() + " " + consumeVerb + " " + smi.SingularPronoun + " " + smi.ItemName + "[/i]", this);
+                }
+                else // ... tell the player that it can't.
+                {
+                    this.sendMessageToPlayer("[i]Can not drink that item.[/i]");
+                }
+            }
+            else // ...they don't have the item.
+            {
+                this.sendMessageToPlayer("[i]Can not find the item " + itemName + "[/i]");
+            }
         }
 
 		#endregion

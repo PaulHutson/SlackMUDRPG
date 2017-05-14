@@ -16,5 +16,8 @@ namespace SlackMUDRPG.CommandClasses
 
         [JsonProperty("AdditionalData")]
         public string AdditionalData { get; set; }
+
+        [JsonProperty("EffectLength")]
+        public int EffectLength { get; set; }
     }
 }

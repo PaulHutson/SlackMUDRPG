@@ -42,8 +42,28 @@
           "DestroyedOutput": null,
           "RequiredSkills": null,
           "AdditionalData": null,
-          "ObjectTrait": null,
-          "HeldItems": null
+          "ObjectTrait": "Drinkable",
+          "HeldItems": null,
+          "Effects": [
+            {
+              "Action": "OnConsume",
+              "EffectType": "Int",
+              "AdditionalData": "-1",
+              "EffectLength": 300
+            },
+            {
+              "Action": "OnConsume",
+              "EffectType": "Chr",
+              "AdditionalData": "1",
+              "EffectLength": 150
+            },
+            {
+              "Action": "OnConsume",
+              "EffectType": "Dex",
+              "AdditionalData": "-2",
+              "EffectLength": 300
+            }
+          ]
         },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
@@ -70,8 +90,28 @@
           "DestroyedOutput": null,
           "RequiredSkills": null,
           "AdditionalData": null,
-          "ObjectTrait": null,
-          "HeldItems": null
+          "ObjectTrait": "Drinkable",
+          "HeldItems": null,
+          "Effects": [
+            {
+              "Action": "OnConsume",
+              "EffectType": "Int",
+              "AdditionalData": "-1",
+              "EffectLength": 300
+            },
+            {
+              "Action": "OnConsume",
+              "EffectType": "Chr",
+              "AdditionalData": "1",
+              "EffectLength": 150
+            },
+            {
+              "Action": "OnConsume",
+              "EffectType": "Dex",
+              "AdditionalData": "-2",
+              "EffectLength": 300
+            }
+          ]
         },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,

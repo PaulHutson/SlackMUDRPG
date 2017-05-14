@@ -167,7 +167,14 @@ namespace SlackMUDRPG.CommandClasses
             List<SMCharacter> lsmc = (List<SMCharacter>)HttpContext.Current.Application["SMCharacters"];
             foreach (SMCharacter c in lsmc.ToList())
             {
-                // ...  who're a bit hurt and logged in.
+                // Remove any attribute effects that have expired
+                if (c.Attributes.Effects != null)
+                {
+                    int currentTime = Utility.Utils.GetUnixTime();
+                    c.Attributes.Effects.RemoveAll(e => e.EffectLength <= currentTime);
+                }
+
+                // Hurt.
                 if (c.Attributes.HitPoints < c.Attributes.MaxHitPoints)
                 {
                     Random rNumber = new Random();
