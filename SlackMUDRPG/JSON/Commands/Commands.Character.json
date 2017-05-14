@@ -40,15 +40,15 @@
 	},
 	{
 		"CommandFamily": "Character",
-		"CommandName": "stats",
+		"CommandName": "stats, attr, attrs, attributes, statistics, getstats",
 		"CommandDescription": "Get the statistics of your character.",
-		"CommandSyntax": "stats",
+		"CommandSyntax": "{name|lower}",
 		"ParamsExpression": null,
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
 		"CommandMethod": "GetStats",
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
-		"ExampleUsage": "stats",
+		"ExampleUsage": "{name|lower}",
 		"RequiredSkill": null
 	},
 	{
@@ -257,6 +257,32 @@
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "{name|lower}",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Character",
+		"CommandName": "drink",
+		"CommandDescription": "Drinks something",
+		"CommandSyntax": "drink [item to drink]",
+		"ParamsExpression": "{.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Drink",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "drink beer",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Character",
+		"CommandName": "eat",
+		"CommandDescription": "Eats something",
+		"CommandSyntax": "eat [item to eat]",
+		"ParamsExpression": "{.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Eat",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "eat cheese",
 		"RequiredSkill": null
 	}
 ]

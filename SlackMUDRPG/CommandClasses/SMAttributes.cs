@@ -35,12 +35,15 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("SocialStanding")]
 		public int SocialStanding { get; set; }
 
-		/// <summary>
-		/// Increases an attribute type by 1
-		/// </summary>
-		/// <param name="attributeType">The attribute type in short form</param>
-		/// <returns>The increased amount, if a 0 is returned then an error has occurred</returns>
-		public int IncreaseAttribute(string attributeType)
+        [JsonProperty("Effects")]
+        public List<SMEffect> Effects { get; set; }
+
+        /// <summary>
+        /// Increases an attribute type by 1
+        /// </summary>
+        /// <param name="attributeType">The attribute type in short form</param>
+        /// <returns>The increased amount, if a 0 is returned then an error has occurred</returns>
+        public int IncreaseAttribute(string attributeType)
 		{
 			// Set the return variable in advance
 			int updatedAttributeValue = 0;
@@ -121,27 +124,36 @@ namespace SlackMUDRPG.CommandClasses
 			switch (statShortName)
 			{
 				case ("STR"):
-					statValue = this.Strength;
+					statValue = this.EffectedStat("STR", this.Strength);
 					break;
 				case ("INT"):
-					statValue = this.Intelligence;
+					statValue = this.EffectedStat("INT", this.Intelligence);
 					break;
 				case ("CHR"):
-					statValue = this.Charisma;
+                    statValue = this.EffectedStat("CHR", this.Charisma);
 					break;
 				case ("DEX"):
-					statValue = this.Dexterity;
+                    statValue = this.EffectedStat("DEX", this.Dexterity);
 					break;
 				case ("WP"):
-					statValue = this.WillPower;
+                    statValue = this.EffectedStat("WP", this.WillPower);
 					break;
 				case ("FT"):
-					statValue = this.WillPower;
+                    statValue = this.EffectedStat("FT", this.Fortitude);
 					break;
-				case ("SS"):
-					statValue = this.SocialStanding;
-					break;
-			}
+                case ("SS"):
+                    statValue = this.EffectedStat("SS", this.SocialStanding);
+                    break;
+                case ("HP"):
+                    statValue = this.EffectedStat("HP", this.HitPoints);
+                    break;
+                case ("MAXHP"):
+                    statValue = this.EffectedStat("MAXHP", this.MaxHitPoints);
+                    break;
+                case ("T"):
+                    statValue = this.EffectedStat("T", this.GetToughness());
+                    break;
+            }
 			return statValue;
 		}
 
@@ -152,6 +164,30 @@ namespace SlackMUDRPG.CommandClasses
 			// Base Toughness based on the fortitude of someone.
 			return this.Fortitude / 10;
 		}
+
+        public int EffectedStat(string effectedStatCheck, int currentValue)
+        {
+            int modifiedStat = currentValue;
+
+            if (this.Effects != null)
+            {
+                List<SMEffect> smel = this.Effects.FindAll(e => e.EffectType.ToLower() == effectedStatCheck.ToLower());
+                if (smel != null)
+                {
+                    foreach (SMEffect sme in smel)
+                    {
+                        modifiedStat += int.Parse(sme.AdditionalData);
+                    }
+
+                    if (modifiedStat < 0)
+                    {
+                        modifiedStat = 0;
+                    }
+                }
+            }
+
+            return modifiedStat;
+        }
 
 		#endregion
 	}

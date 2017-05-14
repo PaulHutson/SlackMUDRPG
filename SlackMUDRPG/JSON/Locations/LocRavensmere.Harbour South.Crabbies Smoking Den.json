@@ -30,7 +30,17 @@
 	        "HitPoints": 1,
 	        "MaxHitPoints": 1,
 	        "BaseDamage": 0.001,
-	        "Toughness": 1
+	        "Toughness": 1,
+          "ObjectTrait": "Eatable",
+          "HeldItems": null,
+          "Effects": [
+            {
+              "Action": "OnConsume",
+              "EffectType": "MAXHP",
+              "AdditionalData": "1",
+              "EffectLength": 1200
+            }
+          ]
         },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
