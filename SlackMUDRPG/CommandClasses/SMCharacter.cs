@@ -629,7 +629,7 @@ namespace SlackMUDRPG.CommandClasses
             SMRoom smr = this.GetRoom();
             
             // Check if there is a bed in the room
-            if (smr.RoomItems.Count(roomitem => roomitem.ItemFamily.ToLower() == "bed") > 0) 
+            if ((smr.RoomItems != null) && (smr.RoomItems.Count(roomitem => roomitem.ItemFamily.ToLower() == "bed") > 0)) 
             {
                 // If there is a bed send them a message to say they're logging out.
                 this.sendMessageToPlayer(this.Formatter.Italic("You feel weary and slip into a pleasant sleep (you have been logged out from the game world)."));
