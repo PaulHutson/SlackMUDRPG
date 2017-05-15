@@ -1282,122 +1282,180 @@ namespace SlackMUDRPG.CommandClasses
 		#region "Inventory Functions"
 
 		/// <summary>
-		/// Picks up item from the current room.
+		/// Picks up an item from the current room (identified by a given string) and places it in an equipped container or empty hand.
 		/// </summary>
 		/// <param name="itemIdentifier">Items identifier (id, name or family).</param>
-		public void PickUpItem(string itemIdentifier, SMItem itemBeingGiven = null, bool ignoreWeight = false, bool suppressOutputMessages = false, bool isQuestItem = false)
+		public void PickUpItem(string itemIdentifier)
 		{
-			// Set the variables for use later.
-			SMItem item;
-			string action = "pick up";
-			string actioned = "picked up";
+			// Find the item in the characters room
+			SMItem itemToPickup = this.FindItemInRoom(itemIdentifier);
 
-			// if the item is being give to someone...
-			if (itemBeingGiven != null)
+			// If the item cannot be found inform the player and return
+			if (itemToPickup == null)
 			{
-				// .. set the item as the given item
-				item = itemBeingGiven;
-				action = "receive";
-				actioned = "received";
-			}
-			else
-			{
-				// Find the item in the characters room
-				item = this.FindItemInRoom(itemIdentifier);
-			}
-
-			// If there is not an item
-			if (item == null)
-			{
-				// ... inform the player
-                if (!suppressOutputMessages)
-                {
-                    this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to pick up!"));
-                }
+				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\"!"));
 				return;
 			}
 
-			// Get an empty hand to pick up the item with
+			// Weight Check
+			if (this.WeightLimit - this.GetCurrentWeight() < itemToPickup.ItemWeight)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to pick up {itemToPickup.ItemName}({itemToPickup.ItemWeight}), this would exceed your weight limit of \"{this.WeightLimit}\"."));
+				return;
+			}
+
+			bool putInContainer = false;
+			bool putInHand = false;
+
+			// Try to put the item in an equipped container
+			putInContainer = this.PutItemInEquippedContainer(itemToPickup);
+
+			// If unable to put in a container try empty hands
+			if (!putInContainer)
+			{
+				putInHand = this.PutItemInEmptyHand(itemToPickup);
+			}
+
+			// Remove item from room and send messages on success
+			if (putInContainer || putInHand)
+			{
+				this.GetRoom().RemoveItem(itemToPickup);
+
+				this.SaveToFile();
+
+				this.sendMessageToPlayer(this.Formatter.Italic($"You picked up {itemToPickup.SingularPronoun} {itemToPickup.ItemName}."));
+
+				this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} picked up {itemToPickup.SingularPronoun} {itemToPickup.ItemName}."));
+
+				return;
+			}
+
+			// Otherwise send failure message
+			this.sendMessageToPlayer(this.Formatter.Italic($"Unable to pick up {itemToPickup.ItemName}({itemToPickup.ItemWeight}), you don't have space for it."));
+		}
+
+		/// <summary>
+		/// Receives a given item and places it in an equipped container or empty hand, ignoring weight limits.
+		/// </summary>
+		/// <param name="item">The item the character is receiving.</param>
+		/// <param name="supressOutput">Bool indicating of the playour output shoudl be suppressed.</param>
+		public void ReceiveItem(SMItem item, bool supressOutput = false)
+		{
+			bool putInContainer = false;
+			bool putInHand = false;
+
+			// Try to put the item in an equipped container
+			putInContainer = this.PutItemInEquippedContainer(item);
+
+			// If unable to put in a container try empty hands
+			if (!putInContainer)
+			{
+				putInHand = this.PutItemInEmptyHand(item);
+			}
+
+			// Save character and send messages on success
+			if (putInContainer || putInHand)
+			{
+				this.SaveToFile();
+
+				if (!supressOutput)
+				{
+					this.sendMessageToPlayer(this.Formatter.Italic($"You received {item.SingularPronoun} {item.ItemName}."));
+
+					this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} received {item.SingularPronoun} {item.ItemName}."));
+				}
+
+				return;
+			}
+
+			// Otherwise send failure message
+			if (!supressOutput)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to receive {item.ItemName}({item.ItemWeight}), you don't have space for it."));
+			}
+		}
+
+		/// <summary>
+		/// Attempts to put a give item in a container the character has equipped.
+		/// </summary>
+		/// <param name="item">The item to put in an equipped container.</param>
+		/// <returns>Bool indicating the suucess of the operation.</returns>
+		private bool PutItemInEquippedContainer(SMItem item)
+		{
+			SMItem container = this.GetEquippedContainerForItem(item);
+
+			if (container != null)
+			{
+				SMItemHelper.PutItemInContainer(item, container);
+				return true;
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Attempts to put a give item in an empty hand if the character has one.
+		/// </summary>
+		/// <param name="item">The item to put in an empty hand.</param>
+		/// <returns>Bool indicating the suucess of the operation.</returns>
+		private bool PutItemInEmptyHand(SMItem item)
+		{
 			SMSlot hand = this.GetEmptyHand();
-			
-			// If the item is larger than size 1 then it needs to be picked up with an empty hand.
-			if ((hand == null) && (item.ItemSize > 1))
-			{
-                if (!suppressOutputMessages)
-                {
-                    this.sendMessageToPlayer(this.Formatter.Italic($"You need an empty hand to {action} that item."));
-                }
-				return;
-			}
-
-			// Check the item can be picked up based on its weight
-			if ((this.WeightLimit < this.GetCurrentWeight() + item.ItemWeight) && (!ignoreWeight))
-			{
-                if (!suppressOutputMessages)
-                {
-                    this.sendMessageToPlayer(this.Formatter.Italic($"Unable to {action} {item.ItemName}, this would exceed your weight limit of \"{this.WeightLimit}\"."));
-                }
-				return;
-			}
 
 			if (hand != null)
 			{
-				// Check the slot can equip the item
-				if (!hand.canEquipItem(item))
-				{
-                    if (!suppressOutputMessages)
-                    {
-                        this.sendMessageToPlayer(this.Formatter.Italic($"Unable to {action} {item.ItemName}, {hand.GetReadableName()} cannot epuip items of type \"{item.ItemType}\"."));
-                    }
-					return;
-				}
-				else
-				{
-					// Add the item to the characters hand
-					hand.EquippedItem = item;
-				}
-			}
-			else
-			{
-				// Try to store it elsewhere on the character (perhaps in a bag).
-				foreach (SMSlot slot in this.Slots)
-				{
-					if (!slot.isEmpty())
-					{
-						// Look inside the equipped item if it is a container
-						if (slot.EquippedItem.CanHoldOtherItems())
-						{
-							// Add item to container
-							string	output = $"You put {item.SingularPronoun} {item.ItemName} ";
-									output += $"in {slot.EquippedItem.SingularPronoun} {slot.EquippedItem.ItemName}.";
-
-							SMItemHelper.PutItemInContainer(item, slot.EquippedItem);
-                            if (!suppressOutputMessages)
-                            {
-                                this.sendMessageToPlayer(this.Formatter.Italic(output));
-                            }
-							
-							break;
-						}
-					}
-				}
-			}
-			
-			// Remove the item from the room
-			if (itemBeingGiven == null)
-			{
-				this.GetRoom().RemoveItem(item);
-                if (!suppressOutputMessages)
-                {
-                    this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} {actioned} {item.SingularPronoun} {item.ItemName}."));
-                }
+				hand.EquippedItem = item;
+				return true;
 			}
 
-            if (!suppressOutputMessages)
-            {
-                this.sendMessageToPlayer(this.Formatter.Italic($"You {actioned} {item.SingularPronoun} {item.ItemName}."));
-            }
-            this.SaveToFile();
+			return false;
+		}
+
+		/// <summary>
+		/// Searches the character for a equipped container that can hold a given item.
+		/// </summary>
+		/// <param name="item">The item to find a container for.</param>
+		/// <return>A container the item can go in or null if not container is found.</return></returns>
+		private SMItem GetEquippedContainerForItem(SMItem item)
+		{
+			foreach (SMSlot slot in this.Slots)
+			{
+				// If there is an item equipped and it can hold other items
+				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems())
+				{
+					return SMItemHelper.FindContainerForItemRecursive(item, slot.EquippedItem);
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Gets an SMSlot representing an empty hand on the character, optionally weighted to the right hand first.
+		/// </summary>
+		/// <returns>The empty hand SMSlot.</returns>
+		/// <param name="rightFirst">If set to <c>true</c> tries the right hand first.</param>
+		private SMSlot GetEmptyHand(bool rightFirst = true)
+		{
+			SMSlot rightHand = this.GetSlotByName("RightHand");
+			SMSlot leftHand = this.GetSlotByName("LeftHand");
+
+			if (rightFirst)
+			{
+				if (rightHand.isEmpty())
+				{
+					return rightHand;
+				}
+
+				return leftHand.isEmpty() ? leftHand : null;
+			}
+
+			if (leftHand.isEmpty())
+			{
+				return leftHand;
+			}
+
+			return rightHand.isEmpty() ? rightHand : null;
 		}
 
 		/// <summary>
@@ -1628,7 +1686,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Check the container can hold the family corresponding to the item
-			if (!targetContainer.CanHoldItem(itemToPut))
+			if (!targetContainer.CanHoldItemByFamily(itemToPut))
 			{
 				this.sendMessageToPlayer(this.Formatter.Italic($"You cannot put an item of the family \"{itemToPut.ItemFamily}\" in \"{targetContainer.ItemName}\"!"));
 				return;
@@ -2008,34 +2066,6 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return item;
-		}
-
-		/// <summary>
-		/// Gets an SMSlot representing an empty hand on the character, optionally weighted to the right hand first.
-		/// </summary>
-		/// <returns>The empty hand SMSlot.</returns>
-		/// <param name="rightFirst">If set to <c>true</c> tries the right hand first.</param>
-		private SMSlot GetEmptyHand(bool rightFirst = true)
-		{
-			SMSlot rightHand = this.GetSlotByName("RightHand");
-			SMSlot leftHand = this.GetSlotByName("LeftHand");
-
-			if (rightFirst)
-			{
-				if (rightHand.isEmpty())
-				{
-					return rightHand;
-				}
-
-				return leftHand.isEmpty() ? leftHand : null;
-			}
-
-			if (leftHand.isEmpty())
-			{
-				return leftHand;
-			}
-
-			return rightHand.isEmpty() ? rightHand : null;
 		}
 
 		/// <summary>
@@ -2780,7 +2810,7 @@ namespace SlackMUDRPG.CommandClasses
 										SMItem itemBeingGiven = SMItemFactory.Get(itemParts[0], itemParts[1]);
 
 										// Pass it to the player
-										this.PickUpItem("", itemBeingGiven, true);
+										this.ReceiveItem(itemBeingGiven);
 
 										numberToGive--;
 									}
@@ -2795,7 +2825,7 @@ namespace SlackMUDRPG.CommandClasses
                                     keyBeingGiven.AdditionalData = keyInfo[1];
 
                                     // Pass the key to the player
-                                    this.PickUpItem("", keyBeingGiven, true);
+									this.ReceiveItem(keyBeingGiven);
 
                                     break;
                                 case "money":
