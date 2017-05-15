@@ -351,7 +351,7 @@ namespace SlackMUDRPG.CommandClasses
 								SMItem itemBeingGiven = SMItemFactory.Get(itemParts[0], itemParts[1]);
 
 								// Pass it to the player
-								invokingCharacter.PickUpItem("", itemBeingGiven, true);
+								invokingCharacter.ReceiveItem(itemBeingGiven);
 
 								// Reduce the number to create
 								numberToCreate--;
@@ -540,7 +540,7 @@ namespace SlackMUDRPG.CommandClasses
                                         shopItemToBuy.Item.ItemID = Guid.NewGuid().ToString();
 
                                         // Buy the item.
-                                        invokingCharacter.PickUpItem("", shopItemToBuy.Item, true);
+										invokingCharacter.ReceiveItem(shopItemToBuy.Item);
 
                                         // Remove the money from the player
                                         invokingCharacter.Currency.RemoveCurrency(shopItemToBuy.Cost);

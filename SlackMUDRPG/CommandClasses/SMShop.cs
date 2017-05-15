@@ -76,7 +76,7 @@ namespace SlackMUDRPG.CommandClasses
                     while (numberToBuy > 0)
                     {
                         numberToBuy--;
-                        smc.PickUpItem("", ssi.Item, true, true);
+						smc.ReceiveItem(ssi.Item, true);
                     }
 
                     // Return that the item was bought.
