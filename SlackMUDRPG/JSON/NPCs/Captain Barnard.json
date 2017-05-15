@@ -210,7 +210,7 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.Challenge1"
+                  "AdditionalData": "Hail.Challenge1"
                 }
               ]
             },
@@ -220,7 +220,7 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.NoChallenge"
+                  "AdditionalData": "Hail.NoChallenge"
                 }
               ]
             }
@@ -245,7 +245,7 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.Challenge2"
+                  "AdditionalData": "Hail.Challenge2"
                 }
               ]
             }
@@ -270,7 +270,7 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.Challenge1"
+                  "AdditionalData": "Hail.Challenge1"
                 }
               ]
             },
@@ -280,7 +280,7 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.NoChallenge"
+                  "AdditionalData": "Hail.NoChallenge"
                 }
               ]
             }
@@ -319,7 +319,7 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.ChallengeAcceptance1Y"
+                  "AdditionalData": "Hail.ChallengeAcceptance1Y"
                 }
               ]
             },
@@ -329,7 +329,7 @@
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Enter.ChallengeAcceptance1N"
+                  "AdditionalData": "Hail.ChallengeAcceptance1N"
                 }
               ]
             }
