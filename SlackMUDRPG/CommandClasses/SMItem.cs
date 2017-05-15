@@ -65,8 +65,8 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("RequiredSkills")]
 		public List<SMRequiredSkill> RequiredSkills { get; set; }
 
-        [JsonProperty("AdditionalData")]
-        public string AdditionalData { get; set; }
+		[JsonProperty("AdditionalData")]
+		public string AdditionalData { get; set; }
 
 		[JsonProperty("ObjectTrait")]
 		public string ObjectTrait { get; set; }
@@ -78,7 +78,7 @@ namespace SlackMUDRPG.CommandClasses
 		public List<string> CanHoldFamilies { get; set; }
 
 		[JsonProperty("Effects")]
-        public List<SMEffect> Effects { get; set; }
+		public List<SMEffect> Effects { get; set; }
 
 		/// <summary>
 		/// Determines if the item can hold other items.
@@ -94,7 +94,7 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="item">The item that is to be put in this item.</param>
 		/// <returns>Bool indicating if the item can be put in this item.</returns>
-		public bool CanHoldItem(SMItem item)
+		public bool CanHoldItemByFamily(SMItem item)
 		{
 			if (!this.CanHoldOtherItems())
 			{
@@ -117,6 +117,25 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return true;
+		}
+
+		/// <summary>
+		/// Determines if the item can hold a given other item by checking the properties of both items and the available
+		/// capacity of this item.
+		/// </summary>
+		/// <param name="item">The item to be put inside this.</param>
+		/// <returns>Bool indicating if the item can be put inside this.</returns>
+		public bool CanHoldItem(SMItem item)
+		{
+			if (this.CanHoldOtherItems() && this.CanHoldItemByFamily(item))
+			{
+				if (SMItemHelper.GetItemAvailbleCapacity(this) >= item.ItemSize)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		/// <summary>
