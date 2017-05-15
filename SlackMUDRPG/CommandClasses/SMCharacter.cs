@@ -1753,7 +1753,7 @@ namespace SlackMUDRPG.CommandClasses
 				playerToGiveTo.SaveToApplication();
 
 				// Respond to the action
-				SMNPC smn = this.GetRoom().GetNPCs().FirstOrDefault(smc => smc.GetFullName().ToLower() == playerName.ToLower());
+				SMNPC smn = this.GetRoom().GetNPCs().FirstOrDefault(smc => smc.GetFullName().ToLower() == playerToGiveTo.GetFullName().ToLower());
 				if (smn != null)
 				{
 					NPCHelper.StartAnNPCReactionCheck(smn, "PlayerCharacter.GivesItemToThem", this, itemToGive);

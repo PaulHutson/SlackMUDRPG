@@ -113,7 +113,7 @@ namespace SlackMUDRPG.CommandClasses
             }
 
             // If there are some responses for this character for the actionType
-            if (listToChooseFrom != null)
+            if ((listToChooseFrom != null) && (listToChooseFrom.Count > 0))
             {
                 // If there is more than one of the item randomise the list
                 if (listToChooseFrom.Count > 1) {
@@ -149,6 +149,14 @@ namespace SlackMUDRPG.CommandClasses
 							responseSelected = true;
                         }
                     }
+                }
+            }
+            else
+            {
+                if (itemIn != null)
+                {
+                    this.GetRoom().AddItem(itemIn);
+                    this.GetRoom().Announce("[i]" + this.GetFullName() + " drops " + itemIn.SingularPronoun + " " + itemIn.ItemName + "[/i]");
                 }
             }
         }
