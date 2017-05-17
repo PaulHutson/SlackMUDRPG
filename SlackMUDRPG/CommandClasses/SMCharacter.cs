@@ -1325,7 +1325,7 @@ namespace SlackMUDRPG.CommandClasses
 
 				this.sendMessageToPlayer(this.Formatter.Italic($"You picked up {itemToPickup.SingularPronoun} {itemToPickup.ItemName}."));
 
-				this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} picked up {itemToPickup.SingularPronoun} {itemToPickup.ItemName}."));
+				this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} picked up {itemToPickup.SingularPronoun} {itemToPickup.ItemName}."), this, true);
 
 				return;
 			}
@@ -1362,7 +1362,7 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					this.sendMessageToPlayer(this.Formatter.Italic($"You received {item.SingularPronoun} {item.ItemName}."));
 
-					this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} received {item.SingularPronoun} {item.ItemName}."));
+					this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} received {item.SingularPronoun} {item.ItemName}."), this, true);
 				}
 
 				return;
