@@ -143,25 +143,52 @@
       {
         "ItemNumber": 6,
         "Item": {
-					"ItemID": "Chisel1",
-					"ItemName": "Shoddy Chisel",
-	        "SingularPronoun": "a",
-	        "PluralName": "Shoddy Chisels",
-	        "PluralPronoun": "some",
+          "ItemID": "Chisel1",
+          "ItemName": "Shoddy Chisel",
+          "SingularPronoun": "a",
+          "PluralName": "Shoddy Chisels",
+          "PluralPronoun": "some",
           "ItemType": "tools",
           "ItemFamily": "Chisel",
-	        "ItemDescription": "This shoddy chisel is used for things like Carpentry.",
-	        "ItemWeight": 1,
+          "ItemDescription": "This shoddy chisel is used for things like Carpentry.",
+          "ItemWeight": 1,
           "ItemSize": 1,
           "HitPoints": 50,
           "MaxHitPoints": 50,
           "BaseDamage": 1,
           "Toughness": 3,
-	        "CanHoldOtherItems": false
-				},
+          "CanHoldOtherItems": false
+        },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
         "Cost": 40
+      },
+      {
+        "ItemNumber": 7,
+        "Item": {
+	        "ItemName": "Shoddy Axe",
+	        "SingularPronoun": "a",
+	        "PluralName": "Shoddy Axes",
+	        "PluralPronoun": "some",
+	        "ItemType": "Weapon",
+	        "ItemFamily": "Axe",
+	        "ItemDescription": "A shoddy axe",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 50,
+	        "MaxHitPoints": 50,
+	        "BaseDamage": 2,
+	        "Toughness": 3,
+	        "RequiredSkills": [
+		        {
+			        "SkillName": "Axe Use",
+			        "SkillLevel":  "1"
+		        }
+	        ]
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 45
       }
 	  ]
   }
