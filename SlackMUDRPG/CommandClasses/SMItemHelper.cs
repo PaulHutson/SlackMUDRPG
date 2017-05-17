@@ -269,6 +269,36 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Searches a specified container recursively to find a container matching a given identifier.
+		/// Will return the specified container itself if the identifier matches.
+		/// </summary>
+		/// <param name="identifier">The identifier for the container to search for.</param>
+		/// <param name="container">The container to search in.</param>
+		/// <returns>An SMItem object representing the container matching the idetifier.</returns>
+		public static SMItem FindContainerInContainerRecursive(string identifier, SMItem container)
+		{
+			SMItem foundContainer = ItemMatches(container, identifier) ? container : null;
+
+			if (foundContainer == null)
+			{
+				foreach (SMItem innerItem in container.HeldItems)
+				{
+					if (innerItem.CanHoldOtherItems())
+					{
+						if (ItemMatches(innerItem, identifier))
+						{
+							return innerItem;
+						}
+
+						return FindContainerInContainerRecursive(identifier, innerItem);
+					}
+				}
+			}
+
+			return foundContainer;
+		}
+
+		/// <summary>
 		/// Finds an item in a list recursivly looking through containers within containers.
 		/// </summary>
 		/// <returns>The item from the list.</returns>
