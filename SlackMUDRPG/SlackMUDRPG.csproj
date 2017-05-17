@@ -252,7 +252,7 @@
     <Content Include="JSON\Locations\LocLockedPlace1.json" />
     <Content Include="JSON\Locations\LocHospital.json" />
     <Content Include="JSON\Objects\Building.Hut.json" />
-    <Content Include="JSON\Objects\Weapon.ShoddyPickAxe.json" />
+    <Content Include="JSON\Objects\Weapon.PickAxe.json" />
     <Content Include="JSON\Skills\Skill.Mine.json" />
     <Content Include="JSON\Objects\Environment.GoldVein.json" />
     <Content Include="JSON\Objects\Resource.GoldNugget.json" />
@@ -397,6 +397,8 @@
     <Content Include="JSON\NPCs\Cassius Anor.json" />
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.Merchants Arms Rooms.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Docklands Way North.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Industrial Quarter.Foresters Outpost.json" />
+    <Content Include="JSON\NPCs\Pat Gumptkin.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
     <Content Include="JSON\NPCs\Rat.json" />
