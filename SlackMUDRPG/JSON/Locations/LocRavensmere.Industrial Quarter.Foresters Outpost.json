@@ -1,0 +1,168 @@
+{
+	"RoomID": "Ravensmere.Industrial Quarter.Foresters Outpost",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": true,
+	"RoomDescription": "A modestly sized shop selling wares for those pursuing activities outside of the city walls including rudimentary weapons and survival equipment.",
+	"RoomExits": [
+    {
+      "Shortcut": "RS",
+      "Description": "Ravens South (road)",
+      "RoomID": "Ravensmere.Industrial Quarter.Ravens South"
+    }
+	],
+	"RoomItems": null,
+	"NPCSpawns": null,
+  "NPCShopItems": {
+    "ShopInventory": [
+      {
+        "ItemNumber": 1,
+        "Item": {
+	        "SingularPronoun": "a",
+	        "ItemName": "Shoddy Pick Axe",
+	        "PluralPronoun": "some",
+	        "PluralName": "Shoddy Pick Axes",
+	        "ItemType": "Weapon",
+	        "ItemFamily": "PickAxe",
+	        "ItemDescription": "A pick axe",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 50,
+	        "MaxHitPoints": 50,
+	        "BaseDamage": 3,
+	        "Toughness": 3
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 45
+      },
+      {
+        "ItemNumber": 2,
+        "Item": {
+	        "ItemName": "Shoddy Skinning Knife",
+	        "SingularPronoun": "a",
+	        "PluralName": "Shoddy Skinning Knives",
+	        "PluralPronoun": "some",
+	        "ItemType": "Weapon",
+	        "ItemFamily": "Knife",
+	        "ItemDescription": "A knife (of shoddy quality) primarily used for skinning animals",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 50,
+	        "MaxHitPoints": 50,
+	        "BaseDamage": 1,
+	        "Toughness": 3,
+	        "RequiredSkills": [
+		        {
+			        "SkillName": "Knife Use",
+			        "SkillLevel":  "1"
+		        }
+	        ]
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 30
+      },
+      {
+        "ItemNumber": 3,
+        "Item": {
+	        "SingularPronoun": "a",
+	        "ItemName": "Shoddy Sword",
+	        "PluralPronoun": "some",
+	        "PluralName": "Shoddy Swords",
+	        "ItemType": "Weapon",
+	        "ItemFamily": "Sword",
+	        "ItemDescription": "A sword",
+	        "ItemWeight": 4,
+	        "ItemSize": 2,
+	        "HitPoints": 100,
+	        "MaxHitPoints": 100,
+	        "BaseDamage": 3.5,
+	        "Toughness": 3,
+	        "RequiredSkills": [
+		        {
+			        "SkillName": "Sword Use",
+			        "SkillLevel":  "1"
+		        }
+	        ]
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 85
+      },
+      {
+        "ItemNumber": 4,
+        "Item": {
+	        "SingularPronoun": "a",
+	        "ItemName": "Simple Arrow",
+	        "PluralPronoun": "some",
+	        "PluralName": "Simple Arrows",
+	        "ItemType": "Consumable",
+	        "ItemFamily": "Arrow",
+	        "ItemDescription": "This simple arrow will fly straight, but won't necessarily cause much damage",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 1,
+	        "MaxHitPoints": 1,
+	        "BaseDamage": 3,
+	        "Toughness": 1,
+	        "DestroyedOutput": null
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 5
+      },
+      {
+        "ItemNumber": 5,
+        "Item": {
+	        "ItemName": "Simple Bow",
+	        "SingularPronoun": "a",
+	        "PluralName": "Simple Bows",
+	        "PluralPronoun": "some",
+	        "ItemType": "RangedWeapon",
+	        "ItemFamily": "Bow",
+	        "ItemDescription": "This is a simple bow like that which someone would use to catch simple fare.",
+	        "ItemWeight": 2,
+	        "ItemSize": 2,
+	        "HitPoints": 50,
+	        "MaxHitPoints": 50,
+	        "BaseDamage": 5,
+	        "Toughness": 3,
+	        "RequiredSkills": [
+		        {
+			        "SkillName": "Bow Use",
+			        "SkillLevel":  "1"
+		        }
+	        ]
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 45
+      },
+      {
+        "ItemNumber": 6,
+        "Item": {
+					"ItemID": "Chisel1",
+					"ItemName": "Shoddy Chisel",
+	        "SingularPronoun": "a",
+	        "PluralName": "Shoddy Chisels",
+	        "PluralPronoun": "some",
+          "ItemType": "tools",
+          "ItemFamily": "Chisel",
+	        "ItemDescription": "This shoddy chisel is used for things like Carpentry.",
+	        "ItemWeight": 1,
+          "ItemSize": 1,
+          "HitPoints": 50,
+          "MaxHitPoints": 50,
+          "BaseDamage": 1,
+          "Toughness": 3,
+	        "CanHoldOtherItems": false
+				},
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 40
+      }
+	  ]
+  }
+}
