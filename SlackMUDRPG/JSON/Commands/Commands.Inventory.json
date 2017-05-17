@@ -89,5 +89,18 @@
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "destroy quiver",
 		"RequiredSkill": null
+	},
+		{
+		"CommandFamily": "Inventory",
+		"CommandName": "empty",
+		"CommandDescription": "Empty all items from an equipped container in to the current location.",
+		"CommandSyntax": "empty [contaier identifier]",
+		"ParamsExpression": "{.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "EmptyContainer",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "destroy backpack",
+		"RequiredSkill": null
 	}
 ]
