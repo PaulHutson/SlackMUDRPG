@@ -3,6 +3,7 @@ using SlackMUDRPG.Utility;
 using SlackMUDRPG.Utility.Formatters;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -45,11 +46,11 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("NPCMovementTarget")]
         public NPCMovementTarget NPCMovementTarget { get; set; }
 
-        [JsonProperty("Race")]
+        [JsonProperty("race")]
         public string Race { get; set; }
 
         [JsonProperty("IgnoreActions")]
-        public List<string> IgnoreActions { get; set; }
+        public List<string> IgnoreActions { get; set; } = new List<string>();
 
         private NPCRace _npcRace;
         public NPCRace NPCRace
@@ -86,7 +87,7 @@ namespace SlackMUDRPG.CommandClasses
             // Get a list of characters that respond to this action type in the room
             List<NPCResponses> listToChooseFrom = NPCResponses.FindAll(npcr => npcr.ResponseType.ToLower() == actionType.ToLower());
             // if the NPC doesn't define responds to the event we'll look for defaults on the race.
-            if (listToChooseFrom.Count == 0)
+            if (listToChooseFrom.Count == 0 && NPCRace != null)
             {
                 listToChooseFrom = NPCRace.NPCResponses.FindAll(npcr => npcr.ResponseType.ToLower() == actionType.ToLower());
             }
@@ -295,6 +296,11 @@ namespace SlackMUDRPG.CommandClasses
 
             // Get the conversation
             NPCConversations npcc = this.NPCConversationStructures.FirstOrDefault(constructure => constructure.ConversationID == rsd[0]);
+            if (npcc == null && NPCRace != null)
+            {
+                // check race for conversation
+                npcc = this.NPCRace.NPCConversationStructures.FirstOrDefault(cs => cs.ConversationID == rsd[0]);
+            }
 
             // Check we definitely found a structure to use
             if (npcc != null)
@@ -955,6 +961,7 @@ namespace SlackMUDRPG.CommandClasses
             string responseString = responseStringToProcess;
             responseString = responseString.Replace("{playercharacter}", invokingCharacter.GetFullName());
 			responseString = responseString.Replace("{response}", invokingCharacter.VariableResponse);
+            responseString = responseString.Replace("{hisher}", GetHisHerPronoun());
 
 			return responseString;
 		}
@@ -1260,6 +1267,9 @@ namespace SlackMUDRPG.CommandClasses
 
         [JsonProperty("NPCResponses")]
         public List<NPCResponses> NPCResponses { get; set; }
+
+        [JsonProperty("NPCConversationStructures")]
+        public List<NPCConversations> NPCConversationStructures { get; set; }
     }
 
     public static class NPCHelper

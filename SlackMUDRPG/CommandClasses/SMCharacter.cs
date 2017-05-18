@@ -2740,12 +2740,9 @@ namespace SlackMUDRPG.CommandClasses
             {
                 // NOTE: Potentially extract into a global strings JSON
                 this.sendMessageToPlayer("[i]" + this.GetFullName() + " says:[/i] \"Hail " + npc.GetFullName() + "\"");
-                bool responded = npc.RespondToAction("PlayerCharacter.Hail", this);
-                if (responded)
-                {
-                    spokenToSomeone = true;
-                }
-                else
+                bool responded = npc.RespondToAction("PlayerCharacter.Hail", this);    
+                spokenToSomeone = true;
+                if (!responded)
                 {
                     // NOTE: Potentially extract into a global strings JSON
                     this.sendMessageToPlayer(string.Format("[i]{0} doesn't seem to respond to your hail.[/i]", npc.GetFullName()));
@@ -2983,6 +2980,25 @@ namespace SlackMUDRPG.CommandClasses
         }
 
         #endregion
+
+        #region "Text Helper Functions"
+
+        public string GetHisHerPronoun()
+        {
+            switch (Sex)
+            {
+                case 'M':
+                case 'm':
+                    return "his";
+                case 'F':
+                case 'f':
+                    return "her";
+                default:
+                    return "their";
+            }
+        }
+
+        #endregion "Text Helper Functions"
     }
 
     #region "Other Class Structures"

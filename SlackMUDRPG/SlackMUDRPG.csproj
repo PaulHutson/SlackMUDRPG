@@ -399,6 +399,7 @@
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Docklands Way North.json" />
     <Content Include="JSON\Locations\LocRavensmere.Industrial Quarter.Foresters Outpost.json" />
     <Content Include="JSON\NPCs\Pat Gumptkin.json" />
+    <Content Include="JSON\NPCRaces\Human.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
     <Content Include="JSON\NPCs\Rat.json" />
