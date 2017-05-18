@@ -1,0 +1,108 @@
+{
+  "firstname": "New",
+  "lastname": "Arrival",
+  "lastinteractiondate": "2017-05-14T12:33:44.5915984-05:00",
+  "lastlogindate": "2017-05-14T12:40:37.8760823-05:00",
+  "age": 18,
+  "sex": "m",
+  "pkFlag": false,
+  "userID": "255c00f7-a16e-4ce3-8ec8-4bdcd2a015e3",
+  "username": "Kazamyr",
+  "password": "EAAAAMcJv8661RWbHi8Tokxb8oHSeroxasU6TYUxeq/kH52q",
+  "roomID": "Ravensmere.Harbour South.Landing Area",
+  "newbieTipsDisabled": false,
+  "questLog": [
+    {
+      "questName": "Welcome to Ravensmere",
+      "questStep": "Visit the Clerk in the arrivals hall",
+      "questStepInstructions": "Go and speak to the Podgy Clerk in the arrivals area",
+      "lastDateUpdated": 1494783226,
+      "expires": 0,
+      "daily": false,
+      "completed": false
+    }
+  ],
+  "attributes": {
+    "str": 10,
+    "int": 10,
+    "chr": 10,
+    "dex": 10,
+    "wp": 10,
+    "ft": 0,
+    "hp": 10,
+    "maxhp": 10,
+    "socialStanding": 8
+  },
+  "slots": [
+    {
+      "name": "RightHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "allowedTypes": [
+        "any"
+      ]
+    },
+    {
+      "name": "Back",
+      "allowedTypes": [
+        "Container"
+      ],
+      "equippedItem": {
+        "itemID": "51b7b3c2-acab-4c0e-ab0f-cbab43d522dc",
+        "singularPronoun": "a",
+        "itemName": "Small Backpack",
+        "pluralName": "Small Backpacks",
+        "pluralPronoun": "some",
+        "itemType": "Container",
+        "itemFamily": "Backpack",
+        "itemDescription": "Basic small backpack that all players start with.",
+        "itemWeight": 0,
+        "itemCapacity": 25,
+        "itemSize": 25,
+        "hitPoints": 5,
+        "maxHitPoints": 5,
+        "baseDamage": 1E-10,
+        "toughness": 1
+      }
+    }
+  ],
+  "bodyParts": [
+    {
+      "name": "Head"
+    },
+    {
+      "name": "Neck"
+    },
+    {
+      "name": "Torso"
+    },
+    {
+      "name": "Arms"
+    },
+    {
+      "name": "RightHand"
+    },
+    {
+      "name": "LeftHand"
+    },
+    {
+      "name": "Legs"
+    },
+    {
+      "name": "RightFoot"
+    },
+    {
+      "name": "LeftFoot"
+    }
+  ],
+  "currency": {
+    "amountOfCurrency": 5
+  },
+  "characterWeight": 50,
+  "characterSize": 160,
+  "connectionService": "WS"
+}

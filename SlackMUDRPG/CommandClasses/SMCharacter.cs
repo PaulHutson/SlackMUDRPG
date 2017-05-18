@@ -2694,9 +2694,18 @@ namespace SlackMUDRPG.CommandClasses
             // If there is someone in the list
             if (npc != null)
             {
+                // NOTE: Potentially extract into a global strings JSON
                 this.sendMessageToPlayer("[i]" + this.GetFullName() + " says:[/i] \"Hail " + npc.GetFullName() + "\"");
-                npc.RespondToAction("PlayerCharacter.Hail", this);
-                spokenToSomeone = true;
+                bool responded = npc.RespondToAction("PlayerCharacter.Hail", this);
+                if (responded)
+                {
+                    spokenToSomeone = true;
+                }
+                else
+                {
+                    // NOTE: Potentially extract into a global strings JSON
+                    this.sendMessageToPlayer(string.Format("[i]{0} doesn't seem to respond to your hail.[/i]", npc.GetFullName()));
+                }
             }
             else // Check if there is a player of the name in the room.
             {
