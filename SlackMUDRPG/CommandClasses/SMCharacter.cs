@@ -1325,7 +1325,7 @@ namespace SlackMUDRPG.CommandClasses
 
 				this.sendMessageToPlayer(this.Formatter.Italic($"You picked up {itemToPickup.SingularPronoun} {itemToPickup.ItemName}."));
 
-				this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} picked up {itemToPickup.SingularPronoun} {itemToPickup.ItemName}."));
+				this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} picked up {itemToPickup.SingularPronoun} {itemToPickup.ItemName}."), this, true);
 
 				return;
 			}
@@ -1362,7 +1362,7 @@ namespace SlackMUDRPG.CommandClasses
 				{
 					this.sendMessageToPlayer(this.Formatter.Italic($"You received {item.SingularPronoun} {item.ItemName}."));
 
-					this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} received {item.SingularPronoun} {item.ItemName}."));
+					this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} received {item.SingularPronoun} {item.ItemName}."), this, true);
 				}
 
 				return;
@@ -1373,6 +1373,49 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to receive {item.ItemName}({item.ItemWeight}), you don't have space for it."));
 			}
+		}
+
+		/// <summary>
+		/// Empties all items from an equipped container identified by a given string. Items are places in the characters current location.
+		/// </summary>
+		/// <param name="containerIdentifier">String identifying the equipped container to empty.</param>
+		public void EmptyContainer(string containerIdentifier)
+		{
+			// Find the equipped container to empty
+			SMItem container = this.GetEquippedContainer(containerIdentifier);
+
+			if (containerIdentifier != null)
+			{
+				if (container.HeldItems != null && container.HeldItems.Any())
+				{
+					List<SMItem> toRemove = new List<SMItem>();
+
+					// Look through all items in the container adding them to the room
+					foreach (SMItem item in container.HeldItems.ToList())
+					{
+						// Add item to the room
+						this.GetRoom().AddItem(item);
+
+						// Remove item from the container
+						container.HeldItems.Remove(item);
+
+						// Report to player
+						this.sendMessageToPlayer(this.Formatter.Italic($"You dropped {item.SingularPronoun} {item.ItemName}."));
+
+						// Announce to room
+						this.GetRoom().Announce(this.Formatter.Italic($"\"{this.GetFullName()}\" dropped {item.SingularPronoun} {item.ItemName}."), this, true);
+					}
+
+					this.SaveToApplication();
+					return;
+				}
+
+				this.sendMessageToPlayer(this.Formatter.Italic($"\"{container.ItemName}\" is already empty!"));
+				return;
+			}
+
+			this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(containerIdentifier)}\"!"));
+			return;
 		}
 
 		/// <summary>
@@ -1456,6 +1499,31 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return rightHand.isEmpty() ? rightHand : null;
+		}
+
+		/// <summary>
+		/// Gets an equipped container by searching all slots for a container matching given identifier.
+		/// </summary>
+		/// <param name="itemIdentifier"></param>
+		/// <returns>The equipped container or null.</returns>
+		private SMItem GetEquippedContainer(string identifier)
+		{
+			SMItem container = null;
+
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems())
+				{
+					container = SMItemHelper.FindContainerInContainerRecursive(identifier, slot.EquippedItem);
+
+					if (container != null)
+					{
+						break;
+					}
+				}
+			}
+
+			return container;
 		}
 
 		/// <summary>
@@ -2042,30 +2110,6 @@ namespace SlackMUDRPG.CommandClasses
 
 			slotContainingItem = null;
 			return null;
-		}
-
-		/// <summary>
-		/// Gets an equipped container by searching all slots for a given identifier.
-		/// </summary>
-		/// <param name="itemIdentifier"></param>
-		/// <returns>The equipped container or null.</returns>
-		private SMItem GetEquippedContainer(string itemIdentifier)
-		{
-			SMItem item = null;
-
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier) && slot.EquippedItem.CanHoldOtherItems())
-					{
-						item = slot.EquippedItem;
-						break;
-					}
-				}
-			}
-
-			return item;
 		}
 
 		/// <summary>

@@ -15,6 +15,11 @@
 			"Shortcut": "RGS",
 			"Description": "Ravensgate South",
 			"RoomID": "Ravensmere.Industrial Quarter.Ravensgate South"
+		},
+    {
+			"Shortcut": "FO",
+			"Description": "Foresters Outpost [i](Shop)[/i]",
+			"RoomID": "Ravensmere.Industrial Quarter.Foresters Outpost"
 		}
 	],
 	"RoomItems": null,
