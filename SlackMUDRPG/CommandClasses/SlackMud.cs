@@ -228,7 +228,16 @@ namespace SlackMUDRPG.CommandClasses
         /// <returns>The NPCRace value matching the provided name.</returns>
         public NPCRace GetNPCRace(string name)
         {
-            return ((List<NPCRace>)HttpContext.Current.Application["NPCRaces"]).FirstOrDefault(r => r.Name == name);
+            Dictionary<string, NPCRace> races = (Dictionary<string, NPCRace>)HttpContext.Current.Application["NPCRaces"];
+            if (races.ContainsKey(name.ToLower()))
+            {
+                return races[name.ToLower()];
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         /// <summary>

@@ -3,7 +3,6 @@ using SlackMUDRPG.Utility;
 using SlackMUDRPG.Utility.Formatters;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -46,23 +45,23 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("NPCMovementTarget")]
         public NPCMovementTarget NPCMovementTarget { get; set; }
 
-        [JsonProperty("race")]
-        public string Race { get; set; }
+        [JsonProperty("RaceID")]
+        public string RaceID { get; set; }
 
         [JsonProperty("IgnoreActions")]
         public List<string> IgnoreActions { get; set; } = new List<string>();
 
-        private NPCRace _npcRace;
+        // Not a property from JSON, but is returns a value based on RaceID
         public NPCRace NPCRace
         {
             get
             {
-                if (_npcRace == null)
-                {
-                    _npcRace = new SlackMud().GetNPCRace(Race);
-                }
+				if (this.RaceID != null)
+				{
+					return new SlackMud().GetNPCRace(this.RaceID);
+				}
 
-                return _npcRace;
+				return null;
             }
         }
 
@@ -78,18 +77,18 @@ namespace SlackMUDRPG.CommandClasses
         /// <returns>Returns a boolean value representing whether or not the NPC handled the action or not.</returns>
         public bool RespondToAction(string actionType, SMCharacter invokingCharacter, SMItem itemIn = null)
         {
-            // check to see if this action is ignored
-            if (IgnoreActions.Count(a => a.ToLower() == actionType.ToLower()) > 0)
-            {
-                return false;
-            }
+			// check to see if this action is ignored
+			if (this.IgnoreActions.Count(a => a.ToLower() == actionType.ToLower()) > 0)
+			{
+				return false;
+			}
 
             // Get a list of characters that respond to this action type in the room
             List<NPCResponses> listToChooseFrom = NPCResponses.FindAll(npcr => npcr.ResponseType.ToLower() == actionType.ToLower());
             // if the NPC doesn't define responds to the event we'll look for defaults on the race.
-            if (listToChooseFrom.Count == 0 && NPCRace != null)
+            if (listToChooseFrom.Count == 0)
             {
-                listToChooseFrom = NPCRace.NPCResponses.FindAll(npcr => npcr.ResponseType.ToLower() == actionType.ToLower());
+                listToChooseFrom = this.NPCRace?.NPCResponses.FindAll(npcr => npcr.ResponseType.ToLower() == actionType.ToLower()) ?? listToChooseFrom;
             }
 
             // Cull any prerequisites.
@@ -151,21 +150,21 @@ namespace SlackMUDRPG.CommandClasses
                 listToChooseFrom.RemoveAll(resp => resp.RemoveItemFromResponses == true);
             }
 
-            // If there are some responses for this character for the actionType
-            if ((listToChooseFrom != null) && (listToChooseFrom.Count > 0))
-            {
-                // If there is more than one of the item randomise the list
-                if (listToChooseFrom.Count > 1) {
+			// If there are some responses for this character for the actionType
+			if ((listToChooseFrom != null) && (listToChooseFrom.Count > 0))
+			{
+				// If there is more than one of the item randomise the list
+				if (listToChooseFrom.Count > 1) {
 					listToChooseFrom = listToChooseFrom.OrderBy(item => new Random().Next()).ToList();
-                }
+				}
 
-                // Loop around until a response is selected
-                foreach (NPCResponses npr in listToChooseFrom)
-                {
-                    // randomly select whether this happens or not
-                    int rndChance = new Random().Next(1, 100);
-                    if (rndChance <= npr.Frequency)
-                    {
+				// Loop around until a response is selected
+				foreach (NPCResponses npr in listToChooseFrom)
+				{
+					// randomly select whether this happens or not
+					int rndChance = new Random().Next(1, 100);
+					if (rndChance <= npr.Frequency)
+					{
 						// If the invoking character is null
 						if ((invokingCharacter == null) && (this.RoomID != "IsSpawned"))
 						{
@@ -180,21 +179,21 @@ namespace SlackMUDRPG.CommandClasses
 							ProcessResponse(npr, invokingCharacter, itemIn);
 						}
 
-                        // Set that a response has been selected so we can drop out of the loop
-                        return true;
-                    }
-                }
-            }
-            else
-            {
-                if (itemIn != null)
-                {
-                    this.GetRoom().AddItem(itemIn);
-                    this.GetRoom().Announce("[i]" + this.GetFullName() + " drops " + itemIn.SingularPronoun + " " + itemIn.ItemName + "[/i]");
-                }
-            }
+						// Set that a response has been selected so we can drop out of the loop
+						return true;
+					}
+				}
+			}
+			else
+			{
+				if (itemIn != null)
+				{
+					this.GetRoom().AddItem(itemIn);
+					this.GetRoom().Announce("[i]" + this.GetFullName() + " drops " + itemIn.SingularPronoun + " " + itemIn.ItemName + "[/i]");
+				}
+			}
 
-            return false;
+			return false;
         }
 
         private void ProcessResponse(NPCResponses npr, SMCharacter invokingCharacter, SMItem itemIn)
@@ -296,10 +295,10 @@ namespace SlackMUDRPG.CommandClasses
 
             // Get the conversation
             NPCConversations npcc = this.NPCConversationStructures.FirstOrDefault(constructure => constructure.ConversationID == rsd[0]);
-            if (npcc == null && NPCRace != null)
+            if (npcc == null)
             {
                 // check race for conversation
-                npcc = this.NPCRace.NPCConversationStructures.FirstOrDefault(cs => cs.ConversationID == rsd[0]);
+                npcc = this.NPCRace?.NPCConversationStructures.FirstOrDefault(cs => cs.ConversationID == rsd[0]);
             }
 
             // Check we definitely found a structure to use
@@ -956,12 +955,14 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
-        private string ProcessResponseString(string responseStringToProcess, SMCharacter invokingCharacter)
-        {
-            string responseString = responseStringToProcess;
-            responseString = responseString.Replace("{playercharacter}", invokingCharacter.GetFullName());
+		private string ProcessResponseString(string responseStringToProcess, SMCharacter invokingCharacter)
+		{
+			// NOTE: Perhaps extract this into a text helper somewhere, or expand on it with Regex replacement
+			// from a map/data value or use a template engine like Mustache? -- bbuck
+			string responseString = responseStringToProcess;
+			responseString = responseString.Replace("{playercharacter}", invokingCharacter.GetFullName());
 			responseString = responseString.Replace("{response}", invokingCharacter.VariableResponse);
-            responseString = responseString.Replace("{hisher}", GetHisHerPronoun());
+			responseString = responseString.Replace("{hisher}", GetHisHerPronoun());
 
 			return responseString;
 		}
@@ -1259,17 +1260,17 @@ namespace SlackMUDRPG.CommandClasses
     /// or 'Animal' or 'Rat,' etc...
     /// </summary>
     public class NPCRace {
-        [JsonProperty("Name")]
-        public string Name { get; set; }
+		[JsonProperty("Name")]
+		public string Name { get; set; } = "Unnamed Race";
 
-        [JsonProperty("Description")]
-        public string Description { get; set; }
+		[JsonProperty("Description")]
+		public string Description { get; set; } = "No description provided.";
 
-        [JsonProperty("NPCResponses")]
-        public List<NPCResponses> NPCResponses { get; set; }
+		[JsonProperty("NPCResponses")]
+		public List<NPCResponses> NPCResponses { get; set; } = new List<NPCResponses>();
 
-        [JsonProperty("NPCConversationStructures")]
-        public List<NPCConversations> NPCConversationStructures { get; set; }
+		[JsonProperty("NPCConversationStructures")]
+		public List<NPCConversations> NPCConversationStructures { get; set; } = new List<NPCConversations>();
     }
 
     public static class NPCHelper
