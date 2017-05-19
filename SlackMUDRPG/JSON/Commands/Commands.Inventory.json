@@ -90,7 +90,7 @@
 		"ExampleUsage": "destroy quiver",
 		"RequiredSkill": null
 	},
-		{
+	{
 		"CommandFamily": "Inventory",
 		"CommandName": "empty",
 		"CommandDescription": "Empty all items from an equipped container in to the current location.",
@@ -101,6 +101,32 @@
 		"PassCommandAsFirstArg": false,
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "destroy backpack",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Inventory",
+		"CommandName": "stow",
+		"CommandDescription": "Moves a held item to an equipped container if a suitable space is available.",
+		"CommandSyntax": "stow [item identifier]",
+		"ParamsExpression": "{.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Stow",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "stow sword",
+		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Inventory",
+		"CommandName": "stowall",
+		"CommandDescription": "Moves the held items from both hands to an equipped container if a suitable space is available.",
+		"CommandSyntax": "stowall",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "StowAll",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "stowall",
 		"RequiredSkill": null
 	}
 ]

@@ -1419,10 +1419,74 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Stows a single item matching a given identifer that the character is holding, placing the item in an equipped container.
+		/// </summary>
+		/// <param name="itemIdentifier">Identifer of the item to stow.</param>
+		public void Stow(string itemIdentifier)
+		{
+			// Handle "stow all"
+			if (itemIdentifier.ToLower() == "all")
+			{
+				this.StowAll();
+				return;
+			}
+
+			SMSlot slot = null;
+
+			SMItem item = this.GetHeldItem(itemIdentifier, out slot);
+
+			// Unable to find item
+			if (item == null)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to stow, are you holding it?"));
+				return;
+			}
+
+			// Failed to put item in an equipped container
+			if (!this.PutItemInEquippedContainer(item))
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to stow \"{item.ItemName}\"!"));
+				return;
+			}
+
+			// Success
+			slot.EquippedItem = null;
+			this.sendMessageToPlayer(this.Formatter.Italic($"You to stowed \"{item.ItemName}\"."));
+			this.SaveToApplication();
+		}
+
+		/// <summary>
+		/// Stow all items the character is holding, please them in an equipped container.
+		/// </summary>
+		public void StowAll()
+		{
+			// Get a list of slots to stow equipped items for
+			List<SMSlot> hands = new List<SMSlot>();
+			hands.Add(this.GetSlotByName("RightHand"));
+			hands.Add(this.GetSlotByName("LeftHand"));
+
+			// Check if there are ay items to stow
+			if (hands.All(s => s.isEmpty()))
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Nothing to stow."));
+				return;
+			}
+
+			// Try and stow each item one by one
+			foreach (SMSlot hand in hands)
+			{
+				if (!hand.isEmpty())
+				{
+					this.Stow(hand.EquippedItem.ItemID);
+				}
+			}
+		}
+
+		/// <summary>
 		/// Attempts to put a give item in a container the character has equipped.
 		/// </summary>
 		/// <param name="item">The item to put in an equipped container.</param>
-		/// <returns>Bool indicating the suucess of the operation.</returns>
+		/// <returns>Bool indicating the success of the operation.</returns>
 		private bool PutItemInEquippedContainer(SMItem item)
 		{
 			SMItem container = this.GetEquippedContainerForItem(item);
@@ -1524,6 +1588,49 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return container;
+		}
+
+		/// <summary>
+		/// Gets an item, identified by a give string, that the character is holding.
+		/// </summary>
+		/// <param name="itemIdentifier">String identifying the item.</param>
+		/// <param name="slot">Variable to hold the slot the item is found it.</param>
+		/// <returns>The item if found otherwise null.</returns>
+		private SMItem GetHeldItem(string itemIdentifier, out SMSlot slot)
+		{
+			slot = null;
+
+			// Get a list of slots to stow equipped items for
+			List<SMSlot> hands = new List<SMSlot>();
+			hands.Add(this.GetSlotByName("RightHand"));
+			hands.Add(this.GetSlotByName("LeftHand"));
+
+			foreach (SMSlot hand in hands)
+			{
+				if (this.SlotContainsItem(hand, itemIdentifier))
+				{
+					slot = hand;
+					return hand.EquippedItem;
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Checks in a give slot contains an item idetified by a given string.
+		/// </summary>
+		/// <param name="slot">The SMSlot object to check.</param>
+		/// <param name="itemIdentifier">String identifying the item.</param>
+		/// <returns>Bool idicating if there was a match.</returns>
+		private bool SlotContainsItem(SMSlot slot, string itemIdentifier)
+		{
+			if (!slot.isEmpty() && SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 		/// <summary>
