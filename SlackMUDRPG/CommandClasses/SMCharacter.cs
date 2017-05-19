@@ -2738,25 +2738,31 @@ namespace SlackMUDRPG.CommandClasses
             // If there is someone in the list
             if (npc != null)
             {
-                this.sendMessageToPlayer("[i]" + this.GetFullName() + " says:[/i] \"Hail " + npc.GetFullName() + "\"");
-                npc.RespondToAction("PlayerCharacter.Hail", this);
-                spokenToSomeone = true;
+				// NOTE: Potentially extract into a global strings JSON
+				this.sendMessageToPlayer("[i]" + this.GetFullName() + " says:[/i] \"Hail " + npc.GetFullName() + "\"");
+				bool responded = npc.RespondToAction("PlayerCharacter.Hail", this);
+				spokenToSomeone = true;
+				if (!responded)
+				{
+					// NOTE: Potentially extract into a global strings JSON
+					this.sendMessageToPlayer(string.Format("[i]{0} doesn't seem to respond to your hail.[/i]", npc.GetFullName()));
+				}
             }
             else // Check if there is a player of the name in the room.
             {
-                SMCharacter smc = this.GetRoom().GetPeople().FirstOrDefault(p => (p.FirstName.ToLower() == hailTarget.ToLower()) || (p.LastName.ToLower() == hailTarget.ToLower()) || (p.GetFullName().ToLower() == hailTarget.ToLower()));
+				SMCharacter smc = this.GetRoom().GetPeople().FirstOrDefault(p => (p.FirstName.ToLower() == hailTarget.ToLower()) || (p.LastName.ToLower() == hailTarget.ToLower()) || (p.GetFullName().ToLower() == hailTarget.ToLower()));
 
-                if (smc != null)
-                {
-                    this.Say("Hail " + smc.GetFullName());
-                    spokenToSomeone = true;
-                }
+				if (smc != null)
+				{
+					this.Say("Hail " + smc.GetFullName());
+					spokenToSomeone = true;
+				}
             }
 
-            if (!spokenToSomeone)
-            {
-                this.sendMessageToPlayer("[i]Can not hail \"" + hailTarget + "\"[/i]");
-            }
+			if (!spokenToSomeone)
+			{
+				this.sendMessageToPlayer("[i]Can not hail \"" + hailTarget + "\"[/i]");
+			}
         }
 
 		#endregion
@@ -2974,6 +2980,23 @@ namespace SlackMUDRPG.CommandClasses
         }
 
         #endregion
+
+        #region "Text Helper Functions"
+
+        public string GetHisHerPronoun()
+        {
+            switch (Char.ToLower(Sex))
+            {
+                case 'm':
+                    return "his";
+                case 'f':
+                    return "her";
+                default:
+                    return "their";
+            }
+        }
+
+        #endregion "Text Helper Functions"
     }
 
     #region "Other Class Structures"

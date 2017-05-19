@@ -222,6 +222,25 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
         /// <summary>
+        /// Gets an NPC race by name from the preloaded list of names.
+        /// </summary>
+        /// <param name="name">The name (identifier) of the NPC race.</param>
+        /// <returns>The NPCRace value matching the provided name.</returns>
+        public NPCRace GetNPCRace(string name)
+        {
+            Dictionary<string, NPCRace> races = (Dictionary<string, NPCRace>)HttpContext.Current.Application["NPCRaces"];
+            if (races.ContainsKey(name.ToLower()))
+            {
+                return races[name.ToLower()];
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
+
+        /// <summary>
         /// Gets any type of character and also loads the character to memory if it isn't already there.
         /// Note: This returns NPCs as well as Player Characters
         /// </summary>

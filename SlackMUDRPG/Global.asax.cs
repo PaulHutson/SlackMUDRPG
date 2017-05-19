@@ -153,6 +153,25 @@ namespace SlackMUDRPG
 
 			Application["SMNPCs"] = lnpcs;
 
+            // load and fetch NPCRaces, using a dictionary for speedy lookups later.
+            Dictionary<string, NPCRace> dnpcRaces = new Dictionary<string, NPCRace>();
+
+            string NPCRacesFolderFilePath = FilePathSystem.GetFilePathFromFolder("NPCRaces");
+            d = new DirectoryInfo(NPCRacesFolderFilePath);
+            Files = d.GetFiles();
+            foreach (FileInfo file in Files)
+            {
+                string RaceFilePath = FilePathSystem.GetFilePath("NPCRaces", file.Name, "");
+                using (StreamReader r = new StreamReader(RaceFilePath))
+                {
+                    string json = r.ReadToEnd();
+                    NPCRace raceFromJSON = JsonConvert.DeserializeObject<NPCRace>(json);
+                    dnpcRaces[raceFromJSON.Name.ToLower()] = raceFromJSON;
+                }
+            }
+
+            Application["NPCRaces"] = dnpcRaces;
+
             Application["Parties"] = new List<SMParty>();
 
             #region "The Pulse"

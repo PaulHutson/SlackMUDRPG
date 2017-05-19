@@ -1,0 +1,40 @@
+﻿{
+  "Name": "Human",
+  "Description": "The most common race you can find in Ravensmere",
+  "NPCResponses": [
+    {
+      "ResponseType": "PlayerCharacter.Hail",
+      "ResponseTimeOfDay": "all",
+      "AdditionalData": null,
+      "Faction": null,
+      "Frequency": 100,
+      "ResponseSteps": [
+        {
+          "ResponseStepType": "Conversation",
+          "ResponseStepData": "ReturnHail.1"
+        }
+      ]
+    }
+  ],
+  "NPCConversationStructures": [
+    {
+      "ConversationID": "ReturnHail",
+      "ConversationStep": [
+        {
+          "StepID": "1",
+          "Scope": "say",
+          "AdditionalData": "Hail!",
+          "NextStep": "2.0",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "2",
+          "Scope": "emote",
+          "AdditionalData": "smiles and dips {hisher} head respectfully towards {playercharacter}.",
+          "NextStep": null,
+          "ResponseOptions": null
+        }
+      ]
+    }
+  ]
+}
