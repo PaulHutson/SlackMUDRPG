@@ -634,6 +634,33 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Gets an item from the room matching a given identifier.
+		/// </summary>
+		/// <param name="identifier">The item identifier</param>
+		/// <returns>The item if found otherwise null.</returns>
+		public SMItem GetRoomItem(string identifier)
+		{
+			return SMItemHelper.GetItemFromList(this.RoomItems, identifier);
+		}
+
+		/// <summary>
+		/// Gets a container item from the room matching a given identifier.
+		/// </summary>
+		/// <param name="identifier">The container identifier.</param>
+		/// <returns>The container if found otherwise null.</returns>
+		public SMItem GetRoomContainer(string identifier)
+		{
+			SMItem item = SMItemHelper.GetItemFromList(this.RoomItems, identifier);
+
+			if (item == null || !item.CanHoldOtherItems())
+			{
+				return null;
+			}
+
+			return item;
+		}
+
+		/// <summary>
 		/// Gets the id of an item in the room by its name
 		/// </summary>
 		/// <param name="itemName"></param>
