@@ -46,13 +46,6 @@
       "FailureOutput": "You must target something",
       "SuccessOutput": null
     },
-    {
-      "StepType": "Hit",
-      "StepRequiredObject": "Family.Bow",
-      "RequiredObjectAmount": 1,
-      "FailureOutput": "Failed to hit {TARGETNAME}",
-      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
-    },
 		{
       "StepType": "ConsumeObject",
       "StepRequiredObject": "Family.Arrow",
@@ -65,7 +58,17 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} hits {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} shoots an arrow at {TARGETNAME}",
+      "SuppressPlayerMessage": true
+    },
+    {
+      "StepType": "Hit",
+      "StepRequiredObject": "Family.Bow",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "You shoot an arrow but it misses {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} with an arrow to produce {Object.DestroyedOutput}",
+      "ExtraData": "You shoot an arrow at {TARGETNAME} ({OUTPUTINFORMATION})",
+      "SuppressPlayerMessage": true
     },
     {
       "StepType": "Pause",

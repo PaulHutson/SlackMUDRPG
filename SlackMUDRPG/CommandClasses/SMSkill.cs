@@ -241,7 +241,7 @@ namespace SlackMUDRPG.CommandClasses
                                                     }
                                                 }
 
-                                                smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetNameInformation, "")));
+                                                smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(smss.SuccessOutput, smc, targetNameInformation, "")), smc, smss.SuppressPlayerMessage);
                                                 break;
                                             case "OwnedObject":
                                                 if (!CheckHasItem(smss, smc))
@@ -971,13 +971,13 @@ namespace SlackMUDRPG.CommandClasses
 							targetChar.Attributes.HitPoints = targetChar.Attributes.HitPoints - (int)actualDamageAmount;
 							if ((int)actualDamageAmount > 0)
 							{
-								smc.sendMessageToPlayer(this.Formatter.Italic($"Hit {targetChar.GetFullName()} for {(int)actualDamageAmount} damage"));
+								smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.ExtraData, smc, targetChar.GetFullName(), "", $"you hit {targetChar.GetFullName()} for {(int)actualDamageAmount} damage")));
 								targetChar.sendMessageToPlayer(this.Formatter.Italic($"You were hit by {smc.GetFullName()} for {(int)actualDamageAmount} damage (HP {targetChar.Attributes.HitPoints} / {targetChar.Attributes.MaxHitPoints} remaining)"));
 								targetChar.SaveToApplication();
 							}
 							else
 							{
-								smc.sendMessageToPlayer(this.Formatter.Italic($"You're unable to damage {targetChar.GetFullName()}"));
+								smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.ExtraData, smc, targetChar.GetFullName(), "", $"you hit but you were unable to injure them")));
 							}
 						}
 						else
@@ -996,11 +996,11 @@ namespace SlackMUDRPG.CommandClasses
 							smc.GetRoom().UpdateItem(targetItem.ItemID, "HP", newTargetHP);
 							if ((int)actualDamageAmount > 0)
 							{
-								smc.sendMessageToPlayer(this.Formatter.Italic($"Hit {targetItem.ItemName} for {(int)actualDamageAmount} damage"));
+								smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.ExtraData, smc, targetItem.GetSingularItemName().ToLower(), "", $"you hit {targetItem.GetSingularItemName()} for {(int)actualDamageAmount} damage")));
 							}
 							else
 							{
-								smc.sendMessageToPlayer(this.Formatter.Italic($"You're unable to damage {targetItem.ItemName}"));
+								smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(smss.ExtraData, smc, targetItem.GetSingularItemName().ToLower(), "", $"you hit but you were unable to damage it")));
 							}
 						}
 						else
@@ -1461,15 +1461,16 @@ namespace SlackMUDRPG.CommandClasses
             return true;
 		}
 
-		private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetName, string objectDestroyedName)
+		private string SuccessOutputParse(string successOutput, SMCharacter smc, string targetName, string objectDestroyedName, string outputInformation = "")
 		{
             // replace the elements as needed
             successOutput = successOutput.Replace("{TARGETNAME}", targetName);
             successOutput = successOutput.Replace("{ITEMNAME}", targetName);
             successOutput = successOutput.Replace("{CHARNAME}", smc.GetFullName());
-			successOutput = successOutput.Replace("{Object.DestroyedOutput}", objectDestroyedName);
+            successOutput = successOutput.Replace("{Object.DestroyedOutput}", objectDestroyedName);
+            successOutput = successOutput.Replace("{OUTPUTINFORMATION}", outputInformation);
 
-			return successOutput;
+            return successOutput;
 		}
 
 		public void SkillIncrease(SMCharacter smc, bool skillSuccess = true)
@@ -1636,7 +1637,11 @@ namespace SlackMUDRPG.CommandClasses
 		// Success output text
 		[JsonProperty("SuccessOutput")]
 		public string SuccessOutput { get; set; }
-	}
+
+        // Bool Suppress Player Message
+        [JsonProperty("SuppressPlayerMessage")]
+        public bool SuppressPlayerMessage { get; set; } = false;
+    }
 
 	#endregion
 

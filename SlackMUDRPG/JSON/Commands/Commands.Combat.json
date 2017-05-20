@@ -1,7 +1,7 @@
 [
 	{
 		"CommandFamily": "Combat",
-		"CommandName": "attack, hit",
+		"CommandName": "attack, hit, kill",
 		"CommandDescription": "{name|tilte}s a character, creature or object with whatever you're holding (or your bare hands).",
 		"CommandSyntax": "{name|lower} <thing>",
 		"ParamsExpression": "{.+}",

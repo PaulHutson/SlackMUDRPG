@@ -44,14 +44,17 @@
       "StepRequiredObject": "Family.Axe",
       "RequiredObjectAmount": 1,
       "FailureOutput": "Failed to hit {TARGETNAME}",
-      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} with their axe to produce {Object.DestroyedOutput}",
+      "ExtraData": "You attack {TARGETNAME} with your axe ({OUTPUTINFORMATION})",
+      "SuppressPlayerMessage": true
     },
     {
       "StepType": "Information",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} uses their axe to attack {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} uses their axe to attack {TARGETNAME}",
+      "SuppressPlayerMessage": true
     },
     {
       "StepType": "Pause",

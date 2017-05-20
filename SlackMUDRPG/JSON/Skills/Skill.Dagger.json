@@ -44,14 +44,17 @@
       "StepRequiredObject": "Family.Knife",
       "RequiredObjectAmount": 1,
       "FailureOutput": "Failed to hit {TARGETNAME}",
-      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}",
+      "ExtraData": "You user your dagger to attack {TARGETNAME} ({OUTPUTINFORMATION})",
+      "SuppressPlayerMessage": true
     },
     {
       "StepType": "Information",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} uses their Knife to attack {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} uses their Knife to attack {TARGETNAME}",
+      "SuppressPlayerMessage": true
     },
     {
       "StepType": "Pause",
