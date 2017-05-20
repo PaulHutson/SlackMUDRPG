@@ -40,18 +40,21 @@
       "SuccessOutput": null
     },
     {
-      "StepType": "Hit",
-      "StepRequiredObject": "Family.Sword",
-      "RequiredObjectAmount": 1,
-      "FailureOutput": "Failed to hit {TARGETNAME}",
-      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} to produce {Object.DestroyedOutput}"
-    },
-    {
       "StepType": "Information",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} uses their sword to attack {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} uses their sword to attack {TARGETNAME}",
+      "SuppressPlayerMessage": true
+    },
+    {
+      "StepType": "Hit",
+      "StepRequiredObject": "Family.Sword",
+      "RequiredObjectAmount": 1,
+      "FailureOutput": "Failed to hit {TARGETNAME}",
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME} with their sword producing {Object.DestroyedOutput}",
+      "ExtraData": "You swing your sword at {TARGETNAME} ({OUTPUTINFORMATION})",
+      "SuppressPlayerMessage": true
     },
     {
       "StepType": "Pause",

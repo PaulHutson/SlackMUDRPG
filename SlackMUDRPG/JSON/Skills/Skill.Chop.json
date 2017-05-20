@@ -50,14 +50,17 @@
       "StepRequiredObject": "Family.Axe",
       "RequiredObjectAmount": 1,
       "FailureOutput": "Failed to chop {TARGETNAME}",
-      "SuccessOutput": "{CHARNAME} chops {TARGETNAME} to produce {Object.DestroyedOutput}"
+      "SuccessOutput": "{CHARNAME} chops {TARGETNAME} to produce {Object.DestroyedOutput}",
+      "ExtraData": "You chop {TARGETNAME} with your axe ({OUTPUTINFORMATION})",
+      "SuppressPlayerMessage": true
     },
     {
       "StepType": "Information",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} chops {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} chops {TARGETNAME}",
+      "SuppressPlayerMessage": true
     },
     {
       "StepType": "Pause",

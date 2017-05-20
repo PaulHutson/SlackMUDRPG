@@ -33,14 +33,17 @@
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": "Failed to hit {TARGETNAME}",
-      "SuccessOutput": "{CHARNAME} kills {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} kills {TARGETNAME}",
+      "ExtraData": "You hit {TARGETNAME} ({OUTPUTINFORMATION})",
+      "SuppressPlayerMessage": true
     },
     {
       "StepType": "Information",
       "StepRequiredObject": null,
       "RequiredObjectAmount": 0,
       "FailureOutput": null,
-      "SuccessOutput": "{CHARNAME} hits {TARGETNAME}"
+      "SuccessOutput": "{CHARNAME} hits {TARGETNAME}",
+      "SuppressPlayerMessage": true
     },
     {
       "StepType": "Pause",

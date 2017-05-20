@@ -201,6 +201,10 @@ namespace SlackMUDRPG.CommandClasses
 			return smil;
 		}
 
+        /// <summary>
+        /// Initate an effect from an item.
+        /// </summary>
+        /// <param name="smc">The character the effect will take place on</param>
         public void InitiateEffects(SMCharacter smc)
         {
             if (this.Effects != null)
@@ -222,6 +226,11 @@ namespace SlackMUDRPG.CommandClasses
                     }
                 }
             }
+        }
+
+        public string GetSingularItemName()
+        {
+            return this.SingularPronoun + " " + this.ItemName;
         }
 	}
 }
