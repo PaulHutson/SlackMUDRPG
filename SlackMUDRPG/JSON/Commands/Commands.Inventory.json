@@ -128,5 +128,18 @@
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "stowall",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Inventory",
+		"CommandName": "fill",
+		"CommandDescription": "Fill a container with as many items as are available or the containet can hold.",
+		"CommandSyntax": "fill [contianer] with [item]",
+		"ParamsExpression": "fill {.+} with {.+}",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "FillContainer",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "fill quiver with hunting arrows",
+		"RequiredSkill": null
 	}
 ]
