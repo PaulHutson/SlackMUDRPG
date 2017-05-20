@@ -1298,7 +1298,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			// Weight Check
-			if (this.WeightLimit - this.GetCurrentWeight() < itemToPickup.ItemWeight)
+			if (!this.CheckWeightWithNewItem(itemToPickup))
 			{
 				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to pick up {itemToPickup.ItemName}({itemToPickup.ItemWeight}), this would exceed your weight limit of \"{this.WeightLimit}\"."));
 				return;
@@ -1491,6 +1491,192 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Fill a container with as many of an item as are available or can fit in the container.
+		/// </summary>
+		/// <param name="containerIdentifier">String identifying the container.</param>
+		/// <param name="itemIdentifier">String identifying the item.</param>
+		public void FillContainer(string containerIdentifier, string itemIdentifier)
+		{
+			// Find the target container, check equipped items then the room
+			SMItem container = this.GetEquippedContainer(containerIdentifier);
+			container = container == null ? this.GetRoom().GetRoomContainer(containerIdentifier) : container;
+
+			if (container == null)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find a container identified by \"{Utils.SanitiseString(containerIdentifier)}\""));
+				return;
+			}
+
+			// Setup counter for items successfully put in the container
+			int itemCount = 0;
+
+			// Store a copy of the item to use in the player responces
+			SMItem itemForResponcesDetails = null;
+
+			// Setup a variable to hold a reason for stopping the fill operation
+			string stopReason = String.Empty;
+
+			while (true)
+			{
+				// Get item to put in container
+				string itemLocation = String.Empty;
+
+				SMItem itemToFillWith = this.GetItemForFill(itemIdentifier, out itemLocation);
+
+				if (itemToFillWith == null)
+				{
+					stopReason = "no-item";
+					break;
+				}
+
+				itemForResponcesDetails = itemToFillWith;
+
+				// Check character weight limits
+				if (itemLocation == "room" && !this.CheckWeightWithNewItem(itemToFillWith))
+				{
+					stopReason = "weight-limit";
+					break;
+				}
+
+				// Check container can hold items of that type
+				if (!container.CanHoldItemByFamily(itemToFillWith))
+				{
+					stopReason = "item-family-restriction";
+					break;
+				}
+
+				// Check container has capacity for the item
+				if (SMItemHelper.GetItemAvailbleCapacity(container) < itemToFillWith.ItemSize)
+				{
+					stopReason = "capacity-limit";
+					break;
+				}
+
+				// Move item to container
+				if (itemLocation == "room")
+				{
+					this.GetRoom().RemoveItem(itemToFillWith);
+				}
+				else
+				{
+					this.RemoveEquippedItem(itemToFillWith.ItemID);
+				}
+
+				SMItemHelper.PutItemInContainer(itemToFillWith, container);
+
+				// incrament count
+				itemCount++;
+
+				// Check capacity to see if the container has been filled
+				if (SMItemHelper.GetItemUsedCapacity(container) == container.ItemCapacity)
+				{
+					stopReason = "capacity-limit";
+					break;
+				}
+			}
+
+			// Save updates
+			this.SaveToApplication();
+
+			// Respond to player with reason for stopping the fill operation
+			string msg = String.Empty;
+
+			switch (stopReason)
+			{
+				case "no-item":
+					if (itemCount < 1)
+					{
+						msg = $"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\"!";
+					}
+					else
+					{
+						msg = $"Stopped filling {container.ItemName} because no more \"{itemForResponcesDetails.PluralName}\" are avalable in this location!";
+					}
+					break;
+
+				case "weight-limit":
+					if (itemCount < 1)
+					{
+						msg = $"Unable to fill {container.ItemName}, this would exceed your weight limit of {this.WeightLimit}.";
+					}
+					else
+					{
+						msg = $"Stopped filling {container.ItemName}, adding more items would exceed your weight limit of {this.WeightLimit}.";
+					}
+					break;
+
+				case "item-family-restriction":
+					msg = $"Unable to fill {container.ItemName} with items of the family \"{itemForResponcesDetails.ItemFamily}\"";
+					break;
+
+				case "capacity-limit":
+					if (itemCount < 1)
+					{
+						msg = $"Unable to fill {container.ItemName}, there is no space available in it!";
+					}
+					else
+					{
+						msg = $"Stopped filling {container.ItemName}, capacity limit reached.";
+					}
+					break;
+			}
+
+			this.sendMessageToPlayer(this.Formatter.Italic(msg));
+
+			// Respond to player with result of the fill operation
+			if (itemCount > 0)
+			{
+				string result = $"You filled {container.ItemName} with {itemCount} ";
+				if (itemCount > 1)
+				{
+					result += $"{itemForResponcesDetails.PluralName}";
+				}
+				else
+				{
+					result += $"{itemForResponcesDetails.ItemName}";
+				}
+
+				this.sendMessageToPlayer(this.Formatter.Italic(result));
+			}
+		}
+
+		/// <summary>
+		/// Gets the current weight of all items the character is holding or wearing.
+		/// </summary>
+		/// <returns>The current weight.</returns>
+		private int GetCurrentWeight()
+		{
+			int weight = 0;
+
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty())
+				{
+					weight += SMItemHelper.GetItemWeight(slot.EquippedItem);
+				}
+			}
+
+			// TODO account for clothing (including item help in pockets ect...)
+
+			return weight;
+		}
+
+		/// <summary>
+		/// Checks in the character would be overweight if a given item was added to their inventory.
+		/// </summary>
+		/// <param name="item">The item bening added.</param>
+		/// <returns>Bool indicating if adding the item would put the character overweight.</returns>
+		private bool CheckWeightWithNewItem(SMItem item)
+		{
+			if (this.WeightLimit - this.GetCurrentWeight() < item.ItemWeight)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		/// <summary>
 		/// Attempts to put a give item in a container the character has equipped.
 		/// </summary>
 		/// <param name="item">The item to put in an equipped container.</param>
@@ -1639,6 +1825,36 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			return false;
+		}
+
+		/// <summary>
+		/// Gets an item for the FillContainer method to put in a container.
+		/// </summary>
+		/// <param name="itemIdentifier">String identifying the item.</param>
+		/// <param name="itemLocation">Variable to hold the location of the item if found.</param>
+		/// <returns>An item found that matched the given identifier.</returns>
+		private SMItem GetItemForFill(string itemIdentifier, out string itemLocation)
+		{
+			itemLocation = null;
+			SMItem item = null;
+
+			item = this.GetRoom().GetRoomItem(itemIdentifier);
+
+			if (item != null)
+			{
+				itemLocation = "room";
+				return item;
+			}
+
+			item = this.GetEquippedItem(itemIdentifier);
+
+			if (item != null)
+			{
+				itemLocation = "character";
+				return item;
+			}
+
+			return item;
 		}
 
 		/// <summary>
@@ -2225,27 +2441,6 @@ namespace SlackMUDRPG.CommandClasses
 
 			slotContainingItem = null;
 			return null;
-		}
-
-		/// <summary>
-		/// Gets the current weight of all items the character is holding or wearing.
-		/// </summary>
-		/// <returns>The current weight.</returns>
-		private int GetCurrentWeight()
-		{
-			int weight = 0;
-
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					weight += SMItemHelper.GetItemWeight(slot.EquippedItem);
-				}
-			}
-
-			// TODO account for clothing (including item help in pockets ect...)
-
-			return weight;
 		}
 
 		/// <summary>
