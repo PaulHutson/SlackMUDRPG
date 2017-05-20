@@ -1719,16 +1719,23 @@ namespace SlackMUDRPG.CommandClasses
 		/// <return>A container the item can go in or null if not container is found.</return></returns>
 		private SMItem GetEquippedContainerForItem(SMItem item)
 		{
+			SMItem container = null;
+
 			foreach (SMSlot slot in this.Slots)
 			{
 				// If there is an item equipped and it can hold other items
 				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems())
 				{
-					return SMItemHelper.FindContainerForItemRecursive(item, slot.EquippedItem);
+					container = SMItemHelper.FindContainerForItemRecursive(item, slot.EquippedItem);
+
+					if (container != null)
+					{
+						break;
+					}
 				}
 			}
 
-			return null;
+			return container;
 		}
 
 		/// <summary>
