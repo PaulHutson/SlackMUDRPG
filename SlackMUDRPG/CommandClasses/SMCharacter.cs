@@ -713,7 +713,7 @@ namespace SlackMUDRPG.CommandClasses
 			foreach (SMCharacter smc in smcs)
 			{
                 // Find out if they're currently active (i.e. active within the last two minutes).
-                double difference = Utility.Utils.GetDifferenceBetweenUnixTimestampsInMinutes(Utility.Utils.GetUnixTimeFromDate(this.LastInteractionDate), Utility.Utils.GetUnixTime()) + 60;
+                double difference = Utility.Utils.GetDifferenceBetweenUnixTimestampsInMinutes(Utility.Utils.GetUnixTimeFromDate(this.LastInteractionDate), Utility.Utils.GetUnixTime());
 
                 // Set the activity information
                 string activity = "";
