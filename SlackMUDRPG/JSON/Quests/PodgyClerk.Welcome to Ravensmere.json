@@ -6,10 +6,10 @@
 		{
 			"Name": "Visit the Clerk in the arrivals hall",
 			"Type": "Talk",
-			"CharacterName": "Podgy Clerk",
+			"CharacterName": "Pudgy Clerk",
 			"LocationID": "Ravensmere.Harbour South.Arrivals Area",
 			"AdditionalData": null,
-			"Instructions": "Go and speak to the Podgy Clerk in the arrivals area"
+			"Instructions": "Go and speak to the Pudgy Clerk in the arrivals area"
 		}
 	],
 	"Rewards": [

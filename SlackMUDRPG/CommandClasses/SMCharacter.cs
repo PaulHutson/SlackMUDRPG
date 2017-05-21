@@ -529,7 +529,7 @@ namespace SlackMUDRPG.CommandClasses
 			messageToSend += this.Formatter.ListItem("WillPower: " + this.Attributes.GetBaseStatValue("WP"));
 
             // Effects that are current on the player.
-            if (this.Attributes.Effects != null)
+            if (this.Attributes.Effects?.Count>0)
             {
                 messageToSend += this.Formatter.ListItem("-----------------------");
                 foreach (SMEffect sme in this.Attributes.Effects)

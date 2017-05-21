@@ -1,13 +1,13 @@
 ﻿{
-  "firstname": "Podgy",
+  "firstname": "Pudgy",
   "lastname": "Clerk",
-  "description": "A podgy looking clerk with a round face and small glasses that he seems to peer over.",
+  "description": "A pudgy looking clerk with a round face and small glasses that he seems to peer over.",
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
   "age": 34,
   "sex": "m",
   "PKFlag": false,
-  "UserID": "PodgyClerk",
+  "UserID": "PudgyClerk",
   "RoomID": "Ravensmere.Harbour South.Arrivals Area",
   "CurrentActivity": null,
   "Attributes": {
@@ -110,7 +110,7 @@
     }
   ],
   "ResponseURL": null,
-	"NPCType": "PodgyClerk",
+	"NPCType": "PudgyClerk",
 	"FamilyType": "Clerk",
 	"IsGeneric": true,
 	"WalkingType": "walk",
@@ -155,7 +155,7 @@
         {
           "StepID": "Info",
           "Scope": "generalemote",
-          "AdditionalData": "Podgy Clerk sits at his desk (To speak to him type [b]Hail Podgy Clerk[/b])",
+          "AdditionalData": "A Pudgy Clerk sits at his desk (To speak to him type [b]Hail Pudgy Clerk[/b])",
           "NextStep": null,
           "ResponseOptions": null
         },

@@ -4,8 +4,8 @@
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
   "Outside": false,
-	"RoomDescription": "You stand in a large hall full of weary travellers. Magnificant painted scenes of a seafaring culture line the walls, and clerks move around with large stacks of documents. A podgy man with a monacle and greasy hair beckons to all new arrivals..",
-	"RoomNewbieTips": "Here you meet the first NPC you need to interact with.  To get started you'll need to hail him using the [b]Hail[/b] command (i.e. [b]hail Podgy Clerk[/b] or [b]h clerk[/b]) and he'll help you set your name in the world ... as he asks you questions simply reply with the \"<shortcut>\" presented in the questions i.e. \"y\" to say yes.  He'll ask you other questions that don't have a shortcut code that you can just type the answer to (like when he asks for your name). [To disable tips type \"newbietips off\"]",
+	"RoomDescription": "You stand in a large hall full of weary travellers. Magnificent painted scenes of a seafaring culture line the walls, and clerks move around with large stacks of documents. A pudgy man with a monacle and greasy hair beckons to all new arrivals..",
+	"RoomNewbieTips": "Here you meet the first NPC you need to interact with.  To get started you'll need to hail him using the [b]Hail[/b] command (i.e. [b]hail Pudgy Clerk[/b] or [b]h clerk[/b]) and he'll help you set your name in the world ... as he asks you questions simply reply with the \"<shortcut>\" presented in the questions i.e. \"y\" to say yes.  He'll ask you other questions that don't have a shortcut code that you can just type the answer to (like when he asks for your name). [To disable tips type \"newbietips off\"]",
 	"RoomExits": [
 		{
 			"Shortcut": "AAE",
