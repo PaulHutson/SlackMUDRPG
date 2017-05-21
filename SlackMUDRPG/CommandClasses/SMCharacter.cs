@@ -528,8 +528,23 @@ namespace SlackMUDRPG.CommandClasses
 			messageToSend += this.Formatter.ListItem("Toughness: " + this.Attributes.GetBaseStatValue("T"));
 			messageToSend += this.Formatter.ListItem("WillPower: " + this.Attributes.GetBaseStatValue("WP"));
 
-			// Tell the player
-			this.sendMessageToPlayer(messageToSend);
+            // Effects that are current on the player.
+            if (this.Attributes.Effects != null)
+            {
+                messageToSend += this.Formatter.ListItem("-----------------------");
+                foreach (SMEffect sme in this.Attributes.Effects)
+                {
+                    messageToSend += this.Formatter.ListItem("Effect: " + sme.EffectType + " " + sme.AdditionalData);
+                }
+            }
+
+            // Return the money information.
+            messageToSend += this.Formatter.ListItem("-----------------------");
+            messageToSend += this.Formatter.ListItem("Money: " + this.Currency.AmountOfCurrency);
+
+
+            // Tell the player
+            this.sendMessageToPlayer(messageToSend);
 		}
 
 		/// <summary>

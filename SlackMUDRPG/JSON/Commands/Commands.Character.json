@@ -40,7 +40,7 @@
 	},
 	{
 		"CommandFamily": "Character",
-		"CommandName": "stats, attr, attrs, attributes, statistics, getstats",
+		"CommandName": "stats, attr, attrs, attributes, statistics, getstats, score, sc, charsheet",
 		"CommandDescription": "Get the statistics of your character.",
 		"CommandSyntax": "{name|lower}",
 		"ParamsExpression": null,
