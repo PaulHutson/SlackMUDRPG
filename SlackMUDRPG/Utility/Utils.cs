@@ -219,6 +219,11 @@ namespace SlackMUDRPG.Utility
             return (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         }
 
+        public static int GetUnixTimeFromDate(DateTime dateToConvert)
+        {
+            return (Int32)(dateToConvert.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+        }
+
         public static int GetUnixTimeOffset(int additionalSeconds)
         {
             return GetUnixTime() + additionalSeconds;

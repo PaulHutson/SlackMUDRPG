@@ -712,7 +712,27 @@ namespace SlackMUDRPG.CommandClasses
 			string whoList = "";
 			foreach (SMCharacter smc in smcs)
 			{
-				whoList += this.Formatter.ListItem(smc.GetFullName() + " (" + smc.CalculateLevel() + ")");
+                // Find out if they're currently active (i.e. active within the last two minutes).
+                double difference = Utility.Utils.GetDifferenceBetweenUnixTimestampsInMinutes(Utility.Utils.GetUnixTimeFromDate(this.LastInteractionDate), Utility.Utils.GetUnixTime()) + 60;
+
+                // Set the activity information
+                string activity = "";
+                if ((difference > 2) && (difference < 60))
+                {
+                    activity = "- afk for " + difference + " minutes";
+                }
+                else if ((difference >= 60) && (difference < 120))
+                {
+                    activity = "- afk for " + 1 + " hour";
+                }
+                else if (difference >= 120)
+                {
+                    difference = Math.Round(difference / 60,0);
+                    activity = "- afk for " +  difference + " hours";
+                }
+
+                // Build the wholist.
+				whoList += this.Formatter.ListItem(smc.GetFullName() + " (" + smc.CalculateLevel() + ") " + activity);
 			}
 
 			// Add the list to the output string.
