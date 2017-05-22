@@ -1676,6 +1676,173 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Trys to equip an item to a slot, which can be optionally specified.
+		/// Look in the character inventory, then the room for the item, specified by an identifier (id, name, family).
+		/// If slot is not specifed trys to find a suitable availble one.
+		/// </summary>
+		/// <param name="itemIdentifier">Identifier of the item to equip.</param>
+		/// <param name="targetSlotName">Optional, name of the slot to equip the item to.</param>
+		public void EquipItem(string itemIdentifier, string targetSlotName = null)
+		{
+			// Find the item to be equipped
+			SMItem itemToEquip = null;
+			bool ownsItem = true;
+
+			itemToEquip = this.GetItemFromEquippedContainer(itemIdentifier);
+
+			// Look in the current room for the item
+			if (itemToEquip == null)
+			{
+				ownsItem = false;
+				itemToEquip = this.GetRoom().GetRoomItem(itemIdentifier);
+			}
+
+			// Return after an error message if the item cannot be found
+			if (itemToEquip == null)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find the item \"{Utils.SanitiseString(itemIdentifier)}\" to equip!"));
+				return;
+			}
+
+			// Find a slot to equip the item to
+			SMSlot targetSlot = null;
+
+			// If a slot name is given try that
+			if (targetSlotName != null)
+			{
+				targetSlot = this.GetSlotByName(targetSlotName);
+
+				// Return after an error message if the named slot is not found
+				if (targetSlot == null)
+				{
+					this.sendMessageToPlayer(this.Formatter.Italic($"The specified slot \"{Utils.SanitiseString(targetSlotName)}\" could not be found!"));
+					return;
+				}
+
+				// Return after an error message if the slot cannot hold the item
+				if (!targetSlot.canEquipItem(itemToEquip))
+				{
+					this.sendMessageToPlayer(this.Formatter.Italic($"Cannot equip \"{itemToEquip.ItemName}\" to \"{targetSlot.GetReadableName()}\"!"));
+					return;
+				}
+			}
+			// If a slot name is not given try and find one
+			else
+			{
+				foreach (SMSlot slot in this.Slots)
+				{
+					if (slot.canEquipItem(itemToEquip))
+					{
+						targetSlot = slot;
+						break;
+					}
+				}
+			}
+
+			// Ensure we have a slot for the item, otherwise return after a notification
+			if (targetSlot == null)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find a suitable empty slot to equip \"{itemToEquip.ItemName}\"!"));
+				return;
+			}
+
+			// If the character does not already own the item check weight and remove item from room
+			if (!ownsItem)
+			{
+				if (!this.CheckWeightWithNewItem(itemToEquip))
+				{
+					this.sendMessageToPlayer(this.Formatter.Italic($"Unable to equip up \"{itemToEquip.ItemName}\", this would exceed your weight limit of \"{this.WeightLimit}\"!"));
+					return;
+				}
+
+				this.GetRoom().RemoveItem(itemToEquip);
+				this.GetRoom().Announce(this.Formatter.Italic($"\"{this.GetFullName()}\" picked up \"{itemToEquip.ItemName}\"!"), this, true);
+			}
+			// Else just remove the item from the player
+			else
+			{
+				this.RemoveOwnedItem(itemToEquip.ItemID);
+			}
+
+			// Finally add the item to the target slot and inform the palyer
+			targetSlot.EquippedItem = itemToEquip;
+
+			this.sendMessageToPlayer(this.Formatter.Italic($"You equipped {itemToEquip.SingularPronoun} \"{itemToEquip.ItemName}\"!"));
+
+			this.SaveToApplication();
+		}
+
+		/// <summary>
+		/// Gets an SMSlot by name, case insensitive.
+		/// </summary>
+		/// <returns>The SMSlot by name.</returns>
+		/// <param name="slotName">Name of the slot.</param>
+		public SMSlot GetSlotByName(string slotName)
+		{
+			if (this.Slots != null)
+			{
+				return this.Slots.FirstOrDefault(sms => sms.Name.Replace(" ", "").ToLower() == slotName.Replace(" ", "").ToLower());
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Removes an owned item by searching all slots and their contents for a given identifier.
+		/// </summary>
+		/// <param name="itemIdentifier"></param>
+		public void RemoveOwnedItem(string itemIdentifier, bool tellPlayer = false)
+		{
+			bool haveRemovedItem = false;
+
+			// Check in each slot (not recursive)
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty())
+				{
+					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
+					{
+						slot.EquippedItem = null;
+						haveRemovedItem = true;
+						this.SaveToApplication();
+						break;
+					}
+				}
+			}
+
+			// Check in any equipped containers (recursive)
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty())
+				{
+					// Look inside the equipped item if it is a container
+					if (slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems != null)
+					{
+						if (slot.EquippedItem.HeldItems.Any())
+						{
+							if (SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier) != null)
+							{
+								SMItemHelper.RemoveItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
+								haveRemovedItem = true;
+								this.SaveToApplication();
+								break;
+							}
+						}
+					}
+				}
+			}
+
+			// TODO check in clothing slots e.g. pockets
+
+			// Announce it to the player if needed
+			if (tellPlayer && haveRemovedItem)
+			{
+				// Send the message
+				this.sendMessageToPlayer("[i]Removed " + itemIdentifier + " from inventory.[/i]");
+			}
+		}
+
+		/// <summary>
 		/// Gets the current weight of all items the character is holding or wearing.
 		/// </summary>
 		/// <returns>The current weight.</returns>
@@ -1900,6 +2067,33 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Gets an item that the characters owns that is currently in an equipped container.
+		/// </summary>
+		/// <param name="itemIdentifier">String identifying the item.</param>
+		/// <returns>The item if found otherwise null.</returns>
+		private SMItem GetItemFromEquippedContainer(string itemIdentifier)
+		{
+			// TODO check slots in clothing, e.g. pockets
+
+			SMItem foundItem = null;
+
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems())
+				{
+					foundItem = SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
+
+					if (foundItem != null)
+					{
+						break;
+					}
+				}
+			}
+
+			return foundItem;
+		}
+
+		/// <summary>
 		/// Drops the item specified by a given identifier (id, name, family).
 		/// </summary>
 		/// <param name="itemIdentifier">Item identifier.</param>
@@ -1963,106 +2157,6 @@ namespace SlackMUDRPG.CommandClasses
 			}
 
 			this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to drop!"));
-		}
-
-		/// <summary>
-		/// Trys to equip an item to a slot, which can be optionally specified.
-		/// Look in the character inventory, then the room for the item, specified by an identifier (id, name, family).
-		/// If slot is not specifed trys to find a suitable availble one.
-		/// </summary>
-		/// <param name="itemIdentifier">Identifier of the item to equip.</param>
-		/// <param name="targetSlotName">Optional, name of the slot to equip the item to.</param>
-		public void EquipItem(string itemIdentifier, string targetSlotName = null)
-		{
-			// Find the item to be equipped, look on the character, then in the current room
-
-			// TODO account for items contained within clothing
-
-			SMSlot slotContainingItem;
-			SMItem itemToEquip = this.GetEquippableItem(itemIdentifier, out slotContainingItem);
-			bool ownedItem = true;
-
-			if (itemToEquip == null)
-			{
-				itemToEquip = this.FindItemInRoom(itemIdentifier);
-				ownedItem = false;
-			}
-
-			if (itemToEquip == null)
-			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find the item \"{Utils.SanitiseString(itemIdentifier)}\" to equip!"));
-				return;
-			}
-
-			// Determine the slot the item should be equipped to
-			SMSlot targetSlot = null;
-
-			// Try the slot specified in the user input
-			if (targetSlotName != null)
-			{
-				targetSlot = this.GetSlotByName(targetSlotName);
-
-				if (targetSlot == null)
-				{
-					this.sendMessageToPlayer(this.Formatter.Italic($"The specified slot \"{Utils.SanitiseString(targetSlotName)}\" could not be found!"));
-					return;
-				}
-
-				if (!targetSlot.isEmpty())
-				{
-					this.sendMessageToPlayer(this.Formatter.Italic($"Cannot equip an item to \"{targetSlot.GetReadableName()}\", that slot is not empty!"));
-					return;
-				}
-
-				if (!targetSlot.canEquipItem(itemToEquip))
-				{
-					this.sendMessageToPlayer(this.Formatter.Italic($"Cannot equip an item of type \"{itemToEquip.ItemType}\" to \"{targetSlot.GetReadableName()}\"!"));
-					return;
-				}
-			}
-
-			// Try and find a suitable empty slot if slot name is not given
-			if (targetSlot == null)
-			{
-				foreach (SMSlot slot in this.Slots)
-				{
-					if (slot.isEmpty() && slot.canEquipItem(itemToEquip))
-					{
-						targetSlot = slot;
-						break;
-					}
-				}
-			}
-
-			if (targetSlot == null)
-			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find a suitable empty slot to equip \"{itemToEquip.ItemName}\"!"));
-				return;
-			}
-
-			// If the character does not already own the item check weight and remove item from room
-			if (!ownedItem)
-			{
-				if (this.GetCurrentWeight() + SMItemHelper.GetItemWeight(itemToEquip) > this.WeightLimit)
-				{
-					this.sendMessageToPlayer(this.Formatter.Italic($"Unable to equip up \"{itemToEquip.ItemName}\", this would exceed your weight limit of \"{this.WeightLimit}\"!"));
-					return;
-				}
-
-				this.GetRoom().RemoveItem(itemToEquip);
-				this.GetRoom().Announce(this.Formatter.Italic($"\"{this.GetFullName()}\" picked up \"{itemToEquip.ItemName}\"!"));
-
-			}
-			// Else just remove the item from its container
-			else
-			{
-				SMItemHelper.RemoveItemFromList(slotContainingItem.EquippedItem.HeldItems, itemToEquip.ItemID);
-			}
-
-			// Equip the item to the target slot and inform the palyer
-			targetSlot.EquippedItem = itemToEquip;
-			this.sendMessageToPlayer(this.Formatter.Italic($"You equipped {itemToEquip.SingularPronoun} \"{itemToEquip.ItemName}\"!"));
-			this.SaveToApplication();
 		}
 
 		/// <summary>
@@ -2310,21 +2404,6 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Gets an SMSlot by name, case insensitive.
-		/// </summary>
-		/// <returns>The SMSlot by name.</returns>
-		/// <param name="slotName">Name of the slot.</param>
-		public SMSlot GetSlotByName(string slotName)
-		{
-			if (this.Slots != null)
-			{
-				return this.Slots.FirstOrDefault(sms => sms.Name.ToLower() == slotName.ToLower());
-			}
-
-			return null;
-		}
-
-		/// <summary>
 		/// Gets an equipped item by searching all slots for a given identifier. If not identifier is given the item in the first non-empty slot is returned.
 		/// </summary>
 		/// <param name="itemIdentifier"></param>
@@ -2459,33 +2538,6 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
-		/// Gets an equippable item owned by the character.
-		/// </summary>
-		/// <returns>The equippable item.</returns>
-		/// <param name="itemIdentifier">Item identifier.</param>
-		private SMItem GetEquippableItem(string itemIdentifier, out SMSlot slotContainingItem)
-		{
-			// TODO check slots in clothing, e.g. pockets
-
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (!slot.isEmpty() && slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems != null)
-				{
-					SMItem item = SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
-
-					if (item != null)
-					{
-						slotContainingItem = slot;
-						return item;
-					}
-				}
-			}
-
-			slotContainingItem = null;
-			return null;
-		}
-
-		/// <summary>
 		/// Lists the contents of a given slot, optionally including container contents.
 		/// </summary>
 		/// <param name="slotName">The name of the slot to list.</param>
@@ -2541,61 +2593,6 @@ namespace SlackMUDRPG.CommandClasses
 					}
 				}
 			}
-		}
-
-		/// <summary>
-		/// Removes an owned item by searching all slots and their contents for a given identifier.
-		/// </summary>
-		/// <param name="itemIdentifier"></param>
-		public void RemoveOwnedItem(string itemIdentifier, bool tellPlayer = false)
-		{
-            bool haveRemovedItem = false;
-
-			// Check in each slot (not recursive)
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
-					{
-						slot.EquippedItem = null;
-                        haveRemovedItem = true;
-                        this.SaveToApplication();
-						break;
-					}
-				}
-			}
-
-			// Check in any equipped containers (recursive)
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (!slot.isEmpty())
-				{
-					// Look inside the equipped item if it is a container
-					if (slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems != null)
-					{
-                        if (slot.EquippedItem.HeldItems.Any())
-                        {
-                            if (SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier) != null)
-                            {
-                                SMItemHelper.RemoveItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
-                                haveRemovedItem = true;
-                                this.SaveToApplication();
-                                break;
-                            }
-                        }
-					}
-				}
-			}
-
-			// TODO check in clothing slots e.g. pockets
-
-            // Announce it to the player if needed
-            if (tellPlayer && haveRemovedItem)
-            {
-                // Send the message
-                this.sendMessageToPlayer("[i]Removed " + itemIdentifier + " from inventory.[/i]");
-            }
 		}
 
 		/// <summary>
