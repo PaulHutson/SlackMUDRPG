@@ -5,6 +5,7 @@
 	"PluralName": "Iron Vein Outcroppings",
 	"ItemType": "Environment",
 	"ItemFamily": "Iron",
+	"PluralFamilyName": "Iron",
 	"ItemDescription": "A rocky outcropping with an iron vein within it",
 	"ItemWeight": 500000,
 	"ItemSize": 500000,

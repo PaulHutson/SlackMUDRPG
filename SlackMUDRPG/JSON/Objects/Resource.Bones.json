@@ -5,6 +5,7 @@
 	"PluralName": "{Family} Bones",
 	"ItemType": "Resource",
 	"ItemFamily": "Bones",
+	"PluralFamilyName": "Bones",
 	"ItemDescription": "Some {Family} Bones",
 	"ItemWeight": 1,
 	"ItemSize": 1,

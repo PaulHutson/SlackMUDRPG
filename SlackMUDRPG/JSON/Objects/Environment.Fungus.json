@@ -5,6 +5,7 @@
 	"PluralName": "Fungus",
 	"ItemType": "Environment",
 	"ItemFamily": "Fungus",
+	"PluralFamilyName": "Fungi",
 	"ItemDescription": "A putrid looking fungus.",
 	"ItemWeight": 1,
   "ItemSize": 1,

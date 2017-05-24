@@ -5,6 +5,7 @@
 	"PluralName": "Copper Vein Outcroppings",
 	"ItemType": "Environment",
 	"ItemFamily": "Copper",
+	"PluralFamilyName": "Copper",
 	"ItemDescription": "A rocky outcropping with a Copper vein within it",
 	"ItemWeight": 500000,
 	"ItemSize": 500000,

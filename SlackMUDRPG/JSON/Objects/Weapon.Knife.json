@@ -5,6 +5,7 @@
 	"PluralPronoun": "some",
 	"ItemType": "Weapon",
 	"ItemFamily": "Knife",
+	"PluralFamilyName": "Knives",
 	"ItemDescription": "A knife",
 	"ItemWeight": 1,
 	"ItemSize": 1,

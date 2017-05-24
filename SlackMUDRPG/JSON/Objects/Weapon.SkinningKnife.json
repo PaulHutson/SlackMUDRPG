@@ -5,6 +5,7 @@
 	"PluralPronoun": "some",
 	"ItemType": "Weapon",
 	"ItemFamily": "Knife",
+	"PluralFamilyName": "Knives",
 	"ItemDescription": "A knife primarily used for skinning animals",
 	"ItemWeight": 1,
 	"ItemSize": 1,
