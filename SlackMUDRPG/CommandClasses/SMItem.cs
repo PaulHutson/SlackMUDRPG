@@ -32,6 +32,9 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("PreviousItemFamily")]
 		public string PreviousItemFamily { get; set; }
 
+		[JsonProperty("PluralFamilyName")]
+		private string PluralFamilyName { get; set; } = null;
+
 		[JsonProperty("ItemDescription")]
 		public string ItemDescription { get; set; }
 
@@ -232,5 +235,19 @@ namespace SlackMUDRPG.CommandClasses
         {
             return this.SingularPronoun + " " + this.ItemName;
         }
+
+		/// <summary>
+		/// Get the plural family name of the item. If this is null then just add an 's' to the family name.
+		/// </summary>
+		/// <returns>The plural family name.</returns>
+		public string GetPluralFamilyName()
+		{
+			if (this.PluralFamilyName == null)
+			{
+				return $"{this.ItemFamily}s";
+			}
+
+			return this.PluralFamilyName;
+		}
 	}
 }
