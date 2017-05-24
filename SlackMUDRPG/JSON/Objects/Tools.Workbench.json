@@ -5,6 +5,7 @@
 	"PluralPronoun": "some",
 	"ItemType": "tools",
 	"ItemFamily": "Workbench",
+	"PluralFamilyName": "Workbenches",
 	"ItemDescription": "A wooden workbench used for crafting items.",
 	"ItemWeight": 50,
 	"ItemSize": 50,

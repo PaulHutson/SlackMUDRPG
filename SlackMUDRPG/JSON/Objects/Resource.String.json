@@ -5,6 +5,7 @@
 	"PluralName": "string",
 	"ItemType": "String",
 	"ItemFamily": "String",
+	"PluralFamilyName": "String",
 	"ItemDescription": "A small amount of string",
 	"ItemWeight": 1,
 	"ItemSize": 1,

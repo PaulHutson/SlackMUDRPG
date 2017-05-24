@@ -5,6 +5,7 @@
 	"PluralName": "water",
 	"ItemType": "liquid",
 	"ItemFamily": "water",
+	"PluralFamilyName": "water",
 	"ItemDescription": "Some clear water",
 	"ItemWeight": 1,
 	"ItemSize": 1,

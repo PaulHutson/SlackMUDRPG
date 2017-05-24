@@ -5,6 +5,7 @@
 	"PluralName": "Gold Vein Outcroppings",
 	"ItemType": "Environment",
 	"ItemFamily": "Gold",
+	"PluralFamilyName": "Gold",
 	"ItemDescription": "A rocky outcropping with a gold vein within it",
 	"ItemWeight": 1000,
 	"ItemSize": 1000,

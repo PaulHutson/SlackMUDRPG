@@ -5,6 +5,7 @@
 	"PluralName": "fish",
 	"ItemType": "Resource",
 	"ItemFamily": "Fish",
+	"PluralFamilyName": "Fish",
 	"ItemDescription": "A silver sided fish",
 	"ItemWeight": 1,
 	"ItemSize": 1,

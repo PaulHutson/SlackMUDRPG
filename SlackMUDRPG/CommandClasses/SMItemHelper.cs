@@ -144,10 +144,14 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="identifier">String identifier (id, name, family).</param>
 		public static bool ItemMatches(SMItem item, string identifier)
 		{
+			string ciIdentifier = identifier.ToLower();
+
 			if (item.ItemID == identifier ||
-				item.ItemName.ToLower() == identifier.ToLower() ||
-				item.ItemFamily.ToLower() == identifier.ToLower() ||
-				item.ItemType.ToLower() == identifier.ToLower())
+				item.ItemName.ToLower() == ciIdentifier ||
+				item.PluralName.ToLower() == ciIdentifier ||
+				item.ItemFamily.ToLower() == ciIdentifier ||
+				item.GetPluralFamilyName().ToLower() == ciIdentifier ||
+				item.ItemType.ToLower() == ciIdentifier)
 			{
 				return true;
 			}
@@ -336,23 +340,35 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="itemIdentifier">Item identifier.</param>
 		private static SMItem FindItemInList(List<SMItem> list, string itemIdentifier)
 		{
+			string ciIdentifier = itemIdentifier.ToLower();
+
 			SMItem foundItem = null;
 
 			foundItem = list.FirstOrDefault((SMItem item) => item.ItemID == itemIdentifier);
 
 			if (foundItem == null)
 			{
-				foundItem = list.FirstOrDefault((SMItem item) => item.ItemName.ToLower() == itemIdentifier.ToLower());
+				foundItem = list.FirstOrDefault((SMItem item) => item.ItemName.ToLower() == ciIdentifier);
 			}
 
 			if (foundItem == null)
 			{
-				foundItem = list.FirstOrDefault((SMItem item) => item.ItemFamily.ToLower() == itemIdentifier.ToLower());
+				foundItem = list.FirstOrDefault((SMItem item) => item.PluralName.ToLower() == ciIdentifier);
 			}
 
 			if (foundItem == null)
 			{
-				foundItem = list.FirstOrDefault((SMItem item) => item.ItemType.ToLower() == itemIdentifier.ToLower());
+				foundItem = list.FirstOrDefault((SMItem item) => item.ItemFamily.ToLower() == ciIdentifier);
+			}
+
+			if (foundItem == null)
+			{
+				foundItem = list.FirstOrDefault((SMItem item) => item.GetPluralFamilyName().ToLower() == ciIdentifier);
+			}
+
+			if (foundItem == null)
+			{
+				foundItem = list.FirstOrDefault((SMItem item) => item.ItemType.ToLower() == ciIdentifier);
 			}
 
 			return foundItem;
@@ -391,6 +407,5 @@ namespace SlackMUDRPG.CommandClasses
 
 			return false;
 		}
-
 	}
 }
