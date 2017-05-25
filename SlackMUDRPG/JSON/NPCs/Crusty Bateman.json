@@ -116,12 +116,12 @@
       "ResponseSteps": [
         {
           "ResponseStepType": "Conversation",
-          "ResponseStepData": "Enter.1"
+          "ResponseStepData": "Shop.1"
         }
       ],
       "PreRequisites": [
         {
-          "Type": "HasNotDoneQuest",
+          "Type": "HasDoneQuest",
           "AdditionalData": "Hooked"
         }
       ]
@@ -140,7 +140,7 @@
       ],
       "PreRequisites": [
         {
-          "Type": "HasDoneQuest",
+          "Type": "HasNotDoneQuest",
           "AdditionalData": "Hooked"
         }
       ]
