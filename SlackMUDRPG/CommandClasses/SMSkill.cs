@@ -333,6 +333,7 @@ namespace SlackMUDRPG.CommandClasses
                                 }
                             }
                         }
+                        smc.StopActivity();
                     }
                 }
                 else

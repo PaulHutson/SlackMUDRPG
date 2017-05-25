@@ -1001,8 +1001,11 @@ namespace SlackMUDRPG.CommandClasses
         /// </summary>
         public void StopActivity()
         {
-			this.sendMessageToPlayer(this.Formatter.Italic($"Stopped {this.CurrentActivity}"));
-			this.CurrentActivity = null;
+            if (this.CurrentActivity != null)
+            {
+                this.sendMessageToPlayer(this.Formatter.Italic($"Stopped {this.CurrentActivity}"));
+                this.CurrentActivity = null;
+            }
 		}
 
 		#endregion
