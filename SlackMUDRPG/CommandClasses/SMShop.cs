@@ -49,7 +49,7 @@ namespace SlackMUDRPG.CommandClasses
                     }
                 }
 
-                returnString += this.Formatter.ListItem(shopNumber + ". " + ssi.Item.ItemName + " - " + ssi.Cost + " " + currencyPlural + amountAvailable);
+                returnString += this.Formatter.ListItem(shopNumber + ". " + ssi.GetItemNameForListing() + " - " + ssi.Cost + " " + currencyPlural + amountAvailable);
             }
 
             return returnString;
@@ -119,5 +119,20 @@ namespace SlackMUDRPG.CommandClasses
 
 		[JsonProperty("AdditionalData")]
 		public string AdditionalData { get; set; }
+
+		/// <summary>
+		/// Returns a string to use for the shop item in shop inventory listings.
+		/// </summary>
+		/// <returns>Name to use for listings.</returns>
+		public string GetItemNameForListing()
+		{
+			switch (this.ItemType)
+			{
+				case "recipe":
+					return $"{this.AdditionalData} (recipe)";
+				default:
+					return this.Item.ItemName;
+			}
+		}
     }
 }
