@@ -60,6 +60,39 @@ namespace SlackMUDRPG.CommandClasses
 
 			return smi;
 		}
+
+		/// <summary>
+		/// Gets a comma seperated string of the skills (including level) required for this recipe.
+		/// </summary>
+		/// <returns>String detailing the required skills.</returns>
+		public string GetRequiredSkillsString()
+		{
+			List<string> required = new List<string>();
+
+			foreach (SMSkillHeld skill in this.RequiredSkills)
+			{
+				required.Add($"{skill.SkillName} ({skill.SkillLevel})");
+			}
+
+			return required.Count > 0 ? String.Join(", ", required.ToArray()) : null;
+		}
+
+		/// <summary>
+		/// Gets a comma seperated string of the materials (including qty) required for this recipe.
+		/// </summary>
+		/// <returns>String detailing the required materials.</returns>
+		public string GetRequiredMaterialsString()
+		{
+			List<string> required = new List<string>();
+
+			foreach (SMReceipeMaterial material in this.Materials)
+			{
+				required.Add($"{material.MaterialType.Split('.')[1]} x {material.MaterialQuantity}");
+			}
+
+			return required.Count > 0 ? String.Join(", ", required.ToArray()) : null;
+		}
+
 	}
 
 	public class SMReceipeMaterial
