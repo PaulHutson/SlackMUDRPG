@@ -105,6 +105,9 @@ namespace SlackMUDRPG.CommandClasses
         [JsonProperty("Item")]
         public SMItem Item { get; set; }
 
+		[JsonProperty("ItemType")]
+		public string ItemType { get; set; }
+
         [JsonProperty("AmountForSale")]
         public int AmountForSale { get; set; }
 
