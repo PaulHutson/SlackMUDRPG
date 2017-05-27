@@ -521,20 +521,7 @@ namespace SlackMUDRPG.CommandClasses
 						
 						break;
 					case "teachrecipe":
-						// ensure the characters KnownRecipes property is a list
-						if (invokingCharacter.KnownRecipes == null)
-						{
-							invokingCharacter.KnownRecipes = new List<string>();
-						}
-
-						// only learn the recipe if not already known
-						if (invokingCharacter.KnownRecipes.Count(recipe => recipe == npccs.AdditionalData) == 0)
-						{
-							invokingCharacter.KnownRecipes.Add(npccs.AdditionalData);
-
-							invokingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"You learnt a new recipe {npccs.AdditionalData}."));
-						}
-
+						invokingCharacter.LearnRecipe(npccs.AdditionalData);
 						break;
                     case "shopitem":
                         // Get the scope

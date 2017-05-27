@@ -1008,7 +1008,6 @@ namespace SlackMUDRPG.CommandClasses
             }
 		}
 
-
 		/// <summary>
 		/// Lists known recipes or details of a perticular known recipe if a recipe name is specified.
 		/// </summary>
@@ -1119,6 +1118,27 @@ namespace SlackMUDRPG.CommandClasses
 			List<SMReceipe> knowRecipes = this.GetKnownRecipes();
 
 			return knowRecipes.FirstOrDefault(r => r.Name.ToLower() == recipeName.ToLower());
+		}
+
+		/// <summary>
+		/// Learns a new recipe of a given name.
+		/// </summary>
+		/// <param name="recipeName">The name or the recipe to learn.</param>
+		public void LearnRecipe(string recipeName)
+		{
+			// Ensure the characters KnownRecipes property is a list
+			if (this.KnownRecipes == null)
+			{
+				this.KnownRecipes = new List<string>();
+			}
+
+			// Only learn the recipe if not already known
+			if (this.KnownRecipes.Count(recipe => recipe == recipeName) == 0)
+			{
+				this.KnownRecipes.Add(recipeName);
+
+				this.sendMessageToPlayer(this.Formatter.Italic($"You learnt a new recipe \"{recipeName}\"."));
+			}
 		}
 
 		#endregion
