@@ -116,5 +116,8 @@ namespace SlackMUDRPG.CommandClasses
 
         [JsonProperty("Cost")]
         public int Cost { get; set; }
+
+		[JsonProperty("AdditionalData")]
+		public string AdditionalData { get; set; }
     }
 }
