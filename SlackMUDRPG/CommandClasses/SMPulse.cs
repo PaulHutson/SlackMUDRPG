@@ -183,6 +183,22 @@ namespace SlackMUDRPG.CommandClasses
                     if (rDouble <= 5)
                     {
                         c.Attributes.HitPoints++;
+                        if (c.Attributes.Effects != null)
+                        {
+                            List<SMEffect> smel = c.Attributes.Effects.FindAll(e => e.EffectType.ToLower() == "Healing Rate".ToLower());
+
+                            if (smel != null)
+                            {
+                                int increasedHealingRate = 0;
+
+                                foreach (SMEffect sme in smel)
+                                {
+                                    increasedHealingRate += int.Parse(sme.AdditionalData);
+                                }
+
+                                c.Attributes.HitPoints = c.Attributes.HitPoints + increasedHealingRate;
+                            }
+                        }
                         c.SaveToApplication();
                         c.SaveToFile();
                     }

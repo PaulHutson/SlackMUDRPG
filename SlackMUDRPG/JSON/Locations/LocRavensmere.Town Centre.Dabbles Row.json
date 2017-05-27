@@ -15,15 +15,14 @@
       "Shortcut": "BW",
       "Description": "Barons Walk",
       "RoomID": "Ravensmere.Town Centre.Barons Walk"
+    },
+    {
+      "Shortcut": "TD",
+      "Description": "The Dozen",
+      "RoomID": "Ravensmere.Town Centre.The Dozen",
+      "Echo": "The warmth of the air that flows over you is noticiable as you enter the bakery."
     }
 	],
 	"RoomItems": null,
-	"NPCSpawns": [
-    {
-			"TypeOfNPC": "Beggar",
-			"MaxNumber": 1,
-			"SpawnFrequency": 10,
-			"Unique": false
-		}
-	]
+	"NPCSpawns": null
 }

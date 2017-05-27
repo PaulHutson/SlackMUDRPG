@@ -400,6 +400,7 @@
     <Content Include="JSON\Locations\LocRavensmere.Industrial Quarter.Foresters Outpost.json" />
     <Content Include="JSON\NPCs\Pat Gumptkin.json" />
     <Content Include="JSON\NPCRaces\Human.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.The Dozen.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
     <Content Include="JSON\NPCs\Rat.json" />
@@ -485,6 +486,7 @@
     <Content Include="JSON\Quests\Town.Two Rings Don%27t Make A Right.json" />
     <Content Include="JSON\Objects\Environment.Fungus.json" />
     <Content Include="JSON\Quests\Crabby.Fish For The Smoking.json" />
+    <Content Include="JSON\Objects\Food.Bread" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="RebuildCharNameList.aspx" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />

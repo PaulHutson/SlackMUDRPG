@@ -1,0 +1,36 @@
+﻿{
+  "ItemID": "GENERATE",
+  "SingularPronoun": "a",
+  "ItemName": "Loaf of Bread",
+  "PluralName": "Loaves of Bread",
+  "PluralPronoun": "some",
+  "ItemType": "Bread",
+  "ItemFamily": "Loaf",
+  "ItemDescription": "A loaf of bread, lightly browned on top",
+  "ItemWeight": 1,
+  "ItemCapacity": 0,
+  "ItemSize": 1,
+  "HitPoints": 1,
+  "MaxHitPoints": 1,
+  "BaseDamage": 0.0001,
+  "Toughness": 1,
+  "DestroyedOutput": null,
+  "RequiredSkills": null,
+  "AdditionalData": null, 
+  "ObjectTrait": "Eatable",
+  "HeldItems": null,
+  "Effects": [
+    {
+      "Action": "OnConsume",
+      "EffectType": "Str",
+      "AdditionalData": "1",
+      "EffectLength": 300
+    },
+    {
+      "Action": "OnConsume",
+      "EffectType": "Healing Rate",
+      "AdditionalData": "1",
+      "EffectLength": 300
+    }
+  ]
+}

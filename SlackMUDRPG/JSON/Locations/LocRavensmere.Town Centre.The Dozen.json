@@ -1,0 +1,35 @@
+{
+	"RoomID": "Ravensmere.Town Centre.Barons Walk",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "The air in the bakery is more delicious than any flavour contained within bread, somehow the aroma captures everything good about the baking breads contained within the ovens.  There is a row of ovens that seem to be perpetually stoked by a number of young boys to keep them hot enough to bake.  The ovens seem to be frequented by a number of people from the skullery maids of large houses through to the poor from the city... the free warmth draws in everyone.",
+	"RoomExits": [
+    {
+      "Shortcut": "DR",
+      "Description": "Dabbles Row",
+      "RoomID": "Ravensmere.Town Centre.Dabbles Row"
+    }
+	],
+  "RoomItems": [
+    {
+      "ItemID": "Oven1",
+      "ItemName": "5 Large Ovens for Baking",
+      "SingularPronoun": "",
+      "PluralName": "",
+      "PluralPronoun": "",
+      "ItemType": "tools",
+      "ItemFamily": "Oven",
+      "ItemDescription": "5 large ovens for baking breads.",
+      "ItemWeight": 500000,
+      "ItemSize": 500,
+      "HitPoints": 100000,
+      "MaxHitPoints": 100000,
+      "BaseDamage": 200,
+      "Toughness": 25,
+      "CanHoldOtherItems": false
+    }
+  ],
+	"NPCSpawns": null
+}
