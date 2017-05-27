@@ -2378,6 +2378,15 @@ namespace SlackMUDRPG.CommandClasses
 			}
 			else
 			{
+				// If the given slot name is actually the name of the item equipped to the slot
+				// then examine the item rather than listing inventory
+				if (this.GetEquippedItem(slotName) != null)
+				{
+					this.InspectObject(slotName);
+					return;
+				}
+
+				// List slot inventory
 				inventory += this.ListSlotDetails(slotName, true);
 			}
 
