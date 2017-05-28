@@ -521,20 +521,7 @@ namespace SlackMUDRPG.CommandClasses
 						
 						break;
 					case "teachrecipe":
-						// ensure the characters KnownRecipes property is a list
-						if (invokingCharacter.KnownRecipes == null)
-						{
-							invokingCharacter.KnownRecipes = new List<string>();
-						}
-
-						// only learn the recipe if not already known
-						if (invokingCharacter.KnownRecipes.Count(recipe => recipe == npccs.AdditionalData) == 0)
-						{
-							invokingCharacter.KnownRecipes.Add(npccs.AdditionalData);
-
-							invokingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"You learnt a new recipe {npccs.AdditionalData}."));
-						}
-
+						invokingCharacter.LearnRecipe(npccs.AdditionalData);
 						break;
                     case "shopitem":
                         // Get the scope
@@ -584,14 +571,38 @@ namespace SlackMUDRPG.CommandClasses
                                     // Check the player has enough money for the item
                                     if (invokingCharacter.Currency.CheckCurrency(shopItemToBuy.Cost))
                                     {
-                                        // Set the item id to be a generated one.
-                                        shopItemToBuy.Item.ItemID = Guid.NewGuid().ToString();
+										// Flag indicating if the item should be charged for
+										bool chargeForItem = true;
 
-                                        // Buy the item.
-										invokingCharacter.ReceiveItem(shopItemToBuy.Item);
+										// Index of the nextStep to take (0 = success, 1 = failed to buy)
+										Int32 nextStep = 0;
+
+										// Process the transaction, giveing the character the item or learning something
+										// as defined by the ShopItems type
+										switch (shopItemToBuy.ItemType)
+										{
+											case "recipe":
+												// Try and learn the recipe, only charge if the character can learn it
+												if (!invokingCharacter.LearnRecipe(shopItemToBuy.AdditionalData))
+												{
+													chargeForItem = false;
+													nextStep = 1;
+												}
+												break;
+											default:
+												// Set the item id to be a generated one.
+												shopItemToBuy.Item.ItemID = Guid.NewGuid().ToString();
+
+												// Buy the item.
+												invokingCharacter.ReceiveItem(shopItemToBuy.Item);
+												break;
+										}
 
                                         // Remove the money from the player
-                                        invokingCharacter.Currency.RemoveCurrency(shopItemToBuy.Cost);
+										if (chargeForItem)
+										{
+											invokingCharacter.Currency.RemoveCurrency(shopItemToBuy.Cost);
+										}
 
                                         // Save the Character
                                         invokingCharacter.SaveToApplication();
@@ -602,7 +613,7 @@ namespace SlackMUDRPG.CommandClasses
                                         // with different states as yet, so it'd involve a bit of work, although not massive).
 
                                         // Continue the conversation
-                                        ProcessConversationStep(npcc, nextSteps[0], invokingCharacter);
+                                        ProcessConversationStep(npcc, nextSteps[nextStep], invokingCharacter);
                                     }
                                     else
                                     {

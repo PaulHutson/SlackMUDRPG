@@ -1008,6 +1008,145 @@ namespace SlackMUDRPG.CommandClasses
             }
 		}
 
+		/// <summary>
+		/// Lists known recipes or details of a perticular known recipe if a recipe name is specified.
+		/// </summary>
+		/// <param name="recipe">Optional, name of the known recipe to detial.</param>
+		public void Recipes(string recipe = null)
+		{
+			if (recipe == null)
+			{
+				this.ListKnownRecipes();
+				return;
+			}
+
+			this.ShowRecipeDetails(recipe);
+			return;
+		}
+
+		/// <summary>
+		/// Lists the names of each recipe the character knows.
+		/// </summary>
+		private void ListKnownRecipes()
+		{
+			// Get a list on know recipes
+			List<SMReceipe> knowRecipes = this.GetKnownRecipes();
+
+			// If the character has not learnt any recipes yes
+			if (knowRecipes == null)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"You have not learnt any recipes yet!"));
+				return;
+			}
+
+			// List known recipes
+			string listing = String.Empty;
+
+			foreach (SMReceipe recipe in knowRecipes)
+			{
+				listing += this.Formatter.ListItem(recipe.Name);
+			}
+
+			string msg = this.Formatter.Bold("Know Recipes:", 1);
+
+			this.sendMessageToPlayer(msg + listing);
+			return;
+		}
+
+		/// <summary>
+		/// Outputs the details of a specified known recipe including its description, required skills and materials.
+		/// </summary>
+		/// <param name="recipeName">The name of the recipe to show details for.</param>
+		public void ShowRecipeDetails(string recipeName)
+		{
+			// Try and find the recipe
+			SMReceipe recipe = this.GetKnownRecipe(recipeName);
+
+			// If the recipe cannot be found inform the player and return
+			if (recipe == null)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find a known recipe with the name \"{Utils.SanitiseString(recipeName)}\"!"));
+				return;
+			}
+
+			// Output the recipe details
+			string details = this.Formatter.Bold(recipe.Name, 1);
+			details += this.Formatter.Italic(recipe.Description, 2);
+
+			details += this.Formatter.Bold("Required Skills (Lvl): ");
+			details += this.Formatter.General(recipe.GetRequiredSkillsString(), 2);
+
+			details += this.Formatter.Bold("Required Materials: ");
+			details += this.Formatter.General(recipe.GetRequiredMaterialsString());
+
+			this.sendMessageToPlayer(details);
+			return;
+		}
+
+		/// <summary>
+		/// Gets an ordered (by name) list of the characters know recipes.
+		/// </summary>
+		/// <returns>The list a known recipes.</returns>
+		private List<SMReceipe> GetKnownRecipes()
+		{
+			// Get a list of recipes in the game world
+			List<SMReceipe> smrs = (List<SMReceipe>)HttpContext.Current.Application["SMReceipes"];
+
+			// Create a new empty list to hold recipes the character knows
+			List<SMReceipe> recipes = new List<SMReceipe>();
+
+			// Loop round the KnownRecipes list
+			if (this.KnownRecipes != null && this.KnownRecipes.Any())
+			{
+				foreach (string recipe in this.KnownRecipes)
+				{
+					recipes.Add(smrs.FirstOrDefault(rec => rec.Name.ToLower() == recipe.ToLower()));
+				}
+			}
+
+			// Sort and return the list of know recipes
+			return recipes.Count > 0 ? recipes.OrderBy(r => r.Name).ToList() : null;
+		}
+
+		/// <summary>
+		/// Get a known recipe by name.
+		/// </summary>
+		/// <param name="recipeName">The name of the recipe to search for.</param>
+		/// <returns>The SMRecipe object is found otherwise null.</returns>
+		private SMReceipe GetKnownRecipe(string recipeName)
+		{
+			List<SMReceipe> knowRecipes = this.GetKnownRecipes();
+
+			return knowRecipes.FirstOrDefault(r => r.Name.ToLower() == recipeName.ToLower());
+		}
+
+		/// <summary>
+		/// Learns a new recipe of a given name.
+		/// </summary>
+		/// <param name="recipeName">The name or the recipe to learn.</param>
+		public bool LearnRecipe(string recipeName)
+		{
+			// Ensure the characters KnownRecipes property is a list
+			if (this.KnownRecipes == null)
+			{
+				this.KnownRecipes = new List<string>();
+			}
+
+			// Only learn the recipe if not already known
+			if (this.KnownRecipes.Count(recipe => recipe == recipeName) == 0)
+			{
+				this.KnownRecipes.Add(recipeName);
+
+				this.sendMessageToPlayer(this.Formatter.Italic($"You learnt a new recipe \"{recipeName}\"."));
+				return true;
+			}
+			else
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"You already know the recipe \"{recipeName}\"."));
+				return false;
+			}
+		}
+
 		#endregion
 
 		#region "Combat Related Functions"

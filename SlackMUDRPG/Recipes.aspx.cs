@@ -76,8 +76,8 @@ namespace SlackMUDRPG
 					template = template.Replace("{panelId}", guid);
 					template = template.Replace("{Name}", recipe.Name);
 					template = template.Replace("{Description}", recipe.Description);
-					template = template.Replace("{RequiredSkills}", Utils.noneIfNull(this.GetRequiredSkillsString(recipe)));
-					template = template.Replace("{RequiredMaterials}", this.GetRequiredMaterialsString(recipe));
+					template = template.Replace("{RequiredSkills}", Utils.noneIfNull(recipe.GetRequiredSkillsString()));
+					template = template.Replace("{RequiredMaterials}", recipe.GetRequiredMaterialsString());
 					template = template.Replace("{NeedToLearn}", this.GetNeedToLearnString(recipe));
 
 					html += template;
@@ -112,40 +112,6 @@ namespace SlackMUDRPG
 			List<SMReceipe> filtered = smrl.Where(recipe => recipe.Produces.Split('.')[0] == recipeType).ToList();
 
 			return filtered.OrderBy(recipe => recipe.Name).ToList();
-		}
-
-		/// <summary>
-		/// Gets a string representing the skills required to do a given recipe
-		/// </summary>
-		/// <param name="recipe">The recipe to inspect required skills for</param>
-		/// <returns>A string of required skills and level</returns>
-		private string GetRequiredSkillsString(SMReceipe recipe)
-		{
-			List<string> required = new List<string>();
-
-			foreach (SMSkillHeld skill in recipe.RequiredSkills)
-			{
-				required.Add($"{skill.SkillName} ({skill.SkillLevel})");
-			}
-
-			return String.Join(", ", required.ToArray());
-		}
-
-		/// <summary>
-		/// Gets a string representing the materials required to do a given recipe
-		/// </summary>
-		/// <param name="recipe">The recipe to inspect required materials for</param>
-		/// <returns>A string of required materials and quantity</returns>
-		private string GetRequiredMaterialsString(SMReceipe recipe)
-		{
-			List<string> required = new List<string>();
-
-			foreach (SMReceipeMaterial material in recipe.Materials)
-			{
-				required.Add($"{material.MaterialType.Split('.')[1]} x {material.MaterialQuantity}");
-			}
-
-			return String.Join(", ", required.ToArray());
 		}
 
 		/// <summary>

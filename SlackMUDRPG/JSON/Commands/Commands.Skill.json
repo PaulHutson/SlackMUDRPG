@@ -37,5 +37,18 @@
 		"PassUserIDAsFirstArg": false,
 		"ExampleUsage": "cast fly stick, or cast thunderbolt",
 		"RequiredSkill": null
+	},
+	{
+		"CommandFamily": "Recipes",
+		"CommandName": "recipe, recipes",
+		"CommandDescription": "List the recipes the player knows or get details about a specific one.",
+		"CommandSyntax": "{name|lower} [optional recipe name]",
+		"ParamsExpression": "{.+}?",
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "Recipes",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "recipe Simple Leather Belt",
+		"RequiredSkill": null
 	}
 ]
