@@ -1,0 +1,92 @@
+﻿{
+	"Name": "Venison Steak",
+	"Description": "The knowledge to butcher a deer to produce venison steaks.",
+	"Produces": "Resource.VenisonSteak|4",
+	"PauseTime": 5,
+	"NeedToLearn": true,
+	"ProductionTrait": "Trait.Butchery",
+	"Materials": [
+		{
+			"MaterialType": "ItemName.Deer Meat",
+			"MaterialQuantity": 1
+		}
+	],
+	"RequiredSkills": [
+		{
+			"SkillName": "Butchery",
+			"SkillLevel": "5"
+		}
+	],
+	"SkillSteps": [
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} begins to prepare {TARGETNAME}."
+		},
+		{
+			"StepType": "CheckConsumeItems",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": "You do not have the required {ITEMNAME} to prepare {TARGETNAME}.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 3,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} places {ITEMNAME} on the butchers block."
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 5,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "ConsumeItems",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": "You do not have enough {ITEMNAME} to complete the task.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 2,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} precisly cuts the {ITEMNAME} to prepare {TARGETNAME}."
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 10,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "CreateObject",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"FailureOutput": "Failed to prepare {TARGETNAME}",
+			"SuccessOutput": "You've prepared {TARGETNAME} (it is located in the same place as you)."
+		}
+	]
+}

@@ -1,0 +1,61 @@
+﻿{
+	"SkillType": {
+		"SkillTypeName": "Production",
+		"SkillTypeDescription": "Skills related to the production of items."
+	},
+	"SkillName": "Butchery",
+	"CanUseWithoutLearning": false,
+	"SkillDescription": "The ability to prepare animal meat in specific ways.",
+	"SkillLearnText": "You've learnt how to prepare animal meat in specific ways.",
+	"LevelIncreaseText": "You feel you've gotten better at butchery.",
+	"ActivityType": "Butchery",
+	"BaseStat": "DEX",
+	"LevelMultiplier": 10,
+	"ImprovementSpeed": 10,
+	"Prerequisites": [
+		{
+			"IsSkill": false,
+			"SkillStatName": "DEX",
+			"PreReqLevel": 10
+		},
+		{
+			"IsSkill": false,
+			"SkillStatName": "INT",
+			"PreReqLevel": 10
+		}
+	],
+	"SkillSteps": [
+		{
+			"StepType": "EquippedObject",
+			"StepRequiredObject": "Family.Meat Cleaver",
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+			"FailureOutput": "You don't have a meat cleaver equipped.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "CheckObjectInLocation",
+			"StepRequiredObject": "Item.Butchers Block",
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+			"FailureOutput": "There is no butchers block here.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "CheckReceipe",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": "Trait.Butchery",
+			"FailureOutput": "The item you're trying to prepare is not something you use butchery to do.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "UseReceipe",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+			"FailureOutput": "Failed to produce {ITEMNAME}.",
+			"SuccessOutput": null
+		}
+	]
+}

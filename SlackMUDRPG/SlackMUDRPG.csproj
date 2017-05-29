@@ -217,6 +217,7 @@
     <Content Include="HTMLTemplates\SkillTemplate.html" />
     <Content Include="Items.aspx" />
     <Content Include="JSON\Commands\Commands.General.json" />
+    <Content Include="JSON\Objects\Weapon.MeatCleaver.json" />
     <Content Include="JSON\Skills\Skill.Block.json" />
     <Content Include="packages.config" />
     <Content Include="JSON\GeneralText\NoCharacter.json" />
@@ -487,6 +488,12 @@
     <Content Include="JSON\Objects\Environment.Fungus.json" />
     <Content Include="JSON\Quests\Crabby.Fish For The Smoking.json" />
     <Content Include="JSON\Objects\Food.Bread" />
+    <Content Include="JSON\Skills\Skill.Butchery.json" />
+    <Content Include="JSON\Objects\Resource.VenisonSteak.json" />
+    <Content Include="JSON\Objects\Tools.ButchersBlock.json" />
+    <Content Include="JSON\Objects\Resource.RabbitShank.json" />
+    <Content Include="JSON\Receipe\Resource.VenisonSteak.json" />
+    <Content Include="JSON\Receipe\Resource.RabbitShank.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="RebuildCharNameList.aspx" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />

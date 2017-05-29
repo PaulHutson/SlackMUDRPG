@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Rabbit Shank",
+	"PluralName": "Rabbit Shanks",
+	"PluralPronoun": "some",
+	"ItemType": "Resource",
+	"ItemFamily": "Raw Meat",
+	"ItemDescription": "This rabbit shank won't fill you up but cook up a few and you'll have a tasty meal.",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.0001,
+	"Toughness": 1
+} 
