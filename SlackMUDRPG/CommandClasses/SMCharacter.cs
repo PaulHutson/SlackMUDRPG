@@ -840,7 +840,7 @@ namespace SlackMUDRPG.CommandClasses
 								switch (sme.EffectType)
 								{
 									case "HP-Regeneration":
-										this.RecoverHp(Int32.Parse(sme.AdditionalData));
+										this.Attributes.RecoverHp(Int32.Parse(sme.AdditionalData), this);
 										break;
 								}
 							}
@@ -872,34 +872,6 @@ namespace SlackMUDRPG.CommandClasses
                 this.sendMessageToPlayer(this.Formatter.Italic($"Can not find the item {Utils.SanitiseString(itemName)}"));
             }
         }
-
-		/// <summary>
-		/// Recover a given number of HP up to the character Max HP attribute.
-		/// </summary>
-		/// <param name="Amount">The integer amount of HP to recover.</param>
-		public void RecoverHp(Int32 Amount)
-		{
-			// Workout how many HP the character is from its max
-			Int32 missingHp = this.Attributes.MaxHitPoints - this.Attributes.HitPoints;
-
-			// Do nothing if HP already at its max
-			if (missingHp == 0)
-			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"Your hit points are already full!"));
-				return;
-			}
-
-			// Workout how many hp to recover to ensure we dont go over the characters max HP
-			Int32 hpToGain = missingHp < Amount ? missingHp : Amount;
-
-			// Recover the HP
-			this.Attributes.HitPoints += hpToGain;
-
-			// Inform the player how many HP they recovered
-			this.sendMessageToPlayer(this.Formatter.Italic($"You recovered \"{hpToGain}\" hit points giving you a total of \"{this.Attributes.HitPoints}\"."));
-
-			return;
-		}
 
 		#endregion
 
