@@ -821,7 +821,7 @@ namespace SlackMUDRPG.CommandClasses
 					RemoveOwnedItem(smi.ItemName, false);
 
 					// Inform the player the item has been consumed
-					this.sendMessageToPlayer(this.Formatter.Italic($"You {consumeVerb} {smi.SingularPronoun} {smi.ItemName}."));
+					this.sendMessageToPlayer(this.Formatter.Italic($"You {singularConsumeVerb} {smi.SingularPronoun} {smi.ItemName}."));
 
 					// Check that the player has an initialised Effects list on the attributes
 					if (this.Attributes.Effects == null)
