@@ -12,7 +12,25 @@
 			"RoomID": "Ravensmere.Harbour South.Bridge Row"
 		}
 	],
-	"RoomItems": null,
+	"RoomItems": [
+		{
+			"ItemID": "sam-and-ellas-butchers-block",
+			"ItemName": "Butchers Block",
+			"SingularPronoun": "a",
+			"PluralName": "Butchers Blocks",
+			"PluralPronoun": "some",
+			"ItemType": "tools",
+			"ItemFamily": "Butchers Block",
+			"ItemDescription": "A wooden block used for preparing cuts of meat on.",
+			"ItemWeight": 75,
+			"ItemSize": 75,
+			"HitPoints": 100000,
+			"MaxHitPoints": 100000,
+			"BaseDamage": 20,
+			"Toughness": 25,
+			"CanHoldOtherItems": false
+		}
+	],
 	"NPCShopItems": {
 		"ShopInventory": [
 			{
