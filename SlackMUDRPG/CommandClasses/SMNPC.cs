@@ -85,6 +85,7 @@ namespace SlackMUDRPG.CommandClasses
 
             // Get a list of characters that respond to this action type in the room
             List<NPCResponses> listToChooseFrom = NPCResponses.FindAll(npcr => npcr.ResponseType.ToLower() == actionType.ToLower());
+
             // if the NPC doesn't define responds to the event we'll look for defaults on the race.
             if (listToChooseFrom.Count == 0)
             {
@@ -94,50 +95,13 @@ namespace SlackMUDRPG.CommandClasses
             // Cull any prerequisites.
             if ((listToChooseFrom != null) && (invokingCharacter != null))
             {
-                // get the quests for use later
-                List<SMQuestStatus> smqs = new List<SMQuestStatus>();
-                if (invokingCharacter.QuestLog != null)
-                {
-                    smqs = invokingCharacter.QuestLog;
-                }
-
                 // .. if there is, loop around them.
                 foreach (NPCResponses npr in listToChooseFrom)
                 {
                     if (npr.PreRequisites != null)
                     {
-                        bool canUseResponse = true;
-                        foreach (NPCConversationStepResponseOptionsPreRequisites prereq in npr.PreRequisites)
-                        {
-                            // Check the prereq types.
-                            switch (prereq.Type)
-                            {
-                                case "HasDoneQuest":
-                                    if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (quest.Completed)) == 0)
-                                    {
-                                        canUseResponse = false;
-                                    }
-                                    break;
-                                case "InProgressQuest":
-                                    if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (!quest.Completed)) == 0)
-                                    {
-                                        canUseResponse = false;
-                                    }
-                                    break;
-								case "HasNotDoneQuest":
-                                    if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData)) != 0)
-                                    {
-                                        canUseResponse = false;
-                                    }
-                                    break;
-                                case "IsNotInProgressQuest":
-                                    if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (!quest.Completed)) != 0)
-                                    {
-                                        canUseResponse = false;
-                                    }
-                                    break;
-                            }
-                        }
+						// Check the response pre requisites
+						bool canUseResponse = this.CheckResponcePreRequisites(npr.PreRequisites, invokingCharacter);
 
                         // Remove any items from the list that can't be used.
                         if (!canUseResponse)
@@ -777,64 +741,10 @@ namespace SlackMUDRPG.CommandClasses
 				// Variable to hold whether the response can be added - it may not be allowed due to some prereqs..
 				bool canAddResponse = true;
 
-				// Check if there is a prereq...
+				// Check if there is a prereq and if there is the pre requisites are met
 				if (npcccsro.PreRequisites != null)
 				{
-					// get the quests for use later
-					List<SMQuestStatus> smqs = new List<SMQuestStatus>();
-					if (invokingCharacter.QuestLog != null)
-					{
-						smqs = invokingCharacter.QuestLog;
-					}
-
-					// .. if there is, loop around them.
-					foreach (NPCConversationStepResponseOptionsPreRequisites prereq in npcccsro.PreRequisites)
-					{
-						switch (prereq.Type) {
-							case "HasDoneQuest":
-								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (quest.Completed)) == 0)
-								{
-									canAddResponse = false;
-								}
-								break;
-							case "InProgressQuest":
-								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (!quest.Completed)) == 0)
-								{
-									canAddResponse = false;
-								}
-								break;
-							case "InProgressQuestStep":
-								string[] data = prereq.AdditionalData.Split('.');
-								SMQuestStatus qst = smqs.FirstOrDefault(q => q.QuestName == data[0]);
-
-								// quest not started OR quest complete OR not on correct step
-								if (qst == null || qst.Completed || qst.QuestStep != data[1])
-								{
-									canAddResponse = false;
-								}
-								break;
-							case "HasNotDoneQuest":
-								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData)) != 0)
-								{
-									canAddResponse = false;
-								}
-								break;
-							case "IsNotInProgressQuest":
-								if (smqs.Count(quest => (quest.QuestName == prereq.AdditionalData) && (!quest.Completed)) != 0)
-								{
-									canAddResponse = false;
-								}
-								break;
-							case "HasItem":
-								string[] additionalDataSplit = prereq.AdditionalData.Split('.');
-
-								if (invokingCharacter.CountOwnedItems(additionalDataSplit[0]) < Int32.Parse(additionalDataSplit[1]))
-								{
-									canAddResponse = false;
-								}
-								break;
-						}
-					}
+					canAddResponse = this.CheckResponcePreRequisites(npcccsro.PreRequisites, invokingCharacter);
 				}
 
 				// Check that the response can be added
@@ -1046,6 +956,83 @@ namespace SlackMUDRPG.CommandClasses
         {
             // Do nothing, we don't want to save the file out for NPCs.
         }
+
+		/// <summary>
+		/// Checks if the pre requisite conditions for a given list of conversation responce steps are met or not.
+		/// </summary>
+		/// <param name="Prereqs">A list of conversation response pre requisites.</param>
+		/// <param name="invokingCharacter">The character invoking the conversation step.</param>
+		/// <returns>True if all pre requisites are met else false.</returns>
+		private bool CheckResponcePreRequisites(List<NPCConversationStepResponseOptionsPreRequisites> Prereqs, SMCharacter invokingCharacter)
+		{
+			// Get the invoking characters quest log
+			List<SMQuestStatus> questLog = new List<SMQuestStatus>();
+
+			if (invokingCharacter.QuestLog != null)
+			{
+				questLog = invokingCharacter.QuestLog;
+			}
+
+			// Set a flag it indicate if the prereqs are met
+			bool prereqsMet = true;
+
+			// Loop around the prereqs and check if they are met
+			foreach (NPCConversationStepResponseOptionsPreRequisites prereq in Prereqs)
+			{
+				switch (prereq.Type)
+				{
+					case "HasDoneQuest":
+						if (questLog.Count(q => q.QuestName == prereq.AdditionalData && q.Completed) == 0)
+						{
+							prereqsMet = false;
+						}
+						break;
+
+					case "InProgressQuest":
+						if (questLog.Count(q => q.QuestName == prereq.AdditionalData && !q.Completed) == 0)
+						{
+							prereqsMet = false;
+						}
+						break;
+
+					case "InProgressQuestStep":
+						string[] data = prereq.AdditionalData.Split('.');
+						SMQuestStatus quest = questLog.FirstOrDefault(q => q.QuestName == data[0]);
+
+						// Quest not started || quest complete || quest not on correct step
+						if (quest == null || quest.Completed || quest.QuestStep != data[1])
+						{
+							prereqsMet = false;
+						}
+						break;
+
+					case "HasNotDoneQuest":
+						if (questLog.Count(q => (q.QuestName == prereq.AdditionalData)) != 0)
+						{
+							prereqsMet = false;
+						}
+						break;
+
+					case "IsNotInProgressQuest":
+						if (questLog.Count(q => (q.QuestName == prereq.AdditionalData) && (!q.Completed)) != 0)
+						{
+							prereqsMet = false;
+						}
+						break;
+
+					case "HasItem":
+						string[] additionalDataSplit = prereq.AdditionalData.Split('.');
+
+						if (invokingCharacter.CountOwnedItems(additionalDataSplit[0]) < Int32.Parse(additionalDataSplit[1]))
+						{
+							prereqsMet = false;
+						}
+						break;
+				}
+			}
+
+			return prereqsMet;
+		}
 	}
 
 	#region "NPC Structures"
