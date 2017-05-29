@@ -800,22 +800,31 @@ namespace SlackMUDRPG.CommandClasses
             this.ConsumeItem(itemName, "eats", "eat", "Eatable");
         }
 
-        /// <summary>
-        /// Consume something
-        /// </summary>
-        /// <param name="itemName">The name of the item to consume</param>
-        public void ConsumeItem(string itemName, string consumeVerb, string singularConsumeVerb, string objectTrait)
+		/// <summary>
+		/// Consume a given item.
+		/// </summary>
+		/// <param name="itemName">The name of the thing to consume.</param>
+		/// <param name="consumeVerb">The verb associated with the consumption e.g. "eats".</param>
+		/// <param name="singularConsumeVerb">The singular verb associated with the consumption e.g. "eat".</param>
+		/// <param name="objectTrait">The object trait required for consumption e.g. "Eatable".</param>
+		public void ConsumeItem(string itemName, string consumeVerb, string singularConsumeVerb, string objectTrait)
         {
             // Check the item exists in the characters posession.
             SMItem smi = this.GetOwnedItem(itemName);
 
             // Check that the character has the item about their person...
             if (smi != null) {
-                // See if the item can be drunk...
+                // See if the item matched the given trait (eatable, drinkable) ...
                 if (smi.ObjectTrait.ToLower().Contains(objectTrait.ToLower()))
                 {
-                    // Check that the player has an initialised Effects list on the attributes
-                    if (this.Attributes.Effects == null)
+					// Remove the item
+					RemoveOwnedItem(smi.ItemName, false);
+
+					// Inform the player the item has been consumed
+					this.sendMessageToPlayer(this.Formatter.Italic($"You {consumeVerb} {smi.SingularPronoun} {smi.ItemName}."));
+
+					// Check that the player has an initialised Effects list on the attributes
+					if (this.Attributes.Effects == null)
                     {
                         this.Attributes.Effects = new List<SMEffect>();
                     }
@@ -825,32 +834,72 @@ namespace SlackMUDRPG.CommandClasses
                     {
                         if (sme.Action.ToLower() == "onconsume")
                         {
-                            // Change the timing on this.
-                            sme.EffectLength = Utility.Utils.GetUnixTimeOffset(sme.EffectLength);
+							// If effect length is 0 apply the effect immediatly
+							if (sme.EffectLength == 0)
+							{
+								switch (sme.EffectType)
+								{
+									case "HP-Regeneration":
+										this.RecoverHp(Int32.Parse(sme.AdditionalData));
+										break;
+								}
+							}
+							else // ... apply the effect with correct timing
+							{
+								// Change the timing on this.
+								sme.EffectLength = Utility.Utils.GetUnixTimeOffset(sme.EffectLength);
 
-                            // Now add the effect to the attributes
-                            this.Attributes.Effects.Add(sme);
+								// Now add the effect to the attributes
+								this.Attributes.Effects.Add(sme);
+							}
                         }
                     }
 
-                    // Remove the item.
-                    RemoveOwnedItem(smi.ItemName, false);
+					// Save the changes to the character
                     this.SaveToApplication();
                     this.SaveToFile();
 
-                    // Tell everyone that the character has drunk the item.
-                    this.GetRoom().Announce("[i]" + this.GetFullName() + " " + consumeVerb + " " + smi.SingularPronoun + " " + smi.ItemName + "[/i]", this);
+                    // Tell everyone that the character has consumed the item.
+                    this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} {consumeVerb} {smi.SingularPronoun} {smi.ItemName}"), this, true);
                 }
                 else // ... tell the player that it can't.
                 {
-                    this.sendMessageToPlayer("[i]Can not drink that item.[/i]");
+                    this.sendMessageToPlayer(this.Formatter.Italic($"Can not {consumeVerb} that item."));
                 }
             }
             else // ...they don't have the item.
             {
-                this.sendMessageToPlayer("[i]Can not find the item " + itemName + "[/i]");
+                this.sendMessageToPlayer(this.Formatter.Italic($"Can not find the item {Utils.SanitiseString(itemName)}"));
             }
         }
+
+		/// <summary>
+		/// Recover a given number of HP up to the character Max HP attribute.
+		/// </summary>
+		/// <param name="Amount">The integer amount of HP to recover.</param>
+		public void RecoverHp(Int32 Amount)
+		{
+			// Workout how many HP the character is from its max
+			Int32 missingHp = this.Attributes.MaxHitPoints - this.Attributes.HitPoints;
+
+			// Do nothing if HP already at its max
+			if (missingHp == 0)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Your hit points are already full!"));
+				return;
+			}
+
+			// Workout how many hp to recover to ensure we dont go over the characters max HP
+			Int32 hpToGain = missingHp < Amount ? missingHp : Amount;
+
+			// Recover the HP
+			this.Attributes.HitPoints += hpToGain;
+
+			// Inform the player how many HP they recovered
+			this.sendMessageToPlayer(this.Formatter.Italic($"You recovered \"{hpToGain}\" hit points giving you a total of \"{this.Attributes.HitPoints}\"."));
+
+			return;
+		}
 
 		#endregion
 
