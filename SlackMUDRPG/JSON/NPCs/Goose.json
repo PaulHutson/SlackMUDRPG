@@ -35,7 +35,7 @@
 	"FamilyType": "Goose",
 	"PronounSingular": "a",
 	"PronounMultiple": "some",
-	"DestroyedOutput": "Resource.Feather,5|Resource.Meat,1",
+	"DestroyedOutput": "Resource.Feather,5|Resource.Carcass,1",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",

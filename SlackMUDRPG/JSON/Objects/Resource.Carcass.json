@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "{Family} Carcass",
+	"PluralPronoun": "some",
+	"PluralName": "{Family} Carcasses",
+	"ItemType": "Resource",
+	"ItemFamily": "Carcass",
+	"ItemDescription": "A {Family} carcass",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.001,
+	"Toughness": 1
+}

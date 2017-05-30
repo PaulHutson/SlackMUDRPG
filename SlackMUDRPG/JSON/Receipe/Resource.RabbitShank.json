@@ -7,7 +7,7 @@
 	"ProductionTrait": "Trait.Butchery",
 	"Materials": [
 		{
-			"MaterialType": "ItemName.Rabbit Meat",
+			"MaterialType": "ItemName.Rabbit Carcass",
 			"MaterialQuantity": 1
 		}
 	],

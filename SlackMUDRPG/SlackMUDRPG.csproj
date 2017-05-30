@@ -408,7 +408,7 @@
     <Content Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\Skills\Skill.Skin.json" />
     <Content Include="JSON\Objects\Weapon.Knife.json" />
-    <Content Include="JSON\Objects\Resource.Meat.json" />
+    <Content Include="JSON\Objects\Resource.Carcass.json" />
     <Content Include="JSON\Objects\Resource.Skin.json" />
     <Content Include="JSON\Objects\Resource.Bones.json" />
     <Content Include="JSON\Objects\Container.Bucket.json" />

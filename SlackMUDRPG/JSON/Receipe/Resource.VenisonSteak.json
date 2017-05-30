@@ -7,7 +7,7 @@
 	"ProductionTrait": "Trait.Butchery",
 	"Materials": [
 		{
-			"MaterialType": "ItemName.Deer Meat",
+			"MaterialType": "ItemName.Deer Carcass",
 			"MaterialQuantity": 1
 		}
 	],
