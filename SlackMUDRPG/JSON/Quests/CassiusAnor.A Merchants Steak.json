@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "A Merchants Steak",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Get Venison Steaks for Cassius Anor",
+			"Type": "Get",
+			"CharacterName": "Cassius Anor",
+			"LocationID": "Ravensmere.Town Centre.The Merchants Arm",
+			"AdditionalData": "ItemName.Vension Steaks,4",
+			"Instructions": "Bring four Venison Steaks to Cassius Anor"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Money",
+			"AdditionalData": "75"
+		}
+	]
+}

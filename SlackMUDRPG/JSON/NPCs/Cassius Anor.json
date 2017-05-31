@@ -161,6 +161,46 @@
                 }
               ]
             },
+			{
+				"ResponseOptionShortcut": "WORK",
+				"ResponseOptionText": "I'm looking for work, do you need anything doing around here? [i]Quest[/i]",
+				"PreRequisites": [
+					{
+						"Type": "HasNotDoneQuest",
+						"AdditionalData": "A Merchants Steak"
+					},
+					{
+						"Type": "IsNotInProgressQuest",
+						"AdditionalData": "A Merchants Steak"
+					}
+				],
+				"ResponseOptionActionSteps": [
+					{
+						"NPCResponseOptionActionType": "Conversation",
+						"AdditionalData": "VenisonSteak.Intro-Step-1"
+					}
+				]
+			},
+			{
+				"ResponseOptionShortcut": "VS",
+				"ResponseOptionText": "I've got some venison steaks for you.",
+				"PreRequisites": [
+						{
+							"Type": "InProgressQuest",
+							"AdditionalData": "A Merchants Steak"
+						},
+						{
+							"Type": "HasItem",
+							"AdditionalData": "Vension Steak.4"
+						}
+					],
+				"ResponseOptionActionSteps": [
+					{
+					"NPCResponseOptionActionType": "Conversation",
+					"AdditionalData": "VenisonSteak.Return-Step-1"
+					}
+				]
+			},
             {
               "ResponseOptionShortcut": "N",
               "ResponseOptionText": "No",
@@ -175,6 +215,137 @@
         }
       ]
     },
+	{
+		"ConversationID": "VenisonSteak",
+		"ConversationStep": [
+			{
+				"StepID": "Intro-Step-1",
+				"Scope": "saytoplayer",
+				"AdditionalData": "I'm not hiring folks at the moment, but maybe there is something else you can help with...",
+				"NextStep": "Intro-Step-2.3",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Intro-Step-2",
+				"Scope": "saytoplayer",
+				"AdditionalData": "You look like the type who can get things. Venison steaks are in short supply these days but my custoers can't get enought of them.",
+				"NextStep": "Intro-Step-3.4",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Intro-Step-3",
+				"Scope": "saytoplayer",
+				"AdditionalData": "Maybe you can get me some? I'll pay good money.",
+				"NextStep": "Intro-Step-4.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Intro-Step-4",
+				"Scope": "addquest",
+				"AdditionalData": "CassiusAnor.A Merchants Steak",
+				"NextStep": null,
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Step-1",
+				"Scope": "saytoplayer",
+				"AdditionalData": "Lets have a look at them then...",
+				"NextStep": "Return-Step-2.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Step-2",
+				"Scope": "saytoplayer",
+				"AdditionalData": "",
+				"NextStep": null,
+				"ResponseOptions": [
+					{
+						"ResponseOptionShortcut": "GIVE",
+						"ResponseOptionText": "Give Cassius four venison steaks.",
+						"ResponseOptionActionSteps": [
+							{
+								"NPCResponseOptionActionType": "Conversation",
+								"AdditionalData": "VenisonSteak.Return-Give-Step-1"
+							}
+						]
+					},
+					{
+						"ResponseOptionShortcut": "N",
+						"ResponseOptionText": "Not right now.",
+						"ResponseOptionActionSteps": [
+							{
+								"NPCResponseOptionActionType": "Conversation",
+								"AdditionalData": "VenisonSteak.Return-DontGive-Step-1"
+							}
+						]
+					}
+				]
+			},
+			{
+				"StepID": "Return-Give-Step-1",
+				"Scope": "takeitems",
+				"AdditionalData": "Venison Steak.4",
+				"NextStep": "Return-Give-Step-2.3",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-2",
+				"Scope": "emotetoplayer",
+				"AdditionalData": "takes four [b]Venison Steaks[/b] from you.",
+				"NextStep": "Return-Give-Step-3.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-3",
+				"Scope": "saytoplayer",
+				"AdditionalData": "Very nice, these will keep the punters happy. Where did you get them from?",
+				"NextStep": "Return-Give-Step-4.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-4",
+				"Scope": "emotetoplayer",
+				"AdditionalData": "looks at you hopefully.",
+				"NextStep": "Return-Give-Step-5.4",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-5",
+				"Scope": "saytoplayer",
+				"AdditionalData": "Fine, keep your secrets. A deals a deal as promised heres your money.",
+				"NextStep": "Return-Give-Step-6.3",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-6",
+				"Scope": "updatequest",
+				"AdditionalData": "CassiusAnor.A Merchants Steak",
+				"NextStep": "Return-Give-Step-7.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-7",
+				"Scope": "increasefactionlevel",
+				"AdditionalData": "Cassius Anor|1",
+				"NextStep": "Return-Give-Step-8.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-8",
+				"Scope": "saytoplayer",
+				"AdditionalData": "If you've got a good supply why don't you bring me some more tomorrow, I'll always pay for good quality meat.",
+				"NextStep": null,
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-DontGive-Step-1",
+				"Scope": "saytoplayer",
+				"AdditionalData": "Come back when your ready then!",
+				"NextStep": null,
+				"ResponseOptions": null
+			}
+		]
+	},
     {
       "ConversationID": "Shop",
       "ConversationStep": [
