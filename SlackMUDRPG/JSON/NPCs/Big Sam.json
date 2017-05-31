@@ -409,14 +409,14 @@
 					"StepID": "Intro-Step-1",
 					"Scope": "saytoplayer",
 					"AdditionalData": "You've been coming here for a while now, as your interested I'll teach you the basics.",
-					"NextStep": "Intro-Step-2.3",
+					"NextStep": "Intro-Step-2.4",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Intro-Step-2",
 					"Scope": "saytoplayer",
 					"AdditionalData": "All animals are different you'll need to learn about each type individually. That said you will need two things before you can get started.",
-					"NextStep": "Intro-Step-3.3",
+					"NextStep": "Intro-Step-3.5",
 					"ResponseOptions": null
 				},
 				{
@@ -430,21 +430,21 @@
 					"StepID": "Intro-Step-4",
 					"Scope": "saytoplayer",
 					"AdditionalData": "This is a meat cleaver, you won't get far without one. I've had this one for over 20 years, you need to look after it, keep it clean and sharp if you want to make a nice cut.",
-					"NextStep": "Intro-Step-5.3",
+					"NextStep": "Intro-Step-5.6",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Intro-Step-5",
 					"Scope": "saytoplayer",
 					"AdditionalData": "Steelforge Blacksmiths in the military district is the place to go to get one. I've known Master Duncan for years, his work is exceptional.",
-					"NextStep": "Intro-Step-6.3",
+					"NextStep": "Intro-Step-6.6",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Intro-Step-6",
 					"Scope": "saytoplayer",
 					"AdditionalData": "Its not only about the cleaver though, you need somewhere to work. My butchers block here is made of hard Maple. Its a sturdy thing that won't move around as you chop. Also the wooden surface is forgiving enough not to damage the blade of my cleaver.",
-					"NextStep": "Intro-Step-7.5",
+					"NextStep": "Intro-Step-7.8",
 					"ResponseOptions": null
 				},
 				{
@@ -472,14 +472,14 @@
 					"StepID": "Learning-Step-2",
 					"Scope": "saytoplayer",
 					"AdditionalData": "Very nice, now be careful the last student I had got careless and ended up loosing three fingers!",
-					"NextStep": "Learning-Step-3.3",
+					"NextStep": "Learning-Step-3.4",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Learning-Step-3",
 					"Scope": "saytoplayer",
-					"AdditionalData": "You're in luck today I have a big order for rabbit shanks so watch closly and I'll show you what to do.",
-					"NextStep": "Learning-Step-4.3",
+					"AdditionalData": "You're in luck, today I have a big order for rabbit shanks so watch closly and I'll show you what to do.",
+					"NextStep": "Learning-Step-4.5",
 					"ResponseOptions": null
 				},
 				{
@@ -493,14 +493,14 @@
 					"StepID": "Learning-Step-5",
 					"Scope": "saytoplayer",
 					"AdditionalData": "This is a rabbit carcass, you get it by skinning the corpse of a rabbit.",
-					"NextStep": "Learning-Step-6.3",
+					"NextStep": "Learning-Step-6.4",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Learning-Step-6",
 					"Scope": "emotetoplayer",
 					"AdditionalData": "strikes the rabbit carcass removing one of its rear legs.",
-					"NextStep": "Learning-Step-7.2",
+					"NextStep": "Learning-Step-7.3",
 					"ResponseOptions": null
 				},
 				{
@@ -514,67 +514,67 @@
 					"StepID": "Learning-Step-8",
 					"Scope": "saytoplayer",
 					"AdditionalData": "There you go, remember keep your fingers out of the way take care with the cuts.",
-					"NextStep": "Learning-Step-9.3",
+					"NextStep": "Learning-Step-9.5",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Learning-Step-9",
 					"Scope": "teachskill",
 					"AdditionalData": "Butchery.1",
-					"NextStep": "Learning-Step-10.3",
-					"ResponseOptions": null
-				},
-				{
-					"StepID": "Learning-Step-9",
-					"Scope": "teachrecipe",
-					"AdditionalData": "Rabbit Shank",
-					"NextStep": "Learning-Step-10.3",
+					"NextStep": "Learning-Step-10.4",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Learning-Step-10",
-					"Scope": "updatequest",
-					"AdditionalData": "BigSam.Making The Cut",
-					"NextStep": "Learning-Step-11.2",
+					"Scope": "teachrecipe",
+					"AdditionalData": "Rabbit Shank",
+					"NextStep": "Learning-Step-11.4",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Learning-Step-11",
-					"Scope": "increasefactionlevel",
-					"AdditionalData": "BigSam|5",
-					"NextStep": "Learning-Step-12.2",
+					"Scope": "updatequest",
+					"AdditionalData": "BigSam.Making The Cut",
+					"NextStep": "Learning-Step-12.4",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Learning-Step-12",
-					"Scope": "saytoplayer",
-					"AdditionalData": "You can sell what you prepeare to the local tavens, there is always demand for the best cuts.",
-					"NextStep": "Learning-Step-13.3",
+					"Scope": "increasefactionlevel",
+					"AdditionalData": "Big Sam|5",
+					"NextStep": "Learning-Step-13.4",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Learning-Step-13",
 					"Scope": "saytoplayer",
-					"AdditionalData": "Don't forget all animals are differnt and you'll need to learn how to deal with each type. I like you... if you come back with a deer carcass I'll teach you how to prepare venison steaks.",
-					"NextStep": "Learning-Step-14.4",
+					"AdditionalData": "You can sell what you prepeare to the local tavens, there is always demand for the best cuts.",
+					"NextStep": "Learning-Step-14.3",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Learning-Step-14",
-					"Scope": "emotetoplayer",
-					"AdditionalData": "smiles at you...",
-					"NextStep": "Learning-Step-15.3",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Don't forget all animals are differnt and you'll need to learn how to deal with each type.",
+					"NextStep": "Learning-Step-15.4",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Learning-Step-15",
-					"Scope": "saytoplayer",
-					"AdditionalData": "You've got potential, I see it in th way you handle that cleaver. Come back with a deer carcass I'll teach you how to prepare venison steaks.",
-					"NextStep": "Learning-Step-16.4",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "smiles at you...",
+					"NextStep": "Learning-Step-16.3",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Learning-Step-16",
+					"Scope": "saytoplayer",
+					"AdditionalData": "You've got potential, I see it in the way you handle that cleaver. Come back with a deer carcass I'll teach you how to prepare venison steaks.",
+					"NextStep": "Learning-Step-17.5",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Learning-Step-17",
 					"Scope": "addquest",
 					"AdditionalData": "BigSam.Venison Steaks",
 					"NextStep": null,
@@ -815,6 +815,13 @@
 					"StepID": "ShopBuy",
 					"Scope": "saytoplayer",
 					"AdditionalData": "Good choice.",
+					"NextStep": "ShopBuy1.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "ShopBuy1",
+					"Scope": "increasefactionlevel",
+					"AdditionalData": "Big Sam|1",
 					"NextStep": "BuySomethingElse.1",
 					"ResponseOptions": null
 				}

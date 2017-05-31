@@ -1147,6 +1147,8 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="recipeName">The name or the recipe to learn.</param>
 		public bool LearnRecipe(string recipeName)
 		{
+			bool learnt;
+
 			// Ensure the characters KnownRecipes property is a list
 			if (this.KnownRecipes == null)
 			{
@@ -1159,13 +1161,18 @@ namespace SlackMUDRPG.CommandClasses
 				this.KnownRecipes.Add(recipeName);
 
 				this.sendMessageToPlayer(this.Formatter.Italic($"You learnt a new recipe \"{recipeName}\"."));
-				return true;
+				learnt = true;
 			}
 			else
 			{
 				this.sendMessageToPlayer(this.Formatter.Italic($"You already know the recipe \"{recipeName}\"."));
-				return false;
+				learnt = false;
 			}
+
+			this.SaveToApplication();
+			this.SaveToFile();
+
+			return learnt;
 		}
 
 		#endregion
