@@ -498,6 +498,7 @@
     <Content Include="JSON\Quests\BigSam.Venison Steaks.json" />
     <Content Include="JSON\Quests\BertRengle.Scalebrewers Rabbit Stew.json" />
     <Content Include="JSON\Quests\CassiusAnor.A Merchants Steak.json" />
+    <Content Include="JSON\Objects\Food.ScalebrewersRabbitStew.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="RebuildCharNameList.aspx" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />
