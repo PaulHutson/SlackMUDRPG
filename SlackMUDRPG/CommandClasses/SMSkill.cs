@@ -1071,7 +1071,7 @@ namespace SlackMUDRPG.CommandClasses
 			if (smss.StepRequiredObject != "{TARGET}")
 			{
 				string[] itemTypeSplit = smss.StepRequiredObject.Split('.');
-				if (smc.CountOwnedItems(itemTypeSplit[1]) > smss.RequiredObjectAmount)
+				if (smc.CountOwnedItems(itemTypeSplit[1]) >= smss.RequiredObjectAmount)
 				{
 					// if they have enough remove them (i.e. consume them)
 					int numberToConsume = smss.RequiredObjectAmount;
