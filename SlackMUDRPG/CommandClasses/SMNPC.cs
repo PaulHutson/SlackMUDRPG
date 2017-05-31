@@ -1028,6 +1028,18 @@ namespace SlackMUDRPG.CommandClasses
 							prereqsMet = false;
 						}
 						break;
+
+					case "FactionLevel":
+						string[] parts = prereq.AdditionalData.Split('.');
+
+						SMFaction factionDetails = invokingCharacter.Factions.FirstOrDefault(faction => faction.FactionName.ToLower() == parts[0].ToLower());
+
+						if (factionDetails == null || factionDetails.Level < Int32.Parse(parts[1]))
+						{
+							prereqsMet = false;
+						}
+
+						break;
 				}
 			}
 
