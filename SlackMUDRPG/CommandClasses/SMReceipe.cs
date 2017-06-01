@@ -120,6 +120,21 @@ namespace SlackMUDRPG.CommandClasses
 			return required.Count > 0 ? String.Join(", ", required.ToArray()) : null;
 		}
 
+		/// <summary>
+		/// Gets a string used to display the output of the recipe.
+		/// </summary>
+		/// <returns>String represeting the recipes output.</returns>
+		public string GetProducedOutputString()
+		{
+			Int32 qty = this.GetProducedItemQty();
+
+			if (qty > 1)
+			{
+				return $"{this.GetProducedItem().PluralName} x {qty}";
+			}
+
+			return $"{this.GetProducedItem().ItemName} x {qty}";
+		}
 	}
 
 	public class SMReceipeMaterial
