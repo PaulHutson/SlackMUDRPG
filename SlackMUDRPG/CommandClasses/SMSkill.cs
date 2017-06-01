@@ -1389,55 +1389,59 @@ namespace SlackMUDRPG.CommandClasses
 										string originalPluralName = smi.PluralName;
 										smi.ItemID = Guid.NewGuid().ToString();
 
-										// Check the threshold reached for this item...
-										Random r = new Random();
-										double rDouble = r.NextDouble();
-										int baseItemWeight = smi.ItemWeight;
-										int baseItemSize = smi.ItemSize;
-										int baseHitPoints = smi.HitPoints;
-										float baseDamage = smi.BaseDamage;
-										int baseToughness = smi.Toughness;
-										int baseItemCapacity = smi.ItemCapacity;
-
-										// Get the character level
-										SMSkillHeld smsh = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
-										int characterSkillLevel = 0;
-										if (smsh != null)
+										// Modify created item based on thresholds if they have been set.
+										if (smr.StepThresholds != null)
 										{
-											characterSkillLevel = (int)smsh.SkillLevel;
-										}
+											// Check the threshold reached for this item...
+											Random r = new Random();
+											double rDouble = r.NextDouble();
+											int baseItemWeight = smi.ItemWeight;
+											int baseItemSize = smi.ItemSize;
+											int baseHitPoints = smi.HitPoints;
+											float baseDamage = smi.BaseDamage;
+											int baseToughness = smi.Toughness;
+											int baseItemCapacity = smi.ItemCapacity;
 
-										foreach (SMReceipeStepThreshold smrst in smr.StepThresholds)
-										{
-											if (((rDouble * 100) + characterSkillLevel) >= smrst.ThresholdLevel)
+											// Get the character level
+											SMSkillHeld smsh = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+											int characterSkillLevel = 0;
+											if (smsh != null)
 											{
-												smi.ItemName = smrst.ThresholdName + " " + originalItemName;
-												smi.PluralName = smrst.ThresholdName + " " + originalPluralName;
+												characterSkillLevel = (int)smsh.SkillLevel;
+											}
 
-												if (smrst.ThresholdBonus != null)
+											foreach (SMReceipeStepThreshold smrst in smr.StepThresholds)
+											{
+												if (((rDouble * 100) + characterSkillLevel) >= smrst.ThresholdLevel)
 												{
-													foreach (SMReceipeStepThresholdBonus smrstb in smrst.ThresholdBonus)
+													smi.ItemName = smrst.ThresholdName + " " + originalItemName;
+													smi.PluralName = smrst.ThresholdName + " " + originalPluralName;
+
+													if (smrst.ThresholdBonus != null)
 													{
-														switch (smrstb.ThresholdBonusName)
+														foreach (SMReceipeStepThresholdBonus smrstb in smrst.ThresholdBonus)
 														{
-															case "BaseDamage":
-																smi.BaseDamage = baseDamage + smrstb.ThresholdBonusValue;
-																break;
-															case "Toughness":
-																smi.Toughness = baseToughness + smrstb.ThresholdBonusValue;
-																break;
-															case "HitPoints":
-																smi.HitPoints = baseHitPoints + smrstb.ThresholdBonusValue;
-																break;
-															case "ItemSize":
-																smi.ItemSize = baseItemSize + smrstb.ThresholdBonusValue;
-																break;
-															case "ItemWeight":
-																smi.ItemWeight = baseItemWeight + smrstb.ThresholdBonusValue;
-																break;
-															case "ItemCapacity":
-																smi.ItemCapacity = baseItemCapacity + smrstb.ThresholdBonusValue;
-																break;
+															switch (smrstb.ThresholdBonusName)
+															{
+																case "BaseDamage":
+																	smi.BaseDamage = baseDamage + smrstb.ThresholdBonusValue;
+																	break;
+																case "Toughness":
+																	smi.Toughness = baseToughness + smrstb.ThresholdBonusValue;
+																	break;
+																case "HitPoints":
+																	smi.HitPoints = baseHitPoints + smrstb.ThresholdBonusValue;
+																	break;
+																case "ItemSize":
+																	smi.ItemSize = baseItemSize + smrstb.ThresholdBonusValue;
+																	break;
+																case "ItemWeight":
+																	smi.ItemWeight = baseItemWeight + smrstb.ThresholdBonusValue;
+																	break;
+																case "ItemCapacity":
+																	smi.ItemCapacity = baseItemCapacity + smrstb.ThresholdBonusValue;
+																	break;
+															}
 														}
 													}
 												}
