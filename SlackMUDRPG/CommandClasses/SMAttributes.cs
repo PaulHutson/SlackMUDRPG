@@ -182,7 +182,7 @@ namespace SlackMUDRPG.CommandClasses
 			this.HitPoints += hpToGain;
 
 			// Inform the player how many HP they recovered
-			invokingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"You feel better \"{hpToGain}\"hp recovered."));
+			invokingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"You feel better \"{hpToGain}hp\" recovered."));
 
 			return;
 		}
