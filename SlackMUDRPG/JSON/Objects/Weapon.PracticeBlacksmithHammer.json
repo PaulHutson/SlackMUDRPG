@@ -3,7 +3,7 @@
 	"SingularPronoun": "a",
 	"PluralName": "Practice Blacksmith Hammers",
 	"PluralPronoun": "some",
-  "ItemType": "weapons",
+  "ItemType": "Weapon",
   "ItemFamily": "Hammer",
 	"ItemDescription": "This Practice Blacksmithing Hammer is made for use when learning to blacksmith.",
 	"ItemWeight": 4,

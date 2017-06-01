@@ -3,7 +3,7 @@
 	"SingularPronoun": "a",
 	"PluralName": "Blacksmith Hammers",
 	"PluralPronoun": "some",
-  "ItemType": "weapons",
+  "ItemType": "Weapon",
   "ItemFamily": "Hammer",
 	"ItemDescription": "This Blacksmithing Hammer is made for use when blacksmithing.",
 	"ItemWeight": 3,

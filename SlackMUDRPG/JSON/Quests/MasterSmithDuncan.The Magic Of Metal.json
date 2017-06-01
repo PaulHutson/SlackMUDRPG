@@ -15,7 +15,7 @@
 	"Rewards": [
 		{
       "Type": "Item",
-      "AdditionalData": "Weapons.PracticeBlacksmithHammer,1"
+      "AdditionalData": "Weapon.PracticeBlacksmithHammer,1"
     },
     {
 			"Type": "Item",

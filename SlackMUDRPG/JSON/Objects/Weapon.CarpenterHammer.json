@@ -3,7 +3,7 @@
 	"SingularPronoun": "a",
 	"PluralName": "Shoddy Carpenter Hammers",
 	"PluralPronoun": "some",
-  "ItemType": "weapons",
+  "ItemType": "Weapon",
   "ItemFamily": "Hammer",
 	"ItemDescription": "This hammer is made for use in carpentry.",
 	"ItemWeight": 1,

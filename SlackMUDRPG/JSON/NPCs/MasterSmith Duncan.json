@@ -47,7 +47,7 @@
 				  "SingularPronoun": "a",
 				  "PluralName": "Best Quality Blacksmith Hammers",
 				  "PluralPronoun": "some",
-				  "ItemType": "weapons",
+				  "ItemType": "Weapon",
 				  "ItemFamily": "Hammer",
 				  "ItemDescription": "This Best Quality Blacksmithing Hammer has been crafted by a master.",
 				  "ItemWeight": 3,
