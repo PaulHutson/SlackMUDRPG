@@ -246,7 +246,29 @@
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
         "Cost": 180
-      }
+      },
+		{
+			"ItemNumber": 9,
+			"Item": {
+				"ItemName": "Meat Cleaver",
+				"SingularPronoun": "a",
+				"PluralName": "Meat Cleavers",
+				"PluralPronoun": "some",
+				"ItemType": "Weapon",
+				"ItemFamily": "Meat Cleaver",
+				"ItemDescription": "This meat cleaver can be used in the perparation of fine cuts of meat, but will also serve you well in a fight.",
+				"ItemWeight": 1,
+				"ItemSize": 1,
+				"HitPoints": 50,
+				"MaxHitPoints": 50,
+				"BaseDamage": 3,
+				"Toughness": 3,
+				"CanHoldOtherItems": false
+			},
+			"AmountForSale": 0,
+			"UnlimitedAvailable": true,
+			"Cost": 250
+		}
 	]
   }
 }

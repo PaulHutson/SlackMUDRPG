@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "Venison Steaks",
+	"Prerequisites": null,
+	"Daily": false,
+	"QuestSteps": [
+		{
+			"Name": "Steaks anyone?",
+			"Type": "Get",
+			"CharacterName": "Big Sam",
+			"LocationID": "Ravensmere.Harbour South.Sam And Ellas Butchery",
+			"AdditionalData": "ItemName.Deer Carcass,1",
+			"Instructions": "Bring a deer carcass to Big Sam to learn how to prepare it."
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Item",
+			"AdditionalData": "Resource.VenisonSteak,2"
+		}
+	]
+}

@@ -165,36 +165,221 @@
           "NextStep": "4.1",
           "ResponseOptions": null
         },
-        {
-          "StepID": "4",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Would you like to see what's on offer now?",
-          "NextStep": null,
-          "ResponseOptions": [
-            {
-              "ResponseOptionShortcut": "Y",
-              "ResponseOptionText": "Yes",
-              "ResponseOptionActionSteps": [
-                {
-                  "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Shop.2"
-                }
-              ]
-            },
-            {
-              "ResponseOptionShortcut": "N",
-              "ResponseOptionText": "No",
-              "ResponseOptionActionSteps": [
-                {
-                  "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "ShopLeave.NotNow"
-                }
-              ]
-            }
-          ]
-        }
+		{
+			"StepID": "4",
+			"Scope": "saytoplayer",
+			"AdditionalData": "What will it be?",
+			"NextStep": null,
+			"ResponseOptions": [
+				{
+					"ResponseOptionShortcut": "BUY",
+					"ResponseOptionText": "I'd like to see whats on offer now.",
+					"ResponseOptionActionSteps": [
+						{
+							"NPCResponseOptionActionType": "Conversation",
+							"AdditionalData": "Shop.2"
+						}
+					]
+				},
+				{
+					"ResponseOptionShortcut": "WORK",
+					"ResponseOptionText": "I'm looking for work, can you help? [i]Quest[/i]",
+					"PreRequisites": [
+						{
+							"Type": "HasNotDoneQuest",
+							"AdditionalData": "Scalebrewers Rabbit Stew"
+						},
+						{
+							"Type": "IsNotInProgressQuest",
+							"AdditionalData": "Scalebrewers Rabbit Stew"
+						}
+					],
+					"ResponseOptionActionSteps": [
+						{
+							"NPCResponseOptionActionType": "Conversation",
+							"AdditionalData": "RabbitStew.Intro-Step-1"
+						}
+					]
+				},
+				{
+					"ResponseOptionShortcut": "RS",
+					"ResponseOptionText": "I've got your rabbit shanks.",
+					"PreRequisites": [
+						{
+							"Type": "InProgressQuest",
+							"AdditionalData": "Scalebrewers Rabbit Stew"
+						},
+						{
+							"Type": "HasItem",
+							"AdditionalData": "Rabbit Shank.4"
+						}
+					],
+					"ResponseOptionActionSteps": [
+						{
+							"NPCResponseOptionActionType": "Conversation",
+							"AdditionalData": "RabbitStew.Return-Step-1"
+						}
+					]
+				},
+				{
+					"ResponseOptionShortcut": "N",
+					"ResponseOptionText": "Nothing for now.",
+					"ResponseOptionActionSteps": [
+						{
+							"NPCResponseOptionActionType": "Conversation",
+							"AdditionalData": "ShopLeave.NotNow"
+						}
+					]
+				}
+			]
+		}
       ]
     },
+	{
+		"ConversationID": "RabbitStew",
+		"ConversationStep": [
+			{
+				"StepID": "Intro-Step-1",
+				"Scope": "saytoplayer",
+				"AdditionalData": "Your in luck, I dont have any full time positions but I do need supplies. You might have heard we serve the best rabbit stew in Ravensmere?",
+				"NextStep": "Intro-Step-2.5",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Intro-Step-2",
+				"Scope": "emotetoplayer",
+				"AdditionalData": "looks suprised at your blank expression.",
+				"NextStep": "Intro-Step-3.3",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Intro-Step-3",
+				"Scope": "saytoplayer",
+				"AdditionalData": "I need rabbit shanks for the kitchen... bring me four and I'll pay you well.",
+				"NextStep": "Intro-Step-4.3",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Intro-Step-4",
+				"Scope": "addquest",
+				"AdditionalData": "BertRengle.Scalebrewers Rabbit Stew",
+				"NextStep": null,
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Step-1",
+				"Scope": "saytoplayer",
+				"AdditionalData": "Just in time chef is beging to get worried. Give them here and I'll sort you out.",
+				"NextStep": null,
+				"ResponseOptions": [
+					{
+						"ResponseOptionShortcut": "GIVE",
+						"ResponseOptionText": "Give Bert Rengle 4 Rabbit Shanks",
+						"ResponseOptionActionSteps": [
+							{
+								"NPCResponseOptionActionType": "Conversation",
+								"AdditionalData": "RabbitStew.Return-Give-Step-1"
+							}
+						]
+					},
+					{
+						"ResponseOptionShortcut": "N",
+						"ResponseOptionText": "Sorry I need to keep these.",
+						"ResponseOptionActionSteps": [
+							{
+								"NPCResponseOptionActionType": "Conversation",
+								"AdditionalData": "RabbitStew.Return-DontGive-Step-1"
+							}
+						]
+					}
+				]
+			},
+			{
+				"StepID": "Return-Give-Step-1",
+				"Scope": "takeitems",
+				"AdditionalData": "Rabbit Shank.4",
+				"NextStep": "Return-Give-Step-2.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-2",
+				"Scope": "emotetoplayer",
+				"AdditionalData": "takes four [b]Rabbit Shanks[/b] from you.",
+				"NextStep": "Return-Give-Step-3.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-3",
+				"Scope": "saytoplayer",
+				"AdditionalData": "Excellent these are going straight to the kitchen, chef will be pleased.",
+				"NextStep": "Return-Give-Step-4.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-4",
+				"Scope": "updatequest",
+				"AdditionalData": "BertRengle.Scalebrewers Rabbit Stew",
+				"NextStep": "Return-Give-Step-5.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-5",
+				"Scope": "increasefactionlevel",
+				"AdditionalData": "Bert Rengle|1",
+				"NextStep": "Return-Give-Step-6.2",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-6",
+				"Scope": "saytoplayer",
+				"AdditionalData": "We always need supplies maybe you can bring more tomorrow.",
+				"NextStep": "Return-Give-Step-7.3",
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-Give-Step-7",
+				"Scope": "saytoplayer",
+				"AdditionalData": "If you have not tried it why not have a bowl of the rabbit stew, its will help you regain health.",
+				"NextStep": null,
+				"ResponseOptions": [
+					{
+						"ResponseOptionShortcut": "STEW",
+						"ResponseOptionText": "Ok I'll give it a go.",
+						"ResponseOptionActionSteps": [
+							{
+								"NPCResponseOptionActionType": "Conversation",
+								"AdditionalData": "Shop.2"
+							}
+						]
+					},
+					{
+						"ResponseOptionShortcut": "N",
+						"ResponseOptionText": "Not right now",
+						"ResponseOptionActionSteps": [
+							{
+								"NPCResponseOptionActionType": "Conversation",
+								"AdditionalData": "RabbitStew.Return-NoStew-Step-1"
+							}
+						]
+					}
+				]
+			},
+			{
+				"StepID": "Return-DontGive-Step-1",
+				"Scope": "saytoplayer",
+				"AdditionalData": "Come back when your ready then!",
+				"NextStep": null,
+				"ResponseOptions": null
+			},
+			{
+				"StepID": "Return-NoStew-Step-1",
+				"Scope": "saytoplayer",
+				"AdditionalData": "Its your loss, let me know when you change your mind.",
+				"NextStep": null,
+				"ResponseOptions": null
+			}
+		]
+	},
     {
       "ConversationID": "Leave",
       "ConversationStep": [

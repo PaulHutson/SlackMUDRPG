@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Venison Steak",
+	"PluralName": "Venison Steaks",
+	"PluralPronoun": "some",
+	"ItemType": "Resource",
+	"ItemFamily": "Raw Meat",
+	"ItemDescription": "A fine cut from the deer, this will make a great meal once cooked and may help you regain some health.",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.0001,
+	"Toughness": 1
+} 

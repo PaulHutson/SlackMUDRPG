@@ -142,7 +142,42 @@
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
         "Cost": 5
-      }
+      },
+		{
+			"ItemNumber": 3,
+			"Item": {
+				"SingularPronoun": "some",
+				"ItemName": "Scalebrewers Rabbit Stew",
+				"PluralName": "Scalebrewers Rabbit Stew",
+				"PluralPronoun": "some",
+				"ItemType": "Food",
+				"ItemFamily": "Stew",
+				"ItemDescription": "The famous Scalebrewers Rabbit Stew helps recover your health.",
+				"ItemWeight": 1,
+				"ItemCapacity": 0,
+				"ItemSize": 1,
+				"HitPoints": 1,
+				"MaxHitPoints": 1,
+				"BaseDamage": 0.0001,
+				"Toughness": 1,
+				"DestroyedOutput": null,
+				"RequiredSkills": null,
+				"AdditionalData": null,
+				"ObjectTrait": "Eatable",
+				"HeldItems": null,
+				"Effects": [
+					{
+						"Action": "OnConsume",
+						"EffectType": "HP-Regeneration",
+						"AdditionalData": 3,
+						"EffectLength": 0
+					}
+				]
+			},
+			"AmountForSale": 0,
+			"UnlimitedAvailable": true,
+			"Cost": 50
+		}
     ]
   }
 }
