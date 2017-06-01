@@ -29,7 +29,7 @@
 			"StepType": "CheckConsumeItems",
 			"StepRequiredObject": null,
 			"RequiredObjectAmount": 0,
-			"FailureOutput": "You do not have the required {ITEMNAME} to prepare {TARGETNAME}.",
+			"FailureOutput": "You do not have the required {ITEMNAME} to prepare Rabbit Shanks.",
 			"SuccessOutput": null
 		},
 		{
