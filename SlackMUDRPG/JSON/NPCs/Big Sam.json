@@ -216,11 +216,7 @@
 									"AdditionalData": "Making The Cut"
 								},
 								{
-									"Type": "HasNotDoneQuest",
-									"AdditionalData": "Venison Steaks"
-								},
-								{
-									"Type": "IsNotInProgressQuest",
+									"Type": "InProgressQuest",
 									"AdditionalData": "Venison Steaks"
 								},
 								{
@@ -617,7 +613,7 @@
 					"StepID": "Step-2",
 					"Scope": "takeitems",
 					"AdditionalData": "Deer Carcass.1",
-					"NextStep": "Step-3.2",
+					"NextStep": "Step-3.1",
 					"ResponseOptions": null
 				},
 				{
@@ -645,14 +641,14 @@
 					"StepID": "Step-6",
 					"Scope": "saytoplayer",
 					"AdditionalData": "You need to get hold of the hind legs and cut along here.",
-					"NextStep": "Step-7.3",
+					"NextStep": "Step-7.4",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Step-7",
 					"Scope": "saytoplayer",
 					"AdditionalData": "Once you've done that you need to remove this whole section, ideally in a sinlge cut otherwise your final produce won't be top notch.",
-					"NextStep": "Step-8.4",
+					"NextStep": "Step-8.5",
 					"ResponseOptions": null
 				},
 				{
@@ -666,14 +662,14 @@
 					"StepID": "Step-9",
 					"Scope": "saytoplayer",
 					"AdditionalData": "Now this is the most important part. You want to cut this into even sized steaks and be extra careful to keep the cuts clean.",
-					"NextStep": "Step-10.6",
+					"NextStep": "Step-10.8",
 					"ResponseOptions": null
 				},
 				{
 					"StepID": "Step-10",
 					"Scope": "saytoplayer",
 					"AdditionalData": "And there you have it, four of my finest venison steaks. I'll give you two back, but feel free to come and butcher your own from now on.",
-					"NextStep": "Step-11.3",
+					"NextStep": "Step-11.5",
 					"ResponseOptions": null
 				},
 				{
@@ -693,7 +689,7 @@
 				{
 					"StepID": "Step-13",
 					"Scope": "increasefactionlevel",
-					"AdditionalData": "BigSam|5",
+					"AdditionalData": "Big Sam|5",
 					"NextStep": null,
 					"ResponseOptions": null
 				},
