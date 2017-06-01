@@ -44,7 +44,7 @@
 	"FamilyType": "Bear",
 	"PronounSingular": "a",
 	"PronounMultiple": "some",
-	"DestroyedOutput": "Resource.Meat,1",
+	"DestroyedOutput": "Resource.Carcass,1",
   "NPCResponses": [
     {
       "ResponseType": "PlayerCharacter.Enter",

@@ -40,12 +40,39 @@ namespace SlackMUDRPG.CommandClasses
 		[JsonProperty("SkillSteps")]
 		public List<SMSkillStep> SkillSteps { get; set; }
 
+		/// <summary>
+		/// Gets the name of the item the recipe produces by parsing the Produces property.
+		/// </summary>
+		/// <returns>The name of the item produced.</returns>
+		public string GetProducedItemName()
+		{
+			string[] parts = this.Produces.Split('|');
+
+			return parts[0];
+		}
+
+		/// <summary>
+		/// Gets the quantity of items the recipe produces by parsing the Produces property.
+		/// </summary>
+		/// <returns>The quantity of items produced.</returns>
+		public Int32 GetProducedItemQty()
+		{
+			string[] parts = this.Produces.Split('|');
+
+			if (parts.Length == 1)
+			{
+				return 1;
+			}
+
+			return Int32.Parse(parts[1]);
+		}
+
 		public SMItem GetProducedItem()
 		{
 			SMItem smi = null;
 
 			// Get the right path, and work out if the file exists.
-			string path = FilePathSystem.GetFilePath("Objects", this.Produces);
+			string path = FilePathSystem.GetFilePath("Objects", this.GetProducedItemName());
 
 			// Check if the character exists..
 			if (File.Exists(path))

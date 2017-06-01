@@ -7,7 +7,7 @@
 			"Name": "Catch Rabbit and Venison for Big Sam",
 			"Type": "Get",
 			"CharacterName": "Big Sam",
-			"LocationID": "Ravensmere.Harbour South.Big Sams Butchers Shop",
+			"LocationID": "Ravensmere.Harbour South.Sam And Ellas Butchery",
 			"AdditionalData": "ItemName.Bunny Rabbit Corpse,6|ItemName.Young Deer Corpse,1",
 			"Instructions": "Get six bunny rabbit corpses and one young deer corpse then return them to Big Sam"
 		}

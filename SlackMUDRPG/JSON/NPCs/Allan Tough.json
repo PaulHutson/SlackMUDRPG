@@ -307,7 +307,7 @@
 				{
 					"StepID": "Learning-4",
 					"Scope": "saytoplayer",
-					"AdditionalData": "Obviously you'll need leather. You can either tan your owm animal skins if you know how, or you can buy some from Felhirst's Tannery in the south harbour.",
+					"AdditionalData": "Obviously you'll need leather. You can either tan your own animal skins if you know how, or you can buy some from Felhirst's Tannery in the south harbour.",
 					"NextStep": "Learning-5.6",
 					"ResponseOptions": null
 				},

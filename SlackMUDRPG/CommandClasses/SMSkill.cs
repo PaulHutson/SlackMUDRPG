@@ -1378,74 +1378,100 @@ namespace SlackMUDRPG.CommandClasses
 									}
 									break;
 								case "CreateObject":
-									// Create the object.
-									// Create a new object of the type for the receipe.
-									SMItem smi = smr.GetProducedItem();
-                                    string originalItemName = smi.ItemName;
-									smi.ItemID = Guid.NewGuid().ToString();
+									// Create the object or objects.
+									Int32 objectsToCreateCount = smr.GetProducedItemQty();
 
-									// Check the threshold reached for this item...
-									Random r = new Random();
-									double rDouble = r.NextDouble();
-									int baseItemWeight = smi.ItemWeight;
-									int baseItemSize = smi.ItemSize;
-									int baseHitPoints = smi.HitPoints;
-									float baseDamage = smi.BaseDamage;
-									int baseToughness = smi.Toughness;
-                                    int baseItemCapacity = smi.ItemCapacity;
-
-                                    // Get the character level
-                                    SMSkillHeld smsh = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
-                                    int characterSkillLevel = 0;
-                                    if (smsh != null)
-                                    {
-                                        characterSkillLevel = (int)smsh.SkillLevel;
-                                    }
-                                    
-									foreach (SMReceipeStepThreshold smrst in smr.StepThresholds)
+									while (objectsToCreateCount > 0)
 									{
-										if (((rDouble * 100) + characterSkillLevel) >= smrst.ThresholdLevel)
-                                        {
-                                            smi.ItemName = smrst.ThresholdName + " " + originalItemName;
+										// Create a new object of the type for the receipe.
+										SMItem smi = smr.GetProducedItem();
+										string originalItemName = smi.ItemName;
+										string originalPluralName = smi.PluralName;
+										smi.ItemID = Guid.NewGuid().ToString();
 
-											if (smrst.ThresholdBonus!= null)
+										// Modify created item based on thresholds if they have been set.
+										if (smr.StepThresholds != null)
+										{
+											// Check the threshold reached for this item...
+											Random r = new Random();
+											double rDouble = r.NextDouble();
+											int baseItemWeight = smi.ItemWeight;
+											int baseItemSize = smi.ItemSize;
+											int baseHitPoints = smi.HitPoints;
+											float baseDamage = smi.BaseDamage;
+											int baseToughness = smi.Toughness;
+											int baseItemCapacity = smi.ItemCapacity;
+
+											// Get the character level
+											SMSkillHeld smsh = smc.Skills.FirstOrDefault(skill => skill.SkillName == this.SkillName);
+											int characterSkillLevel = 0;
+											if (smsh != null)
 											{
-												foreach (SMReceipeStepThresholdBonus smrstb in smrst.ThresholdBonus)
+												characterSkillLevel = (int)smsh.SkillLevel;
+											}
+
+											foreach (SMReceipeStepThreshold smrst in smr.StepThresholds)
+											{
+												if (((rDouble * 100) + characterSkillLevel) >= smrst.ThresholdLevel)
 												{
-													switch (smrstb.ThresholdBonusName)
+													smi.ItemName = smrst.ThresholdName + " " + originalItemName;
+													smi.PluralName = smrst.ThresholdName + " " + originalPluralName;
+
+													if (smrst.ThresholdBonus != null)
 													{
-														case "BaseDamage":
-															smi.BaseDamage = baseDamage + smrstb.ThresholdBonusValue;
-															break;
-														case "Toughness":
-															smi.Toughness = baseToughness + smrstb.ThresholdBonusValue;
-															break;
-														case "HitPoints":
-															smi.HitPoints = baseHitPoints + smrstb.ThresholdBonusValue;
-															break;
-														case "ItemSize":
-															smi.ItemSize = baseItemSize + smrstb.ThresholdBonusValue;
-															break;
-														case "ItemWeight":
-															smi.ItemWeight = baseItemWeight + smrstb.ThresholdBonusValue;
-															break;
-                                                        case "ItemCapacity":
-                                                            smi.ItemCapacity = baseItemCapacity + smrstb.ThresholdBonusValue;
-                                                            break;
-                                                    }
+														foreach (SMReceipeStepThresholdBonus smrstb in smrst.ThresholdBonus)
+														{
+															switch (smrstb.ThresholdBonusName)
+															{
+																case "BaseDamage":
+																	smi.BaseDamage = baseDamage + smrstb.ThresholdBonusValue;
+																	break;
+																case "Toughness":
+																	smi.Toughness = baseToughness + smrstb.ThresholdBonusValue;
+																	break;
+																case "HitPoints":
+																	smi.HitPoints = baseHitPoints + smrstb.ThresholdBonusValue;
+																	break;
+																case "ItemSize":
+																	smi.ItemSize = baseItemSize + smrstb.ThresholdBonusValue;
+																	break;
+																case "ItemWeight":
+																	smi.ItemWeight = baseItemWeight + smrstb.ThresholdBonusValue;
+																	break;
+																case "ItemCapacity":
+																	smi.ItemCapacity = baseItemCapacity + smrstb.ThresholdBonusValue;
+																	break;
+															}
+														}
+													}
 												}
 											}
 										}
-									}
 
-									// Place it in the location where the character is.
-									smc.GetRoom().AddItem(smi);
-                                    smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(receipeStep.SuccessOutput, smc, smi.SingularPronoun + " " + smi.ItemName, "")));
+										// Place it in the location where the character is.
+										smc.GetRoom().AddItem(smi);
+										smc.sendMessageToPlayer(this.Formatter.Italic(SuccessOutputParse(receipeStep.SuccessOutput, smc, smi.SingularPronoun + " " + smi.ItemName, "")));
+
+										// Decrement to to create count
+										objectsToCreateCount--;
+									}
 
                                     break;
                                 case "Information":
                                     SMItem producedItem = smr.GetProducedItem();
-                                    smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(receipeStep.SuccessOutput, smc, producedItem.SingularPronoun + " " + producedItem.ItemName, "")));
+
+									string targetName = String.Empty;
+
+									if (smr.GetProducedItemQty() > 1)
+									{
+										targetName = $"{producedItem.PluralPronoun} {producedItem.PluralName}";
+									}
+									else
+									{
+										targetName = $"{producedItem.SingularPronoun} {producedItem.ItemName}";
+									}
+
+                                    smc.GetRoom().Announce(this.Formatter.Italic(SuccessOutputParse(receipeStep.SuccessOutput, smc, targetName, "")));
                                     break;
 								case "Pause":
 									System.Threading.Thread.Sleep(receipeStep.RequiredObjectAmount * 1000);

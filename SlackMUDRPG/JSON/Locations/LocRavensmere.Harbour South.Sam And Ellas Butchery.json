@@ -12,19 +12,37 @@
 			"RoomID": "Ravensmere.Harbour South.Bridge Row"
 		}
 	],
-	"RoomItems": null,
+	"RoomItems": [
+		{
+			"ItemID": "sam-and-ellas-butchers-block",
+			"ItemName": "Butchers Block",
+			"SingularPronoun": "a",
+			"PluralName": "Butchers Blocks",
+			"PluralPronoun": "some",
+			"ItemType": "tools",
+			"ItemFamily": "Butchers Block",
+			"ItemDescription": "A wooden block used for preparing cuts of meat on.",
+			"ItemWeight": 75,
+			"ItemSize": 75,
+			"HitPoints": 100000,
+			"MaxHitPoints": 100000,
+			"BaseDamage": 20,
+			"Toughness": 25,
+			"CanHoldOtherItems": false
+		}
+	],
 	"NPCShopItems": {
 		"ShopInventory": [
 			{
 				"ItemNumber": 1,
 				"Item": {
-					"SingularPronoun": "some",
-					"ItemName": "Deer Meat",
+					"SingularPronoun": "a",
+					"ItemName": "Deer Carcass",
 					"PluralPronoun": "some",
-					"PluralName": "Deer Meat",
+					"PluralName": "Deer Carcasses",
 					"ItemType": "Resource",
-					"ItemFamily": "Meat",
-					"ItemDescription": "Some deer meat",
+					"ItemFamily": "Carcass",
+					"ItemDescription": "A deer carcass",
 					"ItemWeight": 1,
 					"ItemSize": 1,
 					"HitPoints": 1,
@@ -39,13 +57,13 @@
 			{
 				"ItemNumber": 2,
 				"Item": {
-					"SingularPronoun": "some",
-					"ItemName": "Rabbit Meat",
+					"SingularPronoun": "a",
+					"ItemName": "Rabbit Carcass",
 					"PluralPronoun": "some",
-					"PluralName": "Rabbit Meat",
+					"PluralName": "Rabbit Carcasses",
 					"ItemType": "Resource",
-					"ItemFamily": "Meat",
-					"ItemDescription": "Some rabbit meat",
+					"ItemFamily": "Carcass",
+					"ItemDescription": "A rabbit carcass",
 					"ItemWeight": 1,
 					"ItemSize": 1,
 					"HitPoints": 1,

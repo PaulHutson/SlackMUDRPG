@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SlackMUDRPG.Utility.Formatters;
 
 namespace SlackMUDRPG.CommandClasses
 {
@@ -155,6 +156,35 @@ namespace SlackMUDRPG.CommandClasses
                     break;
             }
 			return statValue;
+		}
+
+		/// <summary>
+		/// Recover a given number of HP up to the maxhp attribute.
+		/// </summary>
+		/// <param name="Amount">The integer amount of HP to recover.</param>
+		/// <param name="invokingCharacter">The character invoking the HP recovery.</param>
+		public void RecoverHp(Int32 Amount, SMCharacter invokingCharacter)
+		{
+			// Workout how many HP the character is from its max
+			Int32 missingHp = this.MaxHitPoints - this.HitPoints;
+
+			// Do nothing if HP already at its max
+			if (missingHp == 0)
+			{
+				invokingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"Your hit points are already full!"));
+				return;
+			}
+
+			// Workout how many hp to recover to ensure we dont go over the characters max HP
+			Int32 hpToGain = missingHp < Amount ? missingHp : Amount;
+
+			// Recover the HP
+			this.HitPoints += hpToGain;
+
+			// Inform the player how many HP they recovered
+			invokingCharacter.sendMessageToPlayer(ResponseFormatterFactory.Get().Italic($"You feel better \"{hpToGain}hp\" recovered."));
+
+			return;
 		}
 
 		#region "Derived Atributes"

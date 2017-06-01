@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "Making The Cut",
+	"Prerequisites": null,
+	"Daily": false,
+	"QuestSteps": [
+		{
+			"Name": "Chop chop chop...",
+			"Type": "Get",
+			"CharacterName": "Big Sam",
+			"LocationID": "Ravensmere.Harbour South.Sam And Ellas Butchery",
+			"AdditionalData": "ItemName.Meat Cleaver,1",
+			"Instructions": "Talk to Big Sam once you have a Meat Cleaver."
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Item",
+			"AdditionalData": "Resource.RabbitShank,2"
+		}
+	]
+}

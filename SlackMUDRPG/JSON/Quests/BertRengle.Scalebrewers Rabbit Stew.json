@@ -1,0 +1,21 @@
+﻿{
+	"QuestName": "Scalebrewers Rabbit Stew",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Get Rabbit Shanks For Bert Rengle",
+			"Type": "Get",
+			"CharacterName": "Bert Rengle",
+			"LocationID": "Ravensmere.Harbour South.Scalebrewers Tavern",
+			"AdditionalData": "ItemName.Rabbit Shank,4",
+			"Instructions": "Bring four Rabbit Shanks to Bert Rengle"
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Money",
+			"AdditionalData": "50"
+		}
+	]
+}
