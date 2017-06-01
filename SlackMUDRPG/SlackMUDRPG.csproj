@@ -266,7 +266,7 @@
     <Content Include="JSON\Receipe\Weapon.WoodenSword.json" />
     <Content Include="JSON\Objects\Resource.LeatherStrip.json" />
     <Content Include="JSON\Objects\Tools.Chisel.json" />
-    <Content Include="JSON\Objects\Weapons.CarpenterHammer.json" />
+    <Content Include="JSON\Objects\Weapon.CarpenterHammer.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Arrivals Area.json" />
     <Content Include="JSON\Locations\LocRavensmere.Harbour South.Landing Area.json" />
     <Content Include="JSON\Misc\BodyParts.BaseCharacter.json" />
@@ -429,7 +429,7 @@
     <Content Include="JSON\Skills\Skill.BlackSmithing.json" />
     <Content Include="JSON\Receipe\Weapon.Sword.json" />
     <Content Include="JSON\Objects\Weapon.Sword.json" />
-    <Content Include="JSON\Objects\Weapons.BlacksmithHammer.json" />
+    <Content Include="JSON\Objects\Weapon.BlacksmithHammer.json" />
     <Content Include="JSON\Objects\Tools.Tongs.json" />
     <Content Include="JSON\Objects\Tools.Anvil.json" />
     <Content Include="JSON\Receipe\Weapon.Knife.json" />
@@ -451,7 +451,7 @@
     <Content Include="JSON\Objects\Resource.ArteirRoot.json" />
     <Content Include="JSON\Skills\Skill.Dig.json" />
     <Content Include="JSON\Quests\MasterSmithDuncan.The Magic Of Metal.json" />
-    <Content Include="JSON\Objects\Weapons.PracticeBlacksmithHammer.json" />
+    <Content Include="JSON\Objects\Weapon.PracticeBlacksmithHammer.json" />
     <Content Include="JSON\Objects\Tools.PracticeTongs.json" />
     <Content Include="JSON\Quests\Zog.A Test Of Power.json" />
     <Content Include="JSON\Objects\Book.AMagistasCompanion.json" />

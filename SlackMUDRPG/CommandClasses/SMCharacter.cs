@@ -1094,6 +1094,9 @@ namespace SlackMUDRPG.CommandClasses
 			string details = this.Formatter.Bold(recipe.Name, 1);
 			details += this.Formatter.Italic(recipe.Description, 2);
 
+			details += this.Formatter.Bold("Produces: ");
+			details += this.Formatter.General(recipe.GetProducedOutputString(), 2);
+
 			details += this.Formatter.Bold("Required Skills (Lvl): ");
 			details += this.Formatter.General(recipe.GetRequiredSkillsString(), 2);
 

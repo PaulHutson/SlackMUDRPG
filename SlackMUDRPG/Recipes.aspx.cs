@@ -76,6 +76,7 @@ namespace SlackMUDRPG
 					template = template.Replace("{panelId}", guid);
 					template = template.Replace("{Name}", recipe.Name);
 					template = template.Replace("{Description}", recipe.Description);
+					template = template.Replace("{RecipeOutput}", recipe.GetProducedOutputString());
 					template = template.Replace("{RequiredSkills}", Utils.noneIfNull(recipe.GetRequiredSkillsString()));
 					template = template.Replace("{RequiredMaterials}", recipe.GetRequiredMaterialsString());
 					template = template.Replace("{NeedToLearn}", this.GetNeedToLearnString(recipe));
