@@ -149,7 +149,7 @@
           "StepID": "3",
           "Scope": "saytoplayer",
           "AdditionalData": "Welcome to the Merchants Arms - do take a seat... is there anything I can get you today?",
-          "NextStep": "4.1",
+          "NextStep": null,
           "ResponseOptions": [
             {
               "ResponseOptionShortcut": "Y",
@@ -191,7 +191,7 @@
 						},
 						{
 							"Type": "HasItem",
-							"AdditionalData": "Vension Steak.4"
+							"AdditionalData": "Venison Steak.4"
 						}
 					],
 				"ResponseOptionActionSteps": [
@@ -222,7 +222,7 @@
 				"StepID": "Intro-Step-1",
 				"Scope": "saytoplayer",
 				"AdditionalData": "I'm not hiring folks at the moment, but maybe there is something else you can help with...",
-				"NextStep": "Intro-Step-2.3",
+				"NextStep": "Intro-Step-2.4",
 				"ResponseOptions": null
 			},
 			{
@@ -285,7 +285,7 @@
 				"StepID": "Return-Give-Step-1",
 				"Scope": "takeitems",
 				"AdditionalData": "Venison Steak.4",
-				"NextStep": "Return-Give-Step-2.3",
+				"NextStep": "Return-Give-Step-2.2",
 				"ResponseOptions": null
 			},
 			{
