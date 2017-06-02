@@ -2054,6 +2054,55 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Drops the item specified by a given identifier (id, name, family) if the character posesses such an item.
+		/// </summary>
+		/// <param name="itemIdentifier">Item identifier.</param>
+		public void DropItem(string itemIdentifier)
+		{
+			// Handle "drop all" command
+			if (itemIdentifier.ToLower() == "all")
+			{
+				this.DropAll();
+				return;
+			}
+
+			// Get the item to drop
+			SMItem itemToDrop = this.GetOwnedItem(itemIdentifier);
+
+			// If we have found the target item
+			if (itemToDrop != null)
+			{
+				// Remove it from the character
+				this.RemoveOwnedItem(itemToDrop.ItemID);
+
+				// Add it to the room
+				this.GetRoom().AddItem(itemToDrop);
+				this.GetRoom().Announce(this.Formatter.Italic($"\"{this.GetFullName()}\" dropped {itemToDrop.SingularPronoun} {itemToDrop.ItemName}."));
+				return;
+			}
+
+			// Unable to find the item
+			this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to drop!"));
+			return;
+		}
+
+		/// <summary>
+		/// Drops all equipped items into the characters current room. Any item inside equipped containers will remain in the container when it is dropped.
+		/// </summary>
+		public void DropAll()
+		{
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (slot.EquippedItem != null)
+				{
+					this.DropItem(slot.EquippedItem.ItemID);
+				}
+			}
+
+			// TODO handle items in clothing
+		}
+
+		/// <summary>
 		/// Gets an SMSlot by name, case insensitive.
 		/// </summary>
 		/// <returns>The SMSlot by name.</returns>
@@ -2498,71 +2547,7 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
-		/// <summary>
-		/// Drops the item specified by a given identifier (id, name, family).
-		/// </summary>
-		/// <param name="itemIdentifier">Item identifier.</param>
-		public void DropItem(string itemIdentifier)
-		{
-			// TODO account for containers in clothing, e.g. pockets
 
-			SMItem itemToDrop = null;
-
-			// Loop through slots and check if the target item is directly equipped
-			foreach (SMSlot slot in this.Slots)
-			{
-				if (slot.EquippedItem != null)
-				{
-					if (SMItemHelper.ItemMatches(slot.EquippedItem, itemIdentifier))
-					{
-						itemToDrop = slot.EquippedItem;
-
-						// If the target item matched remove it
-						slot.EquippedItem = null;
-
-						this.SaveToApplication();
-					}
-				}
-
-				if (itemToDrop != null)
-				{
-					break;
-				}
-			}
-
-			// If we have not found the target item at this point look in equipped containers
-			if (itemToDrop == null)
-			{
-				foreach (SMSlot slot in this.Slots)
-				{
-					if (slot != null && slot.EquippedItem != null)
-					{
-						if (slot.EquippedItem.CanHoldOtherItems() && slot.EquippedItem.HeldItems != null)
-						{
-							itemToDrop = SMItemHelper.GetItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
-
-							// If the target item is found in the container remove it
-							if (itemToDrop != null)
-							{
-								SMItemHelper.RemoveItemFromList(slot.EquippedItem.HeldItems, itemIdentifier);
-
-								this.SaveToApplication();
-							}
-						}
-					}
-				}
-			}
-
-			// If we have found the target item add it too the room and announce this
-			if (itemToDrop != null)
-			{
-				this.GetRoom().AddItem(itemToDrop);
-				this.GetRoom().Announce(this.Formatter.Italic($"\"{this.GetFullName()}\" dropped {itemToDrop.SingularPronoun} {itemToDrop.ItemName}."));
-				return;
-			}
-
-			this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to drop!"));
-		}
 
 		/// <summary>
 		/// Gives an item identified by itemIdentifier to a charcter identified by playerName.
