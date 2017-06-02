@@ -142,6 +142,23 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Checks if this item contains a specified other item.
+		/// </summary>
+		/// <param name="item">The item to test for inside this.</param>
+		/// <returns>Bool indicating of the item is inside this.</returns>
+		public bool Contains(SMItem item)
+		{
+			if (this.HeldItems != null && this.HeldItems.Any())
+			{
+				SMItem foundItem = SMItemHelper.GetItemFromList(this.HeldItems, item.ItemID);
+
+				return foundItem == null ? false : true;
+			}
+
+			return false;
+		}
+
+		/// <summary>
 		/// Gets a new instance of the items DestroyedOutput.
 		/// </summary>
 		/// <returns>New item or null.</returns>
