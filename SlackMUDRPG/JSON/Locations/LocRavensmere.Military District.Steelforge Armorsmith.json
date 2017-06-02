@@ -14,7 +14,7 @@
 	],
 	"RoomItems": [
 		{
-			"ItemID": "Anvil1",
+			"ItemID": "31ca656d-c14d-45f5-8d24-c14c4389bc79",
 			"ItemName": "Anvil",
 			"SingularPronoun": "an",
 			"PluralName": "Anvils",
@@ -48,7 +48,7 @@
 			"Toughness": 5,
 			"HeldItems": [
 				{
-					"ItemID": "Tongs5",
+					"ItemID": "4bb5b19c-4c89-4e13-b7c4-096b8a613833",
 					"ItemName": "Tongs",
 					"SingularPronoun": "a pair of",
 					"PluralName": "Tongs",
@@ -65,7 +65,7 @@
 					"CanHoldOtherItems": false
 				},
 				{
-					"ItemID": "Tongs4",
+					"ItemID": "f85accab-0243-45de-b1d6-d29319b43757",
 					"ItemName": "Tongs",
 					"SingularPronoun": "a pair of",
 					"PluralName": "Tongs",
@@ -82,7 +82,7 @@
 					"CanHoldOtherItems": false
 				},
 				{
-					"ItemID": "Tongs3",
+					"ItemID": "b6fec899-2544-468e-9ace-0d78b8765258",
 					"ItemName": "Tongs",
 					"SingularPronoun": "a pair of",
 					"PluralName": "Tongs",
@@ -99,7 +99,7 @@
 					"CanHoldOtherItems": false
 				},
 				{
-					"ItemID": "Tongs2",
+					"ItemID": "f6a19ed7-a826-49d1-a95b-d363bb0c6891",
 					"ItemName": "Tongs",
 					"SingularPronoun": "a pair of",
 					"PluralName": "Tongs",
@@ -116,7 +116,7 @@
 					"CanHoldOtherItems": false
 				},
 				{
-					"ItemID": "Tongs1",
+					"ItemID": "ead0cc00-4a3d-420c-bddc-629d9631610e",
 					"ItemName": "Tongs",
 					"SingularPronoun": "a pair of",
 					"PluralName": "Tongs",
@@ -133,7 +133,7 @@
 					"CanHoldOtherItems": false
 				},
 				{
-					"ItemID": "BlacksmithHammer1",
+					"ItemID": "926981d4-96c3-4876-a0b4-a9ee22de5369",
 					"ItemName": "Blacksmith Hammer",
 					"SingularPronoun": "a",
 					"PluralName": "Blacksmith Hammers",
@@ -150,7 +150,7 @@
 					"CanHoldOtherItems": false
 				},
 				{
-					"ItemID": "BlacksmithHammer2",
+					"ItemID": "bda0c7d2-2dd0-4baf-9edf-e49935962ed0",
 					"ItemName": "Blacksmith Hammer",
 					"SingularPronoun": "a",
 					"PluralName": "Blacksmith Hammers",
@@ -167,7 +167,7 @@
 					"CanHoldOtherItems": false
 				},
 				{
-					"ItemID": "BlacksmithHammer3",
+					"ItemID": "1ceb10dd-2ccf-42a9-9f19-655f283f6f71",
 					"ItemName": "Blacksmith Hammer",
 					"SingularPronoun": "a",
 					"PluralName": "Blacksmith Hammers",
@@ -184,7 +184,7 @@
 					"CanHoldOtherItems": false
 				},
 				{
-					"ItemID": "BlacksmithHammer4",
+					"ItemID": "2e72ec4b-a550-4e0b-8427-afc61bd3c7a3",
 					"ItemName": "Blacksmith Hammer",
 					"SingularPronoun": "a",
 					"PluralName": "Blacksmith Hammers",
@@ -201,7 +201,7 @@
 					"CanHoldOtherItems": false
 				},
 				{
-					"ItemID": "BlacksmithHammer5",
+					"ItemID": "b0272a40-7fb4-4397-be93-29560b6618b6",
 					"ItemName": "Blacksmith Hammer",
 					"SingularPronoun": "a",
 					"PluralName": "Blacksmith Hammers",
@@ -237,7 +237,7 @@
 			"Toughness": 5,
 			"HeldItems": [
 				{
-					"ItemID": "IronNugget1",
+					"ItemID": "15f12733-7b48-4fc7-9ecc-36cdc172fcd0",
 					"SingularPronoun": "an",
 					"ItemName": "Iron Nugget",
 					"PluralPronoun": "some",
@@ -253,7 +253,7 @@
 					"Toughness": 5
 				},
 				{
-					"ItemID": "IronNugget2",
+					"ItemID": "e0ab6d59-fb85-4f26-91d7-0ae7ec0b8066",
 					"SingularPronoun": "an",
 					"ItemName": "Iron Nugget",
 					"PluralPronoun": "some",
@@ -269,7 +269,7 @@
 					"Toughness": 5
 				},
 				{
-					"ItemID": "IronNugget3",
+					"ItemID": "2fb99a97-0bf1-4c8b-bf64-8adf895d0e2d",
 					"SingularPronoun": "an",
 					"ItemName": "Iron Nugget",
 					"PluralPronoun": "some",
@@ -285,7 +285,7 @@
 					"Toughness": 5
 				},
 				{
-					"ItemID": "IronNugget4",
+					"ItemID": "806fe793-eac1-4dab-9005-1c7a8303a66a",
 					"SingularPronoun": "an",
 					"ItemName": "Iron Nugget",
 					"PluralPronoun": "some",
@@ -301,7 +301,7 @@
 					"Toughness": 5
 				},
 				{
-					"ItemID": "IronNugget5",
+					"ItemID": "9677d3ad-4a40-44f7-8a5b-3da46db351d8",
 					"SingularPronoun": "an",
 					"ItemName": "Iron Nugget",
 					"PluralPronoun": "some",

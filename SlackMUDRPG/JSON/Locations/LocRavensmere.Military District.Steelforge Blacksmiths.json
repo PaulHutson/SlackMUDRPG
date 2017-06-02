@@ -29,7 +29,7 @@
 	],
 	"RoomItems": [
 		{
-			"ItemID": "Anvil1",
+			"ItemID": "fe576219-1cae-48f2-ab25-d6eac86bd10e",
 			"ItemName": "Anvil",
 			"SingularPronoun": "an",
 			"PluralName": "Anvils",
@@ -69,7 +69,6 @@
       {
         "ItemNumber": 1,
         "Item": {
-          "ItemID": "BlacksmithHammer1",
           "ItemName": "Blacksmith Hammer",
           "SingularPronoun": "a",
           "PluralName": "Blacksmith Hammers",
@@ -92,7 +91,6 @@
       {
         "ItemNumber": 2,
         "Item": {
-          "ItemID": "BlacksmithHammer2",
           "ItemName": "Good Quality Blacksmith Hammer",
           "SingularPronoun": "a",
           "PluralName": "Good Quality Blacksmith Hammers",
@@ -115,7 +113,6 @@
       {
         "ItemNumber": 3,
         "Item": {
-					"ItemID": "BlacksmithHammer3",
 					"ItemName": "Best Quality Blacksmith Hammer",
 					"SingularPronoun": "a",
 					"PluralName": "Best Quality Blacksmith Hammers",
@@ -138,7 +135,6 @@
       {
         "ItemNumber": 4,
         "Item": {
-					"ItemID": "Tongs5",
 					"ItemName": "Tongs",
 					"SingularPronoun": "a pair of",
 					"PluralName": "Tongs",
@@ -161,7 +157,6 @@
       {
         "ItemNumber": 5,
         "Item": {
-					"ItemID": "Tongs6",
 					"ItemName": "Good Quality Tongs",
 					"SingularPronoun": "a pair of",
 					"PluralName": "Good Quality Tongs",
@@ -184,7 +179,6 @@
       {
         "ItemNumber": 6,
         "Item": {
-					"ItemID": "Chisel1",
 					"ItemName": "Shoddy Chisel",
 	        "SingularPronoun": "a",
 	        "PluralName": "Shoddy Chisels",

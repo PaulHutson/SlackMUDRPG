@@ -19,7 +19,7 @@
 	],
   "RoomItems": [
     {
-      "ItemID": "beams",
+      "ItemID": "3f173855-dda2-467d-99de-42511d960fb5",
       "SingularPronoun": "some",
       "ItemName": "beams",
       "PluralPronoun": "some",
@@ -35,7 +35,7 @@
       "Toughness": 10
     },
     {
-      "ItemID": "minecarts",
+      "ItemID": "94585c34-b444-47b7-b23e-1eeecda18587",
       "SingularPronoun": "some",
       "ItemName": "minecarts",
       "PluralPronoun": "some",

@@ -19,7 +19,7 @@
 	],
 	"RoomItems": [
 		{
-			"ItemID": "FelhirstsBucket",
+			"ItemID": "7ca90a46-b181-4613-aaa8-c2db29e9a708",
 			"SingularPronoun": "a",
 			"ItemName": "Wooden Bucket full of Urine",
 			"PluralPronoun": "some",
@@ -36,7 +36,7 @@
 			"Toughness": 5,
 			"HeldItems": [
 				{
-					"ItemID": "Piss1",
+					"ItemID": "f7eeb6fd-9a7c-4bbf-8759-fb02cbcccba1",
 					"SingularPronoun": "some",
 					"ItemName": "urine",
 					"PluralPronoun": "some",
@@ -54,7 +54,7 @@
 			]
 		},
 		{
-			"ItemID": "FelhirstsChest",
+			"ItemID": "3d26cee2-11fa-4844-8652-021fae873494",
 			"SingularPronoun": "a",
 			"ItemName": "Wooden Chest",
 			"PluralPronoun": "some",
@@ -71,7 +71,7 @@
 			"Toughness": 5,
       "HeldItems": [
         {
-          "ItemID": "SKnife1",
+          "ItemID": "acef8e4a-59c1-425d-b42c-1d76fde93283",
           "ItemName": "Skinning Knife",
           "SingularPronoun": "a",
           "PluralName": "Skinning Knives",
@@ -87,7 +87,7 @@
           "Toughness": 3
         },
         {
-          "ItemID": "SKnife2",
+          "ItemID": "a294e837-270a-4d96-9f8b-4924f2179f99",
           "ItemName": "Skinning Knife",
           "SingularPronoun": "a",
           "PluralName": "Skinning Knives",

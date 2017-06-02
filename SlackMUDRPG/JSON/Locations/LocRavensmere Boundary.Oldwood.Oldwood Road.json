@@ -24,7 +24,7 @@
 	],
 	"RoomItems": [
 		{
-			"ItemID": "YT1",
+			"ItemID": "3b7d3084-5c4b-4c37-8a1c-a434a434a050",
 			"SingularPronoun": "a",
 			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
@@ -41,7 +41,7 @@
 			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
-			"ItemID": "YT2",
+			"ItemID": "c33d2baf-ce18-4e46-bbaa-a51f3d2052dd",
 			"SingularPronoun": "a",
 			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
@@ -58,7 +58,7 @@
 			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
-			"ItemID": "YT3",
+			"ItemID": "5944ec74-8ec7-485d-8279-ce8ad11b69fa",
 			"SingularPronoun": "a",
 			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
@@ -75,7 +75,7 @@
 			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
-			"ItemID": "YT4",
+			"ItemID": "d0fee845-c0bd-44ca-a96f-e78c1e3d43ca",
 			"SingularPronoun": "a",
 			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
@@ -92,7 +92,7 @@
 			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
-			"ItemID": "YT5",
+			"ItemID": "ec5160ab-81ad-4714-874e-5523a80234cc",
 			"SingularPronoun": "a",
 			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
@@ -109,7 +109,7 @@
 			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
-			"ItemID": "YT6",
+			"ItemID": "dff025fb-9806-418f-ad2b-94cb7b06a8ff",
 			"SingularPronoun": "a",
 			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
@@ -126,7 +126,7 @@
 			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
-			"ItemID": "YT7",
+			"ItemID": "5b03535f-01da-424c-a6c2-2bdc2b24184e",
 			"SingularPronoun": "a",
 			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
@@ -143,7 +143,7 @@
 			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
-			"ItemID": "YT8",
+			"ItemID": "a155ffab-3aa1-40d3-a9af-ee0f901f5d4e",
 			"SingularPronoun": "a",
 			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
@@ -160,7 +160,7 @@
 			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
-			"ItemID": "YT9",
+			"ItemID": "52a6cd75-1e20-471e-bd3a-a6297d26921a",
 			"SingularPronoun": "a",
 			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
@@ -177,7 +177,7 @@
 			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
-			"ItemID": "YT10",
+			"ItemID": "bba3f369-93d2-4bfb-8de2-7dff1c4b457c",
 			"SingularPronoun": "a",
 			"ItemName": "Young Tree",
 			"PluralPronoun": "some",
@@ -194,7 +194,7 @@
 			"DestroyedOutput": "Resource.TreeTrunk,1"
 		},
 		{
-			"ItemID": "Log4",
+			"ItemID": "f6551a99-8d5a-489f-8a77-3fecabb1b65c",
 			"SingularPronoun": "a",
 			"ItemName": "Log",
 			"PluralPronoun": "some",
@@ -211,7 +211,7 @@
 			"DestroyedOutput": "Resource.Stick,10"
 		},
 		{
-			"ItemID": "Log1",
+			"ItemID": "40e60973-151c-4705-9e2d-e2752b83903f",
 			"SingularPronoun": "a",
 			"ItemName": "Log",
 			"PluralPronoun": "some",
@@ -228,7 +228,7 @@
 			"DestroyedOutput": "Resource.Stick,10"
 		},
 		{
-			"ItemID": "Log2",
+			"ItemID": "bc7a42f4-75b3-4c76-9671-e3389b5ec512",
 			"SingularPronoun": "a",
 			"ItemName": "Log",
 			"PluralPronoun": "some",
@@ -245,7 +245,7 @@
 			"DestroyedOutput": "Resource.Stick,10"
 		},
 		{
-			"ItemID": "Log3",
+			"ItemID": "65c75704-f889-4738-b8de-5dcf24e0c5e9",
 			"SingularPronoun": "a",
 			"ItemName": "Log",
 			"PluralPronoun": "some",
@@ -262,7 +262,7 @@
 			"DestroyedOutput": "Resource.Stick,10"
 		},
 		{
-			"ItemID": "Stick1",
+			"ItemID": "8b207f6c-c9b7-48f2-a2c5-21d289c1466c",
 			"SingularPronoun": "a",
 			"ItemName": "Stick",
 			"PluralPronoun": "some",
@@ -278,7 +278,7 @@
 			"Toughness": 2
 		},
 		{
-			"ItemID": "Stick2",
+			"ItemID": "09210c93-fef3-489a-bbdd-4cc0a159722d",
 			"SingularPronoun": "a",
 			"ItemName": "Stick",
 			"PluralPronoun": "some",
@@ -294,7 +294,7 @@
 			"Toughness": 2
 		},
 		{
-			"ItemID": "Stick3",
+			"ItemID": "65c407c0-1968-4bc9-8088-69c0a297dc0c",
 			"SingularPronoun": "a",
 			"ItemName": "Stick",
 			"PluralPronoun": "some",
@@ -310,7 +310,7 @@
 			"Toughness": 2
 		},
 		{
-			"ItemID": "Stick4",
+			"ItemID": "bfa4ef6e-5d02-4c8f-84bb-4460b32833e6",
 			"SingularPronoun": "a",
 			"ItemName": "Stick",
 			"PluralPronoun": "some",
@@ -326,7 +326,7 @@
 			"Toughness": 2
 		},
 		{
-			"ItemID": "Stick5",
+			"ItemID": "6b263d65-7dea-45d0-a869-3a8534ed94dc",
 			"SingularPronoun": "a",
 			"ItemName": "Stick",
 			"PluralPronoun": "some",
@@ -342,7 +342,7 @@
 			"Toughness": 2
 		},
 		{
-			"ItemID": "Stick6",
+			"ItemID": "b4d3571a-89ea-4069-9be8-f621e2d41b75",
 			"SingularPronoun": "a",
 			"ItemName": "Stick",
 			"PluralPronoun": "some",
@@ -358,7 +358,7 @@
 			"Toughness": 2
 		},
 		{
-			"ItemID": "Stick7",
+			"ItemID": "e2bdade8-f1de-4c35-809d-81f6b2ade65f",
 			"SingularPronoun": "a",
 			"ItemName": "Stick",
 			"PluralPronoun": "some",
@@ -374,7 +374,7 @@
 			"Toughness": 2
 		},
 		{
-			"ItemID": "Stick8",
+			"ItemID": "3045df19-0b0e-4854-ab49-dc02cc7b4227",
 			"SingularPronoun": "a",
 			"ItemName": "Stick",
 			"PluralPronoun": "some",
@@ -390,7 +390,7 @@
 			"Toughness": 2
 		},
 		{
-			"ItemID": "Stick9",
+			"ItemID": "2faeaf47-614e-4283-8bb6-5df9258eb418",
 			"SingularPronoun": "a",
 			"ItemName": "Stick",
 			"PluralPronoun": "some",
@@ -406,7 +406,7 @@
 			"Toughness": 2
 		},
 		{
-			"ItemID": "Stick10",
+			"ItemID": "6a8a9fa2-7e09-48d2-8bcb-eb7049cb2fc7",
 			"SingularPronoun": "a",
 			"ItemName": "Stick",
 			"PluralPronoun": "some",

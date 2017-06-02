@@ -42,7 +42,7 @@
         "any"
       ],
       "EquippedItem": {
-        "ItemID": "J2K",
+        "ItemID": "7e53d688-0c50-44ee-897a-e0cd68a2e14e",
         "ItemName": "Knife",
         "SingularPronoun": "a",
         "PluralName": "Knives",
@@ -70,7 +70,7 @@
         "any"
       ],
       "EquippedItem": {
-        "itemID": "LHSSR",
+        "itemID": "e7c220f2-9e1d-401f-bbec-9ad5158524b5",
         "SingularPronoun": "a",
         "ItemName": "Little Hellstone Signet Ring",
         "PluralPronoun": "some",

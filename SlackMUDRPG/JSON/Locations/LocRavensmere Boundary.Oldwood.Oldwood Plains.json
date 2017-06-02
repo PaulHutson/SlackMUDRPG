@@ -29,7 +29,7 @@
 	],
   "RoomItems": [
     {
-      "ItemID": "ArteirPlant",
+      "ItemID": "892c4af3-694e-4e36-8e91-1397e7c764bd",
       "SingularPronoun": "an",
       "ItemName": "Arteir Plant",
       "PluralPronoun": "some",
@@ -46,7 +46,7 @@
       "DestroyedOutput": "Resource.ArteirRoot,1"
     },
     {
-      "ItemID": "ArteirPlant2",
+      "ItemID": "c19b02f3-4521-49bc-8f10-3c5f3b7e15f8",
       "SingularPronoun": "an",
       "ItemName": "Arteir Plant",
       "PluralPronoun": "some",
@@ -63,7 +63,7 @@
       "DestroyedOutput": "Resource.ArteirRoot,1"
     },
     {
-      "ItemID": "ArteirPlant3",
+      "ItemID": "91a9a664-857e-4b3e-bf29-ed7a9c923e09",
       "SingularPronoun": "an",
       "ItemName": "Arteir Plant",
       "PluralPronoun": "some",
@@ -80,7 +80,7 @@
       "DestroyedOutput": "Resource.ArteirRoot,1"
     },
     {
-      "ItemID": "ArteirPlant4",
+      "ItemID": "45d00a52-76b6-435b-b087-b3d825bc21dd",
       "SingularPronoun": "an",
       "ItemName": "Arteir Plant",
       "PluralPronoun": "some",
