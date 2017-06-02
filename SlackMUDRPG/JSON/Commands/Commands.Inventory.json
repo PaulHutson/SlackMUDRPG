@@ -25,6 +25,19 @@
 		"ExampleUsage": "drop wooden stick",
 		"RequiredSkill": null
 	},
+		{
+		"CommandFamily": "Inventory",
+		"CommandName": "dropall",
+		"CommandDescription": "Drops all currently equipped items into your current room. Any equipped containers keep their contents.",
+		"CommandSyntax": "dropall",
+		"ParamsExpression": null,
+		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
+		"CommandMethod": "DropAll",
+		"PassCommandAsFirstArg": false,
+		"PassUserIDAsFirstArg": false,
+		"ExampleUsage": "dropall",
+		"RequiredSkill": null
+	},
 	{
 		"CommandFamily": "Inventory",
 		"CommandName": "inventory, i",

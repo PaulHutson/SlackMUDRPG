@@ -2059,6 +2059,13 @@ namespace SlackMUDRPG.CommandClasses
 		/// <param name="itemIdentifier">Item identifier.</param>
 		public void DropItem(string itemIdentifier)
 		{
+			// Handle "drop all" command
+			if (itemIdentifier.ToLower() == "all")
+			{
+				this.DropAll();
+				return;
+			}
+
 			// Get the item to drop
 			SMItem itemToDrop = this.GetOwnedItem(itemIdentifier);
 
@@ -2077,6 +2084,22 @@ namespace SlackMUDRPG.CommandClasses
 			// Unable to find the item
 			this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\" to drop!"));
 			return;
+		}
+
+		/// <summary>
+		/// Drops all equipped items into the characters current room. Any item inside equipped containers will remain in the container when it is dropped.
+		/// </summary>
+		public void DropAll()
+		{
+			foreach (SMSlot slot in this.Slots)
+			{
+				if (slot.EquippedItem != null)
+				{
+					this.DropItem(slot.EquippedItem.ItemID);
+				}
+			}
+
+			// TODO handle items in clothing
 		}
 
 		/// <summary>
