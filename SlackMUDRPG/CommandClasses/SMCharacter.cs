@@ -1515,22 +1515,19 @@ namespace SlackMUDRPG.CommandClasses
 			bool putInContainer = false;
 			bool putInHand = false;
 
-            if (this.AreHandsEmpty())
-            {
-                putInHand = this.PutItemInEmptyHand(itemToPickup);
-            }
-            
-            if (!putInHand)
-            {
-                // Try to put the item in an equipped container
-                putInContainer = this.PutItemInEquippedContainer(itemToPickup);
+			putInHand = this.PutItemInEmptyHand(itemToPickup);
 
-                // If unable to put in a container try empty hands
-                if (!putInContainer)
-                {
-                    putInHand = this.PutItemInEmptyHand(itemToPickup);
-                }
-            }
+			if (!putInHand)
+			{
+				// Try to put the item in an equipped container
+				putInContainer = this.PutItemInEquippedContainer(itemToPickup);
+
+				// If unable to put in a container try empty hands
+				if (!putInContainer)
+				{
+					putInHand = this.PutItemInEmptyHand(itemToPickup);
+				}
+			}
 			
 			// Remove item from room and send messages on success
 			if (putInContainer || putInHand)
