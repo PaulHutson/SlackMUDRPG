@@ -1552,7 +1552,8 @@ namespace SlackMUDRPG.CommandClasses
 		/// </summary>
 		/// <param name="item">The item the character is receiving.</param>
 		/// <param name="supressOutput">Bool indicating of the playour output shoudl be suppressed.</param>
-		public void ReceiveItem(SMItem item, bool supressOutput = false)
+		/// /// <returns>Bool indicating the success of the recieve operation.</returns>
+		public bool ReceiveItem(SMItem item, bool supressOutput = false)
 		{
 			bool putInContainer = false;
 			bool putInHand = false;
@@ -1569,7 +1570,7 @@ namespace SlackMUDRPG.CommandClasses
 			// Save character and send messages on success
 			if (putInContainer || putInHand)
 			{
-				this.SaveToFile();
+				this.SaveToApplication();
 
 				if (!supressOutput)
 				{
@@ -1578,7 +1579,7 @@ namespace SlackMUDRPG.CommandClasses
 					this.GetRoom().Announce(this.Formatter.Italic($"{this.GetFullName()} received {item.SingularPronoun} {item.ItemName}."), this, true);
 				}
 
-				return;
+				return true;
 			}
 
 			// Otherwise send failure message
@@ -1586,6 +1587,8 @@ namespace SlackMUDRPG.CommandClasses
 			{
 				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to receive {item.ItemName}({item.ItemWeight}), you don't have space for it."));
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -2103,6 +2106,50 @@ namespace SlackMUDRPG.CommandClasses
 		}
 
 		/// <summary>
+		/// Gives an item identified by itemIdentifier to a charcter identified by receiverName (can be an NPC or a player character).
+		/// </summary>
+		/// <param name="itemIdentifier">Identifier of the item to give.</param>
+		/// <param name="playerName">Name of the character to give the item to.</param>
+		public void GiveItem(string itemIdentifier, string receiverName)
+		{
+			// Get item from current players inventory
+			SMItem itemToGive = this.GetOwnedItem(itemIdentifier);
+
+			// If unable to find the item inform the player and return early
+			if (itemToGive == null)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"You must own an item to give it, \"{Utils.SanitiseString(itemIdentifier)}\" was not found in your inventory!"));
+				return;
+			}
+
+			// Get player to give item to
+			SMCharacter receiver = this.GetRoom().GetAllPeople().FirstOrDefault(smc =>
+				smc.GetFullName().ToLower() == receiverName.ToLower()
+				|| smc.FirstName.ToLower() == receiverName.ToLower()
+				|| smc.LastName.ToLower() == receiverName.ToLower()
+			);
+
+			// If unable to find the other character inform the player and return early
+			if (receiver == null)
+			{
+				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find anyone answering to \"{Utils.SanitiseString(receiverName)}\" in this room!"));
+				return;
+			}
+
+			// Check in the receiver is an NPC or player character and handle the give accordingly
+			if (receiver.GetType().Name == "SMNPC")
+			{
+				// Give to NPC
+				this.GiveItemToNPC(itemToGive, receiver);
+				return;
+			}
+
+			// Give to player character
+			this.GiveItemToPlayerCharacter(itemToGive, receiver);
+			return;
+		}
+
+		/// <summary>
 		/// Gets an SMSlot by name, case insensitive.
 		/// </summary>
 		/// <returns>The SMSlot by name.</returns>
@@ -2547,85 +2594,59 @@ namespace SlackMUDRPG.CommandClasses
 			}
 		}
 
+		/// <summary>
+		/// Gives am item to a specified NPC, triggering the NPC's response. 
+		/// </summary>
+		/// <param name="item">The item to give.</param>
+		/// <param name="npc">The NPC to give the item to.</param>
+		private void GiveItemToNPC(SMItem item, SMCharacter npc)
+		{
+			// Tell the player they have passed the item over
+			this.sendMessageToPlayer(this.Formatter.Italic($"You gave {npc.GetFullName()} {item.SingularPronoun} \"{item.ItemName}\""));
 
+			// Remove item from the character
+			this.RemoveOwnedItem(item.ItemID);
+
+			// Save changes to the both giving and reciving characters
+			this.SaveToApplication();
+			npc.SaveToApplication();
+
+			// Make the NPC respond to the action
+			SMNPC smnpc = this.GetRoom().GetNPCs().FirstOrDefault(smc => smc.GetFullName().ToLower() == npc.GetFullName().ToLower());
+			if (smnpc != null)
+			{
+				NPCHelper.StartAnNPCReactionCheck(smnpc, "PlayerCharacter.GivesItemToThem", this, item);
+			}
+		}
 
 		/// <summary>
-		/// Gives an item identified by itemIdentifier to a charcter identified by playerName.
+		/// Gives am item to a specified player character.
 		/// </summary>
-		/// <param name="itemIdentifier">Identifier of the item to give.</param>
-		/// <param name="playerName">Name of the character to give the item to.</param>
-		public void GiveItem(string itemIdentifier, string playerName)
+		/// <param name="item">The item to give.</param>
+		/// <param name="npc">The player character to give the item to.</param>
+		private void GiveItemToPlayerCharacter(SMItem item, SMCharacter receiver)
 		{
-			// Get item from current players inventory
-			SMItem itemToGive = this.GetOwnedItem(itemIdentifier);
+			// Try and give the item
+			bool given = receiver.ReceiveItem(item, true);
 
-			if (itemToGive == null)
+			// On success
+			if (given)
 			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"You must own an item to give it, \"{Utils.SanitiseString(itemIdentifier)}\" was not found in your inventory!"));
+				// Remove item from the giving character
+				this.RemoveOwnedItem(item.ItemID);
+				this.SaveToApplication();
+
+				// Inform both players of the success
+				this.sendMessageToPlayer(this.Formatter.Italic($"You gave \"{receiver.GetFullName()}\" {item.SingularPronoun} \"{item.ItemName}\"."));
+				receiver.sendMessageToPlayer(this.Formatter.Italic($"\"{this.GetFullName()}\" gave you {item.SingularPronoun} \"{item.ItemName}\""));
+
 				return;
 			}
 
-			// Get player to give item to
-			SMCharacter playerToGiveTo = this.GetRoom().GetAllPeople().FirstOrDefault(smc => (smc.GetFullName().ToLower() == playerName.ToLower()) || (smc.FirstName.ToLower() == playerName.ToLower()) || (smc.LastName.ToLower() == playerName.ToLower()));
-
-			if (playerToGiveTo == null)
-			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find a player called, \"{Utils.SanitiseString(playerName)}\" in this room!"));
-				return;
-			}
-
-			if (playerToGiveTo.GetType().Name != "SMNPC")
-			{
-				// Check player can recieve item (needs an empyt hand available weigth capacity to hold carry the item
-				SMSlot receivingHand = playerToGiveTo.GetEmptyHand();
-
-				if (receivingHand == null)
-				{
-					this.sendMessageToPlayer(this.Formatter.Italic($"Unable to give \"{itemToGive.ItemName}\" to \"{playerToGiveTo.GetFullName()}\", they dont have an emoty hand to take it!"));
-					playerToGiveTo.sendMessageToPlayer(this.Formatter.Italic($"{this.GetFullName()} tried to give you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\" but you dont have an empty had to take it!"));
-					return;
-				}
-
-				if (playerToGiveTo.WeightLimit - playerToGiveTo.GetCurrentWeight() < SMItemHelper.GetItemWeight(itemToGive))
-				{
-					this.sendMessageToPlayer(this.Formatter.Italic($"Unable to give \"{itemToGive.ItemName}\" to \"{playerToGiveTo.GetFullName()}\", they can't carry that much weight!"));
-					playerToGiveTo.sendMessageToPlayer(this.Formatter.Italic($"{this.GetFullName()} tried to give you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\" but your strong enough to carry it!"));
-					return;
-				}
-
-				// Remove item from current player
-				this.RemoveOwnedItem(itemToGive.ItemID);
-
-				// Add item to receiving player
-				receivingHand.EquippedItem = itemToGive;
-
-				// Send responces and save both players
-				this.sendMessageToPlayer(this.Formatter.Italic($"You gave {playerToGiveTo.GetFullName()} {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
-				playerToGiveTo.sendMessageToPlayer(this.Formatter.Italic($"{this.GetFullName()} gave you {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
-
-				// Make sure the player now knows what he has.
-				this.SaveToApplication();
-				playerToGiveTo.SaveToApplication();
-			}
-			else
-			{
-				// Tell the player he passed the item over
-				this.sendMessageToPlayer(this.Formatter.Italic($"You gave {playerToGiveTo.GetFullName()} {itemToGive.SingularPronoun} \"{itemToGive.ItemName}\""));
-
-				// Remove item from current player
-				this.RemoveOwnedItem(itemToGive.ItemID);
-
-				// Make sure the player now knows what he has.
-				this.SaveToApplication();
-				playerToGiveTo.SaveToApplication();
-
-				// Respond to the action
-				SMNPC smn = this.GetRoom().GetNPCs().FirstOrDefault(smc => smc.GetFullName().ToLower() == playerToGiveTo.GetFullName().ToLower());
-				if (smn != null)
-				{
-					NPCHelper.StartAnNPCReactionCheck(smn, "PlayerCharacter.GivesItemToThem", this, itemToGive);
-				}
-			}
+			// On failure
+			this.sendMessageToPlayer(this.Formatter.Italic($"Unable to give {item.SingularPronoun} \"{item.ItemName}\" to \"{receiver.GetFullName()}\"!"));
+			receiver.sendMessageToPlayer(this.Formatter.Italic($"\"{this.GetFullName()}\" tried to give you {item.SingularPronoun} \"{item.ItemName}\" but you cannot receive it!"));
+			return;
 		}
 
 		/// <summary>
