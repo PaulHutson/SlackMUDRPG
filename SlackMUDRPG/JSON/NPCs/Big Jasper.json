@@ -42,7 +42,7 @@
         "any"
       ],
       "EquippedItem": {
-        "ItemID": "J1K",
+        "ItemID": "77c11063-88fd-4b46-a8e0-e6cf3d366944",
         "ItemName": "Knife",
         "SingularPronoun": "a",
         "PluralName": "Knives",
@@ -70,7 +70,7 @@
         "any"
       ],
       "EquippedItem": {
-        "itemID": "BHSSR",
+        "itemID": "e5ecd17f-ed95-4aee-bf7b-a7bc8016a30e",
         "SingularPronoun": "a",
         "ItemName": "Big Hellstone Signet Ring",
         "PluralPronoun": "some",

@@ -1960,23 +1960,6 @@ namespace SlackMUDRPG.CommandClasses
 			// Declare a variable to show if the container to put the item in is owned or not
 			bool ownedContainer = true;
 
-			// Find item, look in slots their equipped items and clothing
-			SMItem itemToPut = this.GetOwnedItem(itemIdentifier);
-
-			// Look in the room if the item has not been found
-			if (itemToPut == null)
-			{
-				itemToPut = this.FindItemInRoom(itemIdentifier);
-				ownedItem = false;
-			}
-
-			// Check the item has been found
-			if (itemToPut == null)
-			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\"!"));
-				return;
-			}
-
 			// Find container to put item in, look in slots and their equipped items, clothing, then room
 			SMItem targetContainer = null;
 
@@ -1999,17 +1982,59 @@ namespace SlackMUDRPG.CommandClasses
 				return;
 			}
 
+			// Daclare a variable to store the item to put
+			SMItem itemToPut = null;
+
+			// Try and find the target item on the character
+			SMItem itemOnCharacter = this.GetOwnedItem(itemIdentifier);
+
+			// Try and find the target item in the characters room
+			SMItem itemInRoom = this.FindItemInRoom(itemIdentifier);
+
+			// Declare a string varaible to hold the name of the item in case of failure
+			string nameForFailureMsg = String.Empty;
+
+			// Determin which item to use (character or room) by checking if either were found and if the found item is already in the target container
+			if (itemOnCharacter != null)
+			{
+				if (!targetContainer.Contains(itemOnCharacter))
+				{
+					itemToPut = itemOnCharacter;
+				}
+
+				nameForFailureMsg  = itemOnCharacter.ItemName;
+			}
+
+			if (itemToPut == null && itemInRoom != null)
+			{
+				if (!targetContainer.Contains(itemInRoom))
+				{
+					itemToPut = itemInRoom;
+					ownedItem = false;
+				}
+
+				nameForFailureMsg = itemInRoom.ItemName;
+			}
+
+			// Check a suitable item has been found
+			if (itemToPut == null)
+			{
+				if (itemOnCharacter != null || itemInRoom != null)
+				{
+					this.sendMessageToPlayer(this.Formatter.Italic($"Unable to put {nameForFailureMsg} in {targetContainer.ItemName} it is already there"));
+				}
+				else
+				{
+					this.sendMessageToPlayer(this.Formatter.Italic($"Unable to find \"{Utils.SanitiseString(itemIdentifier)}\"!"));
+				}
+
+				return;
+			}
+
 			// Check the item and container are not the same thing
 			if (itemToPut.ItemID == targetContainer.ItemID)
 			{
 				this.sendMessageToPlayer(this.Formatter.Italic($"You cannot put an item inside itself!"));
-				return;
-			}
-
-			// Check the item is not already in the container
-			if (SMItemHelper.GetItemFromList(targetContainer.HeldItems, itemToPut.ItemID) != null)
-			{
-				this.sendMessageToPlayer(this.Formatter.Italic($"\"{itemToPut.ItemName}\" is alreay in {targetContainer.ItemName}!"));
 				return;
 			}
 
