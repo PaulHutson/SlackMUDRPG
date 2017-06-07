@@ -1,5 +1,5 @@
 {
-	"RoomID": "Ravensmere.Town Centre.Barons Walk",
+	"RoomID": "Ravensmere.Town Centre.The Dozen",
 	"RoomLocationX": "1",
 	"RoomLocationY": "1",
 	"RoomLocationZ": "1",
@@ -14,22 +14,23 @@
 	],
   "RoomItems": [
     {
-      "ItemID": "Oven1",
-      "ItemName": "5 Large Ovens for Baking",
-      "SingularPronoun": "",
-      "PluralName": "",
-      "PluralPronoun": "",
-      "ItemType": "tools",
-      "ItemFamily": "Oven",
-      "ItemDescription": "5 large ovens for baking breads.",
-      "ItemWeight": 500000,
-      "ItemSize": 500,
-      "HitPoints": 100000,
-      "MaxHitPoints": 100000,
-      "BaseDamage": 200,
-      "Toughness": 25,
-      "CanHoldOtherItems": false
-    }
+			"ItemID": "3d26cee2-11fa-4844-8652-021fae873494",
+			"SingularPronoun": "some",
+			"ItemName": "large ovens",
+			"PluralPronoun": "some",
+			"PluralName": "large ovens",
+			"ItemType": "Oven",
+			"ItemFamily": "Oven",
+			"ItemDescription": "Five huge ovens in the corner of the room",
+			"ItemWeight": 20000,
+			"ItemCapacity": 50,
+			"ItemSize": 50,
+			"HitPoints": 50000,
+			"MaxHitPoints": 50000,
+			"BaseDamage": 200,
+			"Toughness": 5,
+      "HeldItems": null
+		}
   ],
 	"NPCSpawns": null
 }
