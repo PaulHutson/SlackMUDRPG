@@ -1,0 +1,142 @@
+﻿{
+	"Name": "Rabbit Pie",
+	"Description": "The ability to bake a Rabbit Pie.",
+	"Produces": "Food.RabbitPie|1",
+	"PauseTime": 5,
+	"NeedToLearn": true,
+	"ProductionTrait": "Trait.Baking",
+	"Materials": [
+    {
+      "MaterialType": "ItemName.bag of flour",
+      "MaterialQuantity": 1
+    },
+    {
+			"MaterialType": "Family.egg",
+			"MaterialQuantity": 2
+		},
+    {
+			"MaterialType": "ItemName.Rabbit Shank",
+			"MaterialQuantity": 1
+		}
+	],
+	"RequiredSkills": [
+		{
+			"SkillName": "Bake",
+			"SkillLevel": "3"
+		}
+	],
+	"SkillSteps": [
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} begins to prepare some dough ready for the pastry."
+		},
+		{
+			"StepType": "CheckConsumeItems",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": "You do not have the required {ITEMNAME} to prepare the pie.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 3,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "ConsumeItems",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": "You do not have enough {ITEMNAME} to complete the task.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} kneeds to the pastry preparing it to form the pie."
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 5,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} starts to form the pastry into a pie shape."
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 2,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} cuts and adds the rabbit shank meat to the pie base."
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 5,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} adds the top to the pie with some of the left over pastry."
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 5,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} places the pie in the oven to being cooking."
+		},
+		{
+			"StepType": "Pause",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 5,
+			"FailureOutput": null,
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "Information",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 0,
+			"FailureOutput": null,
+			"SuccessOutput": "{CHARNAME} turns the pie around to ensure that it cooks through evenly."
+		},
+		{
+			"StepType": "CreateObject",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"FailureOutput": "Burned the pie ruining it.",
+			"SuccessOutput": "Removes the pie from the oven piping hot and ready for eating (it is located in the same place as you)."
+		}
+	]
+}

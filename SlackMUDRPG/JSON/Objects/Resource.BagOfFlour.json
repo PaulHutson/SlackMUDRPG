@@ -1,0 +1,16 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "bag of flour",
+	"PluralPronoun": "some",
+	"PluralName": "bags of flour",
+	"ItemType": "container",
+	"ItemFamily": "bag",
+	"PluralFamilyName": "flour",
+	"ItemDescription": "A bag of flour",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 0,
+	"MaxHitPoints": 0,
+	"BaseDamage": 0.00000001,
+	"Toughness": 0
+}

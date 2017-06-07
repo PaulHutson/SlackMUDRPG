@@ -487,7 +487,7 @@
     <Content Include="JSON\Quests\Town.Two Rings Don%27t Make A Right.json" />
     <Content Include="JSON\Objects\Environment.Fungus.json" />
     <Content Include="JSON\Quests\Crabby.Fish For The Smoking.json" />
-    <Content Include="JSON\Objects\Food.Bread" />
+    <None Include="JSON\Objects\Food.Bread.json" />
     <Content Include="JSON\Skills\Skill.Butchery.json" />
     <Content Include="JSON\Objects\Resource.VenisonSteak.json" />
     <Content Include="JSON\Objects\Tools.ButchersBlock.json" />
@@ -499,6 +499,13 @@
     <Content Include="JSON\Quests\BertRengle.Scalebrewers Rabbit Stew.json" />
     <Content Include="JSON\Quests\CassiusAnor.A Merchants Steak.json" />
     <Content Include="JSON\Objects\Food.ScalebrewersRabbitStew.json" />
+    <Content Include="JSON\Objects\Resource.Egg.json" />
+    <Content Include="JSON\Objects\Resource.Flour.json" />
+    <Content Include="JSON\Objects\Resource.BagOfFlour.json" />
+    <Content Include="JSON\Skills\Skill.Bake.json" />
+    <Content Include="JSON\Receipe\Food.Bread.json" />
+    <None Include="JSON\Objects\Food.RabbitPie.json" />
+    <Content Include="JSON\Receipe\Food.RabbitPie.json" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="RebuildCharNameList.aspx" />
     <Content Include="scripts\ai.1.0.7-build00691.js" />

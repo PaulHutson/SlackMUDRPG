@@ -1,0 +1,48 @@
+{
+  "SkillType": {
+    "SkillTypeName": "Food",
+    "SkillTypeDescription": "Related to making foods"
+  },
+  "SkillName": "Bake",
+	"CanUseWithoutLearning":  true,
+  "SkillDescription": "The ability make baked foods",
+  "SkillLearnText": "You've learnt how to bake things",
+  "LevelIncreaseText":  "You feel that you've gotten a little better at baking",
+  "ActivityType":  "Baking",
+  "BaseStat": "INT",
+  "LevelMultiplier": 10,
+  "ImprovementSpeed": 10,
+  "Prerequisites": [
+    {
+      "IsSkill": false,
+      "SkillStatName": "INT",
+      "PreReqLevel": 5
+    }
+  ],
+  "SkillSteps": [
+    {
+      "StepType": "CheckObjectInLocation",
+      "StepRequiredObject": "Family.Oven",
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+      "FailureOutput": "There is no oven available here for baking",
+      "SuccessOutput": null
+    },
+		{
+			"StepType": "CheckReceipe",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": "Trait.Baking",
+			"FailureOutput": "You can't bake that.",
+			"SuccessOutput": null
+		},
+		{
+			"StepType": "UseReceipe",
+			"StepRequiredObject": null,
+			"RequiredObjectAmount": 1,
+			"ExtraData": null,
+			"FailureOutput": "Failed to bake {ITEMNAME}.",
+			"SuccessOutput": null
+		}
+  ]
+}
