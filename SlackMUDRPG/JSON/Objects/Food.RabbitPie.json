@@ -1,12 +1,12 @@
 ﻿{
   "ItemID": "GENERATE",
   "SingularPronoun": "a",
-  "ItemName": "Loaf of Bread",
-  "PluralName": "Loaves of Bread",
+  "ItemName": "Rabbit Pie",
+  "PluralName": "Rabbit Pies",
   "PluralPronoun": "some",
-  "ItemType": "Bread",
-  "ItemFamily": "Loaf",
-  "ItemDescription": "A loaf of bread, lightly browned on top",
+  "ItemType": "Pie",
+  "ItemFamily": "Pie",
+  "ItemDescription": "A rabbit pie",
   "ItemWeight": 1,
   "ItemCapacity": 0,
   "ItemSize": 1,
@@ -28,8 +28,8 @@
     },
     {
       "Action": "OnConsume",
-      "EffectType": "Healing Rate",
-      "AdditionalData": "1",
+      "EffectType": "HP-Regeneration",
+      "AdditionalData": "2",
       "EffectLength": 300
     }
   ]

@@ -1,0 +1,16 @@
+﻿{
+	"SingularPronoun": "an",
+	"ItemName": "{Family} egg",
+	"PluralPronoun": "some",
+	"PluralName": "{Family} eggs",
+	"ItemType": "egg",
+	"ItemFamily": "egg",
+	"PluralFamilyName": "eggs",
+	"ItemDescription": "A perfect {Family} egg",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 0,
+	"MaxHitPoints": 0,
+	"BaseDamage": 0.00000001,
+	"Toughness": 0
+}

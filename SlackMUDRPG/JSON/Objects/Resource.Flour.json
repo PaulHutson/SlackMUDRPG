@@ -1,0 +1,16 @@
+﻿{
+	"SingularPronoun": "some",
+	"ItemName": "flour",
+	"PluralPronoun": "some",
+	"PluralName": "flour",
+	"ItemType": "flour",
+	"ItemFamily": "flour",
+	"PluralFamilyName": "flour",
+	"ItemDescription": "flour",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 0,
+	"MaxHitPoints": 0,
+	"BaseDamage": 0.00000001,
+	"Toughness": 0
+}
