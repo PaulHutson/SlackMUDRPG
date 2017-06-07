@@ -15,7 +15,7 @@
 	{
 		"CommandFamily": "Character",
 		"CommandName": "inspect, examine, e",
-		"CommandDescription": "{name|tilte} a chatracter or an object within a location.",
+		"CommandDescription": "{name|title} a chatracter or an object within a location.",
 		"CommandSyntax": "{name|lower} <thing to inspect>",
 		"ParamsExpression": "{.+}",
 		"CommandClass": "SlackMUDRPG.CommandClasses.SMCharacter",
