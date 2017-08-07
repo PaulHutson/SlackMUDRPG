@@ -20,6 +20,11 @@
 			"Shortcut": "FO",
 			"Description": "Foresters Outpost [i](Shop)[/i]",
 			"RoomID": "Ravensmere.Industrial Quarter.Foresters Outpost"
+		},
+    {
+			"Shortcut": "MQ",
+			"Description": "Millers Quorn [i](Shop)[/i]",
+			"RoomID": "Ravensmere.Industrial Quarter.Millers Quorn"
 		}
 	],
 	"RoomItems": null,
