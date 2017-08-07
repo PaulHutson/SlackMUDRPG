@@ -1,0 +1,63 @@
+{
+	"RoomID": "Ravensmere.Industrial Quarter.Millers Quorn",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "The whirr and clamour of a thousand moving parts bears down on you as you squeeze through the narrow doorway. Everywhere you look there seems to be something turning, clanking, rattling, or otherwise serving some unknown mechanical purpose. Add in the muted but thunderous sound of rushing water, and it's quite enough to give you vertigo. The centrepiece of the room is a massive millstone, although it's quite unlike any you've ever seen before. The stone itself has been carefully shaped with specific grooves and complex patterns; the assembly which it's attached to is astonishingly elaborate. Intricate copper gears are meshed together all the way up the length of the wooden shaft; besides it, a chain of dozens of tiny iron links disappears into the depths of the machinery in the ceiling. The room stinks of oil and sweat, and there's precious little room to manoeuvre without the risk of getting caught in something. As you tread on a few splinters, the thought crosses your mind that all this machinery might be a little heavy for the rough wooden planks... and the rushing river awaits not far below.",
+	"RoomExits": [
+    {
+			"Shortcut": "RS",
+			"Description": "Ravens South",
+			"RoomID": "Ravensmere.Industrial Quarter.Ravens South"
+		}
+	],
+  "RoomItems": [
+    {
+			"ItemID": "3d26cee2-11fa-4844-8652-021fae873494",
+			"SingularPronoun": "a",
+			"ItemName": "Massive Millstone",
+			"PluralPronoun": "some",
+			"PluralName": "Massive Millstones",
+			"ItemType": "MillStone",
+			"ItemFamily": "MillStone",
+			"ItemDescription": "A massive millstone in the center of the room",
+			"ItemWeight": 20000,
+			"ItemCapacity": 50,
+			"ItemSize": 50,
+			"HitPoints": 50000,
+			"MaxHitPoints": 50000,
+			"BaseDamage": 200,
+			"Toughness": 50,
+      "HeldItems": null
+		}
+  ],
+	"NPCSpawns": null,
+  "NPCShopItems": {
+    "ShopInventory": [
+      {
+        "ItemNumber": 1,
+        "Item": {
+	        "SingularPronoun": "some",
+	        "ItemName": "flour",
+	        "PluralPronoun": "some",
+	        "PluralName": "flour",
+	        "ItemType": "flour",
+	        "ItemFamily": "flour",
+	        "PluralFamilyName": "flour",
+	        "ItemDescription": "flour",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 0,
+	        "MaxHitPoints": 0,
+	        "BaseDamage": 0.00000001,
+	        "Toughness": 0,
+          "HeldItems": null
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 50
+      }
+    ]
+  }
+}
