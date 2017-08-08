@@ -38,25 +38,24 @@
       {
         "ItemNumber": 1,
         "Item": {
-	        "SingularPronoun": "some",
-	        "ItemName": "flour",
+	        "SingularPronoun": "a",
+	        "ItemName": "bag of flour",
 	        "PluralPronoun": "some",
-	        "PluralName": "flour",
-	        "ItemType": "flour",
-	        "ItemFamily": "flour",
+	        "PluralName": "bags of flour",
+	        "ItemType": "container",
+	        "ItemFamily": "bag",
 	        "PluralFamilyName": "flour",
-	        "ItemDescription": "flour",
+	        "ItemDescription": "A bag of flour",
 	        "ItemWeight": 1,
 	        "ItemSize": 1,
 	        "HitPoints": 0,
 	        "MaxHitPoints": 0,
 	        "BaseDamage": 0.00000001,
-	        "Toughness": 0,
-          "HeldItems": null
+	        "Toughness": 0
         },
         "AmountForSale": 0,
         "UnlimitedAvailable": true,
-        "Cost": 50
+        "Cost": 5
       }
     ]
   }

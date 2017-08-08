@@ -1,19 +1,19 @@
 ﻿{
-  "firstname": "Samual",
-  "lastname": "Milner",
-  "description": "The top of this labourer's square head just about reaches your shoulders. Given his own broad frame, the net result in that he looks roughly as wide as he is tall. His coarse linen shirt and canvas trousers don't quite fit him – although given his shape, it’s difficult to imagine anything that would. His youth is betrayed by fuzz that could loosely be called facial hair, and his big hands have remarkably delicate fingers. Despite his rough job, he looks like he could play a piano as equally as he could lift a sack of flour.",
+  "firstname": "Shayn",
+  "lastname": "The Pastor",
+  "description": "Thin as a rake and twice as tall, this man's black clothes hang off him like wet towels from a dish rack. His gangly appearance is not helped by the tightness of his collar, which gives the impression his neck is twice as long as it is; the bald dome peeking from the top of his grey hair only emphasises this man's sheer verticality. How he fits into the shop's tiny door is a mystery. In contrast to his formal appearance, a purple scarf is draped loosely over his shoulders and dangles on either side of his chest. In between is a small sigil that seems to be carved from driftwood.",
   "lastinteractiondate": "2016-12-31T17:28:12.0987844+00:00",
   "lastlogindate": "2016-12-31T17:28:12.0987844+00:00",
-  "age": 34,
+  "age": 48,
   "sex": "m",
   "PKFlag": false,
-  "UserID": "SamualMilner",
-  "RoomID": "Ravensmere.Industrial Quarter.Millers Quorn",
+  "UserID": "ShaynThePastor",
+  "RoomID": "Ravensmere.Town Centre.Pastors Lady General Store",
   "CurrentActivity": null,
   "Attributes": {
     "str": 9,
-    "int": 9,
-    "chr": 7,
+    "int": 14,
+    "chr": 9,
     "dex": 13,
     "wp": 10,
     "ft": 20,
@@ -80,26 +80,13 @@
     }
   ],
   "ResponseURL": null,
-  "NPCType": "SamualMillner",
-  "FamilyType": "Miller",
+  "NPCType": "ShaynThePastor",
+  "FamilyType": "Pastor",
   "IsGeneric": false,
   "WalkingType": "walk",
   "PronounSingular": "a",
   "PronounMultiple": "some",
   "NPCResponses": [
-    {
-      "ResponseType": "PlayerCharacter.Enter",
-      "ResponseTimeOfDay": "all",
-      "AdditionalData": null,
-      "Faction": null,
-      "Frequency": 100,
-      "ResponseSteps": [
-        {
-          "ResponseStepType": "Conversation",
-          "ResponseStepData": "Enter.1"
-        }
-      ]
-    },
     {
       "ResponseType": "PlayerCharacter.Hail",
       "ResponseTimeOfDay": "all",
@@ -129,36 +116,24 @@
   ],
   "NPCConversationStructures": [
     {
-      "ConversationID": "Enter",
-      "ConversationStep": [
-        {
-          "StepID": "1",
-          "Scope": "emotetoplayer",
-          "AdditionalData": "continues working hard sweeping away some fallen grain.",
-          "NextStep": null,
-          "ResponseOptions": null
-        }
-      ]
-    },
-    {
       "ConversationID": "Hail",
       "ConversationStep": [
         {
           "StepID": "1",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Hey.",
+          "Scope": "emotetoplayer",
+          "AdditionalData": "You receive a quiet nod. The man straightens up – or it might be more accurate to say 'unfolds' – and spreads his hands on the counter.",
           "NextStep": "2.1",
           "ResponseOptions": null
         },
         {
           "StepID": "2",
-          "Scope": "emotetoplayer",
-          "AdditionalData": "The young man gives you an offhand wave, but doesn’t otherwise turn his attention to you. He seems quite distracted by the machinery around him.",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Hello. What would you like?",
           "NextStep": null,
           "ResponseOptions": [
             {
               "ResponseOptionShortcut": "SHOP",
-              "ResponseOptionText": "Do you sell flour directly?",
+              "ResponseOptionText": "Greetings. What have you got for sale?",
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
@@ -167,12 +142,12 @@
               ]
             },
             {
-              "ResponseOptionShortcut": "MILL",
-              "ResponseOptionText": "This place is impressive. I’ve never seen machinery quite like it.",
+              "ResponseOptionShortcut": "SIGIL",
+              "ResponseOptionText": "[i]You indicate the driftwood pendant around his neck.[/i]  What’s that about?",
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Mill.1"
+                  "AdditionalData": "SIGIL.1"
                 }
               ]
             }
@@ -181,77 +156,38 @@
       ]
     },
     {
-      "ConversationID": "Mill",
+      "ConversationID": "SIGIL",
       "ConversationStep": [
         {
           "StepID": "1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "As if someone had ignited a torch behind his face, the miller lights up.",
+          "AdditionalData": "Shayn smiles vaguely, cupping the wood in the palm of one hand. You can see now that it's tied about his neck with a length of simple string.",
           "NextStep": "2.3",
           "ResponseOptions": null
         },
         {
           "StepID": "2",
           "Scope": "saytoplayer",
-          "AdditionalData": "Thank you! It’s great, right? Of course, it’s not perfect, but I haven’t got all the parts from home yet. Still waiting for a couple of shipments to come in, and do they ever arrive when they say they will?",
+          "AdditionalData": "I’d have thought you'd recognise the scarf. I belong to the Sea Godess Iora, who watches over our harbours and our ships. This is a small symbol of gratitude for the protection she offers us.",
           "NextStep": "3.3",
           "ResponseOptions": null
         },
         {
           "StepID": "3",
           "Scope": "emotetoplayer",
-          "AdditionalData": "He grins at you, and you notice he’s missing a couple of teeth. The rest are yellowing.",
+          "AdditionalData": "He holds it up between two thin fingers, and you can see now that it's carved into the shape of a broad tree. The branches are shaped like crashing waves. The craftsmanship is beautiful.",
           "NextStep": "4.3",
           "ResponseOptions": null
         },
         {
           "StepID": "4",
           "Scope": "saytoplayer",
-          "AdditionalData": "The answer is no, by the way. I can still mill a fair amount, but it’s nowhere near as efficient as it could be, and since half of it is my own design I’m the only one who knows how to use it...",
-          "NextStep": null,
-          "ResponseOptions": [
-            {
-              "ResponseOptionShortcut": "TEACH",
-              "ResponseOptionText": "I’m guessing that means you can’t teach me how to mill flour?",
-              "ResponseOptionActionSteps": [
-                {
-                  "NPCResponseOptionActionType": "Conversation",
-                  "AdditionalData": "Mill.5"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "StepID": "5",
-          "Scope": "emotetoplayer",
-          "AdditionalData": "shakes his head.",
-          "NextStep": "6.3",
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "6",
-          "Scope": "saytoplayer",
-          "AdditionalData": "Sorry, no. Like I said, most of this is custom craftsmanship, and I don’t trust anyone else to use it. I’d say go and find another mill, but I’m the only one in town right now, so… you’ll just have to wait, I’m afraid.",
-          "NextStep": "7.3",
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "7",
-          "Scope": "emotetoplayer",
-          "AdditionalData": "He perks up slightly.",
-          "NextStep": "8.3",
-          "ResponseOptions": null
-        },
-        {
-          "StepID": "8",
-          "Scope": "saytoplayer",
-          "AdditionalData": "We can talk about the machinery instead, if you want? I bet you’ve never seen a custom ten-sprocket cog without a ratchet axle.",
+          "AdditionalData": "Without the shelter of her boughs we'd never see a single ship arrive in Ravensmere. You should consider that when you think about how you arrived here...",
           "NextStep": null,
           "ResponseOptions": [
             {
               "ResponseOptionShortcut": "SHOP",
-              "ResponseOptionText": "Uh, I’ll pass for now, thanks. Can I just buy some flour?",
+              "ResponseOptionText": "Point taken. Now, what's for sale?",
               "ResponseOptionActionSteps": [
                 {
                   "NPCResponseOptionActionType": "Conversation",
@@ -269,7 +205,7 @@
         {
           "StepID": "1",
           "Scope": "emotetoplayer",
-          "AdditionalData": "Your only answer is a vague wave towards a stack of flour sacks in one corner. A nearby table bears a sign with scrawled handwriting – “50 per sack” – along with a small tin pot filled with loose marks.",
+          "AdditionalData": "waves his hand to the shelves",
           "NextStep": "2.1",
           "ResponseOptions": null
         },
@@ -283,7 +219,7 @@
         {
           "StepID": "3",
           "Scope": "saytoplayer",
-          "AdditionalData": "Want to buy some?",
+          "AdditionalData": "See anything you'd like?",
           "NextStep": null,
           "ResponseOptions": [
             {
@@ -371,7 +307,7 @@
         {
           "StepID": "ShopBuy",
           "Scope": "saytoplayer",
-          "AdditionalData": "Thanks for your business, come back soon if you want any more...",
+          "AdditionalData": "May the Godess Iora watch over you always...",
           "NextStep": "BuySomethingElse.1",
           "ResponseOptions": null
         }
@@ -383,14 +319,21 @@
         {
           "StepID": "NoBuy",
           "Scope": "saytoplayer",
-          "AdditionalData": "Thanks for your business.",
+          "AdditionalData": "May the Godess Iora watch over you always...",
           "NextStep": null,
           "ResponseOptions": null
         },
         {
           "StepID": "NotNow",
           "Scope": "emotetoplayer",
-          "AdditionalData": "nods at you and turns back to the machinery.",
+          "AdditionalData": "smiles.",
+          "NextStep": "ShopLeave.NotNow2",
+          "ResponseOptions": null
+        },
+        {
+          "StepID": "NotNow",
+          "Scope": "saytoplayer",
+          "AdditionalData": "Come back if you need anything at all.",
           "NextStep": null,
           "ResponseOptions": null
         }

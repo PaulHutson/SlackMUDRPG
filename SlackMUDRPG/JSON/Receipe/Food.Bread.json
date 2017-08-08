@@ -3,7 +3,7 @@
 	"Description": "The ability to bake bread.",
 	"Produces": "Food.Bread|1",
 	"PauseTime": 5,
-	"NeedToLearn": true,
+	"NeedToLearn": false,
 	"ProductionTrait": "Trait.Baking",
 	"Materials": [
     {
