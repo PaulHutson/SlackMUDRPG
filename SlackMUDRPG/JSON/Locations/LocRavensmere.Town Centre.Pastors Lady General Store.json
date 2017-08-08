@@ -1,0 +1,65 @@
+{
+	"RoomID": "Ravensmere.Town Centre.Pastors Lady General Store",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+  "Outside": false,
+	"RoomDescription": "There's not a ton of room in the store – you're squeezed between a stack of leather on one flank, and several crates of what smells like salted bacon on the other. The narrow aisles between the heaped goods all head towards the shopkeep's counter at one end of the room. The dark wood – elaborately carved to resemble a mermaid swimming through the ocean – seems out of place in the cramped room.[n][n]Despite the sheer quantity of goods, they're carefully arranged to highlight the most desirable items. A stack of ale kegs have been placed with maximum consideration – almost forming a little shrine – to showing off the shiny bottle of finest cider in their midst. In the stacks behind them, there's a selection of belts meticulously lined up, by colour, from light to dark. Hanging over your head are hammers and tools for every conceivable purpose. Not a single one is misplaced. Whoever runs this store clearly cares very deeply about it – or at least about its appearance.",
+	"RoomExits": [
+		{
+			"Shortcut": "KW",
+			"Description": "Kings Way [i](Road)[/i]",
+			"RoomID": "Ravensmere.Town Centre.Kings Way"
+		}
+	],
+	"RoomItems": null,
+	"NPCSpawns": null,
+  "NPCShopItems": {
+    "ShopInventory": [
+      {
+        "ItemNumber": 1,
+        "Item": {
+          "SingularPronoun": "a",
+	        "ItemName": "bag of flour",
+	        "PluralPronoun": "some",
+	        "PluralName": "bags of flour",
+	        "ItemType": "container",
+	        "ItemFamily": "bag",
+	        "PluralFamilyName": "flour",
+	        "ItemDescription": "A bag of flour",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 0,
+	        "MaxHitPoints": 0,
+	        "BaseDamage": 0.00000001,
+	        "Toughness": 0
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 20
+      },
+      {
+        "ItemNumber": 2,
+        "Item": {
+	        "SingularPronoun": "an",
+	        "ItemName": "Chicken egg",
+	        "PluralPronoun": "some",
+	        "PluralName": "Chicken eggs",
+	        "ItemType": "egg",
+	        "ItemFamily": "egg",
+	        "PluralFamilyName": "eggs",
+	        "ItemDescription": "A perfect Chicken egg",
+	        "ItemWeight": 1,
+	        "ItemSize": 1,
+	        "HitPoints": 0,
+	        "MaxHitPoints": 0,
+	        "BaseDamage": 0.00000001,
+	        "Toughness": 0
+        },
+        "AmountForSale": 0,
+        "UnlimitedAvailable": true,
+        "Cost": 2
+      }
+    ]
+  }
+}

@@ -5,12 +5,12 @@
 	"RoomLocationZ": "1",
   "Outside": true,
 	"RoomDescription": "The road travels under many wooden passages reaching overhead from building to building.  A wall to the side is covered in mechanical cogs and gears which turn slowly, making the sound of an oversized grandfather clock.  In the centre of the wall stands a metal door slightly ajar.",
-	"RoomExits": [
-		{
-			"Shortcut": "GS",
-			"Description": "Grand Square",
-			"RoomID": "Ravensmere.Town Centre.Grand Square"
-		},
+  "RoomExits": [
+    {
+      "Shortcut": "GS",
+      "Description": "Grand Square",
+      "RoomID": "Ravensmere.Town Centre.Grand Square"
+    },
     {
       "Shortcut": "SP",
       "Description": "Sliguth's Passage",
@@ -20,8 +20,14 @@
       "Shortcut": "GSP",
       "Description": "Greystone Passage",
       "RoomID": "Ravensmere.Town Centre.Greystone Passage"
+    },
+    {
+      "Shortcut": "PLGS",
+      "Description": "Pastors Lady General Store [i](Shop)[/i]",
+      "RoomID": "LocRavensmere.Town Centre.Pastors Lady General Store",
+      "Echo": "As you enter you can see that the room is gloomy – probably because of the piles of crates in front of the windows – and there're no torches lit."
     }
-	],
+  ],
 	"RoomItems": null,
 	"NPCSpawns": [
     {

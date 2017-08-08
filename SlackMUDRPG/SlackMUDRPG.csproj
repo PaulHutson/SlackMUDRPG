@@ -404,6 +404,8 @@
     <Content Include="JSON\Locations\LocRavensmere.Town Centre.The Dozen.json" />
     <Content Include="JSON\Locations\LocRavensmere.Industrial Quarter.Millers Quorn.json" />
     <Content Include="JSON\NPCs\Samual Millner.json" />
+    <Content Include="JSON\Locations\LocRavensmere.Town Centre.Pastors Lady General Store.json" />
+    <Content Include="JSON\NPCs\Shayn The Pastor.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
     <Content Include="JSON\NPCs\Rat.json" />
