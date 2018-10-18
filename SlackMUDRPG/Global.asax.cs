@@ -8,7 +8,7 @@ using SlackMUDRPG.Utility;
 using System.Threading;
 using Microsoft.Web.WebSockets;
 using System.Web.Http;
-using SlackMUDRPG.BotFramework;
+//using SlackMUDRPG.BotFramework;
 
 namespace SlackMUDRPG
 {
@@ -24,8 +24,8 @@ namespace SlackMUDRPG
 			Application["WSClients"] = wsClients;
 
 			// Botclients
-			List<BotClient> botClients = new List<BotClient>();
-			Application["BotClients"] = botClients;
+			//List<BotClient> botClients = new List<BotClient>();
+			//Application["BotClients"] = botClients;
 			
 			// Character List
 			List<SMCharacter> smc = new List<SMCharacter>();
@@ -192,7 +192,7 @@ namespace SlackMUDRPG
 			#endregion
 
 			// Register the global configuration items for the bot helper
-			GlobalConfiguration.Configure(WebAPIConfig.Register);
+			//GlobalConfiguration.Configure(WebAPIConfig.Register);
 		}
 
 		protected void Session_Start(object sender, EventArgs e)
