@@ -555,8 +555,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BotFramework\MessagesController.cs" />
-    <Compile Include="BotFramework\WebAPIConfig.cs" />
     <Compile Include="CommandClasses\Commands.cs" />
     <Compile Include="CommandClasses\SlackClient.cs" />
     <Compile Include="CommandClasses\SlackMud.cs" />

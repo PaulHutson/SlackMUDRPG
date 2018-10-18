@@ -1,6 +1,6 @@
 using Microsoft.Bot.Connector;
 using Microsoft.Web.WebSockets;
-using SlackMUDRPG.BotFramework;
+//using SlackMUDRPG.BotFramework;
 using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Handlers;
 using SlackMUDRPG.Utility.Formatters;
@@ -54,7 +54,7 @@ namespace SlackMUDRPG.CommandClasses
 						h.Send(messageContent);
 					}
 				}
-				else if (serviceType.ToLower() == "bc")
+				/*else if (serviceType.ToLower() == "bc")
 				{
 					List<BotClient> botClients = (List<BotClient>)HttpContext.Current.Application["BotClients"];
 					BotClient bc = botClients.FirstOrDefault(bot => bot.UserID == channelOrPersonTo);
@@ -74,7 +74,7 @@ namespace SlackMUDRPG.CommandClasses
 
                         BotClientUtility.SendMessage(bc, messageContent);
 					}
-				}
+				}*/
 			}
 		}
 
