@@ -310,7 +310,10 @@ namespace SlackMUDRPG.CommandClasses
                         // If the room is not locked or the character has the right key, let them in.
                         if (initiateMove)
                         {
-                            int waitTime = 0;
+							this.sendMessageToPlayer("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+							this.sendMessageToPlayer("");
+
+							int waitTime = 0;
 
                             // Show echos if any are around
                             if ((sme.Echo != null) && (sme.Echo != ""))
