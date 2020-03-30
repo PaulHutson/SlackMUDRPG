@@ -414,6 +414,7 @@
     <Content Include="JSON\Locations\LocRavensmere.The Heights.Primrose Gates Estate.json" />
     <Content Include="JSON\Locations\LocRavensmere.The Heights.Chorsters Road.json" />
     <Content Include="JSON\NPCs\Sally the Head Maid.json" />
+    <Content Include="JSON\NPCs\Primrose Rat.json" />
     <None Include="JSON\Objects\Consumable.SimpleArrow.json" />
     <Content Include="JSON\NPCs\Rat Catcher.json" />
     <Content Include="JSON\NPCs\Rat.json" />
