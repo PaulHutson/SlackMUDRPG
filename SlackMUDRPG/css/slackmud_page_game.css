@@ -24,8 +24,12 @@
 }
 
 .game-output li {
-	list-style: none;
-	padding-left: 15px;
+    list-style: none;
+    padding-left: 15px;
+}
+
+.game-output .inputoutputcommand {
+    color: royalblue;
 }
 
 @media(max-width: 767px) {

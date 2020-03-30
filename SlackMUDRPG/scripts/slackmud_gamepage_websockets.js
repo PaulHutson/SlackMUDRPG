@@ -80,6 +80,7 @@
 
 		if (val != '') {
 			addToStack(usedCommands, val);
+			gameOutput.append('<span class=\"inputoutputcommand\">' + val + '</span><br /><br />');
 			ws.send(val);
 			gameInput.val('');
 		}
