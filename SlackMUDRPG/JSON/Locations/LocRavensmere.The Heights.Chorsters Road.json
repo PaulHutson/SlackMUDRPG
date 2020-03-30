@@ -1,0 +1,47 @@
+﻿{
+	"RoomID": "Ravensmere.The Heights.Chorsters Road",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"Outside": false,
+	"RoomDescription": "A well-to-do road, filled with rich houses set back from the road behind massive gates.",
+	"RoomExits": [
+		{
+			"Shortcut": "PGE",
+			"Description": "Primrose Gates Estate",
+			"RoomID": "Ravensmere.The Heights.Primrose Gates Estate"
+		},
+		{
+			"Shortcut": "KW",
+			"Description": "Kings Way",
+			"RoomID": "Ravensmere.Town Centre.Kings Way"
+		}
+	],
+	"RoomItems": null,
+	"NPCSpawns": [
+		{
+			"TypeOfNPC": "Guard-Generic",
+			"MaxNumber": 2,
+			"SpawnFrequency": 90,
+			"Unique": false
+		},
+		{
+			"TypeOfNPC": "SacratasMonk-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+		{
+			"TypeOfNPC": "AspertanPriest-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 25,
+			"Unique": false
+		},
+		{
+			"TypeOfNPC": "Noble-Generic",
+			"MaxNumber": 3,
+			"SpawnFrequency": 45,
+			"Unique": false
+		}
+	]
+}

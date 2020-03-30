@@ -7,7 +7,6 @@ using SlackMUDRPG.CommandClasses;
 using SlackMUDRPG.Utility;
 using System.Threading;
 using Microsoft.Web.WebSockets;
-using System.Web.Http;
 //using SlackMUDRPG.BotFramework;
 
 namespace SlackMUDRPG

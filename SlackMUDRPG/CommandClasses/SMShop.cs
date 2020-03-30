@@ -1,11 +1,8 @@
-﻿using Microsoft.IdentityModel.Protocols;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SlackMUDRPG.Utility.Formatters;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Web;
 
 namespace SlackMUDRPG.CommandClasses
 {

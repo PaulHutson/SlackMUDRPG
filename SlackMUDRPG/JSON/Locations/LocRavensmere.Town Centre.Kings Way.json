@@ -26,9 +26,41 @@
       "Description": "Pastors Lady General Store [i](Shop)[/i]",
       "RoomID": "LocRavensmere.Town Centre.Pastors Lady General Store",
       "Echo": "As you enter you can see that the room is gloomy – probably because of the piles of crates in front of the windows – and there're no torches lit."
+    },
+    {
+      "Shortcut": "CR",
+      "Description": "Chorsters Road",
+      "RoomID": "Ravensmere.The Heights.Chorsters Road",
+      "Echo": "Obviously you've moved into a more upmarket area of town, the well-to-do houses are set back in plush gardens along this around."
     }
   ],
-	"RoomItems": null,
+  "RoomItems": [
+    {
+      "itemID": "0f367c26-d693-435c-9f57-45f3255b9cda",
+      "SingularPronoun": "a",
+      "ItemName": "Worn Poster",
+      "PluralPronoun": "some",
+      "PluralName": "Worn Posters",
+      "ItemType": "Readable",
+      "ItemFamily": "Poster",
+      "ItemDescription": "An A4 piece of paper that is damp and ruined but you can read \"In need of rat catcher for primrose gates\" it is in big bold writing then you can just about read small directions to primrose gates [i]head to Chorsters Road, then enter Primrose Gates Estate from there[/i]",
+      "ItemExtraDetail": "An A4 piece of paper that is damp and ruined but you can read \"In need of rat catcher for primrose gates\" it is in big bold writing then you can just about read small directions to primrose gates [i]head to Chorsters Road, then enter Primrose Gates Estate from there[/i]",
+      "ItemWeight": 1000,
+      "ItemSize": 0,
+      "HitPoints": 1000000000,
+      "MaxHitPoints": 1000000000,
+      "BaseDamage": 0.001,
+      "Toughness": 1,
+      "HeldItem": null,
+      "Effects": [
+        {
+          "Action": "OnExamine",
+          "EffectType": "AddQuest",
+          "AdditionalData": "Town.Ratcatcher For Primrose Gates"
+        }
+      ]
+    }
+  ],
 	"NPCSpawns": [
     {
       "TypeOfNPC": "Guard-Generic",

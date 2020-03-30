@@ -1,0 +1,15 @@
+﻿{
+	"SingularPronoun": "a",
+	"ItemName": "Primrose Rat Corpse",
+	"PluralName": "Primrose Rat Corpses",
+	"PluralPronoun": "some",
+	"ItemType": "Resource",
+	"ItemFamily": "Quest Item",
+	"ItemDescription": "Primrose Rat Corpse, used in the Ratcatcher for Primrose Gates quest",
+	"ItemWeight": 1,
+	"ItemSize": 1,
+	"HitPoints": 1,
+	"MaxHitPoints": 1,
+	"BaseDamage": 0.0001,
+	"Toughness": 1
+} 

@@ -1,0 +1,23 @@
+﻿{
+	"RoomID": "Ravensmere.The Heights.Primrose Gates Estate",
+	"RoomLocationX": "1",
+	"RoomLocationY": "1",
+	"RoomLocationZ": "1",
+	"Outside": true,
+	"RoomDescription": "A big stone mansion with five bedrooms and a grand garden at the front thats about 2.5 acres with lots of trees, hedges and flower beds.",
+	"RoomExits": [
+		{
+			"Shortcut": "CR",
+			"Description": "Chorsters Road",
+			"RoomID": "Ravensmere.The Heights.Chorsters Road"
+		}
+	],
+	"NPCSpawns": [
+		{
+			"TypeOfNPC": "Guard-Generic",
+			"MaxNumber": 1,
+			"SpawnFrequency": 90,
+			"Unique": false
+		}
+	]
+}

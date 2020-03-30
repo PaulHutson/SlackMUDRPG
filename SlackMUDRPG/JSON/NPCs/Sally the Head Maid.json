@@ -1,0 +1,613 @@
+﻿{
+	"firstname": "Sally",
+	"lastname": "the Head Maid",
+	"description": "A short and fat women, whose hair is in a bun and is wearing a long black dress.",
+	"lastinteractiondate": "2017-05-01T10:00:00.0987844+00:00",
+	"lastlogindate": "2017-05-01T10:00:00.0987844+00:00",
+	"age": 46,
+	"sex": "f",
+	"PKFlag": false,
+	"UserID": "SallyTheHeadMaid",
+	"RoomID": "Ravensmere.Primrose Gates Estate.Entrance Hall",
+	"CurrentActivity": null,
+	"Attributes": {
+		"str": 15,
+		"int": 18,
+		"chr": 10,
+		"dex": 25,
+		"wp": 12,
+		"ft": 20,
+		"hp": 20,
+		"maxhp": 20,
+		"SocialStanding": 18
+	},
+	"Skills": [
+		{
+			"SkillName": "Leatherwork",
+			"SkillLevel": 30
+		},
+		{
+			"SkillName": "Butchery",
+			"SkillLevel": 10
+		},
+		{
+			"SkillName": "Bake",
+			"SkillLevel": 12
+		}
+	],
+	"Slots": [
+		{
+			"Name": "RightHand",
+			"AllowedTypes": [
+				"any"
+			],
+			"EquippedItem": null
+		},
+		{
+			"Name": "LeftHand",
+			"AllowedTypes": [
+				"any"
+			],
+			"EquippedItem": null
+		},
+		{
+			"Name": "Back",
+			"AllowedTypes": [
+				"containers"
+			],
+			"EquippedItem": null
+		}
+	],
+	"BodyParts": [
+		{
+			"Name": "Head"
+		},
+		{
+			"Name": "Neck"
+		},
+		{
+			"Name": "Torso"
+		},
+		{
+			"Name": "Arms"
+		},
+		{
+			"Name": "RightHand"
+		},
+		{
+			"Name": "LeftHand"
+		},
+		{
+			"Name": "Legs"
+		},
+		{
+			"Name": "RightFoot"
+		},
+		{
+			"Name": "LeftFoot"
+		}
+	],
+	"ResponseURL": null,
+	"NPCType": "SallyTheHeadMaid",
+	"FamilyType": "PrimroseEstateWorker",
+	"IsGeneric": false,
+	"WalkingType": "walk",
+	"PronounSingular": "a",
+	"PronounMultiple": "some",
+
+	"NPCResponses": [
+		{
+			"ResponseType": "PlayerCharacter.Hail",
+			"ResponseTimeOfDay": "all",
+			"AdditionalData": null,
+			"Faction": null,
+			"Frequency": 100,
+			"ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Enter.Hail"
+				}
+			]
+		},
+		{
+			"ResponseType": "PlayerCharacter.Enter",
+			"ResponseTimeOfDay": "all",
+			"AdditionalData": null,
+			"Faction": null,
+			"Frequency": 100,
+			"ResponseSteps": [
+				{
+					"ResponseStepType": "Conversation",
+					"ResponseStepData": "Enter.1"
+				}
+			]
+		}
+	],
+
+	"NPCConversationStructures": [
+		{
+			"ConversationID": "Enter",
+			"ConversationStep": [
+				{
+					"StepID": "Hail",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "looks sternly at you.",
+					"NextStep": "2.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": 1,
+					"Scope": "emotetoplayer",
+					"AdditionalData": "tsks at your appearance...",
+					"NextStep": "2.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": 2,
+					"Scope": "saytoplayer",
+					"AdditionalData": "What do you want?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "FP",
+							"ResponseOptionText": "I found a poster and was trying to find out more...",
+							"PreRequisites": [
+								{
+									"Type": "HasNotDoneQuest",
+									"AdditionalData": "Ratcatcher For Primrose Gates"
+								}
+							],
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "conversation",
+									"AdditionalData": "LearnLeatherwork.Intro-1"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "ER",
+							"ResponseOptionText": "Er, I think I've lost my way!",
+							"PreRequisites": [
+								{
+									"Type": "InProgressQuestStep",
+									"AdditionalData": "Working With Leather.Cutting leather"
+								},
+								{
+									"Type": "HasItem",
+									"AdditionalData": "LeatherCutter.1"
+								}
+							],
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "conversation",
+									"AdditionalData": "LearnLeatherwork.Learning-1"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "LB",
+							"ResponseOptionText": "I have a Buckle and Leather, learn to make a Belt",
+							"PreRequisites": [
+								{
+									"Type": "InProgressQuestStep",
+									"AdditionalData": "Working With Leather.A belting good time"
+								},
+								{
+									"Type": "HasItem",
+									"AdditionalData": "Leather Strip.1"
+								},
+								{
+									"Type": "HasItem",
+									"AdditionalData": "Iron Buckle.1"
+								}
+							],
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "conversation",
+									"AdditionalData": "LearnLeatherwork.BeltRecipe-1"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "SHOP",
+							"ResponseOptionText": "Buy quality leather goods, crafting supplies or equipment",
+							"PreRequisites": null,
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "conversation",
+									"AdditionalData": "Shop.1"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ConversationID": "LearnLeatherwork",
+			"ConversationStep": [
+				{
+					"StepID": "Intro-1",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Fantastic, I'm always looking to teach new people, my son is just not interested in the family trade. He thinks hes some kind of big shot hero of the arena.",
+					"NextStep": "Intro-2.5",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Intro-2",
+					"Scope": "saytoplayer",
+					"AdditionalData": "The key to crafting quality leather goods is the materials and tools. You need to cut the leather precisely to start.",
+					"NextStep": "Intro-3.4",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Intro-3",
+					"Scope": "saytoplayer",
+					"AdditionalData": "You'll need a [b]Leather Cutter[/b] before I can teach you anything. You can buy one here or craft your own if you know how. Either way come speak to me once you have one and we'll get started.",
+					"NextStep": "Intro-4.6",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Intro-4",
+					"Scope": "addquest",
+					"AdditionalData": "Tough.Working With Leather",
+					"NextStep": "Intro-5.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Intro-5",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Would you like to shop now?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"PreRequisites": null,
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "conversation",
+									"AdditionalData": "Shop.1"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "ShopLeave.NoBuy"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "Learning-1",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Great, thats not a terrible qaulity tool, lets get started.",
+					"NextStep": "Learning-2.4",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Learning-2",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Once you have your tools and materials you'll need a workbench where you can craft items.",
+					"NextStep": "Learning-3.5",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Learning-3",
+					"Scope": "saytoplayer",
+					"AdditionalData": "We have one in the workshop here you can use from time to time for free.",
+					"NextStep": "Learning-4.4",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Learning-4",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Obviously you'll need leather. You can either tan your own animal skins if you know how, or you can buy some from Felhirst's Tannery in the south harbour.",
+					"NextStep": "Learning-5.6",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Learning-5",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Additionaly crafting some items will require other resources such as string or metal work. These can be purchased here or at other merchants around town. If you know how you might even be able to craft some of your own.",
+					"NextStep": "Learning-6.8",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Learning-6",
+					"Scope": "saytoplayer",
+					"AdditionalData": "So remember good materials and tools combined with careful craftsmanship and most or all practice.",
+					"NextStep": "Learning-7.5",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Learning-7",
+					"Scope": "teachskill",
+					"AdditionalData": "Leatherwork.1",
+					"NextStep": "Learning-8.3",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Learning-8",
+					"Scope": "saytoplayer",
+					"AdditionalData": "If your interested in learning more come back with an Iron Buckle and a piece of Leather and I'll teach you how to make a belt.",
+					"NextStep": "Learning-9.3",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Learning-9",
+					"Scope": "updatequest",
+					"AdditionalData": "Tough.Working With Leather",
+					"NextStep": "Learning-10.3",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "Learning-10",
+					"Scope": "increasefactionlevel",
+					"AdditionalData": "Allan Tough|5",
+					"NextStep": null,
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-1",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Excellent, I see you have the Buckle and Leather, I'll take those.",
+					"NextStep": "BeltRecipe-2.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-2",
+					"Scope": "takeitems",
+					"AdditionalData": "Iron Buckle.1,Leather Strip.1",
+					"NextStep": "BeltRecipe-3.0",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-3",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "takes an [b]Iron Buckle[/b] from you.",
+					"NextStep": "BeltRecipe-4.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-4",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "takes a [b]Leather Strip[/b] from you.",
+					"NextStep": "BeltRecipe-5.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-5",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Right, lets get started, watch closely...",
+					"NextStep": "BeltRecipe-6.5",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-6",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "starts cutting and punching holes in the Leather Strip...",
+					"NextStep": "BeltRecipe-7.10",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-7",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "attaches an Iron Buckle to the leather...",
+					"NextStep": "BeltRecipe-8.10",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-8",
+					"Scope": "saytoplayer",
+					"AdditionalData": "And your you have it, a simple leather belt. Did you get all that?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "LearnLeatherwork.BeltRecipe-9"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "LearnLeatherwork.BeltRecipe-Repeat"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "BeltRecipe-Repeat",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Ok, one more time, watch closely.",
+					"NextStep": "BeltRecipe-6.5",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-9",
+					"Scope": "emotetoplayer",
+					"AdditionalData": "smiles with satisfaction",
+					"NextStep": "BeltRecipe-10.5",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-10",
+					"Scope": "teachrecipe",
+					"AdditionalData": "Simple Leather Belt",
+					"NextStep": "BeltRecipe-11.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-11",
+					"Scope": "updatequest",
+					"AdditionalData": "Tough.Working With Leather",
+					"NextStep": "BeltRecipe-12.2",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-12",
+					"Scope": "increasefactionlevel",
+					"AdditionalData": "Allan Tough|5",
+					"NextStep": "BeltRecipe-13.3",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BeltRecipe-13",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Come back anytime Tough & Sons is always open to a fellow craftsman.",
+					"NextStep": null,
+					"ResponseOptions": null
+				}
+			]
+		},
+		{
+			"ConversationID": "Shop",
+			"ConversationStep": [
+				{
+					"StepID": "1",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Here's what I have on offer today...",
+					"NextStep": "2.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "2",
+					"Scope": "shopitem",
+					"AdditionalData": "room",
+					"NextStep": "3.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "3",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Would you like to buy something?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.4"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "ShopLeave.NoBuy"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "4",
+					"Scope": "saytoplayer",
+					"AdditionalData": "What'll it be? [i](Enter the item number from the list above)[/i]",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "{variable}",
+							"ResponseOptionText": "{variable}",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.5"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "5",
+					"Scope": "shopbuyitem",
+					"AdditionalData": "ShopBuy|ShopNotValid",
+					"NextStep": null,
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "ShopNotValid",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Sorry, I can't sell you that...",
+					"NextStep": "BuySomethingElse.1",
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "BuySomethingElse",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Would you like to buy something else?",
+					"NextStep": null,
+					"ResponseOptions": [
+						{
+							"ResponseOptionShortcut": "Y",
+							"ResponseOptionText": "Yes",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "Shop.4"
+								}
+							]
+						},
+						{
+							"ResponseOptionShortcut": "N",
+							"ResponseOptionText": "No",
+							"ResponseOptionActionSteps": [
+								{
+									"NPCResponseOptionActionType": "Conversation",
+									"AdditionalData": "ShopLeave.NoBuy"
+								}
+							]
+						}
+					]
+				},
+				{
+					"StepID": "ShopBuy",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Good choice.",
+					"NextStep": "BuySomethingElse.1",
+					"ResponseOptions": null
+				}
+			]
+		},
+		{
+			"ConversationID": "ShopLeave",
+			"ConversationStep": [
+				{
+					"StepID": "NoBuy",
+					"Scope": "saytoplayer",
+					"AdditionalData": "No problem, come back anytime you want to buy something...",
+					"NextStep": null,
+					"ResponseOptions": null
+				},
+				{
+					"StepID": "NotNow",
+					"Scope": "saytoplayer",
+					"AdditionalData": "Its been a pleasure, come back anythime you want to buy something else...",
+					"NextStep": null,
+					"ResponseOptions": null
+				}
+			]
+		}
+	],
+	"NPCMovementAlgorithms": null,
+	"NPCMovementTarget": null
+}

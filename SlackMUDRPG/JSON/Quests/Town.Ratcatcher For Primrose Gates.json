@@ -1,0 +1,29 @@
+﻿{
+	"QuestName": "Ratcatcher For Primrose Gates",
+	"Prerequisites": null,
+	"Daily": true,
+	"QuestSteps": [
+		{
+			"Name": "Find Primrose Gates",
+			"Type": "Get",
+			"CharacterName": "Sally the Head Maid",
+			"LocationID": "Ravensmere.Primrose Gates Estate.Entrance Room",
+			"AdditionalData": "",
+			"Instructions": "Speak to Sally (the head maid) at the Primrose Gates to find out what she needs."
+		},
+		{
+			"Name": "Kill the Rats",
+			"Type": "Get",
+			"CharacterName": "Sally the Head Maid",
+			"LocationID": "Ravensmere.Primrose Gates Estate.Entrance Room",
+			"AdditionalData": "Resource.Primrose Rat Corpse,5",
+			"Instructions": "Kill five rats in the house and bring them back to Sally."
+		}
+	],
+	"Rewards": [
+		{
+			"Type": "Money",
+			"AdditionalData": "25"
+		}
+	]
+}
